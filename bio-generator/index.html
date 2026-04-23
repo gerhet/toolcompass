@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Bio Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans text-sm">
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a></div>
+    </header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-2 text-center">Bio Generator</h1>
+        <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
+            <input type="text" id="job" placeholder="Your Job (e.g. Web Developer)" class="w-full p-3 border rounded-lg mb-4 outline-none">
+            <input type="text" id="passion" placeholder="Your Passion (e.g. Coffee & Code)" class="w-full p-3 border rounded-lg mb-4 outline-none">
+            <button onclick="genBio()" class="w-full bg-purple-600 text-white font-bold py-3 rounded-lg hover:bg-purple-700 transition mb-6">Generate Bio ✨</button>
+            <div id="bioOutput" class="hidden space-y-4">
+                <div class="p-4 bg-purple-50 rounded-lg border border-purple-100"><p class="font-bold text-xs mb-1">PROFESSIONAL:</p><p id="bio1"></p></div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100"><p class="font-bold text-xs mb-1">CASUAL:</p><p id="bio2"></p></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function genBio() {
+            const j = document.getElementById('job').value;
+            const p = document.getElementById('passion').value;
+            if(!j || !p) return;
+            document.getElementById('bio1').innerText = `🎯 ${j} | 💡 Helping brands grow | 📩 DM for collaborations`;
+            document.getElementById('bio2').innerText = `${p} ☕ | Solving problems as a ${j} | Let's connect! ✨`;
+            document.getElementById('bioOutput').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
