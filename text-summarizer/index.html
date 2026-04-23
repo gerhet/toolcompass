@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Summarizer | Free Summary Tool | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10 max-w-4xl">
+        <h1 class="text-3xl font-extrabold mb-2 text-center">Text Summarizer</h1>
+        <p class="text-gray-600 mb-8 text-center">Instantly shorten long articles into key bullet points.</p>
+
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 mb-12">
+            <textarea id="textInput" rows="8" class="w-full p-4 border rounded-xl mb-4 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste your long text here..."></textarea>
+            
+            <div class="flex justify-between items-center mb-6">
+                <label class="text-sm font-medium text-gray-700">Summary Length:</label>
+                <select id="sentencesCount" class="p-2 border rounded-lg bg-white text-sm">
+                    <option value="3">3 Sentences</option>
+                    <option value="5">5 Sentences</option>
+                    <option value="7">7 Sentences</option>
+                </select>
+            </div>
+
+            <button onclick="summarize()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Summarize Now</button>
+
+            <div id="resultContainer" class="mt-8 hidden p-6 bg-blue-50 rounded-xl border border-blue-100">
+                <h3 class="font-bold text-blue-800 mb-3 uppercase text-xs tracking-widest">Summary Result:</h3>
+                <ul id="summaryList" class="list-disc pl-5 space-y-2 text-gray-700"></ul>
+                <button onclick="copyToClipboard()" class="mt-4 text-xs text-blue-600 font-semibold hover:underline">Copy to Clipboard</button>
+            </div>
+        </div>
+
+        <div class="w-full h-32 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs mb-12 border-dashed border-2">
+            ADVERTISEMENT
+        </div>
+
+        <article class="prose max-w-none text-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900">How our Text Summarizer Works</h2>
+            <p>In the age of information overload, being able to quickly grasp the core message of a text is vital. Our <strong>Text Summarizer</strong> uses a sentence-extraction algorithm to identify the most significant parts of your document.</p>
+            
+            <h3 class="text-xl font-semibold mt-6">Efficiency for Students and Professionals</h3>
+            <p>Whether you're a student trying to review research papers or a professional scanning long industry reports, this tool helps you save time. Simply paste the text, choose your desired length, and get the key points instantly.</p>
+
+            <h3 class="text-xl font-semibold mt-6">Privacy First</h3>
+            <p>Just like all tools on <strong>ToolCompass.org</strong>, our summarizer works client-side. Your text is processed directly in your browser and never stored on our servers. Your data stays private.</p>
+        </article>
+    </main>
+
+    <script>
+        function summarize() {
+            const text = document.getElementById('textInput').value;
+            const count = parseInt(document.getElementById('sentencesCount').value);
+            const container = document.getElementById('resultContainer');
+            const list = document.getElementById('summaryList');
+
+            if (text.length < 50) {
+                alert("Please enter a longer text to summarize.");
+                return;
+            }
+
+            // Simple Logic: Split by sentences and pick the longest ones (usually most descriptive)
+            const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
+            const sorted = [...sentences].sort((a, b) => b.length - a.length);
+            const summary = sorted.slice(0, count);
+
+            list.innerHTML = "";
+            summary.forEach(s => {
+                const li = document.createElement('li');
+                li.innerText = s.trim();
+                list.appendChild(li);
+            });
+
+            container.classList.remove('hidden');
+        }
+
+        function copyToClipboard() {
+            const listItems = document.querySelectorAll('#summaryList li');
+            const text = Array.from(listItems).map(li => "• " + li.innerText).join('\n');
+            navigator.clipboard.writeText(text);
+            alert("Copied!");
+        }
+    </script>
+</body>
+</html>
