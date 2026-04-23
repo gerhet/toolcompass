@@ -4,70 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToolCompass | 30+ Free Online Utilities</title>
+    <meta name="description" content="Professional-grade calculators and web utilities for your daily workflow.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .tool-card { transition: all 0.3s ease; border: 1px solid #e5e7eb; height: 100%; display: flex; flex-direction: column; }
-        .tool-card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .active { border-left: 4px solid #3b82f6; }
-        .inactive { opacity: 0.5; grayscale: 1; pointer-events: none; }
+        .tool-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #f0f0f0; }
+        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.06); border-color: #3b82f6; }
+        .active-glow { border-top: 4px solid #3b82f6; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
-    <header class="bg-white shadow-sm sticky top-0 z-50 py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2"><span class="text-2xl">🧭</span><span class="text-2xl font-bold text-blue-600">ToolCompass.org</span></div>
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-5 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🧭</span>
+                <span class="text-2xl font-bold text-blue-600 tracking-tight">ToolCompass.org</span>
+            </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section class="bg-white border-b border-gray-100 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-gray-900">
+                One Compass. <span class="text-blue-600">Every Tool.</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Free, fast, and secure web utilities. No accounts, no tracking – just the tools you need to get the job done.
+            </p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <a href="/mortgage-splitter" class="tool-card active bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">🏠</span>
-                <h3 class="font-bold text-lg mb-2">Mortgage Splitter</h3>
-                <p class="text-gray-500 text-sm">Professional loan & interest calculator.</p>
+            <a href="/mortgage-splitter" class="tool-card active-glow bg-white p-8 rounded-2xl block">
+                <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">🏠</div>
+                <h3 class="text-xl font-bold mb-3">Mortgage Splitter</h3>
+                <p class="text-gray-600 text-sm leading-relaxed mb-6">Professional loan analysis and repayment schedules for homeowners.</p>
+                <span class="text-blue-600 font-bold text-sm inline-flex items-center">Open Tool <span class="ml-2">→</span></span>
             </a>
 
-            <a href="/hourly-rate" class="tool-card active bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">💰</span>
-                <h3 class="font-bold text-lg mb-2">Hourly Rate Calc</h3>
-                <p class="text-gray-500 text-sm">Essential for freelancers & contractors.</p>
+            <a href="/hourly-rate" class="tool-card active-glow bg-white p-8 rounded-2xl block">
+                <div class="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">💰</div>
+                <h3 class="text-xl font-bold mb-3">Hourly Rate Calc</h3>
+                <p class="text-gray-600 text-sm leading-relaxed mb-6">Essential for freelancers: Calculate what you really need to charge.</p>
+                <span class="text-blue-600 font-bold text-sm inline-flex items-center">Open Tool <span class="ml-2">→</span></span>
             </a>
 
-            <a href="/qr-generator" class="tool-card active bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">📱</span>
-                <h3 class="font-bold text-lg mb-2">QR Generator</h3>
-                <p class="text-gray-500 text-sm">Instant secure QR codes.</p>
+            <a href="/qr-generator" class="tool-card active-glow bg-white p-8 rounded-2xl block">
+                <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">📱</div>
+                <h3 class="text-xl font-bold mb-3">QR Generator</h3>
+                <p class="text-gray-600 text-sm leading-relaxed mb-6">Create secure, instant QR codes for links, text, or Wi-Fi access.</p>
+                <span class="text-blue-600 font-bold text-sm inline-flex items-center">Open Tool <span class="ml-2">→</span></span>
             </a>
 
-            <a href="/text-summarizer" class="tool-card active bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">📝</span>
-                <h3 class="font-bold text-lg mb-2">Text Summarizer</h3>
-                <p class="text-gray-500 text-sm">Extract key points from long texts.</p>
+            <a href="/text-summarizer" class="tool-card active-glow bg-white p-8 rounded-2xl block">
+                <div class="bg-yellow-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">📝</div>
+                <h3 class="text-xl font-bold mb-3">Text Summarizer</h3>
+                <p class="text-gray-600 text-sm leading-relaxed mb-6">Turn long articles into clear, digestible bullet points instantly.</p>
+                <span class="text-blue-600 font-bold text-sm inline-flex items-center">Open Tool <span class="ml-2">→</span></span>
             </a>
 
-            <a href="/linkedin-post-maker" class="tool-card active bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">🔗</span>
-                <h3 class="font-bold text-lg mb-2">LinkedIn Post Maker</h3>
-                <p class="text-gray-500 text-sm">Boost your professional engagement.</p>
+            <a href="/linkedin-post-maker" class="tool-card active-glow bg-white p-8 rounded-2xl block">
+                <div class="bg-indigo-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">🔗</div>
+                <h3 class="text-xl font-bold mb-3">LinkedIn Maker</h3>
+                <p class="text-gray-600 text-sm leading-relaxed mb-6">Format your thoughts into high-engagement professional posts.</p>
+                <span class="text-blue-600 font-bold text-sm inline-flex items-center">Open Tool <span class="ml-2">→</span></span>
             </a>
 
-            <a href="/bio-generator" class="tool-card active bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">👤</span>
-                <h3 class="font-bold text-lg mb-2">Bio Generator</h3>
-                <p class="text-gray-500 text-sm">Craft the perfect social media bio.</p>
+            <a href="/bio-generator" class="tool-card active-glow bg-white p-8 rounded-2xl block">
+                <div class="bg-pink-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">👤</div>
+                <h3 class="text-xl font-bold mb-3">Bio Generator</h3>
+                <p class="text-gray-600 text-sm leading-relaxed mb-6">Craft the perfect social media bio for any platform in seconds.</p>
+                <span class="text-blue-600 font-bold text-sm inline-flex items-center">Open Tool <span class="ml-2">→</span></span>
             </a>
 
-            <div class="tool-card inactive bg-white p-6 rounded-xl">
-                <span class="text-3xl mb-4">🛠️</span>
-                <h3 class="font-bold text-lg mb-2">JSON Formatter</h3>
-                <p class="text-gray-500 text-sm">Coming soon.</p>
+            <div class="bg-gray-50 border-2 border-dashed border-gray-200 p-8 rounded-2xl flex flex-col justify-center items-center text-center">
+                <span class="text-3xl mb-4 opacity-30">🛠️</span>
+                <h3 class="text-lg font-bold text-gray-400">More tools coming</h3>
+                <p class="text-gray-400 text-xs mt-2 italic">Building 24 more utilities...</p>
             </div>
-            </div>
+
+        </div>
     </main>
 
-    <footer class="text-center py-10 text-gray-400 text-xs border-t border-gray-200 mt-10">
-        &copy; 2026 ToolCompass.org
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">&copy; 2026 ToolCompass.org | Navigating the digital world.</p>
+        </div>
     </footer>
+
 </body>
 </html>
