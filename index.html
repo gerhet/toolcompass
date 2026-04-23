@@ -3,53 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolCompass - All-in-One Online Utilities</title>
+    <title>ToolCompass | Free Online Calculators & Web Utilities</title>
+    <meta name="description" content="Discover ToolCompass: A collection of free, fast, and easy-to-use online tools for finance, development, and daily tasks.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .tool-card:hover { transform: translateY(-5px); transition: all 0.3s; }
+        .tool-card { transition: all 0.3s ease; border: 1px solid #f0f0f0; }
+        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #3b82f6; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
 
-    <header class="bg-white shadow-sm py-6">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-blue-600">ToolCompass.org</h1>
-            <nav>
-                <span class="text-sm text-gray-500">Your Daily Digital Toolbox</span>
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🧭</span>
+                <span class="text-2xl font-bold text-blue-600 tracking-tight">ToolCompass.org</span>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6 text-sm font-medium text-gray-600">
+                    <li><a href="/" class="hover:text-blue-600">Home</a></li>
+                    <li><a href="#all-tools" class="hover:text-blue-600">All Tools</a></li>
+                </ul>
             </nav>
         </div>
     </header>
 
-    <div class="container mx-auto px-4 py-4 text-center bg-gray-200 my-6 rounded text-xs text-gray-400">
-        ADVERTISEMENT
-    </div>
-
-    <section class="container mx-auto px-4 py-12 text-center">
-        <h2 class="text-4xl font-extrabold mb-4">Smart Tools for Every Task</h2>
-        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Fast, free, and easy-to-use web utilities for developers, writers, and finance experts.</p>
+    <section class="bg-gradient-to-b from-white to-gray-50 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">
+                One Compass. <span class="text-blue-600">Every Tool.</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Empowering your digital workflow with professional-grade calculators and utilities. No registration, no fees, just tools.
+            </p>
+        </div>
     </section>
 
-    <main class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-2">
+        <div class="w-full h-24 bg-gray-100 rounded-lg flex items-center justify-center border-dashed border-2 border-gray-200 text-gray-400 text-xs">
+            ADVERTISEMENT
+        </div>
+    </div>
+
+    <main id="all-tools" class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <a href="/mortgage-splitter" class="tool-card bg-white p-6 rounded-xl shadow-md border border-gray-100 block">
-                <div class="text-3xl mb-4">🏠</div>
-                <h3 class="text-xl font-bold mb-2 text-blue-600">Mortgage Splitter</h3>
-                <p class="text-gray-600 text-sm">Analyze your home loan, interest rates, and repayment schedule in seconds.</p>
+            <a href="/mortgage-splitter" class="tool-card bg-white p-8 rounded-2xl block">
+                <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">🏠</div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Mortgage Splitter</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Calculate monthly payments, interest rates, and total loan costs with our professional mortgage analyzer.</p>
+                <div class="mt-6 text-blue-600 text-sm font-semibold flex items-center">
+                    Use Tool <span class="ml-2">→</span>
+                </div>
             </a>
 
-            <a href="/hourly-rate" class="tool-card bg-white p-6 rounded-xl shadow-md border border-gray-100 block">
-                <div class="text-3xl mb-4">💰</div>
-                <h3 class="text-xl font-bold mb-2">Hourly Rate Calc</h3>
-                <p class="text-gray-600 text-sm">p>
+            <a href="/hourly-rate" class="tool-card bg-white p-8 rounded-2xl block">
+                <div class="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">💰</div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">Hourly Rate Calculator</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Determine what you should charge as a freelancer to cover your expenses, taxes, and desired profit.</p>
+                <div class="mt-6 text-blue-600 text-sm font-semibold flex items-center">
+                    Use Tool <span class="ml-2">→</span>
+                </div>
             </a>
 
+            <div class="tool-card bg-white p-8 rounded-2xl opacity-60 grayscale">
+                <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center text-2xl mb-6">📱</div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800">QR Code Generator</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Instantly generate high-quality QR codes for URLs, text, or Wi-Fi access. Coming very soon.</p>
+                <div class="mt-6 text-gray-400 text-xs font-bold uppercase">Work in Progress</div>
             </div>
+
+        </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-10 mt-20">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2026 ToolCompass.org - Professional Web Utilities</p>
+    <section class="bg-white py-16 border-t border-gray-100">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-2xl font-bold mb-6">Why use ToolCompass?</h2>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+                ToolCompass.org provides a curated collection of digital helpers designed for speed and accuracy. Whether you're planning your finances or optimizing your freelance business, our tools are built to give you the data you need without the clutter.
+            </p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-8 mb-8">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <span class="text-xl">🧭</span>
+                    <span class="text-xl font-bold">ToolCompass.org</span>
+                </div>
+                <div class="flex space-x-6 text-sm text-gray-400">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
+                    <a href="#" class="hover:text-white">Contact</a>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 text-sm">&copy; 2026 ToolCompass.org. Helping you navigate digital tasks.</p>
         </div>
     </footer>
 
