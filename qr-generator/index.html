@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free QR Code Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/script.js/2026/qrcode.min.js" integrity="sha512-..." crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4">
+            <a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10 max-w-4xl">
+        <h1 class="text-3xl font-extrabold mb-2 text-center">QR Code Generator</h1>
+        <p class="text-gray-600 mb-8 text-center">Create high-quality QR codes for URLs or text instantly.</p>
+
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 mb-12 flex flex-col items-center">
+            <div class="w-full max-w-md space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Enter URL or Text</label>
+                    <input type="text" id="qr-input" placeholder="https://example.com" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <button onclick="generateQR()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Generate QR Code</button>
+            </div>
+
+            <div id="qr-result-container" class="mt-10 hidden flex flex-col items-center">
+                <div id="qrcode" class="p-4 bg-white border rounded-lg shadow-sm"></div>
+                <button onclick="downloadQR()" class="mt-6 text-sm bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition">Download PNG</button>
+            </div>
+        </div>
+
+        <div class="w-full h-32 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs mb-12 border-dashed border-2">
+            ADVERTISEMENT
+        </div>
+
+        <article class="prose max-w-none text-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900">Why use a QR Code?</h2>
+            <p>QR codes (Quick Response codes) have become an essential bridge between the physical and digital worlds. Whether you want to share a website link, a Wi-Fi password, or digital contact information, a QR code makes the process seamless for mobile users.</p>
+            
+            <h3 class="text-xl font-semibold mt-6">Safe and Private Generation</h3>
+            <p>At <strong>ToolCompass</strong>, we prioritize your privacy. Our QR Code Generator works entirely within your browser. The data you enter is never sent to our servers, ensuring that your sensitive information remains yours alone.</p>
+
+            <h3 class="text-xl font-semibold mt-6">Best Practices for QR Codes</h3>
+            <ul>
+                <li><strong>Contrast:</strong> Ensure your QR code is dark on a light background for better scannability.</li>
+                <li><strong>Size:</strong> Don't make the code too small; a minimum of 2x2 cm is recommended for print.</li>
+                <li><strong>Testing:</strong> Always scan your generated code with your own smartphone before printing it on business cards or flyers.</li>
+            </ul>
+        </article>
+    </main>
+
+    <script>
+        let qrcode;
+
+        function generateQR() {
+            const input = document.getElementById('qr-input').value;
+            const container = document.getElementById('qr-result-container');
+            const qrDiv = document.getElementById('qrcode');
+
+            if (!input) {
+                alert("Please enter some text or a URL");
+                return;
+            }
+
+            // Clear previous QR
+            qrDiv.innerHTML = "";
+            container.classList.remove('hidden');
+
+            qrcode = new QRCode(qrDiv, {
+                text: input,
+                width: 256,
+                height: 256,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        function downloadQR() {
+            const img = document.querySelector('#qrcode img');
+            if (img) {
+                const link = document.createElement('a');
+                link.download = 'toolcompass-qr-code.png';
+                link.href = img.src;
+                link.click();
+            }
+        }
+    </script>
+</body>
+</html>
