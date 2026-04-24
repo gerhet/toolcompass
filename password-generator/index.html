@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Password Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-md">
+        <h1 class="text-3xl font-extrabold mb-6 text-center">Password Generator</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <div class="bg-gray-100 p-4 rounded-xl mb-6 flex justify-between items-center">
+                <span id="pwOutput" class="font-mono text-lg font-bold break-all tracking-wider text-blue-600">Click Generate</span>
+                <button onclick="copyPw()" class="text-xs font-bold text-gray-500 hover:text-blue-600 uppercase">Copy</button>
+            </div>
+            <div class="space-y-4 mb-8">
+                <div>
+                    <label class="text-xs font-bold text-gray-400 uppercase">Length: <span id="lenVal">16</span></label>
+                    <input type="range" id="pwLength" min="8" max="32" value="16" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-2" oninput="document.getElementById('lenVal').innerText = this.value">
+                </div>
+            </div>
+            <button onclick="generatePw()" class="w-full bg-gray-900 text-white font-bold py-3 rounded-lg hover:bg-black transition">Generate Secure Password</button>
+        </div>
+    </main>
+
+    <script>
+        function generatePw() {
+            const length = document.getElementById('pwLength').value;
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~";
+            let retVal = "";
+            for (let i = 0; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            document.getElementById('pwOutput').innerText = retVal;
+        }
+        function copyPw() {
+            const pw = document.getElementById('pwOutput').innerText;
+            if(pw === "Click Generate") return;
+            navigator.clipboard.writeText(pw);
+            alert("Password copied!");
+        }
+    </script>
+</body>
+</html>
