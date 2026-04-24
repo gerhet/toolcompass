@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Palette Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl text-center">
+        <h1 class="text-3xl font-extrabold mb-4">Color Palette Generator</h1>
+        <p class="text-gray-600 mb-8">Generate beautiful color schemes for your next project.</p>
+        
+        <div class="grid grid-cols-5 gap-2 h-48 mb-8" id="palette">
+            </div>
+
+        <button onclick="generatePalette()" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:bg-blue-700 transition">Generate New Palette</button>
+        <p class="mt-4 text-xs text-gray-400">Click a color to copy the HEX code.</p>
+    </main>
+
+    <script>
+        function generatePalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const color = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+                const div = document.createElement('div');
+                div.className = "rounded-xl cursor-pointer flex items-end justify-center pb-4 text-[10px] font-bold text-white shadow-inner";
+                div.style.backgroundColor = color;
+                div.innerText = color.toUpperCase();
+                div.onclick = () => { navigator.clipboard.writeText(color); alert('Copied ' + color); };
+                palette.appendChild(div);
+            }
+        }
+        generatePalette();
+    </script>
+</body>
+</html>
