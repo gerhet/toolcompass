@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Focus Timer | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-md text-center">
+        <h1 class="text-3xl font-extrabold mb-8">Focus Timer</h1>
+        <div class="bg-white p-10 rounded-full shadow-2xl border-8 border-red-50 w-80 h-80 mx-auto flex flex-col justify-center items-center">
+            <div id="timerDisplay" class="text-6xl font-black text-red-600 mb-2">25:00</div>
+            <p id="statusLabel" class="text-gray-400 font-bold uppercase tracking-widest text-xs">Work Session</p>
+        </div>
+        <div class="mt-10 flex justify-center space-x-4">
+            <button onclick="toggleTimer()" id="startBtn" class="bg-red-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-red-700 transition">Start</button>
+            <button onclick="resetTimer()" class="bg-gray-200 text-gray-600 px-8 py-3 rounded-full font-bold hover:bg-gray-300 transition">Reset</button>
+        </div>
+    </main>
+    <script>
+        let timer;
+        let timeLeft = 1500;
+        let isRunning = false;
+
+        function updateDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timerDisplay').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function toggleTimer() {
+            if (isRunning) {
+                clearInterval(timer);
+                document.getElementById('startBtn').innerText = 'Resume';
+            } else {
+                timer = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                    } else {
+                        clearInterval(timer);
+                        alert("Time's up! Take a break.");
+                    }
+                }, 1000);
+                document.getElementById('startBtn').innerText = 'Pause';
+            }
+            isRunning = !isRunning;
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 1500;
+            isRunning = false;
+            updateDisplay();
+            document.getElementById('startBtn').innerText = 'Start';
+        }
+    </script>
+</body>
+</html>
