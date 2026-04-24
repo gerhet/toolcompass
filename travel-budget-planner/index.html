@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Budget Planner | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-xl">
+        <h1 class="text-3xl font-extrabold mb-6">Holiday Budget Planner</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 space-y-4">
+            <input type="number" id="days" placeholder="Number of days" class="w-full p-3 border rounded-lg">
+            <select id="style" class="w-full p-3 border rounded-lg bg-white">
+                <option value="50">Backpacker ($50/day)</option>
+                <option value="120">Standard ($120/day)</option>
+                <option value="300">Luxury ($300/day)</option>
+            </select>
+            <button onclick="calcBudget()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Estimate Budget</button>
+            <div id="res" class="hidden mt-6 text-center p-6 bg-blue-50 rounded-xl">
+                <p class="text-xs font-bold text-blue-800 uppercase">Estimated Total Cost</p>
+                <p id="total" class="text-4xl font-black text-blue-600">$0</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function calcBudget() {
+            const d = document.getElementById('days').value;
+            const s = document.getElementById('style').value;
+            if(!d) return;
+            document.getElementById('total').innerText = "$" + (d * s).toLocaleString();
+            document.getElementById('res').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
