@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word & Character Counter | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-6">Word Counter</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <textarea id="textInput" rows="10" class="w-full p-4 border rounded-xl mb-6 outline-none focus:ring-2 focus:ring-blue-500" placeholder="Paste your text here..." oninput="countText()"></textarea>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-4 rounded-xl text-center"><p class="text-xs font-bold text-blue-400">WORDS</p><p id="wordCount" class="text-3xl font-black text-blue-600">0</p></div>
+                <div class="bg-gray-50 p-4 rounded-xl text-center"><p class="text-xs font-bold text-gray-400">CHARACTERS</p><p id="charCount" class="text-3xl font-black text-gray-800">0</p></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function countText() {
+            const val = document.getElementById('textInput').value.trim();
+            document.getElementById('wordCount').innerText = val ? val.split(/\s+/).length : 0;
+            document.getElementById('charCount').innerText = val.length;
+        }
+    </script>
+</body>
+</html>
