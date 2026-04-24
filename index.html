@@ -3,64 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolCompass | 30 Free Online Tools</title>
+    <title>ToolCompass | 30+ Free Online Tools & Professional Calculators</title>
+    <meta name="description" content="Access 30+ free professional web tools. From Finance and Dev-Tools to Content Creation. No login, fast and secure.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .card { transition: all 0.2s; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-3px); border-color: #3b82f6; box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1); }
+        .tool-link { transition: all 0.2s ease; border: 1px solid #e2e8f0; }
+        .tool-link:hover { border-color: #3b82f6; background-color: #f8fafc; transform: translateY(-2px); shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .section-title { position: relative; padding-left: 1rem; }
+        .section-title::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #3b82f6; border-radius: 2px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
-    <header class="bg-white border-b py-6 sticky top-0 z-50">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-black text-blue-600">🧭 ToolCompass</h1>
-            <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase">30 Tools Live</span>
+<body class="bg-white text-slate-900 font-sans">
+
+    <header class="border-b border-slate-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🧭</span>
+                <span class="text-xl font-bold tracking-tighter">ToolCompass<span class="text-blue-600">.org</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">30 TOOLS READY</span>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            
-            <a href="/mortgage-splitter" class="card bg-white p-4 rounded-xl">🏠 Mortgage Splitter</a>
-            <a href="/hourly-rate" class="card bg-white p-4 rounded-xl">💰 Hourly Rate</a>
-            <a href="/tip-splitter" class="card bg-white p-4 rounded-xl">🍽️ Tip Splitter</a>
-            <a href="/loan-affordability" class="card bg-white p-4 rounded-xl">🏦 Loan Limit</a>
-            <a href="/vat-calculator" class="card bg-white p-4 rounded-xl">🧾 VAT Calc</a>
-            <a href="/travel-budget-planner" class="card bg-white p-4 rounded-xl">✈️ Travel Budget</a>
-
-            <a href="/text-summarizer" class="card bg-white p-4 rounded-xl">📝 Summarizer</a>
-            <a href="/word-counter" class="card bg-white p-4 rounded-xl">🔢 Word Counter</a>
-            <a href="/case-converter" class="card bg-white p-4 rounded-xl">Aa Case Fix</a>
-            <a href="/subject-line-generator" class="card bg-white p-4 rounded-xl">📧 Email Subject</a>
-            <a href="/linkedin-post-maker" class="card bg-white p-4 rounded-xl">🔗 LinkedIn Post</a>
-            <a href="/bio-generator" class="card bg-white p-4 rounded-xl">👤 Bio Gen</a>
-            <a href="/privacy-policy-generator" class="card bg-white p-4 rounded-xl">⚖️ Privacy Gen</a>
-
-            <a href="/pomodoro-timer" class="card bg-white p-4 rounded-xl">🍅 Pomodoro</a>
-            <a href="/stopwatch" class="card bg-white p-4 rounded-xl">⏱️ Stopwatch</a>
-            <a href="/workday-counter" class="card bg-white p-4 rounded-xl">📅 Workdays</a>
-            <a href="/year-progress" class="card bg-white p-4 rounded-xl">📊 Year Progress</a>
-            <a href="/timezone-clock" class="card bg-white p-4 rounded-xl">🌍 World Clock</a>
-            <a href="/countdown-generator" class="card bg-white p-4 rounded-xl">⏳ Countdown</a>
-
-            <a href="/qr-generator" class="card bg-white p-4 rounded-xl">📱 QR Gen</a>
-            <a href="/json-formatter" class="card bg-white p-4 rounded-xl">💻 JSON Format</a>
-            <a href="/base64-tool" class="card bg-white p-4 rounded-xl">🔐 Base64</a>
-            <a href="/binary-converter" class="card bg-white p-4 rounded-xl">01 Binary</a>
-            <a href="/color-palette" class="card bg-white p-4 rounded-xl">🎨 Colors</a>
-            <a href="/password-generator" class="card bg-white p-4 rounded-xl">🛡️ PW Gen</a>
-
-            <a href="/bmi-calculator" class="card bg-white p-4 rounded-xl">⚖️ BMI Calc</a>
-            <a href="/age-calculator" class="card bg-white p-4 rounded-xl">👶 Age Calc</a>
-            <a href="/percentage-calculator" class="card bg-white p-4 rounded-xl">% Percentage</a>
-            <a href="/name-generator" class="card bg-white p-4 rounded-xl">🎲 Name Gen</a>
-            <a href="/co2-travel-comparison" class="card bg-white p-4 rounded-xl">🌿 CO2 Tracker</a>
-
+    <section class="py-16 bg-slate-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">
+                One Compass. <span class="text-blue-600">Every Utility.</span>
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                Stop bookmarking dozens of sites. Access all your essential web utilities, finance calculators, and developer tools in one clean, ad-free environment.
+            </p>
         </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-16">
+        
+        <div class="mb-16">
+            <h2 class="section-title text-xl font-bold mb-6 italic">Finance & Business</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/mortgage-splitter" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">🏠</span>
+                    <div><span class="block font-bold">Mortgage Splitter</span><span class="text-xs text-slate-500 text-slate-500">Loan & Interest analysis</span></div>
+                </a>
+                <a href="/hourly-rate" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">💰</span>
+                    <div><span class="block font-bold">Hourly Rate</span><span class="text-xs text-slate-500">For Freelancers</span></div>
+                </a>
+                <a href="/vat-calculator" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">🧾</span>
+                    <div><span class="block font-bold">VAT Calculator</span><span class="text-xs text-slate-500">Tax addition/removal</span></div>
+                </a>
+                <a href="/loan-affordability" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">🏦</span>
+                    <div><span class="block font-bold">Loan Limit</span><span class="text-xs text-slate-500">Affordability check</span></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-16">
+            <h2 class="section-title text-xl font-bold mb-6 italic">Content & Writing</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/text-summarizer" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">📝</span>
+                    <div><span class="block font-bold">Summarizer</span><span class="text-xs text-slate-500">AI-style text compression</span></div>
+                </a>
+                <a href="/word-counter" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">🔢</span>
+                    <div><span class="block font-bold">Word Counter</span><span class="text-xs text-slate-500">SEO & Length check</span></div>
+                </a>
+                <a href="/subject-line-generator" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">📧</span>
+                    <div><span class="block font-bold">Email Subjects</span><span class="text-xs text-slate-500">Higher open rates</span></div>
+                </a>
+                <a href="/linkedin-post-maker" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">🔗</span>
+                    <div><span class="block font-bold">LinkedIn Maker</span><span class="text-xs text-slate-500">Professional posts</span></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="mb-16">
+            <h2 class="section-title text-xl font-bold mb-6 italic">Developer Utilities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/json-formatter" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">💻</span>
+                    <div><span class="block font-bold">JSON Format</span><span class="text-xs text-slate-500">Prettify code</span></div>
+                </a>
+                <a href="/qr-generator" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">📱</span>
+                    <div><span class="block font-bold">QR Gen</span><span class="text-xs text-slate-500">Instant codes</span></div>
+                </a>
+                <a href="/base64-tool" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">🔐</span>
+                    <div><span class="block font-bold">Base64</span><span class="text-xs text-slate-500">Encode/Decode</span></div>
+                </a>
+                <a href="/binary-converter" class="tool-link p-4 rounded-xl flex items-center space-x-4">
+                    <span class="text-2xl">01</span>
+                    <div><span class="block font-bold">Binary Conv.</span><span class="text-xs text-slate-500">Text to bits</span></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="text-center mt-20 p-12 bg-blue-600 rounded-3xl text-white">
+            <h3 class="text-2xl font-bold mb-2">And 18 more tools...</h3>
+            <p class="opacity-80">Explore our full library of utilities above.</p>
+        </div>
+
     </main>
 
-    <footer class="py-20 text-center text-slate-400 text-xs font-medium border-t">
-        TOOLCOMPASS.ORG &copy; 2026 - SIMPLICITY IN EVERY TOOL
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2026 ToolCompass.org - Fast, Free, Secure.</p>
+        </div>
     </footer>
 </body>
 </html>
