@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Identity Engine | 20M+ Names | ToolCompass</title>
+    <title>X-IDENTITY | Ultimate Naming Engine | ToolCompass</title>
     
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
@@ -16,211 +16,249 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .name-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-        .name-card:hover { transform: translateY(-2px); shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .gradient-bg { background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%); }
-        .active-len { background-color: #2563eb !important; color: white !important; border-color: #2563eb !important; }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@900&display=swap');
+        
+        :root { --accent: #2563eb; }
+        body { font-family: 'Space Grotesk', sans-serif; background: #020617; color: #f8fafc; overflow-x: hidden; }
+        .font-heavy { font-family: 'Outfit', sans-serif; }
+        
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .name-card { transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; position: relative; overflow: hidden; }
+        .name-card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--accent); box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.5); }
+        
+        .scanline { width: 100%; height: 2px; background: rgba(37, 99, 235, 0.2); position: absolute; animation: scan 4s linear infinite; pointer-events: none; }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+        
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #9333ea, #3b82f6); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-[#f1f5f9] text-slate-900 min-h-screen">
+<body>
 
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 py-4">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="/" class="flex items-center space-x-2 group">
-                <span class="text-2xl group-hover:rotate-12 transition-transform">🧭</span>
-                <span class="font-black text-xl tracking-tighter uppercase">ToolCompass<span class="text-blue-600">.org</span></span>
-            </a>
-            <div class="text-[10px] font-black bg-blue-600 text-white px-3 py-1 rounded-full uppercase tracking-widest">
-                Matrix v5.0 Live
-            </div>
+    <div class="scanline"></div>
+
+    <header class="p-6 flex justify-between items-center border-b border-white/5 relative z-10 glass">
+        <a href="/" class="flex items-center space-x-3 group">
+            <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center font-black text-white shadow-lg shadow-blue-500/20">TC</div>
+            <span class="font-heavy text-2xl tracking-tighter uppercase">X-IDENTITY <span class="text-blue-500 font-light">CORE</span></span>
+        </a>
+        <div class="flex items-center space-x-4">
+            <div id="vault-count" class="text-xs font-bold bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full border border-blue-500/20 tracking-widest uppercase">Vault: 0</div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-12 max-w-5xl">
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight uppercase leading-none">The <span class="text-blue-600">Million-Name</span> Engine.</h1>
-            <p class="text-slate-500 font-medium max-w-2xl mx-auto">High-performance combinatorial identity generator. Outperforming standard tools with 20,000,000+ unique algorithmic variations.</p>
+    <main class="container mx-auto px-4 py-16 relative z-10">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h1 class="text-6xl md:text-8xl font-heavy mb-4 tracking-tighter leading-none uppercase italic">The <span class="gradient-text">Omega</span> Engine</h1>
+            <p class="text-slate-400 text-lg uppercase tracking-[0.3em] font-light">Multipass Identity Combinator // v.9.0 Final</p>
         </div>
 
-        <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-blue-200/50 border border-slate-100 overflow-hidden">
-            <div class="p-6 md:p-10">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                    <div class="space-y-4">
-                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest">Core Algorithm</label>
-                        <select id="category" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl outline-none font-bold focus:border-blue-500 transition-all">
-                            <option value="fantasy">Epic Fantasy Lore</option>
-                            <option value="corp">Fortune 500 Corporate</option>
-                            <option value="cyber">Cyberpunk / Sci-Fi</option>
-                            <option value="modern">Modern Global Human</option>
-                            <option value="gaming">E-Sports & Streaming</option>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-4 space-y-6">
+                <div class="glass p-8 rounded-[2rem] space-y-8">
+                    <div>
+                        <label class="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-4 block">Select Universe</label>
+                        <select id="category" class="w-full bg-slate-900/50 border border-white/10 p-4 rounded-xl font-bold outline-none focus:border-blue-500 transition">
+                            <option value="fantasy">Epic High Fantasy</option>
+                            <option value="corp">Global Tech Conglomerate</option>
+                            <option value="cyber">Cybernetic / Hacknet</option>
+                            <option value="modern">Modern Bio-Identity</option>
                         </select>
-                        
-                        <div class="pt-2">
-                            <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest mb-3 block">Batch Size</label>
-                            <div class="flex gap-2">
-                                <button onclick="setQty(24)" id="qty-24" class="qty-btn flex-1 p-2 bg-blue-600 text-white rounded-xl font-bold text-sm">24</button>
-                                <button onclick="setQty(48)" id="qty-48" class="qty-btn flex-1 p-2 bg-slate-50 text-slate-400 rounded-xl font-bold text-sm border border-slate-100">48</button>
-                                <button onclick="setQty(96)" id="qty-96" class="qty-btn flex-1 p-2 bg-slate-50 text-slate-400 rounded-xl font-bold text-sm border border-slate-100">96</button>
-                            </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-blue-500 block">Matrix Parameters</label>
+                        <label class="flex justify-between items-center group cursor-pointer">
+                            <span class="text-sm text-slate-400 group-hover:text-white transition">Honorifics</span>
+                            <input type="checkbox" id="useTitle" class="w-5 h-5 accent-blue-600">
+                        </label>
+                        <label class="flex justify-between items-center group cursor-pointer">
+                            <span class="text-sm text-slate-400 group-hover:text-white transition">Surnames</span>
+                            <input type="checkbox" id="useLast" checked class="w-5 h-5 accent-blue-600">
+                        </label>
+                        <label class="flex justify-between items-center group cursor-pointer">
+                            <span class="text-sm text-slate-400 group-hover:text-white transition">Ancient Traits</span>
+                            <input type="checkbox" id="useTrait" class="w-5 h-5 accent-blue-600">
+                        </label>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-4 block">Sequence Length</label>
+                        <div class="flex bg-slate-900 rounded-xl p-1 border border-white/5">
+                            <button onclick="setLen('short')" id="btn-short" class="flex-1 py-2 text-xs font-bold rounded-lg transition">Short</button>
+                            <button onclick="setLen('med')" id="btn-med" class="flex-1 py-2 text-xs font-bold rounded-lg bg-blue-600 transition">Med</button>
+                            <button onclick="setLen('long')" id="btn-long" class="flex-1 py-2 text-xs font-bold rounded-lg transition">Long</button>
                         </div>
                     </div>
 
-                    <div class="space-y-4">
-                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest">Structure Components</label>
-                        <div class="space-y-2">
-                            <label class="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition">
-                                <span class="text-sm font-bold">Include Honorifics (Titles)</span>
-                                <input type="checkbox" id="useTitle" class="w-5 h-5 accent-blue-600">
-                            </label>
-                            <label class="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition">
-                                <span class="text-sm font-bold">Include Surnames</span>
-                                <input type="checkbox" id="useLast" checked class="w-5 h-5 accent-blue-600">
-                            </label>
-                            <label class="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition">
-                                <span class="text-sm font-bold">Include Traits (Epithets)</span>
-                                <input type="checkbox" id="useTrait" class="w-5 h-5 accent-blue-600">
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest">Linguistic Complexity</label>
-                        <div class="grid grid-cols-1 gap-2">
-                            <button onclick="setLen('short')" id="len-short" class="len-btn p-3 text-xs font-bold border rounded-xl bg-white text-slate-400 border-slate-100">Short & Punchy</button>
-                            <button onclick="setLen('med')" id="len-med" class="len-btn p-3 text-xs font-bold border rounded-xl active-len">Balanced Standard</button>
-                            <button onclick="setLen('long')" id="len-long" class="len-btn p-3 text-xs font-bold border rounded-xl bg-white text-slate-400 border-slate-100">Complex / Ancient</button>
-                        </div>
-                        <button onclick="generate()" class="w-full gradient-bg text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-500/30 transition-all active:scale-95 uppercase tracking-widest mt-2">
-                            Run Matrix Engine
-                        </button>
-                    </div>
+                    <button onclick="generate()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-heavy py-5 rounded-2xl shadow-2xl shadow-blue-500/20 transition active:scale-95 uppercase tracking-widest text-xl italic">
+                        Initialize Matrix
+                    </button>
                 </div>
 
-                <div id="resultArea" class="hidden border-t border-slate-100 pt-10">
-                    <div class="flex items-center justify-between mb-6 px-2">
-                        <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Identity Output</h3>
-                        <span id="stats" class="text-[10px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full"></span>
-                    </div>
-                    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
+                <div id="vault-area" class="glass p-6 rounded-[2rem] hidden">
+                    <h3 class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 flex justify-between">
+                        <span>Secured Vault</span>
+                        <button onclick="clearVault()" class="text-red-400 hover:text-red-300">Wipe</button>
+                    </h3>
+                    <div id="vault-list" class="space-y-2 max-h-48 overflow-y-auto"></div>
                 </div>
             </div>
+
+            <div class="lg:col-span-8 glass p-8 rounded-[2rem] min-h-[600px] relative overflow-hidden">
+                <div id="empty-state" class="absolute inset-0 flex flex-col items-center justify-center opacity-20">
+                    <div class="text-9xl mb-4">⚙️</div>
+                    <p class="font-heavy uppercase tracking-[0.5em]">Waiting for Input...</p>
+                </div>
+                <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10"></div>
+            </div>
+
         </div>
     </main>
 
     <script>
         let currentLen = 'med';
-        let currentQty = 24;
+        let vault = JSON.parse(localStorage.getItem('tc_vault') || '[]');
+        updateVaultUI();
 
         const db = {
-            titles: ["Lord", "Sir", "Grandmaster", "Archon", "Captain", "Agent", "Saint", "Elder", "Baron", "Chief", "Prime", "Dr.", "Professor", "The", "High", "Void", "Master"],
-            traits: ["the Eternal", "the Brave", "the Silent", "the Feather-Bearer", "the Melancholic", "the Radiant", "the Unforgiven", "the Swift", "the Wise", "the Iron-Willed", "the Wanderer", "the Architect", "the Ghost", "the Catalyst"],
+            titles: ["Lord", "High Archon", "Saint", "Agent", "Overlord", "Grandmaster", "Elder", "Baron", "Chief", "Prime", "Dr.", "Professor", "Exarch", "Void-Walker"],
+            traits: ["the Eternal", "the Ghost-Bearer", "the Silent", "the Feather-Bearer", "the Melancholic", "the Radiant", "the Unforgiven", "the Iron-Willed", "the Catalyst", "the Void-Born"],
             fantasy: {
-                p: ["Thal", "Elow", "Kael", "Vael", "Zor", "Lir", "Mor", "Syl", "Fao", "Xan", "Aer", "Bael", "Cael", "Dra", "Eld", "Ghal", "Hald", "Iril", "Jal", "Khor", "Luth", "Mith", "Nyth", "Orel", "Pha"],
-                m: ["an", "en", "in", "on", "un", "ar", "er", "ir", "or", "ur", "al", "el", "il", "ol", "ul", "dra", "morn", "vale", "thir", "vail", "ryn", "dil", "bor", "fin", "lon"],
-                s: ["dor", "thas", "rond", "ius", "ael", "gath", "orn", "ald", "wyn", "mir", "ros", "zak", "duin", "hal", "rem", "vale", "kin", "thor", "grim", "star", "fire", "moon", "blade", "heart"]
+                p: ["Thal", "Elow", "Kael", "Vael", "Zor", "Lir", "Mor", "Syl", "Fao", "Xan", "Aer", "Bael", "Cael", "Dra", "Eld", "Ghal"],
+                m: ["an", "en", "in", "ar", "er", "ir", "al", "el", "il", "dra", "morn", "vale", "ryn", "dil", "bor"],
+                s: ["dor", "thas", "rond", "ius", "ael", "gath", "orn", "ald", "wyn", "mir", "ros", "zak", "duin", "hal", "vale"]
             },
             corp: {
-                p: ["Neo", "Omni", "Velo", "Aero", "Strat", "Quant", "Nexus", "Flux", "Core", "Prime", "Zenth", "Apex", "Nova", "Tera", "Alpha", "Global", "Intelli", "Meta", "Synchro", "Opti"],
-                m: ["stream", "logic", "point", "base", "grid", "wire", "link", "stack", "flow", "bridge", "scale", "wise", "zone", "port", "path", "view", "deck", "vault", "space", "node"],
-                s: ["ly", "ify", "io", "ora", "ix", "on", "ic", "is", "it", "um", "Labs", "Group", "Systems", "Ventures", "Global", "Solutions", "Dynamics", "Collective", "Partners", "Genics"]
+                p: ["Neo", "Omni", "Velo", "Aero", "Strat", "Quant", "Nexus", "Flux", "Core", "Prime", "Zenth", "Apex", "Nova", "Tera"],
+                m: ["stream", "logic", "point", "base", "grid", "wire", "link", "stack", "flow", "bridge", "scale", "wise", "zone"],
+                s: ["ly", "ify", "io", "ora", "ix", "on", "ic", "is", "Labs", "Group", "Systems", "Ventures", "Dynamics", "Collective"]
             },
             cyber: {
-                p: ["Neon", "Cyber", "Synth", "Byte", "Glitch", "Vector", "Static", "Chrome", "Null", "Proxy", "Net", "Code", "Link", "Grid", "Hack", "Shift", "Data", "Laser", "Mecha", "Volt"],
-                m: ["-X-", " Zero ", " Delta ", " Prime ", " MK ", " Core ", " Ghost ", " Void ", " Phantom ", " Pulse ", "-7-", "-9-", " Vector ", " Protocol "],
-                s: ["Runner", "Hunter", "Daemon", "Vortex", "Cutter", "Slider", "Scanner", "Matrix", "Protocol", "Breaker", "Shadow", "Specter", "Edge", "Driver", "Jack", "Phase", "Soul"]
+                p: ["Neon", "Cyber", "Synth", "Byte", "Glitch", "Vector", "Static", "Chrome", "Null", "Proxy", "Net", "Code", "Link", "Grid"],
+                m: ["-X-", " Zero ", " Delta ", " Prime ", " MK ", " Core ", " Ghost ", " Void ", " Pulse ", " Vector "],
+                s: ["Runner", "Daemon", "Vortex", "Cutter", "Slider", "Scanner", "Matrix", "Protocol", "Breaker", "Shadow", "Edge"]
             },
             modern: {
-                p: ["Liam", "Noah", "Oliver", "James", "Elijah", "William", "Henry", "Lucas", "Benjamin", "Theodore", "Mateo", "Levi", "Sebastian", "Daniel", "Jack", "Emma", "Olivia", "Ava", "Sophia", "Isabella"],
-                m: ["Alexander", "Marie", "Grace", "James", "Rose", "Edward", "Lee", "Elizabeth", "Michael", "Jane", "William", "Anne", "Thomas", "Victoria", "David", "Catherine", "Joseph", "Lynn"],
-                s: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore"]
-            },
-            gaming: {
-                p: ["Xx_", "PvP_", "Shadow", "Ghost", "Alpha", "Dark", "Toxic", "Elite", "Pro_", "Cyber", "Fatal", "Nova", "Glitch", "Null", "Void", "Iron", "Storm", "Frost", "Rapid", "Zenith"],
-                m: ["Slayer", "Sniper", "Hunter", "Reaper", "Knight", "King", "God", "Demon", "Wolf", "Beast", "Titan", "Pilot", "Ace", "Bot", "Hacker", "Viper", "Dragon", "Storm", "Blaze", "Raven"],
-                s: ["_YT", "_LP", "99", "77", "X", "_Vortex", "_Prime", "_Zero", "HD", "Gaming", "Modz", "Legacy", "Origin", "Evolution", "Striker", "Pro", "Clan"]
+                p: ["Liam", "Noah", "Oliver", "James", "Elijah", "William", "Henry", "Lucas", "Benjamin", "Theodore", "Mateo", "Levi"],
+                m: ["Alexander", "Marie", "Grace", "James", "Rose", "Edward", "Lee", "Elizabeth", "Michael", "Jane", "William", "Anne"],
+                s: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez"]
             }
         };
 
         function setLen(l) {
             currentLen = l;
-            document.querySelectorAll('.len-btn').forEach(b => {
-                b.classList.remove('active-len');
-                b.classList.add('bg-white', 'text-slate-400', 'border-slate-100');
+            ['short', 'med', 'long'].forEach(id => {
+                document.getElementById('btn-'+id).classList.remove('bg-blue-600');
             });
-            document.getElementById('len-' + l).classList.add('active-len');
-            document.getElementById('len-' + l).classList.remove('bg-white', 'text-slate-400', 'border-slate-100');
-        }
-
-        function setQty(q) {
-            currentQty = q;
-            document.querySelectorAll('.qty-btn').forEach(b => {
-                b.classList.remove('bg-blue-600', 'text-white');
-                b.classList.add('bg-slate-50', 'text-slate-400', 'border-slate-100');
-            });
-            document.getElementById('qty-' + q).classList.add('bg-blue-600', 'text-white');
-            document.getElementById('qty-' + q).classList.remove('bg-slate-50', 'text-slate-400', 'border-slate-100');
+            document.getElementById('btn-'+l).classList.add('bg-blue-600');
         }
 
         function generate() {
+            document.getElementById('empty-state').classList.add('hidden');
             const cat = document.getElementById('category').value;
             const useTitle = document.getElementById('useTitle').checked;
             const useLast = document.getElementById('useLast').checked;
             const useTrait = document.getElementById('useTrait').checked;
             const grid = document.getElementById('grid');
-            const area = document.getElementById('resultArea');
-            const stats = document.getElementById('stats');
 
             grid.innerHTML = '';
-            area.classList.remove('hidden');
-            stats.innerText = `${currentQty} Entities Generated`;
-
-            for(let i = 0; i < currentQty; i++) {
-                let nameParts = [];
-
-                if(useTitle) nameParts.push(db.titles[Math.floor(Math.random() * db.titles.length)]);
+            
+            for(let i = 0; i < 16; i++) {
+                let parts = [];
+                if(useTitle) parts.push(db.titles[Math.floor(Math.random() * db.titles.length)]);
 
                 const p = db[cat].p[Math.floor(Math.random() * db[cat].p.length)];
                 const m = db[cat].m[Math.floor(Math.random() * db[cat].m.length)];
                 const s = db[cat].s[Math.floor(Math.random() * db[cat].s.length)];
 
-                let coreName = "";
-                if(currentLen === 'short') coreName = p + s;
-                else if(currentLen === 'med') coreName = p + m + s;
-                else coreName = p + m + m.split('').reverse().join('') + s;
+                let core = currentLen === 'short' ? p+s : (currentLen === 'med' ? p+m+s : p+m+m+s);
+                if(cat === 'fantasy') core = core.replace(/-/g, '');
+                parts.push(core);
 
-                // Clean-up for specific categories
-                if(cat === 'fantasy') coreName = coreName.replace(/-/g, '');
-                if(cat === 'modern') coreName = p; // Modern uses first names as core
+                if(useLast) parts.push(db[cat].s[Math.floor(Math.random() * db[cat].s.length)]);
+                if(useTrait) parts.push(db.traits[Math.floor(Math.random() * db.traits.length)]);
 
-                nameParts.push(coreName);
-
-                if(useLast) {
-                    const ln = db[cat].s[Math.floor(Math.random() * db[cat].s.length)];
-                    nameParts.push(ln);
-                }
-
-                if(useTrait) nameParts.push(db.traits[Math.floor(Math.random() * db.traits.length)]);
-
-                const fullName = nameParts.join(cat === 'cyber' || cat === 'gaming' ? '' : ' ');
-
-                const card = document.createElement('div');
-                card.className = "name-card group relative bg-white border border-slate-200 p-5 rounded-2xl font-bold text-slate-800 cursor-pointer hover:border-blue-500 hover:bg-blue-50/50 text-center";
-                card.innerHTML = `
-                    <span class="block truncate text-sm md:text-base">${fullName}</span>
-                    <div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-blue-600 text-white text-[9px] flex items-center justify-center font-black transition-opacity uppercase rounded-2xl">Copy Identity</div>
-                `;
-                
-                card.onclick = () => {
-                    navigator.clipboard.writeText(fullName);
-                    const original = card.innerHTML;
-                    card.innerHTML = `<span class="text-blue-600 uppercase text-[10px]">Copied to Clipboard</span>`;
-                    setTimeout(() => card.innerHTML = original, 800);
-                };
-
-                grid.appendChild(card);
+                const name = parts.join(cat === 'cyber' ? '' : ' ');
+                createCard(name);
             }
+        }
+
+        function createCard(name) {
+            const card = document.createElement('div');
+            const hue = Math.floor(Math.random() * 360);
+            card.className = "name-card glass p-6 rounded-2xl border-l-4";
+            card.style.borderLeftColor = `hsl(${hue}, 70%, 50%)`;
+            
+            card.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-[10px] text-slate-500 uppercase font-black mb-1 tracking-widest">ID-MATCH</p>
+                        <h4 class="text-xl font-bold text-white tracking-tight">${name}</h4>
+                    </div>
+                    <button onclick="addToVault('${name}')" class="text-slate-600 hover:text-blue-400 transition text-xl">★</button>
+                </div>
+                <div class="mt-4 flex space-x-2">
+                    <div class="h-1 flex-1 bg-white/5 rounded-full overflow-hidden">
+                        <div class="h-full bg-blue-500/50" style="width: ${Math.random()*100}%"></div>
+                    </div>
+                </div>
+            `;
+            
+            card.onclick = (e) => {
+                if(e.target.tagName === 'BUTTON') return;
+                navigator.clipboard.writeText(name);
+                const toast = document.createElement('div');
+                toast.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest text-xs animate-bounce shadow-2xl z-50";
+                toast.innerText = "Identity Copied to Clipboard";
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2000);
+            };
+            
+            document.getElementById('grid').appendChild(card);
+        }
+
+        function addToVault(name) {
+            if(!vault.includes(name)) {
+                vault.push(name);
+                localStorage.setItem('tc_vault', JSON.stringify(vault));
+                updateVaultUI();
+            }
+        }
+
+        function clearVault() {
+            vault = [];
+            localStorage.setItem('tc_vault', JSON.stringify(vault));
+            updateVaultUI();
+        }
+
+        function updateVaultUI() {
+            const list = document.getElementById('vault-list');
+            const area = document.getElementById('vault-area');
+            const count = document.getElementById('vault-count');
+            
+            if(vault.length > 0) area.classList.remove('hidden');
+            else area.classList.add('hidden');
+            
+            count.innerText = `Vault: ${vault.length}`;
+            list.innerHTML = vault.map(name => `
+                <div class="flex justify-between items-center bg-white/5 p-2 px-3 rounded-lg text-xs font-bold border border-white/5">
+                    <span class="truncate mr-2">${name}</span>
+                    <button onclick="removeFromVault('${name}')" class="text-red-500 hover:scale-125 transition">×</button>
+                </div>
+            `).join('');
+        }
+
+        function removeFromVault(name) {
+            vault = vault.filter(n => n !== name);
+            localStorage.setItem('tc_vault', JSON.stringify(vault));
+            updateVaultUI();
         }
     </script>
 </body>
