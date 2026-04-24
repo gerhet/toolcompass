@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-xl">
+        <h1 class="text-3xl font-extrabold mb-8 text-center text-gray-800">Percentage Calculator</h1>
+        <div class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                <p class="text-sm font-bold mb-4">What is <input type="number" id="p1" class="w-16 border-b-2 border-blue-500 outline-none text-center" placeholder="10"> % of <input type="number" id="v1" class="w-24 border-b-2 border-blue-500 outline-none text-center" placeholder="200"> ?</p>
+                <div class="flex justify-between items-center">
+                    <button onclick="calc1()" class="text-xs bg-blue-600 text-white px-3 py-1 rounded">Calculate</button>
+                    <span id="res1" class="font-bold text-blue-600 text-xl"></span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+                <p class="text-sm font-bold mb-4"><input type="number" id="v2" class="w-20 border-b-2 border-green-500 outline-none text-center" placeholder="50"> is what % of <input type="number" id="v3" class="w-20 border-b-2 border-green-500 outline-none text-center" placeholder="250"> ?</p>
+                <div class="flex justify-between items-center">
+                    <button onclick="calc2()" class="text-xs bg-green-600 text-white px-3 py-1 rounded">Calculate</button>
+                    <span id="res2" class="font-bold text-green-600 text-xl"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function calc1() {
+            const p = document.getElementById('p1').value;
+            const v = document.getElementById('v1').value;
+            document.getElementById('res1').innerText = (v * (p/100)).toFixed(2);
+        }
+        function calc2() {
+            const v2 = document.getElementById('v2').value;
+            const v3 = document.getElementById('v3').value;
+            document.getElementById('res2').innerText = ((v2/v3)*100).toFixed(2) + "%";
+        }
+    </script>
+</body>
+</html>
