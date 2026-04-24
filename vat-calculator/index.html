@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>VAT & Sales Tax Calculator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-md">
+        <h1 class="text-3xl font-extrabold mb-6">VAT Calculator</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl space-y-4">
+            <input type="number" id="amount" placeholder="Amount" class="w-full p-3 border rounded-lg">
+            <input type="number" id="taxRate" value="19" class="w-full p-3 border rounded-lg">
+            <div class="flex gap-2">
+                <button onclick="calc(true)" class="flex-1 bg-green-600 text-white py-2 rounded">Add Tax</button>
+                <button onclick="calc(false)" class="flex-1 bg-gray-600 text-white py-2 rounded">Remove Tax</button>
+            </div>
+            <div id="vatRes" class="hidden p-4 bg-green-50 rounded text-center font-bold text-2xl text-green-700"></div>
+        </div>
+    </main>
+    <script>
+        function calc(add) {
+            const a = parseFloat(document.getElementById('amount').value);
+            const r = parseFloat(document.getElementById('taxRate').value) / 100;
+            const res = add ? a * (1 + r) : a / (1 + r);
+            document.getElementById('vatRes').innerText = res.toFixed(2);
+            document.getElementById('vatRes').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
