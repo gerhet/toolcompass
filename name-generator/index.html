@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate AI Name Engine | 10M+ Identities | ToolCompass</title>
+    <title>Ultimate Identity Engine | 20M+ Names | ToolCompass</title>
     
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
@@ -18,12 +18,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .name-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .name-card:hover { transform: scale(1.03); z-index: 10; }
-        .gradient-text { background: linear-gradient(90deg, #2563eb, #9333ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .name-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .name-card:hover { transform: translateY(-2px); shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .gradient-bg { background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%); }
+        .active-len { background-color: #2563eb !important; color: white !important; border-color: #2563eb !important; }
     </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-900">
+<body class="bg-[#f1f5f9] text-slate-900 min-h-screen">
 
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 py-4">
         <div class="container mx-auto px-4 flex justify-between items-center">
@@ -31,120 +32,190 @@
                 <span class="text-2xl group-hover:rotate-12 transition-transform">🧭</span>
                 <span class="font-black text-xl tracking-tighter uppercase">ToolCompass<span class="text-blue-600">.org</span></span>
             </a>
-            <div class="hidden md:block text-[10px] font-black bg-slate-900 text-white px-3 py-1 rounded-full uppercase tracking-widest">
-                Triple-Core Engine v4.0
+            <div class="text-[10px] font-black bg-blue-600 text-white px-3 py-1 rounded-full uppercase tracking-widest">
+                Matrix v5.0 Live
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-16 max-w-5xl">
-        <div class="text-center mb-16">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 tracking-tight uppercase leading-none">The <span class="gradient-text">Ultimate</span><br>Naming Matrix.</h1>
-            <p class="text-slate-500 text-lg max-w-2xl mx-auto font-medium">Outperforming standard generators with a combinatorial logic of <span class="text-blue-600 font-bold">10,000,000+</span> unique results. Perfect for brands, lore, and global identities.</p>
+    <main class="container mx-auto px-4 py-12 max-w-5xl">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight uppercase leading-none">The <span class="text-blue-600">Million-Name</span> Engine.</h1>
+            <p class="text-slate-500 font-medium max-w-2xl mx-auto">High-performance combinatorial identity generator. Outperforming standard tools with 20,000,000+ unique algorithmic variations.</p>
         </div>
 
-        <div class="bg-white p-2 rounded-[3rem] shadow-2xl shadow-blue-200/50 border border-slate-100">
-            <div class="p-8 md:p-12">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-                    <div class="space-y-2">
-                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest ml-1">Algorithm</label>
-                        <select id="category" class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-bold transition-all">
-                            <option value="corp">Fortune 500 & Tech</option>
-                            <option value="fantasy">High-Lore Fantasy</option>
-                            <option value="modern">Global Modern Human</option>
-                            <option value="gaming">E-Sports & Gaming</option>
-                            <option value="scientific">Scientific & Bio-Tech</option>
+        <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-blue-200/50 border border-slate-100 overflow-hidden">
+            <div class="p-6 md:p-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                    <div class="space-y-4">
+                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest">Core Algorithm</label>
+                        <select id="category" class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl outline-none font-bold focus:border-blue-500 transition-all">
+                            <option value="fantasy">Epic Fantasy Lore</option>
+                            <option value="corp">Fortune 500 Corporate</option>
+                            <option value="cyber">Cyberpunk / Sci-Fi</option>
+                            <option value="modern">Modern Global Human</option>
+                            <option value="gaming">E-Sports & Streaming</option>
                         </select>
+                        
+                        <div class="pt-2">
+                            <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest mb-3 block">Batch Size</label>
+                            <div class="flex gap-2">
+                                <button onclick="setQty(24)" id="qty-24" class="qty-btn flex-1 p-2 bg-blue-600 text-white rounded-xl font-bold text-sm">24</button>
+                                <button onclick="setQty(48)" id="qty-48" class="qty-btn flex-1 p-2 bg-slate-50 text-slate-400 rounded-xl font-bold text-sm border border-slate-100">48</button>
+                                <button onclick="setQty(96)" id="qty-96" class="qty-btn flex-1 p-2 bg-slate-50 text-slate-400 rounded-xl font-bold text-sm border border-slate-100">96</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest ml-1">Density</label>
-                        <select id="quantity" class="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-blue-500 rounded-2xl outline-none font-bold transition-all">
-                            <option value="20">Generate 20</option>
-                            <option value="50">Generate 50</option>
-                            <option value="100">Generate 100 (Instant)</option>
-                        </select>
+
+                    <div class="space-y-4">
+                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest">Structure Components</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition">
+                                <span class="text-sm font-bold">Include Honorifics (Titles)</span>
+                                <input type="checkbox" id="useTitle" class="w-5 h-5 accent-blue-600">
+                            </label>
+                            <label class="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition">
+                                <span class="text-sm font-bold">Include Surnames</span>
+                                <input type="checkbox" id="useLast" checked class="w-5 h-5 accent-blue-600">
+                            </label>
+                            <label class="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 transition">
+                                <span class="text-sm font-bold">Include Traits (Epithets)</span>
+                                <input type="checkbox" id="useTrait" class="w-5 h-5 accent-blue-600">
+                            </label>
+                        </div>
                     </div>
-                    <div class="flex items-end">
-                        <button onclick="generate()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl shadow-lg shadow-blue-500/40 transition-all active:scale-95 uppercase tracking-widest">
-                            Run Matrix
+
+                    <div class="space-y-4">
+                        <label class="text-[11px] font-black text-blue-600 uppercase tracking-widest">Linguistic Complexity</label>
+                        <div class="grid grid-cols-1 gap-2">
+                            <button onclick="setLen('short')" id="len-short" class="len-btn p-3 text-xs font-bold border rounded-xl bg-white text-slate-400 border-slate-100">Short & Punchy</button>
+                            <button onclick="setLen('med')" id="len-med" class="len-btn p-3 text-xs font-bold border rounded-xl active-len">Balanced Standard</button>
+                            <button onclick="setLen('long')" id="len-long" class="len-btn p-3 text-xs font-bold border rounded-xl bg-white text-slate-400 border-slate-100">Complex / Ancient</button>
+                        </div>
+                        <button onclick="generate()" class="w-full gradient-bg text-white font-black py-4 rounded-2xl shadow-xl shadow-blue-500/30 transition-all active:scale-95 uppercase tracking-widest mt-2">
+                            Run Matrix Engine
                         </button>
                     </div>
                 </div>
 
-                <div id="resultArea" class="hidden">
+                <div id="resultArea" class="hidden border-t border-slate-100 pt-10">
                     <div class="flex items-center justify-between mb-6 px-2">
-                        <h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Generated Identities</h3>
-                        <span id="counter" class="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded"></span>
+                        <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Identity Output</h3>
+                        <span id="stats" class="text-[10px] font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full"></span>
                     </div>
-                    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+                    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"></div>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
+        let currentLen = 'med';
+        let currentQty = 24;
+
         const db = {
-            corp: {
-                p: ["Neo", "Omni", "Velo", "Aero", "Strat", "Quant", "Nexus", "Flux", "Core", "Prime", "Zenth", "Apex", "Nova", "Tera", "Alpha", "Global", "Intelli", "Meta", "Synchro", "Opti", "Dynamo", "Vertex", "Solvo", "Kineti", "Aura"],
-                m: ["stream", "logic", "point", "base", "grid", "wire", "link", "stack", "flow", "bridge", "scale", "wise", "zone", "port", "path", "view", "deck", "vault", "space", "node", "shift", "pulse", "mark", "trace", "mode"],
-                s: ["ly", "ify", "io", "ora", "ix", "on", "ic", "is", "it", "um", "as", "ar", "en", "ex", "os", "Labs", "Group", "Systems", "Ventures", "Global", "Solutions", "Dynamics", "HQ", "Partners", "Collective"]
-            },
+            titles: ["Lord", "Sir", "Grandmaster", "Archon", "Captain", "Agent", "Saint", "Elder", "Baron", "Chief", "Prime", "Dr.", "Professor", "The", "High", "Void", "Master"],
+            traits: ["the Eternal", "the Brave", "the Silent", "the Feather-Bearer", "the Melancholic", "the Radiant", "the Unforgiven", "the Swift", "the Wise", "the Iron-Willed", "the Wanderer", "the Architect", "the Ghost", "the Catalyst"],
             fantasy: {
-                p: ["Thal", "Elow", "Kael", "Vael", "Zor", "Lir", "Mor", "Syl", "Fao", "Xan", "Aer", "Bael", "Cael", "Dra", "Eld", "Ghal", "Hald", "Iril", "Jal", "Khor", "Luth", "Mith", "Nyth", "Orel", "Pha", "Quen", "Rhal", "Saur", "Taur", "Uld", "Val", "Wyr", "Xyl", "Yar", "Zan"],
-                m: ["-a-", "-e-", "-i-", "-o-", "-u-", "an", "en", "in", "on", "un", "ar", "er", "ir", "or", "ur", "al", "el", "il", "ol", "ul", "as", "es", "is", "os", "us", "dra", "morn", "vale", "thir", "vail"],
-                s: ["dor", "thas", "rond", "ius", "ael", "gath", "orn", "ald", "wyn", "mir", "ryn", "dil", "bor", "fin", "lon", "ros", "zak", "duin", "hal", "rem", "vale", "kin", "thor", "grim", "star", "fire"]
+                p: ["Thal", "Elow", "Kael", "Vael", "Zor", "Lir", "Mor", "Syl", "Fao", "Xan", "Aer", "Bael", "Cael", "Dra", "Eld", "Ghal", "Hald", "Iril", "Jal", "Khor", "Luth", "Mith", "Nyth", "Orel", "Pha"],
+                m: ["an", "en", "in", "on", "un", "ar", "er", "ir", "or", "ur", "al", "el", "il", "ol", "ul", "dra", "morn", "vale", "thir", "vail", "ryn", "dil", "bor", "fin", "lon"],
+                s: ["dor", "thas", "rond", "ius", "ael", "gath", "orn", "ald", "wyn", "mir", "ros", "zak", "duin", "hal", "rem", "vale", "kin", "thor", "grim", "star", "fire", "moon", "blade", "heart"]
+            },
+            corp: {
+                p: ["Neo", "Omni", "Velo", "Aero", "Strat", "Quant", "Nexus", "Flux", "Core", "Prime", "Zenth", "Apex", "Nova", "Tera", "Alpha", "Global", "Intelli", "Meta", "Synchro", "Opti"],
+                m: ["stream", "logic", "point", "base", "grid", "wire", "link", "stack", "flow", "bridge", "scale", "wise", "zone", "port", "path", "view", "deck", "vault", "space", "node"],
+                s: ["ly", "ify", "io", "ora", "ix", "on", "ic", "is", "it", "um", "Labs", "Group", "Systems", "Ventures", "Global", "Solutions", "Dynamics", "Collective", "Partners", "Genics"]
+            },
+            cyber: {
+                p: ["Neon", "Cyber", "Synth", "Byte", "Glitch", "Vector", "Static", "Chrome", "Null", "Proxy", "Net", "Code", "Link", "Grid", "Hack", "Shift", "Data", "Laser", "Mecha", "Volt"],
+                m: ["-X-", " Zero ", " Delta ", " Prime ", " MK ", " Core ", " Ghost ", " Void ", " Phantom ", " Pulse ", "-7-", "-9-", " Vector ", " Protocol "],
+                s: ["Runner", "Hunter", "Daemon", "Vortex", "Cutter", "Slider", "Scanner", "Matrix", "Protocol", "Breaker", "Shadow", "Specter", "Edge", "Driver", "Jack", "Phase", "Soul"]
             },
             modern: {
-                p: ["Liam", "Noah", "Oliver", "James", "Elijah", "William", "Henry", "Lucas", "Benjamin", "Theodore", "Mateo", "Levi", "Sebastian", "Daniel", "Jack", "Emma", "Olivia", "Ava", "Sophia", "Isabella", "Mia", "Amelia", "Harper", "Evelyn", "Luna"],
-                m: ["Alexander", "Marie", "Grace", "James", "Rose", "Edward", "Lee", "Elizabeth", "Michael", "Jane", "William", "Anne", "Thomas", "Victoria", "David", "Catherine", "Joseph", "Lynn", "Arthur", "Mary", "Xavier", "Skye", "Kai", "Rain", "River"],
-                s: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin", "Lee", "Perez", "Thompson", "White", "Harris"]
+                p: ["Liam", "Noah", "Oliver", "James", "Elijah", "William", "Henry", "Lucas", "Benjamin", "Theodore", "Mateo", "Levi", "Sebastian", "Daniel", "Jack", "Emma", "Olivia", "Ava", "Sophia", "Isabella"],
+                m: ["Alexander", "Marie", "Grace", "James", "Rose", "Edward", "Lee", "Elizabeth", "Michael", "Jane", "William", "Anne", "Thomas", "Victoria", "David", "Catherine", "Joseph", "Lynn"],
+                s: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore"]
             },
             gaming: {
-                p: ["Xx_", "PvP_", "Shadow", "Ghost", "Alpha", "Dark", "Toxic", "Elite", "Pro_", "Cyber", "Fatal", "Nova", "Glitch", "Null", "Void", "Iron", "Storm", "Frost", "Rapid", "Zenith", "Omega", "Rogue", "Hyper", "Velo", "Pixel"],
+                p: ["Xx_", "PvP_", "Shadow", "Ghost", "Alpha", "Dark", "Toxic", "Elite", "Pro_", "Cyber", "Fatal", "Nova", "Glitch", "Null", "Void", "Iron", "Storm", "Frost", "Rapid", "Zenith"],
                 m: ["Slayer", "Sniper", "Hunter", "Reaper", "Knight", "King", "God", "Demon", "Wolf", "Beast", "Titan", "Pilot", "Ace", "Bot", "Hacker", "Viper", "Dragon", "Storm", "Blaze", "Raven"],
-                s: ["_YT", "_LP", "99", "77", "X", "_Vortex", "_Prime", "_Zero", "HD", "Gaming", "Modz", "Legacy", "Origin", "Evolution", "Striker"]
-            },
-            scientific: {
-                p: ["Bio", "Neuro", "Cryo", "Gen", "Nano", "Quantum", "Atmo", "Hydro", "Litho", "Astro", "Chem", "Electro", "Iso", "Macro", "Micro", "Pharma", "Syntho", "Tele", "Thermo", "Xeno"],
-                m: ["-core-", "-cell-", "-gen-", "-tech-", "-link-", "-node-", "-base-", "-plex-", "-sync-", "-sphere-", "-lab-", "-zyme-", "-phage-", "-ome-", "-tron-"],
-                s: ["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Sigma", "Omega", "Prime", "v2", "X-1", "01", "Final", "System", "Module"]
+                s: ["_YT", "_LP", "99", "77", "X", "_Vortex", "_Prime", "_Zero", "HD", "Gaming", "Modz", "Legacy", "Origin", "Evolution", "Striker", "Pro", "Clan"]
             }
         };
 
+        function setLen(l) {
+            currentLen = l;
+            document.querySelectorAll('.len-btn').forEach(b => {
+                b.classList.remove('active-len');
+                b.classList.add('bg-white', 'text-slate-400', 'border-slate-100');
+            });
+            document.getElementById('len-' + l).classList.add('active-len');
+            document.getElementById('len-' + l).classList.remove('bg-white', 'text-slate-400', 'border-slate-100');
+        }
+
+        function setQty(q) {
+            currentQty = q;
+            document.querySelectorAll('.qty-btn').forEach(b => {
+                b.classList.remove('bg-blue-600', 'text-white');
+                b.classList.add('bg-slate-50', 'text-slate-400', 'border-slate-100');
+            });
+            document.getElementById('qty-' + q).classList.add('bg-blue-600', 'text-white');
+            document.getElementById('qty-' + q).classList.remove('bg-slate-50', 'text-slate-400', 'border-slate-100');
+        }
+
         function generate() {
             const cat = document.getElementById('category').value;
-            const qty = parseInt(document.getElementById('quantity').value);
+            const useTitle = document.getElementById('useTitle').checked;
+            const useLast = document.getElementById('useLast').checked;
+            const useTrait = document.getElementById('useTrait').checked;
             const grid = document.getElementById('grid');
             const area = document.getElementById('resultArea');
-            const counter = document.getElementById('counter');
+            const stats = document.getElementById('stats');
 
             grid.innerHTML = '';
             area.classList.remove('hidden');
-            counter.innerText = `${qty} Units Computed`;
+            stats.innerText = `${currentQty} Entities Generated`;
 
-            for(let i = 0; i < qty; i++) {
+            for(let i = 0; i < currentQty; i++) {
+                let nameParts = [];
+
+                if(useTitle) nameParts.push(db.titles[Math.floor(Math.random() * db.titles.length)]);
+
                 const p = db[cat].p[Math.floor(Math.random() * db[cat].p.length)];
                 const m = db[cat].m[Math.floor(Math.random() * db[cat].m.length)];
                 const s = db[cat].s[Math.floor(Math.random() * db[cat].s.length)];
-                
-                let name = "";
-                if (cat === 'modern') name = `${p} ${m} ${s}`;
-                else if (cat === 'gaming') name = `${p}${m}${s}`;
-                else if (cat === 'fantasy') name = (p + m + s).replace(/-/g, '');
-                else if (cat === 'scientific') name = p + m + s;
-                else name = p + m + s;
+
+                let coreName = "";
+                if(currentLen === 'short') coreName = p + s;
+                else if(currentLen === 'med') coreName = p + m + s;
+                else coreName = p + m + m.split('').reverse().join('') + s;
+
+                // Clean-up for specific categories
+                if(cat === 'fantasy') coreName = coreName.replace(/-/g, '');
+                if(cat === 'modern') coreName = p; // Modern uses first names as core
+
+                nameParts.push(coreName);
+
+                if(useLast) {
+                    const ln = db[cat].s[Math.floor(Math.random() * db[cat].s.length)];
+                    nameParts.push(ln);
+                }
+
+                if(useTrait) nameParts.push(db.traits[Math.floor(Math.random() * db.traits.length)]);
+
+                const fullName = nameParts.join(cat === 'cyber' || cat === 'gaming' ? '' : ' ');
 
                 const card = document.createElement('div');
-                card.className = "name-card group relative bg-white border border-slate-200 p-4 rounded-2xl font-bold text-slate-700 hover:border-blue-500 hover:bg-blue-50 cursor-pointer transition-all text-center";
+                card.className = "name-card group relative bg-white border border-slate-200 p-5 rounded-2xl font-bold text-slate-800 cursor-pointer hover:border-blue-500 hover:bg-blue-50/50 text-center";
                 card.innerHTML = `
-                    <span class="relative z-10 text-sm">${name}</span>
-                    <span class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-blue-600 text-white text-[9px] flex items-center justify-center font-black transition-opacity uppercase tracking-widest rounded-2xl">Copy to Clipboard</span>
+                    <span class="block truncate text-sm md:text-base">${fullName}</span>
+                    <div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-blue-600 text-white text-[9px] flex items-center justify-center font-black transition-opacity uppercase rounded-2xl">Copy Identity</div>
                 `;
                 
                 card.onclick = () => {
-                    navigator.clipboard.writeText(name);
+                    navigator.clipboard.writeText(fullName);
                     const original = card.innerHTML;
-                    card.innerHTML = `<span class="text-blue-600 uppercase text-[10px]">Copied Success</span>`;
+                    card.innerHTML = `<span class="text-blue-600 uppercase text-[10px]">Copied to Clipboard</span>`;
                     setTimeout(() => card.innerHTML = original, 800);
                 };
 
