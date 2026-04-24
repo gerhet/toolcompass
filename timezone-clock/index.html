@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Timezone Clock | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-8 text-center text-gray-800">Global Business Hours</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="clock-container">
+            </div>
+    </main>
+    <script>
+        function updateClocks() {
+            const zones = [
+                { city: 'London', zone: 'Europe/London' },
+                { city: 'New York', zone: 'America/New_York' },
+                { city: 'Tokyo', zone: 'Asia/Tokyo' },
+                { city: 'Berlin', zone: 'Europe/Berlin' }
+            ];
+            const container = document.getElementById('clock-container');
+            container.innerHTML = '';
+            zones.forEach(z => {
+                const time = new Date().toLocaleTimeString('en-US', { timeZone: z.zone, hour12: false, hour: '2-digit', minute: '2-digit' });
+                container.innerHTML += `
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex justify-between items-center">
+                        <span class="font-bold text-gray-700">${z.city}</span>
+                        <span class="text-2xl font-mono font-black text-blue-600">${time}</span>
+                    </div>`;
+            });
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
+</body>
+</html>
