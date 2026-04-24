@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://toolcompass.org/</loc><priority>1.0</priority></url>
+  
+  <url><loc>https://toolcompass.org/mortgage-splitter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/hourly-rate</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/vat-calculator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/loan-affordability</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/tip-splitter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/travel-budget-planner</loc><priority>0.8</priority></url>
+  
+  <url><loc>https://toolcompass.org/text-summarizer</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/word-counter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/case-converter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/subject-line-generator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/linkedin-post-maker</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/bio-generator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/privacy-policy-generator</loc><priority>0.8</priority></url>
+  
+  <url><loc>https://toolcompass.org/qr-generator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/json-formatter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/base64-tool</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/binary-converter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/color-palette</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/password-generator</loc><priority>0.8</priority></url>
+  
+  <url><loc>https://toolcompass.org/pomodoro-timer</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/stopwatch</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/workday-counter</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/year-progress</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/timezone-clock</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/countdown-generator</loc><priority>0.8</priority></url>
+  
+  <url><loc>https://toolcompass.org/bmi-calculator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/age-calculator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/percentage-calculator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/name-generator</loc><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/co2-travel-comparison</loc><priority>0.8</priority></url>
+
+  <url><loc>https://toolcompass.org/impressum</loc><priority>0.3</priority></url>
+  <url><loc>https://toolcompass.org/datenschutz</loc><priority>0.3</priority></url>
+</urlset>
