@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workday Counter | Business Day Calculator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a></div>
+    </header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-2 text-center">Workday Counter</h1>
+        <p class="text-gray-600 mb-8 text-center">Calculate the number of business days between two dates.</p>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Start Date</label>
+                    <input type="date" id="startDate" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">End Date</label>
+                    <input type="date" id="endDate" class="w-full p-3 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <button onclick="countWorkdays()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Calculate Days</button>
+            <div id="result" class="hidden mt-8 p-6 bg-blue-50 rounded-xl text-center">
+                <span class="block text-sm text-blue-800 uppercase font-bold tracking-widest mb-1">Working Days</span>
+                <span id="dayCount" class="text-5xl font-black text-blue-600">0</span>
+            </div>
+        </div>
+    </main>
+    <script>
+        function countWorkdays() {
+            let start = new Date(document.getElementById('startDate').value);
+            let end = new Date(document.getElementById('endDate').value);
+            if (isNaN(start) || isNaN(end)) return;
+            let count = 0;
+            let cur = new Date(start);
+            while (cur <= end) {
+                let dayOfWeek = cur.getDay();
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) count++;
+                cur.setDate(cur.getDate() + 1);
+            }
+            document.getElementById('dayCount').innerText = count;
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
