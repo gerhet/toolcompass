@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Subject Line Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a></div>
+    </header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-2 text-center">Subject Line Generator</h1>
+        <p class="text-gray-600 mb-8 text-center">Get more opens with catchy email subject lines.</p>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <input type="text" id="topic" placeholder="What is your email about? (e.g. Summer Sale)" class="w-full p-4 border rounded-xl mb-6 outline-none focus:ring-2 focus:ring-blue-500">
+            <button onclick="generateLines()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition mb-8">Generate Ideas 💡</button>
+            <div id="results" class="hidden space-y-3">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Suggestions:</h3>
+                <div id="linesContainer" class="space-y-2"></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function generateLines() {
+            const t = document.getElementById('topic').value;
+            if(!t) return;
+            const templates = [
+                `🔥 Don't miss out on ${t}!`,
+                `Quick question about ${t}...`,
+                `The truth about ${t} 🤫`,
+                `Your ${t} guide is here`,
+                `Last chance for ${t}!`
+            ];
+            const container = document.getElementById('linesContainer');
+            container.innerHTML = '';
+            templates.forEach(line => {
+                const div = document.createElement('div');
+                div.className = "p-3 bg-gray-50 rounded border border-gray-100 text-sm cursor-pointer hover:bg-blue-50";
+                div.innerText = line;
+                div.onclick = () => { navigator.clipboard.writeText(line); alert('Copied!'); };
+                container.appendChild(div);
+            });
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
