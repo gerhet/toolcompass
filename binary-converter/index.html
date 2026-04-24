@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Binary to Text Converter | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-6">Binary Converter</h1>
+        <textarea id="binIn" class="w-full p-4 border rounded font-mono mb-4" rows="5" placeholder="Enter binary (e.g. 01001000)"></textarea>
+        <button onclick="toText()" class="w-full bg-black text-white py-3 rounded font-bold">Convert to Text</button>
+        <div id="binOut" class="mt-4 p-4 bg-white rounded shadow italic text-gray-600"></div>
+    </main>
+    <script>
+        function toText() {
+            const bin = document.getElementById('binIn').value.replace(/\s/g, '');
+            let text = "";
+            for (let i = 0; i < bin.length; i += 8) {
+                text += String.fromCharCode(parseInt(bin.substr(i, 8), 2));
+            }
+            document.getElementById('binOut').innerText = text || "Invalid Binary";
+        }
+    </script>
+</body>
+</html>
