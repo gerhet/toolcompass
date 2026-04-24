@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Case Converter | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans text-sm">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-6">Case Converter</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl">
+            <textarea id="txt" rows="6" class="w-full p-4 border rounded-xl mb-4 outline-none"></textarea>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="change('up')" class="bg-gray-800 text-white px-4 py-2 rounded">UPPERCASE</button>
+                <button onclick="change('low')" class="bg-gray-800 text-white px-4 py-2 rounded">lowercase</button>
+                <button onclick="change('title')" class="bg-blue-600 text-white px-4 py-2 rounded">Title Case</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        function change(type) {
+            let el = document.getElementById('txt');
+            if(type==='up') el.value = el.value.toUpperCase();
+            if(type==='low') el.value = el.value.toLowerCase();
+            if(type==='title') el.value = el.value.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+        }
+    </script>
+</body>
+</html>
