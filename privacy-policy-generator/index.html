@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Privacy Policy Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-2xl">
+        <h1 class="text-3xl font-extrabold mb-6">Privacy Policy Generator</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <input type="text" id="siteName" placeholder="Your Website Name" class="w-full p-3 border rounded-lg mb-4">
+            <button onclick="genPolicy()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg">Generate Privacy Text</button>
+            <textarea id="policyOut" class="hidden mt-6 w-full h-64 p-4 bg-gray-50 border rounded font-mono text-xs"></textarea>
+        </div>
+    </main>
+    <script>
+        function genPolicy() {
+            const name = document.getElementById('siteName').value || "Our Website";
+            const text = `Privacy Policy for ${name}\n\nAt ${name}, we prioritize your privacy. We do not collect personal data without your consent. Our tools are client-side, meaning your data stays in your browser. We use cookies for basic analytics to improve your experience.`;
+            document.getElementById('policyOut').value = text;
+            document.getElementById('policyOut').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
