@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Prettifier | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a></div>
+    </header>
+    <main class="container mx-auto px-4 py-10 max-w-4xl">
+        <h1 class="text-3xl font-extrabold mb-6">JSON Formatter</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <textarea id="jsonInput" rows="15" class="w-full p-4 border rounded-xl font-mono text-sm outline-none focus:ring-2 focus:ring-blue-500" placeholder="Paste your messy JSON here..."></textarea>
+            <pre id="jsonOutput" class="w-full p-4 border rounded-xl bg-gray-900 text-green-400 text-sm overflow-auto max-h-[380px]">Result will appear here...</pre>
+        </div>
+        <div class="mt-4 flex space-x-2">
+            <button onclick="formatJSON()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition">Format JSON</button>
+            <button onclick="copyJSON()" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-300 transition">Copy Result</button>
+        </div>
+    </main>
+    <script>
+        function formatJSON() {
+            const input = document.getElementById('jsonInput').value;
+            try {
+                const obj = JSON.parse(input);
+                document.getElementById('jsonOutput').innerText = JSON.stringify(obj, null, 4);
+            } catch (e) {
+                document.getElementById('jsonOutput').innerText = "Error: Invalid JSON";
+            }
+        }
+        function copyJSON() {
+            navigator.clipboard.writeText(document.getElementById('jsonOutput').innerText);
+            alert('Copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
