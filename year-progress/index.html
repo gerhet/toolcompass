@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year Progress Tracker | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-xl text-center">
+        <h1 class="text-3xl font-extrabold mb-2">Year Progress</h1>
+        <p id="yearLabel" class="text-gray-500 mb-8 font-bold text-xl"></p>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+            <div class="w-full bg-gray-200 rounded-full h-8 mb-4 overflow-hidden">
+                <div id="progressBar" class="bg-blue-600 h-8 transition-all duration-1000" style="width: 0%"></div>
+            </div>
+            <p id="percentText" class="text-5xl font-black text-blue-600">0%</p>
+            <p class="text-gray-400 text-sm mt-4 italic">Make every day count.</p>
+        </div>
+    </main>
+    <script>
+        const now = new Date();
+        const start = new Date(now.getFullYear(), 0, 1);
+        const end = new Date(now.getFullYear() + 1, 0, 1);
+        const progress = ((now - start) / (end - start)) * 100;
+        document.getElementById('yearLabel').innerText = now.getFullYear();
+        setTimeout(() => {
+            document.getElementById('progressBar').style.width = progress.toFixed(2) + '%';
+            document.getElementById('percentText').innerText = progress.toFixed(2) + '%';
+        }, 500);
+    </script>
+</body>
+</html>
