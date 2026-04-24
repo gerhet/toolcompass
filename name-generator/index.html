@@ -42,13 +42,25 @@
 
     <div class="scanline"></div>
 
-    <header class="p-6 flex justify-between items-center border-b border-white/5 relative z-10 glass">
-        <a href="/" class="flex items-center space-x-3 group">
-            <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center font-black text-white shadow-lg shadow-blue-500/20">TC</div>
-            <span class="font-heavy text-2xl tracking-tighter uppercase">X-IDENTITY <span class="text-blue-500 font-light">CORE</span></span>
-        </a>
-        <div class="flex items-center space-x-4">
-            <div id="vault-count" class="text-xs font-bold bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full border border-blue-500/20 tracking-widest uppercase">Vault: 0</div>
+    <header class="p-6 border-b border-white/5 relative z-50 glass">
+        <div class="container mx-auto flex justify-between items-center">
+            
+            <a href="/" class="flex items-center group space-x-3">
+                <div class="w-10 h-10 bg-blue-600/10 border border-blue-500/30 rounded-xl flex items-center justify-center text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-lg shadow-blue-500/10">
+                    <span class="text-xl font-bold group-hover:-translate-x-1 transition-transform">←</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-blue-600 font-bold text-xs uppercase tracking-widest leading-none mb-1">Back</span>
+                    <span class="text-slate-500 text-[10px] font-black uppercase tracking-tighter">to ToolCompass</span>
+                </div>
+            </a>
+
+            <div class="hidden md:flex flex-col items-end">
+                <div id="vault-count" class="text-[10px] font-bold text-blue-400 bg-blue-500/10 px-4 py-1.5 rounded-full border border-blue-500/20 tracking-[0.2em] uppercase">
+                    Vault_Buffer: 0
+                </div>
+            </div>
+
         </div>
     </header>
 
