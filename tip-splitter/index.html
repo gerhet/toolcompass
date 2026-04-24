@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip & Bill Splitter | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a></div>
+    </header>
+    <main class="container mx-auto px-4 py-10 max-w-xl">
+        <h1 class="text-3xl font-extrabold mb-6 text-center text-gray-800">Tip Splitter</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 space-y-6">
+            <div>
+                <label class="block text-sm font-medium mb-1 text-gray-700">Total Bill ($)</label>
+                <input type="number" id="bill" placeholder="0.00" class="w-full p-4 border rounded-xl text-xl outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-gray-700">Tip (%)</label>
+                    <input type="number" id="tip" value="15" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-gray-700">People</label>
+                    <input type="number" id="people" value="2" class="w-full p-3 border rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+            <button onclick="splitBill()" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition shadow-lg">Split the Bill</button>
+            <div id="result" class="hidden pt-6 border-t border-gray-100 text-center">
+                <p class="text-gray-500 text-xs uppercase font-bold tracking-tighter">Each Person Pays</p>
+                <p id="perPerson" class="text-5xl font-black text-green-600 mt-1">$0.00</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function splitBill() {
+            const bill = parseFloat(document.getElementById('bill').value);
+            const tip = parseFloat(document.getElementById('tip').value);
+            const people = parseInt(document.getElementById('people').value);
+            if (isNaN(bill) || people <= 0) return;
+            const total = bill + (bill * (tip / 100));
+            const share = total / people;
+            document.getElementById('perPerson').innerText = '$' + share.toFixed(2);
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
