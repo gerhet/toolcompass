@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Stopwatch | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans text-center">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-20">
+        <div id="swDisp" class="text-7xl font-black mb-10 text-gray-800">00:00.0</div>
+        <div class="flex justify-center gap-4">
+            <button id="swBtn" onclick="toggle()" class="bg-green-600 text-white px-8 py-3 rounded-xl font-bold">Start</button>
+            <button onclick="reset()" class="bg-gray-400 text-white px-8 py-3 rounded-xl font-bold">Reset</button>
+        </div>
+    </main>
+    <script>
+        let time = 0, timer, running = false;
+        function toggle() {
+            if(!running) {
+                timer = setInterval(() => { time += 0.1; document.getElementById('swDisp').innerText = time.toFixed(1); }, 100);
+                document.getElementById('swBtn').innerText = "Stop";
+            } else { clearInterval(timer); document.getElementById('swBtn').innerText = "Start"; }
+            running = !running;
+        }
+        function reset() { clearInterval(timer); time = 0; running = false; document.getElementById('swDisp').innerText = "00:00.0"; document.getElementById('swBtn').innerText = "Start"; }
+    </script>
+</body>
+</html>
