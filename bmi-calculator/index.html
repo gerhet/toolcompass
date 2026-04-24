@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-10 max-w-md">
+        <h1 class="text-3xl font-extrabold mb-6 text-center">BMI Calculator</h1>
+        <div class="bg-white p-8 rounded-2xl shadow-xl space-y-4">
+            <input type="number" id="h" placeholder="Height in cm" class="w-full p-3 border rounded-lg">
+            <input type="number" id="w" placeholder="Weight in kg" class="w-full p-3 border rounded-lg">
+            <button onclick="calc()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg">Calculate</button>
+            <div id="res" class="hidden text-center p-6 bg-blue-50 rounded-xl">
+                <p id="bmiVal" class="text-4xl font-black text-blue-600"></p>
+                <p id="bmiStatus" class="font-bold text-gray-600"></p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function calc() {
+            const h = document.getElementById('h').value / 100;
+            const w = document.getElementById('w').value;
+            if(!h || !w) return;
+            const bmi = (w / (h * h)).toFixed(1);
+            document.getElementById('bmiVal').innerText = bmi;
+            let status = "Normal";
+            if(bmi < 18.5) status = "Underweight";
+            if(bmi > 25) status = "Overweight";
+            document.getElementById('bmiStatus').innerText = status;
+            document.getElementById('res').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
