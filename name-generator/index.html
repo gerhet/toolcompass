@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Random Name Generator | ToolCompass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans text-center">
+    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
+    <main class="container mx-auto px-4 py-20 max-w-xl">
+        <h1 class="text-4xl font-black mb-8">Random Name</h1>
+        <div id="nameDisp" class="text-5xl font-bold text-blue-600 mb-8">???</div>
+        <button onclick="genName()" class="bg-blue-600 text-white px-10 py-4 rounded-full font-bold shadow-xl">Generate Name</button>
+    </main>
+    <script>
+        function genName() {
+            const first = ["Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley"];
+            const last = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller"];
+            document.getElementById('nameDisp').innerText = first[Math.floor(Math.random()*first.length)] + " " + last[Math.floor(Math.random()*last.length)];
+        }
+    </script>
+</body>
+</html>
