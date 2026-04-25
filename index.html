@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>ToolCompass | Your Ultimate Digital Toolbox</title>
-    <meta name="description" content="Kostenlose High-End Tools für Freelancer, Entwickler und Kreative. Vom Omega-Identity Generator bis zum Profi-Briefing System.">
+    <meta name="description" content="Kostenlose High-End Tools für Freelancer, Entwickler und Kreative. Alles an einem Ort.">
     
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
@@ -17,124 +16,82 @@
     </script>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        :root {
-            --accent: #2563eb;
-            --bg: #020617;
-        }
-
-        body { 
-            font-family: 'Space Grotesk', sans-serif; 
-            background: var(--bg); 
-            color: #f8fafc; 
-            overflow-x: hidden;
-        }
-        
+        :root { --accent: #2563eb; --bg: #020617; }
+        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: #f8fafc; }
         .font-heavy { font-family: 'Outfit', sans-serif; }
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        
-        .tool-card {
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            background: rgba(37, 99, 235, 0.05);
-            box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.3);
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #9333ea, #3b82f6);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-        }
-
+        .tool-card { transition: all 0.3s ease; }
+        .tool-card:hover { transform: translateY(-3px); border-color: var(--accent); background: rgba(37, 99, 235, 0.05); }
+        .gradient-text { background: linear-gradient(90deg, #3b82f6, #9333ea, #3b82f6); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
         @keyframes shine { to { background-position: 200% center; } }
-
-        .scanline { 
-            width: 100%; height: 2px; background: rgba(37, 99, 235, 0.03); 
-            position: fixed; top: 0; animation: scan 10s linear infinite; pointer-events: none; z-index: 100;
-        }
-        @keyframes scan { from { top: 0%; } to { top: 100%; } }
     </style>
 </head>
 <body class="min-h-screen">
-
-    <div class="scanline"></div>
 
     <header class="p-6 border-b border-white/5 glass sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <div class="w-8 h-8 bg-blue-600 rounded shadow-lg shadow-blue-500/50 flex items-center justify-center font-black text-white text-xs">TC</div>
-                <span class="font-heavy text-xl uppercase tracking-tighter">Tool<span class="text-blue-500">Compass</span></span>
+                <span class="font-heavy text-xl uppercase tracking-tighter italic">Tool<span class="text-blue-500">Compass</span></span>
             </div>
-            <nav class="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-500">
-                <a href="#" class="hover:text-blue-400 transition">Terminal</a>
-                <a href="#" class="hover:text-blue-400 transition">Database</a>
-                <a href="#" class="hover:text-blue-400 transition">Security</a>
-            </nav>
+            <div class="text-[10px] font-black text-slate-500 tracking-[0.2em]">SYSTEM_READY // 2026</div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-20">
+    <main class="container mx-auto px-4 py-16">
         
-        <div class="max-w-4xl mx-auto text-center mb-24">
-            <h1 class="text-6xl md:text-8xl font-heavy mb-6 tracking-tighter uppercase italic leading-none">
-                Master Your <span class="gradient-text">Workflow</span>
+        <div class="max-w-4xl mx-auto text-center mb-20">
+            <h1 class="text-6xl md:text-8xl font-heavy mb-6 tracking-tighter uppercase italic italic leading-none">
+                <span class="gradient-text">Omega</span> Terminal
             </h1>
-            <p class="text-slate-500 text-sm md:text-base uppercase tracking-[0.4em] font-light max-w-2xl mx-auto">
-                High-End Utility Tools for the Modern Digital Architect.
-            </p>
+            <p class="text-slate-500 text-xs uppercase tracking-[0.4em]">30+ Industrial Grade Utility Tools</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            
-            <a href="/name-generator" class="tool-card glass p-8 rounded-[2rem] block group">
-                <div class="flex justify-between items-start mb-12">
-                    <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">🧬</div>
-                    <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest bg-blue-500/5 px-3 py-1 rounded-full border border-blue-500/10">Active</span>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
+            <a href="/name-generator" class="tool-card glass p-8 rounded-[2rem] block group border-l-4 border-l-blue-600">
                 <h3 class="text-2xl font-heavy uppercase mb-2 italic">Omega Identity</h3>
-                <p class="text-slate-500 text-xs font-medium leading-relaxed">Multiverse Name Engine für Branding & Creative Writing.</p>
-                <div class="mt-6 flex items-center text-blue-500 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">
-                    Initialize System →
-                </div>
+                <p class="text-slate-500 text-xs leading-relaxed">Der ultimative Name-Generator für Brands & Fiction.</p>
+                <div class="mt-4 text-blue-500 text-[10px] font-black tracking-widest">BOOT SYSTEM →</div>
             </a>
-
-            <a href="/briefing-generator" class="tool-card glass p-8 rounded-[2rem] block group">
-                <div class="flex justify-between items-start mb-12">
-                    <div class="w-12 h-12 bg-purple-500/10 border border-purple-500/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">📋</div>
-                    <span class="text-[10px] font-black text-purple-500 uppercase tracking-widest bg-purple-500/5 px-3 py-1 rounded-full border border-purple-500/10">Active</span>
-                </div>
+            <a href="/briefing-generator" class="tool-card glass p-8 rounded-[2rem] block group border-l-4 border-l-purple-600">
                 <h3 class="text-2xl font-heavy uppercase mb-2 italic">Core Briefing</h3>
-                <p class="text-slate-500 text-xs font-medium leading-relaxed">Strukturierte Projekt-Briefings für maximale Präzision.</p>
-                <div class="mt-6 flex items-center text-purple-500 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">
-                    Open Terminal →
-                </div>
+                <p class="text-slate-500 text-xs leading-relaxed">Profi-Struktur für deine Projekt-Anfragen.</p>
+                <div class="mt-4 text-purple-500 text-[10px] font-black tracking-widest">OPEN TERMINAL →</div>
+            </a>
+        </div>
+
+        <h2 class="text-center text-[10px] font-black uppercase tracking-[0.5em] text-slate-600 mb-8 italic">All Modules</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            
+            <a href="/travel-budget-planner" class="tool-card glass p-4 rounded-xl block border border-white/5 hover:border-blue-500/50">
+                <span class="text-[10px] font-bold text-slate-500 block mb-1 tracking-tighter">03 // FINANCE</span>
+                <span class="font-bold text-sm uppercase italic">Travel Budget</span>
             </a>
 
-            <div class="tool-card glass p-8 rounded-[2rem] border-dashed border-white/10 flex flex-col items-center justify-center text-center opacity-50">
-                <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-xl mb-4">⌛</div>
-                <h3 class="text-sm font-heavy uppercase tracking-widest">Next Tool</h3>
-                <p class="text-[10px] text-slate-600 uppercase mt-2">Under Construction</p>
+            <a href="/bmi-rechner" class="tool-card glass p-4 rounded-xl block border border-white/5">
+                <span class="text-[10px] font-bold text-slate-500 block mb-1 tracking-tighter">04 // HEALTH</span>
+                <span class="font-bold text-sm uppercase italic">BMI Calculator</span>
+            </a>
+
+            <a href="/einheiten-umrechner" class="tool-card glass p-4 rounded-xl block border border-white/5">
+                <span class="text-[10px] font-bold text-slate-500 block mb-1 tracking-tighter">05 // UTILITY</span>
+                <span class="font-bold text-sm uppercase italic">Unit Converter</span>
+            </a>
+
+            <div class="tool-card glass p-4 rounded-xl block border border-white/5 opacity-40 italic flex items-center justify-center text-[10px] tracking-widest">
+                + 25 MORE MODULES ONLINE
             </div>
 
         </div>
 
     </main>
 
-    <footer class="container mx-auto px-4 py-12 border-t border-white/5 text-center mt-20">
-        <p class="text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">&copy; 2026 ToolCompass. All Rights Reserved. Matrix-Level Operation.</p>
+    <footer class="py-12 text-center text-[10px] text-slate-600 tracking-[0.3em] uppercase italic">
+        ToolCompass Core &copy; 2026
     </footer>
 
 </body>
