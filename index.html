@@ -1,115 +1,234 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToolCompass | Das ultimative Tool-Terminal</title>
-    
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4JVNJKQYCG');
-    </script>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     
+    
+    <title>ToolCompass | 30+ Free Professional Online Tools & Calculators</title>
+    <meta name="title" content="ToolCompass | 30+ Free Professional Online Tools & Calculators">
+    <meta name="description" content="Access the ultimate digital toolkit. 30+ free professional utilities for finance, content creation, developer tasks, and daily productivity. No login, 100% private.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolcompass.org/">
+    <meta property="og:title" content="ToolCompass | 30+ Free Professional Online Tools">
+    <meta property="og:description" content="Your all-in-one destination for web utilities. Fast, free, and secure calculators and generators.">
+    <meta property="og:image" content="https://toolcompass.org/og-image.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://toolcompass.org/">
+    <meta property="twitter:title" content="ToolCompass | 30+ Free Professional Online Tools">
+    <meta property="twitter:description" content="30+ free professional utilities for finance, dev tasks, and daily productivity.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { --accent: #3b82f6; --bg: #020617; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: #f8fafc; }
-        .font-heavy { font-family: 'Outfit', sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        .tool-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.03); }
-        .tool-card:hover { border-color: var(--accent); background: rgba(59, 130, 246, 0.1); transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2); }
-        .gradient-text { background: linear-gradient(90deg, #3b82f6, #9333ea, #3b82f6); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
-        @keyframes shine { to { background-position: 200% center; } }
+        .tool-link { transition: all 0.2s ease; border: 1px solid #e2e8f0; height: 100%; }
+        .tool-link:hover { border-color: #3b82f6; background-color: #f8fafc; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .section-header { border-left: 4px solid #3b82f6; padding-left: 1rem; margin-bottom: 1.5rem; margin-top: 3rem; }
     </style>
 </head>
-<body class="min-h-screen pb-20">
+<body class="bg-slate-50 text-slate-900 font-sans">
 
-    <header class="p-6 border-b border-white/5 glass sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center font-black text-white text-xs">TC</div>
-                <span class="font-heavy text-xl uppercase tracking-tighter italic">Tool<span class="text-blue-500">Compass</span></span>
+    <header class="border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur-md z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🧭</span>
+                <span class="text-xl font-bold tracking-tighter uppercase">ToolCompass<span class="text-blue-600">.org</span></span>
             </div>
-            <div class="text-[10px] font-black text-slate-500 tracking-[0.2em] hidden sm:block uppercase">Directory_Status: 31_Active_Modules</div>
+            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">30 Tools Live</span>
         </div>
     </header>
 
     <main class="container mx-auto px-4 py-12">
         
         <div class="text-center mb-16">
-            <h1 class="text-5xl md:text-7xl font-heavy mb-4 tracking-tighter uppercase italic leading-none">
-                <span class="gradient-text">Omega</span> Terminal
-            </h1>
-            <p class="text-slate-500 text-[10px] uppercase tracking-[0.4em]">Integrated Utility Network v2.0</p>
+            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight">The Digital <span class="text-blue-600">Swiss Army Knife.</span></h1>
+            <p class="text-slate-500 max-w-xl mx-auto italic">Fast, private, and free tools for your daily digital tasks.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-16">
-            <a href="/name-generator" class="tool-card glass p-8 rounded-[2rem] block group border-l-4 border-l-blue-600">
-                <div class="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-2">Gen-System</div>
-                <h3 class="text-3xl font-heavy uppercase italic">Omega Identity</h3>
-                <p class="text-slate-500 text-xs mt-2 italic leading-relaxed">Multiverse Name Engine & Identity Forge.</p>
+        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Finance & Business</h2></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <a href="/mortgage-splitter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🏠</span>
+                <h3 class="font-bold text-sm">Mortgage Splitter</h3>
+                <p class="text-xs text-slate-400 mt-1">Loan & interest analysis.</p>
             </a>
-            <a href="/briefing-generator" class="tool-card glass p-8 rounded-[2rem] block group border-l-4 border-l-purple-600">
-                <div class="text-purple-500 text-[10px] font-black uppercase tracking-widest mb-2">Workflow-Module</div>
-                <h3 class="text-3xl font-heavy uppercase italic">Core Briefing</h3>
-                <p class="text-slate-500 text-xs mt-2 italic leading-relaxed">Strategische Projekterfassung für Profis.</p>
+            <a href="/hourly-rate" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">💰</span>
+                <h3 class="font-bold text-sm">Hourly Rate</h3>
+                <p class="text-xs text-slate-400 mt-1">Freelance rate optimizer.</p>
+            </a>
+            <a href="/vat-calculator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🧾</span>
+                <h3 class="font-bold text-sm">VAT Calculator</h3>
+                <p class="text-xs text-slate-400 mt-1">Sales tax addition/removal.</p>
+            </a>
+            <a href="/loan-affordability" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🏦</span>
+                <h3 class="font-bold text-sm">Loan Limit</h3>
+                <p class="text-xs text-slate-400 mt-1">Affordability check.</p>
+            </a>
+            <a href="/tip-splitter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🍽️</span>
+                <h3 class="font-bold text-sm">Tip Splitter</h3>
+                <p class="text-xs text-slate-400 mt-1">Shared bills made easy.</p>
             </a>
         </div>
 
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-600 mb-8 border-b border-white/5 pb-4">All Active Modules (31)</h2>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                
-                <a href="/travel-budget-planner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Travel Budget</span></a>
-                <a href="/spritkostenrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Spritkosten</span></a>
-                <a href="/waehrungsrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Währungsrechner</span></a>
-                <a href="/prozentrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Math</span><span class="font-bold text-sm uppercase italic">Prozentrechner</span></a>
-                <a href="/rabattrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Rabattrechner</span></a>
-                <a href="/skonto-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Skonto-Rechner</span></a>
-                <a href="/mehrwertsteuer-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">MwSt Rechner</span></a>
-                <a href="/abfindungsrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Abfindungsrechner</span></a>
-                
-                <a href="/bmi-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-green-500 uppercase block mb-1">Health</span><span class="font-bold text-sm uppercase italic">BMI Calculator</span></a>
-                <a href="/kalorienrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-green-500 uppercase block mb-1">Health</span><span class="font-bold text-sm uppercase italic">Kalorienrechner</span></a>
-                <a href="/promille-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-red-500 uppercase block mb-1">Health</span><span class="font-bold text-sm uppercase italic">Promille-Rechner</span></a>
-                <a href="/wasserbedarf-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-green-500 uppercase block mb-1">Health</span><span class="font-bold text-sm uppercase italic">Wasserbedarf</span></a>
-                <a href="/idealgewicht-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-green-500 uppercase block mb-1">Health</span><span class="font-bold text-sm uppercase italic">Idealgewicht</span></a>
+        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Content & Writing</h2></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <a href="/text-summarizer" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">📝</span>
+                <h3 class="font-bold text-sm">Summarizer</h3>
+                <p class="text-xs text-slate-400 mt-1">AI-style compression.</p>
+            </a>
+            <a href="/word-counter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🔢</span>
+                <h3 class="font-bold text-sm">Word Counter</h3>
+                <p class="text-xs text-slate-400 mt-1">SEO & character check.</p>
+            </a>
+            <a href="/case-converter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">Aa</span>
+                <h3 class="font-bold text-sm">Case Fixer</h3>
+                <p class="text-xs text-slate-400 mt-1">Lower/Upper/Title case.</p>
+            </a>
+            <a href="/subject-line-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">📧</span>
+                <h3 class="font-bold text-sm">Subject Lines</h3>
+                <p class="text-xs text-slate-400 mt-1">Email open rate booster.</p>
+            </a>
+            <a href="/linkedin-post-maker" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🔗</span>
+                <h3 class="font-bold text-sm">LinkedIn Post</h3>
+                <p class="text-xs text-slate-400 mt-1">Viral formatting.</p>
+            </a>
+            <a href="/bio-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">👤</span>
+                <h3 class="font-bold text-sm">Bio Generator</h3>
+                <p class="text-xs text-slate-400 mt-1">Social media profiles.</p>
+            </a>
+            <a href="/privacy-policy-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">⚖️</span>
+                <h3 class="font-bold text-sm">Privacy Gen</h3>
+                <p class="text-xs text-slate-400 mt-1">Basic legal templates.</p>
+            </a>
+        </div>
 
-                <a href="/einheiten-umrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Utility</span><span class="font-bold text-sm uppercase italic">Unit Converter</span></a>
-                <a href="/passwort-generator" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Security</span><span class="font-bold text-sm uppercase italic">Passwort Gen</span></a>
-                <a href="/qr-code-generator" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Utility</span><span class="font-bold text-sm uppercase italic">QR Code Gen</span></a>
-                <a href="/lohnrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Work</span><span class="font-bold text-sm uppercase italic">Lohnrechner</span></a>
-                <a href="/netto-brutto-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Work</span><span class="font-bold text-sm uppercase italic">Brutto/Netto</span></a>
-                <a href="/stoppuhr" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Utility</span><span class="font-bold text-sm uppercase italic">Stoppuhr</span></a>
-                <a href="/countdown-timer" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Utility</span><span class="font-bold text-sm uppercase italic">Countdown</span></a>
-                
-                <a href="/darlehensrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Darlehensrechner</span></a>
-                <a href="/leasingrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Leasingrechner</span></a>
-                <a href="/investitionsrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Investition</span></a>
-                <a href="/zinseszinsrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-blue-500 uppercase block mb-1">Finance</span><span class="font-bold text-sm uppercase italic">Zinseszins</span></a>
-                <a href="/zufallsgenerator" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Utility</span><span class="font-bold text-sm uppercase italic">Zufallszahlen</span></a>
-                <a href="/wortzaehler" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Writing</span><span class="font-bold text-sm uppercase italic">Wortzähler</span></a>
-                <a href="/schaltjahr-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Time</span><span class="font-bold text-sm uppercase italic">Schaltjahr</span></a>
-                <a href="/kalenderwochen-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Time</span><span class="font-bold text-sm uppercase italic">Kalenderwochen</span></a>
-                <a href="/tage-rechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Time</span><span class="font-bold text-sm uppercase italic">Tagerechner</span></a>
-                <a href="/zeitrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-orange-500 uppercase block mb-1">Time</span><span class="font-bold text-sm uppercase italic">Zeitrechner</span></a>
-                <a href="/revisionsrechner" class="tool-card glass p-5 rounded-2xl block"><span class="text-[9px] font-bold text-purple-500 uppercase block mb-1">Work</span><span class="font-bold text-sm uppercase italic">Revisions-Check</span></a>
+        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Tech & Developer</h2></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <a href="/qr-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">📱</span>
+                <h3 class="font-bold text-sm">QR Gen</h3>
+                <p class="text-xs text-slate-400 mt-1">URLs & WiFi codes.</p>
+            </a>
+            <a href="/json-formatter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">💻</span>
+                <h3 class="font-bold text-sm">JSON Format</h3>
+                <p class="text-xs text-slate-400 mt-1">Prettify messy code.</p>
+            </a>
+            <a href="/base64-tool" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🔐</span>
+                <h3 class="font-bold text-sm">Base64</h3>
+                <p class="text-xs text-slate-400 mt-1">Encode & Decode.</p>
+            </a>
+            <a href="/binary-converter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">01</span>
+                <h3 class="font-bold text-sm">Binary Conv.</h3>
+                <p class="text-xs text-slate-400 mt-1">Text to 010101.</p>
+            </a>
+            <a href="/color-palette" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🎨</span>
+                <h3 class="font-bold text-sm">Color Palette</h3>
+                <p class="text-xs text-slate-400 mt-1">Random HEX schemes.</p>
+            </a>
+            <a href="/password-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🛡️</span>
+                <h3 class="font-bold text-sm">PW Generator</h3>
+                <p class="text-xs text-slate-400 mt-1">Secure random strings.</p>
+            </a>
+        </div>
 
-            </div>
+        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Time & Productivity</h2></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <a href="/pomodoro-timer" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🍅</span>
+                <h3 class="font-bold text-sm">Pomodoro</h3>
+                <p class="text-xs text-slate-400 mt-1">Focus timer.</p>
+            </a>
+            <a href="/stopwatch" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">⏱️</span>
+                <h3 class="font-bold text-sm">Stopwatch</h3>
+                <p class="text-xs text-slate-400 mt-1">Simple lap timer.</p>
+            </a>
+            <a href="/workday-counter" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">📅</span>
+                <h3 class="font-bold text-sm">Workdays</h3>
+                <p class="text-xs text-slate-400 mt-1">Business day count.</p>
+            </a>
+            <a href="/year-progress" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">📊</span>
+                <h3 class="font-bold text-sm">Year Progress</h3>
+                <p class="text-xs text-slate-400 mt-1">Visualizing time.</p>
+            </a>
+            <a href="/timezone-clock" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🌍</span>
+                <h3 class="font-bold text-sm">World Clock</h3>
+                <p class="text-xs text-slate-400 mt-1">Global business hours.</p>
+            </a>
+            <a href="/countdown-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">⏳</span>
+                <h3 class="font-bold text-sm">Countdown</h3>
+                <p class="text-xs text-slate-400 mt-1">Until your event.</p>
+            </a>
+        </div>
+
+        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Health & Utilities</h2></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            <a href="/bmi-calculator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">⚖️</span>
+                <h3 class="font-bold text-sm">BMI Calc</h3>
+                <p class="text-xs text-slate-400 mt-1">Health index check.</p>
+            </a>
+            <a href="/age-calculator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">👶</span>
+                <h3 class="font-bold text-sm">Age Calc</h3>
+                <p class="text-xs text-slate-400 mt-1">Exact age in days.</p>
+            </a>
+            <a href="/percentage-calculator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">%</span>
+                <h3 class="font-bold text-sm">Percentage</h3>
+                <p class="text-xs text-slate-400 mt-1">Quick math helper.</p>
+            </a>
+            <a href="/name-generator" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🎲</span>
+                <h3 class="font-bold text-sm">Name Gen</h3>
+                <p class="text-xs text-slate-400 mt-1">Random identity.</p>
+            </a>
+            <a href="/co2-travel-comparison" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">🌿</span>
+                <h3 class="font-bold text-sm">CO2 Tracker</h3>
+                <p class="text-xs text-slate-400 mt-1">Travel footprint.</p>
+            </a>
+            <a href="/travel-budget-planner" class="tool-link bg-white p-5 rounded-2xl block">
+                <span class="text-2xl mb-3 block">✈️</span>
+                <h3 class="font-bold text-sm">Travel Budget</h3>
+                <p class="text-xs text-slate-400 mt-1">Holiday estimates.</p>
+            </a>
         </div>
 
     </main>
 
-    <footer class="py-12 border-t border-white/5 text-center">
-        <div class="text-[9px] font-black text-slate-700 uppercase tracking-[0.4em]">ToolCompass Terminal // © 2026</div>
+    <footer class="bg-white border-t border-slate-200 py-12 mt-20 text-center">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-8 mb-6">
+                <a href="/impressum" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-widest">Impressum</a>
+                <a href="/datenschutz" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-widest">Datenschutz</a>
+            </div>
+            <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">
+                ToolCompass.org &copy; 2026 | Professional Online Tools
+            </p>
+        </div>
     </footer>
 
 </body>
