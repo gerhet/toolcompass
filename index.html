@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
+    <title>ToolCompass | Your Ultimate Digital Toolbox</title>
+    <meta name="description" content="Kostenlose High-End Tools für Freelancer, Entwickler und Kreative. Vom Omega-Identity Generator bis zum Profi-Briefing System.">
+    
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
     <script>
@@ -12,241 +15,126 @@
       gtag('js', new Date());
       gtag('config', 'G-4JVNJKQYCG');
     </script>
-    
-    <title>ToolCompass | 30+ Free Professional Online Tools & Calculators</title>
-    <meta name="title" content="ToolCompass | 30+ Free Professional Online Tools & Calculators">
-    <meta name="description" content="Access the ultimate digital toolkit. 30+ free professional utilities for finance, content creation, developer tasks, and daily productivity. No login, 100% private.">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://toolcompass.org/">
-    <meta property="og:title" content="ToolCompass | 30+ Free Professional Online Tools">
-    <meta property="og:description" content="Your all-in-one destination for web utilities. Fast, free, and secure calculators and generators.">
-    <meta property="og:image" content="https://toolcompass.org/og-image.jpg">
-
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://toolcompass.org/">
-    <meta property="twitter:title" content="ToolCompass | 30+ Free Professional Online Tools">
-    <meta property="twitter:description" content="30+ free professional utilities for finance, dev tasks, and daily productivity.">
-
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4JVNJKQYCG');
-    </script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧭</text></svg>">
     
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />    
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
-        .tool-link { transition: all 0.2s ease; border: 1px solid #e2e8f0; height: 100%; }
-        .tool-link:hover { border-color: #3b82f6; background-color: #f8fafc; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .section-header { border-left: 4px solid #3b82f6; padding-left: 1rem; margin-bottom: 1.5rem; margin-top: 3rem; }
+        :root {
+            --accent: #2563eb;
+            --bg: #020617;
+        }
+
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: var(--bg); 
+            color: #f8fafc; 
+            overflow-x: hidden;
+        }
+        
+        .font-heavy { font-family: 'Outfit', sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        
+        .tool-card {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(37, 99, 235, 0.05);
+            box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #9333ea, #3b82f6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .scanline { 
+            width: 100%; height: 2px; background: rgba(37, 99, 235, 0.03); 
+            position: fixed; top: 0; animation: scan 10s linear infinite; pointer-events: none; z-index: 100;
+        }
+        @keyframes scan { from { top: 0%; } to { top: 100%; } }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
+<body class="min-h-screen">
 
-    <header class="border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur-md z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl">🧭</span>
-                <span class="text-xl font-bold tracking-tighter uppercase">ToolCompass<span class="text-blue-600">.org</span></span>
+    <div class="scanline"></div>
+
+    <header class="p-6 border-b border-white/5 glass sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-blue-600 rounded shadow-lg shadow-blue-500/50 flex items-center justify-center font-black text-white text-xs">TC</div>
+                <span class="font-heavy text-xl uppercase tracking-tighter">Tool<span class="text-blue-500">Compass</span></span>
             </div>
-            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">30 Tools Live</span>
+            <nav class="hidden md:flex space-x-8 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <a href="#" class="hover:text-blue-400 transition">Terminal</a>
+                <a href="#" class="hover:text-blue-400 transition">Database</a>
+                <a href="#" class="hover:text-blue-400 transition">Security</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-12">
+    <main class="container mx-auto px-4 py-20">
         
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight">The Digital <span class="text-blue-600">Swiss Army Knife.</span></h1>
-            <p class="text-slate-500 max-w-xl mx-auto italic">Fast, private, and free tools for your daily digital tasks.</p>
+        <div class="max-w-4xl mx-auto text-center mb-24">
+            <h1 class="text-6xl md:text-8xl font-heavy mb-6 tracking-tighter uppercase italic leading-none">
+                Master Your <span class="gradient-text">Workflow</span>
+            </h1>
+            <p class="text-slate-500 text-sm md:text-base uppercase tracking-[0.4em] font-light max-w-2xl mx-auto">
+                High-End Utility Tools for the Modern Digital Architect.
+            </p>
         </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Finance & Business</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/mortgage-splitter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🏠</span>
-                <h3 class="font-bold text-sm">Mortgage Splitter</h3>
-                <p class="text-xs text-slate-400 mt-1">Loan & interest analysis.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            
+            <a href="/name-generator" class="tool-card glass p-8 rounded-[2rem] block group">
+                <div class="flex justify-between items-start mb-12">
+                    <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">🧬</div>
+                    <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest bg-blue-500/5 px-3 py-1 rounded-full border border-blue-500/10">Active</span>
+                </div>
+                <h3 class="text-2xl font-heavy uppercase mb-2 italic">Omega Identity</h3>
+                <p class="text-slate-500 text-xs font-medium leading-relaxed">Multiverse Name Engine für Branding & Creative Writing.</p>
+                <div class="mt-6 flex items-center text-blue-500 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">
+                    Initialize System →
+                </div>
             </a>
-            <a href="/hourly-rate" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">💰</span>
-                <h3 class="font-bold text-sm">Hourly Rate</h3>
-                <p class="text-xs text-slate-400 mt-1">Freelance rate optimizer.</p>
-            </a>
-            <a href="/vat-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🧾</span>
-                <h3 class="font-bold text-sm">VAT Calculator</h3>
-                <p class="text-xs text-slate-400 mt-1">Sales tax addition/removal.</p>
-            </a>
-            <a href="/loan-affordability" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🏦</span>
-                <h3 class="font-bold text-sm">Loan Limit</h3>
-                <p class="text-xs text-slate-400 mt-1">Affordability check.</p>
-            </a>
-            <a href="/tip-splitter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🍽️</span>
-                <h3 class="font-bold text-sm">Tip Splitter</h3>
-                <p class="text-xs text-slate-400 mt-1">Shared bills made easy.</p>
-            </a>
-        </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Content & Writing</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/text-summarizer" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📝</span>
-                <h3 class="font-bold text-sm">Summarizer</h3>
-                <p class="text-xs text-slate-400 mt-1">AI-style compression.</p>
+            <a href="/briefing-generator" class="tool-card glass p-8 rounded-[2rem] block group">
+                <div class="flex justify-between items-start mb-12">
+                    <div class="w-12 h-12 bg-purple-500/10 border border-purple-500/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition">📋</div>
+                    <span class="text-[10px] font-black text-purple-500 uppercase tracking-widest bg-purple-500/5 px-3 py-1 rounded-full border border-purple-500/10">Active</span>
+                </div>
+                <h3 class="text-2xl font-heavy uppercase mb-2 italic">Core Briefing</h3>
+                <p class="text-slate-500 text-xs font-medium leading-relaxed">Strukturierte Projekt-Briefings für maximale Präzision.</p>
+                <div class="mt-6 flex items-center text-purple-500 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition">
+                    Open Terminal →
+                </div>
             </a>
-            <a href="/word-counter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🔢</span>
-                <h3 class="font-bold text-sm">Word Counter</h3>
-                <p class="text-xs text-slate-400 mt-1">SEO & character check.</p>
-            </a>
-            <a href="/case-converter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">Aa</span>
-                <h3 class="font-bold text-sm">Case Fixer</h3>
-                <p class="text-xs text-slate-400 mt-1">Lower/Upper/Title case.</p>
-            </a>
-            <a href="/subject-line-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📧</span>
-                <h3 class="font-bold text-sm">Subject Lines</h3>
-                <p class="text-xs text-slate-400 mt-1">Email open rate booster.</p>
-            </a>
-            <a href="/linkedin-post-maker" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🔗</span>
-                <h3 class="font-bold text-sm">LinkedIn Post</h3>
-                <p class="text-xs text-slate-400 mt-1">Viral formatting.</p>
-            </a>
-            <a href="/bio-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">👤</span>
-                <h3 class="font-bold text-sm">Bio Generator</h3>
-                <p class="text-xs text-slate-400 mt-1">Social media profiles.</p>
-            </a>
-            <a href="/privacy-policy-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⚖️</span>
-                <h3 class="font-bold text-sm">Privacy Gen</h3>
-                <p class="text-xs text-slate-400 mt-1">Basic legal templates.</p>
-            </a>
-        </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Tech & Developer</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/qr-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📱</span>
-                <h3 class="font-bold text-sm">QR Gen</h3>
-                <p class="text-xs text-slate-400 mt-1">URLs & WiFi codes.</p>
-            </a>
-            <a href="/json-formatter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">💻</span>
-                <h3 class="font-bold text-sm">JSON Format</h3>
-                <p class="text-xs text-slate-400 mt-1">Prettify messy code.</p>
-            </a>
-            <a href="/base64-tool" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🔐</span>
-                <h3 class="font-bold text-sm">Base64</h3>
-                <p class="text-xs text-slate-400 mt-1">Encode & Decode.</p>
-            </a>
-            <a href="/binary-converter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">01</span>
-                <h3 class="font-bold text-sm">Binary Conv.</h3>
-                <p class="text-xs text-slate-400 mt-1">Text to 010101.</p>
-            </a>
-            <a href="/color-palette" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🎨</span>
-                <h3 class="font-bold text-sm">Color Palette</h3>
-                <p class="text-xs text-slate-400 mt-1">Random HEX schemes.</p>
-            </a>
-            <a href="/password-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🛡️</span>
-                <h3 class="font-bold text-sm">PW Generator</h3>
-                <p class="text-xs text-slate-400 mt-1">Secure random strings.</p>
-            </a>
-        </div>
+            <div class="tool-card glass p-8 rounded-[2rem] border-dashed border-white/10 flex flex-col items-center justify-center text-center opacity-50">
+                <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-xl mb-4">⌛</div>
+                <h3 class="text-sm font-heavy uppercase tracking-widest">Next Tool</h3>
+                <p class="text-[10px] text-slate-600 uppercase mt-2">Under Construction</p>
+            </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Time & Productivity</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/pomodoro-timer" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🍅</span>
-                <h3 class="font-bold text-sm">Pomodoro</h3>
-                <p class="text-xs text-slate-400 mt-1">Focus timer.</p>
-            </a>
-            <a href="/stopwatch" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⏱️</span>
-                <h3 class="font-bold text-sm">Stopwatch</h3>
-                <p class="text-xs text-slate-400 mt-1">Simple lap timer.</p>
-            </a>
-            <a href="/workday-counter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📅</span>
-                <h3 class="font-bold text-sm">Workdays</h3>
-                <p class="text-xs text-slate-400 mt-1">Business day count.</p>
-            </a>
-            <a href="/year-progress" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📊</span>
-                <h3 class="font-bold text-sm">Year Progress</h3>
-                <p class="text-xs text-slate-400 mt-1">Visualizing time.</p>
-            </a>
-            <a href="/timezone-clock" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🌍</span>
-                <h3 class="font-bold text-sm">World Clock</h3>
-                <p class="text-xs text-slate-400 mt-1">Global business hours.</p>
-            </a>
-            <a href="/countdown-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⏳</span>
-                <h3 class="font-bold text-sm">Countdown</h3>
-                <p class="text-xs text-slate-400 mt-1">Until your event.</p>
-            </a>
-        </div>
-
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Health & Utilities</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/bmi-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⚖️</span>
-                <h3 class="font-bold text-sm">BMI Calc</h3>
-                <p class="text-xs text-slate-400 mt-1">Health index check.</p>
-            </a>
-            <a href="/age-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">👶</span>
-                <h3 class="font-bold text-sm">Age Calc</h3>
-                <p class="text-xs text-slate-400 mt-1">Exact age in days.</p>
-            </a>
-            <a href="/percentage-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">%</span>
-                <h3 class="font-bold text-sm">Percentage</h3>
-                <p class="text-xs text-slate-400 mt-1">Quick math helper.</p>
-            </a>
-            <a href="/name-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🎲</span>
-                <h3 class="font-bold text-sm">Name Gen</h3>
-                <p class="text-xs text-slate-400 mt-1">Random identity.</p>
-            </a>
-            <a href="/co2-travel-comparison" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🌿</span>
-                <h3 class="font-bold text-sm">CO2 Tracker</h3>
-                <p class="text-xs text-slate-400 mt-1">Travel footprint.</p>
-            </a>
-            <a href="/travel-budget-planner" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">✈️</span>
-                <h3 class="font-bold text-sm">Travel Budget</h3>
-                <p class="text-xs text-slate-400 mt-1">Holiday estimates.</p>
-            </a>
         </div>
 
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-12 mt-20 text-center">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-center space-x-8 mb-6">
-                <a href="/impressum" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-widest">Impressum</a>
-                <a href="/datenschutz" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-widest">Datenschutz</a>
-            </div>
-            <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">
-                ToolCompass.org &copy; 2026 | Professional Online Tools
-            </p>
-        </div>
+    <footer class="container mx-auto px-4 py-12 border-t border-white/5 text-center mt-20">
+        <p class="text-[10px] font-black text-slate-600 uppercase tracking-[0.5em]">&copy; 2026 ToolCompass. All Rights Reserved. Matrix-Level Operation.</p>
     </footer>
 
 </body>
