@@ -1,249 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4JVNJKQYCG');
-    </script>
-    
-    <title>ToolCompass | 30+ Free Professional Online Tools & Calculators</title>
-    <meta name="title" content="ToolCompass | 30+ Free Professional Online Tools & Calculators">
-    <meta name="description" content="Access the ultimate digital toolkit. 30+ free professional utilities for finance, content creation, developer tasks, and daily productivity. No login, 100% private.">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://toolcompass.org/">
-    <meta property="og:title" content="ToolCompass | 30+ Free Professional Online Tools">
-    <meta property="og:description" content="Your all-in-one destination for web utilities. Fast, free, and secure calculators and generators.">
-    <meta property="og:image" content="https://toolcompass.org/og-image.jpg">
+  <title>ToolCompass | 31+ Free Professional Online Tools & Calculators</title>
+  <meta name="description" content="Access the ultimate digital toolkit. 31+ free professional utilities for finance, content creation, developer tasks, and daily productivity. No login, 100% private.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolcompass.org/">
+  <meta property="og:title" content="ToolCompass | 31+ Free Professional Online Tools">
+  <meta property="og:description" content="Your all-in-one destination for web utilities. Fast, free, and secure calculators and generators.">
+  <meta property="og:image" content="https://toolcompass.org/og-image.jpg">
 
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://toolcompass.org/">
-    <meta property="twitter:title" content="ToolCompass | 30+ Free Professional Online Tools">
-    <meta property="twitter:description" content="30+ free professional utilities for finance, dev tasks, and daily productivity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .tool-link { transition: all 0.2s ease; border: 1px solid #e2e8f0; height: 100%; }
-        .tool-link:hover { border-color: #3b82f6; background-color: #f8fafc; transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .section-header { border-left: 4px solid #3b82f6; padding-left: 1rem; margin-bottom: 1.5rem; margin-top: 3rem; }
-        .tool-link.new-badge { position: relative; }
-        .tool-link.new-badge::after { content: 'NEU'; position: absolute; top: 10px; right: 10px; background: #3b82f6; color: white; font-size: 9px; font-weight: 900; letter-spacing: 0.1em; padding: 2px 6px; border-radius: 20px; }
-    </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F9F8F5;
+      --surface: #FFFFFF;
+      --text: #111110;
+      --muted: #888480;
+      --border: #E4E1DA;
+
+      /* Category colors */
+      --finance: #1A6B3C;
+      --finance-light: #EAF5EF;
+      --content: #B45309;
+      --content-light: #FEF3E2;
+      --tech: #4338CA;
+      --tech-light: #EEF2FF;
+      --time: #0E7490;
+      --time-light: #E0F7FA;
+      --health: #9D174D;
+      --health-light: #FDF2F8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(249,248,245,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .logo-icon { font-size: 20px; }
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+    .logo-text span { color: #2563EB; }
+    .header-badge {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--text);
+      color: var(--bg);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.25rem 2rem; gap: 2rem; }
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: #2563EB;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 380px;
+    }
+
+    /* Search */
+    .search-wrap {
+      position: relative;
+      margin-top: 2rem;
+    }
+    .search-wrap input {
+      width: 100%;
+      padding: 14px 20px 14px 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-wrap input:focus {
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    /* Hero stats */
+    .hero-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-2px); }
+    .stat-card:first-child {
+      grid-column: span 2;
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      margin-top: 4px;
+      opacity: 0.6;
+      font-weight: 300;
+    }
+    .stat-card:first-child .stat-label { opacity: 0.5; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem 5rem;
+    }
+    @media (max-width: 768px) { main { padding: 1rem 1.25rem 4rem; } }
+
+    /* ── CATEGORY SECTION ── */
+    .cat-section { margin-bottom: 3rem; }
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+    .cat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .cat-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .cat-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .cat-count {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── TOOL GRID ── */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
+    }
+
+    /* ── TOOL CARD ── */
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.1rem 1.1rem 1rem;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+      position: relative;
+      transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+      overflow: hidden;
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .tool-card:hover::before { opacity: 1; }
+
+    /* Category accent colors */
+    .cat-finance .tool-card:hover { border-color: var(--finance); }
+    .cat-finance .tool-card::before { background: var(--finance); }
+    .cat-content .tool-card:hover { border-color: var(--content); }
+    .cat-content .tool-card::before { background: var(--content); }
+    .cat-tech .tool-card:hover { border-color: var(--tech); }
+    .cat-tech .tool-card::before { background: var(--tech); }
+    .cat-time .tool-card:hover { border-color: var(--time); }
+    .cat-time .tool-card::before { background: var(--time); }
+    .cat-health .tool-card:hover { border-color: var(--health); }
+    .cat-health .tool-card::before { background: var(--health); }
+
+    .tool-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+      line-height: 1;
+    }
+    .tool-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+    .tool-desc {
+      font-size: 11.5px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    /* NEW badge */
+    .badge-new {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 9px;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: #2563EB;
+      color: #fff;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text);
+      color: var(--bg);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .footer-logo span { color: #60A5FA; }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-links a {
+      color: rgba(249,248,245,0.5);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--bg); }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(249,248,245,0.3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── SEARCH FILTER ── */
+    .tool-card.hidden { display: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero { animation: fadeUp 0.6s ease both; }
+    .cat-section { animation: fadeUp 0.5s ease both; }
+    .cat-section:nth-child(1) { animation-delay: 0.05s; }
+    .cat-section:nth-child(2) { animation-delay: 0.1s; }
+    .cat-section:nth-child(3) { animation-delay: 0.15s; }
+    .cat-section:nth-child(4) { animation-delay: 0.2s; }
+    .cat-section:nth-child(5) { animation-delay: 0.25s; }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans">
+<body>
 
-    <header class="border-b border-slate-200 sticky top-0 bg-white/95 backdrop-blur-md z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl">🧭</span>
-                <span class="text-xl font-bold tracking-tighter uppercase">ToolCompass<span class="text-blue-600">.org</span></span>
-            </div>
-            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">31 Tools Live</span>
-        </div>
-    </header>
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">🧭</span>
+        <span class="logo-text">ToolCompass<span>.org</span></span>
+      </a>
+      <span class="header-badge">31 Tools Live</span>
+    </div>
+  </header>
 
-    <main class="container mx-auto px-4 py-12">
-        
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 tracking-tight">The Digital <span class="text-blue-600">Swiss Army Knife.</span></h1>
-            <p class="text-slate-500 max-w-xl mx-auto italic">Fast, private, and free tools for your daily digital tasks.</p>
-        </div>
+  <section class="hero">
+    <div class="hero-left">
+      <span class="hero-eyebrow">Free · Private · No Login</span>
+      <h1>The Digital<br><em>Swiss Army<br>Knife.</em></h1>
+      <p class="hero-sub">31+ professional utilities for finance, content, dev tasks, and daily productivity.</p>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search" placeholder="Search tools… e.g. VAT, Timer, PDF">
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-num">31+</div>
+        <div class="stat-label">Free tools, no account needed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Ads or tracking</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Private & secure</div>
+      </div>
+    </div>
+  </section>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Finance & Business</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/briefing-generator" class="tool-link new-badge bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📋</span>
-                <h3 class="font-bold text-sm">Briefing Generator</h3>
-                <p class="text-xs text-slate-400 mt-1">Structured client briefings.</p>
-            </a>
-            <a href="/mortgage-splitter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🏠</span>
-                <h3 class="font-bold text-sm">Mortgage Splitter</h3>
-                <p class="text-xs text-slate-400 mt-1">Loan & interest analysis.</p>
-            </a>
-            <a href="/hourly-rate" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">💰</span>
-                <h3 class="font-bold text-sm">Hourly Rate</h3>
-                <p class="text-xs text-slate-400 mt-1">Freelance rate optimizer.</p>
-            </a>
-            <a href="/vat-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🧾</span>
-                <h3 class="font-bold text-sm">VAT Calculator</h3>
-                <p class="text-xs text-slate-400 mt-1">Sales tax addition/removal.</p>
-            </a>
-            <a href="/loan-affordability" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🏦</span>
-                <h3 class="font-bold text-sm">Loan Limit</h3>
-                <p class="text-xs text-slate-400 mt-1">Affordability check.</p>
-            </a>
-            <a href="/tip-splitter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🍽️</span>
-                <h3 class="font-bold text-sm">Tip Splitter</h3>
-                <p class="text-xs text-slate-400 mt-1">Shared bills made easy.</p>
-            </a>
-        </div>
+  <main>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Content & Writing</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/text-summarizer" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📝</span>
-                <h3 class="font-bold text-sm">Summarizer</h3>
-                <p class="text-xs text-slate-400 mt-1">AI-style compression.</p>
-            </a>
-            <a href="/word-counter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🔢</span>
-                <h3 class="font-bold text-sm">Word Counter</h3>
-                <p class="text-xs text-slate-400 mt-1">SEO & character check.</p>
-            </a>
-            <a href="/case-converter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">Aa</span>
-                <h3 class="font-bold text-sm">Case Fixer</h3>
-                <p class="text-xs text-slate-400 mt-1">Lower/Upper/Title case.</p>
-            </a>
-            <a href="/subject-line-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📧</span>
-                <h3 class="font-bold text-sm">Subject Lines</h3>
-                <p class="text-xs text-slate-400 mt-1">Email open rate booster.</p>
-            </a>
-            <a href="/linkedin-post-maker" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🔗</span>
-                <h3 class="font-bold text-sm">LinkedIn Post</h3>
-                <p class="text-xs text-slate-400 mt-1">Viral formatting.</p>
-            </a>
-            <a href="/bio-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">👤</span>
-                <h3 class="font-bold text-sm">Bio Generator</h3>
-                <p class="text-xs text-slate-400 mt-1">Social media profiles.</p>
-            </a>
-            <a href="/privacy-policy-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⚖️</span>
-                <h3 class="font-bold text-sm">Privacy Gen</h3>
-                <p class="text-xs text-slate-400 mt-1">Basic legal templates.</p>
-            </a>
-        </div>
+    <!-- Finance & Business -->
+    <div class="cat-section cat-finance">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--finance)"></div>
+        <span class="cat-title" style="color:var(--finance)">Finance & Business</span>
+        <div class="cat-line"></div>
+        <span class="cat-count">6 tools</span>
+      </div>
+      <div class="tool-grid">
+        <a href="/briefing-generator" class="tool-card" data-name="briefing generator structured client briefings freelance">
+          <span class="badge-new">New</span>
+          <span class="tool-icon">📋</span>
+          <div class="tool-name">Briefing Generator</div>
+          <div class="tool-desc">Structured client briefings.</div>
+        </a>
+        <a href="/mortgage-splitter" class="tool-card" data-name="mortgage splitter loan interest analysis">
+          <span class="tool-icon">🏠</span>
+          <div class="tool-name">Mortgage Splitter</div>
+          <div class="tool-desc">Loan & interest analysis.</div>
+        </a>
+        <a href="/hourly-rate" class="tool-card" data-name="hourly rate freelance optimizer">
+          <span class="tool-icon">💰</span>
+          <div class="tool-name">Hourly Rate</div>
+          <div class="tool-desc">Freelance rate optimizer.</div>
+        </a>
+        <a href="/vat-calculator" class="tool-card" data-name="vat calculator sales tax">
+          <span class="tool-icon">🧾</span>
+          <div class="tool-name">VAT Calculator</div>
+          <div class="tool-desc">Sales tax addition/removal.</div>
+        </a>
+        <a href="/loan-affordability" class="tool-card" data-name="loan limit affordability check">
+          <span class="tool-icon">🏦</span>
+          <div class="tool-name">Loan Limit</div>
+          <div class="tool-desc">Affordability check.</div>
+        </a>
+        <a href="/tip-splitter" class="tool-card" data-name="tip splitter shared bills">
+          <span class="tool-icon">🍽️</span>
+          <div class="tool-name">Tip Splitter</div>
+          <div class="tool-desc">Shared bills made easy.</div>
+        </a>
+      </div>
+    </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Tech & Developer</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/qr-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📱</span>
-                <h3 class="font-bold text-sm">QR Gen</h3>
-                <p class="text-xs text-slate-400 mt-1">URLs & WiFi codes.</p>
-            </a>
-            <a href="/json-formatter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">💻</span>
-                <h3 class="font-bold text-sm">JSON Format</h3>
-                <p class="text-xs text-slate-400 mt-1">Prettify messy code.</p>
-            </a>
-            <a href="/base64-tool" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🔐</span>
-                <h3 class="font-bold text-sm">Base64</h3>
-                <p class="text-xs text-slate-400 mt-1">Encode & Decode.</p>
-            </a>
-            <a href="/binary-converter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">01</span>
-                <h3 class="font-bold text-sm">Binary Conv.</h3>
-                <p class="text-xs text-slate-400 mt-1">Text to 010101.</p>
-            </a>
-            <a href="/color-palette" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🎨</span>
-                <h3 class="font-bold text-sm">Color Palette</h3>
-                <p class="text-xs text-slate-400 mt-1">Random HEX schemes.</p>
-            </a>
-            <a href="/password-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🛡️</span>
-                <h3 class="font-bold text-sm">PW Generator</h3>
-                <p class="text-xs text-slate-400 mt-1">Secure random strings.</p>
-            </a>
-        </div>
+    <!-- Content & Writing -->
+    <div class="cat-section cat-content">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--content)"></div>
+        <span class="cat-title" style="color:var(--content)">Content & Writing</span>
+        <div class="cat-line"></div>
+        <span class="cat-count">7 tools</span>
+      </div>
+      <div class="tool-grid">
+        <a href="/text-summarizer" class="tool-card" data-name="text summarizer ai compression">
+          <span class="tool-icon">📝</span>
+          <div class="tool-name">Summarizer</div>
+          <div class="tool-desc">AI-style compression.</div>
+        </a>
+        <a href="/word-counter" class="tool-card" data-name="word counter seo character check">
+          <span class="tool-icon">🔢</span>
+          <div class="tool-name">Word Counter</div>
+          <div class="tool-desc">SEO & character check.</div>
+        </a>
+        <a href="/case-converter" class="tool-card" data-name="case fixer lower upper title">
+          <span class="tool-icon">Aa</span>
+          <div class="tool-name">Case Fixer</div>
+          <div class="tool-desc">Lower/Upper/Title case.</div>
+        </a>
+        <a href="/subject-line-generator" class="tool-card" data-name="subject lines email open rate">
+          <span class="tool-icon">📧</span>
+          <div class="tool-name">Subject Lines</div>
+          <div class="tool-desc">Email open rate booster.</div>
+        </a>
+        <a href="/linkedin-post-maker" class="tool-card" data-name="linkedin post viral formatting">
+          <span class="tool-icon">🔗</span>
+          <div class="tool-name">LinkedIn Post</div>
+          <div class="tool-desc">Viral formatting.</div>
+        </a>
+        <a href="/bio-generator" class="tool-card" data-name="bio generator social media profiles">
+          <span class="tool-icon">👤</span>
+          <div class="tool-name">Bio Generator</div>
+          <div class="tool-desc">Social media profiles.</div>
+        </a>
+        <a href="/privacy-policy-generator" class="tool-card" data-name="privacy policy generator legal templates">
+          <span class="tool-icon">⚖️</span>
+          <div class="tool-name">Privacy Gen</div>
+          <div class="tool-desc">Basic legal templates.</div>
+        </a>
+      </div>
+    </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Time & Productivity</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/pomodoro-timer" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🍅</span>
-                <h3 class="font-bold text-sm">Pomodoro</h3>
-                <p class="text-xs text-slate-400 mt-1">Focus timer.</p>
-            </a>
-            <a href="/stopwatch" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⏱️</span>
-                <h3 class="font-bold text-sm">Stopwatch</h3>
-                <p class="text-xs text-slate-400 mt-1">Simple lap timer.</p>
-            </a>
-            <a href="/workday-counter" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📅</span>
-                <h3 class="font-bold text-sm">Workdays</h3>
-                <p class="text-xs text-slate-400 mt-1">Business day count.</p>
-            </a>
-            <a href="/year-progress" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">📊</span>
-                <h3 class="font-bold text-sm">Year Progress</h3>
-                <p class="text-xs text-slate-400 mt-1">Visualizing time.</p>
-            </a>
-            <a href="/timezone-clock" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🌍</span>
-                <h3 class="font-bold text-sm">World Clock</h3>
-                <p class="text-xs text-slate-400 mt-1">Global business hours.</p>
-            </a>
-            <a href="/countdown-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⏳</span>
-                <h3 class="font-bold text-sm">Countdown</h3>
-                <p class="text-xs text-slate-400 mt-1">Until your event.</p>
-            </a>
-        </div>
+    <!-- Tech & Developer -->
+    <div class="cat-section cat-tech">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--tech)"></div>
+        <span class="cat-title" style="color:var(--tech)">Tech & Developer</span>
+        <div class="cat-line"></div>
+        <span class="cat-count">6 tools</span>
+      </div>
+      <div class="tool-grid">
+        <a href="/qr-generator" class="tool-card" data-name="qr generator urls wifi codes">
+          <span class="tool-icon">📱</span>
+          <div class="tool-name">QR Gen</div>
+          <div class="tool-desc">URLs & WiFi codes.</div>
+        </a>
+        <a href="/json-formatter" class="tool-card" data-name="json formatter prettify code">
+          <span class="tool-icon">💻</span>
+          <div class="tool-name">JSON Format</div>
+          <div class="tool-desc">Prettify messy code.</div>
+        </a>
+        <a href="/base64-tool" class="tool-card" data-name="base64 encode decode">
+          <span class="tool-icon">🔐</span>
+          <div class="tool-name">Base64</div>
+          <div class="tool-desc">Encode & Decode.</div>
+        </a>
+        <a href="/binary-converter" class="tool-card" data-name="binary converter text">
+          <span class="tool-icon">01</span>
+          <div class="tool-name">Binary Conv.</div>
+          <div class="tool-desc">Text to 010101.</div>
+        </a>
+        <a href="/color-palette" class="tool-card" data-name="color palette random hex schemes">
+          <span class="tool-icon">🎨</span>
+          <div class="tool-name">Color Palette</div>
+          <div class="tool-desc">Random HEX schemes.</div>
+        </a>
+        <a href="/password-generator" class="tool-card" data-name="password generator secure random strings">
+          <span class="tool-icon">🛡️</span>
+          <div class="tool-name">PW Generator</div>
+          <div class="tool-desc">Secure random strings.</div>
+        </a>
+      </div>
+    </div>
 
-        <div class="section-header"><h2 class="text-xl font-black uppercase tracking-tight">Health & Utilities</h2></div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            <a href="/bmi-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">⚖️</span>
-                <h3 class="font-bold text-sm">BMI Calc</h3>
-                <p class="text-xs text-slate-400 mt-1">Health index check.</p>
-            </a>
-            <a href="/age-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">👶</span>
-                <h3 class="font-bold text-sm">Age Calc</h3>
-                <p class="text-xs text-slate-400 mt-1">Exact age in days.</p>
-            </a>
-            <a href="/percentage-calculator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">%</span>
-                <h3 class="font-bold text-sm">Percentage</h3>
-                <p class="text-xs text-slate-400 mt-1">Quick math helper.</p>
-            </a>
-            <a href="/name-generator" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🎲</span>
-                <h3 class="font-bold text-sm">Name Gen</h3>
-                <p class="text-xs text-slate-400 mt-1">Random identity.</p>
-            </a>
-            <a href="/co2-travel-comparison" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">🌿</span>
-                <h3 class="font-bold text-sm">CO2 Tracker</h3>
-                <p class="text-xs text-slate-400 mt-1">Travel footprint.</p>
-            </a>
-            <a href="/travel-budget-planner" class="tool-link bg-white p-5 rounded-2xl block">
-                <span class="text-2xl mb-3 block">✈️</span>
-                <h3 class="font-bold text-sm">Travel Budget</h3>
-                <p class="text-xs text-slate-400 mt-1">Holiday estimates.</p>
-            </a>
-        </div>
+    <!-- Time & Productivity -->
+    <div class="cat-section cat-time">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--time)"></div>
+        <span class="cat-title" style="color:var(--time)">Time & Productivity</span>
+        <div class="cat-line"></div>
+        <span class="cat-count">6 tools</span>
+      </div>
+      <div class="tool-grid">
+        <a href="/pomodoro-timer" class="tool-card" data-name="pomodoro focus timer">
+          <span class="tool-icon">🍅</span>
+          <div class="tool-name">Pomodoro</div>
+          <div class="tool-desc">Focus timer.</div>
+        </a>
+        <a href="/stopwatch" class="tool-card" data-name="stopwatch lap timer">
+          <span class="tool-icon">⏱️</span>
+          <div class="tool-name">Stopwatch</div>
+          <div class="tool-desc">Simple lap timer.</div>
+        </a>
+        <a href="/workday-counter" class="tool-card" data-name="workdays business day count">
+          <span class="tool-icon">📅</span>
+          <div class="tool-name">Workdays</div>
+          <div class="tool-desc">Business day count.</div>
+        </a>
+        <a href="/year-progress" class="tool-card" data-name="year progress visualizing time">
+          <span class="tool-icon">📊</span>
+          <div class="tool-name">Year Progress</div>
+          <div class="tool-desc">Visualizing time.</div>
+        </a>
+        <a href="/timezone-clock" class="tool-card" data-name="world clock global business hours timezone">
+          <span class="tool-icon">🌍</span>
+          <div class="tool-name">World Clock</div>
+          <div class="tool-desc">Global business hours.</div>
+        </a>
+        <a href="/countdown-generator" class="tool-card" data-name="countdown event timer">
+          <span class="tool-icon">⏳</span>
+          <div class="tool-name">Countdown</div>
+          <div class="tool-desc">Until your event.</div>
+        </a>
+      </div>
+    </div>
 
-    </main>
+    <!-- Health & Utilities -->
+    <div class="cat-section cat-health">
+      <div class="cat-header">
+        <div class="cat-dot" style="background:var(--health)"></div>
+        <span class="cat-title" style="color:var(--health)">Health & Utilities</span>
+        <div class="cat-line"></div>
+        <span class="cat-count">6 tools</span>
+      </div>
+      <div class="tool-grid">
+        <a href="/bmi-calculator" class="tool-card" data-name="bmi calculator health index">
+          <span class="tool-icon">⚖️</span>
+          <div class="tool-name">BMI Calc</div>
+          <div class="tool-desc">Health index check.</div>
+        </a>
+        <a href="/age-calculator" class="tool-card" data-name="age calculator exact days">
+          <span class="tool-icon">👶</span>
+          <div class="tool-name">Age Calc</div>
+          <div class="tool-desc">Exact age in days.</div>
+        </a>
+        <a href="/percentage-calculator" class="tool-card" data-name="percentage calculator quick math">
+          <span class="tool-icon">%</span>
+          <div class="tool-name">Percentage</div>
+          <div class="tool-desc">Quick math helper.</div>
+        </a>
+        <a href="/name-generator" class="tool-card" data-name="name generator random identity">
+          <span class="tool-icon">🎲</span>
+          <div class="tool-name">Name Gen</div>
+          <div class="tool-desc">Random identity.</div>
+        </a>
+        <a href="/co2-travel-comparison" class="tool-card" data-name="co2 tracker travel footprint carbon">
+          <span class="tool-icon">🌿</span>
+          <div class="tool-name">CO2 Tracker</div>
+          <div class="tool-desc">Travel footprint.</div>
+        </a>
+        <a href="/travel-budget-planner" class="tool-card" data-name="travel budget holiday estimates planner">
+          <span class="tool-icon">✈️</span>
+          <div class="tool-name">Travel Budget</div>
+          <div class="tool-desc">Holiday estimates.</div>
+        </a>
+      </div>
+    </div>
 
-    <footer class="bg-white border-t border-slate-200 py-12 mt-20 text-center">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-center space-x-8 mb-6">
-                <a href="/impressum" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-widest">Impressum</a>
-                <a href="/datenschutz" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors uppercase tracking-widest">Datenschutz</a>
-            </div>
-            <p class="text-slate-400 text-[10px] font-black uppercase tracking-[0.3em]">
-                ToolCompass.org &copy; 2026 | Professional Online Tools
-            </p>
-        </div>
-    </footer>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Tool<span>Compass</span>.org</div>
+      <div class="footer-links">
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </div>
+      <p class="footer-copy">ToolCompass.org &copy; 2026 | Professional Online Tools</p>
+    </div>
+  </footer>
+
+  <script>
+    const search = document.getElementById('search');
+    search.addEventListener('input', () => {
+      const q = search.value.toLowerCase().trim();
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const name = card.dataset.name || '';
+        card.classList.toggle('hidden', q && !name.includes(q));
+      });
+    });
+  </script>
 
 </body>
 </html>
