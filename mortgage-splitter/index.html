@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- 🔑 SEO Meta Tags -->
+    <title>Mortgage Splitter & Loan Calculator | ToolCompass</title>
+    <meta name="description" content="Calculate your monthly mortgage payments instantly. Visualize interest vs. principal and plan your loan repayment with our premium Mortgage Splitter tool.">
+    <meta name="keywords" content="mortgage calculator, loan splitter, interest calculator, monthly payment, amortization tool">
+    <link rel="canonical" href="https://toolcompass.org/mortgage-splitter">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mortgage Splitter & Loan Calculator | ToolCompass">
+    <meta property="og:description" content="Calculate your monthly mortgage payments instantly. Visualize interest vs. principal.">
+    <meta property="og:image" content="https://toolcompass.org/assets/mortgage-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- 🔑 Site Verification & Analytics -->
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
     <script>
@@ -12,82 +27,435 @@
       gtag('js', new Date());
       gtag('config', 'G-4JVNJKQYCG');
     </script>
-    
-    <title>Mortgage Splitter & Loan Calculator | ToolCompass</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900">
 
-    <header class="bg-white shadow-sm py-4">
-        <div class="container mx-auto px-4">
-            <a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a>
+    <!-- 🎨 Premium Design System (Fonts & CSS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#38bdf8',
+                            accentHover: '#0ea5e9',
+                            text: '#f1f5f9',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.5s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Grain Overlay Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px; width: 20px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px;
+            cursor: pointer; background: #334155;
+            border-radius: 2px;
+        }
+    </style>
+
+    <!-- 📊 Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Mortgage Splitter & Loan Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A premium tool to calculate monthly mortgage payments, visualize interest vs principal, and plan loan repayments."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How is the monthly mortgage payment calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monthly payment is calculated using the standard amortization formula, which factors in the loan amount, interest rate, and loan term."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Does this tool save my data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All calculations happen locally in your browser. We do not store your financial data on any server."
+        }
+      }]
+    }
+    </script>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-40 bg-brand-dark/80 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="font-serif text-2xl font-bold tracking-tight hover:text-brand-accent transition-colors">
+                Tool<span class="text-brand-accent">Compass</span>
+            </a>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-brand-muted">
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/#tools" class="hover:text-white transition">All Tools</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-10 max-w-4xl">
-        <h1 class="text-3xl font-extrabold mb-2">Mortgage Splitter</h1>
-        <p class="text-gray-600 mb-8">Calculate your monthly payments and see how interest affects your loan.</p>
+    <main class="pt-24 pb-12">
+        <div class="container mx-auto px-4 max-w-5xl">
+            
+            <!-- Breadcrumb & Title -->
+            <div class="mb-8 animate-fade-up">
+                <a href="/" class="text-brand-muted hover:text-brand-accent text-sm flex items-center gap-2 mb-4 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    Back to Dashboard
+                </a>
+                <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2 text-white">Mortgage Splitter</h1>
+                <p class="text-brand-muted text-lg">Calculate monthly payments & visualize your loan breakdown.</p>
+            </div>
 
-        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 mb-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Loan Amount ($)</label>
-                        <input type="number" id="amount" value="300000" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Interest Rate (%)</label>
-                        <input type="number" id="interest" value="3.5" step="0.1" class="w-full p-3 border rounded-lg">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Loan Term (Years)</label>
-                        <input type="number" id="years" value="30" class="w-full p-3 border rounded-lg">
-                    </div>
-                    <button onclick="calculate()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Calculate Results</button>
-                </div>
+            <!-- 🔧 TOOL INTERFACE (Hero Card) -->
+            <div class="bg-brand-card rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden animate-fade-up" style="animation-delay: 0.1s;">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                    
+                    <!-- Left: Inputs -->
+                    <div class="lg:col-span-7 p-8 border-b lg:border-b-0 lg:border-r border-gray-700/50 bg-gradient-to-b from-brand-card to-brand-dark/50">
+                        <div class="space-y-6">
+                            <!-- Loan Amount -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-300">Loan Amount</label>
+                                    <span class="text-brand-accent font-bold" id="displayAmount">$300,000</span>
+                                </div>
+                                <input type="range" id="amountRange" min="10000" max="2000000" step="1000" value="300000" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                                <input type="number" id="amount" value="300000" class="mt-2 w-full bg-brand-dark border border-gray-700 rounded-lg p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition">
+                            </div>
 
-                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 flex flex-col justify-center text-center">
-                    <span class="text-blue-800 text-sm uppercase font-bold tracking-wider">Estimated Monthly Payment</span>
-                    <span id="monthlyPayment" class="text-5xl font-black text-blue-600 my-2">$1,347.13</span>
-                    <p class="text-gray-500 text-xs mt-4 uppercase font-semibold">Total Repayment: <span id="totalPayment">$484,968</span></p>
+                            <!-- Interest Rate -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-300">Interest Rate (%)</label>
+                                    <span class="text-brand-accent font-bold" id="displayInterest">3.5%</span>
+                                </div>
+                                <input type="range" id="interestRange" min="0.1" max="15" step="0.1" value="3.5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
+                                <input type="number" id="interest" value="3.5" step="0.1" class="mt-2 w-full bg-brand-dark border border-gray-700 rounded-lg p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition">
+                            </div>
+
+                            <!-- Loan Term -->
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <label class="text-sm font-medium text-gray-300">Loan Term (Years)</label>
+                                    <span class="text-brand-accent font-bold" id="displayYears">30 Years</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="setTerm(15)" class="flex-1 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">15 Y</button>
+                                    <button onclick="setTerm(30)" class="flex-1 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">30 Y</button>
+                                </div>
+                                <input type="number" id="years" value="30" class="mt-2 w-full bg-brand-dark border border-gray-700 rounded-lg p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Results & Visuals -->
+                    <div class="lg:col-span-5 p-8 bg-brand-dark/30 flex flex-col justify-center relative">
+                        <div class="text-center mb-6">
+                            <span class="text-gray-400 text-sm uppercase tracking-widest font-semibold">Monthly Payment</span>
+                            <div class="flex items-center justify-center gap-3 mt-2">
+                                <h2 id="monthlyPayment" class="text-5xl font-bold text-white tracking-tight">$1,347.13</h2>
+                                <button onclick="copyToClipboard('monthlyPayment')" class="text-gray-500 hover:text-brand-accent transition" title="Copy Amount">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Visual Breakdown -->
+                        <div class="bg-gray-800/50 rounded-xl p-4 mb-6 border border-gray-700">
+                            <div class="flex justify-between text-xs text-gray-400 mb-2">
+                                <span>Principal</span>
+                                <span>Interest</span>
+                            </div>
+                            <div class="h-4 w-full bg-gray-700 rounded-full overflow-hidden flex">
+                                <div id="barPrincipal" class="bg-brand-accent h-full transition-all duration-500" style="width: 70%"></div>
+                                <div id="barInterest" class="bg-purple-500 h-full transition-all duration-500" style="width: 30%"></div>
+                            </div>
+                            <div class="flex justify-between mt-3 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-brand-accent"></div>
+                                    <span class="text-gray-300" id="valPrincipal">$943</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-purple-500"></div>
+                                    <span class="text-gray-300" id="valInterest">$404</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-gray-400 text-xs uppercase">Total Cost of Loan</p>
+                            <p id="totalPayment" class="text-2xl font-bold text-gray-200">$484,968</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- 💰 AdSense Placeholder (Mid-Page) -->
+            <div class="my-12 w-full min-h-[100px] bg-brand-card border border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-sm relative overflow-hidden group">
+                <div class="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <span class="z-10">Advertisement Space (728x90 Responsive)</span>
+                <!-- AdSense Code goes here: <ins class="adsbygoogle" ...></ins> -->
+            </div>
+
+            <!-- 📝 SEO Content & FAQ -->
+            <article class="grid grid-cols-1 lg:grid-cols-3 gap-12 animate-fade-up" style="animation-delay: 0.2s;">
+                
+                <!-- Main Content -->
+                <div class="lg:col-span-2 prose prose-invert prose-lg max-w-none text-gray-300">
+                    <h2 class="text-2xl font-bold text-white mb-4">Master Your Mortgage with Precision</h2>
+                    <p>Buying a home is likely the largest financial transaction of your life. Understanding exactly how your monthly payments are split between principal and interest is crucial for long-term financial health. The <strong>Mortgage Splitter</strong> provides a real-time, visual breakdown of your loan amortization.</p>
+                    
+                    <h3 class="text-xl font-bold text-white mt-8 mb-3">How Interest Rates Impact Your Wallet</h3>
+                    <p>Interest rates might seem like small percentages, but over a 30-year term, they compound significantly. A difference of just <strong>0.5%</strong> in your interest rate on a $300,000 loan can result in a difference of over <strong>$30,000</strong> in total interest paid over the life of the loan.</p>
+                    
+                    <h3 class="text-xl font-bold text-white mt-8 mb-3">Why Use This Tool?</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Instant Feedback:</strong> Adjust sliders to see how extra payments or rate changes affect your timeline.</li>
+                        <li><strong>Privacy First:</strong> Unlike other calculators, we don't send your financial data to a server. Everything happens in your browser.</li>
+                        <li><strong>Visual Clarity:</strong> See the ratio of Principal vs. Interest at a glance.</li>
+                    </ul>
+                </div>
+
+                <!-- Sidebar / FAQ -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-brand-card p-6 rounded-2xl border border-gray-700/50">
+                        <h3 class="font-serif text-xl font-bold text-white mb-4">Frequently Asked Questions</h3>
+                        
+                        <details class="group mb-4">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-gray-300 hover:text-brand-accent transition">
+                                <span>Does this include taxes?</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <p class="text-gray-400 text-sm mt-2 leading-relaxed">No, this calculator focuses on Principal and Interest (P&I). Property taxes and insurance (PITI) vary by location and should be added separately to your budget.</p>
+                        </details>
+
+                        <details class="group mb-4">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-gray-300 hover:text-brand-accent transition">
+                                <span>Is my data saved?</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Your inputs are saved locally in your browser's LocalStorage so they remain when you return, but they are never sent to our servers.</p>
+                        </details>
+                    </div>
+                </div>
+            </article>
+
         </div>
-
-        <div class="w-full h-32 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs mb-12 border-dashed border-2">
-            ADVERTISEMENT SPACE (CONTENT ADS)
-        </div>
-
-        <article class="prose max-w-none text-gray-700">
-            <h2 class="text-2xl font-bold text-gray-900">Understanding Your Mortgage Repayments</h2>
-            <p>Taking out a mortgage is one of the biggest financial decisions you'll ever make. This <strong>Mortgage Splitter</strong> helps you break down the numbers to see exactly where your money goes. When you pay off a loan, your monthly installment consists of two main parts: the principal (the amount you borrowed) and the interest (what the bank charges you).</p>
-            
-            <h3 class="text-xl font-semibold mt-6">How Interest Rates Impact Your Loan</h3>
-            <p>Even a 1% difference in your interest rate can save you tens of thousands of dollars over the lifespan of a 30-year loan. For example, on a $300,000 mortgage, paying 4% instead of 5% interest can save you over $60,000 in total interest costs.</p>
-
-            <h3 class="text-xl font-semibold mt-6">Why Use a Loan Calculator?</h3>
-            <ul>
-                <li><strong>Budgeting:</strong> Know exactly how much you can afford each month.</li>
-                <li><strong>Comparison:</strong> Compare different offers from banks.</li>
-                <li><strong>Amortization:</strong> Understand how fast you are building equity in your home.</li>
-            </ul>
-        </article>
     </main>
 
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-brand-dark py-12 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>&copy; 2024 ToolCompass.org. All rights reserved.</p>
+            <div class="mt-4 space-x-4">
+                <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-brand-accent text-brand-dark px-6 py-3 rounded-lg font-bold shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span>Copied to clipboard!</span>
+    </div>
+
+    <!-- 🔧 JavaScript Logic -->
     <script>
-        function calculate() {
-            const amount = document.getElementById('amount').value;
-            const interest = document.getElementById('interest').value / 100 / 12;
-            const payments = document.getElementById('years').value * 12;
+        // Elements
+        const inputs = {
+            amount: document.getElementById('amount'),
+            amountRange: document.getElementById('amountRange'),
+            interest: document.getElementById('interest'),
+            interestRange: document.getElementById('interestRange'),
+            years: document.getElementById('years')
+        };
+        
+        const displays = {
+            amount: document.getElementById('displayAmount'),
+            interest: document.getElementById('displayInterest'),
+            years: document.getElementById('displayYears'),
+            monthly: document.getElementById('monthlyPayment'),
+            total: document.getElementById('totalPayment'),
+            valPrincipal: document.getElementById('valPrincipal'),
+            valInterest: document.getElementById('valInterest'),
+            barPrincipal: document.getElementById('barPrincipal'),
+            barInterest: document.getElementById('barInterest')
+        };
 
-            const x = Math.pow(1 + interest, payments);
-            const monthly = (amount * x * interest) / (x - 1);
-
-            if (isFinite(monthly)) {
-                document.getElementById('monthlyPayment').innerText = '$' + monthly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                document.getElementById('totalPayment').innerText = '$' + (monthly * payments).toLocaleString('en-US', {maximumFractionDigits: 0});
+        // Load from LocalStorage
+        function loadSettings() {
+            const saved = JSON.parse(localStorage.getItem('mortgageSettings'));
+            if (saved) {
+                inputs.amount.value = saved.amount;
+                inputs.interest.value = saved.interest;
+                inputs.years.value = saved.years;
+                syncRange('amount', saved.amount);
+                syncRange('interest', saved.interest);
+                updateDisplays();
             }
+            calculate();
         }
+
+        // Sync Range and Number Inputs
+        function syncRange(type, value) {
+            inputs[type].value = value;
+            inputs[type + 'Range'].value = value;
+        }
+
+        function updateDisplays() {
+            displays.amount.innerText = '$' + Number(inputs.amount.value).toLocaleString();
+            displays.interest.innerText = inputs.interest.value + '%';
+            displays.years.innerText = inputs.years.value + ' Years';
+        }
+
+        // Core Calculation
+        function calculate() {
+            const P = parseFloat(inputs.amount.value);
+            const r = parseFloat(inputs.interest.value) / 100 / 12;
+            const n = parseFloat(inputs.years.value) * 12;
+
+            // Formula: M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]
+            let monthly = 0;
+            if (r === 0) {
+                monthly = P / n;
+            } else {
+                monthly = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            }
+
+            const total = monthly * n;
+            
+            // First month breakdown for visualization
+            const interestPart = P * r;
+            const principalPart = monthly - interestPart;
+
+            // Update UI
+            displays.monthly.innerText = '$' + monthly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            displays.total.innerText = '$' + total.toLocaleString('en-US', {maximumFractionDigits: 0});
+            
+            displays.valPrincipal.innerText = '$' + Math.round(principalPart).toLocaleString();
+            displays.valInterest.innerText = '$' + Math.round(interestPart).toLocaleString();
+
+            // Update Bars
+            const totalParts = principalPart + interestPart;
+            const pPercent = (principalPart / totalParts) * 100;
+            const iPercent = (interestPart / totalParts) * 100;
+            
+            displays.barPrincipal.style.width = pPercent + '%';
+            displays.barInterest.style.width = iPercent + '%';
+
+            // Save to LocalStorage
+            localStorage.setItem('mortgageSettings', JSON.stringify({
+                amount: inputs.amount.value,
+                interest: inputs.interest.value,
+                years: inputs.years.value
+            }));
+        }
+
+        // Helper for buttons
+        function setTerm(years) {
+            inputs.years.value = years;
+            displays.years.innerText = years + ' Years';
+            calculate();
+        }
+
+        // Copy Functionality
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 2000);
+            });
+        }
+
+        // Event Listeners for Live Updates
+        ['amount', 'interest', 'years'].forEach(key => {
+            inputs[key].addEventListener('input', (e) => {
+                syncRange(key, e.target.value);
+                updateDisplays();
+                calculate();
+            });
+            inputs[key + 'Range'].addEventListener('input', (e) => {
+                inputs[key].value = e.target.value;
+                updateDisplays();
+                calculate();
+            });
+        });
+
+        // Init
+        loadSettings();
     </script>
 </body>
 </html>
