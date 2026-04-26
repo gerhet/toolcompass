@@ -72,8 +72,8 @@
     .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: var(--text); margin-bottom: 1rem; }
     .quarter-row { display: grid; grid-template-columns: 60px 1fr 52px; align-items: center; gap: 12px; margin-bottom: 14px; }
     .q-bar-wrap { height: 6px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
-    .q-bar-fill { height: 100%; border-radius: 6px; }
-    .q-done { background: var(--accent); }
+    .q-bar-fill { height: 100%; border-radius: 6px; transition: width 1s ease-out; }
+    .q-done { background: var(--accent); opacity: 0.6; }
     .q-active { background: var(--time-color); }
     .day-grid { display: grid; grid-template-columns: repeat(26, 1fr); gap: 2px; }
     @media (max-width: 600px) { .day-grid { grid-template-columns: repeat(18, 1fr); } }
@@ -83,11 +83,10 @@
     .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     @media (min-width: 600px) { .month-grid { grid-template-columns: repeat(6, 1fr); } }
     .month-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 0.5rem; text-align: center; }
-    .month-card.current { border-color: var(--time-color); }
+    .month-card.current { border-color: var(--time-color); background: rgba(34, 211, 238, 0.05); }
     .motivation-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 2rem; text-align: center; }
     .motivation-quote { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--accent); font-style: italic; margin-bottom: 0.5rem; }
     
-    /* SEO TEXT OPTIMIERUNG */
     .seo-info { margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; line-height: 1.6; }
     .seo-info h2 { color: var(--accent); font-family: 'Playfair Display', serif; margin-bottom: 1rem; }
     
@@ -173,15 +172,14 @@
 </footer>
 
 <script>
-  // DEINE ORIGINAL LOGIK - OPTIMIERT AUF PRÄZISION
   const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const QUARTERS = [
-    { label: 'Q1', months: [0,1,2], dates: 'Jan 1 – Mar 31' },
-    { label: 'Q2', months: [3,4,5], dates: 'Apr 1 – Jun 30' },
-    { label: 'Q3', months: [6,7,8], dates: 'Jul 1 – Sep 30' },
-    { label: 'Q4', months: [9,10,11], dates: 'Oct 1 – Dec 31' },
+    { label: 'Q1', startMonth: 0, endMonth: 2, dates: 'Jan 1 – Mar 31' },
+    { label: 'Q2', startMonth: 3, endMonth: 5, dates: 'Apr 1 – Jun 30' },
+    { label: 'Q3', startMonth: 6, endMonth: 8, dates: 'Jul 1 – Sep 30' },
+    { label: 'Q4', startMonth: 9, endMonth: 11, dates: 'Oct 1 – Dec 31' },
   ];
-  const QUOTES = ["The bad news is time flies. The good news is you're the pilot.", "Lost time is never found again.", "Don't watch the clock; do what it does. Keep going."];
+  const QUOTES = ["The bad news is time flies. The good news is you're the pilot.", "Lost time is never found again.", "Don't watch the clock; do what it does. Keep going.", "Time is what we want most, but what we use worst."];
 
   function update() {
     const now = new Date();
@@ -197,7 +195,6 @@
     document.getElementById('liveClock').textContent = now.toLocaleTimeString();
     document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
     
-    // Stats update
     const doy = Math.floor(elapsed / 86400000) + 1;
     document.getElementById('statDaysGone').textContent = doy;
     document.getElementById('statWeek').textContent = 'W' + Math.ceil(doy / 7);
@@ -205,7 +202,6 @@
     document.getElementById('statQuarter').textContent = 'Q' + (Math.floor(now.getMonth() / 3) + 1);
   }
 
-  // Initial Render (Quarters, Months, DayGrid)
   function init() {
     const now = new Date();
     const Y = now.getFullYear();
@@ -214,22 +210,47 @@
 
     // Quarters
     const qEl = document.getElementById('quartersEl');
+    const currentMonth = now.getMonth();
     QUARTERS.forEach((q, i) => {
-      const activeQ = Math.floor(now.getMonth() / 3);
-      let pct = i < activeQ ? 100 : (i === activeQ ? 45 : 0); // Simplified for initial anim
-      qEl.innerHTML += `<div class="quarter-row"><div><div class="q-label">${q.label}</div></div><div class="q-bar-wrap"><div class="q-bar-fill ${i<=activeQ?'q-active':'q-done'}" style="width:${pct}%"></div></div><div class="q-pct">${pct}%</div></div>`;
+      let qPct = 0;
+      let statusClass = 'q-done';
+      
+      const qStart = new Date(Y, q.startMonth, 1);
+      const qEnd = new Date(Y, q.endMonth + 1, 1);
+      const qTotal = qEnd - qStart;
+
+      if (currentMonth > q.endMonth) {
+        qPct = 100;
+      } else if (currentMonth < q.startMonth) {
+        qPct = 0;
+        statusClass = '';
+      } else {
+        qPct = Math.max(0, Math.min(100, ((now - qStart) / qTotal) * 100));
+        statusClass = 'q-active';
+      }
+
+      qEl.innerHTML += `
+        <div class="quarter-row">
+          <div>
+            <div class="q-label">${q.label}</div>
+            <div style="font-size: 10px; color: var(--muted); opacity: 0.6;">${q.dates}</div>
+          </div>
+          <div class="q-bar-wrap"><div class="q-bar-fill ${statusClass}" style="width:${qPct.toFixed(1)}%"></div></div>
+          <div class="q-pct">${qPct.toFixed(0)}%</div>
+        </div>`;
     });
 
     // Month Grid
     const mg = document.getElementById('monthGrid');
     MONTHS_SHORT.forEach((m, i) => {
       const isCurrent = i === now.getMonth();
-      mg.innerHTML += `<div class="month-card ${isCurrent?'current':''}"><div class="month-name">${m}</div></div>`;
+      const isPast = i < now.getMonth();
+      mg.innerHTML += `<div class="month-card ${isCurrent?'current':''}" style="opacity: ${isPast || isCurrent ? '1' : '0.3'}"><div class="month-name">${m}</div></div>`;
     });
 
     // Day Grid
     const dg = document.getElementById('dayGrid');
-    const totalDays = (new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000;
+    const totalDays = Math.round((new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000);
     const currentDay = Math.floor((now - new Date(Y,0,1)) / 86400000) + 1;
     for(let i=1; i<=totalDays; i++) {
       const cell = document.createElement('div');
