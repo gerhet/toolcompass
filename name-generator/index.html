@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>X-IDENTITY | Ultimate Naming Engine | ToolCompass</title>
     
+    <!-- SEO Meta Tags -->
+    <title>X-IDENTITY | Ultimate Naming Engine | ToolCompass</title>
+    <meta name="description" content="Generate unique character names, brand identities, and gamertags instantly with the X-IDENTITY engine. Free, privacy-focused, and real-time.">
+    <meta name="keywords" content="name generator, character name, gamertag generator, brand name, fantasy names, cyber names">
+    <link rel="canonical" href="https://toolcompass.org/x-identity">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="X-IDENTITY | Ultimate Naming Engine">
+    <meta property="og:description" content="Generate unique character names and identities instantly.">
+    <meta property="og:image" content="https://toolcompass.org/assets/og-x-identity.jpg">
+
+    <!-- Google & Analytics -->
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
     <script>
@@ -14,62 +26,162 @@
       gtag('config', 'G-4JVNJKQYCG');
     </script>
 
+    <!-- Fonts & Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Design System CSS -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@900&display=swap');
-        
-        :root { --accent: #2563eb; }
-        body { font-family: 'Space Grotesk', sans-serif; background: #020617; color: #f8fafc; overflow-x: hidden; }
-        .font-heavy { font-family: 'Outfit', sans-serif; }
-        
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .name-card { transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; position: relative; overflow: hidden; }
-        .name-card:hover { transform: translateY(-5px) scale(1.02); border-color: var(--accent); box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.5); }
-        
-        .scanline { width: 100%; height: 2px; background: rgba(37, 99, 235, 0.2); position: absolute; animation: scan 4s linear infinite; pointer-events: none; }
-        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
-        
-        .gradient-text { background: linear-gradient(90deg, #3b82f6, #9333ea, #3b82f6); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite; }
-        @keyframes shine { to { background-position: 200% center; } }
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Premium Grain Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Glassmorphism Card */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Animations */
+        .fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        /* Name Card Hover Effect */
+        .name-card {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        .name-card:hover {
+            transform: translateY(-3px);
+            border-left-color: var(--accent);
+            background: rgba(59, 130, 246, 0.1);
+            cursor: pointer;
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--accent);
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
     </style>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "X-IDENTITY Naming Engine",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A premium tool for generating unique character names, brand identities, and gamertags across multiple genres."
+    }
+    </script>
 </head>
-<body>
+<body class="antialiased min-h-screen flex flex-col">
 
-    <div class="scanline"></div>
-
-    <header class="bg-white/5 border-b border-white/10 py-4 relative z-50 glass">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            
-            <a href="/" class="flex items-center group space-x-2">
-                <span class="text-blue-500 font-bold group-hover:-translate-x-1 transition-transform">←</span>
-                <span class="text-blue-500 font-bold text-sm">Back to ToolCompass</span>
+    <!-- Navigation -->
+    <header class="border-b border-white/10 bg-slate-900/50 backdrop-blur-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 h-16 flex justify-between items-center">
+            <a href="/" class="flex items-center space-x-2 group">
+                <span class="text-blue-500 group-hover:-translate-x-1 transition-transform duration-300">←</span>
+                <span class="font-bold text-lg tracking-tight">ToolCompass</span>
             </a>
-
-            <div id="vault-count" class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
-                Vault: 0
-            </div>
-
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-400">
+                <a href="#" class="hover:text-white transition">Tools</a>
+                <a href="#" class="hover:text-white transition">About</a>
+                <a href="#" class="hover:text-white transition">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-16 relative z-10">
-        <div class="max-w-4xl mx-auto text-center mb-16">
-            <h1 class="text-6xl md:text-8xl font-heavy mb-4 tracking-tighter leading-none uppercase italic">The <span class="gradient-text">Omega</span> Engine</h1>
-            <p class="text-slate-400 text-lg uppercase tracking-[0.3em] font-light">Multipass Identity Combinator // v.9.0 Final</p>
+    <main class="flex-grow container mx-auto px-4 py-12 relative z-10">
+        
+        <!-- Tool Header -->
+        <div class="max-w-3xl mx-auto text-center mb-12 fade-up" style="animation-delay: 0.1s;">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">X-IDENTITY <span class="text-blue-500">Engine</span></h1>
+            <p class="text-slate-400 text-lg">Generate unique character names, brand identities, and gamertags instantly. 100% private, calculated in your browser.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Ad Slot Top -->
+        <div class="max-w-4xl mx-auto mb-12 fade-up" style="animation-delay: 0.2s;">
+            <div class="w-full h-24 bg-slate-800/50 rounded-lg border border-dashed border-slate-700 flex items-center justify-center text-slate-500 text-sm">
+                <!-- AdSense Code Here -->
+                Ad Slot (Responsive)
+            </div>
+        </div>
+
+        <!-- Tool Interface -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto fade-up" style="animation-delay: 0.3s;">
             
+            <!-- Controls Sidebar -->
             <div class="lg:col-span-4 space-y-6">
-                <div class="glass p-8 rounded-[2rem] space-y-8">
-                    <div>
-                        <label class="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-4 block">Select Universe</label>
-                        <select id="category" class="w-full bg-slate-900/50 border border-white/10 p-4 rounded-xl font-bold outline-none focus:border-blue-500 transition">
+                <div class="glass-panel p-6 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-6 text-white border-b border-white/10 pb-2">Configuration</h3>
+                    
+                    <!-- Category Select -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">Universe / Genre</label>
+                        <select id="category" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white focus:outline-none focus:border-blue-500 transition">
                             <option value="fantasy">Epic High Fantasy</option>
                             <option value="corp">Global Tech Conglomerate</option>
                             <option value="cyber">Cybernetic / Hacknet</option>
@@ -77,61 +189,130 @@
                         </select>
                     </div>
 
-                    <div class="space-y-3">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-blue-500 block">Matrix Parameters</label>
+                    <!-- Toggles -->
+                    <div class="space-y-3 mb-6">
                         <label class="flex justify-between items-center group cursor-pointer">
-                            <span class="text-sm text-slate-400 group-hover:text-white transition">Honorifics</span>
-                            <input type="checkbox" id="useTitle" class="w-5 h-5 accent-blue-600">
+                            <span class="text-sm text-slate-300 group-hover:text-white transition">Include Honorifics</span>
+                            <input type="checkbox" id="useTitle" class="w-4 h-4 accent-blue-600 rounded focus:ring-0">
                         </label>
                         <label class="flex justify-between items-center group cursor-pointer">
-                            <span class="text-sm text-slate-400 group-hover:text-white transition">Surnames</span>
-                            <input type="checkbox" id="useLast" checked class="w-5 h-5 accent-blue-600">
+                            <span class="text-sm text-slate-300 group-hover:text-white transition">Include Surnames</span>
+                            <input type="checkbox" id="useLast" checked class="w-4 h-4 accent-blue-600 rounded focus:ring-0">
                         </label>
                         <label class="flex justify-between items-center group cursor-pointer">
-                            <span class="text-sm text-slate-400 group-hover:text-white transition">Ancient Traits</span>
-                            <input type="checkbox" id="useTrait" class="w-5 h-5 accent-blue-600">
+                            <span class="text-sm text-slate-300 group-hover:text-white transition">Add Ancient Traits</span>
+                            <input type="checkbox" id="useTrait" class="w-4 h-4 accent-blue-600 rounded focus:ring-0">
                         </label>
                     </div>
 
-                    <div>
-                        <label class="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-4 block">Sequence Length</label>
-                        <div class="flex bg-slate-900 rounded-xl p-1 border border-white/5">
-                            <button onclick="setLen('short')" id="btn-short" class="flex-1 py-2 text-xs font-bold rounded-lg transition">Short</button>
-                            <button onclick="setLen('med')" id="btn-med" class="flex-1 py-2 text-xs font-bold rounded-lg bg-blue-600 transition">Med</button>
-                            <button onclick="setLen('long')" id="btn-long" class="flex-1 py-2 text-xs font-bold rounded-lg transition">Long</button>
+                    <!-- Length Selector -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">Name Complexity</label>
+                        <div class="flex bg-slate-800 rounded-lg p-1 border border-slate-700">
+                            <button onclick="setLen('short')" id="btn-short" class="flex-1 py-2 text-xs font-bold rounded-md transition text-slate-400 hover:text-white">Short</button>
+                            <button onclick="setLen('med')" id="btn-med" class="flex-1 py-2 text-xs font-bold rounded-md bg-blue-600 text-white shadow-lg transition">Med</button>
+                            <button onclick="setLen('long')" id="btn-long" class="flex-1 py-2 text-xs font-bold rounded-md transition text-slate-400 hover:text-white">Long</button>
                         </div>
                     </div>
 
-                    <button onclick="generate()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-heavy py-5 rounded-2xl shadow-2xl shadow-blue-500/20 transition active:scale-95 uppercase tracking-widest text-xl italic">
-                        Initialize Matrix
-                    </button>
-                </div>
-
-                <div id="vault-area" class="glass p-6 rounded-[2rem] hidden">
-                    <h3 class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 flex justify-between">
-                        <span>Secured Vault</span>
-                        <button onclick="clearVault()" class="text-red-400 hover:text-red-300">Wipe</button>
-                    </h3>
-                    <div id="vault-list" class="space-y-2 max-h-48 overflow-y-auto"></div>
+                    <!-- Vault Section -->
+                    <div id="vault-area" class="mt-8 pt-6 border-t border-white/10 hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Saved Vault</span>
+                            <button onclick="clearVault()" class="text-xs text-red-400 hover:text-red-300 hover:underline">Clear All</button>
+                        </div>
+                        <div id="vault-list" class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-8 glass p-8 rounded-[2rem] min-h-[600px] relative overflow-hidden">
-                <div id="empty-state" class="absolute inset-0 flex flex-col items-center justify-center opacity-20">
-                    <div class="text-9xl mb-4">⚙️</div>
-                    <p class="font-heavy uppercase tracking-[0.5em]">Waiting for Input...</p>
+            <!-- Results Grid -->
+            <div class="lg:col-span-8">
+                <div class="glass-panel p-6 rounded-2xl min-h-[500px] relative">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-white">Generated Identities</h3>
+                        <span class="text-xs text-slate-500">Click to Copy</span>
+                    </div>
+                    
+                    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                        <!-- Cards injected via JS -->
+                    </div>
                 </div>
-                <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10"></div>
             </div>
 
         </div>
+
+        <!-- Ad Slot Mid -->
+        <div class="max-w-4xl mx-auto my-12 fade-up" style="animation-delay: 0.4s;">
+            <div class="w-full h-24 bg-slate-800/50 rounded-lg border border-dashed border-slate-700 flex items-center justify-center text-slate-500 text-sm">
+                <!-- AdSense Code Here -->
+                Ad Slot (Responsive)
+            </div>
+        </div>
+
+        <!-- SEO Content & FAQ -->
+        <article class="max-w-4xl mx-auto mt-16 prose prose-invert prose-slate">
+            <h2 class="text-3xl font-bold mb-6">Mastering Identity Creation with X-IDENTITY</h2>
+            <p class="text-slate-400 leading-relaxed mb-6">
+                Creating a memorable name for a character, a brand, or an online persona is often the hardest part of the creative process. The <strong>X-IDENTITY Engine</strong> is designed to bridge the gap between imagination and reality. By combining linguistic algorithms with genre-specific databases, we provide instant inspiration.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8 my-8">
+                <div class="bg-slate-800/50 p-6 rounded-xl border border-white/5">
+                    <h4 class="text-xl font-bold text-blue-400 mb-2">For Writers & RPG Players</h4>
+                    <p class="text-sm text-slate-400">Generate consistent naming conventions for your fantasy worlds or sci-fi universes. No more "John Smith" in a medieval setting.</p>
+                </div>
+                <div class="bg-slate-800/50 p-6 rounded-xl border border-white/5">
+                    <h4 class="text-xl font-bold text-blue-400 mb-2">For Branding & Startups</h4>
+                    <p class="text-sm text-slate-400">Find that elusive tech-sounding name that is available as a domain. Our "Corp" and "Cyber" modes are optimized for modern branding.</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold mt-12 mb-4">Frequently Asked Questions</h3>
+            <div class="space-y-4">
+                <details class="group bg-slate-800/50 rounded-lg p-4 cursor-pointer border border-white/5">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        Are these names copyright free?
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p class="text-slate-400 mt-2 text-sm">Yes, the generated names are algorithmic combinations and are free to use for your projects. However, always check trademark databases for commercial use.</p>
+                </details>
+                <details class="group bg-slate-800/50 rounded-lg p-4 cursor-pointer border border-white/5">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        Does the tool save my history?
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p class="text-slate-400 mt-2 text-sm">We do not store data on our servers. However, you can use the "Vault" feature to save favorites locally in your browser's storage.</p>
+                </details>
+                <details class="group bg-slate-800/50 rounded-lg p-4 cursor-pointer border border-white/5">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        Can I generate names offline?
+                        <span class="transition group-open:rotate-180">▼</span>
+                    </summary>
+                    <p class="text-slate-400 mt-2 text-sm">Once the page is loaded, all calculations happen in your browser. You can disconnect from the internet and the tool will continue to work.</p>
+                </details>
+            </div>
+        </article>
+
     </main>
 
-    <script>
-        let currentLen = 'med';
-        let vault = JSON.parse(localStorage.getItem('tc_vault') || '[]');
-        updateVaultUI();
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-slate-900 mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-slate-500 text-sm">
+            <p>&copy; 2024 ToolCompass.org. All rights reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
 
+    <!-- Toast Notification -->
+    <div id="toast">Identity Copied to Clipboard</div>
+
+    <!-- Tool Logic -->
+    <script>
+        // Database
         const db = {
             titles: ["Lord", "High Archon", "Saint", "Agent", "Overlord", "Grandmaster", "Elder", "Baron", "Chief", "Prime", "Dr.", "Professor", "Exarch", "Void-Walker"],
             traits: ["the Eternal", "the Ghost-Bearer", "the Silent", "the Feather-Bearer", "the Melancholic", "the Radiant", "the Unforgiven", "the Iron-Willed", "the Catalyst", "the Void-Born"],
@@ -157,16 +338,40 @@
             }
         };
 
+        let currentLen = 'med';
+        let vault = JSON.parse(localStorage.getItem('tc_vault') || '[]');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateVaultUI();
+            generate(); // Initial generation
+            setupListeners();
+        });
+
+        function setupListeners() {
+            // Live Generation on Change
+            document.getElementById('category').addEventListener('change', generate);
+            document.getElementById('useTitle').addEventListener('change', generate);
+            document.getElementById('useLast').addEventListener('change', generate);
+            document.getElementById('useTrait').addEventListener('change', generate);
+        }
+
         function setLen(l) {
             currentLen = l;
             ['short', 'med', 'long'].forEach(id => {
-                document.getElementById('btn-'+id).classList.remove('bg-blue-600');
+                const btn = document.getElementById('btn-'+id);
+                if(id === l) {
+                    btn.classList.add('bg-blue-600', 'text-white', 'shadow-lg');
+                    btn.classList.remove('text-slate-400');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg');
+                    btn.classList.add('text-slate-400');
+                }
             });
-            document.getElementById('btn-'+l).classList.add('bg-blue-600');
+            generate();
         }
 
         function generate() {
-            document.getElementById('empty-state').classList.add('hidden');
             const cat = document.getElementById('category').value;
             const useTitle = document.getElementById('useTitle').checked;
             const useLast = document.getElementById('useLast').checked;
@@ -175,7 +380,7 @@
 
             grid.innerHTML = '';
             
-            for(let i = 0; i < 16; i++) {
+            for(let i = 0; i < 12; i++) { // Reduced to 12 for cleaner grid
                 let parts = [];
                 if(useTitle) parts.push(db.titles[Math.floor(Math.random() * db.titles.length)]);
 
@@ -197,39 +402,40 @@
 
         function createCard(name) {
             const card = document.createElement('div');
-            const hue = Math.floor(Math.random() * 360);
-            card.className = "name-card glass p-6 rounded-2xl border-l-4";
+            // Random subtle border color based on category for variety
+            const hue = Math.floor(Math.random() * 60) + 200; // Blue/Purple range
+            card.className = "name-card glass-panel p-5 rounded-xl border-l-4 flex justify-between items-center group";
             card.style.borderLeftColor = `hsl(${hue}, 70%, 50%)`;
             
             card.innerHTML = `
-                <div class="flex justify-between items-start">
-                    <div>
-                        <p class="text-[10px] text-slate-500 uppercase font-black mb-1 tracking-widest">ID-MATCH</p>
-                        <h4 class="text-xl font-bold text-white tracking-tight">${name}</h4>
-                    </div>
-                    <button onclick="addToVault('${name}')" class="text-slate-600 hover:text-blue-400 transition text-xl">★</button>
+                <div>
+                    <p class="text-[10px] text-slate-500 uppercase font-bold mb-1 tracking-widest">Generated ID</p>
+                    <h4 class="text-lg font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">${name}</h4>
                 </div>
-                <div class="mt-4 flex space-x-2">
-                    <div class="h-1 flex-1 bg-white/5 rounded-full overflow-hidden">
-                        <div class="h-full bg-blue-500/50" style="width: ${Math.random()*100}%"></div>
-                    </div>
-                </div>
+                <button class="text-slate-600 hover:text-blue-400 transition text-xl p-2" onclick="addToVault('${name}', event)">
+                    ★
+                </button>
             `;
             
             card.onclick = (e) => {
-                if(e.target.tagName === 'BUTTON') return;
-                navigator.clipboard.writeText(name);
-                const toast = document.createElement('div');
-                toast.className = "fixed bottom-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-8 py-3 rounded-full font-black uppercase tracking-widest text-xs animate-bounce shadow-2xl z-50";
-                toast.innerText = "Identity Copied to Clipboard";
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 2000);
+                if(e.target.closest('button')) return; // Don't copy if clicking star
+                copyToClipboard(name);
             };
             
             document.getElementById('grid').appendChild(card);
         }
 
-        function addToVault(name) {
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                toast.innerText = "Identity Copied!";
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            });
+        }
+
+        function addToVault(name, event) {
+            event.stopPropagation(); // Prevent card click
             if(!vault.includes(name)) {
                 vault.push(name);
                 localStorage.setItem('tc_vault', JSON.stringify(vault));
@@ -238,26 +444,28 @@
         }
 
         function clearVault() {
-            vault = [];
-            localStorage.setItem('tc_vault', JSON.stringify(vault));
-            updateVaultUI();
+            if(confirm("Are you sure you want to wipe the vault?")) {
+                vault = [];
+                localStorage.setItem('tc_vault', JSON.stringify(vault));
+                updateVaultUI();
+            }
         }
 
         function updateVaultUI() {
             const list = document.getElementById('vault-list');
             const area = document.getElementById('vault-area');
-            const count = document.getElementById('vault-count');
             
-            if(vault.length > 0) area.classList.remove('hidden');
-            else area.classList.add('hidden');
-            
-            count.innerText = `Vault: ${vault.length}`;
-            list.innerHTML = vault.map(name => `
-                <div class="flex justify-between items-center bg-white/5 p-2 px-3 rounded-lg text-xs font-bold border border-white/5">
-                    <span class="truncate mr-2">${name}</span>
-                    <button onclick="removeFromVault('${name}')" class="text-red-500 hover:scale-125 transition">×</button>
-                </div>
-            `).join('');
+            if(vault.length > 0) {
+                area.classList.remove('hidden');
+                list.innerHTML = vault.map(name => `
+                    <div class="flex justify-between items-center bg-slate-800/50 p-2 px-3 rounded-lg text-xs font-bold border border-white/5 group">
+                        <span class="truncate mr-2 text-slate-300">${name}</span>
+                        <button onclick="removeFromVault('${name}')" class="text-slate-500 hover:text-red-400 transition">×</button>
+                    </div>
+                `).join('');
+            } else {
+                area.classList.add('hidden');
+            }
         }
 
         function removeFromVault(name) {
