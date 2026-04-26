@@ -217,23 +217,43 @@
     .input-wrapper {
       position: relative;
     }
-    .input-wrapper span {
-      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
-      color: var(--muted); font-weight: 500; pointer-events: none;
+    /* FIX: Icon Position & Input Padding */
+    .input-wrapper .icon {
+      position: absolute; 
+      left: 1.25rem; 
+      top: 50%; 
+      transform: translateY(-50%);
+      font-size: 18px;
+      line-height: 1;
+      pointer-events: none;
+      z-index: 10;
     }
     .input-wrapper input {
-      width: 100%; background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1rem 1rem 1rem 2.5rem;
-      color: var(--text); font-family: 'Outfit', sans-serif;
-      font-size: 16px; font-weight: 500; outline: none;
+      width: 100%; 
+      background: var(--surface2); 
+      border: 1px solid var(--border);
+      border-radius: 12px; 
+      /* FIX: Increased left padding from 2.5rem to 3.5rem to prevent overlap */
+      padding: 1rem 1rem 1rem 3.5rem; 
+      color: var(--text); 
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px; 
+      font-weight: 500; 
+      outline: none;
       transition: border-color .2s, background .2s;
     }
     .input-wrapper input:focus {
-      border-color: var(--content); background: rgba(52, 211, 153, 0.02);
+      border-color: var(--content); 
+      background: rgba(52, 211, 153, 0.02);
     }
     .input-suffix {
-      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-      color: var(--muted); font-size: 13px; pointer-events: none;
+      position: absolute; 
+      right: 1rem; 
+      top: 50%; 
+      transform: translateY(-50%);
+      color: var(--muted); 
+      font-size: 13px; 
+      pointer-events: none;
     }
 
     /* Result Card */
@@ -413,7 +433,7 @@
       <div class="input-group">
         <label>Desired Annual Net Income</label>
         <div class="input-wrapper">
-          <span>$</span>
+          <span class="icon">$</span>
           <input type="number" id="netIncome" value="60000" oninput="calculateRate()">
         </div>
       </div>
@@ -421,7 +441,7 @@
       <div class="input-group">
         <label>Monthly Business Expenses</label>
         <div class="input-wrapper">
-          <span>$</span>
+          <span class="icon">$</span>
           <input type="number" id="expenses" value="500" oninput="calculateRate()">
           <span class="input-suffix">/ month</span>
         </div>
@@ -430,7 +450,7 @@
       <div class="input-group">
         <label>Billable Hours per Week</label>
         <div class="input-wrapper">
-          <span>🕒</span>
+          <span class="icon">🕒</span>
           <input type="number" id="hours" value="25" oninput="calculateRate()">
           <span class="input-suffix">hours</span>
         </div>
@@ -439,7 +459,7 @@
       <div class="input-group">
         <label>Vacation Weeks per Year</label>
         <div class="input-wrapper">
-          <span>🏖️</span>
+          <span class="icon">🏖️</span>
           <input type="number" id="vacation" value="4" oninput="calculateRate()">
           <span class="input-suffix">weeks</span>
         </div>
