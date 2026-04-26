@@ -1,45 +1,586 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
 
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4JVNJKQYCG');
-    </script>
-    
-    <title>Year Progress Tracker | ToolCompass</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <title>Year Progress Tracker | ToolCompass</title>
+  <meta name="description" content="See exactly how much of the year is gone — and how much is left. Live year progress with day grid, quarter breakdown, and more.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      --accent-dim: rgba(232,213,163,0.12);
+      --gone: #E8D5A3;
+      --left: #2A2A2A;
+      --time-color: #22D3EE;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 860px; margin: 0 auto;
+      height: 56px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-arrow { font-size: 16px; line-height: 1; }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 15px; color: var(--text);
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+
+    /* MAIN */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border-hover); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--time-color); }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 900; line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* HERO PERCENT */
+    .hero-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(232,213,163,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .year-label {
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .big-percent {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 15vw, 10rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .progress-label { font-size: 13px; color: var(--muted); font-weight: 300; margin-bottom: 2rem; }
+
+    /* main progress bar */
+    .main-bar-wrap {
+      position: relative;
+      width: 100%;
+      height: 10px;
+      background: var(--surface2);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+    .main-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent) 0%, rgba(232,213,163,0.6) 100%);
+      width: 0%;
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bar-labels {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--muted);
+    }
+
+    /* live clock */
+    .live-clock {
+      margin-top: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--time-color);
+      letter-spacing: 0.08em;
+    }
+    .live-date {
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px; color: var(--muted); font-weight: 400;
+      margin-top: 4px; letter-spacing: 0.05em;
+    }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    @media (min-width: 600px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .stat-card:hover { border-color: var(--border-hover); background: var(--surface2); }
+    .stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem; font-weight: 700;
+      color: var(--accent); line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-lbl { font-size: 11px; color: var(--muted); font-weight: 400; letter-spacing: 0.05em; }
+    .stat-sub { font-size: 10px; color: var(--muted); opacity: 0.6; margin-top: 3px; }
+
+    /* QUARTERS */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .quarters-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .quarter-row {
+      display: grid; grid-template-columns: 60px 1fr 52px;
+      align-items: center; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .quarter-row:last-child { margin-bottom: 0; }
+    .q-label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.06em; }
+    .q-bar-wrap { height: 6px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
+    .q-bar-fill { height: 100%; border-radius: 6px; transition: width 1.6s cubic-bezier(0.22,1,0.36,1); }
+    .q-done { background: var(--accent); }
+    .q-active { background: var(--time-color); }
+    .q-future { background: var(--surface2); }
+    .q-pct { font-size: 12px; font-weight: 600; color: var(--muted); text-align: right; }
+    .q-dates { font-size: 10px; color: var(--muted); opacity: 0.55; margin-top: 2px; }
+
+    /* DAY GRID */
+    .daygrid-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .daygrid-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 1rem;
+    }
+    .daygrid-legend { display: flex; gap: 14px; align-items: center; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(26, 1fr);
+      gap: 2px;
+    }
+    @media (max-width: 600px) {
+      .day-grid { grid-template-columns: repeat(18, 1fr); }
+    }
+    .day-cell {
+      aspect-ratio: 1;
+      border-radius: 2px;
+      background: var(--surface2);
+      transition: transform 0.1s;
+      cursor: default;
+      position: relative;
+    }
+    .day-cell.gone { background: var(--accent); opacity: 0.85; }
+    .day-cell.today {
+      background: var(--time-color);
+      opacity: 1;
+      animation: todayPulse 2s ease-in-out infinite;
+    }
+    .day-cell.future { background: var(--surface2); }
+    @keyframes todayPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+    /* MONTHS */
+    .months-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+    .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (min-width: 600px) { .month-grid { grid-template-columns: repeat(6, 1fr); } }
+
+    .month-card {
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.75rem 0.5rem;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .month-card.done { border-color: rgba(232,213,163,0.2); background: rgba(232,213,163,0.04); }
+    .month-card.current { border-color: var(--time-color); background: rgba(34,211,238,0.06); }
+    .month-card.future { opacity: 0.4; }
+    .month-name { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 5px; }
+    .month-fill-wrap { height: 3px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+    .month-fill { height: 100%; border-radius: 3px; transition: width 1.6s cubic-bezier(0.22,1,0.36,1); }
+    .month-pct { font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+    /* MOTIVATION */
+    .motivation-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem 2rem;
+      text-align: center;
+      animation: fadeUp 0.7s 0.6s ease both;
+    }
+    .motivation-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700; font-style: italic;
+      color: var(--accent); line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+    .motivation-sub { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem; text-align: center;
+      margin-top: 2rem;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; opacity: .4; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
-    <main class="container mx-auto px-4 py-10 max-w-xl text-center">
-        <h1 class="text-3xl font-extrabold mb-2">Year Progress</h1>
-        <p id="yearLabel" class="text-gray-500 mb-8 font-bold text-xl"></p>
-        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-            <div class="w-full bg-gray-200 rounded-full h-8 mb-4 overflow-hidden">
-                <div id="progressBar" class="bg-blue-600 h-8 transition-all duration-1000" style="width: 0%"></div>
-            </div>
-            <p id="percentText" class="text-5xl font-black text-blue-600">0%</p>
-            <p class="text-gray-400 text-sm mt-4 italic">Make every day count.</p>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">
+      <span class="back-arrow">←</span>
+      Back to ToolCompass
+    </a>
+    <span class="logo-text">Tool<em>Compass</em>.org</span>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-header">
+    <div class="page-tag"><span class="page-tag-dot"></span>Time & Productivity</div>
+    <h1>Year<br><em>Progress</em></h1>
+    <p class="page-sub">Every second counts. Here's where you stand.</p>
+  </div>
+
+  <!-- HERO PERCENT CARD -->
+  <div class="hero-card">
+    <div class="year-label" id="yearLabel">2025</div>
+    <div class="big-percent" id="bigPercent">0%</div>
+    <div class="progress-label" id="progressLabel">of the year is gone</div>
+    <div class="main-bar-wrap">
+      <div class="main-bar-fill" id="mainBar"></div>
+    </div>
+    <div class="bar-labels">
+      <span>Jan 1</span>
+      <span id="todayBarLabel">Today</span>
+      <span>Dec 31</span>
+    </div>
+    <div class="live-clock" id="liveClock">00:00:00</div>
+    <div class="live-date" id="liveDate">Loading…</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-val" id="statDaysGone">—</div>
+      <div class="stat-lbl">Days gone</div>
+      <div class="stat-sub" id="statDaysLeft">— remaining</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="statWeek">—</div>
+      <div class="stat-lbl">Current week</div>
+      <div class="stat-sub" id="statWeeksLeft">— weeks left</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="statMonth">—</div>
+      <div class="stat-lbl">Current month</div>
+      <div class="stat-sub" id="statMonthPct">— % through</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="statQuarter">—</div>
+      <div class="stat-lbl">Current quarter</div>
+      <div class="stat-sub" id="statQPct">— % through</div>
+    </div>
+  </div>
+
+  <!-- QUARTERS -->
+  <div class="quarters-wrap">
+    <div class="section-title">Quarter Breakdown</div>
+    <div id="quartersEl"></div>
+  </div>
+
+  <!-- MONTH GRID -->
+  <div class="months-wrap">
+    <div class="daygrid-header">
+      <div class="section-title">Month Overview</div>
+    </div>
+    <div class="month-grid" id="monthGrid"></div>
+  </div>
+
+  <!-- DAY GRID -->
+  <div class="daygrid-wrap">
+    <div class="daygrid-header">
+      <div class="section-title">Day Grid — <span id="gridYear"></span></div>
+      <div class="daygrid-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Gone</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--time-color)"></div>Today</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--surface2);border:1px solid rgba(255,255,255,0.1)"></div>Left</div>
+      </div>
+    </div>
+    <div class="day-grid" id="dayGrid"></div>
+  </div>
+
+  <!-- MOTIVATION -->
+  <div class="motivation-wrap">
+    <div class="motivation-quote" id="motivationQuote"></div>
+    <div class="motivation-sub">— A reminder to make it count</div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · No Login</p>
+</footer>
+
+<script>
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DAYS_IN_MONTH = (y,m) => new Date(y, m+1, 0).getDate();
+  const QUARTERS = [
+    { label: 'Q1', months: [0,1,2], dates: 'Jan 1 – Mar 31' },
+    { label: 'Q2', months: [3,4,5], dates: 'Apr 1 – Jun 30' },
+    { label: 'Q3', months: [6,7,8], dates: 'Jul 1 – Sep 30' },
+    { label: 'Q4', months: [9,10,11], dates: 'Oct 1 – Dec 31' },
+  ];
+  const QUOTES = [
+    "The two most important days in your life are the day you are born and the day you find out why.",
+    "Time is what we want most, but what we use worst.",
+    "The bad news is time flies. The good news is you're the pilot.",
+    "It's not about having time. It's about making time.",
+    "Don't watch the clock; do what it does. Keep going.",
+    "Lost time is never found again.",
+  ];
+
+  function isLeapYear(y) { return (y%4===0&&y%100!==0)||y%400===0; }
+  function daysInYear(y) { return isLeapYear(y) ? 366 : 365; }
+  function dayOfYear(d) {
+    const start = new Date(d.getFullYear(), 0, 0);
+    return Math.floor((d - start) / 86400000);
+  }
+  function weekOfYear(d) {
+    const start = new Date(d.getFullYear(), 0, 1);
+    return Math.ceil(((d - start) / 86400000 + start.getDay() + 1) / 7);
+  }
+
+  const now = new Date();
+  const Y = now.getFullYear();
+  const TOTAL_DAYS = daysInYear(Y);
+  const DOY = dayOfYear(now);
+  const PROGRESS = (DOY - 1 + (now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds()) / 86400) / TOTAL_DAYS;
+
+  // Static renders
+  document.getElementById('yearLabel').textContent = Y;
+  document.getElementById('gridYear').textContent = Y;
+  document.getElementById('bigPercent').textContent = (PROGRESS * 100).toFixed(4) + '%';
+  document.getElementById('progressLabel').textContent = `of ${Y} is gone — ${((1-PROGRESS)*100).toFixed(2)}% remains`;
+
+  setTimeout(() => {
+    document.getElementById('mainBar').style.width = (PROGRESS * 100) + '%';
+  }, 300);
+
+  // Stats
+  const daysGone = DOY - 1;
+  const daysLeft = TOTAL_DAYS - DOY;
+  const weekNum = weekOfYear(now);
+  const weeksLeft = 52 - weekNum;
+  const monthIdx = now.getMonth();
+  const dayInMonth = now.getDate();
+  const totalDaysMonth = DAYS_IN_MONTH(Y, monthIdx);
+  const monthPct = ((dayInMonth / totalDaysMonth) * 100).toFixed(0);
+  const qIdx = Math.floor(monthIdx / 3);
+  const qMonths = QUARTERS[qIdx].months;
+  const qStart = new Date(Y, qMonths[0], 1);
+  const qEnd = new Date(Y, qMonths[2]+1, 0);
+  const qTotal = (qEnd - qStart) / 86400000;
+  const qGone = (now - qStart) / 86400000;
+  const qPct = Math.min(100, (qGone / qTotal * 100)).toFixed(0);
+
+  document.getElementById('statDaysGone').textContent = daysGone;
+  document.getElementById('statDaysLeft').textContent = daysLeft + ' remaining';
+  document.getElementById('statWeek').textContent = 'W' + weekNum;
+  document.getElementById('statWeeksLeft').textContent = weeksLeft + ' weeks left';
+  document.getElementById('statMonth').textContent = MONTHS_SHORT[monthIdx];
+  document.getElementById('statMonthPct').textContent = monthPct + '% through';
+  document.getElementById('statQuarter').textContent = 'Q' + (qIdx+1);
+  document.getElementById('statQPct').textContent = qPct + '% through';
+
+  // Quarters
+  const qEl = document.getElementById('quartersEl');
+  QUARTERS.forEach((q, i) => {
+    const qS = new Date(Y, q.months[0], 1);
+    const qE = new Date(Y, q.months[2]+1, 0);
+    const tot = (qE - qS) / 86400000;
+    let pct = 0, cls = 'q-future';
+    if (i < qIdx) { pct = 100; cls = 'q-done'; }
+    else if (i === qIdx) { pct = Math.min(100, (now - qS) / 86400000 / tot * 100); cls = 'q-active'; }
+    qEl.innerHTML += `
+      <div class="quarter-row">
+        <div>
+          <div class="q-label">${q.label}</div>
+          <div class="q-dates">${q.dates}</div>
         </div>
-    </main>
-    <script>
-        const now = new Date();
-        const start = new Date(now.getFullYear(), 0, 1);
-        const end = new Date(now.getFullYear() + 1, 0, 1);
-        const progress = ((now - start) / (end - start)) * 100;
-        document.getElementById('yearLabel').innerText = now.getFullYear();
-        setTimeout(() => {
-            document.getElementById('progressBar').style.width = progress.toFixed(2) + '%';
-            document.getElementById('percentText').innerText = progress.toFixed(2) + '%';
-        }, 500);
-    </script>
+        <div class="q-bar-wrap"><div class="q-bar-fill ${cls}" style="width:0%" data-target="${pct.toFixed(1)}"></div></div>
+        <div class="q-pct">${pct.toFixed(0)}%</div>
+      </div>`;
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.q-bar-fill').forEach(el => {
+      el.style.width = el.dataset.target + '%';
+      el.style.transition = 'width 1.6s cubic-bezier(0.22,1,0.36,1)';
+    });
+  }, 400);
+
+  // Month grid
+  const mgEl = document.getElementById('monthGrid');
+  MONTHS_SHORT.forEach((m, i) => {
+    const tot = DAYS_IN_MONTH(Y, i);
+    let pct = 0, cls = 'future';
+    if (i < monthIdx) { pct = 100; cls = 'done'; }
+    else if (i === monthIdx) { pct = (dayInMonth / tot * 100); cls = 'current'; }
+    const fillColor = i < monthIdx ? 'var(--accent)' : i === monthIdx ? 'var(--time-color)' : 'var(--surface2)';
+    mgEl.innerHTML += `
+      <div class="month-card ${cls}">
+        <div class="month-name">${m}</div>
+        <div class="month-fill-wrap"><div class="month-fill" style="width:0%;background:${fillColor}" data-target="${pct.toFixed(1)}"></div></div>
+        <div class="month-pct">${pct > 0 ? pct.toFixed(0)+'%' : '—'}</div>
+      </div>`;
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.month-fill').forEach(el => {
+      el.style.width = el.dataset.target + '%';
+      el.style.transition = 'width 1.6s cubic-bezier(0.22,1,0.36,1)';
+    });
+  }, 500);
+
+  // Day grid
+  const dgEl = document.getElementById('dayGrid');
+  for (let d = 1; d <= TOTAL_DAYS; d++) {
+    const cell = document.createElement('div');
+    cell.className = 'day-cell';
+    if (d < DOY) cell.classList.add('gone');
+    else if (d === DOY) cell.classList.add('today');
+    else cell.classList.add('future');
+    // tooltip
+    const cellDate = new Date(Y, 0, d);
+    cell.title = cellDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    dgEl.appendChild(cell);
+  }
+
+  // Motivation
+  const qotd = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+  document.getElementById('motivationQuote').textContent = '"' + qotd + '"';
+
+  // Live clock
+  function updateClock() {
+    const n = new Date();
+    const hh = String(n.getHours()).padStart(2,'0');
+    const mm = String(n.getMinutes()).padStart(2,'0');
+    const ss = String(n.getSeconds()).padStart(2,'0');
+    document.getElementById('liveClock').textContent = hh + ':' + mm + ':' + ss;
+    document.getElementById('liveDate').textContent = n.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+    // update percent live
+    const nowProgress = (DOY - 1 + (n.getHours()*3600 + n.getMinutes()*60 + n.getSeconds()) / 86400) / TOTAL_DAYS;
+    document.getElementById('bigPercent').textContent = (nowProgress * 100).toFixed(4) + '%';
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
 
 </body>
 </html>
