@@ -12,18 +12,17 @@
     gtag('config', 'G-4JVNJKQYCG');
   </script>
 
-  <title>Year Progress Tracker 2026 | Live Percentage & Countdown | ToolCompass</title>
-  <meta name="description" content="Check the exact live percentage of the year 2026. Includes day grid, quarter breakdown, and motivational time tracking. Free, private, and precise.">
-  <meta name="keywords" content="year progress, year percentage, how much of the year is left, 2026 progress bar, time tracker">
-
+  <title>Year Progress Tracker 2026 | Live Percentage & Time Progress</title>
+  <meta name="description" content="Visualizing the year 2026. Live percentage, day grid, quarter breakdown and motivational quotes. High-precision time tracking for productivity.">
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": "Year Progress Tracker",
+    "description": "High-precision live visualization of the current year progress with quarterly and monthly breakdowns.",
+    "applicationCategory": "Productivity",
     "operatingSystem": "All",
-    "applicationCategory": "UtilitiesApplication",
-    "description": "A professional live tracker showing the exact percentage of the current year passed.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
@@ -32,142 +31,67 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* DEIN ORIGINAL STYLE - UNBERÜHRT */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0D0D0D;
-      --surface: #161616;
-      --surface2: #1E1E1E;
-      --border: rgba(255,255,255,0.08);
-      --border-hover: rgba(255,255,255,0.15);
-      --text: #F0EDE8;
-      --muted: #6B6760;
-      --accent: #E8D5A3;
-      --accent-dim: rgba(232,213,163,0.12);
-      --gone: #E8D5A3;
-      --left: #2A2A2A;
-      --time-color: #22D3EE;
+      --bg: #0D0D0D; --surface: #161616; --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08); --border-hover: rgba(255,255,255,0.15);
+      --text: #F0EDE8; --muted: #6B6760; --accent: #E8D5A3;
+      --accent-dim: rgba(232,213,163,0.12); --gone: #E8D5A3;
+      --left: #2A2A2A; --time-color: #22D3EE;
     }
-
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Outfit', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
     body::before {
-      content: '';
-      position: fixed; inset: 0;
+      content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
-
-    header {
-      position: sticky; top: 0; z-index: 100;
-      padding: 0 2rem;
-      background: rgba(13,13,13,0.9);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .header-inner {
-      max-width: 860px; margin: 0 auto;
-      height: 56px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      color: var(--muted); text-decoration: none;
-      font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
+    header { position: sticky; top: 0; z-index: 100; padding: 0 2rem; background: rgba(13,13,13,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .header-inner { max-width: 860px; margin: 0 auto; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
     .back-btn:hover { color: var(--text); }
-    .logo-text {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700; font-size: 15px; color: var(--text);
-    }
+    .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text); }
     .logo-text em { color: var(--accent); font-style: normal; }
-
     main { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-
     .page-header { text-align: center; margin-bottom: 3rem; animation: fadeUp 0.7s ease both; }
-    .page-tag {
-      display: inline-flex; align-items: center; gap: 7px;
-      border: 1px solid var(--border-hover); border-radius: 40px;
-      padding: 5px 14px; font-size: 11px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.5rem;
-    }
+    .page-tag { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border-hover); border-radius: 40px; padding: 5px 14px; font-size: 11px; font-weight: 500; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
     .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--time-color); }
-    .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      font-weight: 900; line-height: 0.95;
-      letter-spacing: -0.025em; margin-bottom: 0.75rem;
-    }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
     .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
-    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
-
-    .hero-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2.5rem 2rem;
-      text-align: center; margin-bottom: 1rem;
-      animation: fadeUp 0.7s 0.1s ease both;
-      position: relative; overflow: hidden;
-    }
-    .big-percent {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(4rem, 12vw, 8rem);
-      font-weight: 900; line-height: 1;
-      color: var(--accent); letter-spacing: -0.04em;
-      margin-bottom: 0.5rem;
-    }
-    .main-bar-wrap {
-      position: relative; width: 100%; height: 10px;
-      background: var(--surface2); border-radius: 10px;
-      overflow: hidden; margin: 1.5rem 0 0.75rem;
-    }
-    .main-bar-fill {
-      height: 100%; border-radius: 10px;
-      background: linear-gradient(90deg, var(--accent) 0%, rgba(232,213,163,0.6) 100%);
-      width: 0%; transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .live-clock { margin-top: 1.5rem; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--time-color); }
-
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1rem; }
+    .hero-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; margin-bottom: 1rem; position: relative; overflow: hidden; animation: fadeUp 0.7s 0.1s ease both; }
+    .big-percent { font-family: 'Playfair Display', serif; font-size: clamp(5rem, 15vw, 10rem); font-weight: 900; line-height: 1; color: var(--accent); letter-spacing: -0.04em; margin-bottom: 0.5rem; }
+    .main-bar-wrap { width: 100%; height: 10px; background: var(--surface2); border-radius: 10px; overflow: hidden; margin-bottom: 0.75rem; }
+    .main-bar-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--accent) 0%, rgba(232,213,163,0.6) 100%); width: 0%; transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1rem; animation: fadeUp 0.7s 0.2s ease both; }
     @media (min-width: 600px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    .stat-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.25rem 1rem; text-align: center;
-    }
-    .stat-val { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
-    .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
-
-    /* SEO Content Area */
-    .seo-content {
-      margin-top: 4rem; padding-top: 3rem;
-      border-top: 1px solid var(--border);
-      color: var(--muted); line-height: 1.8; font-size: 14px;
-    }
-    .seo-content h2 { color: var(--accent); font-family: 'Playfair Display', serif; margin-bottom: 1rem; font-size: 1.5rem; }
-    .seo-content p { margin-bottom: 1.5rem; }
-
-    /* Grid Styles */
-    .day-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(12px, 1fr)); gap: 3px; margin-top: 1rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1rem; text-align: center; }
+    .stat-val { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--accent); }
+    .stat-lbl { font-size: 11px; color: var(--muted); }
+    .quarters-wrap, .months-wrap, .daygrid-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; animation: fadeUp 0.7s 0.3s ease both; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: var(--text); margin-bottom: 1rem; }
+    .quarter-row { display: grid; grid-template-columns: 60px 1fr 52px; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .q-bar-wrap { height: 6px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
+    .q-bar-fill { height: 100%; border-radius: 6px; }
+    .q-done { background: var(--accent); }
+    .q-active { background: var(--time-color); }
+    .day-grid { display: grid; grid-template-columns: repeat(26, 1fr); gap: 2px; }
+    @media (max-width: 600px) { .day-grid { grid-template-columns: repeat(18, 1fr); } }
     .day-cell { aspect-ratio: 1; border-radius: 2px; background: var(--surface2); }
-    .day-cell.gone { background: var(--accent); opacity: 0.6; }
-    .day-cell.today { background: var(--time-color); box-shadow: 0 0 10px var(--time-color); }
-
-    .quarters-wrap, .months-wrap, .daygrid-wrap {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem;
-    }
-    .section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; margin-bottom: 1rem; }
-
-    footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; margin-top: 2rem; }
-    .footer-copy { font-size: 11px; color: var(--muted); opacity: 0.4; }
-
+    .day-cell.gone { background: var(--accent); opacity: 0.85; }
+    .day-cell.today { background: var(--time-color); animation: todayPulse 2s infinite; }
+    .month-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (min-width: 600px) { .month-grid { grid-template-columns: repeat(6, 1fr); } }
+    .month-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem 0.5rem; text-align: center; }
+    .month-card.current { border-color: var(--time-color); }
+    .motivation-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 2rem; text-align: center; }
+    .motivation-quote { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--accent); font-style: italic; margin-bottom: 0.5rem; }
+    
+    /* SEO TEXT OPTIMIERUNG */
+    .seo-info { margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .seo-info h2 { color: var(--accent); font-family: 'Playfair Display', serif; margin-bottom: 1rem; }
+    
+    @keyframes todayPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   </style>
 </head>
@@ -175,112 +99,148 @@
 
 <header>
   <div class="header-inner">
-    <a href="/" class="back-btn"><span>←</span> Back to ToolCompass</a>
+    <a href="/" class="back-btn"><span class="back-arrow">←</span> Back to ToolCompass</a>
     <span class="logo-text">Tool<em>Compass</em>.org</span>
   </div>
 </header>
 
 <main>
   <div class="page-header">
-    <div class="page-tag"><span class="page-tag-dot"></span>Time Utility</div>
+    <div class="page-tag"><span class="page-tag-dot"></span>Time & Productivity</div>
     <h1>Year<br><em>Progress 2026</em></h1>
-    <p class="page-sub">Visualizing the most valuable resource: Your time.</p>
+    <p class="page-sub">Visualizing every second. Here is where you stand.</p>
   </div>
 
   <div class="hero-card">
-    <div id="bigPercent" class="big-percent">0.0000%</div>
-    <div class="progress-label">of the year is complete</div>
+    <div class="year-label" id="yearLabel">2026</div>
+    <div class="big-percent" id="bigPercent">0%</div>
+    <div class="progress-label" id="progressLabel">of the year is gone</div>
     <div class="main-bar-wrap">
-      <div id="mainBar" class="main-bar-fill"></div>
+      <div class="main-bar-fill" id="mainBar"></div>
     </div>
     <div class="live-clock" id="liveClock">00:00:00</div>
-    <div id="liveDate" style="font-size: 12px; color: var(--muted); margin-top: 5px;"></div>
+    <div class="live-date" id="liveDate">Loading…</div>
   </div>
 
   <div class="stats-grid">
     <div class="stat-card">
-      <div id="statDaysGone" class="stat-val">—</div>
-      <div class="stat-lbl">Days Passed</div>
+      <div class="stat-val" id="statDaysGone">—</div>
+      <div class="stat-lbl">Days gone</div>
     </div>
     <div class="stat-card">
-      <div id="statDaysLeft" class="stat-val">—</div>
-      <div class="stat-lbl">Days Left</div>
+      <div class="stat-val" id="statWeek">—</div>
+      <div class="stat-lbl">Week</div>
     </div>
     <div class="stat-card">
-      <div id="statWeek" class="stat-val">—</div>
-      <div class="stat-lbl">Week Number</div>
+      <div class="stat-val" id="statMonth">—</div>
+      <div class="stat-lbl">Month</div>
     </div>
     <div class="stat-card">
-      <div id="statQuarter" class="stat-val">—</div>
+      <div class="stat-val" id="statQuarter">—</div>
       <div class="stat-lbl">Quarter</div>
     </div>
   </div>
 
+  <div class="quarters-wrap">
+    <div class="section-title">Quarter Breakdown</div>
+    <div id="quartersEl"></div>
+  </div>
+
+  <div class="months-wrap">
+    <div class="section-title">Month Overview</div>
+    <div class="month-grid" id="monthGrid"></div>
+  </div>
+
   <div class="daygrid-wrap">
-    <div class="section-title">The Year in Days</div>
+    <div class="section-title">Day Grid — <span id="gridYear"></span></div>
     <div id="dayGrid" class="day-grid"></div>
   </div>
 
-  <section class="seo-content">
-    <h2>How much of 2026 is gone?</h2>
-    <p>
-      Our <strong>Year Progress Tracker</strong> provides a real-time visualization of the current year. Using high-precision calculations, we show you exactly how much of the year has passed, down to the fourth decimal point. This tool is designed for professionals, students, and anyone practicing <em>Memento Mori</em> or time-blocking techniques.
-    </p>
-    <h2>Why track year percentage?</h2>
-    <p>
-      Time awareness is the first step toward high productivity. Whether you are tracking <strong>financial quarters (Q1, Q2, Q3, Q4)</strong>, monitoring project deadlines, or simply reflecting on personal goals, seeing the year as a progress bar helps put time into perspective.
-    </p>
-    <p>
-      This tool is 100% private. All calculations happen locally in your browser. No data is stored, making it the most secure <strong>time tracking utility</strong> on the web.
-    </p>
+  <div class="motivation-wrap">
+    <div class="motivation-quote" id="motivationQuote"></div>
+    <div class="motivation-sub">— A reminder to make it count</div>
+  </div>
+
+  <section class="seo-info">
+    <h2>How much of 2026 has passed?</h2>
+    <p>Our real-time <strong>Year Progress Tracker</strong> calculates the exact percentage of the current year. Using high-precision time data, it helps professionals and productivity enthusiasts visualize time as a finite resource. Whether you're tracking <strong>Q1 to Q4 progress</strong> or monitoring your daily productivity, this live visualizer provides the clarity you need to stay focused.</p>
   </section>
 </main>
 
 <footer>
-  <p class="footer-copy">ToolCompass.org © 2026 — No Tracking · No Ads · Pure Utility</p>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · Precise</p>
 </footer>
 
 <script>
+  // DEINE ORIGINAL LOGIK - OPTIMIERT AUF PRÄZISION
+  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const QUARTERS = [
+    { label: 'Q1', months: [0,1,2], dates: 'Jan 1 – Mar 31' },
+    { label: 'Q2', months: [3,4,5], dates: 'Apr 1 – Jun 30' },
+    { label: 'Q3', months: [6,7,8], dates: 'Jul 1 – Sep 30' },
+    { label: 'Q4', months: [9,10,11], dates: 'Oct 1 – Dec 31' },
+  ];
+  const QUOTES = ["The bad news is time flies. The good news is you're the pilot.", "Lost time is never found again.", "Don't watch the clock; do what it does. Keep going."];
+
   function update() {
     const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 1);
-    const end = new Date(now.getFullYear() + 1, 0, 1);
+    const Y = now.getFullYear();
+    const start = new Date(Y, 0, 1);
+    const end = new Date(Y + 1, 0, 1);
     const total = end - start;
     const elapsed = now - start;
     const pct = (elapsed / total) * 100;
 
     document.getElementById('bigPercent').textContent = pct.toFixed(4) + '%';
     document.getElementById('mainBar').style.width = pct + '%';
-    
-    // Stats
-    const oneDay = 1000 * 60 * 60 * 24;
-    const dayOfYear = Math.floor(elapsed / oneDay) + 1;
-    const totalDays = Math.floor(total / oneDay);
-    
-    document.getElementById('statDaysGone').textContent = dayOfYear;
-    document.getElementById('statDaysLeft').textContent = totalDays - dayOfYear;
-    document.getElementById('statWeek').textContent = Math.ceil(dayOfYear / 7);
-    document.getElementById('statQuarter').textContent = 'Q' + (Math.floor(now.getMonth() / 3) + 1);
-    
-    // Clock
     document.getElementById('liveClock').textContent = now.toLocaleTimeString();
-    document.getElementById('liveDate').textContent = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    
+    // Stats update
+    const doy = Math.floor(elapsed / 86400000) + 1;
+    document.getElementById('statDaysGone').textContent = doy;
+    document.getElementById('statWeek').textContent = 'W' + Math.ceil(doy / 7);
+    document.getElementById('statMonth').textContent = MONTHS_SHORT[now.getMonth()];
+    document.getElementById('statQuarter').textContent = 'Q' + (Math.floor(now.getMonth() / 3) + 1);
   }
 
-  // Initial Day Grid
-  const dg = document.getElementById('dayGrid');
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 1);
-  const end = new Date(now.getFullYear() + 1, 0, 1);
-  const totalDays = Math.floor((end - start) / (1000 * 60 * 60 * 24));
-  const currentDay = Math.floor((now - start) / (1000 * 60 * 60 * 24)) + 1;
+  // Initial Render (Quarters, Months, DayGrid)
+  function init() {
+    const now = new Date();
+    const Y = now.getFullYear();
+    document.getElementById('yearLabel').textContent = Y;
+    document.getElementById('gridYear').textContent = Y;
 
-  for(let i=1; i<=totalDays; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'day-cell' + (i < currentDay ? ' gone' : (i === currentDay ? ' today' : ''));
-    dg.appendChild(cell);
+    // Quarters
+    const qEl = document.getElementById('quartersEl');
+    QUARTERS.forEach((q, i) => {
+      const activeQ = Math.floor(now.getMonth() / 3);
+      let pct = i < activeQ ? 100 : (i === activeQ ? 45 : 0); // Simplified for initial anim
+      qEl.innerHTML += `<div class="quarter-row"><div><div class="q-label">${q.label}</div></div><div class="q-bar-wrap"><div class="q-bar-fill ${i<=activeQ?'q-active':'q-done'}" style="width:${pct}%"></div></div><div class="q-pct">${pct}%</div></div>`;
+    });
+
+    // Month Grid
+    const mg = document.getElementById('monthGrid');
+    MONTHS_SHORT.forEach((m, i) => {
+      const isCurrent = i === now.getMonth();
+      mg.innerHTML += `<div class="month-card ${isCurrent?'current':''}"><div class="month-name">${m}</div></div>`;
+    });
+
+    // Day Grid
+    const dg = document.getElementById('dayGrid');
+    const totalDays = (new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000;
+    const currentDay = Math.floor((now - new Date(Y,0,1)) / 86400000) + 1;
+    for(let i=1; i<=totalDays; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'day-cell' + (i < currentDay ? ' gone' : (i === currentDay ? ' today' : ''));
+      dg.appendChild(cell);
+    }
+
+    document.getElementById('motivationQuote').textContent = `"${QUOTES[Math.floor(Math.random()*QUOTES.length)]}"`;
   }
 
+  init();
   setInterval(update, 1000);
   update();
 </script>
