@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><title>VAT & Sales Tax Calculator | ToolCompass</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO META TAGS (Optimiert für Google & AI) -->
+    <title>VAT & Sales Tax Calculator | ToolCompass</title>
+    <meta name="description" content="Professional VAT Calculator. Add or remove sales tax instantly with this free, private tool. No login required. Optimized for freelancers and businesses.">
+    <link rel="canonical" href="https://toolcompass.org/vat-calculator">
+    <meta name="keywords" content="VAT calculator, sales tax, tax calculator, finance tool, business calculator">
+    <meta name="author" content="ToolCompass">
+    <meta name="robots" content="index, follow">
 
+    <!-- OPEN GRAPH (Für Social Media Sharing) -->
+    <meta property="og:title" content="VAT Calculator | ToolCompass">
+    <meta property="og:description" content="Calculate VAT instantly. Free, private, no login.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolcompass.org/vat-calculator">
+
+    <!-- GOOGLE TAGS (Deine Original-Codes - unverändert) -->
     <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
     <script>
@@ -11,32 +27,471 @@
       gtag('js', new Date());
       gtag('config', 'G-4JVNJKQYCG');
     </script>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
-    <main class="container mx-auto px-4 py-10 max-w-md">
-        <h1 class="text-3xl font-extrabold mb-6">VAT Calculator</h1>
-        <div class="bg-white p-8 rounded-2xl shadow-xl space-y-4">
-            <input type="number" id="amount" placeholder="Amount" class="w-full p-3 border rounded-lg">
-            <input type="number" id="taxRate" value="19" class="w-full p-3 border rounded-lg">
-            <div class="flex gap-2">
-                <button onclick="calc(true)" class="flex-1 bg-green-600 text-white py-2 rounded">Add Tax</button>
-                <button onclick="calc(false)" class="flex-1 bg-gray-600 text-white py-2 rounded">Remove Tax</button>
-            </div>
-            <div id="vatRes" class="hidden p-4 bg-green-50 rounded text-center font-bold text-2xl text-green-700"></div>
-        </div>
-    </main>
-    <script>
-        function calc(add) {
-            const a = parseFloat(document.getElementById('amount').value);
-            const r = parseFloat(document.getElementById('taxRate').value) / 100;
-            const res = add ? a * (1 + r) : a / (1 + r);
-            document.getElementById('vatRes').innerText = res.toFixed(2);
-            document.getElementById('vatRes').classList.remove('hidden');
-        }
+
+    <!-- SCHEMA.ORG (WICHTIG FÜR AI & GOOGLE RICH SNIPPETS) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "VAT Calculator",
+      "url": "https://toolcompass.org/vat-calculator",
+      "description": "A free online tool to calculate Value Added Tax (VAT) by adding or removing it from a price.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "Add VAT, Remove VAT, Copy Result, Auto-Save"
+    }
     </script>
+
+    <!-- FONTS (Premium Design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PREMIUM DESIGN SYSTEM (Vom Index übernommen) --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+          --bg: #0D0D0D;
+          --surface: #161616;
+          --surface2: #1E1E1E;
+          --border: rgba(255,255,255,0.08);
+          --border-hover: rgba(255,255,255,0.18);
+          --text: #F0EDE8;
+          --muted: #6B6760;
+          --accent: #E8D5A3;
+          --finance: #4ADE80;
+          --finance-bg: rgba(74,222,128,0.07);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+          font-family: 'Outfit', sans-serif;
+          background: var(--bg);
+          color: var(--text);
+          min-height: 100vh;
+          line-height: 1.6;
+        }
+
+        /* Noise Texture Overlay */
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 999;
+        }
+
+        /* --- HEADER --- */
+        header {
+          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+          padding: 0 2rem;
+          background: rgba(13,13,13,0.88);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--border);
+        }
+        .header-inner {
+          max-width: 1280px; margin: 0 auto;
+          height: 56px;
+          display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon {
+          width: 30px; height: 30px; border-radius: 50%;
+          border: 1px solid var(--border-hover);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 14px;
+        }
+        .logo-text {
+          font-family: 'Playfair Display', serif;
+          font-weight: 700; font-size: 16px;
+          color: var(--text); letter-spacing: 0.01em;
+        }
+        .logo-text em { color: var(--accent); font-style: normal; }
+        .back-btn {
+          font-size: 12px; color: var(--muted); text-decoration: none;
+          display: flex; align-items: center; gap: 5px;
+          transition: color .2s;
+        }
+        .back-btn:hover { color: var(--text); }
+
+        /* --- MAIN LAYOUT --- */
+        main {
+          padding-top: 80px;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .content-wrap {
+          width: 100%; max-width: 800px;
+          padding: 2rem;
+          animation: fadeUp 0.5s ease;
+        }
+
+        /* --- TOOL CARD --- */
+        .tool-card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          padding: 2.5rem;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+          margin-bottom: 3rem;
+        }
+        .tool-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 2.5rem;
+          color: var(--text);
+          margin-bottom: 0.5rem;
+          text-align: center;
+        }
+        .tool-subtitle {
+          text-align: center;
+          color: var(--muted);
+          margin-bottom: 2rem;
+          font-size: 14px;
+        }
+
+        /* --- INPUTS --- */
+        .input-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+          margin-bottom: 2rem;
+        }
+        .input-group { display: flex; flex-direction: column; gap: 8px; }
+        .label {
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: var(--muted);
+          font-weight: 600;
+        }
+        .input-field {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          color: var(--text);
+          padding: 14px;
+          border-radius: 8px;
+          font-size: 16px;
+          font-family: 'Outfit';
+          transition: all 0.2s;
+        }
+        .input-field:focus {
+          outline: none;
+          border-color: var(--accent);
+          box-shadow: 0 0 0 2px rgba(232,213,163,0.1);
+        }
+
+        /* --- BUTTONS --- */
+        .btn-group { display: flex; gap: 1rem; }
+        .btn {
+          flex: 1;
+          padding: 14px;
+          border-radius: 8px;
+          border: none;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 14px;
+          transition: transform 0.1s, opacity 0.2s;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn:hover { opacity: 0.9; }
+        .btn-primary { background: var(--finance); color: #0D0D0D; }
+        .btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+        /* --- RESULT BOX (Addictive Feature) --- */
+        .result-box {
+          margin-top: 2rem;
+          padding: 1.5rem;
+          background: var(--finance-bg);
+          border: 1px solid rgba(74,222,128,0.2);
+          border-radius: 12px;
+          display: none;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .result-box.show { display: flex; animation: slideUp 0.3s ease; }
+        .result-label {
+          font-size: 12px;
+          color: var(--finance);
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .result-value {
+          font-family: 'Playfair Display';
+          font-size: 2rem;
+          color: var(--finance);
+          font-weight: 700;
+        }
+        .copy-trigger {
+          background: transparent;
+          border: 1px solid var(--finance);
+          color: var(--finance);
+          padding: 6px 12px;
+          border-radius: 6px;
+          font-size: 11px;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .copy-trigger:hover {
+          background: var(--finance);
+          color: #000;
+        }
+
+        /* --- SEO CONTENT (AI & Google Optimized) --- */
+        .seo-content {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          padding: 2.5rem;
+          margin-bottom: 3rem;
+        }
+        .seo-content h2 {
+          font-family: 'Playfair Display';
+          font-size: 1.8rem;
+          color: var(--text);
+          margin-bottom: 1rem;
+        }
+        .seo-content h3 {
+          font-size: 1.2rem;
+          color: var(--accent);
+          margin: 1.5rem 0 0.5rem;
+        }
+        .seo-content p {
+          color: var(--muted);
+          margin-bottom: 1rem;
+          font-size: 15px;
+        }
+        .seo-content ul {
+          color: var(--muted);
+          margin-left: 1.5rem;
+          margin-bottom: 1rem;
+        }
+        .seo-content li { margin-bottom: 0.5rem; }
+        .formula-box {
+          background: var(--bg);
+          padding: 1rem;
+          border-radius: 8px;
+          font-family: monospace;
+          color: var(--accent);
+          border: 1px solid var(--border);
+          margin: 1rem 0;
+        }
+
+        /* --- ADSENSE PLACEHOLDERS --- */
+        .ad-container {
+          width: 100%;
+          max-width: 728px;
+          height: 90px;
+          background: var(--surface2);
+          border: 1px dashed var(--border);
+          margin: 2rem auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--muted);
+          font-size: 10px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        /* --- TOAST NOTIFICATION --- */
+        .toast {
+          position: fixed;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%) translateY(20px);
+          background: var(--accent);
+          color: #0D0D0D;
+          padding: 10px 20px;
+          border-radius: 30px;
+          font-size: 13px;
+          font-weight: 600;
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.3s;
+          z-index: 200;
+        }
+        .toast.active {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 600px) {
+          .input-grid { grid-template-columns: 1fr; }
+          .tool-title { font-size: 2rem; }
+          .tool-card { padding: 1.5rem; }
+          .seo-content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">← All Tools</a>
+    <a href="/" class="logo">
+      <div class="logo-icon">🧭</div>
+      <span class="logo-text">Tool<em>Compass</em></span>
+    </a>
+  </div>
+</header>
+
+<main>
+  
+  <!-- ADSENSE SLOT 1 (High Visibility - Top) -->
+  <div class="ad-container">
+    <!-- Füge hier später deinen Google AdSense Code ein -->
+    <span>Advertisement Space (Top)</span>
+  </div>
+
+  <div class="content-wrap">
     
+    <!-- TOOL INTERFACE -->
+    <div class="tool-card">
+      <h1 class="tool-title">VAT Calculator</h1>
+      <p class="tool-subtitle">Calculate Value Added Tax instantly. Add or remove tax from any amount.</p>
+
+      <div class="input-grid">
+        <div class="input-group">
+          <label class="label" for="amount">Amount</label>
+          <input type="number" id="amount" class="input-field" placeholder="100.00" inputmode="decimal">
+        </div>
+        <div class="input-group">
+          <label class="label" for="taxRate">VAT Rate (%)</label>
+          <input type="number" id="taxRate" class="input-field" value="19" inputmode="decimal">
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="calcVAT(true)">Add VAT</button>
+        <button class="btn btn-secondary" onclick="calcVAT(false)">Remove VAT</button>
+      </div>
+
+      <!-- RESULT (Mit Copy Funktion für "Sucht-Faktor") -->
+      <div class="result-box" id="resultBox">
+        <div>
+          <div class="result-label">Total Amount</div>
+          <div class="result-value" id="resultValue">0.00</div>
+        </div>
+        <button class="copy-trigger" onclick="copyResult()">Copy</button>
+      </div>
+    </div>
+
+    <!-- SEO & AI CONTENT BLOCK -->
+    <!-- Dieser Text ist entscheidend für das Ranking bei Google und AI -->
+    <article class="seo-content">
+      <h2>How to Use the VAT Calculator</h2>
+      <p>Our <strong>VAT Calculator</strong> is designed for freelancers, business owners, and consumers who need quick, accurate tax calculations without complex spreadsheets. Whether you are invoicing a client or checking a receipt, this tool handles the math instantly.</p>
+      
+      <h3>Adding VAT (Net to Gross)</h3>
+      <p>To calculate the final price including tax, enter the net amount and your local VAT rate. The tool applies the standard formula:</p>
+      <div class="formula-box">Gross Price = Net Price × (1 + VAT Rate / 100)</div>
+      <p>For example, a €100 product with 19% VAT becomes €119.00.</p>
+
+      <h3>Removing VAT (Gross to Net)</h3>
+      <p>If you have a total price and need to find the original net amount (e.g., for expense reports), select "Remove VAT". The logic reverses the calculation:</p>
+      <div class="formula-box">Net Price = Gross Price / (1 + VAT Rate / 100)</div>
+      
+      <h3>Why Use ToolCompass?</h3>
+      <ul>
+        <li><strong>Privacy First:</strong> All calculations happen in your browser. No data is sent to our servers.</li>
+        <li><strong>Speed:</strong> No loading times or ads interrupting your workflow.</li>
+        <li><strong>Accuracy:</strong> Precision up to two decimal places for financial reliability.</li>
+        <li><strong>Free Forever:</strong> No account, no subscription, no hidden costs.</li>
+      </ul>
+    </article>
+
+    <!-- ADSENSE SLOT 2 (Bottom) -->
+    <div class="ad-container">
+      <!-- Füge hier später deinen Google AdSense Code ein -->
+      <span>Advertisement Space (Bottom)</span>
+    </div>
+
+  </div>
+</main>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script>
+    // --- LOGIC ---
+    const amountInput = document.getElementById('amount');
+    const rateInput = document.getElementById('taxRate');
+    const resultBox = document.getElementById('resultBox');
+    const resultValue = document.getElementById('resultValue');
+
+    // Funktion zum Berechnen
+    function calcVAT(add) {
+        const a = parseFloat(amountInput.value);
+        const r = parseFloat(rateInput.value) / 100;
+
+        if(isNaN(a) || isNaN(r)) {
+            showToast('Please enter valid numbers');
+            return;
+        }
+
+        const res = add ? a * (1 + r) : a / (1 + r);
+        
+        // Ergebnis anzeigen
+        resultValue.innerText = res.toFixed(2);
+        resultBox.classList.add('show');
+
+        // "Süchtig machend": Speichern im LocalStorage
+        localStorage.setItem('tc_vat_amount', a);
+        localStorage.setItem('tc_vat_rate', rateInput.value);
+    }
+
+    // Beim Laden der Seite alte Werte wiederherstellen (UX Boost)
+    window.addEventListener('load', () => {
+        if(localStorage.getItem('tc_vat_amount')) {
+            amountInput.value = localStorage.getItem('tc_vat_amount');
+            rateInput.value = localStorage.getItem('tc_vat_rate');
+        }
+    });
+
+    // Copy Funktion
+    function copyResult() {
+        const text = resultValue.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('Copied to clipboard!');
+        });
+    }
+
+    // Toast Notification
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.classList.add('active');
+        setTimeout(() => toast.classList.remove('active'), 2000);
+    }
+
+    // Enter-Taste Support für bessere UX
+    document.querySelectorAll('.input-field').forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                calcVAT(true);
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
