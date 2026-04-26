@@ -1,0 +1,56 @@
+# ToolCompass
+> 31+ free, private, browser-based productivity tools. No account required. No data stored.
+
+## What is ToolCompass?
+ToolCompass (toolcompass.org) is a collection of professional online utilities for finance, content writing, software development, time management, and health tracking. All tools run entirely in the browser with no server-side processing.
+
+## Available Tools
+
+### Finance & Business
+- VAT Calculator – toolcompass.org/vat-calculator
+- Mortgage Splitter – toolcompass.org/mortgage-splitter  
+- Hourly Rate Calculator – toolcompass.org/hourly-rate
+- Loan Affordability – toolcompass.org/loan-affordability
+- Tip Splitter – toolcompass.org/tip-splitter
+- Briefing Generator – toolcompass.org/briefing-generator
+
+### Content & Writing
+- Text Summarizer – toolcompass.org/text-summarizer
+- Word Counter – toolcompass.org/word-counter
+- Case Converter – toolcompass.org/case-converter
+- Subject Line Generator – toolcompass.org/subject-line-generator
+- LinkedIn Post Maker – toolcompass.org/linkedin-post-maker
+- Bio Generator – toolcompass.org/bio-generator
+- Privacy Policy Generator – toolcompass.org/privacy-policy-generator
+
+### Tech & Developer
+- QR Code Generator – toolcompass.org/qr-generator
+- JSON Formatter – toolcompass.org/json-formatter
+- Base64 Encoder/Decoder – toolcompass.org/base64-tool
+- Binary Converter – toolcompass.org/binary-converter
+- Color Palette Generator – toolcompass.org/color-palette
+- Password Generator – toolcompass.org/password-generator
+
+### Time & Productivity
+- Pomodoro Timer – toolcompass.org/pomodoro-timer
+- Stopwatch – toolcompass.org/stopwatch
+- Workday Counter – toolcompass.org/workday-counter
+- Year Progress – toolcompass.org/year-progress
+- World Clock – toolcompass.org/timezone-clock
+- Countdown Generator – toolcompass.org/countdown-generator
+
+### Health & Utilities
+- BMI Calculator – toolcompass.org/bmi-calculator
+- Age Calculator – toolcompass.org/age-calculator
+- Percentage Calculator – toolcompass.org/percentage-calculator
+- Name Generator – toolcompass.org/name-generator
+- CO2 Travel Tracker – toolcompass.org/co2-travel-comparison
+- Travel Budget Planner – toolcompass.org/travel-budget-planner
+
+## Key Facts
+- Price: Free (100%)
+- Account required: No
+- Data stored server-side: No
+- Ads: None currently
+- Mobile-friendly: Yes
+- Works offline: Yes (after first load)
