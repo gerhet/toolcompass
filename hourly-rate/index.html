@@ -1,100 +1,699 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ═══ PROJECT CONSTANTS ═══ -->
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4JVNJKQYCG');
-    </script>
-    
-    <title>Freelance Hourly Rate Calculator | ToolCompass</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+  <!-- ═══ SEO ═══ -->
+  <title>Freelance Hourly Rate Calculator – Hit Your Income Goals | ToolCompass</title>
+  <meta name="description" content="Calculate the exact hourly rate you need to charge to hit your net income goals. Includes tax buffer, business expenses, and vacation time. Free online calculator.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://toolcompass.org/hourly-rate-calculator">
+  <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="freelance rate calculator, hourly rate calculator, freelancer income, business expenses, tax buffer">
 
-    <header class="bg-white shadow-sm py-4">
-        <div class="container mx-auto px-4">
-            <a href="/" class="text-blue-600 font-bold">← Back to ToolCompass</a>
-        </div>
-    </header>
+  <!-- ═══ OPEN GRAPH ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Freelance Hourly Rate Calculator – Hit Your Income Goals">
+  <meta property="og:description" content="Calculate the exact hourly rate you need to charge to hit your net income goals. Includes tax buffer and expenses.">
+  <meta property="og:url" content="https://toolcompass.org/hourly-rate-calculator">
+  <meta property="og:image" content="https://toolcompass.org/og-rate-calc.png">
+  <meta property="og:site_name" content="ToolCompass">
 
-    <main class="container mx-auto px-4 py-10 max-w-4xl">
-        <h1 class="text-3xl font-extrabold mb-2">Hourly Rate Calculator</h1>
-        <p class="text-gray-600 mb-8">Calculate the rate you actually need to charge to hit your income goals.</p>
+  <!-- ═══ TWITTER ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freelance Hourly Rate Calculator">
+  <meta name="twitter:description" content="Calculate the exact hourly rate you need to charge to hit your net income goals.">
+  <meta name="twitter:image" content="https://toolcompass.org/og-rate-calc.png">
 
-        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 mb-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Desired Annual Net Income ($)</label>
-                        <input type="number" id="netIncome" value="60000" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Monthly Business Expenses ($)</label>
-                        <input type="number" id="expenses" value="500" class="w-full p-3 border rounded-lg">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Billable Hours per Week</label>
-                        <input type="number" id="hours" value="25" class="w-full p-3 border rounded-lg">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1">Vacation Weeks per Year</label>
-                        <input type="number" id="vacation" value="4" class="w-full p-3 border rounded-lg">
-                    </div>
-                    <button onclick="calculateRate()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">Calculate Hourly Rate</button>
-                </div>
+  <!-- ═══ AI FINDABILITY ═══ -->
+  <meta name="ai-description" content="Free online freelance hourly rate calculator. Calculates required hourly rate based on desired net income, business expenses, billable hours, and vacation time. Includes tax buffer recommendations.">
 
-                <div class="bg-green-50 p-6 rounded-xl border border-green-100 flex flex-col justify-center text-center">
-                    <span class="text-green-800 text-sm uppercase font-bold tracking-wider">Required Hourly Rate</span>
-                    <span id="rateResult" class="text-5xl font-black text-green-600 my-2">$55.00</span>
-                    <p class="text-gray-500 text-xs mt-4 uppercase font-semibold">To cover taxes & costs, we recommend adding 30%: <span id="safetyRate" class="font-bold text-gray-700">$71.50</span></p>
-                </div>
-            </div>
-        </div>
+  <!-- ═══ ANALYTICS (G-4JVNJKQYCG) ═══ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
 
-        <div class="w-full h-32 bg-gray-100 rounded flex items-center justify-center text-gray-400 text-xs mb-12 border-dashed border-2">
-            ADVERTISEMENT SPACE (BUSINESS ADS)
-        </div>
+  <!-- ═══ ADSENSE (Placeholder) ═══ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
-        <article class="prose max-w-none text-gray-700">
-            <h2 class="text-2xl font-bold text-gray-900">How to Calculate Your Freelance Rate</h2>
-            <p>Setting your hourly rate is one of the most challenging parts of being a freelancer. Many beginners simply look at what others are charging, but this is a mistake. Your rate should be based on your <strong>individual financial needs</strong>, your business overhead, and your billable capacity.</p>
-            
-            <h3 class="text-xl font-semibold mt-6">Factors to Consider</h3>
-            <ul>
-                <li><strong>Billable vs. Non-Billable Hours:</strong> You won't spend 40 hours a week on client work. You need to account for marketing, admin, and invoicing.</li>
-                <li><strong>The Cost of Being Human:</strong> Unlike employees, freelancers don't get paid for sick days or vacations. You must bake these "missing" hours into your rate.</li>
-                <li><strong>Taxes and Insurance:</strong> Depending on your location, you might need to set aside 25% to 40% of your income for taxes and social security.</li>
-            </ul>
-        </article>
-    </main>
-
-    <script>
-        function calculateRate() {
-            const netIncome = parseFloat(document.getElementById('netIncome').value);
-            const monthlyExpenses = parseFloat(document.getElementById('expenses').value);
-            const billableHoursPerWeek = parseFloat(document.getElementById('hours').value);
-            const vacationWeeks = parseFloat(document.getElementById('vacation').value);
-
-            const annualExpenses = monthlyExpenses * 12;
-            const totalNeeded = netIncome + annualExpenses;
-            
-            const workingWeeks = 52 - vacationWeeks;
-            const totalBillableHours = workingWeeks * billableHoursPerWeek;
-
-            const rate = totalNeeded / totalBillableHours;
-
-            if (isFinite(rate)) {
-                document.getElementById('rateResult').innerText = '$' + rate.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                document.getElementById('safetyRate').innerText = '$' + (rate * 1.3).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  <!-- ═══ SCHEMA.ORG ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Freelance Hourly Rate Calculator",
+        "url": "https://toolcompass.org/hourly-rate-calculator",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Calculates the required hourly rate for freelancers based on income goals, expenses, and working hours.",
+        "featureList": ["Real-time calculation", "Tax buffer estimation", "Expense tracking", "Auto-save inputs"],
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I calculate my freelance hourly rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Add your desired net income and annual business expenses. Divide this total by your annual billable hours (working weeks × hours per week). This gives your base rate. We recommend adding 30% for taxes."
             }
-        }
-    </script>
+          },
+          {
+            "@type": "Question",
+            "name": "What are billable hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Billable hours are the hours you actually spend working for clients. As a freelancer, you cannot bill for admin, marketing, or sick days, so your rate must be higher to cover this non-billable time."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ FONTS ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ═══ STYLES ═══ -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Project Constants */
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      
+      /* Tool Specific Accents (Green for Money/Success) */
+      --content: #34D399;
+      --content-bg: rgba(52, 211, 153, 0.07);
+      --content-border: rgba(52, 211, 153, 0.15);
+      --danger: #EF4444;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain Overlay */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 900px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; font-weight: 500; transition: color .2s; padding: 6px 0;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-arrow { font-size: 16px; transition: transform .2s; }
+    .back-btn:hover .back-arrow { transform: translateX(-3px); }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 15px; color: var(--text);
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+
+    /* ─── MAIN ─── */
+    main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      text-align: center; margin-bottom: 2.5rem;
+      animation: fadeUp .7s ease both;
+    }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border-hover); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--content); }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -.025em; margin-bottom: 1rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* ─── AD SLOT ─── */
+    .ad-slot { margin-bottom: 1rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
+    .ad-inner {
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 90px; position: relative;
+    }
+    .ad-label {
+      position: absolute; top: 6px; left: 10px;
+      font-size: 9px; color: var(--muted); letter-spacing: .1em;
+      text-transform: uppercase; opacity: .4;
+    }
+
+    /* ─── CALCULATOR GRID ─── */
+    .calc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp .7s .1s ease both;
+    }
+    @media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+
+    /* Inputs Card */
+    .inputs-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem;
+    }
+    .input-group { margin-bottom: 1.5rem; }
+    .input-group label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 0.5rem;
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper span {
+      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-weight: 500; pointer-events: none;
+    }
+    .input-wrapper input {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1rem 1rem 2.5rem;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 16px; font-weight: 500; outline: none;
+      transition: border-color .2s, background .2s;
+    }
+    .input-wrapper input:focus {
+      border-color: var(--content); background: rgba(52, 211, 153, 0.02);
+    }
+    .input-suffix {
+      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+      color: var(--muted); font-size: 13px; pointer-events: none;
+    }
+
+    /* Result Card */
+    .result-card {
+      background: var(--content-bg); border: 1px solid var(--content-border);
+      border-radius: 20px; padding: 2rem;
+      display: flex; flex-direction: column; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .result-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--content), transparent);
+    }
+    .result-label {
+      font-size: 12px; font-weight: 600; color: var(--content);
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 0.5rem;
+    }
+    .result-value {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 900;
+      color: var(--content); line-height: 1; margin-bottom: 1rem;
+    }
+    .result-sub {
+      font-size: 13px; color: var(--muted); line-height: 1.6;
+      background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px;
+    }
+    .result-sub strong { color: var(--text); }
+
+    /* ─── BREAKDOWN SECTION ─── */
+    .breakdown-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem; margin-bottom: 1rem;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .breakdown-header {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      font-weight: 700; font-style: italic; color: var(--text);
+      margin-bottom: 1.5rem; border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-label { color: var(--muted); }
+    .breakdown-val { font-weight: 600; color: var(--text); }
+    .breakdown-val.highlight { color: var(--content); }
+
+    /* ─── OTHER TOOLS ─── */
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .3s ease both; }
+    .other-tools-header {
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .other-tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .tool-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text);
+      font-size: 12px; font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
+    .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* ─── SEO CONTENT ─── */
+    .seo-content {
+      padding: 2.5rem 0 0;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .7s .4s ease both;
+    }
+    .seo-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .seo-content h2 em { color: var(--accent); }
+    .seo-content p {
+      font-size: 13.5px; color: var(--muted); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+    .seo-content strong { color: var(--text); font-weight: 500; }
+    
+    .seo-list { list-style: none; margin-bottom: 1.5rem; }
+    .seo-list li {
+      position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem;
+      font-size: 13.5px; color: var(--muted); font-weight: 300; line-height: 1.6;
+    }
+    .seo-list li::before {
+      content: '•'; position: absolute; left: 0; color: var(--content);
+      font-size: 1.2rem; line-height: 1;
+    }
+
+    /* FAQ */
+    .faq-list { margin-top: 1.5rem; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+    .faq-q {
+      width: 100%; background: var(--surface); border: none; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 1rem 1.25rem; text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem; text-align: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width: 480px) {
+      main { padding: 2rem 1.25rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">
+      <span class="back-arrow">←</span> All Tools
+    </a>
+    <a href="/" style="text-decoration:none;">
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-tag"><span class="page-tag-dot"></span>Finance & Business</div>
+    <h1>Hourly Rate<br><em>Calculator</em></h1>
+    <p class="page-sub">Calculate the rate you actually need to charge to hit your income goals.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- CALCULATOR GRID -->
+  <div class="calc-grid">
+    
+    <!-- INPUTS -->
+    <div class="inputs-card">
+      <div class="input-group">
+        <label>Desired Annual Net Income</label>
+        <div class="input-wrapper">
+          <span>$</span>
+          <input type="number" id="netIncome" value="60000" oninput="calculateRate()">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Monthly Business Expenses</label>
+        <div class="input-wrapper">
+          <span>$</span>
+          <input type="number" id="expenses" value="500" oninput="calculateRate()">
+          <span class="input-suffix">/ month</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Billable Hours per Week</label>
+        <div class="input-wrapper">
+          <span>🕒</span>
+          <input type="number" id="hours" value="25" oninput="calculateRate()">
+          <span class="input-suffix">hours</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Vacation Weeks per Year</label>
+        <div class="input-wrapper">
+          <span>🏖️</span>
+          <input type="number" id="vacation" value="4" oninput="calculateRate()">
+          <span class="input-suffix">weeks</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="result-card">
+      <div class="result-label">Required Hourly Rate</div>
+      <div class="result-value" id="rateResult">$55.00</div>
+      
+      <div class="result-sub">
+        To cover taxes & buffer, we recommend charging:<br>
+        <strong style="font-size: 1.2em; color: var(--content);" id="safetyRate">$71.50</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BREAKDOWN -->
+  <div class="breakdown-section">
+    <div class="breakdown-header">Financial Breakdown</div>
+    <div class="breakdown-row">
+      <span class="breakdown-label">Annual Income Goal</span>
+      <span class="breakdown-val" id="breakIncome">$60,000</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="breakdown-label">Annual Expenses</span>
+      <span class="breakdown-val" id="breakExpenses">$6,000</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="breakdown-label">Total Revenue Needed</span>
+      <span class="breakdown-val highlight" id="breakTotal">$66,000</span>
+    </div>
+    <div class="breakdown-row">
+      <span class="breakdown-label">Total Billable Hours / Year</span>
+      <span class="breakdown-val" id="breakHours">1,200</span>
+    </div>
+  </div>
+
+  <!-- AD SLOT MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- OTHER TOOLS -->
+  <div class="other-tools">
+    <div class="other-tools-header">💼 More Business Tools</div>
+    <div class="other-tools-grid">
+      <a href="/vat-calculator" class="tool-chip">
+        <span class="tool-chip-icon">🧮</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">VAT Calculator</div>
+          <div class="tool-chip-desc">Tax calculations</div>
+        </div>
+      </a>
+      <a href="/travel-budget-planner" class="tool-chip">
+        <span class="tool-chip-icon">✈️</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Travel Budget</div>
+          <div class="tool-chip-desc">Trip planning</div>
+        </div>
+      </a>
+      <a href="/tip-splitter" class="tool-chip">
+        <span class="tool-chip-icon">🍽️</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Tip Splitter</div>
+          <div class="tool-chip-desc">Bill sharing</div>
+        </div>
+      </a>
+      <a href="/percentage-calculator" class="tool-chip">
+        <span class="tool-chip-icon">📊</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Percentage</div>
+          <div class="tool-chip-desc">Quick math</div>
+        </div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style: dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">All Tools</div>
+          <div class="tool-chip-desc">31+ utilities</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT -->
+  <div class="seo-content">
+    <h2>How to Calculate Your <em>Freelance Rate</em></h2>
+    <p>
+      Setting your hourly rate is one of the most challenging parts of being a freelancer. Many beginners simply look at what others are charging, but this is a mistake. Your rate should be based on your <strong>individual financial needs</strong>, your business overhead, and your billable capacity.
+    </p>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Key Factors to Consider</h3>
+    <ul class="seo-list">
+      <li><strong>Billable vs. Non-Billable Hours:</strong> You won't spend 40 hours a week on client work. You need to account for marketing, admin, and invoicing.</li>
+      <li><strong>The Cost of Being Human:</strong> Unlike employees, freelancers don't get paid for sick days or vacations. You must bake these "missing" hours into your rate.</li>
+      <li><strong>Taxes and Insurance:</strong> Depending on your location, you might need to set aside 25% to 40% of your income for taxes and social security.</li>
+    </ul>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How do I calculate my freelance hourly rate?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Add your desired net income and annual business expenses. Divide this total by your annual billable hours (working weeks × hours per week). This gives your base rate. We recommend adding 30% for taxes.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What are billable hours?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Billable hours are the hours you actually spend working for clients. As a freelancer, you cannot bill for admin, marketing, or sick days, so your rate must be higher to cover this non-billable time.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Why is the "Safety Rate" higher?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">The Safety Rate includes a recommended 30% buffer to cover income taxes, health insurance, and unexpected business costs that aren't included in your monthly expenses.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE & UTILS
+// ═══════════════════════════════════════════════
+const formatCurrency = (num) => {
+  return '$' + num.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+};
+
+const formatNumber = (num) => {
+  return num.toLocaleString('en-US');
+};
+
+// ═══════════════════════════════════════════════
+// MAIN CALCULATION
+// ═══════════════════════════════════════════════
+function calculateRate() {
+  // Get Inputs
+  const netIncome = parseFloat(document.getElementById('netIncome').value) || 0;
+  const monthlyExpenses = parseFloat(document.getElementById('expenses').value) || 0;
+  const billableHoursPerWeek = parseFloat(document.getElementById('hours').value) || 0;
+  const vacationWeeks = parseFloat(document.getElementById('vacation').value) || 0;
+
+  // Calculations
+  const annualExpenses = monthlyExpenses * 12;
+  const totalNeeded = netIncome + annualExpenses;
+  
+  const workingWeeks = 52 - vacationWeeks;
+  const totalBillableHours = workingWeeks * billableHoursPerWeek;
+
+  let rate = 0;
+  if (totalBillableHours > 0) {
+    rate = totalNeeded / totalBillableHours;
+  }
+
+  const safetyRate = rate * 1.3; // 30% buffer
+
+  // Update UI - Main Result
+  const rateEl = document.getElementById('rateResult');
+  rateEl.innerText = formatCurrency(rate);
+  
+  // Animate number change slightly for "live" feel
+  rateEl.style.transform = "scale(1.05)";
+  setTimeout(() => rateEl.style.transform = "scale(1)", 150);
+
+  // Update UI - Safety Rate
+  document.getElementById('safetyRate').innerText = formatCurrency(safetyRate);
+
+  // Update UI - Breakdown
+  document.getElementById('breakIncome').innerText = formatCurrency(netIncome);
+  document.getElementById('breakExpenses').innerText = formatCurrency(annualExpenses);
+  document.getElementById('breakTotal').innerText = formatCurrency(totalNeeded);
+  document.getElementById('breakHours').innerText = formatNumber(totalBillableHours);
+
+  // Save to LocalStorage
+  saveInputs();
+}
+
+// ═══════════════════════════════════════════════
+// LOCAL STORAGE (AUTO-SAVE)
+// ═══════════════════════════════════════════════
+function saveInputs() {
+  const inputs = {
+    netIncome: document.getElementById('netIncome').value,
+    expenses: document.getElementById('expenses').value,
+    hours: document.getElementById('hours').value,
+    vacation: document.getElementById('vacation').value
+  };
+  localStorage.setItem('tc_rate_calc', JSON.stringify(inputs));
+}
+
+function loadInputs() {
+  const saved = localStorage.getItem('tc_rate_calc');
+  if (saved) {
+    const inputs = JSON.parse(saved);
+    document.getElementById('netIncome').value = inputs.netIncome || 60000;
+    document.getElementById('expenses').value = inputs.expenses || 500;
+    document.getElementById('hours').value = inputs.hours || 25;
+    document.getElementById('vacation').value = inputs.vacation || 4;
+    calculateRate();
+  } else {
+    calculateRate(); // Run once on load
+  }
+}
+
+// ═══════════════════════════════════════════════
+// FAQ ACCORDION
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', loadInputs);
+
+// ─── ADSENSE nach Approval ───
+// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+// (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 </body>
 </html>
