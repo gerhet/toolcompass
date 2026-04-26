@@ -26,35 +26,37 @@
       gtag('config', 'G-4JVNJKQYCG');
     </script>
 
-    <!-- Fonts & Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Design System CSS -->
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg: #0D0D0D;
+            --surface: #161616;
+            --surface2: #1E1E1E;
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(255,255,255,0.18);
+            --text: #F0EDE8;
+            --muted: #6B6760;
+            --accent: #E8D5A3;
+            --accent-hover: #d4c08a;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Premium Grain Overlay */
+        /* Grain Overlay */
         body::before {
             content: "";
             position: fixed;
@@ -64,60 +66,221 @@
             z-index: 50;
         }
 
-        /* Glassmorphism Card */
-        .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text);
         }
 
-        /* Animations */
-        .fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        a:hover { color: var(--accent); }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; }
+        .logo span { color: var(--accent); }
 
-        /* Name Card Hover Effect */
+        /* Main Content */
+        main { padding: 4rem 0; min-height: 80vh; }
+
+        /* Tool Interface */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        @media(min-width: 900px) { .tool-grid { grid-template-columns: 350px 1fr; } }
+
+        /* Cards / Panels */
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.3s;
+        }
+        .panel:hover { border-color: var(--border-hover); }
+
+        /* Inputs & Controls */
+        label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; }
+        
+        select, input[type="text"] {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 1.5rem;
+        }
+        select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+
+        .checkbox-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; cursor: pointer; }
+        .checkbox-group span { font-size: 0.9rem; color: var(--muted); }
+        .checkbox-group:hover span { color: var(--text); }
+        input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+
+        /* Segmented Control (Length) */
+        .segmented-control {
+            display: flex;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+        }
+        .seg-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            padding: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .seg-btn.active {
+            background: var(--accent);
+            color: var(--bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
         .name-card {
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .name-card:hover {
-            transform: translateY(-3px);
-            border-left-color: var(--accent);
-            background: rgba(59, 130, 246, 0.1);
-            cursor: pointer;
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+        .name-text { font-weight: 600; font-size: 1.1rem; }
+        .copy-icon { opacity: 0.3; transition: 0.2s; }
+        .name-card:hover .copy-icon { opacity: 1; color: var(--accent); }
+
+        /* Vault */
+        .vault-section { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+        .vault-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+        .vault-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto; }
+        .vault-item {
+            background: var(--surface2);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .remove-btn { color: var(--muted); cursor: pointer; font-size: 1.2rem; line-height: 1; }
+        .remove-btn:hover { color: #ff4d4d; }
+
+        /* Ad Slots */
+        .ad-slot {
+            width: 100%;
+            min-height: 250px; /* Standard height */
+            background: var(--surface);
+            border: 1px dashed var(--border);
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .ad-inner { text-align: center; }
+        .ad-label {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Toast Notification */
+        /* FAQ & Content */
+        .content-section { max-width: 800px; margin: 4rem auto; }
+        .faq-item { margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .faq-question {
+            padding: 1rem;
+            background: var(--surface);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        .faq-answer {
+            padding: 1rem;
+            background: var(--surface2);
+            display: none;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question { color: var(--accent); }
+
+        /* Toast */
         #toast {
             visibility: hidden;
             min-width: 250px;
             background-color: var(--accent);
-            color: #fff;
+            color: var(--bg);
             text-align: center;
-            border-radius: 8px;
+            border-radius: 6px;
             padding: 16px;
             position: fixed;
-            z-index: 100;
+            z-index: 1000;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
             font-weight: 600;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
             opacity: 0;
             transition: opacity 0.3s, bottom 0.3s;
         }
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 50px;
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-top: 4rem;
         }
+        .footer-links { margin-top: 1rem; }
+        .footer-links a { margin: 0 10px; }
+
+        /* Animations */
+        .fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
     </style>
 
     <!-- Schema.org JSON-LD -->
@@ -137,51 +300,48 @@
     }
     </script>
 </head>
-<body class="antialiased min-h-screen flex flex-col">
+<body>
 
     <!-- Navigation -->
-    <header class="border-b border-white/10 bg-slate-900/50 backdrop-blur-md sticky top-0 z-40">
-        <div class="container mx-auto px-4 h-16 flex justify-between items-center">
-            <a href="/" class="flex items-center space-x-2 group">
-                <span class="text-blue-500 group-hover:-translate-x-1 transition-transform duration-300">←</span>
-                <span class="font-bold text-lg tracking-tight">ToolCompass</span>
-            </a>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-400">
-                <a href="#" class="hover:text-white transition">Tools</a>
-                <a href="#" class="hover:text-white transition">About</a>
-                <a href="#" class="hover:text-white transition">Contact</a>
+    <header>
+        <div class="container nav-flex">
+            <a href="/" class="logo">Tool<span>Compass</span></a>
+            <nav>
+                <!-- Simple Text Nav per Design System -->
+                <a href="/" style="font-size: 0.9rem; color: var(--muted);">← Back to Tools</a>
             </nav>
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-12 relative z-10">
+    <main class="container">
         
         <!-- Tool Header -->
-        <div class="max-w-3xl mx-auto text-center mb-12 fade-up" style="animation-delay: 0.1s;">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">X-IDENTITY <span class="text-blue-500">Engine</span></h1>
-            <p class="text-slate-400 text-lg">Generate unique character names, brand identities, and gamertags instantly. 100% private, calculated in your browser.</p>
+        <div class="fade-up" style="animation-delay: 0.1s; text-align: center; margin-bottom: 2rem;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">X-IDENTITY <span style="color: var(--accent);">Engine</span></h1>
+            <p style="color: var(--muted); max-width: 600px; margin: 0 auto;">Generate unique character names, brand identities, and gamertags instantly. 100% private, calculated in your browser.</p>
         </div>
 
-        <!-- Ad Slot Top -->
-        <div class="max-w-4xl mx-auto mb-12 fade-up" style="animation-delay: 0.2s;">
-            <div class="w-full h-24 bg-slate-800/50 rounded-lg border border-dashed border-slate-700 flex items-center justify-center text-slate-500 text-sm">
+        <!-- AD SLOT TOP -->
+        <div class="ad-slot fade-up" id="adTop" style="animation-delay: 0.2s;">
+            <div class="ad-inner">
+                <span class="ad-label">Advertisement</span>
                 <!-- AdSense Code Here -->
-                Ad Slot (Responsive)
+                <div style="color: var(--muted); font-size: 0.8rem;">Ad Slot (Responsive)</div>
             </div>
         </div>
 
         <!-- Tool Interface -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto fade-up" style="animation-delay: 0.3s;">
+        <div class="tool-grid fade-up" style="animation-delay: 0.3s;">
             
             <!-- Controls Sidebar -->
-            <div class="lg:col-span-4 space-y-6">
-                <div class="glass-panel p-6 rounded-2xl">
-                    <h3 class="text-xl font-bold mb-6 text-white border-b border-white/10 pb-2">Configuration</h3>
+            <aside>
+                <div class="panel">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Configuration</h3>
                     
                     <!-- Category Select -->
-                    <div class="mb-6">
-                        <label class="block text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">Universe / Genre</label>
-                        <select id="category" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white focus:outline-none focus:border-blue-500 transition">
+                    <div>
+                        <label>Universe / Genre</label>
+                        <select id="category">
                             <option value="fantasy">Epic High Fantasy</option>
                             <option value="corp">Global Tech Conglomerate</option>
                             <option value="cyber">Cybernetic / Hacknet</option>
@@ -190,119 +350,124 @@
                     </div>
 
                     <!-- Toggles -->
-                    <div class="space-y-3 mb-6">
-                        <label class="flex justify-between items-center group cursor-pointer">
-                            <span class="text-sm text-slate-300 group-hover:text-white transition">Include Honorifics</span>
-                            <input type="checkbox" id="useTitle" class="w-4 h-4 accent-blue-600 rounded focus:ring-0">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label class="checkbox-group">
+                            <span>Include Honorifics</span>
+                            <input type="checkbox" id="useTitle">
                         </label>
-                        <label class="flex justify-between items-center group cursor-pointer">
-                            <span class="text-sm text-slate-300 group-hover:text-white transition">Include Surnames</span>
-                            <input type="checkbox" id="useLast" checked class="w-4 h-4 accent-blue-600 rounded focus:ring-0">
+                        <label class="checkbox-group">
+                            <span>Include Surnames</span>
+                            <input type="checkbox" id="useLast" checked>
                         </label>
-                        <label class="flex justify-between items-center group cursor-pointer">
-                            <span class="text-sm text-slate-300 group-hover:text-white transition">Add Ancient Traits</span>
-                            <input type="checkbox" id="useTrait" class="w-4 h-4 accent-blue-600 rounded focus:ring-0">
+                        <label class="checkbox-group">
+                            <span>Add Ancient Traits</span>
+                            <input type="checkbox" id="useTrait">
                         </label>
                     </div>
 
                     <!-- Length Selector -->
-                    <div class="mb-6">
-                        <label class="block text-xs font-bold text-blue-400 uppercase tracking-wider mb-2">Name Complexity</label>
-                        <div class="flex bg-slate-800 rounded-lg p-1 border border-slate-700">
-                            <button onclick="setLen('short')" id="btn-short" class="flex-1 py-2 text-xs font-bold rounded-md transition text-slate-400 hover:text-white">Short</button>
-                            <button onclick="setLen('med')" id="btn-med" class="flex-1 py-2 text-xs font-bold rounded-md bg-blue-600 text-white shadow-lg transition">Med</button>
-                            <button onclick="setLen('long')" id="btn-long" class="flex-1 py-2 text-xs font-bold rounded-md transition text-slate-400 hover:text-white">Long</button>
+                    <div>
+                        <label>Name Complexity</label>
+                        <div class="segmented-control">
+                            <button class="seg-btn" onclick="setLen('short')" id="btn-short">Short</button>
+                            <button class="seg-btn active" onclick="setLen('med')" id="btn-med">Med</button>
+                            <button class="seg-btn" onclick="setLen('long')" id="btn-long">Long</button>
                         </div>
                     </div>
 
                     <!-- Vault Section -->
-                    <div id="vault-area" class="mt-8 pt-6 border-t border-white/10 hidden">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Saved Vault</span>
-                            <button onclick="clearVault()" class="text-xs text-red-400 hover:text-red-300 hover:underline">Clear All</button>
+                    <div id="vault-area" class="vault-section hidden">
+                        <div class="vault-header">
+                            <label style="margin:0;">Saved Vault</label>
+                            <button onclick="clearVault()" style="background:none; border:none; color: #ff4d4d; cursor:pointer; font-size:0.8rem;">Clear All</button>
                         </div>
-                        <div id="vault-list" class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar"></div>
+                        <div id="vault-list" class="vault-list"></div>
                     </div>
                 </div>
-            </div>
+            </aside>
 
             <!-- Results Grid -->
-            <div class="lg:col-span-8">
-                <div class="glass-panel p-6 rounded-2xl min-h-[500px] relative">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold text-white">Generated Identities</h3>
-                        <span class="text-xs text-slate-500">Click to Copy</span>
+            <section>
+                <div class="panel" style="min-height: 500px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+                        <h3 style="font-size: 1.2rem;">Generated Identities</h3>
+                        <span style="font-size: 0.8rem; color: var(--muted);">Click to Copy</span>
                     </div>
                     
-                    <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                    <div id="grid" class="results-grid">
                         <!-- Cards injected via JS -->
                     </div>
                 </div>
-            </div>
+            </section>
 
         </div>
 
-        <!-- Ad Slot Mid -->
-        <div class="max-w-4xl mx-auto my-12 fade-up" style="animation-delay: 0.4s;">
-            <div class="w-full h-24 bg-slate-800/50 rounded-lg border border-dashed border-slate-700 flex items-center justify-center text-slate-500 text-sm">
+        <!-- AD SLOT MID -->
+        <div class="ad-slot fade-up" id="adMid" style="animation-delay: 0.4s;">
+            <div class="ad-inner">
+                <span class="ad-label">Advertisement</span>
                 <!-- AdSense Code Here -->
-                Ad Slot (Responsive)
+                <div style="color: var(--muted); font-size: 0.8rem;">Ad Slot (Responsive)</div>
             </div>
         </div>
 
         <!-- SEO Content & FAQ -->
-        <article class="max-w-4xl mx-auto mt-16 prose prose-invert prose-slate">
-            <h2 class="text-3xl font-bold mb-6">Mastering Identity Creation with X-IDENTITY</h2>
-            <p class="text-slate-400 leading-relaxed mb-6">
+        <article class="content-section fade-up" style="animation-delay: 0.5s;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Mastering Identity Creation with X-IDENTITY</h2>
+            <p style="color: var(--muted); margin-bottom: 2rem; line-height: 1.8;">
                 Creating a memorable name for a character, a brand, or an online persona is often the hardest part of the creative process. The <strong>X-IDENTITY Engine</strong> is designed to bridge the gap between imagination and reality. By combining linguistic algorithms with genre-specific databases, we provide instant inspiration.
             </p>
             
-            <div class="grid md:grid-cols-2 gap-8 my-8">
-                <div class="bg-slate-800/50 p-6 rounded-xl border border-white/5">
-                    <h4 class="text-xl font-bold text-blue-400 mb-2">For Writers & RPG Players</h4>
-                    <p class="text-sm text-slate-400">Generate consistent naming conventions for your fantasy worlds or sci-fi universes. No more "John Smith" in a medieval setting.</p>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+                <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">For Writers & RPG Players</h4>
+                    <p style="font-size: 0.9rem; color: var(--muted);">Generate consistent naming conventions for your fantasy worlds or sci-fi universes. No more "John Smith" in a medieval setting.</p>
                 </div>
-                <div class="bg-slate-800/50 p-6 rounded-xl border border-white/5">
-                    <h4 class="text-xl font-bold text-blue-400 mb-2">For Branding & Startups</h4>
-                    <p class="text-sm text-slate-400">Find that elusive tech-sounding name that is available as a domain. Our "Corp" and "Cyber" modes are optimized for modern branding.</p>
+                <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">For Branding & Startups</h4>
+                    <p style="font-size: 0.9rem; color: var(--muted);">Find that elusive tech-sounding name that is available as a domain. Our "Corp" and "Cyber" modes are optimized for modern branding.</p>
                 </div>
             </div>
 
-            <h3 class="text-2xl font-bold mt-12 mb-4">Frequently Asked Questions</h3>
-            <div class="space-y-4">
-                <details class="group bg-slate-800/50 rounded-lg p-4 cursor-pointer border border-white/5">
-                    <summary class="font-bold text-white list-none flex justify-between items-center">
-                        Are these names copyright free?
-                        <span class="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2 text-sm">Yes, the generated names are algorithmic combinations and are free to use for your projects. However, always check trademark databases for commercial use.</p>
-                </details>
-                <details class="group bg-slate-800/50 rounded-lg p-4 cursor-pointer border border-white/5">
-                    <summary class="font-bold text-white list-none flex justify-between items-center">
-                        Does the tool save my history?
-                        <span class="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2 text-sm">We do not store data on our servers. However, you can use the "Vault" feature to save favorites locally in your browser's storage.</p>
-                </details>
-                <details class="group bg-slate-800/50 rounded-lg p-4 cursor-pointer border border-white/5">
-                    <summary class="font-bold text-white list-none flex justify-between items-center">
-                        Can I generate names offline?
-                        <span class="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <p class="text-slate-400 mt-2 text-sm">Once the page is loaded, all calculations happen in your browser. You can disconnect from the internet and the tool will continue to work.</p>
-                </details>
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Are these names copyright free?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, the generated names are algorithmic combinations and are free to use for your projects. However, always check trademark databases for commercial use.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Does the tool save my history?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    We do not store data on our servers. However, you can use the "Vault" feature to save favorites locally in your browser's storage.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Can I generate names offline?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">
+                    Once the page is loaded, all calculations happen in your browser. You can disconnect from the internet and the tool will continue to work.
+                </div>
             </div>
         </article>
 
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 bg-slate-900 mt-12 py-8">
-        <div class="container mx-auto px-4 text-center text-slate-500 text-sm">
+    <footer>
+        <div class="container">
             <p>&copy; 2024 ToolCompass.org. All rights reserved.</p>
-            <div class="mt-2 space-x-4">
-                <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            <div class="footer-links">
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
             </div>
         </div>
     </footer>
@@ -361,11 +526,9 @@
             ['short', 'med', 'long'].forEach(id => {
                 const btn = document.getElementById('btn-'+id);
                 if(id === l) {
-                    btn.classList.add('bg-blue-600', 'text-white', 'shadow-lg');
-                    btn.classList.remove('text-slate-400');
+                    btn.classList.add('active');
                 } else {
-                    btn.classList.remove('bg-blue-600', 'text-white', 'shadow-lg');
-                    btn.classList.add('text-slate-400');
+                    btn.classList.remove('active');
                 }
             });
             generate();
@@ -380,7 +543,7 @@
 
             grid.innerHTML = '';
             
-            for(let i = 0; i < 12; i++) { // Reduced to 12 for cleaner grid
+            for(let i = 0; i < 12; i++) { 
                 let parts = [];
                 if(useTitle) parts.push(db.titles[Math.floor(Math.random() * db.titles.length)]);
 
@@ -402,25 +565,30 @@
 
         function createCard(name) {
             const card = document.createElement('div');
-            // Random subtle border color based on category for variety
-            const hue = Math.floor(Math.random() * 60) + 200; // Blue/Purple range
-            card.className = "name-card glass-panel p-5 rounded-xl border-l-4 flex justify-between items-center group";
-            card.style.borderLeftColor = `hsl(${hue}, 70%, 50%)`;
+            card.className = "name-card";
             
             card.innerHTML = `
-                <div>
-                    <p class="text-[10px] text-slate-500 uppercase font-bold mb-1 tracking-widest">Generated ID</p>
-                    <h4 class="text-lg font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">${name}</h4>
-                </div>
-                <button class="text-slate-600 hover:text-blue-400 transition text-xl p-2" onclick="addToVault('${name}', event)">
-                    ★
-                </button>
+                <div class="name-text">${name}</div>
+                <div class="copy-icon">📋</div>
             `;
             
             card.onclick = (e) => {
-                if(e.target.closest('button')) return; // Don't copy if clicking star
+                if(e.target.closest('.remove-btn') || e.target.closest('.star-btn')) return; 
                 copyToClipboard(name);
             };
+            
+            // Add Star Button logic for Vault
+            const starBtn = document.createElement('div');
+            starBtn.className = "star-btn";
+            starBtn.innerHTML = "★";
+            starBtn.style.cssText = "cursor:pointer; color:var(--muted); font-size:1.2rem; margin-left:10px;";
+            starBtn.onclick = (e) => {
+                e.stopPropagation();
+                addToVault(name);
+            };
+            
+            // Replace copy icon with star in DOM structure for better UX
+            card.querySelector('.copy-icon').replaceWith(starBtn);
             
             document.getElementById('grid').appendChild(card);
         }
@@ -434,8 +602,7 @@
             });
         }
 
-        function addToVault(name, event) {
-            event.stopPropagation(); // Prevent card click
+        function addToVault(name) {
             if(!vault.includes(name)) {
                 vault.push(name);
                 localStorage.setItem('tc_vault', JSON.stringify(vault));
@@ -458,9 +625,9 @@
             if(vault.length > 0) {
                 area.classList.remove('hidden');
                 list.innerHTML = vault.map(name => `
-                    <div class="flex justify-between items-center bg-slate-800/50 p-2 px-3 rounded-lg text-xs font-bold border border-white/5 group">
-                        <span class="truncate mr-2 text-slate-300">${name}</span>
-                        <button onclick="removeFromVault('${name}')" class="text-slate-500 hover:text-red-400 transition">×</button>
+                    <div class="vault-item">
+                        <span style="color:var(--text)">${name}</span>
+                        <span class="remove-btn" onclick="removeFromVault('${name}')">×</span>
                     </div>
                 `).join('');
             } else {
@@ -472,6 +639,10 @@
             vault = vault.filter(n => n !== name);
             localStorage.setItem('tc_vault', JSON.stringify(vault));
             updateVaultUI();
+        }
+
+        function toggleFaq(el) {
+            el.parentElement.classList.toggle('active');
         }
     </script>
 </body>
