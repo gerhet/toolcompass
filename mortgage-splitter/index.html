@@ -31,7 +31,7 @@
     <!-- 🎨 Premium Design System (Fonts & CSS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -42,23 +42,27 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        brand: {
-                            dark: '#0f172a',
-                            card: '#1e293b',
-                            accent: '#38bdf8',
-                            accentHover: '#0ea5e9',
-                            text: '#f1f5f9',
-                            muted: '#94a3b8'
-                        }
+                        bg: '#0D0D0D',
+                        surface: '#161616',
+                        surface2: '#1E1E1E',
+                        border: 'rgba(255,255,255,0.08)',
+                        text: '#F0EDE8',
+                        muted: '#6B6760',
+                        accent: '#E8D5A3',
+                        accentHover: '#D4C08E',
                     },
                     animation: {
-                        'fade-up': 'fadeUp 0.5s ease-out forwards',
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-up': 'fadeUp 0.6s ease-out forwards',
+                        'pop-in': 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
                     },
                     keyframes: {
                         fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        popIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
                         }
                     }
                 }
@@ -67,6 +71,22 @@
     </script>
 
     <style>
+        /* 🎨 Design Constants (UNVERÄNDERBAR) */
+        :root {
+            --bg: #0D0D0D;
+            --surface: #161616;
+            --surface2: #1E1E1E;
+            --border: rgba(255,255,255,0.08);
+            --text: #F0EDE8;
+            --muted: #6B6760;
+            --accent: #E8D5A3;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
         /* Grain Overlay Texture */
         body::before {
             content: "";
@@ -74,34 +94,45 @@
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 50;
-            opacity: 0.03;
+            opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-        /* Range Slider Styling */
+        /* Range Slider Styling (Gold) */
         input[type=range] {
             -webkit-appearance: none; 
             background: transparent; 
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 20px; width: 20px;
+            height: 18px; width: 18px;
             border-radius: 50%;
-            background: #38bdf8;
+            background: var(--accent);
             cursor: pointer;
-            margin-top: -8px;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            margin-top: -7px;
+            box-shadow: 0 0 15px rgba(232, 213, 163, 0.4);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%; height: 4px;
-            cursor: pointer; background: #334155;
+            cursor: pointer; background: var(--surface2);
             border-radius: 2px;
+            border: 1px solid var(--border);
+        }
+
+        /* Utility for Gold Glow */
+        .gold-glow:focus-within {
+            box-shadow: 0 0 15px rgba(232, 213, 163, 0.15);
+            border-color: var(--accent);
         }
     </style>
 
@@ -113,11 +144,7 @@
       "name": "Mortgage Splitter & Loan Calculator",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "description": "A premium tool to calculate monthly mortgage payments, visualize interest vs principal, and plan loan repayments."
     }
     </script>
@@ -128,136 +155,170 @@
       "mainEntity": [{
         "@type": "Question",
         "name": "How is the monthly mortgage payment calculated?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The monthly payment is calculated using the standard amortization formula, which factors in the loan amount, interest rate, and loan term."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "The monthly payment is calculated using the standard amortization formula, factoring in the loan amount, interest rate, and loan term." }
       }, {
         "@type": "Question",
         "name": "Does this tool save my data?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. All calculations happen locally in your browser. We do not store your financial data on any server."
-        }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All calculations happen locally in your browser. We do not store your financial data on any server." }
+      }, {
+        "@type": "Question",
+        "name": "Can I export the amortization schedule?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, use the 'Export CSV' button to download a full breakdown of your payments." }
       }]
     }
     </script>
 </head>
-<body class="bg-brand-dark text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-white">
+<body class="font-sans antialiased selection:bg-accent selection:text-bg">
 
     <!-- Header -->
-    <header class="fixed w-full top-0 z-40 bg-brand-dark/80 backdrop-blur-md border-b border-gray-800">
+    <header class="fixed w-full top-0 z-40 bg-bg/80 backdrop-blur-md border-b border-border">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="/" class="font-serif text-2xl font-bold tracking-tight hover:text-brand-accent transition-colors">
-                Tool<span class="text-brand-accent">Compass</span>
+            <a href="/" class="font-serif text-2xl font-bold tracking-tight hover:text-accent transition-colors flex items-center gap-2">
+                <span class="w-3 h-3 bg-accent rounded-full shadow-[0_0_10px_#E8D5A3]"></span>
+                Tool<span class="text-text">Compass</span>
             </a>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium text-brand-muted">
-                <a href="/" class="hover:text-white transition">Home</a>
-                <a href="/#tools" class="hover:text-white transition">All Tools</a>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-muted">
+                <a href="/" class="hover:text-accent transition">Home</a>
+                <a href="/#tools" class="hover:text-accent transition">All Tools</a>
             </nav>
         </div>
     </header>
 
-    <main class="pt-24 pb-12">
-        <div class="container mx-auto px-4 max-w-5xl">
+    <main class="pt-28 pb-12">
+        <div class="container mx-auto px-4 max-w-6xl">
             
             <!-- Breadcrumb & Title -->
             <div class="mb-8 animate-fade-up">
-                <a href="/" class="text-brand-muted hover:text-brand-accent text-sm flex items-center gap-2 mb-4 transition">
+                <a href="/" class="text-muted hover:text-accent text-xs uppercase tracking-widest font-semibold flex items-center gap-2 mb-4 transition">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    Back to Dashboard
+                    Dashboard / Finance
                 </a>
-                <h1 class="font-serif text-4xl md:text-5xl font-bold mb-2 text-white">Mortgage Splitter</h1>
-                <p class="text-brand-muted text-lg">Calculate monthly payments & visualize your loan breakdown.</p>
+                <h1 class="font-serif text-4xl md:text-6xl font-bold mb-4 text-text">Mortgage Splitter</h1>
+                <p class="text-muted text-lg max-w-2xl">Calculate monthly payments, visualize the interest-to-principal ratio, and export your amortization schedule.</p>
             </div>
 
-            <!-- 🔧 TOOL INTERFACE (Hero Card) -->
-            <div class="bg-brand-card rounded-3xl shadow-2xl border border-gray-700/50 overflow-hidden animate-fade-up" style="animation-delay: 0.1s;">
+            <!-- 📢 AdSense Placeholder (Top) -->
+            <div class="mb-8 w-full min-h-[90px] bg-surface border border-border rounded-xl flex items-center justify-center text-muted text-xs uppercase tracking-widest relative overflow-hidden">
+                <span class="z-10 opacity-50">Advertisement Space (Responsive)</span>
+                <!-- AdSense Code: <ins class="adsbygoogle" ...></ins> -->
+            </div>
+
+            <!-- 🔧 TOOL INTERFACE (Premium Card) -->
+            <div class="bg-surface rounded-3xl shadow-2xl border border-border overflow-hidden animate-fade-up relative" style="animation-delay: 0.1s;">
+                
+                <!-- Toolbar / Stats -->
+                <div class="bg-surface2 border-b border-border px-6 py-3 flex justify-between items-center">
+                    <div class="flex gap-4 text-xs font-mono text-muted">
+                        <span class="flex items-center gap-1">
+                            <svg class="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+                            <span id="stat-count">0</span> Calcs
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <svg class="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
+                            <span id="stat-copy">0</span> Copies
+                        </span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="exportCSV()" class="text-xs bg-bg hover:bg-surface2 text-muted hover:text-accent border border-border px-3 py-1.5 rounded transition flex items-center gap-2">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Export CSV
+                        </button>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
                     
                     <!-- Left: Inputs -->
-                    <div class="lg:col-span-7 p-8 border-b lg:border-b-0 lg:border-r border-gray-700/50 bg-gradient-to-b from-brand-card to-brand-dark/50">
-                        <div class="space-y-6">
+                    <div class="lg:col-span-7 p-8 border-b lg:border-b-0 lg:border-r border-border bg-gradient-to-b from-surface to-bg/50">
+                        <div class="space-y-8">
                             <!-- Loan Amount -->
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <label class="text-sm font-medium text-gray-300">Loan Amount</label>
-                                    <span class="text-brand-accent font-bold" id="displayAmount">$300,000</span>
+                            <div class="group">
+                                <div class="flex justify-between mb-3">
+                                    <label class="text-sm font-medium text-text group-hover:text-accent transition">Loan Amount</label>
+                                    <span class="text-accent font-bold font-mono" id="displayAmount">$300,000</span>
                                 </div>
-                                <input type="range" id="amountRange" min="10000" max="2000000" step="1000" value="300000" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
-                                <input type="number" id="amount" value="300000" class="mt-2 w-full bg-brand-dark border border-gray-700 rounded-lg p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition">
+                                <input type="range" id="amountRange" min="10000" max="2000000" step="1000" value="300000" class="w-full mb-3">
+                                <div class="relative">
+                                    <span class="absolute left-4 top-3 text-muted">$</span>
+                                    <input type="number" id="amount" value="300000" class="w-full bg-bg border border-border rounded-lg p-3 pl-8 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition font-mono gold-glow">
+                                </div>
                             </div>
 
                             <!-- Interest Rate -->
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <label class="text-sm font-medium text-gray-300">Interest Rate (%)</label>
-                                    <span class="text-brand-accent font-bold" id="displayInterest">3.5%</span>
+                            <div class="group">
+                                <div class="flex justify-between mb-3">
+                                    <label class="text-sm font-medium text-text group-hover:text-accent transition">Interest Rate (%)</label>
+                                    <span class="text-accent font-bold font-mono" id="displayInterest">3.5%</span>
                                 </div>
-                                <input type="range" id="interestRange" min="0.1" max="15" step="0.1" value="3.5" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
-                                <input type="number" id="interest" value="3.5" step="0.1" class="mt-2 w-full bg-brand-dark border border-gray-700 rounded-lg p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition">
+                                <input type="range" id="interestRange" min="0.1" max="15" step="0.1" value="3.5" class="w-full mb-3">
+                                <div class="relative">
+                                    <input type="number" id="interest" value="3.5" step="0.1" class="w-full bg-bg border border-border rounded-lg p-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition font-mono gold-glow">
+                                    <span class="absolute right-4 top-3 text-muted">%</span>
+                                </div>
                             </div>
 
                             <!-- Loan Term -->
-                            <div>
-                                <div class="flex justify-between mb-2">
-                                    <label class="text-sm font-medium text-gray-300">Loan Term (Years)</label>
-                                    <span class="text-brand-accent font-bold" id="displayYears">30 Years</span>
+                            <div class="group">
+                                <div class="flex justify-between mb-3">
+                                    <label class="text-sm font-medium text-text group-hover:text-accent transition">Loan Term (Years)</label>
+                                    <span class="text-accent font-bold font-mono" id="displayYears">30 Years</span>
                                 </div>
-                                <div class="flex gap-2">
-                                    <button onclick="setTerm(15)" class="flex-1 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">15 Y</button>
-                                    <button onclick="setTerm(30)" class="flex-1 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">30 Y</button>
+                                <div class="flex gap-2 mb-3">
+                                    <button onclick="setTerm(15)" class="flex-1 py-2 bg-surface2 hover:bg-surface border border-border hover:border-accent rounded-lg text-sm text-muted hover:text-accent transition">15 Y</button>
+                                    <button onclick="setTerm(30)" class="flex-1 py-2 bg-surface2 hover:bg-surface border border-border hover:border-accent rounded-lg text-sm text-muted hover:text-accent transition">30 Y</button>
                                 </div>
-                                <input type="number" id="years" value="30" class="mt-2 w-full bg-brand-dark border border-gray-700 rounded-lg p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition">
+                                <input type="number" id="years" value="30" class="w-full bg-bg border border-border rounded-lg p-3 text-text focus:border-accent focus:ring-1 focus:ring-accent outline-none transition font-mono gold-glow">
                             </div>
                         </div>
                     </div>
 
                     <!-- Right: Results & Visuals -->
-                    <div class="lg:col-span-5 p-8 bg-brand-dark/30 flex flex-col justify-center relative">
-                        <div class="text-center mb-6">
-                            <span class="text-gray-400 text-sm uppercase tracking-widest font-semibold">Monthly Payment</span>
-                            <div class="flex items-center justify-center gap-3 mt-2">
-                                <h2 id="monthlyPayment" class="text-5xl font-bold text-white tracking-tight">$1,347.13</h2>
-                                <button onclick="copyToClipboard('monthlyPayment')" class="text-gray-500 hover:text-brand-accent transition" title="Copy Amount">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                                </button>
+                    <div class="lg:col-span-5 p-8 bg-bg/50 flex flex-col justify-center relative">
+                        <div class="text-center mb-8">
+                            <span class="text-muted text-xs uppercase tracking-widest font-semibold">Monthly Payment</span>
+                            <div class="flex items-center justify-center gap-3 mt-3 group cursor-pointer" onclick="copyToClipboard('monthlyPayment')">
+                                <h2 id="monthlyPayment" class="text-5xl font-bold text-text tracking-tight group-hover:text-accent transition">$1,347.13</h2>
+                                <svg class="w-6 h-6 text-muted group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                             </div>
+                            <p class="text-xs text-muted mt-2 opacity-0 group-hover:opacity-100 transition">Click to copy</p>
                         </div>
 
                         <!-- Visual Breakdown -->
-                        <div class="bg-gray-800/50 rounded-xl p-4 mb-6 border border-gray-700">
-                            <div class="flex justify-between text-xs text-gray-400 mb-2">
+                        <div class="bg-surface2 rounded-xl p-5 mb-6 border border-border relative overflow-hidden">
+                            <!-- Background Grid -->
+                            <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#E8D5A3 1px, transparent 1px); background-size: 10px 10px;"></div>
+                            
+                            <div class="flex justify-between text-xs text-muted mb-2 relative z-10">
                                 <span>Principal</span>
                                 <span>Interest</span>
                             </div>
-                            <div class="h-4 w-full bg-gray-700 rounded-full overflow-hidden flex">
-                                <div id="barPrincipal" class="bg-brand-accent h-full transition-all duration-500" style="width: 70%"></div>
-                                <div id="barInterest" class="bg-purple-500 h-full transition-all duration-500" style="width: 30%"></div>
+                            <div class="h-6 w-full bg-bg rounded-full overflow-hidden flex relative z-10 border border-border">
+                                <div id="barPrincipal" class="bg-accent h-full transition-all duration-700 ease-out shadow-[0_0_15px_rgba(232,213,163,0.5)]" style="width: 70%"></div>
+                                <div id="barInterest" class="bg-muted/50 h-full transition-all duration-700 ease-out" style="width: 30%"></div>
                             </div>
-                            <div class="flex justify-between mt-3 text-sm">
+                            <div class="flex justify-between mt-4 text-sm relative z-10">
                                 <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-brand-accent"></div>
-                                    <span class="text-gray-300" id="valPrincipal">$943</span>
+                                    <div class="w-2 h-2 rounded-full bg-accent shadow-[0_0_5px_#E8D5A3]"></div>
+                                    <span class="text-text font-mono" id="valPrincipal">$943</span>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <div class="w-3 h-3 rounded-full bg-purple-500"></div>
-                                    <span class="text-gray-300" id="valInterest">$404</span>
+                                    <div class="w-2 h-2 rounded-full bg-muted"></div>
+                                    <span class="text-muted font-mono" id="valInterest">$404</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="text-center">
-                            <p class="text-gray-400 text-xs uppercase">Total Cost of Loan</p>
-                            <p id="totalPayment" class="text-2xl font-bold text-gray-200">$484,968</p>
+                        <div class="text-center border-t border-border pt-6">
+                            <p class="text-muted text-xs uppercase tracking-wider">Total Cost of Loan</p>
+                            <p id="totalPayment" class="text-2xl font-bold text-text font-mono">$484,968</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- 💰 AdSense Placeholder (Mid-Page) -->
-            <div class="my-12 w-full min-h-[100px] bg-brand-card border border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-sm relative overflow-hidden group">
-                <div class="absolute inset-0 bg-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="my-12 w-full min-h-[100px] bg-surface border border-dashed border-border rounded-xl flex items-center justify-center text-muted text-sm relative overflow-hidden group">
+                <div class="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <span class="z-10">Advertisement Space (728x90 Responsive)</span>
                 <!-- AdSense Code goes here: <ins class="adsbygoogle" ...></ins> -->
             </div>
@@ -266,44 +327,54 @@
             <article class="grid grid-cols-1 lg:grid-cols-3 gap-12 animate-fade-up" style="animation-delay: 0.2s;">
                 
                 <!-- Main Content -->
-                <div class="lg:col-span-2 prose prose-invert prose-lg max-w-none text-gray-300">
-                    <h2 class="text-2xl font-bold text-white mb-4">Master Your Mortgage with Precision</h2>
-                    <p>Buying a home is likely the largest financial transaction of your life. Understanding exactly how your monthly payments are split between principal and interest is crucial for long-term financial health. The <strong>Mortgage Splitter</strong> provides a real-time, visual breakdown of your loan amortization.</p>
+                <div class="lg:col-span-2 prose prose-invert prose-lg max-w-none text-muted">
+                    <h2 class="text-2xl font-bold text-text mb-4 font-serif">Master Your Mortgage with Precision</h2>
+                    <p>Buying a home is likely the largest financial transaction of your life. Understanding exactly how your monthly payments are split between principal and interest is crucial for long-term financial health. The <strong class="text-accent">Mortgage Splitter</strong> provides a real-time, visual breakdown of your loan amortization.</p>
                     
-                    <h3 class="text-xl font-bold text-white mt-8 mb-3">How Interest Rates Impact Your Wallet</h3>
-                    <p>Interest rates might seem like small percentages, but over a 30-year term, they compound significantly. A difference of just <strong>0.5%</strong> in your interest rate on a $300,000 loan can result in a difference of over <strong>$30,000</strong> in total interest paid over the life of the loan.</p>
+                    <h3 class="text-xl font-bold text-text mt-8 mb-3 font-serif">How Interest Rates Impact Your Wallet</h3>
+                    <p>Interest rates might seem like small percentages, but over a 30-year term, they compound significantly. A difference of just <strong class="text-accent">0.5%</strong> in your interest rate on a $300,000 loan can result in a difference of over <strong class="text-accent">$30,000</strong> in total interest paid over the life of the loan.</p>
                     
-                    <h3 class="text-xl font-bold text-white mt-8 mb-3">Why Use This Tool?</h3>
-                    <ul class="list-disc pl-5 space-y-2">
+                    <h3 class="text-xl font-bold text-text mt-8 mb-3 font-serif">Why Use This Tool?</h3>
+                    <ul class="list-disc pl-5 space-y-2 marker:text-accent">
                         <li><strong>Instant Feedback:</strong> Adjust sliders to see how extra payments or rate changes affect your timeline.</li>
                         <li><strong>Privacy First:</strong> Unlike other calculators, we don't send your financial data to a server. Everything happens in your browser.</li>
-                        <li><strong>Visual Clarity:</strong> See the ratio of Principal vs. Interest at a glance.</li>
+                        <li><strong>Visual Clarity:</strong> See the ratio of Principal vs. Interest at a glance with our dynamic gold visualization.</li>
                     </ul>
                 </div>
 
                 <!-- Sidebar / FAQ -->
                 <div class="lg:col-span-1 space-y-6">
-                    <div class="bg-brand-card p-6 rounded-2xl border border-gray-700/50">
-                        <h3 class="font-serif text-xl font-bold text-white mb-4">Frequently Asked Questions</h3>
+                    <div class="bg-surface p-6 rounded-2xl border border-border">
+                        <h3 class="font-serif text-xl font-bold text-text mb-4">Frequently Asked Questions</h3>
                         
-                        <details class="group mb-4">
-                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-gray-300 hover:text-brand-accent transition">
+                        <details class="group mb-4 border-b border-border pb-4 last:border-0">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-text hover:text-accent transition">
                                 <span>Does this include taxes?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
-                            <p class="text-gray-400 text-sm mt-2 leading-relaxed">No, this calculator focuses on Principal and Interest (P&I). Property taxes and insurance (PITI) vary by location and should be added separately to your budget.</p>
+                            <p class="text-muted text-sm mt-3 leading-relaxed">No, this calculator focuses on Principal and Interest (P&I). Property taxes and insurance (PITI) vary by location and should be added separately to your budget.</p>
                         </details>
 
-                        <details class="group mb-4">
-                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-gray-300 hover:text-brand-accent transition">
+                        <details class="group mb-4 border-b border-border pb-4 last:border-0">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-text hover:text-accent transition">
                                 <span>Is my data saved?</span>
                                 <span class="transition group-open:rotate-180">
                                     <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
-                            <p class="text-gray-400 text-sm mt-2 leading-relaxed">Your inputs are saved locally in your browser's LocalStorage so they remain when you return, but they are never sent to our servers.</p>
+                            <p class="text-muted text-sm mt-3 leading-relaxed">Your inputs are saved locally in your browser's LocalStorage so they remain when you return, but they are never sent to our servers.</p>
+                        </details>
+
+                        <details class="group border-b border-border pb-4 last:border-0">
+                            <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-text hover:text-accent transition">
+                                <span>Can I export the data?</span>
+                                <span class="transition group-open:rotate-180">
+                                    <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <p class="text-muted text-sm mt-3 leading-relaxed">Yes, click the "Export CSV" button in the tool header to download a spreadsheet of your amortization schedule.</p>
                         </details>
                     </div>
                 </div>
@@ -313,25 +384,42 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-800 bg-brand-dark py-12 mt-12">
-        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+    <footer class="border-t border-border bg-bg py-12 mt-12">
+        <div class="container mx-auto px-4 text-center text-muted text-sm">
             <p>&copy; 2024 ToolCompass.org. All rights reserved.</p>
             <div class="mt-4 space-x-4">
-                <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                <a href="/privacy" class="hover:text-accent transition">Privacy Policy</a>
+                <a href="/terms" class="hover:text-accent transition">Terms of Service</a>
             </div>
         </div>
     </footer>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 bg-brand-accent text-brand-dark px-6 py-3 rounded-lg font-bold shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+    <div id="toast" class="fixed bottom-5 right-5 bg-accent text-bg px-6 py-3 rounded-lg font-bold shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
         <span>Copied to clipboard!</span>
     </div>
 
     <!-- 🔧 JavaScript Logic -->
     <script>
-        // Elements
+        // --- Premium Audio Context ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playClick() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        // --- Elements ---
         const inputs = {
             amount: document.getElementById('amount'),
             amountRange: document.getElementById('amountRange'),
@@ -352,7 +440,18 @@
             barInterest: document.getElementById('barInterest')
         };
 
-        // Load from LocalStorage
+        // --- Stats / Vault ---
+        let stats = JSON.parse(localStorage.getItem('toolStats_mortgage')) || { calcs: 0, copies: 0 };
+        document.getElementById('stat-count').innerText = stats.calcs;
+        document.getElementById('stat-copy').innerText = stats.copies;
+
+        function updateStats(type) {
+            stats[type]++;
+            localStorage.setItem('toolStats_mortgage', JSON.stringify(stats));
+            document.getElementById(`stat-${type}`).innerText = stats[type];
+        }
+
+        // --- Core Logic ---
         function loadSettings() {
             const saved = JSON.parse(localStorage.getItem('mortgageSettings'));
             if (saved) {
@@ -366,7 +465,6 @@
             calculate();
         }
 
-        // Sync Range and Number Inputs
         function syncRange(type, value) {
             inputs[type].value = value;
             inputs[type + 'Range'].value = value;
@@ -378,13 +476,11 @@
             displays.years.innerText = inputs.years.value + ' Years';
         }
 
-        // Core Calculation
         function calculate() {
             const P = parseFloat(inputs.amount.value);
             const r = parseFloat(inputs.interest.value) / 100 / 12;
             const n = parseFloat(inputs.years.value) * 12;
 
-            // Formula: M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]
             let monthly = 0;
             if (r === 0) {
                 monthly = P / n;
@@ -393,19 +489,20 @@
             }
 
             const total = monthly * n;
-            
-            // First month breakdown for visualization
             const interestPart = P * r;
             const principalPart = monthly - interestPart;
 
-            // Update UI
+            // Animation Trigger
+            displays.monthly.classList.remove('animate-pop-in');
+            void displays.monthly.offsetWidth; 
+            displays.monthly.classList.add('animate-pop-in');
+
             displays.monthly.innerText = '$' + monthly.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             displays.total.innerText = '$' + total.toLocaleString('en-US', {maximumFractionDigits: 0});
             
             displays.valPrincipal.innerText = '$' + Math.round(principalPart).toLocaleString();
             displays.valInterest.innerText = '$' + Math.round(interestPart).toLocaleString();
 
-            // Update Bars
             const totalParts = principalPart + interestPart;
             const pPercent = (principalPart / totalParts) * 100;
             const iPercent = (interestPart / totalParts) * 100;
@@ -413,25 +510,28 @@
             displays.barPrincipal.style.width = pPercent + '%';
             displays.barInterest.style.width = iPercent + '%';
 
-            // Save to LocalStorage
             localStorage.setItem('mortgageSettings', JSON.stringify({
                 amount: inputs.amount.value,
                 interest: inputs.interest.value,
                 years: inputs.years.value
             }));
+            
+            // Only count as "calc" if user interacts, not on load
+            if(document.hasFocus()) updateStats('calcs');
         }
 
-        // Helper for buttons
         function setTerm(years) {
+            playClick();
             inputs.years.value = years;
             displays.years.innerText = years + ' Years';
             calculate();
         }
 
-        // Copy Functionality
         function copyToClipboard(elementId) {
+            playClick();
             const text = document.getElementById(elementId).innerText;
             navigator.clipboard.writeText(text).then(() => {
+                updateStats('copies');
                 const toast = document.getElementById('toast');
                 toast.classList.remove('translate-y-20', 'opacity-0');
                 setTimeout(() => {
@@ -440,7 +540,47 @@
             });
         }
 
-        // Event Listeners for Live Updates
+        // --- Export Feature ---
+        function exportCSV() {
+            playClick();
+            const P = parseFloat(inputs.amount.value);
+            const r = parseFloat(inputs.interest.value) / 100 / 12;
+            const n = parseFloat(inputs.years.value) * 12;
+            const monthly = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+            let csvContent = "data:text/csv;charset=utf-8,Month,Payment,Principal,Interest,Balance\n";
+            let balance = P;
+
+            for(let i=1; i<=n; i++) {
+                let interestPayment = balance * r;
+                let principalPayment = monthly - interestPayment;
+                balance -= principalPayment;
+                if(balance < 0) balance = 0;
+                csvContent += `${i},${monthly.toFixed(2)},${principalPayment.toFixed(2)},${interestPayment.toFixed(2)},${balance.toFixed(2)}\n`;
+            }
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "mortgage_schedule.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // --- Keyboard Shortcuts ---
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT') {
+                e.preventDefault();
+                calculate();
+                playClick();
+            }
+            if (e.key.toLowerCase() === 'e') {
+                exportCSV();
+            }
+        });
+
+        // --- Event Listeners ---
         ['amount', 'interest', 'years'].forEach(key => {
             inputs[key].addEventListener('input', (e) => {
                 syncRange(key, e.target.value);
@@ -452,6 +592,8 @@
                 updateDisplays();
                 calculate();
             });
+            // Audio on slider move
+            inputs[key + 'Range'].addEventListener('mousedown', playClick);
         });
 
         // Init
