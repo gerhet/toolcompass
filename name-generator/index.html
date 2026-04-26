@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Meta Tags -->
+    <!-- ═══ SEO ═══ -->
     <title>X-IDENTITY | Ultimate Naming Engine | ToolCompass</title>
     <meta name="description" content="Generate unique character names, brand identities, and gamertags instantly with the X-IDENTITY engine. Free, privacy-focused, and real-time.">
     <meta name="keywords" content="name generator, character name, gamertag generator, brand name, fantasy names, cyber names">
     <link rel="canonical" href="https://toolcompass.org/x-identity">
 
-    <!-- Open Graph / Twitter -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="X-IDENTITY | Ultimate Naming Engine">
     <meta property="og:description" content="Generate unique character names and identities instantly.">
@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Design System CSS -->
+    <!-- ═══ DESIGN SYSTEM CSS ═══ -->
     <style>
         :root {
             --bg: #0D0D0D;
@@ -42,10 +42,10 @@
             --text: #F0EDE8;
             --muted: #6B6760;
             --accent: #E8D5A3;
-            --accent-hover: #d4c08a;
+            --accent-glow: rgba(232, 213, 163, 0.15);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Outfit', sans-serif;
@@ -82,7 +82,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(13, 13, 13, 0.8);
+            background: rgba(13, 13, 13, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
@@ -94,6 +94,12 @@
         /* Main Content */
         main { padding: 4rem 0; min-height: 80vh; }
 
+        /* Page Header */
+        .page-header { text-align: center; margin-bottom: 3rem; animation: fadeUp 0.8s ease forwards; opacity: 0; }
+        .page-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 0.5rem; }
+        .page-header h1 em { color: var(--accent); font-style: italic; }
+        .page-sub { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
         /* Tool Interface */
         .tool-grid {
             display: grid;
@@ -101,44 +107,48 @@
             gap: 2rem;
             margin-top: 2rem;
         }
-        @media(min-width: 900px) { .tool-grid { grid-template-columns: 350px 1fr; } }
+        @media(min-width: 900px) { .tool-grid { grid-template-columns: 320px 1fr; } }
 
         /* Cards / Panels */
         .panel {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem;
             transition: border-color 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .panel:hover { border-color: var(--border-hover); }
-
+        
         /* Inputs & Controls */
         label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 0.5rem; font-weight: 600; }
         
-        select, input[type="text"] {
+        select {
             width: 100%;
             background: var(--surface2);
             border: 1px solid var(--border);
             color: var(--text);
             padding: 0.75rem;
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: 'Outfit', sans-serif;
             margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: border-color 0.2s;
         }
-        select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+        select:focus { outline: none; border-color: var(--accent); }
 
-        .checkbox-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; cursor: pointer; }
-        .checkbox-group span { font-size: 0.9rem; color: var(--muted); }
+        .checkbox-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; cursor: pointer; padding: 0.5rem; border-radius: 6px; transition: background 0.2s; }
+        .checkbox-group:hover { background: var(--surface2); }
+        .checkbox-group span { font-size: 0.9rem; color: var(--muted); transition: color 0.2s; }
         .checkbox-group:hover span { color: var(--text); }
-        input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; }
+        input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
 
         /* Segmented Control (Length) */
         .segmented-control {
             display: flex;
             background: var(--surface2);
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 4px;
             margin-bottom: 1.5rem;
         }
@@ -148,71 +158,122 @@
             border: none;
             color: var(--muted);
             padding: 8px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: all 0.2s;
         }
         .seg-btn.active {
             background: var(--accent);
             color: var(--bg);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px var(--accent-glow);
         }
+
+        /* Generate Button (ADDICTIVE) */
+        .generate-btn {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .generate-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .generate-btn:active { transform: scale(0.98); }
 
         /* Results Grid */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 1rem;
         }
+        
+        /* Name Card (ADDICTIVE) */
         .name-card {
             background: var(--surface2);
             border: 1px solid var(--border);
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 1.25rem;
+            border-radius: 12px;
             cursor: pointer;
             position: relative;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.9);
         }
         .name-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+        }
+        .name-card.copied {
+            background: var(--accent);
             border-color: var(--accent);
         }
-        .name-text { font-weight: 600; font-size: 1.1rem; }
-        .copy-icon { opacity: 0.3; transition: 0.2s; }
-        .name-card:hover .copy-icon { opacity: 1; color: var(--accent); }
+        .name-card.copied .name-text, 
+        .name-card.copied .star-btn {
+            color: var(--bg);
+        }
+        
+        .name-text { font-weight: 600; font-size: 1.1rem; letter-spacing: -0.02em; transition: color 0.2s; }
+        
+        .star-btn { 
+            opacity: 0.3; 
+            transition: all 0.2s; 
+            font-size: 1.2rem; 
+            line-height: 1;
+            color: var(--muted);
+        }
+        .name-card:hover .star-btn { opacity: 1; color: var(--accent); }
+        .name-card.saved .star-btn { opacity: 1; color: var(--accent); }
 
         /* Vault */
-        .vault-section { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+        .vault-section { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
         .vault-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
-        .vault-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto; }
+        .vault-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 250px; overflow-y: auto; }
         .vault-item {
             background: var(--surface2);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
             font-size: 0.9rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid transparent;
+            transition: all 0.2s;
         }
-        .remove-btn { color: var(--muted); cursor: pointer; font-size: 1.2rem; line-height: 1; }
+        .vault-item:hover { border-color: var(--border-hover); }
+        .remove-btn { color: var(--muted); cursor: pointer; font-size: 1.2rem; line-height: 1; transition: color 0.2s; }
         .remove-btn:hover { color: #ff4d4d; }
 
         /* Ad Slots */
         .ad-slot {
             width: 100%;
-            min-height: 250px; /* Standard height */
+            min-height: 250px;
             background: var(--surface);
             border: 1px dashed var(--border);
-            margin: 2rem 0;
+            margin: 3rem 0;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            border-radius: 12px;
         }
         .ad-inner { text-align: center; }
         .ad-label {
@@ -226,61 +287,64 @@
 
         /* FAQ & Content */
         .content-section { max-width: 800px; margin: 4rem auto; }
-        .faq-item { margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        .faq-item { margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
         .faq-question {
-            padding: 1rem;
-            background: var(--surface);
+            padding: 1.25rem;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
         }
+        .faq-question:hover { background: var(--surface2); }
         .faq-answer {
-            padding: 1rem;
-            background: var(--surface2);
+            padding: 0 1.25rem 1.25rem;
             display: none;
             color: var(--muted);
             font-size: 0.95rem;
+            line-height: 1.7;
         }
-        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-answer { display: block; animation: slideDown 0.3s ease; }
         .faq-item.active .faq-question { color: var(--accent); }
-
-        /* Toast */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: var(--accent);
-            color: var(--bg);
-            text-align: center;
-            border-radius: 6px;
-            padding: 16px;
-            position: fixed;
-            z-index: 1000;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            font-weight: 600;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
-        }
-        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--border);
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
             color: var(--muted);
             font-size: 0.9rem;
             margin-top: 4rem;
         }
-        .footer-links { margin-top: 1rem; }
-        .footer-links a { margin: 0 10px; }
+        .footer-links { margin-top: 1.5rem; }
+        .footer-links a { margin: 0 15px; font-size: 0.85rem; }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            background-color: var(--accent);
+            color: var(--bg);
+            text-align: center;
+            border-radius: 50px;
+            padding: 14px 24px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 40px;
+            transform: translateX(-50%) translateY(20px);
+            font-weight: 600;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        #toast.show { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* Animations */
-        .fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
         @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { to { opacity: 1; transform: scale(1); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 
     <!-- Schema.org JSON-LD -->
@@ -291,11 +355,7 @@
       "name": "X-IDENTITY Naming Engine",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "description": "A premium tool for generating unique character names, brand identities, and gamertags across multiple genres."
     }
     </script>
@@ -307,7 +367,6 @@
         <div class="container nav-flex">
             <a href="/" class="logo">Tool<span>Compass</span></a>
             <nav>
-                <!-- Simple Text Nav per Design System -->
                 <a href="/" style="font-size: 0.9rem; color: var(--muted);">← Back to Tools</a>
             </nav>
         </div>
@@ -316,13 +375,13 @@
     <main class="container">
         
         <!-- Tool Header -->
-        <div class="fade-up" style="animation-delay: 0.1s; text-align: center; margin-bottom: 2rem;">
-            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">X-IDENTITY <span style="color: var(--accent);">Engine</span></h1>
-            <p style="color: var(--muted); max-width: 600px; margin: 0 auto;">Generate unique character names, brand identities, and gamertags instantly. 100% private, calculated in your browser.</p>
+        <div class="page-header">
+            <h1>X-IDENTITY <em>Engine</em></h1>
+            <p class="page-sub">Generate unique character names, brand identities, and gamertags instantly. 100% private, calculated in your browser.</p>
         </div>
 
         <!-- AD SLOT TOP -->
-        <div class="ad-slot fade-up" id="adTop" style="animation-delay: 0.2s;">
+        <div class="ad-slot" id="adTop">
             <div class="ad-inner">
                 <span class="ad-label">Advertisement</span>
                 <!-- AdSense Code Here -->
@@ -331,7 +390,7 @@
         </div>
 
         <!-- Tool Interface -->
-        <div class="tool-grid fade-up" style="animation-delay: 0.3s;">
+        <div class="tool-grid">
             
             <!-- Controls Sidebar -->
             <aside>
@@ -375,11 +434,16 @@
                         </div>
                     </div>
 
+                    <!-- Manual Trigger (Optional but good for UX) -->
+                    <button class="generate-btn" onclick="generate()">
+                        <span>✨</span> Generate New
+                    </button>
+
                     <!-- Vault Section -->
                     <div id="vault-area" class="vault-section hidden">
                         <div class="vault-header">
                             <label style="margin:0;">Saved Vault</label>
-                            <button onclick="clearVault()" style="background:none; border:none; color: #ff4d4d; cursor:pointer; font-size:0.8rem;">Clear All</button>
+                            <button onclick="clearVault()" style="background:none; border:none; color: #ff4d4d; cursor:pointer; font-size:0.8rem; font-weight:600;">Clear All</button>
                         </div>
                         <div id="vault-list" class="vault-list"></div>
                     </div>
@@ -388,10 +452,10 @@
 
             <!-- Results Grid -->
             <section>
-                <div class="panel" style="min-height: 500px;">
+                <div class="panel" style="min-height: 600px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
                         <h3 style="font-size: 1.2rem;">Generated Identities</h3>
-                        <span style="font-size: 0.8rem; color: var(--muted);">Click to Copy</span>
+                        <span style="font-size: 0.8rem; color: var(--muted);">Click card to copy</span>
                     </div>
                     
                     <div id="grid" class="results-grid">
@@ -403,7 +467,7 @@
         </div>
 
         <!-- AD SLOT MID -->
-        <div class="ad-slot fade-up" id="adMid" style="animation-delay: 0.4s;">
+        <div class="ad-slot" id="adMid">
             <div class="ad-inner">
                 <span class="ad-label">Advertisement</span>
                 <!-- AdSense Code Here -->
@@ -412,18 +476,18 @@
         </div>
 
         <!-- SEO Content & FAQ -->
-        <article class="content-section fade-up" style="animation-delay: 0.5s;">
+        <article class="content-section">
             <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Mastering Identity Creation with X-IDENTITY</h2>
             <p style="color: var(--muted); margin-bottom: 2rem; line-height: 1.8;">
                 Creating a memorable name for a character, a brand, or an online persona is often the hardest part of the creative process. The <strong>X-IDENTITY Engine</strong> is designed to bridge the gap between imagination and reality. By combining linguistic algorithms with genre-specific databases, we provide instant inspiration.
             </p>
             
             <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem;">
-                <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                <div style="background: var(--surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
                     <h4 style="color: var(--accent); margin-bottom: 0.5rem;">For Writers & RPG Players</h4>
                     <p style="font-size: 0.9rem; color: var(--muted);">Generate consistent naming conventions for your fantasy worlds or sci-fi universes. No more "John Smith" in a medieval setting.</p>
                 </div>
-                <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border);">
+                <div style="background: var(--surface); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border);">
                     <h4 style="color: var(--accent); margin-bottom: 0.5rem;">For Branding & Startups</h4>
                     <p style="font-size: 0.9rem; color: var(--muted);">Find that elusive tech-sounding name that is available as a domain. Our "Corp" and "Cyber" modes are optimized for modern branding.</p>
                 </div>
@@ -567,47 +631,61 @@
             const card = document.createElement('div');
             card.className = "name-card";
             
+            // Check if already in vault
+            const isSaved = vault.includes(name);
+            if(isSaved) card.classList.add('saved');
+
             card.innerHTML = `
                 <div class="name-text">${name}</div>
-                <div class="copy-icon">📋</div>
+                <div class="star-btn">${isSaved ? '★' : '☆'}</div>
             `;
             
+            // Click to Copy Logic
             card.onclick = (e) => {
-                if(e.target.closest('.remove-btn') || e.target.closest('.star-btn')) return; 
-                copyToClipboard(name);
+                if(e.target.closest('.star-btn')) return; 
+                copyToClipboard(name, card);
             };
             
-            // Add Star Button logic for Vault
-            const starBtn = document.createElement('div');
-            starBtn.className = "star-btn";
-            starBtn.innerHTML = "★";
-            starBtn.style.cssText = "cursor:pointer; color:var(--muted); font-size:1.2rem; margin-left:10px;";
+            // Star Button Logic
+            const starBtn = card.querySelector('.star-btn');
             starBtn.onclick = (e) => {
                 e.stopPropagation();
-                addToVault(name);
+                toggleVault(name, card, starBtn);
             };
-            
-            // Replace copy icon with star in DOM structure for better UX
-            card.querySelector('.copy-icon').replaceWith(starBtn);
             
             document.getElementById('grid').appendChild(card);
         }
 
-        function copyToClipboard(text) {
+        function copyToClipboard(text, cardElement) {
             navigator.clipboard.writeText(text).then(() => {
+                // Visual Feedback on Card
+                cardElement.classList.add('copied');
+                setTimeout(() => cardElement.classList.remove('copied'), 600);
+
+                // Toast
                 const toast = document.getElementById("toast");
-                toast.className = "show";
                 toast.innerText = "Identity Copied!";
-                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+                toast.className = "show";
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2000);
             });
         }
 
-        function addToVault(name) {
-            if(!vault.includes(name)) {
+        function toggleVault(name, cardElement, starBtn) {
+            if(vault.includes(name)) {
+                // Remove
+                vault = vault.filter(n => n !== name);
+                cardElement.classList.remove('saved');
+                starBtn.innerText = '☆';
+                showToast('Removed from Vault');
+            } else {
+                // Add
                 vault.push(name);
-                localStorage.setItem('tc_vault', JSON.stringify(vault));
-                updateVaultUI();
+                cardElement.classList.add('saved');
+                starBtn.innerText = '★';
+                showToast('Saved to Vault');
             }
+            localStorage.setItem('tc_vault', JSON.stringify(vault));
+            updateVaultUI();
         }
 
         function clearVault() {
@@ -615,6 +693,8 @@
                 vault = [];
                 localStorage.setItem('tc_vault', JSON.stringify(vault));
                 updateVaultUI();
+                // Refresh cards to update stars
+                generate();
             }
         }
 
@@ -626,7 +706,7 @@
                 area.classList.remove('hidden');
                 list.innerHTML = vault.map(name => `
                     <div class="vault-item">
-                        <span style="color:var(--text)">${name}</span>
+                        <span style="color:var(--text); font-weight:500;">${name}</span>
                         <span class="remove-btn" onclick="removeFromVault('${name}')">×</span>
                     </div>
                 `).join('');
@@ -639,10 +719,18 @@
             vault = vault.filter(n => n !== name);
             localStorage.setItem('tc_vault', JSON.stringify(vault));
             updateVaultUI();
+            generate(); // Refresh to update stars
         }
 
         function toggleFaq(el) {
             el.parentElement.classList.toggle('active');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 2000);
         }
     </script>
 </body>
