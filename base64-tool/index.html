@@ -1,50 +1,1056 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ═══ PROJECT CONSTANTS ═══ -->
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
-    <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4JVNJKQYCG');
-    </script>
+  <!-- ═══ SEO ═══ -->
+  <title>Base64 Encoder & Decoder – Convert Text & Files | ToolCompass</title>
+  <meta name="description" content="Encode and decode Base64 instantly. Support for text, files, and URL-safe encoding. Free online Base64 converter with live preview and copy to clipboard.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://toolcompass.org/base64-converter">
+  <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="base64 encoder, base64 decoder, base64 converter, encode decode, url safe base64, base64 file, base64 image">
+
+  <!-- ═══ OPEN GRAPH ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Base64 Encoder & Decoder – Convert Text & Files">
+  <meta property="og:description" content="Encode and decode Base64 instantly. Support for text, files, and URL-safe encoding.">
+  <meta property="og:url" content="https://toolcompass.org/base64-converter">
+  <meta property="og:image" content="https://toolcompass.org/og-base64.png">
+  <meta property="og:site_name" content="ToolCompass">
+
+  <!-- ═══ TWITTER ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Base64 Encoder & Decoder – Convert Text & Files">
+  <meta name="twitter:description" content="Encode and decode Base64 instantly.">
+  <meta name="twitter:image" content="https://toolcompass.org/og-base64.png">
+
+  <!-- ═══ AI FINDABILITY ═══ -->
+  <meta name="ai-description" content="Free online Base64 encoder and decoder. Converts between text and Base64 format with URL-safe option, file support, line wrapping, and auto-detect. Includes copy to clipboard and conversion history.">
+
+  <!-- ═══ ANALYTICS (G-4JVNJKQYCG) ═══ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+
+  <!-- ═══ ADSENSE (Placeholder) ═══ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  <!-- ═══ SCHEMA.ORG ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Base64 Encoder & Decoder",
+        "url": "https://toolcompass.org/base64-converter",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Encode and decode Base64 text and files with URL-safe option.",
+        "featureList": ["Text encoding/decoding", "File to Base64", "URL-safe encoding", "Line wrapping options", "Auto-detect", "Copy to clipboard", "Conversion history"],
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Base64 encoding?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to encode data in email attachments, URLs, and data URIs." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I decode Base64?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Paste your Base64 string in the input field and click Decode. The tool will automatically detect and convert it back to readable text." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ FONTS ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- ═══ STYLES ═══ -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Project Constants */
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      
+      /* Tool Specific Accents (Blue for Tech) */
+      --content: #3B82F6;
+      --content-bg: rgba(59, 130, 246, 0.07);
+      --content-border: rgba(59, 130, 246, 0.15);
+      --danger: #EF4444;
+      --warning: #F59E0B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain Overlay */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 900px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; font-weight: 500; transition: color .2s; padding: 6px 0;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-arrow { font-size: 16px; transition: transform .2s; }
+    .back-btn:hover .back-arrow { transform: translateX(-3px); }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 15px; color: var(--text);
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+
+    /* ─── MAIN ─── */
+    main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      text-align: center; margin-bottom: 2.5rem;
+      animation: fadeUp .7s ease both;
+    }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border-hover); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--content); }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -.025em; margin-bottom: 1rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* ─── AD SLOT ─── */
+    .ad-slot { margin-bottom: 1rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
+    .ad-inner {
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 90px; position: relative;
+    }
+    .ad-label {
+      position: absolute; top: 6px; left: 10px;
+      font-size: 9px; color: var(--muted); letter-spacing: .1em;
+      text-transform: uppercase; opacity: .4;
+    }
+
+    /* ─── CONVERTER CARD ─── */
+    .converter-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .7s .1s ease both;
+    }
+
+    /* Mode Toggle */
+    .mode-toggle {
+      display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+      background: var(--surface2); padding: 4px;
+      border-radius: 12px; width: fit-content;
+    }
+    .mode-btn {
+      background: transparent; border: none;
+      padding: 0.5rem 1rem; border-radius: 8px;
+      font-size: 12px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: all .2s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .mode-btn.active { background: var(--content); color: #000; }
+
+    /* Options Row */
+    .options-row {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem; align-items: center;
+    }
+    .option-checkbox {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--muted);
+      cursor: pointer;
+    }
+    .option-checkbox input {
+      width: 16px; height: 16px;
+      accent-color: var(--content);
+    }
+    .format-select {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.5rem 1rem;
+      color: var(--text); font-size: 12px;
+      font-family: 'Outfit', sans-serif;
+      outline: none;
+    }
+
+    /* Textareas */
+    .textarea-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 768px) { .textarea-grid { grid-template-columns: 1fr; } }
     
-    <title>Base64 Encoder & Decoder | ToolCompass</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    .textarea-group label {
+      display: block; font-size: 11px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 0.5rem;
+    }
+    .textarea-wrapper { position: relative; }
+    textarea {
+      width: 100%; min-height: 200px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+      color: var(--text); font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; line-height: 1.8; outline: none;
+      transition: border-color .2s; resize: vertical;
+    }
+    textarea:focus { border-color: var(--content); }
+    textarea::placeholder { color: var(--muted); }
+    textarea[readonly] { background: var(--surface); }
+    
+    .textarea-actions {
+      display: flex; gap: 6px; margin-top: 0.75rem; flex-wrap: wrap;
+    }
+    .action-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 12px;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: all .2s;
+      font-family: 'Outfit', sans-serif;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .action-btn:hover { border-color: var(--content); color: var(--content); }
+    .action-btn.primary {
+      background: var(--content); border-color: var(--content);
+      color: #000; font-weight: 600;
+    }
+    .action-btn.primary:hover { background: var(--accent); }
+
+    /* Action Buttons Row */
+    .action-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 520px) { .action-row { grid-template-columns: 1fr; } }
+    
+    .convert-btn {
+      width: 100%; padding: 1rem;
+      border-radius: 12px; border: none;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all .2s;
+      font-family: 'Outfit', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .convert-btn.encode {
+      background: var(--content); color: #000;
+    }
+    .convert-btn.encode:hover { background: var(--accent); }
+    .convert-btn.decode {
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .convert-btn.decode:hover { border-color: var(--content); color: var(--content); }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem; background: var(--surface2);
+      border-radius: 12px; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
+      font-size: 12px;
+    }
+    .stat-item {
+      display: flex; align-items: center; gap: 6px;
+      color: var(--muted);
+    }
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600; color: var(--content);
+    }
+    .auto-detect-badge {
+      background: var(--content-bg); color: var(--content);
+      padding: 4px 10px; border-radius: 20px;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* File Upload */
+    .file-upload {
+      border: 2px dashed var(--border);
+      border-radius: 12px; padding: 2rem;
+      text-align: center; margin-bottom: 1.5rem;
+      cursor: pointer; transition: all .2s;
+    }
+    .file-upload:hover { border-color: var(--content); background: var(--content-bg); }
+    .file-upload-icon { font-size: 32px; margin-bottom: 0.5rem; }
+    .file-upload-text { font-size: 13px; color: var(--muted); }
+    .file-upload-input { display: none; }
+    .file-info {
+      display: none; margin-top: 1rem;
+      padding: 0.75rem; background: var(--surface2);
+      border-radius: 8px; font-size: 12px;
+    }
+    .file-info.visible { display: block; }
+
+    /* ─── HISTORY ─── */
+    .history-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .history-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem;
+    }
+    .history-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; font-style: italic;
+      color: var(--text);
+    }
+    .history-clear {
+      font-size: 11px; color: var(--muted);
+      cursor: pointer; transition: color .2s;
+    }
+    .history-clear:hover { color: var(--danger); }
+    .history-list {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      max-height: 200px; overflow-y: auto;
+    }
+    .history-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem; background: var(--surface2);
+      border-radius: 8px; font-size: 12px;
+    }
+    .history-preview {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--muted); max-width: 60%;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .history-type {
+      font-size: 10px; padding: 2px 8px;
+      border-radius: 4px; background: var(--content-bg);
+      color: var(--content); text-transform: uppercase;
+    }
+    .history-delete {
+      font-size: 14px; color: var(--muted); cursor: pointer;
+      transition: color .2s;
+    }
+    .history-delete:hover { color: var(--danger); }
+
+    /* ─── OTHER TOOLS ─── */
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .2s ease both; }
+    .other-tools-header {
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .other-tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .tool-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text);
+      font-size: 12px; font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
+    .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* ─── SEO CONTENT ─── */
+    .seo-content {
+      padding: 2.5rem 0 0;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .7s .3s ease both;
+    }
+    .seo-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .seo-content h2 em { color: var(--accent); }
+    .seo-content p {
+      font-size: 13.5px; color: var(--muted); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+    .seo-content strong { color: var(--text); font-weight: 500; }
+    
+    .code-block {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text);
+      margin: 1rem 0; overflow-x: auto;
+    }
+
+    /* FAQ */
+    .faq-list { margin-top: 1.5rem; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+    .faq-q {
+      width: 100%; background: var(--surface); border: none; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 1rem 1.25rem; text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem; text-align: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width: 480px) {
+      main { padding: 2rem 1.25rem 5rem; }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-    <header class="bg-white shadow-sm py-4"><div class="container mx-auto px-4"><a href="/" class="text-blue-600 font-bold">← Back</a></div></header>
-    <main class="container mx-auto px-4 py-10 max-w-2xl">
-        <h1 class="text-3xl font-extrabold mb-6">Base64 Tool</h1>
-        <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-            <textarea id="baseInput" rows="5" class="w-full p-4 border rounded-xl mb-4 font-mono text-sm outline-none" placeholder="Enter text or base64 here..."></textarea>
-            <div class="flex space-x-2 mb-6">
-                <button onclick="encode()" class="flex-1 bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-black transition">Encode</button>
-                <button onclick="decode()" class="flex-1 bg-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-300 transition">Decode</button>
-            </div>
-            <div id="baseOutputContainer" class="hidden">
-                <p class="text-xs font-bold text-gray-400 mb-2 uppercase">Result:</p>
-                <textarea id="baseOutput" readonly rows="5" class="w-full p-4 bg-gray-50 border rounded-xl font-mono text-sm"></textarea>
-            </div>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">
+      <span class="back-arrow">←</span> All Tools
+    </a>
+    <a href="/" style="text-decoration:none;">
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-tag"><span class="page-tag-dot"></span>Developer Tools</div>
+    <h1>Base64<br><em>Converter</em></h1>
+    <p class="page-sub">Encode and decode Base64 text and files instantly.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- CONVERTER CARD -->
+  <div class="converter-card">
+    
+    <!-- FILE UPLOAD -->
+    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+      <div class="file-upload-icon">📁</div>
+      <div class="file-upload-text">Drop a file here or click to upload (Image, PDF, etc.)</div>
+      <input type="file" id="fileInput" class="file-upload-input" onchange="handleFileUpload(event)">
+      <div class="file-info" id="fileInfo"></div>
+    </div>
+
+    <!-- MODE TOGGLE -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" onclick="setMode('text')" id="modeText">Text Mode</button>
+      <button class="mode-btn" onclick="setMode('file')" id="modeFile">File Mode</button>
+    </div>
+
+    <!-- OPTIONS -->
+    <div class="options-row">
+      <label class="option-checkbox">
+        <input type="checkbox" id="urlSafe" onchange="convert()">
+        URL-Safe Encoding
+      </label>
+      <label class="option-checkbox">
+        <input type="checkbox" id="lineWrap" checked onchange="convert()">
+        Line Wrap (76 chars)
+      </label>
+      <select class="format-select" id="lineLength" onchange="convert()">
+        <option value="0">No Wrap</option>
+        <option value="64">64 chars</option>
+        <option value="76" selected>76 chars</option>
+        <option value="80">80 chars</option>
+      </select>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-row">
+      <button class="convert-btn encode" onclick="encode()">
+        🔒 Encode to Base64
+      </button>
+      <button class="convert-btn decode" onclick="decode()">
+        🔓 Decode from Base64
+      </button>
+    </div>
+
+    <!-- TEXTAREAS -->
+    <div class="textarea-grid">
+      <div class="textarea-group">
+        <label id="inputLabel">Input</label>
+        <div class="textarea-wrapper">
+          <textarea id="input" placeholder="Enter text or Base64 string..." oninput="autoDetect()"></textarea>
         </div>
-    </main>
-    <script>
-        function encode() {
-            const input = document.getElementById('baseInput').value;
-            document.getElementById('baseOutput').value = btoa(input);
-            document.getElementById('baseOutputContainer').classList.remove('hidden');
-        }
-        function decode() {
-            const input = document.getElementById('baseInput').value;
-            try {
-                document.getElementById('baseOutput').value = atob(input);
-                document.getElementById('baseOutputContainer').classList.remove('hidden');
-            } catch(e) { alert("Invalid Base64 string"); }
-        }
-    </script>
+        <div class="textarea-actions">
+          <button class="action-btn" onclick="pasteInput()">📋 Paste</button>
+          <button class="action-btn" onclick="clearAll()">🗑️ Clear</button>
+          <button class="action-btn" onclick="loadExample()">📝 Example</button>
+        </div>
+      </div>
+      <div class="textarea-group">
+        <label id="outputLabel">Output</label>
+        <div class="textarea-wrapper">
+          <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
+        </div>
+        <div class="textarea-actions">
+          <button class="action-btn primary" onclick="copyOutput()">📋 Copy</button>
+          <button class="action-btn" onclick="downloadOutput()">💾 Download</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span>Input:</span>
+        <span class="stat-value" id="inputLength">0</span>
+        <span>chars</span>
+      </div>
+      <div class="stat-item">
+        <span>Output:</span>
+        <span class="stat-value" id="outputLength">0</span>
+        <span>chars</span>
+      </div>
+      <div class="auto-detect-badge" id="autoDetectBadge" style="display:none;">
+        🤖 Auto-Detected: Base64
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-section">
+    <div class="history-header">
+      <span class="history-title">📜 Conversion History</span>
+      <span class="history-clear" onclick="clearHistory()">Clear All</span>
+    </div>
+    <div class="history-list" id="historyList">
+      <div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start converting!</div>
+    </div>
+  </div>
+
+  <!-- AD SLOT MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- OTHER TOOLS -->
+  <div class="other-tools">
+    <div class="other-tools-header">🛠️ More Developer Tools</div>
+    <div class="other-tools-grid">
+      <a href="/binary-converter" class="tool-chip">
+        <span class="tool-chip-icon">01</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Binary Converter</div>
+          <div class="tool-chip-desc">Binary ↔ Text</div>
+        </div>
+      </a>
+      <a href="/password-generator" class="tool-chip">
+        <span class="tool-chip-icon">🔐</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Password Gen</div>
+          <div class="tool-chip-desc">Secure passwords</div>
+        </div>
+      </a>
+      <a href="/qr-generator" class="tool-chip">
+        <span class="tool-chip-icon">📱</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">QR Generator</div>
+          <div class="tool-chip-desc">Custom QR codes</div>
+        </div>
+      </a>
+      <a href="/text-summarizer" class="tool-chip">
+        <span class="tool-chip-icon">📝</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Summarizer</div>
+          <div class="tool-chip-desc">AI-style compression</div>
+        </div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style: dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">All Tools</div>
+          <div class="tool-chip-desc">31+ utilities</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT -->
+  <div class="seo-content">
+    <h2>Understanding <em>Base64 Encoding</em></h2>
+    <p>
+      Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to encode data in email attachments, embed images in HTML/CSS, store complex data in URLs, and transmit data over text-based protocols.
+    </p>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Example Conversion</h3>
+    <div class="code-block">
+Text: Hello World
+Base64: SGVsbG8gV29ybGQ=
+
+Text: ToolCompass
+Base64: VG9vbENvbXBhc3M=
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Common Use Cases</h3>
+    <ul class="seo-list" style="list-style:none;margin-bottom:1.5rem;">
+      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>Data URIs:</strong> Embed images directly in HTML/CSS.</li>
+      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>Email Attachments:</strong> MIME encoding for email transmission.</li>
+      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>API Authentication:</strong> Basic Auth credentials encoding.</li>
+      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>URL Parameters:</strong> Safe transmission of binary data in URLs.</li>
+    </ul>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What is Base64 encoding?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to encode data in email attachments, URLs, and data URIs.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How do I decode Base64?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Paste your Base64 string in the input field and click Decode. The tool will automatically detect and convert it back to readable text.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What is URL-safe Base64?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">URL-safe Base64 replaces + with - and / with _ to make the encoded string safe for use in URLs without additional encoding.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I encode files to Base64?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Drag and drop any file into the upload area or click to select a file. The tool will convert it to a Base64 string.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let currentMode = 'text';
+let history = [];
+let fileName = '';
+
+// ═══════════════════════════════════════════════
+// MODE
+// ═══════════════════════════════════════════════
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  
+  if (mode === 'text') {
+    document.getElementById('modeText').classList.add('active');
+    document.getElementById('input').placeholder = 'Enter text or Base64 string...';
+  } else {
+    document.getElementById('modeFile').classList.add('active');
+    document.getElementById('input').placeholder = 'File Base64 will appear here...';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// ENCODE/DECODE
+// ═══════════════════════════════════════════════
+function encode() {
+  const input = document.getElementById('input').value;
+  const urlSafe = document.getElementById('urlSafe').checked;
+  const lineWrap = document.getElementById('lineWrap').checked;
+  const lineLength = parseInt(document.getElementById('lineLength').value);
+  
+  if (!input) {
+    showToast('Please enter text to encode');
+    return;
+  }
+  
+  try {
+    let encoded = btoa(unescape(encodeURIComponent(input)));
+    
+    // URL-safe
+    if (urlSafe) {
+      encoded = encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    }
+    
+    // Line wrap
+    if (lineWrap && lineLength > 0) {
+      encoded = wrapLines(encoded, lineLength);
+    }
+    
+    document.getElementById('output').value = encoded;
+    updateStats(input.length, encoded.length);
+    saveToHistory(input, encoded, 'Encode');
+    showToast('Encoded successfully!');
+  } catch (e) {
+    showToast('Encoding failed: ' + e.message);
+  }
+}
+
+function decode() {
+  const input = document.getElementById('input').value.trim();
+  const urlSafe = document.getElementById('urlSafe').checked;
+  
+  if (!input) {
+    showToast('Please enter Base64 to decode');
+    return;
+  }
+  
+  try {
+    let decoded = input;
+    
+    // URL-safe
+    if (urlSafe) {
+      decoded = decoded.replace(/-/g, '+').replace(/_/g, '/');
+      // Add padding
+      while (decoded.length % 4) {
+        decoded += '=';
+      }
+    }
+    
+    // Remove whitespace
+    decoded = decoded.replace(/\s/g, '');
+    
+    const result = decodeURIComponent(escape(atob(decoded)));
+    document.getElementById('output').value = result;
+    updateStats(input.length, result.length);
+    saveToHistory(input, result, 'Decode');
+    showToast('Decoded successfully!');
+  } catch (e) {
+    showToast('Invalid Base64 string');
+    document.getElementById('output').value = '';
+  }
+}
+
+function wrapLines(str, lineLength) {
+  const lines = [];
+  for (let i = 0; i < str.length; i += lineLength) {
+    lines.push(str.substring(i, i + lineLength));
+  }
+  return lines.join('\n');
+}
+
+// ═══════════════════════════════════════════════
+// AUTO-DETECT
+// ═══════════════════════════════════════════════
+function autoDetect() {
+  const input = document.getElementById('input').value.trim();
+  const badge = document.getElementById('autoDetectBadge');
+  
+  // Simple Base64 detection
+  const base64Regex = /^[A-Za-z0-9+/=_\-\s]+$/;
+  const isBase64 = base64Regex.test(input) && input.length > 10 && input.length % 4 === 0;
+  
+  if (isBase64) {
+    badge.style.display = 'block';
+    badge.textContent = '🤖 Auto-Detected: Base64';
+  } else {
+    badge.style.display = 'none';
+  }
+  
+  updateStats(input.length, document.getElementById('output').value.length);
+}
+
+// ═══════════════════════════════════════════════
+// FILE UPLOAD
+// ═══════════════════════════════════════════════
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  fileName = file.name;
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    const base64 = e.target.result.split(',')[1]; // Remove data:image/png;base64, prefix
+    document.getElementById('input').value = base64;
+    
+    const fileInfo = document.getElementById('fileInfo');
+    fileInfo.classList.add('visible');
+    fileInfo.innerHTML = `
+      <strong>📄 ${file.name}</strong><br>
+      Size: ${(file.size / 1024).toFixed(2)} KB | 
+      Type: ${file.type}
+    `;
+    
+    convert();
+  };
+  
+  reader.readAsDataURL(file);
+  showToast('File loaded!');
+}
+
+// ═══════════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════════
+function copyOutput() {
+  const output = document.getElementById('output');
+  if (!output.value) return;
+  
+  navigator.clipboard.writeText(output.value).then(() => {
+    showToast('Copied to clipboard!');
+  }).catch(() => {
+    showToast('Copy failed');
+  });
+}
+
+function pasteInput() {
+  navigator.clipboard.readText().then(text => {
+    document.getElementById('input').value = text;
+    autoDetect();
+    showToast('Pasted from clipboard');
+  }).catch(() => {
+    showToast('Paste not supported');
+  });
+}
+
+function clearAll() {
+  document.getElementById('input').value = '';
+  document.getElementById('output').value = '';
+  document.getElementById('fileInfo').classList.remove('visible');
+  document.getElementById('fileInput').value = '';
+  fileName = '';
+  updateStats(0, 0);
+  autoDetect();
+}
+
+function loadExample() {
+  document.getElementById('input').value = 'Hello World! Welcome to ToolCompass.';
+  autoDetect();
+}
+
+function downloadOutput() {
+  const output = document.getElementById('output').value;
+  if (!output) return;
+  
+  const blob = new Blob([output], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName ? `${fileName}.b64` : 'base64-output.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Download started!');
+}
+
+function updateStats(inputLen, outputLen) {
+  document.getElementById('inputLength').textContent = inputLen.toLocaleString();
+  document.getElementById('outputLength').textContent = outputLen.toLocaleString();
+}
+
+// ═══════════════════════════════════════════════
+// HISTORY
+// ═══════════════════════════════════════════════
+function loadHistory() {
+  const saved = localStorage.getItem('tc_base64_history');
+  if (saved) {
+    history = JSON.parse(saved);
+  }
+  renderHistory();
+}
+
+function saveToHistory(input, output, type) {
+  if (history.length > 0 && history[0].input === input) return;
+  
+  history.unshift({
+    input: input.substring(0, 50),
+    output: output.substring(0, 50),
+    type,
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+  });
+  
+  if (history.length > 10) history.pop();
+  
+  localStorage.setItem('tc_base64_history', JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  
+  if (history.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start converting!</div>';
+    return;
+  }
+  
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item">
+      <div style="flex:1;min-width:0;">
+        <div class="history-preview">${h.input} → ${h.output}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${h.date}</div>
+      </div>
+      <span class="history-type">${h.type}</span>
+      <span class="history-delete" onclick="deleteHistory(${i})">🗑️</span>
+    </div>
+  `).join('');
+}
+
+function deleteHistory(index) {
+  history.splice(index, 1);
+  localStorage.setItem('tc_base64_history', JSON.stringify(history));
+  renderHistory();
+}
+
+function clearHistory() {
+  history = [];
+  localStorage.removeItem('tc_base64_history');
+  renderHistory();
+  showToast('History cleared');
+}
+
+// ═══════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════
+function showToast(msg) {
+  let t = document.getElementById('tcToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'tcToast';
+    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:#1E1E1E;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:500;color:#F0EDE8;z-index:500;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.opacity   = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => {
+    t.style.transform = 'translateX(-50%) translateY(60px)';
+    t.style.opacity   = '0';
+  }, 2000);
+}
+
+// ═══════════════════════════════════════════════
+// FAQ ACCORDION
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  loadHistory();
+  autoDetect();
+});
+
+// ─── ADSENSE nach Approval ───
+// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+// (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 </body>
 </html>
