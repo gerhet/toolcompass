@@ -14,11 +14,10 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980"
      crossorigin="anonymous"></script>
 
-  <!-- Dynamischer Title & Meta Description für SEO -->
-  <title id="meta-title">ToolCompass | 31+ High-End Productivity Tools (Free & Private)</title>
-<meta name="description" id="meta-description" content="Professional utilities for creators, devs, and finance. Instant results, no data logging, no account needed. Optimized for fast digital workflows.">
+  <title>ToolCompass | 31+ High-End Productivity Tools (Free & Private)</title>
+  <meta name="description" content="Professional utilities for creators, devs, and finance. Instant results, no data logging, no account needed. Optimized for fast digital workflows.">
 
-<script type="application/ld+json" id="schema-json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
@@ -80,7 +79,7 @@
       z-index: 999;
     }
 
-    /* HEADER & LANGUAGE SWITCHER */
+    /* HEADER */
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 0 2rem;
@@ -117,16 +116,6 @@
       animation: pulse 2s infinite;
     }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
-
-    /* Language Switcher */
-    .lang-switcher { display: flex; gap: 4px; background: var(--surface); padding: 4px; border-radius: 8px; border: 1px solid var(--border); }
-    .lang-btn {
-      border: none; background: transparent; color: var(--muted);
-      padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 500;
-      transition: all 0.2s; letter-spacing: 0.05em;
-    }
-    .lang-btn:hover { color: var(--text); background: var(--surface2); }
-    .lang-btn.active { background: var(--accent); color: #0D0D0D; font-weight: 600; }
 
     /* HERO */
     .hero {
@@ -298,12 +287,32 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* LANGUAGE SELECTOR */
+    .lang-select {
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--muted);
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      outline: none;
+    }
+    .lang-select option {
+      background: var(--surface);
+      color: var(--text);
+    }
+    .lang-select:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
     @media (max-width: 640px) {
       .hero { padding: 6rem 1.25rem 4rem; }
       .tools-wrap { padding: 0 1.25rem 4rem; }
       .tool-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
       .cat-header { flex-wrap: wrap; }
-      .header-inner { flex-wrap: wrap; gap: 1rem; height: auto; padding: 10px 2rem; }
     }
   </style>
 </head>
@@ -315,32 +324,39 @@
       <div class="logo-icon">🧭</div>
       <span class="logo-text">Tool<em>Compass</em>.org</span>
     </a>
-    <!-- Sprachumschalter hinzugefügt -->
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('de')">DE</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
-      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span class="live-badge"><span class="live-dot"></span><span class="tools-live-count">31 tools live</span></span>
+      <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="ru">Русский</option>
+        <option value="ar">العربية</option>
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+      </select>
     </div>
-    <!-- Live Badge bleibt -->
-    <span class="live-badge"><span class="live-dot"></span><span id="trans-live">31 tools live</span></span>
   </div>
 </header>
 
 <section class="hero">
   <div class="hero-glow"></div>
-  <span class="hero-tag"><span class="hero-tag-dot"></span><span id="trans-hero-badge">Free · Private · No Login</span></span>
-  <h1 id="trans-hero-title1">The Digital<br><span class="line2" id="trans-hero-title2">Swiss Army</span>Knife.</h1>
-  <p class="hero-sub" id="trans-hero-sub">31+ professional utilities for finance, content, dev work, and daily productivity. No account.</p>
+  <span class="hero-tag"><span class="hero-tag-dot"></span><span class="t-hero-tag">Free · Private · No Login</span></span>
+  <h1>
+    <span class="t-hero-1">The Digital</span><br>
+    <span class="line2 t-hero-2">Swiss Army</span> <span class="t-hero-3">Knife.</span>
+  </h1>
+  <p class="hero-sub t-hero-sub">31+ professional utilities for finance, content, dev work, and daily productivity. No account.</p>
   <div class="search-outer">
     <span class="search-ico">🔍</span>
     <input type="text" id="search" placeholder="Search tools… VAT, Timer, JSON…" autocomplete="off">
   </div>
   <div class="stats-row">
-    <div class="stat"><div class="stat-n">31+</div><div class="stat-l" id="trans-stat1">Free tools</div></div>
-    <div class="stat"><div class="stat-n">∞</div><div class="stat-l" id="trans-stat2">Free uses</div></div>
+    <div class="stat"><div class="stat-n">31+</div><div class="stat-l t-stat-free">Free tools</div></div>
+    <div class="stat"><div class="stat-n">∞</div><div class="stat-l t-stat-uses">Free uses</div></div>
   </div>
-  <div class="scroll-cue"><span id="trans-scroll">Scroll</span><div class="scroll-line"></div></div>
+  <div class="scroll-cue"><span class="t-scroll">Scroll</span><div class="scroll-line"></div></div>
 </section>
 
 <div class="tools-wrap">
@@ -348,35 +364,35 @@
   <!-- Finance -->
   <div class="cat-block cat-finance reveal">
     <div class="cat-header">
-      <span class="cat-label" id="trans-cat-finance">Finance & Business</span>
-      <span class="cat-sub" id="trans-cat-finance-sub">/ money tools</span>
-      <span class="cat-pill" id="trans-cat-finance-count">6 tools</span>
+      <span class="cat-label t-cat-finance">Finance & Business</span>
+      <span class="cat-sub t-cat-finance-sub">/ money tools</span>
+      <span class="cat-pill">6 tools</span>
     </div>
     <div class="tool-grid">
       <a href="/briefing-generator" class="tool-card" data-name="briefing generator client structured freelance project">
-        <span class="badge-new" id="trans-badge-new">New</span>
+        <span class="badge-new t-new">New</span>
         <div class="icon-wrap">📋</div>
-        <div><div class="tool-name" id="trans-tool-briefing">Briefing Generator</div><div class="tool-desc" id="trans-tool-briefing-desc">Structured client briefings for freelancers.</div></div>
+        <div><div class="tool-name t-tool-briefing">Briefing Generator</div><div class="tool-desc t-tool-briefing-desc">Structured client briefings for freelancers.</div></div>
       </a>
       <a href="/mortgage-splitter" class="tool-card" data-name="mortgage splitter loan interest">
         <div class="icon-wrap">🏠</div>
-        <div><div class="tool-name" id="trans-tool-mortgage">Mortgage Splitter</div><div class="tool-desc" id="trans-tool-mortgage-desc">Loan & interest analysis.</div></div>
+        <div><div class="tool-name t-tool-mortgage">Mortgage Splitter</div><div class="tool-desc t-tool-mortgage-desc">Loan & interest analysis.</div></div>
       </a>
       <a href="/hourly-rate" class="tool-card" data-name="hourly rate freelance optimizer">
         <div class="icon-wrap">💰</div>
-        <div><div class="tool-name" id="trans-tool-hourly">Hourly Rate</div><div class="tool-desc" id="trans-tool-hourly-desc">Freelance rate optimizer.</div></div>
+        <div><div class="tool-name t-tool-hourly">Hourly Rate</div><div class="tool-desc t-tool-hourly-desc">Freelance rate optimizer.</div></div>
       </a>
       <a href="/vat-calculator" class="tool-card" data-name="vat calculator sales tax">
         <div class="icon-wrap">🧾</div>
-        <div><div class="tool-name" id="trans-tool-vat">VAT Calculator</div><div class="tool-desc" id="trans-tool-vat-desc">Sales tax addition & removal.</div></div>
+        <div><div class="tool-name t-tool-vat">VAT Calculator</div><div class="tool-desc t-tool-vat-desc">Sales tax addition & removal.</div></div>
       </a>
       <a href="/loan-affordability" class="tool-card" data-name="loan limit affordability check">
         <div class="icon-wrap">🏦</div>
-        <div><div class="tool-name" id="trans-tool-loan">Loan Limit</div><div class="tool-desc" id="trans-tool-loan-desc">Affordability check.</div></div>
+        <div><div class="tool-name t-tool-loan">Loan Limit</div><div class="tool-desc t-tool-loan-desc">Affordability check.</div></div>
       </a>
       <a href="/tip-splitter" class="tool-card" data-name="tip splitter shared bills">
         <div class="icon-wrap">🍽️</div>
-        <div><div class="tool-name" id="trans-tool-tip">Tip Splitter</div><div class="tool-desc" id="trans-tool-tip-desc">Shared bills made easy.</div></div>
+        <div><div class="tool-name t-tool-tip">Tip Splitter</div><div class="tool-desc t-tool-tip-desc">Shared bills made easy.</div></div>
       </a>
     </div>
   </div>
@@ -384,31 +400,31 @@
   <!-- Content -->
   <div class="cat-block cat-content reveal">
     <div class="cat-header">
-      <span class="cat-label" id="trans-cat-content">Content & Writing</span>
-      <span class="cat-sub" id="trans-cat-content-sub">/ words & text</span>
-      <span class="cat-pill" id="trans-cat-content-count">7 tools</span>
+      <span class="cat-label t-cat-content">Content & Writing</span>
+      <span class="cat-sub t-cat-content-sub">/ words & text</span>
+      <span class="cat-pill">7 tools</span>
     </div>
     <div class="tool-grid">
       <a href="/text-summarizer" class="tool-card" data-name="text summarizer ai compression">
-        <div class="icon-wrap">📝</div><div><div class="tool-name" id="trans-tool-summary">Summarizer</div><div class="tool-desc" id="trans-tool-summary-desc">AI-style text compression.</div></div>
+        <div class="icon-wrap">📝</div><div><div class="tool-name t-tool-summarizer">Summarizer</div><div class="tool-desc t-tool-summarizer-desc">AI-style text compression.</div></div>
       </a>
       <a href="/word-counter" class="tool-card" data-name="word counter seo character">
-        <div class="icon-wrap">🔢</div><div><div class="tool-name" id="trans-tool-counter">Word Counter</div><div class="tool-desc" id="trans-tool-counter-desc">SEO & character check.</div></div>
+        <div class="icon-wrap">🔢</div><div><div class="tool-name t-tool-word">Word Counter</div><div class="tool-desc t-tool-word-desc">SEO & character check.</div></div>
       </a>
       <a href="/case-converter" class="tool-card" data-name="case fixer lower upper title">
-        <div class="icon-wrap" style="font-size:12px;font-weight:700;">Aa</div><div><div class="tool-name" id="trans-tool-case">Case Fixer</div><div class="tool-desc" id="trans-tool-case-desc">Lower/Upper/Title case.</div></div>
+        <div class="icon-wrap" style="font-size:12px;font-weight:700;">Aa</div><div><div class="tool-name t-tool-case">Case Fixer</div><div class="tool-desc t-tool-case-desc">Lower/Upper/Title case.</div></div>
       </a>
       <a href="/subject-line-generator" class="tool-card" data-name="subject lines email open rate">
-        <div class="icon-wrap">📧</div><div><div class="tool-name" id="trans-tool-subject">Subject Lines</div><div class="tool-desc" id="trans-tool-subject-desc">Email open rate booster.</div></div>
+        <div class="icon-wrap">📧</div><div><div class="tool-name t-tool-subject">Subject Lines</div><div class="tool-desc t-tool-subject-desc">Email open rate booster.</div></div>
       </a>
       <a href="/linkedin-post-maker" class="tool-card" data-name="linkedin post viral formatting">
-        <div class="icon-wrap">🔗</div><div><div class="tool-name" id="trans-tool-linkedin">LinkedIn Post</div><div class="tool-desc" id="trans-tool-linkedin-desc">Viral formatting.</div></div>
+        <div class="icon-wrap">🔗</div><div><div class="tool-name t-tool-linkedin">LinkedIn Post</div><div class="tool-desc t-tool-linkedin-desc">Viral formatting.</div></div>
       </a>
       <a href="/bio-generator" class="tool-card" data-name="bio generator social media profiles">
-        <div class="icon-wrap">👤</div><div><div class="tool-name" id="trans-tool-bio">Bio Generator</div><div class="tool-desc" id="trans-tool-bio-desc">Social media profiles.</div></div>
+        <div class="icon-wrap">👤</div><div><div class="tool-name t-tool-bio">Bio Generator</div><div class="tool-desc t-tool-bio-desc">Social media profiles.</div></div>
       </a>
       <a href="/privacy-policy-generator" class="tool-card" data-name="privacy policy generator legal">
-        <div class="icon-wrap">⚖️</div><div><div class="tool-name" id="trans-tool-privacy">Privacy Gen</div><div class="tool-desc" id="trans-tool-privacy-desc">Basic legal templates.</div></div>
+        <div class="icon-wrap">⚖️</div><div><div class="tool-name t-tool-privacy">Privacy Gen</div><div class="tool-desc t-tool-privacy-desc">Basic legal templates.</div></div>
       </a>
     </div>
   </div>
@@ -416,28 +432,28 @@
   <!-- Tech -->
   <div class="cat-block cat-tech reveal">
     <div class="cat-header">
-      <span class="cat-label" id="trans-cat-tech">Tech & Developer</span>
-      <span class="cat-sub" id="trans-cat-tech-sub">/ dev utilities</span>
-      <span class="cat-pill" id="trans-cat-tech-count">6 tools</span>
+      <span class="cat-label t-cat-tech">Tech & Developer</span>
+      <span class="cat-sub t-cat-tech-sub">/ dev utilities</span>
+      <span class="cat-pill">6 tools</span>
     </div>
     <div class="tool-grid">
       <a href="/qr-generator" class="tool-card" data-name="qr generator urls wifi codes">
-        <div class="icon-wrap">📱</div><div><div class="tool-name" id="trans-tool-qr">QR Gen</div><div class="tool-desc" id="trans-tool-qr-desc">URLs & WiFi codes.</div></div>
+        <div class="icon-wrap">📱</div><div><div class="tool-name t-tool-qr">QR Gen</div><div class="tool-desc t-tool-qr-desc">URLs & WiFi codes.</div></div>
       </a>
       <a href="/json-formatter" class="tool-card" data-name="json formatter prettify code">
-        <div class="icon-wrap">💻</div><div><div class="tool-name" id="trans-tool-json">JSON Format</div><div class="tool-desc" id="trans-tool-json-desc">Prettify messy code.</div></div>
+        <div class="icon-wrap">💻</div><div><div class="tool-name t-tool-json">JSON Format</div><div class="tool-desc t-tool-json-desc">Prettify messy code.</div></div>
       </a>
       <a href="/base64-tool" class="tool-card" data-name="base64 encode decode">
-        <div class="icon-wrap">🔐</div><div><div class="tool-name" id="trans-tool-base64">Base64</div><div class="tool-desc" id="trans-tool-base64-desc">Encode & Decode.</div></div>
+        <div class="icon-wrap">🔐</div><div><div class="tool-name t-tool-base64">Base64</div><div class="tool-desc t-tool-base64-desc">Encode & Decode.</div></div>
       </a>
       <a href="/binary-converter" class="tool-card" data-name="binary converter text">
-        <div class="icon-wrap" style="font-size:11px;font-weight:700;">01</div><div><div class="tool-name" id="trans-tool-binary">Binary Conv.</div><div class="tool-desc" id="trans-tool-binary-desc">Text to 010101.</div></div>
+        <div class="icon-wrap" style="font-size:11px;font-weight:700;">01</div><div><div class="tool-name t-tool-binary">Binary Conv.</div><div class="tool-desc t-tool-binary-desc">Text to 010101.</div></div>
       </a>
       <a href="/color-palette" class="tool-card" data-name="color palette random hex schemes">
-        <div class="icon-wrap">🎨</div><div><div class="tool-name" id="trans-tool-color">Color Palette</div><div class="tool-desc" id="trans-tool-color-desc">Random HEX schemes.</div></div>
+        <div class="icon-wrap">🎨</div><div><div class="tool-name t-tool-color">Color Palette</div><div class="tool-desc t-tool-color-desc">Random HEX schemes.</div></div>
       </a>
       <a href="/password-generator" class="tool-card" data-name="password generator secure random strings">
-        <div class="icon-wrap">🛡️</div><div><div class="tool-name" id="trans-tool-password">PW Generator</div><div class="tool-desc" id="trans-tool-password-desc">Secure random strings.</div></div>
+        <div class="icon-wrap">🛡️</div><div><div class="tool-name t-tool-pw">PW Generator</div><div class="tool-desc t-tool-pw-desc">Secure random strings.</div></div>
       </a>
     </div>
   </div>
@@ -445,28 +461,28 @@
   <!-- Time -->
   <div class="cat-block cat-time reveal">
     <div class="cat-header">
-      <span class="cat-label" id="trans-cat-time">Time & Productivity</span>
-      <span class="cat-sub" id="trans-cat-time-sub">/ focus & planning</span>
-      <span class="cat-pill" id="trans-cat-time-count">6 tools</span>
+      <span class="cat-label t-cat-time">Time & Productivity</span>
+      <span class="cat-sub t-cat-time-sub">/ focus & planning</span>
+      <span class="cat-pill">6 tools</span>
     </div>
     <div class="tool-grid">
       <a href="/pomodoro-timer" class="tool-card" data-name="pomodoro focus timer">
-        <div class="icon-wrap">🍅</div><div><div class="tool-name" id="trans-tool-pomo">Pomodoro</div><div class="tool-desc" id="trans-tool-pomo-desc">Focus timer.</div></div>
+        <div class="icon-wrap">🍅</div><div><div class="tool-name t-tool-pomodoro">Pomodoro</div><div class="tool-desc t-tool-pomodoro-desc">Focus timer.</div></div>
       </a>
       <a href="/stopwatch" class="tool-card" data-name="stopwatch lap timer">
-        <div class="icon-wrap">⏱️</div><div><div class="tool-name" id="trans-tool-stopwatch">Stopwatch</div><div class="tool-desc" id="trans-tool-stopwatch-desc">Simple lap timer.</div></div>
+        <div class="icon-wrap">⏱️</div><div><div class="tool-name t-tool-stopwatch">Stopwatch</div><div class="tool-desc t-tool-stopwatch-desc">Simple lap timer.</div></div>
       </a>
       <a href="/workday-counter" class="tool-card" data-name="workdays business day count">
-        <div class="icon-wrap">📅</div><div><div class="tool-name" id="trans-tool-workdays">Workdays</div><div class="tool-desc" id="trans-tool-workdays-desc">Business day count.</div></div>
+        <div class="icon-wrap">📅</div><div><div class="tool-name t-tool-workdays">Workdays</div><div class="tool-desc t-tool-workdays-desc">Business day count.</div></div>
       </a>
       <a href="/year-progress" class="tool-card" data-name="year progress time visualization">
-        <div class="icon-wrap">📊</div><div><div class="tool-name" id="trans-tool-year">Year Progress</div><div class="tool-desc" id="trans-tool-year-desc">Visualizing time.</div></div>
+        <div class="icon-wrap">📊</div><div><div class="tool-name t-tool-year">Year Progress</div><div class="tool-desc t-tool-year-desc">Visualizing time.</div></div>
       </a>
       <a href="/timezone-clock" class="tool-card" data-name="world clock global timezone business hours">
-        <div class="icon-wrap">🌍</div><div><div class="tool-name" id="trans-tool-world">World Clock</div><div class="tool-desc" id="trans-tool-world-desc">Global business hours.</div></div>
+        <div class="icon-wrap">🌍</div><div><div class="tool-name t-tool-world">World Clock</div><div class="tool-desc t-tool-world-desc">Global business hours.</div></div>
       </a>
       <a href="/countdown-generator" class="tool-card" data-name="countdown event timer">
-        <div class="icon-wrap">⏳</div><div><div class="tool-name" id="trans-tool-countdown">Countdown</div><div class="tool-desc" id="trans-tool-countdown-desc">Until your event.</div></div>
+        <div class="icon-wrap">⏳</div><div><div class="tool-name t-tool-countdown">Countdown</div><div class="tool-desc t-tool-countdown-desc">Until your event.</div></div>
       </a>
     </div>
   </div>
@@ -474,28 +490,28 @@
   <!-- Health -->
   <div class="cat-block cat-health reveal">
     <div class="cat-header">
-      <span class="cat-label" id="trans-cat-health">Health & Utilities</span>
-      <span class="cat-sub" id="trans-cat-health-sub">/ everyday helpers</span>
-      <span class="cat-pill" id="trans-cat-health-count">6 tools</span>
+      <span class="cat-label t-cat-health">Health & Utilities</span>
+      <span class="cat-sub t-cat-health-sub">/ everyday helpers</span>
+      <span class="cat-pill">6 tools</span>
     </div>
     <div class="tool-grid">
       <a href="/bmi-calculator" class="tool-card" data-name="bmi calculator health index">
-        <div class="icon-wrap">⚖️</div><div><div class="tool-name" id="trans-tool-bmi">BMI Calc</div><div class="tool-desc" id="trans-tool-bmi-desc">Health index check.</div></div>
+        <div class="icon-wrap">⚖️</div><div><div class="tool-name t-tool-bmi">BMI Calc</div><div class="tool-desc t-tool-bmi-desc">Health index check.</div></div>
       </a>
       <a href="/age-calculator" class="tool-card" data-name="age calculator exact days">
-        <div class="icon-wrap">👶</div><div><div class="tool-name" id="trans-tool-age">Age Calc</div><div class="tool-desc" id="trans-tool-age-desc">Exact age in days.</div></div>
+        <div class="icon-wrap">👶</div><div><div class="tool-name t-tool-age">Age Calc</div><div class="tool-desc t-tool-age-desc">Exact age in days.</div></div>
       </a>
       <a href="/percentage-calculator" class="tool-card" data-name="percentage calculator math">
-        <div class="icon-wrap" style="font-size:13px;font-weight:700;">%</div><div><div class="tool-name" id="trans-tool-percentage">Percentage</div><div class="tool-desc" id="trans-tool-percentage-desc">Quick math helper.</div></div>
+        <div class="icon-wrap" style="font-size:13px;font-weight:700;">%</div><div><div class="tool-name t-tool-percent">Percentage</div><div class="tool-desc t-tool-percent-desc">Quick math helper.</div></div>
       </a>
       <a href="/name-generator" class="tool-card" data-name="name generator random identity">
-        <div class="icon-wrap">🎲</div><div><div class="tool-name" id="trans-tool-name">Name Gen</div><div class="tool-desc" id="trans-tool-name-desc">Random identity.</div></div>
+        <div class="icon-wrap">🎲</div><div><div class="tool-name t-tool-name">Name Gen</div><div class="tool-desc t-tool-name-desc">Random identity.</div></div>
       </a>
       <a href="/co2-travel-comparison" class="tool-card" data-name="co2 tracker travel footprint carbon">
-        <div class="icon-wrap">🌿</div><div><div class="tool-name" id="trans-tool-co2">CO2 Tracker</div><div class="tool-desc" id="trans-tool-co2-desc">Travel footprint.</div></div>
+        <div class="icon-wrap">🌿</div><div><div class="tool-name t-tool-co2">CO2 Tracker</div><div class="tool-desc t-tool-co2-desc">Travel footprint.</div></div>
       </a>
       <a href="/travel-budget-planner" class="tool-card" data-name="travel budget holiday estimates planner">
-        <div class="icon-wrap">✈️</div><div><div class="tool-name" id="trans-tool-travel">Travel Budget</div><div class="tool-desc" id="trans-tool-travel-desc">Holiday estimates.</div></div>
+        <div class="icon-wrap">✈️</div><div><div class="tool-name t-tool-travel">Travel Budget</div><div class="tool-desc t-tool-travel-desc">Holiday estimates.</div></div>
       </a>
     </div>
   </div>
@@ -505,501 +521,531 @@
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   <div class="footer-links">
-    <a href="/impressum">Impressum</a>
-    <a href="/datenschutz">Datenschutz</a>
+    <a href="/impressum" class="t-footer-imp">Impressum</a>
+    <a href="/datenschutz" class="t-footer-priv">Datenschutz</a>
   </div>
-  <p class="footer-copy" id="trans-footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
+  <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
 </footer>
 
 <script>
-  // ============================================
-  // MULTILINGUAL DATA
-  // ============================================
+  // --- TRANSLATION DATA ---
   const translations = {
     en: {
-      meta_title: "ToolCompass | 31+ High-End Productivity Tools (Free & Private)",
-      meta_desc: "Professional utilities for creators, devs, and finance. Instant results, no data logging, no account needed. Optimized for fast digital workflows.",
-      meta_schema_desc: "A collection of 31+ professional online tools including VAT calculators, AI summaries, and developer utilities.",
-      live: "tools live",
-      hero_badge: "Free · Private · No Login",
-      hero_title1: "The Digital",
-      hero_title2: "Swiss Army",
-      hero_sub: "31+ professional utilities for finance, content, dev work, and daily productivity. No account.",
-      stat1: "Free tools",
-      stat2: "Free uses",
+      heroTag: "Free · Private · No Login",
+      hero1: "The Digital",
+      hero2: "Swiss Army",
+      hero3: "Knife.",
+      heroSub: "31+ professional utilities for finance, content, dev work, and daily productivity. No account.",
+      statFree: "Free tools",
+      statUses: "Free uses",
       scroll: "Scroll",
-      search: "Search tools… VAT, Timer, JSON…",
-      // Categories
-      cat_finance: "Finance & Business",
-      cat_finance_sub: "/ money tools",
-      cat_finance_count: "6 tools",
-      cat_content: "Content & Writing",
-      cat_content_sub: "/ words & text",
-      cat_content_count: "7 tools",
-      cat_tech: "Tech & Developer",
-      cat_tech_sub: "/ dev utilities",
-      cat_tech_count: "6 tools",
-      cat_time: "Time & Productivity",
-      cat_time_sub: "/ focus & planning",
-      cat_time_count: "6 tools",
-      cat_health: "Health & Utilities",
-      cat_health_sub: "/ everyday helpers",
-      cat_health_count: "6 tools",
-      // Tools
-      badge_new: "New",
-      tool_briefing: "Briefing Generator",
-      tool_briefing_desc: "Structured client briefings for freelancers.",
-      tool_mortgage: "Mortgage Splitter",
-      tool_mortgage_desc: "Loan & interest analysis.",
-      tool_hourly: "Hourly Rate",
-      tool_hourly_desc: "Freelance rate optimizer.",
-      tool_vat: "VAT Calculator",
-      tool_vat_desc: "Sales tax addition & removal.",
-      tool_loan: "Loan Limit",
-      tool_loan_desc: "Affordability check.",
-      tool_tip: "Tip Splitter",
-      tool_tip_desc: "Shared bills made easy.",
-      tool_summary: "Summarizer",
-      tool_summary_desc: "AI-style text compression.",
-      tool_counter: "Word Counter",
-      tool_counter_desc: "SEO & character check.",
-      tool_case: "Case Fixer",
-      tool_case_desc: "Lower/Upper/Title case.",
-      tool_subject: "Subject Lines",
-      tool_subject_desc: "Email open rate booster.",
-      tool_linkedin: "LinkedIn Post",
-      tool_linkedin_desc: "Viral formatting.",
-      tool_bio: "Bio Generator",
-      tool_bio_desc: "Social media profiles.",
-      tool_privacy: "Privacy Gen",
-      tool_privacy_desc: "Basic legal templates.",
-      tool_qr: "QR Gen",
-      tool_qr_desc: "URLs & WiFi codes.",
-      tool_json: "JSON Format",
-      tool_json_desc: "Prettify messy code.",
-      tool_base64: "Base64",
-      tool_base64_desc: "Encode & Decode.",
-      tool_binary: "Binary Conv.",
-      tool_binary_desc: "Text to 010101.",
-      tool_color: "Color Palette",
-      tool_color_desc: "Random HEX schemes.",
-      tool_password: "PW Generator",
-      tool_password_desc: "Secure random strings.",
-      tool_pomo: "Pomodoro",
-      tool_pomo_desc: "Focus timer.",
-      tool_stopwatch: "Stopwatch",
-      tool_stopwatch_desc: "Simple lap timer.",
-      tool_workdays: "Workdays",
-      tool_workdays_desc: "Business day count.",
-      tool_year: "Year Progress",
-      tool_year_desc: "Visualizing time.",
-      tool_world: "World Clock",
-      tool_world_desc: "Global business hours.",
-      tool_countdown: "Countdown",
-      tool_countdown_desc: "Until your event.",
-      tool_bmi: "BMI Calc",
-      tool_bmi_desc: "Health index check.",
-      tool_age: "Age Calc",
-      tool_age_desc: "Exact age in days.",
-      tool_percentage: "Percentage",
-      tool_percentage_desc: "Quick math helper.",
-      tool_name: "Name Gen",
-      tool_name_desc: "Random identity.",
-      tool_co2: "CO2 Tracker",
-      tool_co2_desc: "Travel footprint.",
-      tool_travel: "Travel Budget",
-      tool_travel_desc: "Holiday estimates.",
-      footer_copy: "ToolCompass.org &copy; 2026 — Professional Online Tools"
+      catFinance: "Finance & Business",
+      catFinanceSub: "/ money tools",
+      catContent: "Content & Writing",
+      catContentSub: "/ words & text",
+      catTech: "Tech & Developer",
+      catTechSub: "/ dev utilities",
+      catTime: "Time & Productivity",
+      catTimeSub: "/ focus & planning",
+      catHealth: "Health & Utilities",
+      catHealthSub: "/ everyday helpers",
+      new: "New",
+      footerImp: "Impressum",
+      footerPriv: "Privacy Policy",
+      tools: {
+        briefing: "Briefing Generator", briefingDesc: "Structured client briefings for freelancers.",
+        mortgage: "Mortgage Splitter", mortgageDesc: "Loan & interest analysis.",
+        hourly: "Hourly Rate", hourlyDesc: "Freelance rate optimizer.",
+        vat: "VAT Calculator", vatDesc: "Sales tax addition & removal.",
+        loan: "Loan Limit", loanDesc: "Affordability check.",
+        tip: "Tip Splitter", tipDesc: "Shared bills made easy.",
+        summarizer: "Summarizer", summarizerDesc: "AI-style text compression.",
+        word: "Word Counter", wordDesc: "SEO & character check.",
+        case: "Case Fixer", caseDesc: "Lower/Upper/Title case.",
+        subject: "Subject Lines", subjectDesc: "Email open rate booster.",
+        linkedin: "LinkedIn Post", linkedinDesc: "Viral formatting.",
+        bio: "Bio Generator", bioDesc: "Social media profiles.",
+        privacy: "Privacy Gen", privacyDesc: "Basic legal templates.",
+        qr: "QR Gen", qrDesc: "URLs & WiFi codes.",
+        json: "JSON Format", jsonDesc: "Prettify messy code.",
+        base64: "Base64", base64Desc: "Encode & Decode.",
+        binary: "Binary Conv.", binaryDesc: "Text to 010101.",
+        color: "Color Palette", colorDesc: "Random HEX schemes.",
+        pw: "PW Generator", pwDesc: "Secure random strings.",
+        pomodoro: "Pomodoro", pomodoroDesc: "Focus timer.",
+        stopwatch: "Stopwatch", stopwatchDesc: "Simple lap timer.",
+        workdays: "Workdays", workdaysDesc: "Business day count.",
+        year: "Year Progress", yearDesc: "Visualizing time.",
+        world: "World Clock", worldDesc: "Global business hours.",
+        countdown: "Countdown", countdownDesc: "Until your event.",
+        bmi: "BMI Calc", bmiDesc: "Health index check.",
+        age: "Age Calc", ageDesc: "Exact age in days.",
+        percent: "Percentage", percentDesc: "Quick math helper.",
+        name: "Name Gen", nameDesc: "Random identity.",
+        co2: "CO2 Tracker", co2Desc: "Travel footprint.",
+        travel: "Travel Budget", travelDesc: "Holiday estimates."
+      }
     },
     de: {
-      meta_title: "ToolCompass | 31+ Premium Produktivitätstools (Kostenlos & Privat)",
-      meta_desc: "Professionelle Dienstprogramme für Kreative, Entwickler und Finanzen. Sofortige Ergebnisse, keine Datenaufzeichnung, kein Konto nötig. Optimiert für schnelle digitale Workflows.",
-      meta_schema_desc: "Eine Sammlung von 31+ professionellen Online-Tools, einschließlich VAT-Rechnern, KI-Zusammenfassungen und Entwickler-Dienstprogrammen.",
-      live: "Tools aktiv",
-      hero_badge: "Kostenlos · Privat · Kein Login",
-      hero_title1: "Das Digitale",
-      hero_title2: "Schweizer Taschenmesser",
-      hero_sub: "31+ professionelle Dienstprogramme für Finanzen, Content, Entwicklung und Alltag. Kein Konto.",
-      stat1: "Kostenlose Tools",
-      stat2: "Unbegrenzt nutzbar",
-      scroll: "Runterscrollen",
-      search: "Tools durchsuchen… MwSt, Timer, JSON…",
-      // Categories
-      cat_finance: "Finanzen & Business",
-      cat_finance_sub: "/ geld-tools",
-      cat_finance_count: "6 Tools",
-      cat_content: "Content & Texte",
-      cat_content_sub: "/ wörter & text",
-      cat_content_count: "7 Tools",
-      cat_tech: "Tech & Entwickler",
-      cat_tech_sub: "/ dev-tools",
-      cat_tech_count: "6 Tools",
-      cat_time: "Zeit & Produktivität",
-      cat_time_sub: "/ fokus & planung",
-      cat_time_count: "6 Tools",
-      cat_health: "Gesundheit & Tools",
-      cat_health_sub: "/ helfer",
-      cat_health_count: "6 Tools",
-      // Tools
-      badge_new: "Neu",
-      tool_briefing: "Briefing Generator",
-      tool_briefing_desc: "Strukturierte Kundenbriefings für Freelancer.",
-      tool_mortgage: "Kredit Teiler",
-      tool_mortgage_desc: "Kredit & Zins Analyse.",
-      tool_hourly: "Stundensatz",
-      tool_hourly_desc: "Optimierer für Freelancer.",
-      tool_vat: "MwSt Rechner",
-      tool_vat_desc: "Verkaufsteuer aufschlagen & entfernen.",
-      tool_loan: "Kreditlimit",
-      tool_loan_desc: "Finanzielle Eignung prüfen.",
-      tool_tip: "Trinkgeld Teiler",
-      tool_tip_desc: "Geteilte Rechnungen vereinfacht.",
-      tool_summary: "Zusammenfasser",
-      tool_summary_desc: "KI-artige Textkompression.",
-      tool_counter: "Wortzähler",
-      tool_counter_desc: "SEO & Zeichen Check.",
-      tool_case: "Groß-/Kleinschreibung",
-      tool_case_desc: "Groß-, Klein-, Titel-Schreibung.",
-      tool_subject: "Betreffzeilen",
-      tool_subject_desc: "Öffnungsrate von E-Mails steigern.",
-      tool_linkedin: "LinkedIn Post",
-      tool_linkedin_desc: "Virale Formatierung.",
-      tool_bio: "Bio Generator",
-      tool_bio_desc: "Social Media Profile.",
-      tool_privacy: "Datenschutz Gen",
-      tool_privacy_desc: "Grundlegende rechtliche Vorlagen.",
-      tool_qr: "QR Code",
-      tool_qr_desc: "URLs & WLAN-Codes.",
-      tool_json: "JSON Formatierer",
-      tool_json_desc: "Unleserlichen Code verschönern.",
-      tool_base64: "Base64",
-      tool_base64_desc: "Kodieren & Dekodieren.",
-      tool_binary: "Binärkonv.",
-      tool_binary_desc: "Text zu 010101.",
-      tool_color: "Farbpalette",
-      tool_color_desc: "Zufällige HEX-Schemata.",
-      tool_password: "Passwort Gen",
-      tool_password_desc: "Sichere Zufallsstrings.",
-      tool_pomo: "Pomodoro",
-      tool_pomo_desc: "Fokus-Timer.",
-      tool_stopwatch: "Stoppuhr",
-      tool_stopwatch_desc: "Einfacher Timer.",
-      tool_workdays: "Arbeitstage",
-      tool_workdays_desc: "Anzahl Geschäftstage.",
-      tool_year: "Jahresfortschritt",
-      tool_year_desc: "Zeit visualisieren.",
-      tool_world: "Weltuhr",
-      tool_world_desc: "Globale Geschäftszeiten.",
-      tool_countdown: "Countdown",
-      tool_countdown_desc: "Bis zu deinem Ereignis.",
-      tool_bmi: "BMI Rechner",
-      tool_bmi_desc: "Gesundheitsindex prüfen.",
-      tool_age: "Alter Rechner",
-      tool_age_desc: "Exaktes Alter in Tagen.",
-      tool_percentage: "Prozentrechner",
-      tool_percentage_desc: "Schnelle Mathematik.",
-      tool_name: "Namen Generator",
-      tool_name_desc: "Zufällige Identität.",
-      tool_co2: "CO2 Tracker",
-      tool_co2_desc: "Reise-Fußabdruck.",
-      tool_travel: "Reise-Budget",
-      tool_travel_desc: "Urlaubs-Kalkulationen.",
-      footer_copy: "ToolCompass.org &copy; 2026 — Professionelle Online Tools"
+      heroTag: "Kostenlos · Privat · Kein Login",
+      hero1: "Das digitale",
+      hero2: "Schweizer",
+      hero3: "Taschenmesser.",
+      heroSub: "31+ Profi-Tools für Finanzen, Content, Dev-Arbeit und Produktivität. Kein Account.",
+      statFree: "Gratis Tools",
+      statUses: "Gratis Nutzung",
+      scroll: "Scrollen",
+      catFinance: "Finanzen & Business",
+      catFinanceSub: "/ Geld-Tools",
+      catContent: "Content & Schreiben",
+      catContentSub: "/ Wörter & Text",
+      catTech: "Tech & Entwickler",
+      catTechSub: "/ Dev-Utilities",
+      catTime: "Zeit & Produktivität",
+      catTimeSub: "/ Fokus & Planung",
+      catHealth: "Gesundheit & Sonstiges",
+      catHealthSub: "/ Alltagshelfer",
+      new: "Neu",
+      footerImp: "Impressum",
+      footerPriv: "Datenschutz",
+      tools: {
+        briefing: "Briefing Generator", briefingDesc: "Strukturierte Kundenbriefings für Freelancer.",
+        mortgage: "Hypotheken-Rechner", mortgageDesc: "Kredit- und Zinsanalyse.",
+        hourly: "Stundensatz", hourlyDesc: "Freelance-Ratenoptimierer.",
+        vat: "MwSt-Rechner", vatDesc: "Steuerberechnung & Entnahme.",
+        loan: "Kreditlimit", loanDesc: "Machbarkeitsprüfung.",
+        tip: "Trinkgeld-Teiler", tipDesc: "Geteilte Rechnungen leicht gemacht.",
+        summarizer: "Zusammenfasser", summarizerDesc: "Textkomprimierung im KI-Stil.",
+        word: "Wortzähler", wordDesc: "SEO & Zeichenzahl-Check.",
+        case: "Groß-/Kleinschreibung", caseDesc: "Lower/Upper/Title Case.",
+        subject: "Betreffzeilen", subjectDesc: "E-Mail-Öffnungsrate-Booster.",
+        linkedin: "LinkedIn Post", linkedinDesc: "Virale Formatierung.",
+        bio: "Bio Generator", bioDesc: "Social-Media-Profile.",
+        privacy: "Datenschutz Gen", privacyDesc: "Basis-Rechtsvorlagen.",
+        qr: "QR Generator", qrDesc: "URLs & WLAN-Codes.",
+        json: "JSON Format", jsonDesc: "Unordentlichen Code verschönern.",
+        base64: "Base64", base64Desc: "Kodieren & Dekodieren.",
+        binary: "Binär-Konverter", binaryDesc: "Text zu 010101.",
+        color: "Farbpalette", colorDesc: "Zufällige HEX-Schemata.",
+        pw: "Passwort Gen", pwDesc: "Sichere Zufallsstrings.",
+        pomodoro: "Pomodoro", pomodoroDesc: "Fokus-Timer.",
+        stopwatch: "Stoppuhr", stopwatchDesc: "Einfache Rundenzeit.",
+        workdays: "Arbeitstage", workdaysDesc: "Geschäftstage zählen.",
+        year: "Jahresfortschritt", yearDesc: "Zeit visualisieren.",
+        world: "Weltuhr", worldDesc: "Globale Geschäftszeiten.",
+        countdown: "Countdown", countdownDesc: "Bis zu deinem Event.",
+        bmi: "BMI Rechner", bmiDesc: "Gesundheitsindex-Check.",
+        age: "Alter Rechner", ageDesc: "Exaktes Alter in Tagen.",
+        percent: "Prozentrechner", percentDesc: "Schneller Mathe-Helfer.",
+        name: "Namensgen", nameDesc: "Zufällige Identität.",
+        co2: "CO2 Tracker", co2Desc: "Reisefußabdruck.",
+        travel: "Reisebudget", travelDesc: "Urlaubsschätzung."
+      }
     },
     es: {
-      meta_title: "ToolCompass | 31+ Herramientas de Productividad de Alta Gama (Gratis y Privadas)",
-      meta_desc: "Utilidades profesionales para creadores, desarrolladores y finanzas. Resultados instantáneos, sin registro de datos, sin cuenta necesaria. Optimizado para flujos de trabajo digitales rápidos.",
-      meta_schema_desc: "Una colección de 31+ herramientas en línea profesionales que incluyen calculadoras de VAT, resúmenes de IA y utilidades para desarrolladores.",
-      live: "herramientas activas",
-      hero_badge: "Gratis · Privado · Sin Registro",
-      hero_title1: "El",
-      hero_title2: "Navaja Suiza",
-      hero_sub: "31+ utilidades profesionales para finanzas, contenido, trabajo y productividad diaria. Sin cuenta.",
-      stat1: "Herramientas Gratis",
-      stat2: "Uso Ilimitado",
-      scroll: "Desplazarse",
-      search: "Buscar herramientas… IVA, Temporizador, JSON…",
-      // Categories
-      cat_finance: "Finanzas & Negocios",
-      cat_finance_sub: "/ herramientas de dinero",
-      cat_finance_count: "6 herramientas",
-      cat_content: "Contenido & Texto",
-      cat_content_sub: "/ palabras & texto",
-      cat_content_count: "7 herramientas",
-      cat_tech: "Tecnología & Desarrollador",
-      cat_tech_sub: "/ utilidades dev",
-      cat_tech_count: "6 herramientas",
-      cat_time: "Tiempo & Productividad",
-      cat_time_sub: "/ enfoque & planificación",
-      cat_time_count: "6 herramientas",
-      cat_health: "Salud & Utilidades",
-      cat_health_sub: "/ ayudas diarias",
-      cat_health_count: "6 herramientas",
-      // Tools
-      badge_new: "Nuevo",
-      tool_briefing: "Generador de Briefing",
-      tool_briefing_desc: "Briefings estructurados para freelancers.",
-      tool_mortgage: "Divisor de Hipoteca",
-      tool_mortgage_desc: "Análisis de préstamo e intereses.",
-      tool_hourly: "Tarifa Horaria",
-      tool_hourly_desc: "Optimizador para freelancers.",
-      tool_vat: "Calculadora de IVA",
-      tool_vat_desc: "Agregar y quitar impuestos.",
-      tool_loan: "Límite de Préstamo",
-      tool_loan_desc: "Verificación de capacidad de pago.",
-      tool_tip: "Divisor de Propina",
-      tool_tip_desc: "Facilita las cuentas compartidas.",
-      tool_summary: "Resumidor",
-      tool_summary_desc: "Compresión de texto estilo IA.",
-      tool_counter: "Contador de Palabras",
-      tool_counter_desc: "Verificación SEO y de caracteres.",
-      tool_case: "Corrector de Mayúsculas",
-      tool_case_desc: "Mayúsculas, minúsculas, título.",
-      tool_subject: "Asuntos de Email",
-      tool_subject_desc: "Mejora la tasa de apertura.",
-      tool_linkedin: "Publicación LinkedIn",
-      tool_linkedin_desc: "Formato viral.",
-      tool_bio: "Generador de Biografía",
-      tool_bio_desc: "Perfiles de redes sociales.",
-      tool_privacy: "Generador de Privacidad",
-      tool_privacy_desc: "Plantillas legales básicas.",
-      tool_qr: "Generador QR",
-      tool_qr_desc: "URLs y códigos WiFi.",
-      tool_json: "Formateador JSON",
-      tool_json_desc: "Embellece código desordenado.",
-      tool_base64: "Base64",
-      tool_base64_desc: "Codificar y Decodificar.",
-      tool_binary: "Conversor Binario",
-      tool_binary_desc: "Texto a 010101.",
-      tool_color: "Paleta de Colores",
-      tool_color_desc: "Esquemas HEX aleatorios.",
-      tool_password: "Generador de Contraseñas",
-      tool_password_desc: "Cadenas aleatorias seguras.",
-      tool_pomo: "Pomodoro",
-      tool_pomo_desc: "Temporizador de enfoque.",
-      tool_stopwatch: "Cronómetro",
-      tool_stopwatch_desc: "Temporizador simple.",
-      tool_workdays: "Días Laborales",
-      tool_workdays_desc: "Conteo de días hábiles.",
-      tool_year: "Progreso del Año",
-      tool_year_desc: "Visualización del tiempo.",
-      tool_world: "Reloj Mundial",
-      tool_world_desc: "Horarios comerciales globales.",
-      tool_countdown: "Cuenta Regresiva",
-      tool_countdown_desc: "Hasta tu evento.",
-      tool_bmi: "Calculadora IMC",
-      tool_bmi_desc: "Verificación de índice de salud.",
-      tool_age: "Calculadora de Edad",
-      tool_age_desc: "Edad exacta en días.",
-      tool_percentage: "Calculadora de Porcentaje",
-      tool_percentage_desc: "Ayuda matemática rápida.",
-      tool_name: "Generador de Nombres",
-      tool_name_desc: "Identidad aleatoria.",
-      tool_co2: "Rastreador CO2",
-      tool_co2_desc: "Huella de viaje.",
-      tool_travel: "Presupuesto de Viaje",
-      tool_travel_desc: "Estimaciones de vacaciones.",
-      footer_copy: "ToolCompass.org &copy; 2026 — Herramientas Profesionales en Línea"
+      heroTag: "Gratis · Privado · Sin Login",
+      hero1: "El Digital",
+      hero2: "Navaja Suiza",
+      hero3: ".",
+      heroSub: "31+ utilidades profesionales para finanzas, contenido, desarrollo y productividad. Sin cuenta.",
+      statFree: "Herramientas gratis",
+      statUses: "Usos gratis",
+      scroll: "Desplazar",
+      catFinance: "Finanzas y Negocios",
+      catFinanceSub: "/ herramientas de dinero",
+      catContent: "Contenido y Escritura",
+      catContentSub: "/ palabras y texto",
+      catTech: "Tecnología y Dev",
+      catTechSub: "/ utilidades dev",
+      catTime: "Tiempo y Productividad",
+      catTimeSub: "/ enfoque y planificación",
+      catHealth: "Salud y Utilidades",
+      catHealthSub: "/ ayudantes diarios",
+      new: "Nuevo",
+      footerImp: "Aviso Legal",
+      footerPriv: "Política de Privacidad",
+      tools: {
+        briefing: "Generador de Briefing", briefingDesc: "Briefings estructurados para freelancers.",
+        mortgage: "Divisor de Hipoteca", mortgageDesc: "Análisis de préstamos e intereses.",
+        hourly: "Tarifa por Hora", hourlyDesc: "Optimizador de tarifas freelance.",
+        vat: "Calculadora IVA", vatDesc: "Suma y resta de impuestos.",
+        loan: "Límite de Préstamo", loanDesc: "Comprobación de asequibilidad.",
+        tip: "Divisor de Propina", tipDesc: "Cuentas compartidas fáciles.",
+        summarizer: "Resumidor", summarizerDesc: "Compresión de texto estilo IA.",
+        word: "Contador de Palabras", wordDesc: "SEO y recuento de caracteres.",
+        case: "Corrector de Mayúsculas", caseDesc: "Minúsculas/Mayúsculas/Título.",
+        subject: "Líneas de Asunto", subjectDesc: "Mejora la apertura de emails.",
+        linkedin: "Post de LinkedIn", linkedinDesc: "Formato viral.",
+        bio: "Generador de Bio", bioDesc: "Perfiles de redes sociales.",
+        privacy: "Gen de Privacidad", privacyDesc: "Plantillas legales básicas.",
+        qr: "Gen de QR", qrDesc: "URLs y códigos WiFi.",
+        json: "Formato JSON", jsonDesc: "Ordena código desordenado.",
+        base64: "Base64", base64Desc: "Codificar y Decodificar.",
+        binary: "Conversor Binario", binaryDesc: "Texto a 010101.",
+        color: "Paleta de Colores", colorDesc: "Esquemas HEX aleatorios.",
+        pw: "Gen de Contraseñas", pwDesc: "Cadenas aleatorias seguras.",
+        pomodoro: "Pomodoro", pomodoroDesc: "Temporizador de enfoque.",
+        stopwatch: "Cronómetro", stopwatchDesc: "Temporizador de vueltas simple.",
+        workdays: "Días Laborables", workdaysDesc: "Recuento de días hábiles.",
+        year: "Progreso del Año", yearDesc: "Visualizando el tiempo.",
+        world: "Reloj Mundial", worldDesc: "Horario comercial global.",
+        countdown: "Cuenta Atrás", countdownDesc: "Hasta tu evento.",
+        bmi: "Calc IMC", bmiDesc: "Chequeo de índice de salud.",
+        age: "Calc Edad", ageDesc: "Edad exacta en días.",
+        percent: "Porcentaje", percentDesc: "Ayuda matemática rápida.",
+        name: "Gen de Nombres", nameDesc: "Identidad aleatoria.",
+        co2: "Rastreador CO2", co2Desc: "Huella de viaje.",
+        travel: "Presupuesto de Viaje", travelDesc: "Estimaciones de vacaciones."
+      }
     },
     fr: {
-      meta_title: "ToolCompass | 31+ Outils de Productivité Haut de Gamme (Gratuits & Privés)",
-      meta_desc: "Utilitaires professionnels pour les créateurs, les développeurs et les finances. Résultats instantanés, aucune journalisation des données, aucun compte nécessaire. Optimisé pour des flux de travail numériques rapides.",
-      meta_schema_desc: "Une collection de 31+ outils en ligne professionnels incluant des calculateurs de TVA, des résumés IA et des utilitaires pour développeurs.",
-      live: "outils actifs",
-      hero_badge: "Gratuit · Privé · Sans Compte",
-      hero_title1: "Le",
-      hero_title2: "Couteau Suisse",
-      hero_sub: "31+ utilitaires professionnels pour les finances, le contenu, le travail et la productivité quotidienne. Aucun compte.",
-      stat1: "Outils Gratuits",
-      stat2: "Utilisation Illimitée",
-      scroll: "Faire défiler",
-      search: "Rechercher des outils… TVA, Minuteur, JSON…",
-      // Categories
-      cat_finance: "Finance & Entreprise",
-      cat_finance_sub: "/ outils argent",
-      cat_finance_count: "6 outils",
-      cat_content: "Contenu & Écriture",
-      cat_content_sub: "/ mots & texte",
-      cat_content_count: "7 outils",
-      cat_tech: "Tech & Développeur",
-      cat_tech_sub: "/ utilitaires dev",
-      cat_tech_count: "6 outils",
-      cat_time: "Temps & Productivité",
-      cat_time_sub: "/ focus & planification",
-      cat_time_count: "6 outils",
-      cat_health: "Santé & Utilitaires",
-      cat_health_sub: "/ aides quotidiennes",
-      cat_health_count: "6 outils",
-      // Tools
-      badge_new: "Nouveau",
-      tool_briefing: "Générateur de Briefing",
-      tool_briefing_desc: "Briefings structurés pour les freelances.",
-      tool_mortgage: "Diviseur de Prêt",
-      tool_mortgage_desc: "Analyse du prêt et des intérêts.",
-      tool_hourly: "Taux Horaire",
-      tool_hourly_desc: "Optimiseur pour freelances.",
-      tool_vat: "Calculateur de TVA",
-      tool_vat_desc: "Ajout et suppression des taxes.",
-      tool_loan: "Limite de Prêt",
-      tool_loan_desc: "Vérification de la capacité d'emprunt.",
-      tool_tip: "Diviseur de Pourboire",
-      tool_tip_desc: "Simplifie les factures partagées.",
-      tool_summary: "Résumeur",
-      tool_summary_desc: "Compression de texte type IA.",
-      tool_counter: "Compteur de Mots",
-      tool_counter_desc: "Vérification SEO et des caractères.",
-      tool_case: "Correcteur de Casse",
-      tool_case_desc: "Majuscules, minuscules, titre.",
-      tool_subject: "Lignes d'Objet",
-      tool_subject_desc: "Amélioration du taux d'ouverture.",
-      tool_linkedin: "Post LinkedIn",
-      tool_linkedin_desc: "Formatage viral.",
-      tool_bio: "Générateur de Bio",
-      tool_bio_desc: "Profils de réseaux sociaux.",
-      tool_privacy: "Générateur de Confidentialité",
-      tool_privacy_desc: "Modèles légaux basiques.",
-      tool_qr: "Générateur QR",
-      tool_qr_desc: "URLs et codes WiFi.",
-      tool_json: "Formateur JSON",
-      tool_json_desc: "Embellit le code désordonné.",
-      tool_base64: "Base64",
-      tool_base64_desc: "Encoder et Décoder.",
-      tool_binary: "Convertisseur Binaire",
-      tool_binary_desc: "Texte vers 010101.",
-      tool_color: "Palette de Couleurs",
-      tool_color_desc: "Schémas HEX aléatoires.",
-      tool_password: "Générateur de MDP",
-      tool_password_desc: "Chaînes aléatoires sécurisées.",
-      tool_pomo: "Pomodoro",
-      tool_pomo_desc: "Minuteur de focus.",
-      tool_stopwatch: "Chronomètre",
-      tool_stopwatch_desc: "Minuteur simple.",
-      tool_workdays: "Jours Ouvrables",
-      tool_workdays_desc: "Comptage des jours ouvrés.",
-      tool_year: "Progrès de l'Année",
-      tool_year_desc: "Visualisation du temps.",
-      tool_world: "Horloge Mondiale",
-      tool_world_desc: "Heures d'ouverture mondiales.",
-      tool_countdown: "Compte à Rebours",
-      tool_countdown_desc: "Jusqu'à votre événement.",
-      tool_bmi: "Calculatrice IMC",
-      tool_bmi_desc: "Vérification de l'indice de santé.",
-      tool_age: "Calculatrice d'Âge",
-      tool_age_desc: "Âge exact en jours.",
-      tool_percentage: "Calculatrice de Pourcentage",
-      tool_percentage_desc: "Aide mathématique rapide.",
-      tool_name: "Générateur de Noms",
-      tool_name_desc: "Identité aléatoire.",
-      tool_co2: "Traceur CO2",
-      tool_co2_desc: "Empreinte de voyage.",
-      tool_travel: "Budget Voyage",
-      tool_travel_desc: "Estimations de vacances.",
-      footer_copy: "ToolCompass.org &copy; 2026 — Outils Professionnels en Ligne"
+      heroTag: "Gratuit · Privé · Sans Login",
+      hero1: "Le Couteau",
+      hero2: "Suisse",
+      hero3: "Numérique.",
+      heroSub: "31+ utilitaires pro pour finance, contenu, dev et productivité. Pas de compte.",
+      statFree: "Outils gratuits",
+      statUses: "Usages gratuits",
+      scroll: "Défiler",
+      catFinance: "Finance & Business",
+      catFinanceSub: "/ outils d'argent",
+      catContent: "Contenu & Rédaction",
+      catContentSub: "/ mots & texte",
+      catTech: "Tech & Développeur",
+      catTechSub: "/ utilitaires dev",
+      catTime: "Temps & Productivité",
+      catTimeSub: "/ focus & planification",
+      catHealth: "Santé & Utilitaires",
+      catHealthSub: "/ aides quotidiennes",
+      new: "Nouveau",
+      footerImp: "Mentions Légales",
+      footerPriv: "Confidentialité",
+      tools: {
+        briefing: "Générateur de Briefing", briefingDesc: "Briefings clients structurés pour freelances.",
+        mortgage: "Calculateur Hypothèque", mortgageDesc: "Analyse de prêt et intérêts.",
+        hourly: "Taux Horaire", hourlyDesc: "Optimiseur de taux freelance.",
+        vat: "Calculateur TVA", vatDesc: "Ajout et retrait de taxe.",
+        loan: "Limite de Prêt", loanDesc: "Vérification de capacité.",
+        tip: "Partage de Pourboire", tipDesc: "Factures partagées simplifiées.",
+        summarizer: "Résumeur", summarizerDesc: "Compression de texte style IA.",
+        word: "Compteur de Mots", wordDesc: "SEO et vérification de caractères.",
+        case: "Correcteur de Cas", caseDesc: "Minuscules/Majuscules/Titre.",
+        subject: "Lignes d'Objet", subjectDesc: "Booster d'ouverture d'email.",
+        linkedin: "Post LinkedIn", linkedinDesc: "Formatage viral.",
+        bio: "Générateur de Bio", bioDesc: "Profils réseaux sociaux.",
+        privacy: "Gén Confidentialité", privacyDesc: "Modèles juridiques de base.",
+        qr: "Gén QR", qrDesc: "URLs et codes WiFi.",
+        json: "Format JSON", jsonDesc: "Embellir le code désordonné.",
+        base64: "Base64", base64Desc: "Encoder et Décoder.",
+        binary: "Conv. Binaire", binaryDesc: "Texte vers 010101.",
+        color: "Palette de Couleurs", colorDesc: "Schémas HEX aléatoires.",
+        pw: "Gén Mot de Passe", pwDesc: "Chaînes aléatoires sécurisées.",
+        pomodoro: "Pomodoro", pomodoroDesc: "Minuteur de focus.",
+        stopwatch: "Chronomètre", stopwatchDesc: "Minuteur de tour simple.",
+        workdays: "Jours Ouvrés", workdaysDesc: "Comptage de jours ouvrables.",
+        year: "Progression Année", yearDesc: "Visualisation du temps.",
+        world: "Horloge Mondiale", worldDesc: "Heures commerciales mondiales.",
+        countdown: "Compte à Rebours", countdownDesc: "Jusqu'à votre événement.",
+        bmi: "Calc IMC", bmiDesc: "Vérification indice santé.",
+        age: "Calc Âge", ageDesc: "Âge exact en jours.",
+        percent: "Pourcentage", percentDesc: "Aide maths rapide.",
+        name: "Gén Nom", nameDesc: "Identité aléatoire.",
+        co2: "Suivi CO2", co2Desc: "Empreinte voyage.",
+        travel: "Budget Voyage", travelDesc: "Estimations vacances."
+      }
+    },
+    ru: {
+      heroTag: "Бесплатно · Приватно · Без входа",
+      hero1: "Цифровой",
+      hero2: "Швейцарский",
+      hero3: "Нож.",
+      heroSub: "31+ профессиональных утилит для финансов, контента, разработки и продуктивности. Без аккаунта.",
+      statFree: "Бесплатные инструменты",
+      statUses: "Бесплатное использование",
+      scroll: "Прокрутить",
+      catFinance: "Финансы и Бизнес",
+      catFinanceSub: "/ денежные инструменты",
+      catContent: "Контент и Письмо",
+      catContentSub: "/ слова и текст",
+      catTech: "Технологии и Разработка",
+      catTechSub: "/ утилиты для разработчиков",
+      catTime: "Время и Продуктивность",
+      catTimeSub: "/ фокус и планирование",
+      catHealth: "Здоровье и Утилиты",
+      catHealthSub: "/ повседневные помощники",
+      new: "Новое",
+      footerImp: "Империум",
+      footerPriv: "Политика конфиденциальности",
+      tools: {
+        briefing: "Генератор Брифинга", briefingDesc: "Структурированные брифинги для фрилансеров.",
+        mortgage: "Ипотечный Разделитель", mortgageDesc: "Анализ кредита и процентов.",
+        hourly: "Почасовая Ставка", hourlyDesc: "Оптимизатор ставок фрилансера.",
+        vat: "Калькулятор НДС", vatDesc: "Добавление и удаление налога.",
+        loan: "Лимит Кредита", loanDesc: "Проверка доступности.",
+        tip: "Разделитель Чаевых", tipDesc: "Общие счета легко.",
+        summarizer: "Резюматор", summarizerDesc: "Сжатие текста в стиле ИИ.",
+        word: "Счетчик Слов", wordDesc: "SEO и проверка символов.",
+        case: "Исправитель Регистра", caseDesc: "Нижний/Верхний/Заглавный регистр.",
+        subject: "Темы Писем", subjectDesc: "Повышение открываемости писем.",
+        linkedin: "Пост LinkedIn", linkedinDesc: "Вирусное форматирование.",
+        bio: "Генератор Био", bioDesc: "Профили в соцсетях.",
+        privacy: "Ген Конфиденциальности", privacyDesc: "Базовые юридические шаблоны.",
+        qr: "QR Генератор", qrDesc: "URL и коды WiFi.",
+        json: "Формат JSON", jsonDesc: "Приведение кода в порядок.",
+        base64: "Base64", base64Desc: "Кодирование и Декодирование.",
+        binary: "Бинарный Конвертер", binaryDesc: "Текст в 010101.",
+        color: "Цветовая Палитра", colorDesc: "Случайные HEX схемы.",
+        pw: "Ген Паролей", pwDesc: "Безопасные случайные строки.",
+        pomodoro: "Помодоро", pomodoroDesc: "Таймер фокуса.",
+        stopwatch: "Секундомер", stopwatchDesc: "Простой таймер кругов.",
+        workdays: "Рабочие Дни", workdaysDesc: "Подсчет рабочих дней.",
+        year: "Прогресс Года", yearDesc: "Визуализация времени.",
+        world: "Мировое Время", worldDesc: "Глобальное рабочее время.",
+        countdown: "Обратный Отсчет", countdownDesc: "До вашего события.",
+        bmi: "Калькулятор ИМТ", bmiDesc: "Проверка индекса здоровья.",
+        age: "Калькулятор Возраста", ageDesc: "Точный возраст в днях.",
+        percent: "Проценты", percentDesc: "Быстрый помощник по математике.",
+        name: "Ген Имен", nameDesc: "Случайная личность.",
+        co2: "Трекер CO2", co2Desc: "След от путешествий.",
+        travel: "Бюджет Поездки", travelDesc: "Оценки отпуска."
+      }
+    },
+    ar: {
+      heroTag: "مجاني · خاص · بدون تسجيل دخول",
+      hero1: "السكين",
+      hero2: "السويسري",
+      hero3: "الرقمي.",
+      heroSub: "أكثر من 31 أداة احترافية للمالية والمحتوى والبرمجة والإنتاجية. بدون حساب.",
+      statFree: "أدوات مجانية",
+      statUses: "استخدامات مجانية",
+      scroll: "تمرير",
+      catFinance: "المالية والأعمال",
+      catFinanceSub: "/ أدوات المال",
+      catContent: "المحتوى والكتابة",
+      catContentSub: "/ الكلمات والنص",
+      catTech: "التكنولوجيا والمطورين",
+      catTechSub: "/ أدوات المطورين",
+      catTime: "الوقت والإنتاجية",
+      catTimeSub: "/ التركيز والتخطيط",
+      catHealth: "الصحة والأدوات",
+      catHealthSub: "/ مساعدات يومية",
+      new: "جديد",
+      footerImp: "البيانات القانونية",
+      footerPriv: "سياسة الخصوصية",
+      tools: {
+        briefing: "منشئ الإحاطة", briefingDesc: "إحاطات عملاء منظمة للمستقلين.",
+        mortgage: "مقسم الرهن العقاري", mortgageDesc: "تحليل القروض والفوائد.",
+        hourly: "الساعة", hourlyDesc: "مُحسّن أسعار المستقلين.",
+        vat: "حاسبة ضريبة القيمة المضافة", vatDesc: "إضافة وإزالة ضريبة المبيعات.",
+        loan: "حد القرض", loanDesc: "فحص القدرة على السداد.",
+        tip: "مقسم البقشيش", tipDesc: "الفواتير المشتركة سهلة.",
+        summarizer: "الملخص", summarizerDesc: "ضغط النص بأسلوب الذكاء الاصطناعي.",
+        word: "عداد الكلمات", wordDesc: "فحص SEO والأحرف.",
+        case: "مصحف الحالة", caseDesc: "حالة صغيرة/كبيرة/عنوان.",
+        subject: "أسطر الموضوع", subjectDesc: "معزز معدل فتح البريد الإلكتروني.",
+        linkedin: "منشور لينكد إن", linkedinDesc: "تنسيق فيروسي.",
+        bio: "منشئ السيرة", bioDesc: "ملفات تعريف وسائل التواصل الاجتماعي.",
+        privacy: "مولد الخصوصية", privacyDesc: "قوالب قانونية أساسية.",
+        qr: "مولد QR", qrDesc: "روابط URL ورموز WiFi.",
+        json: "تنسيق JSON", jsonDesc: "تنسيق الكود الفوضوي.",
+        base64: "Base64", base64Desc: "تشفير وفك تشفير.",
+        binary: "محول ثنائي", binaryDesc: "نص إلى 010101.",
+        color: "لوحة الألوان", colorDesc: "مخططات HEX عشوائية.",
+        pw: "مولد كلمات المرور", pwDesc: "سلاسل عشوائية آمنة.",
+        pomodoro: "بومودورو", pomodoroDesc: "مؤقت التركيز.",
+        stopwatch: "ساعة إيقاف", stopwatchDesc: "مؤقت لفة بسيط.",
+        workdays: "أيام العمل", workdaysDesc: "عدد أيام العمل.",
+        year: "تقدم السنة", yearDesc: "تصور الوقت.",
+        world: "ساعة العالم", worldDesc: "ساعات العمل العالمية.",
+        countdown: "العد التنازلي", countdownDesc: "حتى حدثك.",
+        bmi: "حاسبة كتلة الجسم", bmiDesc: "فحص مؤشر الصحة.",
+        age: "حاسبة العمر", ageDesc: "العمر الدقيق بالأيام.",
+        percent: "النسبة المئوية", percentDesc: "مساعد رياضيات سريع.",
+        name: "مولد الأسماء", nameDesc: "هوية عشوائية.",
+        co2: "متتبع CO2", co2Desc: "البصمة الكربونية للسفر.",
+        travel: "ميزانية السفر", travelDesc: "تقديرات العطلات."
+      }
+    },
+    zh: {
+      heroTag: "免费 · 隐私 · 无需登录",
+      hero1: "数字",
+      hero2: "瑞士",
+      hero3: "军刀。",
+      heroSub: "31+ 款专业工具，适用于金融、内容、开发和日常生产力。无需账户。",
+      statFree: "免费工具",
+      statUses: "无限次使用",
+      scroll: "滚动",
+      catFinance: "金融与商业",
+      catFinanceSub: "/ 金钱工具",
+      catContent: "内容与写作",
+      catContentSub: "/ 文字与文本",
+      catTech: "技术与开发",
+      catTechSub: "/ 开发工具",
+      catTime: "时间与生产力",
+      catTimeSub: "/ 专注与规划",
+      catHealth: "健康与工具",
+      catHealthSub: "/ 日常助手",
+      new: "新",
+      footerImp: "法律声明",
+      footerPriv: "隐私政策",
+      tools: {
+        briefing: "简报生成器", briefingDesc: "为自由职业者构建结构化的客户简报。",
+        mortgage: "房贷拆分器", mortgageDesc: "贷款与利息分析。",
+        hourly: "时薪计算器", hourlyDesc: "自由职业费率优化器。",
+        vat: "增值税计算器", vatDesc: "销售税的添加与扣除。",
+        loan: "贷款限额", loanDesc: "负担能力检查。",
+        tip: "小费拆分器", tipDesc: "轻松分摊账单。",
+        summarizer: "摘要生成器", summarizerDesc: "AI 风格的文本压缩。",
+        word: "字数统计", wordDesc: "SEO 与字符检查。",
+        case: "大小写转换", caseDesc: "小写/大写/首字母大写。",
+        subject: "邮件主题", subjectDesc: "提高邮件打开率。",
+        linkedin: "领英帖子", linkedinDesc: "病毒式传播格式。",
+        bio: "简介生成器", bioDesc: "社交媒体个人资料。",
+        privacy: "隐私政策生成", privacyDesc: "基础法律模板。",
+        qr: "二维码生成", qrDesc: "URL 与 WiFi 代码。",
+        json: "JSON 格式化", jsonDesc: "美化混乱的代码。",
+        base64: "Base64", base64Desc: "编码与解码。",
+        binary: "二进制转换", binaryDesc: "文本转 010101。",
+        color: "调色板", colorDesc: "随机 HEX 配色方案。",
+        pw: "密码生成器", pwDesc: "安全的随机字符串。",
+        pomodoro: "番茄钟", pomodoroDesc: "专注计时器。",
+        stopwatch: "秒表", stopwatchDesc: "简单的计圈计时器。",
+        workdays: "工作日计算", workdaysDesc: "工作日计数。",
+        year: "年度进度", yearDesc: "时间可视化。",
+        world: "世界时钟", worldDesc: "全球商务时间。",
+        countdown: "倒计时", countdownDesc: "直到你的活动开始。",
+        bmi: "BMI 计算器", bmiDesc: "健康指数检查。",
+        age: "年龄计算器", ageDesc: "精确到天的年龄。",
+        percent: "百分比计算器", percentDesc: "快速数学助手。",
+        name: "名字生成器", nameDesc: "随机身份。",
+        co2: "二氧化碳追踪", co2Desc: "旅行足迹。",
+        travel: "旅行预算", travelDesc: "假期估算。"
+      }
+    },
+    ja: {
+      heroTag: "無料 · プライベート · ログイン不要",
+      hero1: "デジタル",
+      hero2: "スイス",
+      hero3: "アーミーナイフ。",
+      heroSub: "金融、コンテンツ、開発、日常の生産性のための 31 種類以上のプロ向けユーティリティ。アカウント不要。",
+      statFree: "無料ツール",
+      statUses: "無制限利用",
+      scroll: "スクロール",
+      catFinance: "金融とビジネス",
+      catFinanceSub: "/ お金ツール",
+      catContent: "コンテンツと執筆",
+      catContentSub: "/ 言葉とテキスト",
+      catTech: "技術と開発",
+      catTechSub: "/ 開発者向けユーティリティ",
+      catTime: "時間と生産性",
+      catTimeSub: "/ 集中と計画",
+      catHealth: "健康とユーティリティ",
+      catHealthSub: "/ 日常のヘルパー",
+      new: "新着",
+      footerImp: "特定商取引法に基づく表記",
+      footerPriv: "プライバシーポリシー",
+      tools: {
+        briefing: "ブリーフィング生成", briefingDesc: "フリーランスのための構造化されたクライアントブリーフィング。",
+        mortgage: "住宅ローン分割", mortgageDesc: "ローンと金利の分析。",
+        hourly: "時給計算", hourlyDesc: "フリーランスの料金最適化。",
+        vat: "消費税計算", vatDesc: "消費税の加算と除去。",
+        loan: "ローン限度額", loanDesc: "返済能力のチェック。",
+        tip: "チップ分割", tipDesc: "割り勘を簡単に。",
+        summarizer: "要約ツール", summarizerDesc: "AI スタイルのテキスト圧縮。",
+        word: "文字数カウント", wordDesc: "SEO と文字数チェック。",
+        case: "大文字小文字変換", caseDesc: "小文字/大文字/タイトルケース。",
+        subject: "件名生成", subjectDesc: "メールの開封率向上。",
+        linkedin: "LinkedIn 投稿", linkedinDesc: "バイラルフォーマット。",
+        bio: "自己紹介生成", bioDesc: "SNS プロフィール。",
+        privacy: "プライバシーポリシー生成", privacyDesc: "基本的な法務テンプレート。",
+        qr: "QR コード生成", qrDesc: "URL と WiFi コード。",
+        json: "JSON フォーマット", jsonDesc: "汚いコードを整形。",
+        base64: "Base64", base64Desc: "エンコードとデコード。",
+        binary: "2 進数変換", binaryDesc: "テキストを 010101 に変換。",
+        color: "カラーパレット", colorDesc: "ランダムな HEX スキーム。",
+        pw: "パスワード生成", pwDesc: "安全なランダム文字列。",
+        pomodoro: "ポモドーロ", pomodoroDesc: "集中タイマー。",
+        stopwatch: "ストップウォッチ", stopwatchDesc: "シンプルなラップタイマー。",
+        workdays: "営業日計算", workdaysDesc: "営業日のカウント。",
+        year: "年の進行度", yearDesc: "時間の可視化。",
+        world: "世界時計", worldDesc: "グローバルなビジネス時間。",
+        countdown: "カウントダウン", countdownDesc: "イベントまで。",
+        bmi: "BMI 計算", bmiDesc: "健康指数チェック。",
+        age: "年齢計算", ageDesc: "正確な年齢（日数）。",
+        percent: "パーセント計算", percentDesc: "クイック数学ヘルパー。",
+        name: "名前生成", nameDesc: "ランダムなアイデンティティ。",
+        co2: "CO2 トラッカー", co2Desc: "旅行の足跡。",
+        travel: "旅行予算", travelDesc: "休暇の見積もり。"
+      }
     }
   };
 
-  // ============================================
-  // SET LANGUAGE
-  // ============================================
-  function setLang(lang) {
+  // --- LOGIC ---
+  function changeLanguage(lang) {
     const t = translations[lang];
     if (!t) return;
 
-    // HTML lang attribute
-    document.documentElement.lang = lang;
-    
-    // Save preference
-    localStorage.setItem('preferredLanguage', lang);
+    // RTL Support for Arabic
+    if (lang === 'ar') {
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.querySelector('.search-ico').style.left = 'auto';
+      document.querySelector('.search-ico').style.right = '17px';
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+      document.querySelector('.search-ico').style.left = '17px';
+      document.querySelector('.search-ico').style.right = 'auto';
+    }
 
-    // Update UI buttons
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-
-    // Meta tags for SEO (dynamic update)
-    document.getElementById('meta-title').textContent = t.meta_title;
-    document.getElementById('meta-description').textContent = t.meta_desc;
-    const schemaScript = JSON.parse(document.getElementById('schema-json').textContent);
-    schemaScript.description = t.meta_schema_desc;
-    document.getElementById('schema-json').textContent = JSON.stringify(schemaScript);
-
-    // Hero & Header
-    document.getElementById('trans-live').textContent = `31 ${t.live}`; // "31 tools live" vs "31 outils actifs"
-    document.getElementById('trans-hero-badge').textContent = t.hero_badge;
-    document.getElementById('trans-hero-title1').textContent = t.hero_title1;
-    document.getElementById('trans-hero-title2').textContent = t.hero_title2;
-    document.getElementById('trans-hero-sub').textContent = t.hero_sub;
-    document.getElementById('trans-stat1').textContent = t.stat1;
-    document.getElementById('trans-stat2').textContent = t.stat2;
-    document.getElementById('trans-scroll').textContent = t.scroll;
-    document.getElementById('search').placeholder = t.search;
+    // Update Text Content
+    document.querySelector('.t-hero-tag').textContent = t.heroTag;
+    document.querySelector('.t-hero-1').textContent = t.hero1;
+    document.querySelector('.t-hero-2').textContent = t.hero2;
+    document.querySelector('.t-hero-3').textContent = t.hero3;
+    document.querySelector('.t-hero-sub').textContent = t.heroSub;
+    document.querySelector('.t-stat-free').textContent = t.statFree;
+    document.querySelector('.t-stat-uses').textContent = t.statUses;
+    document.querySelector('.t-scroll').textContent = t.scroll;
 
     // Categories
-    const setCat = (id, text) => { if(document.getElementById(id)) document.getElementById(id).textContent = text; };
-    setCat('trans-cat-finance', t.cat_finance);
-    setCat('trans-cat-finance-sub', t.cat_finance_sub);
-    setCat('trans-cat-finance-count', t.cat_finance_count);
-    setCat('trans-cat-content', t.cat_content);
-    setCat('trans-cat-content-sub', t.cat_content_sub);
-    setCat('trans-cat-content-count', t.cat_content_count);
-    setCat('trans-cat-tech', t.cat_tech);
-    setCat('trans-cat-tech-sub', t.cat_tech_sub);
-    setCat('trans-cat-tech-count', t.cat_tech_count);
-    setCat('trans-cat-time', t.cat_time);
-    setCat('trans-cat-time-sub', t.cat_time_sub);
-    setCat('trans-cat-time-count', t.cat_time_count);
-    setCat('trans-cat-health', t.cat_health);
-    setCat('trans-cat-health-sub', t.cat_health_sub);
-    setCat('trans-cat-health-count', t.cat_health_count);
+    document.querySelector('.t-cat-finance').textContent = t.catFinance;
+    document.querySelector('.t-cat-finance-sub').textContent = t.catFinanceSub;
+    document.querySelector('.t-cat-content').textContent = t.catContent;
+    document.querySelector('.t-cat-content-sub').textContent = t.catContentSub;
+    document.querySelector('.t-cat-tech').textContent = t.catTech;
+    document.querySelector('.t-cat-tech-sub').textContent = t.catTechSub;
+    document.querySelector('.t-cat-time').textContent = t.catTime;
+    document.querySelector('.t-cat-time-sub').textContent = t.catTimeSub;
+    document.querySelector('.t-cat-health').textContent = t.catHealth;
+    document.querySelector('.t-cat-health-sub').textContent = t.catHealthSub;
 
-    // Tool Names & Descriptions
-    const tools = [
-      {n:'badge-new', d:'badge_new'},
-      {n:'tool-briefing', d:'tool_briefing', desc:'tool_briefing_desc'},
-      {n:'tool-mortgage', d:'tool_mortgage', desc:'tool_mortgage_desc'},
-      {n:'tool-hourly', d:'tool_hourly', desc:'tool_hourly_desc'},
-      {n:'tool-vat', d:'tool_vat', desc:'tool_vat_desc'},
-      {n:'tool-loan', d:'tool_loan', desc:'tool_loan_desc'},
-      {n:'tool-tip', d:'tool_tip', desc:'tool_tip_desc'},
-      {n:'tool-summary', d:'tool_summary', desc:'tool_summary_desc'},
-      {n:'tool-counter', d:'tool_counter', desc:'tool_counter_desc'},
-      {n:'tool-case', d:'tool_case', desc:'tool_case_desc'},
-      {n:'tool-subject', d:'tool_subject', desc:'tool_subject_desc'},
-      {n:'tool-linkedin', d:'tool_linkedin', desc:'tool_linkedin_desc'},
-      {n:'tool-bio', d:'tool_bio', desc:'tool_bio_desc'},
-      {n:'tool-privacy', d:'tool_privacy', desc:'tool_privacy_desc'},
-      {n:'tool-qr', d:'tool_qr', desc:'tool_qr_desc'},
-      {n:'tool-json', d:'tool_json', desc:'tool_json_desc'},
-      {n:'tool-base64', d:'tool_base64', desc:'tool_base64_desc'},
-      {n:'tool-binary', d:'tool_binary', desc:'tool_binary_desc'},
-      {n:'tool-color', d:'tool_color', desc:'tool_color_desc'},
-      {n:'tool-password', d:'tool_password', desc:'tool_password_desc'},
-      {n:'tool-pomo', d:'tool_pomo', desc:'tool_pomo_desc'},
-      {n:'tool-stopwatch', d:'tool_stopwatch', desc:'tool_stopwatch_desc'},
-      {n:'tool-workdays', d:'tool_workdays', desc:'tool_workdays_desc'},
-      {n:'tool-year', d:'tool_year', desc:'tool_year_desc'},
-      {n:'tool-world', d:'tool_world', desc:'tool_world_desc'},
-      {n:'tool-countdown', d:'tool_countdown', desc:'tool_countdown_desc'},
-      {n:'tool-bmi', d:'tool_bmi', desc:'tool_bmi_desc'},
-      {n:'tool-age', d:'tool_age', desc:'tool_age_desc'},
-      {n:'tool-percentage', d:'tool_percentage', desc:'tool_percentage_desc'},
-      {n:'tool-name', d:'tool_name', desc:'tool_name_desc'},
-      {n:'tool-co2', d:'tool_co2', desc:'tool_co2_desc'},
-      {n:'tool-travel', d:'tool_travel', desc:'tool_travel_desc'},
-    ];
-    tools.forEach(k => {
-      const elN = document.getElementById(`trans-${k.n}`);
-      const elD = document.getElementById(`trans-${k.n}-desc`);
-      if (elN) elN.textContent = t[k.d];
-      if (elD && k.desc) elD.textContent = t[k.desc];
-    });
+    // New Badge
+    document.querySelectorAll('.t-new').forEach(el => el.textContent = t.new);
 
     // Footer
-    document.getElementById('trans-footer-copy').textContent = t.footer_copy;
+    document.querySelector('.t-footer-imp').textContent = t.footerImp;
+    document.querySelector('.t-footer-priv').textContent = t.footerPriv;
+
+    // Tools
+    for (const key in t.tools) {
+      const nameEl = document.querySelector(`.t-tool-${key}`);
+      const descEl = document.querySelector(`.t-tool-${key}-desc`);
+      if (nameEl) nameEl.textContent = t.tools[key];
+      if (descEl) descEl.textContent = t.tools[key + 'Desc'];
+    }
+
+    // Update Title Tag
+    const titleBase = "ToolCompass | 31+ High-End Productivity Tools (Free & Private)";
+    if (lang === 'de') document.title = "ToolCompass | 31+ Profi-Tools (Kostenlos & Privat)";
+    else if (lang === 'es') document.title = "ToolCompass | 31+ Herramientas Profesionales (Gratis y Privado)";
+    else if (lang === 'fr') document.title = "ToolCompass | 31+ Outils Pro (Gratuit & Privé)";
+    else if (lang === 'ru') document.title = "ToolCompass | 31+ Профессиональных Инструментов (Бесплатно)";
+    else if (lang === 'ar') document.title = "ToolCompass | 31+ أدوات احترافية (مجاني وخاص)";
+    else if (lang === 'zh') document.title = "ToolCompass | 31+ 专业生产力工具 (免费且隐私)";
+    else if (lang === 'ja') document.title = "ToolCompass | 31+ のプロ向けツール (無料・プライベート)";
+    else document.title = titleBase;
   }
 
-  // ============================================
-  // SEARCH & REVEAL (KEEP EXISTING LOGIC)
-  // ============================================
+  // live search
   const searchEl = document.getElementById('search');
   searchEl.addEventListener('input', () => {
     const q = searchEl.value.toLowerCase().trim();
@@ -1015,6 +1061,7 @@
     });
   });
 
+  // scroll reveal
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
@@ -1024,19 +1071,6 @@
     });
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  // ============================================
-  // INIT: Load preferred language on startup
-  // ============================================
-  document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('preferredLanguage') || 'en'; // Default English
-    // Force set the button state and apply lang
-    const btn = document.querySelector(`.lang-btn[onclick="setLang('${savedLang}')"]`);
-    if(btn) {
-      btn.classList.add('active');
-      setLang(savedLang);
-    }
-  });
 </script>
 
 </body>
