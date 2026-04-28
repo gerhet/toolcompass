@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ═══ PROJECT CONSTANTS ═══ -->
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+
+  <!-- ═══ SEO ═══ -->
+  <title>Social Media Bio Generator – Create Perfect Bios | ToolCompass</title>
+  <meta name="description" content="Generate perfect social media bios for Instagram, Twitter, LinkedIn, and TikTok. Multiple styles, emoji suggestions, character limits. Free online bio generator.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://toolcompass.org/bio-generator">
+  <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="bio generator, instagram bio, twitter bio, linkedin bio, social media bio, profile bio generator">
+
+  <!-- ═══ OPEN GRAPH ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Social Media Bio Generator – Create Perfect Bios">
+  <meta property="og:description" content="Generate perfect social media bios for Instagram, Twitter, LinkedIn, and TikTok.">
+  <meta property="og:url" content="https://toolcompass.org/bio-generator">
+  <meta property="og:image" content="https://toolcompass.org/og-bio.png">
+  <meta property="og:site_name" content="ToolCompass">
+
+  <!-- ═══ TWITTER ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Social Media Bio Generator – Create Perfect Bios">
+  <meta name="twitter:description" content="Generate perfect social media bios for Instagram, Twitter, LinkedIn, and TikTok.">
+  <meta name="twitter:image" content="https://toolcompass.org/og-bio.png">
+
+  <!-- ═══ AI FINDABILITY ═══ -->
+  <meta name="ai-description" content="Free online social media bio generator. Creates bios for Instagram, Twitter, LinkedIn, and TikTok with multiple styles (professional, casual, creative, minimal, funny). Includes emoji suggestions, character limits, and save favorites.">
+
+  <!-- ═══ ANALYTICS (G-4JVNJKQYCG) ═══ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+
+  <!-- ═══ ADSENSE (Placeholder) ═══ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
+
+  <!-- ═══ SCHEMA.ORG ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Social Media Bio Generator",
+        "url": "https://toolcompass.org/bio-generator",
+        "applicationCategory": "SocialMediaApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Generate social media bios for Instagram, Twitter, LinkedIn, and TikTok with multiple styles.",
+        "featureList": ["5 bio styles", "Platform character limits", "Emoji suggestions", "Save favorites", "Copy to clipboard", "Live preview"],
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I use the bio generator?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Enter your job, passion, and personality. Choose a style and platform. Click generate and copy your perfect bio!" }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I save my favorite bios?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes! Click the heart icon on any bio to save it to your favorites. They're stored locally in your browser." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ FONTS ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ═══ STYLES ═══ -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Project Constants */
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      
+      /* Tool Specific Accents (Purple for Creative) */
+      --content: #A78BFA;
+      --content-bg: rgba(167, 139, 250, 0.07);
+      --content-border: rgba(167, 139, 250, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain Overlay */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 900px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; font-weight: 500; transition: color .2s; padding: 6px 0;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-arrow { font-size: 16px; transition: transform .2s; }
+    .back-btn:hover .back-arrow { transform: translateX(-3px); }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 15px; color: var(--text);
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+
+    /* ─── MAIN ─── */
+    main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      text-align: center; margin-bottom: 2.5rem;
+      animation: fadeUp .7s ease both;
+    }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border-hover); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--content); }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -.025em; margin-bottom: 1rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* ─── AD SLOT ─── */
+    .ad-slot { margin-bottom: 1rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
+    .ad-inner {
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 90px; position: relative;
+    }
+    .ad-label {
+      position: absolute; top: 6px; left: 10px;
+      font-size: 9px; color: var(--muted); letter-spacing: .1em;
+      text-transform: uppercase; opacity: .4;
+    }
+
+    /* ─── INPUT CARD ─── */
+    .input-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .input-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
+    
+    .input-group label {
+      display: block; font-size: 11px; font-weight: 600;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 0.5rem;
+    }
+    .input-wrapper { position: relative; }
+    .input-wrapper input, .input-wrapper select {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1rem 1rem 3rem;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 15px; outline: none;
+      transition: border-color .2s;
+    }
+    .input-wrapper input:focus, .input-wrapper select:focus {
+      border-color: var(--content);
+    }
+    .input-icon {
+      position: absolute; left: 1rem; top: 50%;
+      transform: translateY(-50%); font-size: 18px;
+      pointer-events: none; color: var(--muted);
+    }
+
+    /* Style Pills */
+    .style-pills {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .style-pill {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px 12px;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: all .2s;
+    }
+    .style-pill:hover { border-color: var(--content); color: var(--content); }
+    .style-pill.active { border-color: var(--content); color: var(--content); background: var(--content-bg); }
+
+    .generate-btn {
+      width: 100%; background: var(--content);
+      color: #000; font-weight: 600; font-size: 14px;
+      padding: 1rem; border-radius: 12px; border: none;
+      cursor: pointer; transition: transform .2s, opacity .2s;
+      font-family: 'Outfit', sans-serif;
+    }
+    .generate-btn:hover { transform: translateY(-2px); opacity: 0.95; }
+
+    /* ─── BIO RESULTS ─── */
+    .bio-results {
+      display: grid; gap: 1rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .7s .2s ease both;
+    }
+    
+    .bio-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      transition: border-color .2s;
+    }
+    .bio-card:hover { border-color: var(--border-hover); }
+    
+    .bio-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem;
+    }
+    .bio-style {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .bio-style-icon { font-size: 14px; }
+    
+    .bio-actions {
+      display: flex; gap: 6px;
+    }
+    .bio-action-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 10px;
+      font-size: 14px; cursor: pointer;
+      transition: all .2s;
+    }
+    .bio-action-btn:hover { border-color: var(--content); color: var(--content); }
+    .bio-action-btn.favorite.active { color: #EF4444; border-color: #EF4444; }
+    
+    .bio-text {
+      font-size: 14px; line-height: 1.6; color: var(--text);
+      margin-bottom: 1rem;
+    }
+    
+    .bio-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 1rem; border-top: 1px solid var(--border);
+    }
+    .char-count {
+      font-size: 11px; color: var(--muted);
+    }
+    .char-count.warning { color: var(--warning); }
+    .char-count.danger { color: var(--danger); }
+    .platform-badge {
+      font-size: 10px; padding: 2px 8px;
+      border-radius: 4px; background: var(--surface2);
+      color: var(--muted); text-transform: uppercase;
+    }
+
+    /* ─── EMOJI PICKER ─── */
+    .emoji-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .emoji-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .emoji-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      gap: 6px;
+    }
+    .emoji-btn {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px;
+      font-size: 18px; cursor: pointer;
+      transition: all .2s; text-align: center;
+    }
+    .emoji-btn:hover { border-color: var(--content); transform: scale(1.1); }
+
+    /* ─── FAVORITES ─── */
+    .favorites-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .favorites-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem;
+    }
+    .favorites-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; font-style: italic;
+      color: var(--text);
+    }
+    .favorites-grid {
+      display: grid; gap: 0.75rem;
+    }
+    .favorite-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem;
+    }
+    .favorite-text {
+      font-size: 13px; color: var(--text); flex: 1;
+    }
+    .favorite-delete {
+      font-size: 16px; color: var(--muted); cursor: pointer;
+      transition: color .2s;
+    }
+    .favorite-delete:hover { color: var(--danger); }
+
+    /* ─── PLATFORM LIMITS ─── */
+    .platform-limits {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem; margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) { .platform-limits { grid-template-columns: repeat(2, 1fr); } }
+    
+    .platform-pill {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.75rem;
+      text-align: center; cursor: pointer;
+      transition: all .2s;
+    }
+    .platform-pill:hover { border-color: var(--border-hover); }
+    .platform-pill.active { border-color: var(--content); background: var(--content-bg); }
+    .platform-icon { font-size: 20px; margin-bottom: 4px; }
+    .platform-name { font-size: 10px; color: var(--muted); text-transform: uppercase; }
+    .platform-limit { font-size: 11px; color: var(--text); font-weight: 600; }
+
+    /* ─── OTHER TOOLS ─── */
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .3s ease both; }
+    .other-tools-header {
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .other-tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .tool-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text);
+      font-size: 12px; font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
+    .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* ─── SEO CONTENT ─── */
+    .seo-content {
+      padding: 2.5rem 0 0;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .7s .4s ease both;
+    }
+    .seo-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .seo-content h2 em { color: var(--accent); }
+    .seo-content p {
+      font-size: 13.5px; color: var(--muted); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
+    }
+    .seo-content strong { color: var(--text); font-weight: 500; }
+    
+    .seo-list { list-style: none; margin-bottom: 1.5rem; }
+    .seo-list li {
+      position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem;
+      font-size: 13.5px; color: var(--muted); font-weight: 300; line-height: 1.6;
+    }
+    .seo-list li::before {
+      content: '•'; position: absolute; left: 0; color: var(--content);
+      font-size: 1.2rem; line-height: 1;
+    }
+
+    /* FAQ */
+    .faq-list { margin-top: 1.5rem; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+    .faq-q {
+      width: 100%; background: var(--surface); border: none; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 1rem 1.25rem; text-align: left; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-q:hover { background: var(--surface2); }
+    .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem; text-align: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width: 480px) {
+      main { padding: 2rem 1.25rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">
+      <span class="back-arrow">←</span> All Tools
+    </a>
+    <a href="/" style="text-decoration:none;">
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-tag"><span class="page-tag-dot"></span>Social Media & Content</div>
+    <h1>Bio<br><em>Generator</em></h1>
+    <p class="page-sub">Create perfect bios for Instagram, Twitter, LinkedIn & TikTok.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- INPUT CARD -->
+  <div class="input-card">
+    
+    <!-- PLATFORM SELECTOR -->
+    <div class="platform-limits">
+      <div class="platform-pill active" onclick="setPlatform('instagram', this)">
+        <div class="platform-icon">📸</div>
+        <div class="platform-name">Instagram</div>
+        <div class="platform-limit">150</div>
+      </div>
+      <div class="platform-pill" onclick="setPlatform('twitter', this)">
+        <div class="platform-icon">𝕏</div>
+        <div class="platform-name">Twitter</div>
+        <div class="platform-limit">160</div>
+      </div>
+      <div class="platform-pill" onclick="setPlatform('linkedin', this)">
+        <div class="platform-icon">💼</div>
+        <div class="platform-name">LinkedIn</div>
+        <div class="platform-limit">220</div>
+      </div>
+      <div class="platform-pill" onclick="setPlatform('tiktok', this)">
+        <div class="platform-icon">🎵</div>
+        <div class="platform-name">TikTok</div>
+        <div class="platform-limit">80</div>
+      </div>
+    </div>
+
+    <div class="input-grid">
+      <div class="input-group">
+        <label>Your Job / Role</label>
+        <div class="input-wrapper">
+          <span class="input-icon">💼</span>
+          <input type="text" id="job" placeholder="e.g. Web Developer" oninput="generateBios()">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Your Passion</label>
+        <div class="input-wrapper">
+          <span class="input-icon">❤️</span>
+          <input type="text" id="passion" placeholder="e.g. Coffee & Code" oninput="generateBios()">
+        </div>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Personality / Vibe</label>
+      <div class="input-wrapper">
+        <span class="input-icon">✨</span>
+        <input type="text" id="personality" placeholder="e.g. Creative, Minimal, Funny" oninput="generateBios()">
+      </div>
+    </div>
+
+    <div class="style-pills">
+      <span class="style-pill active" onclick="setStyle('professional', this)">💼 Professional</span>
+      <span class="style-pill" onclick="setStyle('casual', this)">😊 Casual</span>
+      <span class="style-pill" onclick="setStyle('creative', this)">🎨 Creative</span>
+      <span class="style-pill" onclick="setStyle('minimal', this)">⚪ Minimal</span>
+      <span class="style-pill" onclick="setStyle('funny', this)">😂 Funny</span>
+    </div>
+
+    <button class="generate-btn" onclick="generateBios()">✨ Generate Bios</button>
+  </div>
+
+  <!-- EMOJI PICKER -->
+  <div class="emoji-section">
+    <div class="emoji-header">🎭 Quick Emojis</div>
+    <div class="emoji-grid" id="emojiGrid">
+      <!-- Emojis rendered by JS -->
+    </div>
+  </div>
+
+  <!-- BIO RESULTS -->
+  <div class="bio-results" id="bioResults">
+    <!-- Bios rendered by JS -->
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="favorites-section">
+    <div class="favorites-header">
+      <span class="favorites-title">❤️ Saved Bios</span>
+      <span style="font-size:11px;color:var(--muted);" id="favCount">0 saved</span>
+    </div>
+    <div class="favorites-grid" id="favoritesGrid">
+      <!-- Favorites rendered by JS -->
+    </div>
+  </div>
+
+  <!-- AD SLOT MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- OTHER TOOLS -->
+  <div class="other-tools">
+    <div class="other-tools-header">📱 More Content Tools</div>
+    <div class="other-tools-grid">
+      <a href="/subject-line-generator" class="tool-chip">
+        <span class="tool-chip-icon">📧</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Subject Lines</div>
+          <div class="tool-chip-desc">Email open rates</div>
+        </div>
+      </a>
+      <a href="/text-summarizer" class="tool-chip">
+        <span class="tool-chip-icon">📝</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Summarizer</div>
+          <div class="tool-chip-desc">AI-style compression</div>
+        </div>
+      </a>
+      <a href="/word-counter" class="tool-chip">
+        <span class="tool-chip-icon">📊</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Word Counter</div>
+          <div class="tool-chip-desc">Count words & chars</div>
+        </div>
+      </a>
+      <a href="/qr-generator" class="tool-chip">
+        <span class="tool-chip-icon">📱</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">QR Generator</div>
+          <div class="tool-chip-desc">Custom QR codes</div>
+        </div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style: dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">All Tools</div>
+          <div class="tool-chip-desc">31+ utilities</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT -->
+  <div class="seo-content">
+    <h2>Why Your <em>Social Media Bio</em> Matters</h2>
+    <p>
+      Your social media bio is often the first impression people have of you. A well-crafted bio can attract followers, build credibility, and communicate your unique value proposition in seconds. Whether you're building a personal brand or promoting a business, your bio should be clear, engaging, and authentic.
+    </p>
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Platform Character Limits</h3>
+    <ul class="seo-list">
+      <li><strong>Instagram:</strong> 150 characters – Keep it punchy and include a call-to-action.</li>
+      <li><strong>Twitter / X:</strong> 160 characters – Be concise and use relevant keywords.</li>
+      <li><strong>LinkedIn:</strong> 220 characters – Focus on professional value and expertise.</li>
+      <li><strong>TikTok:</strong> 80 characters – Short, fun, and personality-driven.</li>
+    </ul>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How do I use the bio generator?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Enter your job, passion, and personality. Choose a style and platform. Click generate and copy your perfect bio!</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I save my favorite bios?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Click the heart icon on any bio to save it to your favorites. They're stored locally in your browser.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What makes a good social media bio?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">A good bio clearly states who you are, what you do, and what value you provide. Include relevant keywords, emojis for visual appeal, and a call-to-action if applicable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let currentPlatform = 'instagram';
+let currentStyle = 'professional';
+let favorites = [];
+
+const PLATFORM_LIMITS = {
+  instagram: 150,
+  twitter: 160,
+  linkedin: 220,
+  tiktok: 80
+};
+
+const EMOJIS = [
+  '✨','🔥','💼','❤️','🎨','📸','🎵','💡','🚀','🌟',
+  '👋','🎯','📩','☕','🌍','💪','🎓','🏆','🎬','📱',
+  '🛍️','🎮','📚','🎪','🌈','💫','🎭','🎪','🎨','🎯'
+];
+
+// ═══════════════════════════════════════════════
+// BIO TEMPLATES
+// ═══════════════════════════════════════════════
+const TEMPLATES = {
+  professional: [
+    (j, p, pers) => `🎯 ${j} | 💡 Helping brands grow | 📩 DM for collaborations`,
+    (j, p, pers) => `${j} 💼 | Building the future | Let's connect!`,
+    (j, p, pers) => `📍 ${j} | 🌍 Making an impact | ${p}`,
+    (j, p, pers) => `${j} ✨ | Passionate about ${p} | Open to opportunities`,
+    (j, p, pers) => `🚀 ${j} | Turning ideas into reality | ${p}`
+  ],
+  casual: [
+    (j, p, pers) => `${p} ☕ | Solving problems as a ${j} | Let's connect! ✨`,
+    (j, p, pers) => `Just a ${j} who loves ${p} 🌟 | Say hi! 👋`,
+    (j, p, pers) => `${j} by day, ${p} by night 🌙 | Living my best life`,
+    (j, p, pers) => `Hey! I'm a ${j} 💫 | ${p} enthusiast | Good vibes only`,
+    (j, p, pers) => `${j} 🎨 | ${p} lover | Making magic happen ✨`
+  ],
+  creative: [
+    (j, p, pers) => `🎨 ${j} | Creating beauty from ${p} | Art is life`,
+    (j, p, pers) => `${j} ✨ | Dreamer & Doer | ${p} fuels my soul`,
+    (j, p, pers) => `🌈 ${j} | Painting the world with ${p} | Creative mind`,
+    (j, p, pers) => `${j} 🎭 | Where ${p} meets innovation | Let's create!`,
+    (j, p, pers) => `✨ ${j} | ${p} addict | Making the ordinary extraordinary`
+  ],
+  minimal: [
+    (j, p, pers) => `${j}. ${p}.`,
+    (j, p, pers) => `${j} | ${p}`,
+    (j, p, pers) => `${j}. Creating.`,
+    (j, p, pers) => `${j} • ${p}`,
+    (j, p, pers) => `${j}. Living ${p}.`
+  ],
+  funny: [
+    (j, p, pers) => `${j} 🤓 | Powered by ${p} | Send coffee ☕`,
+    (j, p, pers) => `Professional ${j} | Amateur at ${p} | 100% human 😅`,
+    (j, p, pers) => `${j} by choice, ${p} by necessity | Here for a good time`,
+    (j, p, pers) => `I ${j} and I know things 🤓 | ${p} is my therapy`,
+    (j, p, pers) => `${j} 🎪 | ${p} enthusiast | Professional overthinker 🤔`
+  ]
+};
+
+// ═══════════════════════════════════════════════
+// PLATFORM & STYLE
+// ═══════════════════════════════════════════════
+function setPlatform(platform, el) {
+  currentPlatform = platform;
+  document.querySelectorAll('.platform-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  generateBios();
+}
+
+function setStyle(style, el) {
+  currentStyle = style;
+  document.querySelectorAll('.style-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  generateBios();
+}
+
+// ═══════════════════════════════════════════════
+// GENERATE BIOS
+// ═══════════════════════════════════════════════
+function generateBios() {
+  const job = document.getElementById('job').value || 'Professional';
+  const passion = document.getElementById('passion').value || 'Life';
+  const personality = document.getElementById('personality').value || '';
+  
+  const templates = TEMPLATES[currentStyle];
+  const limit = PLATFORM_LIMITS[currentPlatform];
+  
+  const results = document.getElementById('bioResults');
+  results.innerHTML = templates.map((template, index) => {
+    const bio = template(job, passion, personality);
+    const charCount = bio.length;
+    const isOver = charCount > limit;
+    const isWarning = charCount > limit * 0.9;
+    
+    return `
+      <div class="bio-card">
+        <div class="bio-header">
+          <div class="bio-style">
+            <span class="bio-style-icon">${getStyleIcon(currentStyle)}</span>
+            ${currentStyle}
+          </div>
+          <div class="bio-actions">
+            <button class="bio-action-btn" onclick="copyBio('${escapeQuotes(bio)}')">📋</button>
+            <button class="bio-action-btn favorite" onclick="toggleFavorite('${escapeQuotes(bio)}', this)">❤️</button>
+          </div>
+        </div>
+        <div class="bio-text">${bio}</div>
+        <div class="bio-meta">
+          <span class="char-count ${isOver ? 'danger' : isWarning ? 'warning' : ''}">${charCount}/${limit} chars</span>
+          <span class="platform-badge">${currentPlatform}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Save inputs
+  saveInputs();
+}
+
+function getStyleIcon(style) {
+  const icons = {
+    professional: '💼',
+    casual: '😊',
+    creative: '🎨',
+    minimal: '⚪',
+    funny: '😂'
+  };
+  return icons[style] || '✨';
+}
+
+function escapeQuotes(str) {
+  return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+// ═══════════════════════════════════════════════
+// EMOJI PICKER
+// ═══════════════════════════════════════════════
+function renderEmojis() {
+  const grid = document.getElementById('emojiGrid');
+  grid.innerHTML = EMOJIS.map(emoji => `
+    <button class="emoji-btn" onclick="addEmoji('${emoji}')">${emoji}</button>
+  `).join('');
+}
+
+function addEmoji(emoji) {
+  const personality = document.getElementById('personality');
+  personality.value = personality.value + ' ' + emoji;
+  generateBios();
+}
+
+// ═══════════════════════════════════════════════
+// COPY & FAVORITES
+// ═══════════════════════════════════════════════
+function copyBio(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Bio copied!');
+  }).catch(() => {
+    showToast('Copy failed');
+  });
+}
+
+function loadFavorites() {
+  const saved = localStorage.getItem('tc_bio_favorites');
+  if (saved) {
+    favorites = JSON.parse(saved);
+  }
+  renderFavorites();
+}
+
+function toggleFavorite(bio, btn) {
+  const index = favorites.findIndex(f => f.bio === bio);
+  
+  if (index === -1) {
+    favorites.unshift({ bio, saved: new Date().toISOString() });
+    btn.classList.add('active');
+    showToast('Bio saved!');
+  } else {
+    favorites.splice(index, 1);
+    btn.classList.remove('active');
+    showToast('Bio removed');
+  }
+  
+  localStorage.setItem('tc_bio_favorites', JSON.stringify(favorites));
+  renderFavorites();
+}
+
+function renderFavorites() {
+  const grid = document.getElementById('favoritesGrid');
+  const count = document.getElementById('favCount');
+  
+  count.textContent = `${favorites.length} saved`;
+  
+  if (favorites.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No saved bios yet. Click ❤️ to save!</div>';
+    return;
+  }
+  
+  grid.innerHTML = favorites.map((f, i) => `
+    <div class="favorite-card">
+      <div class="favorite-text">${f.bio}</div>
+      <span class="favorite-delete" onclick="deleteFavorite(${i})">🗑️</span>
+    </div>
+  `).join('');
+}
+
+function deleteFavorite(index) {
+  favorites.splice(index, 1);
+  localStorage.setItem('tc_bio_favorites', JSON.stringify(favorites));
+  renderFavorites();
+  showToast('Bio removed');
+}
+
+// ═══════════════════════════════════════════════
+// LOCAL STORAGE
+// ═══════════════════════════════════════════════
+function saveInputs() {
+  const inputs = {
+    job: document.getElementById('job').value,
+    passion: document.getElementById('passion').value,
+    personality: document.getElementById('personality').value,
+    platform: currentPlatform,
+    style: currentStyle
+  };
+  localStorage.setItem('tc_bio_inputs', JSON.stringify(inputs));
+}
+
+function loadInputs() {
+  const saved = localStorage.getItem('tc_bio_inputs');
+  if (saved) {
+    const inputs = JSON.parse(saved);
+    document.getElementById('job').value = inputs.job || '';
+    document.getElementById('passion').value = inputs.passion || '';
+    document.getElementById('personality').value = inputs.personality || '';
+    
+    if (inputs.platform) {
+      currentPlatform = inputs.platform;
+      document.querySelectorAll('.platform-pill').forEach(p => {
+        p.classList.toggle('active', p.querySelector('.platform-name').textContent.toLowerCase() === inputs.platform);
+      });
+    }
+    
+    if (inputs.style) {
+      currentStyle = inputs.style;
+      document.querySelectorAll('.style-pill').forEach((p, i) => {
+        const styles = ['professional', 'casual', 'creative', 'minimal', 'funny'];
+        p.classList.toggle('active', styles[i] === inputs.style);
+      });
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════
+function showToast(msg) {
+  let t = document.getElementById('tcToast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'tcToast';
+    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:#1E1E1E;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:500;color:#F0EDE8;z-index:500;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.opacity   = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => {
+    t.style.transform = 'translateX(-50%) translateY(60px)';
+    t.style.opacity   = '0';
+  }, 2000);
+}
+
+// ═══════════════════════════════════════════════
+// FAQ ACCORDION
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', () => {
+  renderEmojis();
+  loadInputs();
+  loadFavorites();
+  generateBios();
+});
+
+// ─── ADSENSE nach Approval ───
+// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+// (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>

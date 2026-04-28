@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980"
+     crossorigin="anonymous"></script>
+
+  <title>Case Converter – Uppercase, Lowercase, Title & More | ToolCompass</title>
+  <meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more. Free, instant, no login. The most complete case converter online.">
+  <link rel="canonical" href="https://toolcompass.org/case-converter">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Case Converter",
+    "url": "https://toolcompass.org/case-converter",
+    "applicationCategory": "UtilitiesApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is Title Case?", "acceptedAnswer": { "@type": "Answer", "text": "Title Case capitalizes the first letter of each major word. It's used for headlines, book titles, and headings." } },
+      { "@type": "Question", "name": "What is camelCase?", "acceptedAnswer": { "@type": "Answer", "text": "camelCase joins words without spaces, capitalizing each word except the first. Used in JavaScript variables and JSON keys." } },
+      { "@type": "Question", "name": "What is snake_case?", "acceptedAnswer": { "@type": "Answer", "text": "snake_case replaces spaces with underscores and uses all lowercase. Common in Python, databases, and file names." } },
+      { "@type": "Question", "name": "What is kebab-case?", "acceptedAnswer": { "@type": "Answer", "text": "kebab-case replaces spaces with hyphens and uses all lowercase. Common in URLs, CSS class names, and HTML attributes." } },
+      { "@type": "Question", "name": "Is my text stored anywhere?", "acceptedAnswer": { "@type": "Answer", "text": "No. All conversions happen entirely in your browser. Nothing is sent to any server." } },
+      { "@type": "Question", "name": "Can I convert code variable names?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! camelCase, PascalCase, snake_case, and CONSTANT_CASE are specifically designed for developers renaming variables." } }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      --content: #FB923C;
+      --content-bg: rgba(251,146,60,0.07);
+      --content-border: rgba(251,146,60,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 16px;
+      color: var(--text); letter-spacing: 0.01em;
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+    .back-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; letter-spacing: .06em;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .back-btn:hover { color: var(--text); }
+
+    /* PAGE */
+    .page { max-width: 900px; margin: 0 auto; padding: 90px 2rem 6rem; }
+
+    /* HERO */
+    .tool-hero { text-align: center; margin-bottom: 3rem; animation: fadeUp .7s ease both; }
+    .tool-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--content-border); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--content); margin-bottom: 1.25rem;
+      background: var(--content-bg);
+    }
+    .tool-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.02em; margin-bottom: .75rem;
+    }
+    .tool-hero h1 em { font-style: italic; color: var(--accent); }
+    .tool-hero p {
+      color: var(--muted); font-size: 15px; font-weight: 300;
+      max-width: 480px; margin: 0 auto; line-height: 1.7;
+    }
+
+    /* AD TOP */
+    .ad-slot { width: 100%; margin-bottom: 2rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
+    .ad-inner {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1rem; text-align: center;
+      min-height: 100px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: .5rem;
+    }
+    .ad-label { font-size: 10px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+    /* MAIN CARD */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      animation: fadeUp .7s .1s ease both;
+    }
+
+    /* TEXTAREA AREA */
+    .textarea-wrap { position: relative; }
+    .textarea-wrap textarea {
+      width: 100%; min-height: 180px; padding: 1.5rem;
+      background: var(--surface2); border: none;
+      border-bottom: 1px solid var(--border);
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 16px; font-weight: 400; line-height: 1.7;
+      resize: vertical; outline: none;
+      transition: background .2s;
+      caret-color: var(--accent);
+    }
+    .textarea-wrap textarea:focus { background: #1a1a1a; }
+    .textarea-wrap textarea::placeholder { color: var(--muted); }
+
+    .textarea-meta {
+      position: absolute; bottom: .75rem; right: 1rem;
+      display: flex; gap: 1rem;
+      font-size: 11px; color: var(--muted);
+    }
+    .meta-item { display: flex; align-items: center; gap: 4px; }
+    .meta-item span { font-weight: 600; color: var(--text); transition: color .2s; }
+
+    /* ACTION BAR */
+    .action-bar {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: .5rem; flex-wrap: wrap;
+    }
+    .action-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-right: .25rem;
+    }
+
+    .btn {
+      border: 1px solid var(--border); border-radius: 10px;
+      background: transparent; color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500;
+      padding: 7px 13px; cursor: pointer; letter-spacing: .02em;
+      transition: all .18s; white-space: nowrap;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .btn:hover { border-color: var(--border-hover); background: var(--surface2); }
+    .btn.active {
+      background: var(--content-bg);
+      border-color: var(--content-border);
+      color: var(--content);
+    }
+    .btn.ghost {
+      border-color: transparent; color: var(--muted);
+    }
+    .btn.ghost:hover { color: var(--text); border-color: var(--border); }
+    .btn-icon { font-size: 11px; }
+
+    /* LIVE PREVIEW */
+    .preview-section { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .preview-label-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: .75rem;
+    }
+    .preview-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .active-mode-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+      background: var(--content-bg); color: var(--content);
+      border: 1px solid var(--content-border); letter-spacing: .03em;
+    }
+    #preview {
+      font-size: 15px; line-height: 1.75; color: var(--text);
+      min-height: 40px; word-break: break-word;
+      font-weight: 400;
+    }
+    #preview.empty { color: var(--muted); font-style: italic; font-size: 14px; }
+
+    /* BOTTOM BAR */
+    .bottom-bar {
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+    }
+    .btn-copy {
+      background: var(--accent); color: #0D0D0D;
+      border: none; border-radius: 10px;
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+      padding: 9px 20px; cursor: pointer; letter-spacing: .02em;
+      transition: all .18s; display: flex; align-items: center; gap: 7px;
+    }
+    .btn-copy:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-copy:active { transform: translateY(0); }
+    .btn-clear {
+      border: 1px solid var(--border); border-radius: 10px;
+      background: transparent; color: var(--muted);
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 9px 16px; cursor: pointer;
+      transition: all .18s;
+    }
+    .btn-clear:hover { color: var(--text); border-color: var(--border-hover); }
+
+    .spacer { flex: 1; }
+
+    /* STATS ROW */
+    .stats-strip {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+      font-size: 11px; color: var(--muted);
+      align-items: center;
+    }
+    .stat-chip {
+      display: flex; align-items: center; gap: 4px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 4px 10px;
+    }
+    .stat-chip strong { color: var(--text); font-weight: 600; }
+
+    /* HISTORY */
+    .history-section {
+      margin-top: 2rem;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+    }
+    .history-list { display: flex; flex-direction: column; gap: .5rem; }
+    .history-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .9rem 1rem;
+      display: flex; align-items: flex-start; gap: .75rem;
+      cursor: pointer; transition: all .18s;
+    }
+    .history-item:hover { border-color: var(--border-hover); background: var(--surface2); }
+    .history-mode {
+      font-size: 10px; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--content);
+      background: var(--content-bg); border: 1px solid var(--content-border);
+      border-radius: 6px; padding: 2px 8px; white-space: nowrap;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .history-text {
+      font-size: 13px; color: var(--text); line-height: 1.5;
+      overflow: hidden; text-overflow: ellipsis;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+    .history-empty {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 13px;
+      border: 1px dashed var(--border); border-radius: 12px;
+    }
+
+    /* QUICK MODES (developer section) */
+    .dev-section {
+      margin-top: 2rem;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .dev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .5rem; }
+    .dev-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .85rem 1rem;
+      cursor: pointer; transition: all .18s;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .dev-card:hover { border-color: var(--content-border); background: var(--content-bg); }
+    .dev-card.active-dev { border-color: var(--content-border); background: var(--content-bg); }
+    .dev-card-label { font-size: 10px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+    .dev-card-example { font-size: 13px; font-weight: 600; color: var(--text); font-family: 'Courier New', monospace; }
+
+    /* FAQ */
+    .faq-section {
+      margin-top: 3.5rem;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 500; padding: 1.1rem 0;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; transition: color .15s;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-icon { font-size: 18px; color: var(--muted); flex-shrink: 0; transition: transform .25s; }
+    .faq-a {
+      overflow: hidden; max-height: 0; transition: max-height .3s ease, padding .3s;
+      font-size: 13px; color: var(--muted); line-height: 1.75; padding: 0;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.1rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* AD MID */
+    #adMid { margin: 2.5rem 0; }
+
+    /* SEO CONTENT */
+    .seo-block {
+      margin-top: 3rem; padding: 2rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      font-size: 13px; color: var(--muted); line-height: 1.85;
+      animation: fadeUp .7s .35s ease both;
+    }
+    .seo-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--text); margin-bottom: .75rem;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--surface2); border: 1px solid var(--border-hover);
+      border-radius: 12px; padding: .75rem 1.5rem;
+      font-size: 13px; font-weight: 500; letter-spacing: .02em;
+      opacity: 0; transition: all .3s; pointer-events: none; z-index: 200;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast-icon { font-size: 15px; }
+
+    /* RELATED TOOLS */
+    .related-tools { margin-top: 2rem; animation: fadeUp .7s .32s ease both; }
+    .other-tools-header {
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .75rem;
+    }
+    .other-tools-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px;
+    }
+    .tool-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text);
+      font-size: 12px; font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
+    .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width: 640px) {
+      .page { padding: 80px 1.25rem 4rem; }
+      .action-bar { padding: .75rem 1rem; }
+      .bottom-bar { padding: .75rem 1rem; }
+      .preview-section { padding: 1rem 1.25rem; }
+      .stats-strip { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">🧭</div>
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+    <a href="/" class="back-btn">← All Tools</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="tool-hero">
+    <span class="tool-tag">Aa Content & Writing</span>
+    <h1>The Ultimate<br><em>Case Converter</em></h1>
+    <p>10 transformation modes. Live preview. Copy in one click. Built for writers, devs, and everyone in between.</p>
+  </div>
+
+  <!-- AD TOP -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card">
+
+    <!-- TEXTAREA -->
+    <div class="textarea-wrap">
+      <textarea id="inputText" placeholder="Paste or type your text here… it transforms instantly ✨" spellcheck="false"></textarea>
+      <div class="textarea-meta">
+        <div class="meta-item">Words: <span id="wCount">0</span></div>
+        <div class="meta-item">Chars: <span id="cCount">0</span></div>
+        <div class="meta-item">Lines: <span id="lCount">0</span></div>
+      </div>
+    </div>
+
+    <!-- MODE BUTTONS -->
+    <div class="action-bar">
+      <span class="action-label">Mode</span>
+      <button class="btn active" data-mode="upper" onclick="setMode('upper')"><span class="btn-icon">⬆</span> UPPER</button>
+      <button class="btn" data-mode="lower" onclick="setMode('lower')"><span class="btn-icon">⬇</span> lower</button>
+      <button class="btn" data-mode="title" onclick="setMode('title')"><span class="btn-icon">Tt</span> Title</button>
+      <button class="btn" data-mode="sentence" onclick="setMode('sentence')"><span class="btn-icon">Ss</span> Sentence</button>
+      <button class="btn" data-mode="alternating" onclick="setMode('alternating')"><span class="btn-icon">~</span> aLtErNaTe</button>
+      <button class="btn" data-mode="camel" onclick="setMode('camel')"><span class="btn-icon">{ }</span> camelCase</button>
+      <button class="btn" data-mode="pascal" onclick="setMode('pascal')"><span class="btn-icon">{ }</span> PascalCase</button>
+      <button class="btn" data-mode="snake" onclick="setMode('snake')"><span class="btn-icon">_</span> snake_case</button>
+      <button class="btn" data-mode="kebab" onclick="setMode('kebab')"><span class="btn-icon">-</span> kebab-case</button>
+      <button class="btn" data-mode="constant" onclick="setMode('constant')"><span class="btn-icon">!</span> CONSTANT</button>
+    </div>
+
+    <!-- LIVE PREVIEW -->
+    <div class="preview-section">
+      <div class="preview-label-row">
+        <span class="preview-label">Live Preview</span>
+        <span class="active-mode-badge" id="activeBadge">UPPERCASE</span>
+      </div>
+      <div id="preview" class="empty">Your converted text appears here as you type…</div>
+    </div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+      <button class="btn-copy" onclick="copyResult()">
+        <span>📋</span> Copy Result
+      </button>
+      <button class="btn-clear" onclick="clearAll()">Clear</button>
+      <div class="spacer"></div>
+      <div class="stats-strip">
+        <div class="stat-chip">Mode: <strong id="modeLabel">UPPERCASE</strong></div>
+        <div class="stat-chip">Saved: <strong id="histCount">0</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEV QUICK REFERENCE -->
+  <div class="dev-section">
+    <div class="section-header">
+      <span class="section-title">Quick Mode Reference</span>
+    </div>
+    <div class="dev-grid">
+      <div class="dev-card" onclick="setMode('upper')">
+        <span class="dev-card-label">UPPERCASE</span>
+        <span class="dev-card-example">HELLO WORLD</span>
+      </div>
+      <div class="dev-card" onclick="setMode('lower')">
+        <span class="dev-card-label">lowercase</span>
+        <span class="dev-card-example">hello world</span>
+      </div>
+      <div class="dev-card" onclick="setMode('title')">
+        <span class="dev-card-label">Title Case</span>
+        <span class="dev-card-example">Hello World</span>
+      </div>
+      <div class="dev-card" onclick="setMode('sentence')">
+        <span class="dev-card-label">Sentence case</span>
+        <span class="dev-card-example">Hello world</span>
+      </div>
+      <div class="dev-card" onclick="setMode('alternating')">
+        <span class="dev-card-label">aLtErNaTiNg</span>
+        <span class="dev-card-example">hElLo wOrLd</span>
+      </div>
+      <div class="dev-card" onclick="setMode('camel')">
+        <span class="dev-card-label">camelCase</span>
+        <span class="dev-card-example">helloWorld</span>
+      </div>
+      <div class="dev-card" onclick="setMode('pascal')">
+        <span class="dev-card-label">PascalCase</span>
+        <span class="dev-card-example">HelloWorld</span>
+      </div>
+      <div class="dev-card" onclick="setMode('snake')">
+        <span class="dev-card-label">snake_case</span>
+        <span class="dev-card-example">hello_world</span>
+      </div>
+      <div class="dev-card" onclick="setMode('kebab')">
+        <span class="dev-card-label">kebab-case</span>
+        <span class="dev-card-example">hello-world</span>
+      </div>
+      <div class="dev-card" onclick="setMode('constant')">
+        <span class="dev-card-label">CONSTANT_CASE</span>
+        <span class="dev-card-example">HELLO_WORLD</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-section">
+    <div class="section-header">
+      <span class="section-title">Conversion History</span>
+      <button class="btn ghost" onclick="clearHistory()">Clear history</button>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">Your recent conversions will appear here.</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="section-header" style="margin-bottom:1.5rem;">
+      <span class="section-title">Frequently Asked Questions</span>
+    </div>
+    <div id="faq">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What is Title Case and when should I use it?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Title Case capitalizes the first letter of every major word. It's the standard for book titles, article headlines, movie names, and headings. Use it whenever you want to give text the authority of a proper title.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What's the difference between camelCase and PascalCase?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Both join words without spaces. camelCase starts with a lowercase letter (helloWorld) — common in JavaScript variables and JSON keys. PascalCase starts every word with uppercase (HelloWorld) — used for class names, components, and constructors.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Why use snake_case or kebab-case?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">snake_case (underscores) is the convention in Python, databases, and many config files. kebab-case (hyphens) is standard in URLs, CSS class names, and HTML attributes. Knowing which to use keeps your code consistent and readable.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is my text sent to any server?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Never. Every single conversion happens entirely inside your browser using JavaScript. No data leaves your device, no server ever sees your text. Fully private, fully offline-capable.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What is CONSTANT_CASE used for?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">CONSTANT_CASE (also called SCREAMING_SNAKE_CASE) is used for constants and environment variables across most languages — like MAX_RETRY_COUNT or API_BASE_URL. It signals "this value never changes."</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can I convert multiple paragraphs at once?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes! Paste in as much text as you need. All modes work on the entire input, including multi-paragraph content. Sentence case intelligently capitalizes only the first letter of each sentence.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="related-tools">
+    <div class="other-tools-header">⚡ More Content Tools</div>
+    <div class="other-tools-grid">
+      <a href="/text-summarizer" class="tool-chip">
+        <span class="tool-chip-icon">📝</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">Summarizer</div><div class="tool-chip-desc">AI text compression</div></div>
+      </a>
+      <a href="/word-counter" class="tool-chip">
+        <span class="tool-chip-icon">🔢</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">Word Counter</div><div class="tool-chip-desc">SEO & character check</div></div>
+      </a>
+      <a href="/subject-line-generator" class="tool-chip">
+        <span class="tool-chip-icon">📧</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">Subject Lines</div><div class="tool-chip-desc">Email open rate booster</div></div>
+      </a>
+      <a href="/privacy-policy-generator" class="tool-chip">
+        <span class="tool-chip-icon">⚖️</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">Privacy Gen</div><div class="tool-chip-desc">Legal templates</div></div>
+      </a>
+      <a href="/linkedin-post-maker" class="tool-chip">
+        <span class="tool-chip-icon">🔗</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">LinkedIn Post</div><div class="tool-chip-desc">Viral formatting</div></div>
+      </a>
+      <a href="/password-generator" class="tool-chip">
+        <span class="tool-chip-icon">🛡️</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">PW Generator</div><div class="tool-chip-desc">Secure random strings</div></div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style:dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div class="tool-chip-info"><div class="tool-chip-name">All Tools</div><div class="tool-chip-desc">31+ utilities</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SEO BLOCK -->
+  <div class="seo-block">
+    <h2>About This Case Converter</h2>
+    <p>
+      Whether you're a developer renaming variables, a writer polishing headlines, or a content creator formatting social media posts — having the right text case matters more than most people realize. This tool brings together 10 of the most commonly needed text transformations in one place, with live preview so you can see the result instantly as you type.
+    </p>
+    <br>
+    <p>
+      For developers: camelCase, PascalCase, snake_case, kebab-case, and CONSTANT_CASE are the five naming conventions that cover virtually every language and framework. For writers: uppercase, lowercase, title case, and sentence case handle every editorial need. And for fun — alternating case is always there when you need it.
+    </p>
+  </div>
+
+</div><!-- /page -->
+
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">Copied to clipboard!</span>
+</div>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">ToolCompass.org © 2026 — Professional Online Tools</p>
+</footer>
+
+<script>
+  let currentMode = 'upper';
+  let history = JSON.parse(localStorage.getItem('caseHistory') || '[]');
+
+  const modeBadgeNames = {
+    upper: 'UPPERCASE', lower: 'lowercase', title: 'Title Case',
+    sentence: 'Sentence case', alternating: 'aLtErNaTe',
+    camel: 'camelCase', pascal: 'PascalCase',
+    snake: 'snake_case', kebab: 'kebab-case', constant: 'CONSTANT_CASE'
+  };
+
+  // --- TRANSFORM FUNCTIONS ---
+  function toUpper(t) { return t.toUpperCase(); }
+  function toLower(t) { return t.toLowerCase(); }
+  function toTitle(t) {
+    const minors = new Set(['a','an','the','and','but','or','for','nor','on','at','to','by','in','of','up','as','is','it']);
+    return t.toLowerCase().replace(/\b\w+/g, (w, i) => {
+      if (i === 0 || !minors.has(w)) return w.charAt(0).toUpperCase() + w.slice(1);
+      return w;
+    });
+  }
+  function toSentence(t) {
+    return t.toLowerCase().replace(/(^\s*|[.!?]\s+)([a-z])/g, (m, p1, p2) => p1 + p2.toUpperCase());
+  }
+  function toAlternating(t) {
+    let i = 0;
+    return t.split('').map(c => {
+      if (c.match(/[a-zA-Z]/)) return (i++ % 2 === 0) ? c.toLowerCase() : c.toUpperCase();
+      return c;
+    }).join('');
+  }
+  function toCamel(t) {
+    return t.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (_, c) => c.toUpperCase());
+  }
+  function toPascal(t) {
+    const c = toCamel(t);
+    return c.charAt(0).toUpperCase() + c.slice(1);
+  }
+  function toSnake(t) {
+    return t.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '');
+  }
+  function toKebab(t) {
+    return t.toLowerCase().replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
+  function toConstant(t) {
+    return toSnake(t).toUpperCase();
+  }
+
+  const transforms = { upper: toUpper, lower: toLower, title: toTitle, sentence: toSentence, alternating: toAlternating, camel: toCamel, pascal: toPascal, snake: toSnake, kebab: toKebab, constant: toConstant };
+
+  // --- LIVE UPDATE ---
+  const inputEl = document.getElementById('inputText');
+  const previewEl = document.getElementById('preview');
+
+  function update() {
+    const raw = inputEl.value;
+    const words = raw.trim() ? raw.trim().split(/\s+/).length : 0;
+    const chars = raw.length;
+    const lines = raw ? raw.split('\n').length : 0;
+    document.getElementById('wCount').textContent = words;
+    document.getElementById('cCount').textContent = chars;
+    document.getElementById('lCount').textContent = lines;
+
+    if (!raw.trim()) {
+      previewEl.textContent = 'Your converted text appears here as you type…';
+      previewEl.classList.add('empty');
+    } else {
+      previewEl.textContent = transforms[currentMode](raw);
+      previewEl.classList.remove('empty');
+    }
+  }
+
+  inputEl.addEventListener('input', update);
+
+  function setMode(mode) {
+    currentMode = mode;
+    document.querySelectorAll('.btn[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+    document.getElementById('activeBadge').textContent = modeBadgeNames[mode];
+    document.getElementById('modeLabel').textContent = modeBadgeNames[mode];
+    update();
+  }
+
+  // --- COPY ---
+  function copyResult() {
+    const raw = inputEl.value.trim();
+    if (!raw) { showToast('⚠️', 'Nothing to copy yet!'); return; }
+    const result = transforms[currentMode](raw);
+    navigator.clipboard.writeText(result).then(() => {
+      saveHistory(result, currentMode);
+      showToast('✓', 'Copied to clipboard!');
+    });
+  }
+
+  function clearAll() {
+    inputEl.value = '';
+    update();
+  }
+
+  // --- TOAST ---
+  function showToast(icon, msg) {
+    const t = document.getElementById('toast');
+    document.querySelector('.toast-icon').textContent = icon;
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // --- HISTORY ---
+  function saveHistory(text, mode) {
+    history.unshift({ text, mode, time: Date.now() });
+    if (history.length > 10) history.pop();
+    localStorage.setItem('caseHistory', JSON.stringify(history));
+    renderHistory();
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('historyList');
+    document.getElementById('histCount').textContent = history.length;
+    if (!history.length) {
+      list.innerHTML = '<div class="history-empty">Your recent conversions will appear here.</div>';
+      return;
+    }
+    list.innerHTML = history.map((h, i) => `
+      <div class="history-item" onclick="loadHistory(${i})">
+        <span class="history-mode">${modeBadgeNames[h.mode]}</span>
+        <span class="history-text">${escHtml(h.text)}</span>
+      </div>
+    `).join('');
+  }
+
+  function loadHistory(i) {
+    const h = history[i];
+    inputEl.value = h.text;
+    setMode(h.mode);
+    showToast('↩', 'Loaded from history');
+  }
+
+  function clearHistory() {
+    history = [];
+    localStorage.removeItem('caseHistory');
+    renderHistory();
+    showToast('🗑', 'History cleared');
+  }
+
+  function escHtml(t) {
+    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // --- FAQ ---
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // --- KEYBOARD SHORTCUTS ---
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); copyResult(); }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'Delete') { e.preventDefault(); clearAll(); }
+  });
+
+  // --- INIT ---
+  renderHistory();
+  update();
+</script>
+</body>
+</html>

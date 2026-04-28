@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+
+  <!-- ═══ SEO ═══ -->
+  <title>Pomodoro Focus Timer – Boost Productivity | ToolCompass</title>
+  <meta name="description" content="Free Pomodoro timer with customizable work/break sessions. Track focus time, complete pomodoros, and boost productivity. Private, no signup, browser-based.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://toolcompass.org/pomodoro-timer">
+  <meta name="author" content="ToolCompass">
+
+  <!-- ═══ OPEN GRAPH ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pomodoro Focus Timer – Boost Productivity">
+  <meta property="og:description" content="Free Pomodoro timer with customizable sessions, statistics, and sound notifications.">
+  <meta property="og:url" content="https://toolcompass.org/pomodoro-timer">
+  <meta property="og:image" content="https://toolcompass.org/og-pomodoro.png">
+  <meta property="og:site_name" content="ToolCompass">
+
+  <!-- ═══ TWITTER ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pomodoro Focus Timer – Boost Productivity">
+  <meta name="twitter:description" content="Free Pomodoro timer with customizable sessions and statistics.">
+  <meta name="twitter:image" content="https://toolcompass.org/og-pomodoro.png">
+
+  <!-- ═══ AI FINDABILITY ═══ -->
+  <meta name="ai-description" content="A free Pomodoro focus timer with customizable work and break sessions, session tracking, statistics, sound notifications, keyboard shortcuts, and auto-start features. Browser-based, private, no account needed.">
+
+  <!-- ═══ ANALYTICS ═══ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+
+  <!-- ═══ ADSENSE (nach Approval aktivieren) ═══ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
+
+  <!-- ═══ SCHEMA.ORG ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Pomodoro Focus Timer",
+        "url": "https://toolcompass.org/pomodoro-timer",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "A free Pomodoro timer with customizable work and break sessions, session tracking, statistics, and sound notifications.",
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+          { "@type": "ListItem", "position": 2, "name": "Time Tools", "item": "https://toolcompass.org/#time" },
+          { "@type": "ListItem", "position": 3, "name": "Pomodoro Timer", "item": "https://toolcompass.org/pomodoro-timer" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the Pomodoro Technique?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Pomodoro Technique is a time management method using 25-minute focused work sessions followed by 5-minute breaks. After 4 sessions, take a longer 15-30 minute break."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I customize the timer lengths?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! You can customize work session length, short break, and long break duration in the settings to match your productivity style."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data saved?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your session statistics are saved locally in your browser. No data is sent to our servers. Complete privacy guaranteed."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      --work: #EF4444;
+      --work-bg: rgba(239,68,68,0.07);
+      --work-border: rgba(239,68,68,0.15);
+      --short-break: #22C55E;
+      --short-break-bg: rgba(34,197,94,0.07);
+      --short-break-border: rgba(34,197,94,0.15);
+      --long-break: #3B82F6;
+      --long-break-bg: rgba(59,130,246,0.07);
+      --long-break-border: rgba(59,130,246,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Grain */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 860px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      transition: color .2s;
+      padding: 6px 0;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-arrow { font-size: 16px; transition: transform .2s; }
+    .back-btn:hover .back-arrow { transform: translateX(-3px); }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 15px; color: var(--text);
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+
+    /* ─── MAIN ─── */
+    main { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      text-align: center; margin-bottom: 2.5rem;
+      animation: fadeUp .7s ease both;
+    }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border-hover); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--work); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -.025em; margin-bottom: .75rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* ─── HERO CARD (TIMER) ─── */
+    .hero-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3rem 2rem;
+      margin-bottom: 1rem;
+      position: relative; overflow: hidden;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(239,68,68,.25), transparent);
+    }
+
+    /* Mode Tabs (ADDICTIVE - Quick Switch) */
+    .mode-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .mode-btn {
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .mode-btn:hover {
+      border-color: var(--work);
+      color: var(--work);
+    }
+    .mode-btn.active[data-mode="work"] {
+      background: var(--work);
+      border-color: var(--work);
+      color: #fff;
+    }
+    .mode-btn.active[data-mode="short"] {
+      background: var(--short-break);
+      border-color: var(--short-break);
+      color: #0D0D0D;
+    }
+    .mode-btn.active[data-mode="long"] {
+      background: var(--long-break);
+      border-color: var(--long-break);
+      color: #fff;
+    }
+
+    /* Progress Ring (ADDICTIVE - Visual Timer) */
+    .timer-container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin: 0 auto 2rem;
+    }
+    @media (max-width: 400px) {
+      .timer-container {
+        width: 260px;
+        height: 260px;
+      }
+    }
+    .progress-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 12;
+    }
+    .progress-ring .bg {
+      stroke: var(--surface2);
+    }
+    .progress-ring .progress {
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.5s linear, stroke 0.3s ease;
+    }
+    .timer-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .timer-display {
+      font-family: 'Outfit', monospace;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1;
+      transition: color .3s ease;
+    }
+    .timer-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-top: 0.75rem;
+      transition: color .3s ease;
+    }
+    .pomodoro-count {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Control Buttons (ADDICTIVE - Satisfying Clicks) */
+    .control-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .control-btn {
+      padding: 14px 32px;
+      border-radius: 30px;
+      border: none;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .control-btn:active { transform: scale(0.96); }
+    .btn-start {
+      background: var(--work);
+      color: #fff;
+    }
+    .btn-start:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-start.running {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+    .btn-reset {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-reset:hover {
+      border-color: var(--work);
+      color: var(--work);
+    }
+    .btn-skip {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-skip:hover {
+      border-color: var(--short-break);
+      color: var(--short-break);
+    }
+
+    /* Keyboard Shortcuts (ADDICTIVE - Power User) */
+    .keyboard-hint {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      padding: 12px;
+      background: var(--surface2);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .key-shortcut {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .key-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    /* Settings (ADDICTIVE - Customization) */
+    .settings-section {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .settings-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .settings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 520px) {
+      .settings-grid { grid-template-columns: 1fr; }
+    }
+    .setting-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .setting-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .setting-input {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: 8px;
+      font-family: 'Outfit';
+      font-size: 14px;
+      text-align: center;
+    }
+    .setting-input:focus {
+      outline: none;
+      border-color: var(--work);
+    }
+
+    /* Statistics (ADDICTIVE - Progress Tracking) */
+    .stats-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: none;
+    }
+    .stats-section.show {
+      display: block;
+      animation: slideUp .3s ease;
+    }
+    .stats-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stats-clear {
+      font-size: 10px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .stats-clear:hover { color: var(--work); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 1rem;
+      background: var(--bg);
+      border-radius: 10px;
+    }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--work);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-top: 0.5rem;
+    }
+
+    /* Settings Modal (ADDICTIVE - Advanced Options) */
+    .settings-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+    .toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .toggle-btn:hover {
+      border-color: var(--work);
+      color: var(--work);
+    }
+    .settings-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease;
+    }
+    .settings-panel.open {
+      max-height: 500px;
+    }
+
+    /* ─── SECTION BLOCKS ─── */
+    .section-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-badge {
+      font-size: 10px;
+      font-weight: 600;
+      background: var(--work-bg);
+      color: var(--work);
+      border: 1px solid var(--work-border);
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: .06em;
+      font-style: normal;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 1rem;
+    }
+    @media (max-width: 520px) {
+      .benefit-grid { grid-template-columns: 1fr; }
+    }
+    .benefit-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .benefit-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .benefit-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .benefit-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── AD SLOT ─── */
+    .ad-slot {
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .ad-slot.adsense-active {
+      display: block;
+    }
+    .ad-inner {
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90px;
+      position: relative;
+    }
+    .ad-label {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    /* ─── OTHER TOOLS ─── */
+    .other-tools {
+      margin-bottom: 1rem;
+      animation: fadeUp .7s .5s ease both;
+    }
+    .other-tools-header {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .other-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover {
+      border-color: var(--border-hover);
+      background: var(--surface2);
+      transform: translateY(-2px);
+    }
+    .tool-chip-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .tool-chip-info {
+      min-width: 0;
+    }
+    .tool-chip-name {
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tool-chip-desc {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    /* ─── SEO CONTENT ─── */
+    .seo-content {
+      padding: 2.5rem 0 0;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .7s .6s ease both;
+    }
+    .seo-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .seo-content h2 em {
+      color: var(--accent);
+    }
+    .seo-content p {
+      font-size: 13.5px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .seo-content strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .seo-content ul {
+      color: var(--muted);
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .seo-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: 1.5rem;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-q:hover {
+      background: var(--surface2);
+    }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--accent);
+      transition: transform .3s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+    }
+    .faq-a-inner {
+      padding: .25rem 1.25rem 1rem;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .footer-logo em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    /* ─── ANIMATIONS & TOAST ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: #0D0D0D;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+      z-index: 200;
+    }
+    .toast.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 2rem 1.25rem 5rem;
+      }
+      .hero-card {
+        padding: 1.5rem;
+      }
+      .control-buttons {
+        flex-direction: column;
+      }
+      .control-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .keyboard-hint {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">
+      <span class="back-arrow">←</span> All Tools
+    </a>
+    <a href="/" style="text-decoration:none;">
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-tag"><span class="page-tag-dot"></span>Time & Productivity</div>
+    <h1>Pomodoro<br><em>Focus Timer</em></h1>
+    <p class="page-sub">25-minute focused work sessions. Boost your productivity.</p>
+  </div>
+
+  <!-- AD SLOT TOP (nach Approval aktivieren) -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- HERO CARD (TIMER) -->
+  <div class="hero-card">
+    
+    <!-- Mode Tabs (ADDICTIVE - Quick Switch) -->
+    <div class="mode-tabs">
+      <button class="mode-btn active" data-mode="work" onclick="setMode('work')">
+        🎯 Work
+      </button>
+      <button class="mode-btn" data-mode="short" onclick="setMode('short')">
+        ☕ Short Break
+      </button>
+      <button class="mode-btn" data-mode="long" onclick="setMode('long')">
+        🌴 Long Break
+      </button>
+    </div>
+
+    <!-- Progress Ring (ADDICTIVE - Visual Timer) -->
+    <div class="timer-container">
+      <svg class="progress-ring" width="320" height="320">
+        <circle class="bg" cx="160" cy="160" r="140"></circle>
+        <circle class="progress" id="progressCircle" cx="160" cy="160" r="140" 
+                stroke-dasharray="879" stroke-dashoffset="0"></circle>
+      </svg>
+      <div class="timer-content">
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-label" id="timerLabel">Work Session</div>
+        <div class="pomodoro-count">Pomodoro <span id="pomoCount">1</span> of 4</div>
+      </div>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="control-buttons">
+      <button class="control-btn btn-start" id="startBtn" onclick="toggleTimer()">
+        <span id="startIcon">▶️</span>
+        <span id="startText">Start</span>
+      </button>
+      <button class="control-btn btn-reset" onclick="resetTimer()">
+        <span>🔄</span>
+        <span>Reset</span>
+      </button>
+      <button class="control-btn btn-skip" onclick="skipSession()">
+        <span>⏭️</span>
+        <span>Skip</span>
+      </button>
+    </div>
+
+    <!-- Keyboard Shortcuts -->
+    <div class="keyboard-hint">
+      <div class="key-shortcut">
+        <span class="key-badge">Space</span>
+        <span>Start/Pause</span>
+      </div>
+      <div class="key-shortcut">
+        <span class="key-badge">R</span>
+        <span>Reset</span>
+      </div>
+      <div class="key-shortcut">
+        <span class="key-badge">S</span>
+        <span>Skip</span>
+      </div>
+    </div>
+
+    <!-- Statistics (ADDICTIVE - Progress Tracking) -->
+    <div class="stats-section" id="statsSection">
+      <div class="stats-title">
+        <span>📊 Today's Progress</span>
+        <span class="stats-clear" onclick="clearStats()">Clear</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="statCompleted">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statMinutes">0</div>
+          <div class="stat-label">Minutes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statStreak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Toggle -->
+    <div class="settings-toggle">
+      <button class="toggle-btn" onclick="toggleSettings()">
+        ⚙️ Settings
+      </button>
+    </div>
+
+    <!-- Settings Panel (ADDICTIVE - Customization) -->
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-section">
+        <div class="settings-title">Timer Duration (minutes)</div>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label class="setting-label">Work</label>
+            <input type="number" id="workDuration" class="setting-input" value="25" min="1" max="60" onchange="saveSettings()">
+          </div>
+          <div class="setting-item">
+            <label class="setting-label">Short Break</label>
+            <input type="number" id="shortDuration" class="setting-input" value="5" min="1" max="30" onchange="saveSettings()">
+          </div>
+          <div class="setting-item">
+            <label class="setting-label">Long Break</label>
+            <input type="number" id="longDuration" class="setting-input" value="15" min="1" max="60" onchange="saveSettings()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AD SLOT MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="section-block">
+    <div class="section-title">
+      Why Pomodoro Works
+      <span class="section-title-badge">Benefits</span>
+    </div>
+    <p style="font-size:13.5px; color:var(--muted); line-height:1.7;">
+      The Pomodoro Technique helps you maintain focus and avoid burnout:
+    </p>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🎯</div>
+        <div class="benefit-title">Improved Focus</div>
+        <div class="benefit-desc">Single-tasking for 25 minutes eliminates distractions</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">⏱️</div>
+        <div class="benefit-title">Time Awareness</div>
+        <div class="benefit-desc">Better estimation of task duration over time</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">😌</div>
+        <div class="benefit-title">Reduced Burnout</div>
+        <div class="benefit-desc">Regular breaks prevent mental fatigue</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">✅</div>
+        <div class="benefit-title">Sense of Achievement</div>
+        <div class="benefit-desc">Track completed pomodoros for motivation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTHER TOOLS -->
+  <div class="other-tools">
+    <div class="other-tools-header">⚡ More Time Tools</div>
+    <div class="other-tools-grid">
+      <a href="/stopwatch" class="tool-chip">
+        <span class="tool-chip-icon">⏱️</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Stopwatch</div>
+          <div class="tool-chip-desc">Lap timer</div>
+        </div>
+      </a>
+      <a href="/countdown-generator" class="tool-chip">
+        <span class="tool-chip-icon">⏳</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Countdown</div>
+          <div class="tool-chip-desc">Event timer</div>
+        </div>
+      </a>
+      <a href="/workday-counter" class="tool-chip">
+        <span class="tool-chip-icon">📅</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Workdays</div>
+          <div class="tool-chip-desc">Business days</div>
+        </div>
+      </a>
+      <a href="/global-timezone-clock" class="tool-chip">
+        <span class="tool-chip-icon">🌍</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">World Clock</div>
+          <div class="tool-chip-desc">Global timezones</div>
+        </div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style: dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">All Tools</div>
+          <div class="tool-chip-desc">31+ utilities</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT + FAQ -->
+  <div class="seo-content">
+    <h2>How to use the <em>Pomodoro Timer</em></h2>
+    <p>
+      The <strong>Pomodoro Technique</strong> is a proven time management method developed by Francesco Cirillo. Work in focused 25-minute sessions (called "pomodoros"), followed by 5-minute breaks. After completing 4 pomodoros, take a longer 15-30 minute break.
+    </p>
+    <p>
+      Our timer makes it easy to follow this method. Select your mode (Work, Short Break, or Long Break), click Start, and focus on your task. When the timer ends, you'll hear a notification sound. Track your completed pomodoros in the statistics section to stay motivated.
+    </p>
+    <p>
+      <strong>Pro tips:</strong> Eliminate distractions during work sessions, use breaks to physically move around, and customize timer durations to match your personal productivity rhythm.
+    </p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What is the Pomodoro Technique?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">The Pomodoro Technique is a time management method using 25-minute focused work sessions followed by 5-minute breaks. After 4 sessions, take a longer 15-30 minute break. This helps maintain focus and prevent burnout.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I customize the timer lengths?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Click Settings to customize work session length (1-60 min), short break (1-30 min), and long break (1-60 min) to match your productivity style.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Are there keyboard shortcuts?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Spacebar starts/pauses the timer, R resets, and S skips to the next session. Perfect for hands-free operation while working.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Is my data saved?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Your session statistics are saved locally in your browser. No data is sent to our servers. Complete privacy guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+</footer>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">Session complete!</div>
+
+<!-- AUDIO NOTIFICATION -->
+<audio id="alarmSound" preload="auto">
+  <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbqWEyMmih0NupYTIyaKHQ26lhMjJoodDbqWEyMmih0NupYTIyaKHQ26lhMjJoodDbqWEyMmih0NupYTI=" type="audio/wav">
+</audio>
+
+<script>
+// ═══════════════════════════════════════════════
+// POMODORO TIMER LOGIC
+// ═══════════════════════════════════════════════
+
+let timer;
+let timeLeft = 1500;
+let totalTime = 1500;
+let isRunning = false;
+let currentMode = 'work';
+let pomodoroCount = 1;
+let completedPomodoros = 0;
+let totalMinutes = 0;
+
+// Mode Durations (can be customized)
+let durations = {
+  work: 25,
+  short: 5,
+  long: 15
+};
+
+// Mode Colors
+const modeColors = {
+  work: { circle: '#EF4444', text: '#EF4444' },
+  short: { circle: '#22C55E', text: '#22C55E' },
+  long: { circle: '#3B82F6', text: '#3B82F6' }
+};
+
+// Set Mode (ADDICTIVE - Quick Switch)
+function setMode(mode) {
+  currentMode = mode;
+  
+  // Update buttons
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+  
+  // Update timer
+  const minutes = durations[mode];
+  totalTime = minutes * 60;
+  timeLeft = totalTime;
+  
+  // Update display
+  updateDisplay();
+  updateProgress();
+  updateColors();
+  
+  // Update label
+  const labels = {
+    work: 'Work Session',
+    short: 'Short Break',
+    long: 'Long Break'
+  };
+  document.getElementById('timerLabel').innerText = labels[mode];
+  
+  // Reset running state
+  if (isRunning) {
+    toggleTimer();
+  }
+}
+
+// Update Colors (ADDICTIVE - Visual Feedback)
+function updateColors() {
+  const colors = modeColors[currentMode];
+  const progressCircle = document.getElementById('progressCircle');
+  const timerDisplay = document.getElementById('timerDisplay');
+  const timerLabel = document.getElementById('timerLabel');
+  
+  progressCircle.style.stroke = colors.circle;
+  timerDisplay.style.color = colors.text;
+  timerLabel.style.color = colors.text;
+}
+
+// Update Display
+function updateDisplay() {
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
+  document.getElementById('timerDisplay').innerText = 
+    `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  
+  // Update page title (ADDICTIVE - Always Visible)
+  document.title = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} - Pomodoro Timer`;
+}
+
+// Update Progress Ring (ADDICTIVE - Visual Timer)
+function updateProgress() {
+  const circle = document.getElementById('progressCircle');
+  const circumference = 2 * Math.PI * 140;
+  const offset = circumference - (timeLeft / totalTime) * circumference;
+  circle.style.strokeDashoffset = offset;
+}
+
+// Toggle Timer
+function toggleTimer() {
+  const startBtn = document.getElementById('startBtn');
+  const startIcon = document.getElementById('startIcon');
+  const startText = document.getElementById('startText');
+  
+  if (isRunning) {
+    // Pause
+    clearInterval(timer);
+    startIcon.innerText = '▶️';
+    startText.innerText = 'Resume';
+    startBtn.classList.add('running');
+  } else {
+    // Start
+    timer = setInterval(() => {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateDisplay();
+        updateProgress();
+      } else {
+        // Session complete
+        clearInterval(timer);
+        playAlarm();
+        handleSessionComplete();
+      }
+    }, 1000);
+    
+    startIcon.innerText = '⏸️';
+    startText.innerText = 'Pause';
+    startBtn.classList.remove('running');
+  }
+  
+  isRunning = !isRunning;
+}
+
+// Handle Session Complete (ADDICTIVE - Progress Tracking)
+function handleSessionComplete() {
+  isRunning = false;
+  document.getElementById('startBtn').innerHTML = '<span>▶️</span><span>Start</span>';
+  
+  if (currentMode === 'work') {
+    completedPomodoros++;
+    totalMinutes += durations.work;
+    
+    // Check if long break needed
+    if (completedPomodoros % 4 === 0) {
+      setMode('long');
+      showToast('🎉 4 Pomodoros complete! Long break time!');
+    } else {
+      setMode('short');
+      showToast('✅ Work session complete! Take a break.');
+    }
+    
+    // Update stats
+    updateStats();
+  } else {
+    // Break complete, back to work
+    if (currentMode === 'long') {
+      pomodoroCount = 1;
+    } else {
+      pomodoroCount++;
+    }
+    document.getElementById('pomoCount').innerText = pomodoroCount;
+    setMode('work');
+    showToast('☕ Break over! Back to work.');
+  }
+  
+  // Save stats
+  saveStats();
+}
+
+// Skip Session
+function skipSession() {
+  clearInterval(timer);
+  isRunning = false;
+  document.getElementById('startBtn').innerHTML = '<span>▶️</span><span>Start</span>';
+  
+  if (currentMode === 'work') {
+    setMode('short');
+  } else {
+    pomodoroCount++;
+    if (pomodoroCount > 4) pomodoroCount = 1;
+    document.getElementById('pomoCount').innerText = pomodoroCount;
+    setMode('work');
+  }
+  
+  showToast('Session skipped');
+}
+
+// Reset Timer
+function resetTimer() {
+  clearInterval(timer);
+  isRunning = false;
+  timeLeft = totalTime;
+  
+  updateDisplay();
+  updateProgress();
+  
+  document.getElementById('startBtn').innerHTML = '<span>▶️</span><span>Start</span>';
+  document.getElementById('startBtn').classList.remove('running');
+  
+  showToast('Timer reset');
+}
+
+// Play Alarm Sound
+function playAlarm() {
+  const audio = document.getElementById('alarmSound');
+  audio.play().catch(() => {
+    // Fallback notification if audio fails
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification('Pomodoro Timer', { body: 'Session complete!' });
+    }
+  });
+}
+
+// Request Notification Permission
+function requestNotificationPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+
+// Statistics (ADDICTIVE - Progress Tracking)
+function updateStats() {
+  document.getElementById('statCompleted').innerText = completedPomodoros;
+  document.getElementById('statMinutes').innerText = totalMinutes;
+  
+  // Calculate streak (simplified)
+  const lastDate = localStorage.getItem('tc_pomo_lastDate');
+  const today = new Date().toDateString();
+  let streak = parseInt(localStorage.getItem('tc_pomo_streak') || '0');
+  
+  if (lastDate !== today) {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (lastDate === yesterday.toDateString()) {
+      streak++;
+    } else {
+      streak = 1;
+    }
+    localStorage.setItem('tc_pomo_lastDate', today);
+  }
+  
+  localStorage.setItem('tc_pomo_streak', streak);
+  document.getElementById('statStreak').innerText = streak;
+  
+  document.getElementById('statsSection').classList.add('show');
+}
+
+function saveStats() {
+  localStorage.setItem('tc_pomo_completed', completedPomodoros);
+  localStorage.setItem('tc_pomo_minutes', totalMinutes);
+}
+
+function clearStats() {
+  completedPomodoros = 0;
+  totalMinutes = 0;
+  localStorage.removeItem('tc_pomo_completed');
+  localStorage.removeItem('tc_pomo_minutes');
+  localStorage.removeItem('tc_pomo_streak');
+  localStorage.removeItem('tc_pomo_lastDate');
+  updateStats();
+  showToast('Stats cleared');
+}
+
+function loadStats() {
+  completedPomodoros = parseInt(localStorage.getItem('tc_pomo_completed') || '0');
+  totalMinutes = parseInt(localStorage.getItem('tc_pomo_minutes') || '0');
+  updateStats();
+}
+
+// Settings (ADDICTIVE - Customization)
+function toggleSettings() {
+  document.getElementById('settingsPanel').classList.toggle('open');
+}
+
+function saveSettings() {
+  durations.work = parseInt(document.getElementById('workDuration').value) || 25;
+  durations.short = parseInt(document.getElementById('shortDuration').value) || 5;
+  durations.long = parseInt(document.getElementById('longDuration').value) || 15;
+  
+  localStorage.setItem('tc_pomo_durations', JSON.stringify(durations));
+  
+  // Update current timer if not running
+  if (!isRunning) {
+    setMode(currentMode);
+  }
+  
+  showToast('Settings saved');
+}
+
+function loadSettings() {
+  const saved = localStorage.getItem('tc_pomo_durations');
+  if (saved) {
+    durations = JSON.parse(saved);
+    document.getElementById('workDuration').value = durations.work;
+    document.getElementById('shortDuration').value = durations.short;
+    document.getElementById('longDuration').value = durations.long;
+  }
+}
+
+// Keyboard Shortcuts (ADDICTIVE - Power User)
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT') return;
+  
+  if (e.code === 'Space') {
+    e.preventDefault();
+    toggleTimer();
+  } else if (e.code === 'KeyR') {
+    resetTimer();
+  } else if (e.code === 'KeyS') {
+    skipSession();
+  }
+});
+
+// Toast Notification
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.innerText = message;
+  toast.classList.add('active');
+  setTimeout(() => toast.classList.remove('active'), 3000);
+}
+
+// FAQ Accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// Initialize
+window.addEventListener('load', () => {
+  loadSettings();
+  loadStats();
+  setMode('work');
+  requestNotificationPermission();
+});
+
+// ─── ADSENSE aktivieren nach Approval ───
+// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+// (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>

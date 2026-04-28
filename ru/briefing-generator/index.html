@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980"
+     crossorigin="anonymous"></script>
+
+  <title>Briefing Generator – Professionelle Projektbriefings in 5 Schritten | ToolCompass</title>
+  <meta name="description" content="Erstelle kostenlos strukturierte Projektbriefings für Freelancer und Kunden. Klar, präzise, sofort kopierbar. Kein Login. Keine Daten gespeichert.">
+  <link rel="canonical" href="https://toolcompass.org/briefing-generator">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Briefing Generator",
+    "url": "https://toolcompass.org/briefing-generator",
+    "applicationCategory": "BusinessApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Strukturierte Projektbriefings für Freelancer und Kunden in 5 Schritten erstellen."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Was ist ein Projektbriefing?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Projektbriefing ist ein strukturiertes Dokument, das alle wichtigen Informationen zu einem Auftrag zusammenfasst: Ziele, Umfang, Budget, Deadline und Ansprechpartner." } },
+      { "@type": "Question", "name": "Für wen ist der Briefing Generator gedacht?", "acceptedAnswer": { "@type": "Answer", "text": "Für Freelancer, Agenturen und Auftraggeber, die Projekte klar und professionell dokumentieren möchten – ohne langes Hin-und-Her per E-Mail." } },
+      { "@type": "Question", "name": "Werden meine Daten gespeichert?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Alle Eingaben bleiben ausschließlich in deinem Browser. Es werden keine Daten an Server übertragen." } },
+      { "@type": "Question", "name": "Kann ich das Briefing exportieren?", "acceptedAnswer": { "@type": "Answer", "text": "Ja! Das fertige Briefing kann per Knopfdruck in die Zwischenablage kopiert oder als .txt-Datei heruntergeladen werden." } },
+      { "@type": "Question", "name": "Wie viele Felder kann ich ausfüllen?", "acceptedAnswer": { "@type": "Answer", "text": "Der Generator führt dich durch 5 Phasen mit insgesamt 15+ Feldern – von Kundendaten bis hin zu Tonalität und Zielgruppe." } },
+      { "@type": "Question", "name": "Kann ich ein angefangenes Briefing weitermachen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja! Deine Eingaben werden automatisch im Browser gespeichert, sodass du jederzeit weitermachen kannst." } }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      --finance: #4ADE80;
+      --finance-bg: rgba(74,222,128,0.07);
+      --finance-border: rgba(74,222,128,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 860px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid var(--border-hover);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 16px;
+      color: var(--text); letter-spacing: 0.01em;
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+    .back-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; letter-spacing: .06em;
+      color: var(--muted); text-decoration: none; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .back-btn:hover { color: var(--text); }
+
+    /* ─── PAGE ─── */
+    .page { max-width: 860px; margin: 0 auto; padding: 90px 2rem 6rem; }
+
+    /* ─── HERO ─── */
+    .tool-hero { text-align: center; margin-bottom: 2.5rem; animation: fadeUp .7s ease both; }
+    .tool-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--finance-border); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--finance); margin-bottom: 1.25rem;
+      background: var(--finance-bg);
+    }
+    .tool-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -0.02em; margin-bottom: .75rem;
+    }
+    .tool-hero h1 em { font-style: italic; color: var(--accent); }
+    .tool-hero p { color: var(--muted); font-size: 15px; font-weight: 300; max-width: 460px; margin: 0 auto; line-height: 1.7; }
+
+    /* ─── PROGRESS BAR ─── */
+    .progress-wrap { margin-bottom: 2rem; animation: fadeUp .7s .05s ease both; }
+    .progress-steps {
+      display: flex; gap: 6px; margin-bottom: .75rem;
+    }
+    .prog-step {
+      flex: 1; height: 3px; border-radius: 10px;
+      background: var(--surface2);
+      position: relative; overflow: hidden;
+      transition: background .3s;
+    }
+    .prog-step::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--finance);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .45s cubic-bezier(.4,0,.2,1);
+    }
+    .prog-step.done::after { transform: scaleX(1); }
+    .prog-step.active::after { transform: scaleX(1); background: var(--accent); }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    }
+    .progress-label .p-phase { color: var(--muted); }
+    .progress-label .p-count { color: var(--accent); }
+
+    /* ─── WIZARD CARD ─── */
+    .wizard-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      animation: fadeUp .7s .1s ease both;
+      position: relative;
+    }
+    .wizard-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,222,128,.2), transparent);
+    }
+
+    /* ─── STEP ─── */
+    .step { display: none; }
+    .step.active { display: block; animation: stepIn .35s ease both; }
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateX(16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .step-head {
+      padding: 2rem 2rem 0;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+    .step-num {
+      font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--finance); margin-bottom: .4rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .step-num::before {
+      content: '';
+      display: inline-block; width: 18px; height: 1px;
+      background: var(--finance); opacity: .5;
+    }
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 900;
+      letter-spacing: -.02em; line-height: 1.1;
+    }
+    .step-title em { font-style: italic; color: var(--accent); }
+    .step-sub { font-size: 13px; color: var(--muted); font-weight: 300; margin-top: .4rem; }
+
+    .step-body { padding: 1.75rem 2rem; }
+
+    /* ─── FORM ELEMENTS ─── */
+    .field { margin-bottom: 1.25rem; }
+    .field-label {
+      display: block; font-size: 10px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .5rem;
+    }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 400;
+      padding: 12px 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--finance);
+      box-shadow: 0 0 0 3px rgba(74,222,128,0.07);
+    }
+    textarea { resize: vertical; min-height: 96px; line-height: 1.6; }
+    select { cursor: pointer; }
+    select option { background: #1E1E1E; }
+
+    /* ─── TAG PILLS ─── */
+    .tag-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag-pill {
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 7px 14px;
+      font-size: 12px; font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      user-select: none;
+      color: var(--muted);
+    }
+    .tag-pill:hover { border-color: var(--border-hover); color: var(--text); }
+    .tag-pill.selected {
+      background: var(--finance-bg);
+      border-color: var(--finance-border);
+      color: var(--finance);
+    }
+
+    /* ─── STEP FOOTER ─── */
+    .step-footer {
+      padding: 1.25rem 2rem 1.75rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem;
+    }
+    .btn-back {
+      background: none; border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: color .15s;
+    }
+    .btn-back:hover { color: var(--text); }
+    .btn-next {
+      background: var(--finance);
+      color: #0D0D0D;
+      border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: .04em;
+      padding: 12px 28px; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all .2s;
+    }
+    .btn-next:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-next:active { transform: translateY(0); }
+
+    /* ─── RESULT STEP ─── */
+    .result-block {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem;
+      font-size: 13px; line-height: 1.85;
+      white-space: pre-wrap; font-family: 'Outfit', monospace;
+      color: var(--text);
+      max-height: 420px; overflow-y: auto;
+    }
+    .result-block::-webkit-scrollbar { width: 4px; }
+    .result-block::-webkit-scrollbar-track { background: transparent; }
+    .result-block::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+
+    .result-section-title {
+      font-weight: 700; color: var(--accent); letter-spacing: .05em;
+    }
+    .result-divider { color: var(--muted); }
+
+    .result-actions {
+      display: flex; gap: .75rem; margin-top: 1.25rem; flex-wrap: wrap;
+    }
+    .btn-copy-main {
+      background: var(--accent); color: #0D0D0D;
+      border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700;
+      padding: 12px 24px; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all .2s; flex: 1;
+      justify-content: center;
+    }
+    .btn-copy-main:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-download {
+      background: var(--surface2); color: var(--text);
+      border: 1px solid var(--border); border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+      padding: 12px 20px; cursor: pointer;
+      display: flex; align-items: center; gap: 8px;
+      transition: all .2s;
+    }
+    .btn-download:hover { border-color: var(--border-hover); }
+    .btn-restart {
+      background: none; color: var(--muted);
+      border: 1px solid var(--border); border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
+      padding: 12px 16px; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: all .2s;
+    }
+    .btn-restart:hover { color: var(--text); border-color: var(--border-hover); }
+
+    /* ─── SUMMARY PREVIEW ─── */
+    .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+    .summary-card {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem;
+    }
+    .summary-card-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; }
+    .summary-card-value { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+    .summary-card-value.finance { color: var(--finance); }
+
+    /* ─── AD SLOT ─── */
+    .ad-slot { margin-bottom: 1.5rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
+    .ad-inner {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1rem; text-align: center;
+      min-height: 100px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: .5rem;
+    }
+    .ad-label { font-size: 10px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+    /* ─── FEATURE CHIPS ─── */
+    .feature-strip {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+      margin-top: 1.5rem; margin-bottom: 2rem;
+      animation: fadeUp .7s .15s ease both;
+    }
+    .feature-chip {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 30px; padding: 6px 12px;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+    }
+    .feature-chip span { font-size: 12px; }
+
+    /* ─── RELATED TOOLS ─── */
+    .related-tools { margin-top: 2.5rem; animation: fadeUp .7s .3s ease both; }
+    .other-tools-header {
+      font-size: 11px; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .75rem;
+    }
+    .other-tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+    .tool-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text);
+      font-size: 12px; font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-name { font-weight: 600; font-size: 12px; }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+    /* ─── FAQ ─── */
+    .faq-section { margin-top: 3rem; animation: fadeUp .7s .35s ease both; }
+    .faq-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 14px; font-weight: 500; padding: 1.1rem 0;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; transition: color .15s;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-icon { font-size: 18px; color: var(--muted); flex-shrink: 0; transition: transform .25s; }
+    .faq-a { overflow: hidden; max-height: 0; transition: max-height .3s ease, padding .3s; font-size: 13px; color: var(--muted); line-height: 1.75; }
+    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.1rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ─── SEO ─── */
+    .seo-block {
+      margin-top: 2.5rem; padding: 2rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      font-size: 13px; color: var(--muted); line-height: 1.85;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .seo-block h2 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: .75rem; }
+
+    /* ─── TOAST ─── */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--surface2); border: 1px solid var(--border-hover);
+      border-radius: 12px; padding: .75rem 1.5rem;
+      font-size: 13px; font-weight: 500;
+      opacity: 0; transition: all .3s; pointer-events: none; z-index: 200;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ─── FOOTER ─── */
+    footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+    @media (max-width: 620px) {
+      .page { padding: 80px 1.25rem 4rem; }
+      .field-row { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .step-head, .step-body { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .step-footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .result-actions { flex-direction: column; }
+      .btn-copy-main { flex: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-icon">🧭</div>
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+    <a href="/" class="back-btn">← All Tools</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="tool-hero">
+    <span class="tool-tag">📋 Finance & Business</span>
+    <h1>Briefing<br><em>Generator</em></h1>
+    <p>In 5 Schritten zum perfekten Projektbriefing. Für Freelancer, Agenturen und Auftraggeber.</p>
+  </div>
+
+  <!-- FEATURE STRIP -->
+  <div class="feature-strip">
+    <div class="feature-chip"><span>⚡</span> 5 Phasen</div>
+    <div class="feature-chip"><span>📋</span> Sofort kopierbar</div>
+    <div class="feature-chip"><span>💾</span> Auto-Speichern</div>
+    <div class="feature-chip"><span>📥</span> TXT Export</div>
+    <div class="feature-chip"><span>🔒</span> 100% privat</div>
+  </div>
+
+  <!-- AD TOP -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-steps">
+      <div class="prog-step active" id="p0"></div>
+      <div class="prog-step" id="p1"></div>
+      <div class="prog-step" id="p2"></div>
+      <div class="prog-step" id="p3"></div>
+      <div class="prog-step" id="p4"></div>
+    </div>
+    <div class="progress-label">
+      <span class="p-phase" id="phaseLabel">Phase 1 von 5 — Kundendaten</span>
+      <span class="p-count" id="phasePct">20%</span>
+    </div>
+  </div>
+
+  <!-- WIZARD CARD -->
+  <div class="wizard-card">
+
+    <!-- ── STEP 0: KUNDENDATEN ── -->
+    <div class="step active" id="s0">
+      <div class="step-head">
+        <div class="step-num">Phase 01</div>
+        <div class="step-title">Wer gibt den<br><em>Auftrag?</em></div>
+        <div class="step-sub">Kontaktdaten des Auftraggebers</div>
+      </div>
+      <div class="step-body">
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Firma / Brand *</label>
+            <input type="text" id="f-company" placeholder="z.B. Müller GmbH" oninput="autoSave()">
+          </div>
+          <div class="field">
+            <label class="field-label">Ansprechpartner *</label>
+            <input type="text" id="f-contact" placeholder="Vollständiger Name" oninput="autoSave()">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">E-Mail</label>
+            <input type="email" id="f-email" placeholder="kontakt@firma.de" oninput="autoSave()">
+          </div>
+          <div class="field">
+            <label class="field-label">Telefon / Slack</label>
+            <input type="text" id="f-phone" placeholder="+49 123 456789" oninput="autoSave()">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Website (optional)</label>
+          <input type="url" id="f-website" placeholder="https://firma.de" oninput="autoSave()">
+        </div>
+      </div>
+      <div class="step-footer">
+        <span></span>
+        <button class="btn-next" onclick="goNext()">Phase 02 <span>→</span></button>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: PROJEKTKERN ── -->
+    <div class="step" id="s1">
+      <div class="step-head">
+        <div class="step-num">Phase 02</div>
+        <div class="step-title">Was wird<br><em>erschaffen?</em></div>
+        <div class="step-sub">Art und Ziel des Projekts definieren</div>
+      </div>
+      <div class="step-body">
+        <div class="field">
+          <label class="field-label">Projekt-Typ</label>
+          <div class="tag-group" id="tags-type">
+            <span class="tag-pill" onclick="toggleTag(this,'type')">Website</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">App / SaaS</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">Branding</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">Social Media</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">SEO / Content</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">Video / Film</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">Print</span>
+            <span class="tag-pill" onclick="toggleTag(this,'type')">Beratung</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Projektname</label>
+          <input type="text" id="f-projname" placeholder="z.B. Relaunch Corporate Website 2026" oninput="autoSave()">
+        </div>
+        <div class="field">
+          <label class="field-label">Hauptziel des Projekts *</label>
+          <textarea id="f-goal" placeholder="Was soll erreicht werden? Welches Problem lösen wir? Wer ist die Zielgruppe?" oninput="autoSave()"></textarea>
+        </div>
+        <div class="field">
+          <label class="field-label">Tonalität / Stil</label>
+          <div class="tag-group" id="tags-tone">
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Professionell</span>
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Modern</span>
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Minimalistisch</span>
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Verspielt</span>
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Luxuriös</span>
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Technisch</span>
+            <span class="tag-pill" onclick="toggleTag(this,'tone')">Warm & Nahbar</span>
+          </div>
+        </div>
+      </div>
+      <div class="step-footer">
+        <button class="btn-back" onclick="goBack()">← Zurück</button>
+        <button class="btn-next" onclick="goNext()">Phase 03 <span>→</span></button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: SCOPE & DEADLINE ── -->
+    <div class="step" id="s2">
+      <div class="step-head">
+        <div class="step-num">Phase 03</div>
+        <div class="step-title">Scope &<br><em>Milestones</em></div>
+        <div class="step-sub">Leistungsumfang, Zeitplan & Revisionen</div>
+      </div>
+      <div class="step-body">
+        <div class="field">
+          <label class="field-label">Leistungsumfang *</label>
+          <textarea id="f-scope" placeholder="Was wird konkret geliefert? z.B. 5-seitige Website, Logo in 3 Varianten, monatliche Content-Pakete…" oninput="autoSave()"></textarea>
+        </div>
+        <div class="field">
+          <label class="field-label">Was ist explizit NICHT enthalten?</label>
+          <input type="text" id="f-excluded" placeholder="z.B. Texte, Fotos, Hosting, SEO-Optimierung…" oninput="autoSave()">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Projektstart</label>
+            <input type="date" id="f-start" oninput="autoSave()">
+          </div>
+          <div class="field">
+            <label class="field-label">Finale Deadline *</label>
+            <input type="date" id="f-deadline" oninput="autoSave()">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Revisionsrunden</label>
+            <select id="f-revisions" onchange="autoSave()">
+              <option value="1">1 Revision</option>
+              <option value="2" selected>2 Revisionen</option>
+              <option value="3">3 Revisionen</option>
+              <option value="unlimitiert">Unlimitiert</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Kommunikation via</label>
+            <select id="f-comm" onchange="autoSave()">
+              <option>E-Mail</option>
+              <option>Slack</option>
+              <option>Teams</option>
+              <option>WhatsApp</option>
+              <option>Notion</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="step-footer">
+        <button class="btn-back" onclick="goBack()">← Zurück</button>
+        <button class="btn-next" onclick="goNext()">Phase 04 <span>→</span></button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: BUDGET ── -->
+    <div class="step" id="s3">
+      <div class="step-head">
+        <div class="step-num">Phase 04</div>
+        <div class="step-title">Budget &<br><em>Investment</em></div>
+        <div class="step-sub">Finanzielle Rahmenbedingungen</div>
+      </div>
+      <div class="step-body">
+        <div class="field-row">
+          <div class="field">
+            <label class="field-label">Budget (€) *</label>
+            <input type="number" id="f-budget" placeholder="z.B. 3500" min="0" oninput="autoSave()">
+          </div>
+          <div class="field">
+            <label class="field-label">Abrechnungsmodell</label>
+            <select id="f-billing" onchange="autoSave()">
+              <option>Festpreis</option>
+              <option>Stundensatz</option>
+              <option>Retainer / Monatspauschale</option>
+              <option>Meilenstein-basiert</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Zahlungsmodell</label>
+          <div class="tag-group" id="tags-payment">
+            <span class="tag-pill" onclick="toggleTag(this,'payment')">50% Start / 50% Ende</span>
+            <span class="tag-pill" onclick="toggleTag(this,'payment')">100% Vorkasse</span>
+            <span class="tag-pill" onclick="toggleTag(this,'payment')">Auf Rechnung (14 Tage)</span>
+            <span class="tag-pill" onclick="toggleTag(this,'payment')">Meilenstein-basiert</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Referenzen / Vorbilder</label>
+          <input type="text" id="f-refs" placeholder="Links zu Websites, Marken oder Designs die gefallen…" oninput="autoSave()">
+        </div>
+        <div class="field">
+          <label class="field-label">Weitere Anmerkungen</label>
+          <textarea id="f-notes" placeholder="Besonderheiten, Wünsche, Einschränkungen oder alles was sonst noch wichtig ist…" style="min-height:80px;" oninput="autoSave()"></textarea>
+        </div>
+      </div>
+      <div class="step-footer">
+        <button class="btn-back" onclick="goBack()">← Zurück</button>
+        <button class="btn-next" onclick="goNext()">Briefing erstellen <span>✓</span></button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: ERGEBNIS ── -->
+    <div class="step" id="s4">
+      <div class="step-head">
+        <div class="step-num">Fertig ✓</div>
+        <div class="step-title">Dein<br><em>Briefing</em></div>
+        <div class="step-sub">Bereit zum Kopieren und Versenden</div>
+      </div>
+      <div class="step-body">
+
+        <!-- Summary Cards -->
+        <div class="summary-grid" id="summaryCards"></div>
+
+        <!-- Full Text Result -->
+        <div class="result-block" id="resultText"></div>
+
+        <!-- Actions -->
+        <div class="result-actions">
+          <button class="btn-copy-main" onclick="copyBriefing()">📋 Briefing kopieren</button>
+          <button class="btn-download" onclick="downloadBriefing()">💾 Als .txt speichern</button>
+          <button class="btn-restart" onclick="restartForm()">↩ Neu starten</button>
+        </div>
+
+      </div>
+      <div class="step-footer" style="justify-content:center;">
+        <button class="btn-back" onclick="goBack()">← Zurück bearbeiten</button>
+      </div>
+    </div>
+
+  </div><!-- /wizard-card -->
+
+  <!-- AD MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- RELATED TOOLS -->
+  <div class="related-tools">
+    <div class="other-tools-header">⚡ Passende Tools</div>
+    <div class="other-tools-grid">
+      <a href="/hourly-rate" class="tool-chip">
+        <span class="tool-chip-icon">💰</span>
+        <div><div class="tool-chip-name">Hourly Rate</div><div class="tool-chip-desc">Stundensatz Rechner</div></div>
+      </a>
+      <a href="/vat-calculator" class="tool-chip">
+        <span class="tool-chip-icon">🧾</span>
+        <div><div class="tool-chip-name">VAT Calculator</div><div class="tool-chip-desc">Mehrwertsteuer</div></div>
+      </a>
+      <a href="/tip-splitter" class="tool-chip">
+        <span class="tool-chip-icon">🍽️</span>
+        <div><div class="tool-chip-name">Tip Splitter</div><div class="tool-chip-desc">Rechnungen teilen</div></div>
+      </a>
+      <a href="/privacy-policy-generator" class="tool-chip">
+        <span class="tool-chip-icon">⚖️</span>
+        <div><div class="tool-chip-name">Privacy Gen</div><div class="tool-chip-desc">Datenschutz-Vorlage</div></div>
+      </a>
+      <a href="/subject-line-generator" class="tool-chip">
+        <span class="tool-chip-icon">📧</span>
+        <div><div class="tool-chip-name">Subject Lines</div><div class="tool-chip-desc">E-Mail Betreffzeilen</div></div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style:dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div><div class="tool-chip-name">Alle Tools</div><div class="tool-chip-desc">31+ Utilities</div></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="faq-section-title">Häufige Fragen</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Was ist ein Projektbriefing und warum brauche ich eines?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Ein Projektbriefing ist das Fundament jeder erfolgreichen Zusammenarbeit. Es fasst Ziele, Umfang, Budget und Deadline in einem Dokument zusammen — und verhindert teure Missverständnisse von Anfang an.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Für wen ist der Generator geeignet?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Für Freelancer, die Kunden strukturiert onboarden wollen. Für Auftraggeber, die klare Anforderungen kommunizieren möchten. Für Agenturen, die ihren Prozess standardisieren wollen.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Werden meine Eingaben gespeichert?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Deine Daten werden automatisch lokal in deinem Browser gespeichert, damit du jederzeit weitermachen kannst. Es werden keine Daten an Server übertragen — alles bleibt auf deinem Gerät.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Wie exportiere ich das fertige Briefing?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Im letzten Schritt kannst du das Briefing per Knopfdruck in die Zwischenablage kopieren oder als .txt-Datei herunterladen — bereit zum Einfügen in E-Mail, Notion, Slack oder jede andere Plattform.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Kann ich ein laufendes Briefing später weitermachen?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Ja. Alle Eingaben werden automatisch gespeichert. Schließt du den Tab und öffnest ihn wieder, sind alle Felder noch ausgefüllt.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">In welchen Sprachen kann ich das Briefing erstellen?<span class="faq-icon">+</span></button>
+      <div class="faq-a">Die Felder können in jeder Sprache ausgefüllt werden — Deutsch, Englisch, Französisch oder eine andere. Das erzeugte Briefing-Dokument übernimmt deine Eingaben 1:1.</div>
+    </div>
+  </div>
+
+  <!-- SEO BLOCK -->
+  <div class="seo-block">
+    <h2>Warum ein strukturiertes Briefing alles verändert</h2>
+    <p>
+      Die meisten Projekte scheitern nicht an mangelndem Talent — sie scheitern an fehlender Klarheit. Ein präzises Briefing spart im Schnitt 30–40% der Kommunikationszeit, reduziert Revisionsschleifen und sorgt dafür, dass alle Beteiligten von Anfang an auf demselben Stand sind.
+    </p>
+    <br>
+    <p>
+      Dieser Generator führt dich in 5 strukturierten Phasen durch alle relevanten Aspekte eines Projekts — von Kundendaten über Scope und Deadline bis hin zu Budget und Tonalität. Das Ergebnis ist ein professionelles Dokument, das du sofort versenden kannst.
+    </p>
+  </div>
+
+</div><!-- /page -->
+
+<div class="toast" id="toast">
+  <span id="toastIcon">✓</span>
+  <span id="toastMsg">Kopiert!</span>
+</div>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">ToolCompass.org © 2026 — Professional Online Tools</p>
+</footer>
+
+<script>
+  // ─────────────────────────────────────────
+  // STATE
+  // ─────────────────────────────────────────
+  let currentStep = 0;
+  const TOTAL_STEPS = 5;
+  const tags = { type: [], tone: [], payment: [] };
+
+  const phaseNames = [
+    'Phase 1 von 5 — Kundendaten',
+    'Phase 2 von 5 — Projektkern',
+    'Phase 3 von 5 — Scope & Milestones',
+    'Phase 4 von 5 — Budget',
+    'Fertig — Briefing bereit'
+  ];
+  const phasePcts = ['20%', '40%', '60%', '80%', '100%'];
+
+  // ─────────────────────────────────────────
+  // NAVIGATION
+  // ─────────────────────────────────────────
+  function goNext() {
+    if (currentStep < TOTAL_STEPS - 1) setStep(currentStep + 1);
+  }
+  function goBack() {
+    if (currentStep > 0) setStep(currentStep - 1);
+  }
+
+  function setStep(n) {
+    document.getElementById('s' + currentStep).classList.remove('active');
+    currentStep = n;
+    document.getElementById('s' + currentStep).classList.add('active');
+
+    // Progress bar
+    for (let i = 0; i < TOTAL_STEPS; i++) {
+      const seg = document.getElementById('p' + i);
+      if (!seg) continue;
+      seg.className = 'prog-step' + (i < n ? ' done' : i === n ? ' active' : '');
+    }
+
+    document.getElementById('phaseLabel').textContent = phaseNames[n];
+    document.getElementById('phasePct').textContent = phasePcts[n];
+
+    if (n === 4) buildResult();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─────────────────────────────────────────
+  // TAGS
+  // ─────────────────────────────────────────
+  function toggleTag(el, group) {
+    el.classList.toggle('selected');
+    const val = el.textContent.trim();
+    const idx = tags[group].indexOf(val);
+    if (idx === -1) tags[group].push(val);
+    else tags[group].splice(idx, 1);
+    autoSave();
+  }
+
+  // ─────────────────────────────────────────
+  // HELPERS
+  // ─────────────────────────────────────────
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function fmt(v, fallback) { return v || fallback || '—'; }
+
+  // ─────────────────────────────────────────
+  // AUTO-SAVE
+  // ─────────────────────────────────────────
+  function autoSave() {
+    const data = {
+      company: val('f-company'), contact: val('f-contact'),
+      email: val('f-email'), phone: val('f-phone'), website: val('f-website'),
+      projname: val('f-projname'), goal: val('f-goal'),
+      scope: val('f-scope'), excluded: val('f-excluded'),
+      start: val('f-start'), deadline: val('f-deadline'),
+      revisions: val('f-revisions'), comm: val('f-comm'),
+      budget: val('f-budget'), billing: val('f-billing'),
+      refs: val('f-refs'), notes: val('f-notes'),
+      tags
+    };
+    localStorage.setItem('tc_briefing', JSON.stringify(data));
+  }
+
+  function loadSaved() {
+    try {
+      const raw = localStorage.getItem('tc_briefing');
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      const fields = ['company','contact','email','phone','website','projname','goal','scope','excluded','start','deadline','revisions','comm','budget','billing','refs','notes'];
+      fields.forEach(k => { const el = document.getElementById('f-' + k); if (el && d[k]) el.value = d[k]; });
+
+      // Restore tags
+      if (d.tags) {
+        Object.keys(d.tags).forEach(group => {
+          d.tags[group].forEach(val => {
+            tags[group] = d.tags[group];
+            document.querySelectorAll(`#tags-${group} .tag-pill`).forEach(pill => {
+              if (pill.textContent.trim() === val) pill.classList.add('selected');
+            });
+          });
+        });
+      }
+    } catch(e) {}
+  }
+
+  // ─────────────────────────────────────────
+  // BUILD RESULT
+  // ─────────────────────────────────────────
+  function buildResult() {
+    const company  = fmt(val('f-company'));
+    const contact  = fmt(val('f-contact'));
+    const email    = fmt(val('f-email'));
+    const phone    = fmt(val('f-phone'));
+    const website  = fmt(val('f-website'));
+    const projname = fmt(val('f-projname'), 'Unbenanntes Projekt');
+    const goal     = fmt(val('f-goal'));
+    const type     = tags.type.length ? tags.type.join(', ') : '—';
+    const tone     = tags.tone.length ? tags.tone.join(', ') : '—';
+    const scope    = fmt(val('f-scope'));
+    const excl     = fmt(val('f-excluded'));
+    const start    = fmt(val('f-start'));
+    const deadline = fmt(val('f-deadline'));
+    const rev      = fmt(val('f-revisions'));
+    const comm     = fmt(val('f-comm'));
+    const budget   = val('f-budget') ? `€ ${parseInt(val('f-budget')).toLocaleString('de-DE')}` : '—';
+    const billing  = fmt(val('f-billing'));
+    const payment  = tags.payment.length ? tags.payment.join(', ') : '—';
+    const refs     = fmt(val('f-refs'));
+    const notes    = fmt(val('f-notes'));
+
+    // Summary cards
+    document.getElementById('summaryCards').innerHTML = `
+      <div class="summary-card"><div class="summary-card-label">Auftraggeber</div><div class="summary-card-value">${company}<br><span style="color:var(--muted);font-size:12px;">${contact}</span></div></div>
+      <div class="summary-card"><div class="summary-card-label">Projektname</div><div class="summary-card-value">${projname}</div></div>
+      <div class="summary-card"><div class="summary-card-label">Deadline</div><div class="summary-card-value">${deadline}</div></div>
+      <div class="summary-card"><div class="summary-card-label">Budget</div><div class="summary-card-value finance">${budget}</div></div>
+    `;
+
+    // Full briefing text
+    const now = new Date().toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+    const text = [
+      `╔══════════════════════════════════════════╗`,
+      `   PROJEKT BRIEFING`,
+      `   Erstellt am ${now} via ToolCompass.org`,
+      `╚══════════════════════════════════════════╝`,
+      ``,
+      `── 01 AUFTRAGGEBER ───────────────────────`,
+      `Firma / Brand:      ${company}`,
+      `Ansprechpartner:    ${contact}`,
+      `E-Mail:             ${email}`,
+      `Telefon / Slack:    ${phone}`,
+      `Website:            ${website}`,
+      ``,
+      `── 02 PROJEKT ────────────────────────────`,
+      `Projektname:        ${projname}`,
+      `Projekt-Typ:        ${type}`,
+      `Tonalität / Stil:   ${tone}`,
+      ``,
+      `Hauptziel:`,
+      goal,
+      ``,
+      `── 03 SCOPE & MILESTONES ─────────────────`,
+      `Leistungsumfang:`,
+      scope,
+      ``,
+      `Nicht enthalten:    ${excl}`,
+      `Projektstart:       ${start}`,
+      `Finale Deadline:    ${deadline}`,
+      `Revisionsrunden:    ${rev}`,
+      `Kommunikation:      ${comm}`,
+      ``,
+      `── 04 BUDGET & KONDITIONEN ───────────────`,
+      `Budget:             ${budget}`,
+      `Abrechnung:         ${billing}`,
+      `Zahlungsmodell:     ${payment}`,
+      ``,
+      `── 05 REFERENZEN & ANMERKUNGEN ──────────`,
+      `Referenzen:         ${refs}`,
+      ``,
+      `Anmerkungen:`,
+      notes,
+      ``,
+      `─────────────────────────────────────────`,
+      `Generiert mit ToolCompass.org/briefing-generator`,
+    ].join('\n');
+
+    document.getElementById('resultText').textContent = text;
+  }
+
+  // ─────────────────────────────────────────
+  // COPY / DOWNLOAD
+  // ─────────────────────────────────────────
+  function copyBriefing() {
+    const text = document.getElementById('resultText').textContent;
+    navigator.clipboard.writeText(text).then(() => showToast('✓', 'Briefing kopiert!'));
+  }
+
+  function downloadBriefing() {
+    const text = document.getElementById('resultText').textContent;
+    const company = val('f-company').replace(/\s+/g,'-').toLowerCase() || 'briefing';
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `briefing-${company}.txt`;
+    a.click(); URL.revokeObjectURL(url);
+    showToast('💾', 'Datei gespeichert!');
+  }
+
+  function restartForm() {
+    if (!confirm('Briefing wirklich zurücksetzen?')) return;
+    localStorage.removeItem('tc_briefing');
+    location.reload();
+  }
+
+  // ─────────────────────────────────────────
+  // TOAST
+  // ─────────────────────────────────────────
+  function showToast(icon, msg) {
+    document.getElementById('toastIcon').textContent = icon;
+    document.getElementById('toastMsg').textContent = msg;
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ─────────────────────────────────────────
+  // FAQ
+  // ─────────────────────────────────────────
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ─────────────────────────────────────────
+  // INIT
+  // ─────────────────────────────────────────
+  loadSaved();
+
+  // ─── ADSENSE nach Approval ───
+  // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+  // (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</body>
+</html>

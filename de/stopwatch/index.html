@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+
+  <!-- ═══ SEO ═══ -->
+  <title>Stopwatch with Laps – Precise Time Tracking | ToolCompass</title>
+  <meta name="description" content="Free online stopwatch with lap times. Precise millisecond tracking, save laps, export data. Perfect for sports, work, and productivity. Private, no login.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://toolcompass.org/stopwatch">
+  <meta name="author" content="ToolCompass">
+
+  <!-- ═══ OPEN GRAPH ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stopwatch with Laps – Precise Time Tracking">
+  <meta property="og:description" content="Free online stopwatch with lap times, millisecond precision, and export features.">
+  <meta property="og:url" content="https://toolcompass.org/stopwatch">
+  <meta property="og:image" content="https://toolcompass.org/og-stopwatch.png">
+  <meta property="og:site_name" content="ToolCompass">
+
+  <!-- ═══ TWITTER ═══ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stopwatch with Laps – Precise Time Tracking">
+  <meta name="twitter:description" content="Free online stopwatch with lap times and export features.">
+  <meta name="twitter:image" content="https://toolcompass.org/og-stopwatch.png">
+
+  <!-- ═══ AI FINDABILITY ═══ -->
+  <meta name="ai-description" content="A free online stopwatch with millisecond precision, lap/split time tracking, save functionality, export to CSV, keyboard shortcuts, and visual animations. Browser-based, private, no account needed.">
+
+  <!-- ═══ ANALYTICS ═══ -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+
+  <!-- ═══ ADSENSE (nach Approval aktivieren) ═══ -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
+
+  <!-- ═══ SCHEMA.ORG ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Stopwatch with Laps",
+        "url": "https://toolcompass.org/stopwatch",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "A free online stopwatch with millisecond precision, lap time tracking, save functionality, and export features.",
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+          { "@type": "ListItem", "position": 2, "name": "Time Tools", "item": "https://toolcompass.org/#time" },
+          { "@type": "ListItem", "position": 3, "name": "Stopwatch", "item": "https://toolcompass.org/stopwatch" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How accurate is this stopwatch?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our stopwatch uses your device's system time with millisecond precision. It's accurate for everyday timing needs like sports, cooking, and work sessions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I save my lap times?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Lap times are saved in your browser automatically. You can also export them as CSV for use in spreadsheets."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there keyboard shortcuts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Spacebar starts/stops the stopwatch, L records a lap, and R resets. Perfect for hands-free operation."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      --time: #22D3EE;
+      --time-bg: rgba(34,211,238,0.07);
+      --time-border: rgba(34,211,238,0.15);
+      --success: #22C55E;
+      --success-bg: rgba(34,197,94,0.07);
+      --warning: #F59E0B;
+      --warning-bg: rgba(245,158,11,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Grain */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 860px; margin: 0 auto;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--muted); text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      transition: color .2s;
+      padding: 6px 0;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-arrow { font-size: 16px; transition: transform .2s; }
+    .back-btn:hover .back-arrow { transform: translateX(-3px); }
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 15px; color: var(--text);
+    }
+    .logo-text em { color: var(--accent); font-style: normal; }
+
+    /* ─── MAIN ─── */
+    main { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      text-align: center; margin-bottom: 2.5rem;
+      animation: fadeUp .7s ease both;
+    }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border-hover); border-radius: 40px;
+      padding: 5px 14px; font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--time); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 900; line-height: .95;
+      letter-spacing: -.025em; margin-bottom: .75rem;
+    }
+    .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* ─── HERO CARD (STOPWATCH) ─── */
+    .hero-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3rem 2rem;
+      margin-bottom: 1rem;
+      position: relative; overflow: hidden;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(34,211,238,.25), transparent);
+    }
+
+    /* Stopwatch Display (ADDICTIVE - Visual Impact) */
+    .stopwatch-display {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    .time-display {
+      font-family: 'Outfit', monospace;
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 700;
+      color: var(--time);
+      letter-spacing: -.02em;
+      line-height: 1;
+      text-shadow: 0 0 30px rgba(34,211,238,0.3);
+    }
+    .time-display.running {
+      animation: pulseTime 1s ease-in-out infinite;
+    }
+    @keyframes pulseTime {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+    .milliseconds {
+      font-size: 0.5em;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-top: 1rem;
+    }
+    .status-badge.stopped {
+      background: var(--surface2);
+      color: var(--muted);
+    }
+    .status-badge.running {
+      background: var(--time-bg);
+      color: var(--time);
+      border: 1px solid var(--time-border);
+    }
+
+    /* Control Buttons (ADDICTIVE - Satisfying Clicks) */
+    .control-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .control-btn {
+      padding: 16px 32px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 140px;
+      justify-content: center;
+    }
+    .control-btn:active { transform: scale(0.96); }
+    .btn-start {
+      background: var(--success);
+      color: #0D0D0D;
+    }
+    .btn-start:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-start.running {
+      background: var(--warning);
+    }
+    .btn-lap {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-lap:hover {
+      border-color: var(--time);
+      color: var(--time);
+    }
+    .btn-lap:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .btn-reset {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-reset:hover {
+      border-color: var(--warning);
+      color: var(--warning);
+    }
+
+    /* Keyboard Shortcuts Hint (ADDICTIVE - Discovery) */
+    .keyboard-hint {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      padding: 12px;
+      background: var(--surface2);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .key-shortcut {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .key-badge {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    /* Lap Times Section (ADDICTIVE - Progress Tracking) */
+    .laps-section {
+      margin-top: 2rem;
+      display: none;
+    }
+    .laps-section.show {
+      display: block;
+      animation: slideUp .3s ease;
+    }
+    .laps-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .laps-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .laps-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .laps-action-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .laps-action-btn:hover {
+      border-color: var(--time);
+      color: var(--time);
+    }
+
+    .laps-list {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .lap-item {
+      display: grid;
+      grid-template-columns: 60px 1fr 100px;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      transition: background .2s;
+    }
+    .lap-item:last-child {
+      border-bottom: none;
+    }
+    .lap-item:hover {
+      background: var(--surface2);
+    }
+    .lap-item.fastest {
+      background: var(--success-bg);
+    }
+    .lap-item.slowest {
+      background: var(--warning-bg);
+    }
+    .lap-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .lap-time {
+      font-family: 'Outfit', monospace;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .lap-diff {
+      font-size: 11px;
+      text-align: right;
+    }
+    .lap-diff.faster {
+      color: var(--success);
+    }
+    .lap-diff.slower {
+      color: var(--warning);
+    }
+
+    /* Progress Ring (ADDICTIVE - Visual Feedback) */
+    .progress-ring {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    .progress-ring svg {
+      transform: rotate(-90deg);
+    }
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 8;
+    }
+    .progress-ring .bg {
+      stroke: var(--surface2);
+    }
+    .progress-ring .progress {
+      stroke: var(--time);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.1s linear;
+    }
+    .progress-ring .time-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    /* ─── SECTION BLOCKS ─── */
+    .section-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title-badge {
+      font-size: 10px;
+      font-weight: 600;
+      background: var(--time-bg);
+      color: var(--time);
+      border: 1px solid var(--time-border);
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: .06em;
+      font-style: normal;
+    }
+
+    .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 1rem;
+    }
+    @media (max-width: 520px) {
+      .use-case-grid { grid-template-columns: 1fr; }
+    }
+    .use-case-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .use-case-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .use-case-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .use-case-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ─── AD SLOT ─── */
+    .ad-slot {
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .ad-slot.adsense-active {
+      display: block;
+    }
+    .ad-inner {
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90px;
+      position: relative;
+    }
+    .ad-label {
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    /* ─── OTHER TOOLS ─── */
+    .other-tools {
+      margin-bottom: 1rem;
+      animation: fadeUp .7s .5s ease both;
+    }
+    .other-tools-header {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .other-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .tool-chip:hover {
+      border-color: var(--border-hover);
+      background: var(--surface2);
+      transform: translateY(-2px);
+    }
+    .tool-chip-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .tool-chip-info {
+      min-width: 0;
+    }
+    .tool-chip-name {
+      font-weight: 600;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tool-chip-desc {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    /* ─── SEO CONTENT ─── */
+    .seo-content {
+      padding: 2.5rem 0 0;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .7s .6s ease both;
+    }
+    .seo-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .seo-content h2 em {
+      color: var(--accent);
+    }
+    .seo-content p {
+      font-size: 13.5px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .seo-content strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: 1.5rem;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 1rem 1.25rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: background .2s;
+    }
+    .faq-q:hover {
+      background: var(--surface2);
+    }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--accent);
+      transition: transform .3s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+    .faq-item.open .faq-a {
+      max-height: 200px;
+    }
+    .faq-a-inner {
+      padding: .25rem 1.25rem 1rem;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .footer-logo em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .4;
+    }
+
+    /* ─── ANIMATIONS & TOAST ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: #0D0D0D;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+      z-index: 200;
+    }
+    .toast.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      main {
+        padding: 2rem 1.25rem 5rem;
+      }
+      .hero-card {
+        padding: 1.5rem;
+      }
+      .control-buttons {
+        flex-direction: column;
+      }
+      .control-btn {
+        min-width: 100%;
+      }
+      .keyboard-hint {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="back-btn">
+      <span class="back-arrow">←</span> All Tools
+    </a>
+    <a href="/" style="text-decoration:none;">
+      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-tag"><span class="page-tag-dot"></span>Time & Productivity</div>
+    <h1>Precision<br><em>Stopwatch</em></h1>
+    <p class="page-sub">Millisecond accuracy with lap times. Perfect for sports and work.</p>
+  </div>
+
+  <!-- AD SLOT TOP (nach Approval aktivieren) -->
+  <div class="ad-slot" id="adTop">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- HERO CARD (STOPWATCH) -->
+  <div class="hero-card">
+    
+    <!-- Progress Ring (ADDICTIVE - Visual Timer) -->
+    <div class="progress-ring">
+      <svg width="200" height="200">
+        <circle class="bg" cx="100" cy="100" r="90"></circle>
+        <circle class="progress" id="progressCircle" cx="100" cy="100" r="90" 
+                stroke-dasharray="565" stroke-dashoffset="565"></circle>
+      </svg>
+      <div class="time-center">
+        <div class="time-display" id="timeDisplay">
+          00:00<span class="milliseconds">.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Badge -->
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span class="status-badge stopped" id="statusBadge">
+        <span>⏸️</span>
+        <span>Stopped</span>
+      </span>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="control-buttons">
+      <button class="control-btn btn-start" id="startBtn" onclick="toggleStopwatch()">
+        <span id="startIcon">▶️</span>
+        <span id="startText">Start</span>
+      </button>
+      <button class="control-btn btn-lap" id="lapBtn" onclick="recordLap()" disabled>
+        <span>🏁</span>
+        <span>Lap</span>
+      </button>
+      <button class="control-btn btn-reset" onclick="resetStopwatch()">
+        <span>🔄</span>
+        <span>Reset</span>
+      </button>
+    </div>
+
+    <!-- Keyboard Shortcuts (ADDICTIVE - Power User Feature) -->
+    <div class="keyboard-hint">
+      <div class="key-shortcut">
+        <span class="key-badge">Space</span>
+        <span>Start/Stop</span>
+      </div>
+      <div class="key-shortcut">
+        <span class="key-badge">L</span>
+        <span>Record Lap</span>
+      </div>
+      <div class="key-shortcut">
+        <span class="key-badge">R</span>
+        <span>Reset</span>
+      </div>
+    </div>
+
+    <!-- Lap Times Section -->
+    <div class="laps-section" id="lapsSection">
+      <div class="laps-header">
+        <span class="laps-title">🏁 Lap Times (<span id="lapCount">0</span>)</span>
+        <div class="laps-actions">
+          <button class="laps-action-btn" onclick="copyLaps()">📋 Copy</button>
+          <button class="laps-action-btn" onclick="exportLaps()">💾 CSV</button>
+          <button class="laps-action-btn" onclick="clearLaps()">🗑️ Clear</button>
+        </div>
+      </div>
+      <div class="laps-list" id="lapsList"></div>
+    </div>
+  </div>
+
+  <!-- AD SLOT MID -->
+  <div class="ad-slot" id="adMid">
+    <div class="ad-inner">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="XXXXXXXXXX"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  </div>
+
+  <!-- USE CASES -->
+  <div class="section-block">
+    <div class="section-title">
+      Perfect For
+      <span class="section-title-badge">Use Cases</span>
+    </div>
+    <p style="font-size:13.5px; color:var(--muted); line-height:1.7;">
+      Our precision stopwatch helps you track time across multiple scenarios:
+    </p>
+    <div class="use-case-grid">
+      <div class="use-case-card">
+        <div class="use-case-icon">🏃</div>
+        <div class="use-case-title">Sports & Fitness</div>
+        <div class="use-case-desc">Track runs, intervals, and workout sessions</div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon">⏱️</div>
+        <div class="use-case-title">Productivity</div>
+        <div class="use-case-desc">Pomodoro sessions and time blocking</div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon">🍳</div>
+        <div class="use-case-title">Cooking</div>
+        <div class="use-case-desc">Perfect timing for recipes and meals</div>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon">🎮</div>
+        <div class="use-case-title">Gaming</div>
+        <div class="use-case-desc">Speedruns and challenge timing</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTHER TOOLS -->
+  <div class="other-tools">
+    <div class="other-tools-header">⚡ More Time Tools</div>
+    <div class="other-tools-grid">
+      <a href="/pomodoro-timer" class="tool-chip">
+        <span class="tool-chip-icon">🍅</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Pomodoro</div>
+          <div class="tool-chip-desc">Focus timer</div>
+        </div>
+      </a>
+      <a href="/countdown-generator" class="tool-chip">
+        <span class="tool-chip-icon">⏳</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Countdown</div>
+          <div class="tool-chip-desc">Event timer</div>
+        </div>
+      </a>
+      <a href="/workday-counter" class="tool-chip">
+        <span class="tool-chip-icon">📅</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">Workdays</div>
+          <div class="tool-chip-desc">Business days</div>
+        </div>
+      </a>
+      <a href="/global-timezone-clock" class="tool-chip">
+        <span class="tool-chip-icon">🌍</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">World Clock</div>
+          <div class="tool-chip-desc">Global timezones</div>
+        </div>
+      </a>
+      <a href="/" class="tool-chip" style="border-style: dashed;">
+        <span class="tool-chip-icon">🧭</span>
+        <div class="tool-chip-info">
+          <div class="tool-chip-name">All Tools</div>
+          <div class="tool-chip-desc">31+ utilities</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT + FAQ -->
+  <div class="seo-content">
+    <h2>How to use the <em>Stopwatch</em></h2>
+    <p>
+      Our <strong>Precision Stopwatch</strong> offers millisecond-accurate time tracking directly in your browser. Whether you're timing sports activities, work sessions, cooking, or any other task, this tool provides reliable measurements with lap time functionality.
+    </p>
+    <p>
+      Click <strong>Start</strong> to begin timing, <strong>Lap</strong> to record split times without stopping, and <strong>Reset</strong> to clear everything. Your lap times are automatically saved and can be exported as CSV for use in spreadsheets or shared with others.
+    </p>
+    <p>
+      <strong>Keyboard shortcuts</strong> make hands-free operation easy: Spacebar starts/stops, L records a lap, and R resets. Perfect for when your hands are busy or you need quick control.
+    </p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How accurate is this stopwatch?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Our stopwatch uses your device's system time with millisecond precision. It's accurate for everyday timing needs like sports, cooking, work sessions, and productivity tracking.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I save my lap times?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Lap times are stored in your browser automatically. You can also export them as CSV files for use in Excel, Google Sheets, or other applications.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Are there keyboard shortcuts?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Spacebar starts/stops the stopwatch, L records a lap, and R resets. These shortcuts work even when the stopwatch is running for hands-free operation.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Does it work offline?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <p class="faq-a-inner">Yes! Once loaded, the stopwatch works completely offline. All timing happens in your browser with no internet connection required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+</footer>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// STOPWATCH LOGIC
+// ═══════════════════════════════════════════════
+
+let startTime = 0;
+let elapsedTime = 0;
+let timerInterval;
+let isRunning = false;
+let laps = [];
+let lapCounter = 0;
+
+// Format time with milliseconds (ADDICTIVE - Precision Display)
+function formatTime(ms) {
+  const minutes = Math.floor(ms / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+  const milliseconds = Math.floor((ms % 1000) / 10);
+  
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}<span class="milliseconds">.${String(milliseconds).padStart(2, '0')}</span>`;
+}
+
+// Update display (ADDICTIVE - Smooth Animation)
+function updateDisplay() {
+  const now = Date.now();
+  const elapsed = now - startTime + elapsedTime;
+  document.getElementById('timeDisplay').innerHTML = formatTime(elapsed);
+  
+  // Update progress ring (ADDICTIVE - Visual Feedback)
+  const progressCircle = document.getElementById('progressCircle');
+  const offset = 565 - (565 * ((elapsed % 60000) / 60000));
+  progressCircle.style.strokeDashoffset = offset;
+}
+
+// Toggle Start/Stop
+function toggleStopwatch() {
+  const startBtn = document.getElementById('startBtn');
+  const startIcon = document.getElementById('startIcon');
+  const startText = document.getElementById('startText');
+  const lapBtn = document.getElementById('lapBtn');
+  const statusBadge = document.getElementById('statusBadge');
+  const timeDisplay = document.getElementById('timeDisplay');
+  
+  if (!isRunning) {
+    // Start
+    startTime = Date.now();
+    timerInterval = setInterval(updateDisplay, 10);
+    isRunning = true;
+    
+    startIcon.innerText = '⏸️';
+    startText.innerText = 'Stop';
+    startBtn.classList.add('running');
+    lapBtn.disabled = false;
+    
+    statusBadge.className = 'status-badge running';
+    statusBadge.innerHTML = '<span>▶️</span><span>Running</span>';
+    timeDisplay.classList.add('running');
+  } else {
+    // Stop
+    elapsedTime += Date.now() - startTime;
+    clearInterval(timerInterval);
+    isRunning = false;
+    
+    startIcon.innerText = '▶️';
+    startText.innerText = 'Start';
+    startBtn.classList.remove('running');
+    lapBtn.disabled = true;
+    
+    statusBadge.className = 'status-badge stopped';
+    statusBadge.innerHTML = '<span>⏸️</span><span>Stopped</span>';
+    timeDisplay.classList.remove('running');
+  }
+  
+  // Save state to LocalStorage (ADDICTIVE - Persistence)
+  saveState();
+}
+
+// Record Lap (ADDICTIVE - Progress Tracking)
+function recordLap() {
+  if (!isRunning) return;
+  
+  lapCounter++;
+  const currentTime = Date.now() - startTime + elapsedTime;
+  const prevTime = laps.length > 0 ? laps[laps.length - 1].total : 0;
+  const lapTime = currentTime - prevTime;
+  
+  laps.push({
+    number: lapCounter,
+    total: currentTime,
+    lap: lapTime
+  });
+  
+  renderLaps();
+  saveState();
+  showToast(`Lap ${lapCounter} recorded!`);
+}
+
+// Render Laps (ADDICTIVE - Visual Comparison)
+function renderLaps() {
+  const lapsList = document.getElementById('lapsList');
+  const lapsSection = document.getElementById('lapsSection');
+  const lapCount = document.getElementById('lapCount');
+  
+  if (laps.length === 0) {
+    lapsSection.classList.remove('show');
+    return;
+  }
+  
+  lapsSection.classList.add('show');
+  lapCount.innerText = laps.length;
+  
+  // Find fastest and slowest laps (ADDICTIVE - Competition)
+  const lapTimes = laps.map(l => l.lap);
+  const fastest = Math.min(...lapTimes);
+  const slowest = Math.max(...lapTimes);
+  
+  lapsList.innerHTML = laps.slice().reverse().map((lap, index) => {
+    const actualIndex = laps.length - 1 - index;
+    const prevLap = actualIndex > 0 ? laps[actualIndex - 1].lap : lap.lap;
+    const diff = lap.lap - prevLap;
+    
+    let diffClass = '';
+    let diffText = '';
+    if (actualIndex > 0) {
+      if (diff < 0) {
+        diffClass = 'faster';
+        diffText = `-${Math.abs(diff)}ms`;
+      } else if (diff > 0) {
+        diffClass = 'slower';
+        diffText = `+${diff}ms`;
+      }
+    }
+    
+    let itemClass = 'lap-item';
+    if (lap.lap === fastest && laps.length > 1) itemClass += ' fastest';
+    if (lap.lap === slowest && laps.length > 1) itemClass += ' slowest';
+    
+    return `
+      <div class="${itemClass}">
+        <div class="lap-number">Lap ${lap.number}</div>
+        <div class="lap-time">${formatTime(lap.total)}</div>
+        <div class="lap-diff ${diffClass}">${diffText}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Reset Stopwatch
+function resetStopwatch() {
+  clearInterval(timerInterval);
+  isRunning = false;
+  elapsedTime = 0;
+  laps = [];
+  lapCounter = 0;
+  
+  document.getElementById('timeDisplay').innerHTML = '00:00<span class="milliseconds">.00</span>';
+  document.getElementById('startBtn').classList.remove('running');
+  document.getElementById('startIcon').innerText = '▶️';
+  document.getElementById('startText').innerText = 'Start';
+  document.getElementById('lapBtn').disabled = true;
+  document.getElementById('statusBadge').className = 'status-badge stopped';
+  document.getElementById('statusBadge').innerHTML = '<span>⏸️</span><span>Stopped</span>';
+  document.getElementById('timeDisplay').classList.remove('running');
+  document.getElementById('progressCircle').style.strokeDashoffset = 565;
+  
+  renderLaps();
+  saveState();
+  showToast('Reset!');
+}
+
+// Copy Laps (ADDICTIVE - Shareability)
+function copyLaps() {
+  const text = laps.map(l => `Lap ${l.number}: ${formatTime(l.total).replace(/<[^>]*>/g, '')} (${formatTime(l.lap).replace(/<[^>]*>/g, '')})`).join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Laps copied!');
+  });
+}
+
+// Export Laps as CSV (ADDICTIVE - Export Feature)
+function exportLaps() {
+  const headers = 'Lap,Total Time,Lap Time\n';
+  const rows = laps.map(l => `${l.number},${l.total/1000},${l.lap/1000}`).join('\n');
+  const csv = headers + rows;
+  
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `stopwatch-laps-${Date.now()}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  showToast('CSV downloaded!');
+}
+
+// Clear Laps
+function clearLaps() {
+  laps = [];
+  lapCounter = 0;
+  renderLaps();
+  saveState();
+  showToast('Laps cleared!');
+}
+
+// Save State to LocalStorage (ADDICTIVE - Persistence)
+function saveState() {
+  localStorage.setItem('tc_stopwatch_elapsed', elapsedTime);
+  localStorage.setItem('tc_stopwatch_laps', JSON.stringify(laps));
+  localStorage.setItem('tc_stopwatch_counter', lapCounter);
+  localStorage.setItem('tc_stopwatch_running', isRunning);
+}
+
+// Load State from LocalStorage (ADDICTIVE - Convenience)
+function loadState() {
+  const savedElapsed = localStorage.getItem('tc_stopwatch_elapsed');
+  const savedLaps = localStorage.getItem('tc_stopwatch_laps');
+  const savedCounter = localStorage.getItem('tc_stopwatch_counter');
+  const savedRunning = localStorage.getItem('tc_stopwatch_running');
+  
+  if (savedElapsed) {
+    elapsedTime = parseInt(savedElapsed);
+    document.getElementById('timeDisplay').innerHTML = formatTime(elapsedTime);
+  }
+  if (savedLaps) {
+    laps = JSON.parse(savedLaps);
+    lapCounter = parseInt(savedCounter) || 0;
+    renderLaps();
+  }
+  if (savedRunning === 'true') {
+    // Don't auto-start, but show the time
+    isRunning = false;
+  }
+}
+
+// Keyboard Shortcuts (ADDICTIVE - Power User)
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  
+  if (e.code === 'Space') {
+    e.preventDefault();
+    toggleStopwatch();
+  } else if (e.code === 'KeyL') {
+    if (isRunning) recordLap();
+  } else if (e.code === 'KeyR') {
+    resetStopwatch();
+  }
+});
+
+// Toast Notification
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.innerText = message;
+  toast.classList.add('active');
+  setTimeout(() => toast.classList.remove('active'), 2000);
+}
+
+// FAQ Accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// Initialize
+loadState();
+
+// ─── ADSENSE aktivieren nach Approval ───
+// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+// (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>
