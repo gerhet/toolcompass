@@ -2,60 +2,243 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Qwen 3.5 Chat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puter.js KI Chat Interface</title>
+    
+    <!-- 1. Einbindung von Puter.js -->
+    <script src="https://js.puter.com/v2/"></script>
+    
+    <!-- 2. Einbindung von Marked.js für Markdown-Formatierung (Code, Fettdruck etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        #chat { border: 1px solid #ccc; height: 400px; overflow-y: auto; padding: 10px; margin-bottom: 10px; }
-        #userInput { width: 70%; padding: 10px; }
-        #sendBtn { padding: 10px; }
+        /* --- CSS STYLING --- */
+        :root {
+            --bg-color: #1e1e1e;
+            --chat-bg: #2d2d2d;
+            --user-msg-bg: #007acc;
+            --ai-msg-bg: #3c3c3c;
+            --text-color: #e0e0e0;
+            --input-bg: #252526;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 15px 20px;
+            border-bottom: 1px solid #444;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Chat Container */
+        #chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            scroll-behavior: smooth;
+        }
+
+        /* Nachrichten Blasen */
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            line-height: 1.5;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background-color: var(--user-msg-bg);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background-color: var(--ai-msg-bg);
+            border-bottom-left-radius: 2px;
+        }
+
+        /* Markdown Styles innerhalb der Nachrichten */
+        .message.ai pre {
+            background-color: #111;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .message.ai code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: rgba(0,0,0,0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .message.ai pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        /* Input Bereich */
+        #input-area {
+            background-color: #333;
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #444;
+        }
+
+        textarea {
+            flex: 1;
+            background-color: var(--input-bg);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 12px;
+            resize: none;
+            height: 50px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            border-color: var(--user-msg-bg);
+        }
+
+        button {
+            background-color: var(--user-msg-bg);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #0062a3;
+        }
+
+        button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+
+        /* Lade-Animation */
+        .typing-indicator {
+            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            display: none; /* Standardmäßig versteckt */
+        }
     </style>
 </head>
 <body>
-    <h1>Chat mit Qwen 3.5</h1>
-    <div id="chat"></div>
-    <input type="text" id="userInput" placeholder="Frage an Qwen 3.5..." />
-    <button id="sendBtn">Senden</button>
 
-    <script src="https://js.puter.com/v2/"></script>
+    <header>
+        Puter.js Chat Interface
+    </header>
+
+    <div id="chat-container">
+        <!-- Begrüßungsnachricht -->
+        <div class="message ai">
+            Hallo! Ich bin bereit. Was möchtest du wissen?
+        </div>
+    </div>
+    
+    <div class="typing-indicator" id="typing-indicator">Puter schreibt...</div>
+
+    <div id="input-area">
+        <textarea id="user-input" placeholder="Schreibe deine Nachricht hier..."></textarea>
+        <button id="send-btn">Senden</button>
+    </div>
+
     <script>
-        const chatBox = document.getElementById('chat');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('sendBtn');
+        // --- JAVASCRIPT LOGIK ---
 
-        function addToChat(message, isUser) {
-            const msgDiv = document.createElement('div');
-            msgDiv.style.textAlign = isUser ? 'right' : 'left';
-            msgDiv.style.margin = '10px 0';
-            msgDiv.innerHTML = `<strong>${isUser ? 'Du' : 'Qwen'}</strong>: ${message}`;
-            chatBox.appendChild(msgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        // Funktion: Nachricht zum Chat hinzufügen
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            
+            // Wenn es die KI ist, rendern wir Markdown. Wenn User, dann nur Text.
+            if (sender === 'ai') {
+                messageDiv.innerHTML = marked.parse(text);
+            } else {
+                messageDiv.textContent = text;
+            }
+
+            chatContainer.appendChild(messageDiv);
+            
+            // Automatisches Scrollen nach unten
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        async function sendQuestion() {
-            const question = userInput.value.trim();
-            if (!question) return;
+        // Funktion: Nachricht an Puter.js senden
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
 
-            addToChat(question, true);
-            userInput.value = '';
-            addToChat('Denkt nach...', false);
+            // 1. User Nachricht anzeigen
+            addMessage(text, 'user');
+            userInput.value = ''; // Eingabefeld leeren
+            userInput.disabled = true; // Eingabe sperren während KI denkt
+            sendBtn.disabled = true;
+            typingIndicator.style.display = 'block';
 
             try {
-                const response = await puter.ai.chat(question, {
-                    model: "qwen/qwen3.5-397b-a17b"
-                });
-                // Entferne die "Denkt nach..."-Nachricht und füge die echte Antwort ein
-                chatBox.lastChild.remove();
-                addToChat(response.message.content, false);
+                // 2. Aufruf an Puter.js API
+                // Wir nutzen puter.ai.chat mit dem Text
+                const response = await puter.ai.chat(text);
+                
+                // 3. Antwort anzeigen
+                addMessage(response.message.content, 'ai');
+
             } catch (error) {
-                chatBox.lastChild.remove();
-                addToChat("Fehler: " + error.message, false);
+                console.error("Fehler bei Puter.js:", error);
+                addMessage("Entschuldigung, es gab einen Fehler bei der Verbindung zu Puter.", 'ai');
+            } finally {
+                // UI wieder aktivieren
+                userInput.disabled = false;
+                sendBtn.disabled = false;
+                typingIndicator.style.display = 'none';
+                userInput.focus();
             }
         }
 
-        sendBtn.addEventListener('click', sendQuestion);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendQuestion();
+        // Event Listener für Klick auf Button
+        sendBtn.addEventListener('click', sendMessage);
+
+        // Event Listener für Enter-Taste (Shift+Enter für neue Zeile)
+        userInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         });
+
     </script>
 </body>
-</html>   
+</html>
