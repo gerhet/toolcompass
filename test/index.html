@@ -1,17 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>Mein Qwen-Chat</title>
+    <meta charset="UTF-8">
+    <title>Qwen 3.5 Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        #chat { border: 1px solid #ccc; height: 400px; overflow-y: auto; padding: 10px; margin-bottom: 10px; }
+        #userInput { width: 70%; padding: 10px; }
+        #sendBtn { padding: 10px; }
+    </style>
 </head>
 <body>
     <h1>Chat mit Qwen 3.5</h1>
-    <div id="antwort"></div>
+    <div id="chat"></div>
+    <input type="text" id="userInput" placeholder="Frage an Qwen 3.5..." />
+    <button id="sendBtn">Senden</button>
+
     <script src="https://js.puter.com/v2/"></script>
     <script>
-        puter.ai.chat("Hallo, wie geht es dir?", {
-            model: "qwen/qwen3.5-397b-a17b"
-        }).then(response => {
-            document.getElementById('antwort').innerHTML = response.message.content;
+        const chatBox = document.getElementById('chat');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        function addToChat(message, isUser) {
+            const msgDiv = document.createElement('div');
+            msgDiv.style.textAlign = isUser ? 'right' : 'left';
+            msgDiv.style.margin = '10px 0';
+            msgDiv.innerHTML = `<strong>${isUser ? 'Du' : 'Qwen'}</strong>: ${message}`;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendQuestion() {
+            const question = userInput.value.trim();
+            if (!question) return;
+
+            addToChat(question, true);
+            userInput.value = '';
+            addToChat('Denkt nach...', false);
+
+            try {
+                const response = await puter.ai.chat(question, {
+                    model: "qwen/qwen3.5-397b-a17b"
+                });
+                // Entferne die "Denkt nach..."-Nachricht und füge die echte Antwort ein
+                chatBox.lastChild.remove();
+                addToChat(response.message.content, false);
+            } catch (error) {
+                chatBox.lastChild.remove();
+                addToChat("Fehler: " + error.message, false);
+            }
+        }
+
+        sendBtn.addEventListener('click', sendQuestion);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendQuestion();
         });
     </script>
 </body>
