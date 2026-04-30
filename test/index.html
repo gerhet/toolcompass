@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qwen 3.6 - Pro UI with Copy</title>
+    <title>Qwen 3.6 Pro - Auto-Expand Textarea</title>
     <script src="https://js.puter.com/v2/"></script>
     <style>
         :root { 
             --bg-color: #171717;       
             --user-msg: #2f2f2f;       
-            --ai-msg: transparent;         
             --text-main: #ececec;      
             --text-muted: #b4b4b4;     
             --input-bg: #2f2f2f;       
             --max-width: 800px; 
-            --accent: #4e4e4e;
         }
 
         body { 
@@ -24,7 +22,15 @@
             margin: 0; display: flex; flex-direction: column; height: 100vh; align-items: center; 
         }
 
-        header { width: 100%; max-width: var(--max-width); padding: 20px; font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+        header { 
+            width: 100%; max-width: var(--max-width); padding: 20px; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .global-copy-btn {
+            background: transparent; color: var(--text-muted); border: 1px solid #444;
+            padding: 6px 12px; font-size: 12px; border-radius: 8px; cursor: pointer;
+        }
 
         #chat-container { 
             flex: 1; width: 100%; max-width: var(--max-width); overflow-y: auto; 
@@ -32,67 +38,47 @@
         }
 
         .message-wrapper { position: relative; display: flex; flex-direction: column; }
-
-        .message { 
-            max-width: 85%; padding: 10px 0; font-size: 16px; line-height: 1.6; word-wrap: break-word; position: relative;
-        }
-
-        .user { 
-            align-self: flex-end; background-color: var(--user-msg); color: white; 
-            padding: 12px 20px; border-radius: 18px; border: 1px solid #444;
-        }
-
+        .message { max-width: 85%; padding: 10px 0; font-size: 16px; line-height: 1.6; word-wrap: break-word; white-space: pre-wrap; }
+        .user { align-self: flex-end; background-color: var(--user-msg); color: white; padding: 12px 20px; border-radius: 18px; border: 1px solid #444; }
         .ai { align-self: flex-start; color: var(--text-main); width: 100%; }
+        .copy-btn { align-self: flex-start; background: #333; color: #ccc; border: 1px solid #444; padding: 4px 10px; font-size: 11px; border-radius: 6px; cursor: pointer; margin-bottom: 8px; }
 
-        /* Kopier-Button Styling */
-        .copy-btn {
-            align-self: flex-start;
-            background: #333;
-            color: #ccc;
-            border: 1px solid #444;
-            padding: 4px 10px;
-            font-size: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-bottom: 8px;
-            transition: all 0.2s;
-        }
-
-        .copy-btn:hover { background: #444; color: #fff; }
-        .copy-btn:active { transform: scale(0.95); }
-
-        /* Eingabebereich */
-        #input-wrapper { width: 100%; max-width: var(--max-width); padding: 10px 20px 40px 20px; }
+        /* Eingabebereich mit automatischer Höhe */
+        #input-wrapper { width: 100%; max-width: var(--max-width); padding: 10px 20px 40px 20px; box-sizing: border-box; }
         #input-area { 
             display: flex; background: var(--input-bg); border-radius: 16px; 
-            padding: 6px 12px; align-items: center; gap: 10px; border: 1px solid #444;
+            padding: 10px 15px; align-items: flex-end; gap: 10px; border: 1px solid #444;
         }
 
-        input { flex: 1; padding: 14px; border: none; background: transparent; outline: none; color: white; font-size: 16px; }
+        textarea { 
+            flex: 1; padding: 8px 0; border: none; background: transparent; outline: none; 
+            color: white; font-size: 16px; font-family: inherit; resize: none; 
+            max-height: 200px; line-height: 1.5;
+        }
 
         button#send-btn { 
             background: #fff; color: #000; border: none; border-radius: 12px; 
-            width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+            margin-bottom: 4px;
         }
-
-        /* Scrollbar */
-        #chat-container::-webkit-scrollbar { width: 5px; }
-        #chat-container::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<header>Qwen 3.6 Flash</header>
+<header>
+    <span>Qwen 3.6 Flash</span>
+    <button class="global-copy-btn" id="copy-all-btn">Chat-Verlauf kopieren</button>
+</header>
 
 <div id="chat-container">
     <div class="message-wrapper">
-        <div class="message ai">Guten Tag. Ich bin bereit. Code oder Texte kann ich direkt für dich kopierbar machen.</div>
+        <div class="message ai">Guten Tag. Das Textfeld passt sich nun deiner Nachricht an.</div>
     </div>
 </div>
 
 <div id="input-wrapper">
     <div id="input-area">
-        <input type="text" id="user-input" placeholder="Nachricht an Qwen..." autocomplete="off">
+        <textarea id="user-input" rows="1" placeholder="Nachricht an Qwen..." autocomplete="off"></textarea>
         <button id="send-btn">↑</button>
     </div>
 </div>
@@ -101,22 +87,33 @@
     const chatContainer = document.getElementById('chat-container');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
+    const copyAllBtn = document.getElementById('copy-all-btn');
+
+    let chatHistory = ["KI: Guten Tag. Das Textfeld passt sich nun deiner Nachricht an."];
+
+    // Automatisches Anpassen der Höhe des Textfeldes
+    userInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
 
     function appendMessage(role, text) {
         const wrapper = document.createElement('div');
         wrapper.className = 'message-wrapper';
 
-        // Kopier-Button nur für KI hinzufügen
         if (role === 'ai') {
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
-            btn.innerText = 'Kopieren';
+            btn.innerText = 'Antwort kopieren';
             btn.onclick = () => {
                 navigator.clipboard.writeText(text);
                 btn.innerText = 'Kopiert!';
-                setTimeout(() => btn.innerText = 'Kopieren', 2000);
+                setTimeout(() => btn.innerText = 'Antwort kopieren', 2000);
             };
             wrapper.appendChild(btn);
+            chatHistory.push("KI: " + text);
+        } else {
+            chatHistory.push("DU: " + text);
         }
 
         const msgDiv = document.createElement('div');
@@ -134,12 +131,11 @@
 
         appendMessage('user', prompt);
         userInput.value = '';
+        userInput.style.height = 'auto'; // Höhe zurücksetzen
         sendBtn.disabled = true;
 
         try {
-            const response = await puter.ai.chat(prompt, { 
-                model: 'qwen/qwen3.6-flash' 
-            });
+            const response = await puter.ai.chat(prompt, { model: 'qwen/qwen3.6-flash' });
             appendMessage('ai', response);
         } catch (error) {
             appendMessage('ai', "Fehler: " + error.message);
@@ -149,10 +145,22 @@
         }
     }
 
-    sendBtn.addEventListener('click', handleChat);
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleChat();
+    // Senden bei Enter (aber Zeilenumbruch bei Shift+Enter)
+    userInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+        }
     });
+
+    copyAllBtn.addEventListener('click', () => {
+        const fullText = chatHistory.join('\n\n---\n\n');
+        navigator.clipboard.writeText(fullText);
+        copyAllBtn.innerText = 'Verlauf kopiert!';
+        setTimeout(() => copyAllBtn.innerText = 'Chat-Verlauf kopieren', 2000);
+    });
+
+    sendBtn.addEventListener('click', handleChat);
 </script>
 
 </body>
