@@ -126,24 +126,33 @@
     }
 
     async function handleChat() {
-        const prompt = userInput.value.trim();
-        if (!prompt) return;
+    const prompt = userInput.value.trim();
+    if (!prompt) return;
 
-        appendMessage('user', prompt);
-        userInput.value = '';
-        userInput.style.height = 'auto'; // Höhe zurücksetzen
-        sendBtn.disabled = true;
+    appendMessage('user', prompt);
+    userInput.value = '';
+    userInput.style.height = 'auto'; 
+    sendBtn.disabled = true;
 
-        try {
-            const response = await puter.ai.chat(prompt, { model: 'qwen/qwen3.6-flash' });
-            appendMessage('ai', response);
-        } catch (error) {
-            appendMessage('ai', "Fehler: " + error.message);
-        } finally {
-            sendBtn.disabled = false;
-            userInput.focus();
-        }
+    try {
+        // Hier wurde das Modell auf deepseek-v4-pro geändert
+        const response = await puter.ai.chat(prompt, { 
+            model: 'deepseek/deepseek-v4-pro' 
+        });
+
+        // WICHTIG: Je nach Puter-Version ist die Antwort entweder 
+        // direkt der Text oder ein Objekt (response.message.content).
+        // Wir prüfen beides ab:
+        const aiText = response.message ? response.message.content : response;
+        
+        appendMessage('ai', aiText);
+    } catch (error) {
+        appendMessage('ai', "Fehler: " + error.message);
+    } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
     }
+}
 
     // Senden bei Enter (aber Zeilenumbruch bei Shift+Enter)
     userInput.addEventListener('keydown', (e) => {
