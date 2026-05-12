@@ -121,7 +121,7 @@
     /* Grain */
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
 
@@ -305,6 +305,59 @@
     }
     .copy-btn:hover { background: var(--tip); color: #0D0D0D; }
 
+    /* === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === */
+    .ymyl-disclaimer {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-left: 4px solid #EF4444;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 12.5px;
+      color: var(--muted);
+      animation: fadeUp .7s .2s ease both;
+    }
+    .ymyl-disclaimer strong { color: #FCA5A5; }
+    .ymyl-disclaimer a { color: var(--tip); text-decoration: none; border-bottom: 1px dashed var(--tip-border); }
+    .ymyl-disclaimer a:hover { border-bottom-style: solid; }
+
+    /* === NEW: HOW IT WORKS SECTION === */
+    .how-it-works {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin: 1.5rem 0;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .how-it-works h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .how-it-works ol {
+      padding-left: 1.4rem; color: var(--muted);
+      font-size: 13.5px; line-height: 1.7;
+    }
+    .how-it-works li { margin-bottom: 0.5rem; }
+    .how-it-works strong { color: var(--text); font-weight: 500; }
+
+    /* === NEW: WHO IS THIS FOR BOX === */
+    .who-is-this-for {
+      background: linear-gradient(135deg, rgba(34,197,94,0.03) 0%, transparent 100%);
+      border: 1px solid var(--tip-border);
+      border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0 1.5rem;
+      font-size: 13px; color: var(--muted);
+    }
+    .who-is-this-for strong { color: var(--tip); }
+    .who-is-this-for ul {
+      margin: 0.5rem 0 0 1.2rem; padding: 0;
+      list-style: none;
+    }
+    .who-is-this-for li { margin-bottom: 0.3rem; }
+    .who-is-this-for li::before {
+      content: '✓ '; color: var(--tip); font-weight: 600;
+    }
+
     /* ─── SECTION BLOCKS ─── */
     .section-block {
       background: var(--surface); border: 1px solid var(--border);
@@ -337,6 +390,24 @@
     .tip-card.recommended { border-color: var(--tip); background: var(--tip-bg); }
     .tip-percent { font-size: 20px; font-weight: 700; color: var(--tip); margin-bottom: 4px; }
     .tip-situation { font-size: 11px; color: var(--muted); }
+
+    /* === NEW: TIPPING BY COUNTRY BOX === */
+    .tipping-countries {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .tipping-countries strong { color: var(--text); }
+    .tipping-countries ul {
+      margin: 0.5rem 0 0 1.2rem;
+      list-style: none;
+      padding: 0;
+    }
+    .tipping-countries li { margin-bottom: 0.3rem; }
 
     /* ─── AD SLOT ─── */
     .ad-slot {
@@ -401,6 +472,8 @@
       line-height: 1.8; margin-bottom: 1rem;
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content a { color: var(--tip); text-decoration: none; border-bottom: 1px dashed var(--tip-border); }
+    .seo-content a:hover { border-bottom-style: solid; }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -420,6 +493,17 @@
     .faq-item.open .faq-a { max-height: 200px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
+    /* === NEW: PRO TIP BOX === */
+    .pro-tip {
+      background: rgba(232,213,163,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pro-tip strong { color: var(--accent); }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -431,7 +515,21 @@
       font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem;
     }
     .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 0.5rem 0 1rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .ad-disclosure {
+      font-size: 10px; color: var(--muted); opacity: 0.5;
+      margin-top: 0.8rem; line-height: 1.4;
+    }
 
     /* ─── ANIMATIONS & TOAST ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -543,6 +641,33 @@
         <span class="breakdown-value" id="breakdownTotal">$0.00</span>
       </div>
     </div>
+
+    <!-- === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === -->
+    <div class="ymyl-disclaimer">
+      <strong>⚠️ Important Notice:</strong> This calculator is for informational purposes only and does not constitute financial or etiquette advice. Tipping customs vary significantly by country, culture, and establishment. In some countries (e.g., Japan, South Korea), tipping is uncommon or even considered rude. Always research local customs and consider service quality when deciding on a tip. ToolCompass is not liable for any social or financial decisions based on these calculations.
+    </div>
+  </div>
+
+  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <div class="how-it-works">
+    <h3>🔧 How This Tool Works</h3>
+    <ol>
+      <li><strong>Enter the bill amount:</strong> Type the total restaurant bill (before or after tax, as you prefer).</li>
+      <li><strong>Select tip percentage:</strong> Use quick buttons (10–25%) or enter a custom value.</li>
+      <li><strong>Set number of people:</strong> Use the +/- counter or type directly to split evenly.</li>
+      <li><strong>Get instant results:</strong> See each person's share plus a full breakdown of subtotal, tip, and total.</li>
+    </ol>
+  </div>
+
+  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <div class="who-is-this-for">
+    <strong>Who is this for?</strong> This splitter helps groups who want fair, stress-free bill division:
+    <ul>
+      <li>Friends dining out together who want to split evenly</li>
+      <li>Business teams calculating per-person meal expenses for reports</li>
+      <li>Travelers navigating tipping customs in unfamiliar countries</li>
+      <li>Anyone who wants to avoid awkward math at the end of a meal</li>
+    </ul>
   </div>
 
   <!-- AD SLOT MID -->
@@ -580,6 +705,21 @@
         <div class="tip-percent">20%+</div>
         <div class="tip-situation">Excellent Service</div>
       </div>
+    </div>
+
+    <!-- === NEW: TIPPING BY COUNTRY BOX === -->
+    <div class="tipping-countries">
+      <strong>🌍 Tipping varies by country:</strong>
+      <ul>
+        <li><strong>USA/Canada:</strong> 15–20% expected in restaurants</li>
+        <li><strong>UK/Europe:</strong> 10–15% common; service charge often included</li>
+        <li><strong>Australia/NZ:</strong> Tipping optional; rounding up is common</li>
+        <li><strong>Japan/South Korea:</strong> Tipping uncommon; may be refused</li>
+        <li><strong>Middle East:</strong> 10–15% appreciated; check if service charge included</li>
+      </ul>
+      <p style="font-size:11px; color:var(--muted); font-style:italic; margin-top:0.5rem;">
+        When in doubt, ask locally or check your receipt for included service charges.
+      </p>
     </div>
   </div>
 
@@ -628,6 +768,14 @@
       The calculator instantly shows how much <strong>each person owes</strong>, including a detailed breakdown of the subtotal, tip amount, and total. You can copy the result to share in group chats or payment apps like Venmo, PayPal, or Splitwise.
     </p>
 
+    <div class="pro-tip">
+      <strong>💡 Pro Tip:</strong> For group dinners where people ordered different items, consider using a dedicated app like Splitwise for uneven splits. For international travel, research local tipping customs beforehand — in some cultures, leaving a tip can be confusing or even offensive. Pair this tool with our <a href="/travel-budget-planner">Travel Budget Planner</a> for complete trip planning.
+    </div>
+
+    <p>
+      All calculations run locally in your browser using JavaScript. This means your financial data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
+    </p>
+
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
@@ -672,7 +820,13 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy</a>
+  </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
