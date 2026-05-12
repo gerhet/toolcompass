@@ -34,4 +34,5 @@
   <url><loc>https://toolcompass.org/briefing-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/impressum</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://toolcompass.org/datenschutz</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://toolcompass.org/about</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
