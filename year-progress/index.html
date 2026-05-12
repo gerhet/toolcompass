@@ -265,6 +265,43 @@
     }
     .stat-lbl { font-size: 11px; color: var(--muted); letter-spacing: .04em; }
 
+    /* === NEW: HOW IT WORKS SECTION === */
+    .how-it-works {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin: 1.5rem 0;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .how-it-works h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .how-it-works ol {
+      padding-left: 1.4rem; color: var(--muted);
+      font-size: 13.5px; line-height: 1.7;
+    }
+    .how-it-works li { margin-bottom: 0.5rem; }
+    .how-it-works strong { color: var(--text); font-weight: 500; }
+
+    /* === NEW: WHO IS THIS FOR BOX === */
+    .who-is-this-for {
+      background: linear-gradient(135deg, rgba(34,211,238,0.03) 0%, transparent 100%);
+      border: 1px solid var(--time-border);
+      border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0 1.5rem;
+      font-size: 13px; color: var(--muted);
+    }
+    .who-is-this-for strong { color: var(--time); }
+    .who-is-this-for ul {
+      margin: 0.5rem 0 0 1.2rem; padding: 0;
+      list-style: none;
+    }
+    .who-is-this-for li { margin-bottom: 0.3rem; }
+    .who-is-this-for li::before {
+      content: '✓ '; color: var(--time); font-weight: 600;
+    }
+
     /* ─── SECTION BLOCKS ─── */
     .section-block {
       background: var(--surface); border: 1px solid var(--border);
@@ -445,6 +482,8 @@
       line-height: 1.8; margin-bottom: 1rem;
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content a { color: var(--time); text-decoration: none; border-bottom: 1px dashed var(--time-border); }
+    .seo-content a:hover { border-bottom-style: solid; }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -464,6 +503,17 @@
     .faq-item.open .faq-a { max-height: 200px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
+    /* === NEW: PRO TIP BOX === */
+    .pro-tip {
+      background: rgba(232,213,163,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pro-tip strong { color: var(--accent); }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -475,7 +525,21 @@
       font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem;
     }
     .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 0.5rem 0 1rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .ad-disclosure {
+      font-size: 10px; color: var(--muted); opacity: 0.5;
+      margin-top: 0.8rem; line-height: 1.4;
+    }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -558,6 +622,28 @@
       <div class="stat-val" id="statQuarter">—</div>
       <div class="stat-lbl">Quarter</div>
     </div>
+  </div>
+
+  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <div class="how-it-works">
+    <h3>🔧 How This Tool Works</h3>
+    <ol>
+      <li><strong>Real-time calculation:</strong> The tracker uses your device's local time to calculate the exact milliseconds elapsed since January 1st, 2026.</li>
+      <li><strong>Live updates:</strong> The percentage, progress bar, and clock update every second — no page refresh needed.</li>
+      <li><strong>100% private:</strong> All calculations happen in your browser. No data is sent to any server.</li>
+      <li><strong>Visual clarity:</strong> The day grid, quarter bars, and month cards give you multiple ways to understand your year's progress.</li>
+    </ol>
+  </div>
+
+  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <div class="who-is-this-for">
+    <strong>Who is this for?</strong> This tracker helps anyone who wants to visualize time as a finite resource:
+    <ul>
+      <li>Freelancers tracking quarterly goals and deadlines</li>
+      <li>Students monitoring academic progress</li>
+      <li>Project managers planning yearly milestones</li>
+      <li>Anyone practicing intentional time management</li>
+    </ul>
   </div>
 
   <!-- AD SLOT MID -->
@@ -664,8 +750,16 @@
     <p>
       Our real-time <strong>Year Progress Tracker</strong> calculates the exact percentage of 2026 that has elapsed — updated every second. It's a simple but powerful way to visualize time as a finite resource. Whether you're a <strong>freelancer tracking quarterly goals</strong>, a student monitoring academic progress, or simply someone who wants to stay intentional with their year — this tool delivers clarity at a glance.
     </p>
+    
+    <div class="pro-tip">
+      <strong>💡 Pro Tip:</strong> Bookmark this page and check it weekly. Seeing the percentage change in real-time creates a subtle but powerful motivation to use your time intentionally. Pair it with our <a href="/pomodoro-timer">Pomodoro Timer</a> for maximum productivity.
+    </div>
+    
     <p>
       The tracker shows your current <strong>day of the year</strong>, <strong>ISO week number</strong>, active quarter with a live progress bar, a month-by-month overview, and a full <strong>day grid</strong> of all 365 days. Elapsed days are highlighted in gold, today's date pulses in cyan, and remaining days are shown in grey — giving you an honest, visual picture of where your year stands.
+    </p>
+    <p>
+      All calculations run locally in your browser using JavaScript. This means your data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
     </p>
 
     <div class="faq-list">
@@ -712,7 +806,13 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum">Imprint</a>
+    <a href="/datenschutz">Privacy</a>
+  </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
 </footer>
 
 <script>
