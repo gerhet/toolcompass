@@ -135,7 +135,7 @@
     /* Grain */
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
 
@@ -340,6 +340,43 @@
       white-space: nowrap;
     }
 
+    /* === NEW: HOW IT WORKS SECTION === */
+    .how-it-works {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin: 1.5rem 0;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .how-it-works h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .how-it-works ol {
+      padding-left: 1.4rem; color: var(--muted);
+      font-size: 13.5px; line-height: 1.7;
+    }
+    .how-it-works li { margin-bottom: 0.5rem; }
+    .how-it-works strong { color: var(--text); font-weight: 500; }
+
+    /* === NEW: WHO IS THIS FOR BOX === */
+    .who-is-this-for {
+      background: linear-gradient(135deg, rgba(251,146,60,0.03) 0%, transparent 100%);
+      border: 1px solid var(--content-border);
+      border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0 1.5rem;
+      font-size: 13px; color: var(--muted);
+    }
+    .who-is-this-for strong { color: var(--content); }
+    .who-is-this-for ul {
+      margin: 0.5rem 0 0 1.2rem; padding: 0;
+      list-style: none;
+    }
+    .who-is-this-for li { margin-bottom: 0.3rem; }
+    .who-is-this-for li::before {
+      content: '✓ '; color: var(--content); font-weight: 600;
+    }
+
     /* ─── KEYWORD DENSITY ─── */
     .keywords-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -416,6 +453,8 @@
       line-height: 1.8; margin-bottom: 1rem;
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content a { color: var(--content); text-decoration: none; border-bottom: 1px dashed var(--content-border); }
+    .seo-content a:hover { border-bottom-style: solid; }
 
     /* Platform limits table */
     .limits-table {
@@ -455,15 +494,43 @@
     .faq-item.open .faq-a { max-height: 300px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
+    /* === NEW: PRO TIP BOX === */
+    .pro-tip {
+      background: rgba(232,213,163,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pro-tip strong { color: var(--accent); }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
       padding: 2.5rem 2rem; text-align: center;
       max-width: 900px; margin: 0 auto;
     }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem;
+    }
     .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 0.5rem 0 1rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .ad-disclosure {
+      font-size: 10px; color: var(--muted); opacity: 0.5;
+      margin-top: 0.8rem; line-height: 1.4;
+    }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -586,6 +653,28 @@
     </div>
   </div>
 
+  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <div class="how-it-works">
+    <h3>🔧 How This Tool Works</h3>
+    <ol>
+      <li><strong>Type or paste:</strong> Enter your text in the box above — calculations update instantly as you type.</li>
+      <li><strong>Real-time stats:</strong> Words, characters (with/without spaces), sentences, paragraphs and lines are counted automatically.</li>
+      <li><strong>Platform limits:</strong> Click a platform pill (Twitter, LinkedIn, etc.) to track your character count against common limits.</li>
+      <li><strong>Keyword insights:</strong> The tool analyzes your text and shows the most frequent meaningful words with density percentages.</li>
+    </ol>
+  </div>
+
+  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <div class="who-is-this-for">
+    <strong>Who is this for?</strong> This counter helps anyone who writes for digital platforms:
+    <ul>
+      <li>Content writers optimizing blog posts for SEO and readability</li>
+      <li>Social media managers staying within Twitter, LinkedIn & Instagram limits</li>
+      <li>Students checking essay word counts before submission</li>
+      <li>Marketers crafting meta descriptions and ad copy within character limits</li>
+    </ul>
+  </div>
+
   <!-- READING TIME -->
   <div class="reading-card">
     <div class="reading-info">
@@ -694,9 +783,16 @@
       </tbody>
     </table>
 
+    <div class="pro-tip">
+      <strong>💡 Pro Tip:</strong> For SEO content, aim for 1–3% keyword density for your target term. Too low = unclear topic; too high = keyword stuffing. Pair this tool with our <a href="/text-summarizer">Text Summarizer</a> to refine long drafts into concise, impactful content.
+    </div>
+
     <h2 style="margin-top: 1.5rem;">Why <em>reading time</em> matters</h2>
     <p>
       Average adult reading speed is around <strong>200 words per minute</strong> for online content. Knowing your estimated reading time helps you match your content length to your audience's attention span. Blog posts under 7 minutes tend to perform better for engagement; long-form content above 10 minutes tends to rank better in SEO.
+    </p>
+    <p>
+      All calculations run locally in your browser using JavaScript. This means your text never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
     </p>
 
     <div class="faq-list">
@@ -752,7 +848,13 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy</a>
+  </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
 </footer>
 
 <script>
