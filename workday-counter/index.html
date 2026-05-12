@@ -331,6 +331,43 @@
     }
     .holiday-hint svg { opacity: .5; }
 
+    /* === NEW: HOW IT WORKS SECTION === */
+    .how-it-works {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin: 1.5rem 0;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .how-it-works h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .how-it-works ol {
+      padding-left: 1.4rem; color: var(--muted);
+      font-size: 13.5px; line-height: 1.7;
+    }
+    .how-it-works li { margin-bottom: 0.5rem; }
+    .how-it-works strong { color: var(--text); font-weight: 500; }
+
+    /* === NEW: WHO IS THIS FOR BOX === */
+    .who-is-this-for {
+      background: linear-gradient(135deg, rgba(34,211,238,0.03) 0%, transparent 100%);
+      border: 1px solid var(--time-border);
+      border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0 1.5rem;
+      font-size: 13px; color: var(--muted);
+    }
+    .who-is-this-for strong { color: var(--time); }
+    .who-is-this-for ul {
+      margin: 0.5rem 0 0 1.2rem; padding: 0;
+      list-style: none;
+    }
+    .who-is-this-for li { margin-bottom: 0.3rem; }
+    .who-is-this-for li::before {
+      content: '✓ '; color: var(--time); font-weight: 600;
+    }
+
     /* ─── AD SLOT ─── */
     .ad-slot {
       margin-bottom: 1rem; display: none;
@@ -394,6 +431,8 @@
       line-height: 1.8; margin-bottom: 1rem;
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content a { color: var(--time); text-decoration: none; border-bottom: 1px dashed var(--time-border); }
+    .seo-content a:hover { border-bottom-style: solid; }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -413,6 +452,17 @@
     .faq-item.open .faq-a { max-height: 200px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
+    /* === NEW: PRO TIP BOX === */
+    .pro-tip {
+      background: rgba(232,213,163,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pro-tip strong { color: var(--accent); }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -424,7 +474,21 @@
       font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem;
     }
     .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 0.5rem 0 1rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .ad-disclosure {
+      font-size: 10px; color: var(--muted); opacity: 0.5;
+      margin-top: 0.8rem; line-height: 1.4;
+    }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -544,6 +608,28 @@
     </div>
   </div>
 
+  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <div class="how-it-works">
+    <h3>🔧 How This Tool Works</h3>
+    <ol>
+      <li><strong>Enter your dates:</strong> Select a start and end date using the date pickers above.</li>
+      <li><strong>Automatic calculation:</strong> The tool counts every Monday–Friday between your dates, excluding Saturdays and Sundays.</li>
+      <li><strong>Instant results:</strong> See net working days, total calendar days, weekend days, work weeks, plus equivalent hours and minutes.</li>
+      <li><strong>Flexible input:</strong> Use the "Quick" buttons for common ranges, or swap dates if you entered them in reverse order.</li>
+    </ol>
+  </div>
+
+  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <div class="who-is-this-for">
+    <strong>Who is this for?</strong> This calculator helps professionals who need precise timeline estimates:
+    <ul>
+      <li>Project managers planning sprint capacity and deadlines</li>
+      <li>Freelancers quoting delivery dates to clients</li>
+      <li>HR teams calculating vacation or notice periods</li>
+      <li>Students organizing study schedules around weekdays</li>
+    </ul>
+  </div>
+
   <!-- AD SLOT MID -->
   <div class="ad-slot" id="adMid">
     <div class="ad-inner">
@@ -612,11 +698,16 @@
     <p>
       Calculating <strong>net working days</strong> between two dates is essential for accurate project planning, resource allocation, and deadline estimation. Our <strong>Workday Counter</strong> excludes weekends (Saturday and Sunday) automatically and converts your timeline into actionable metrics: total business days, work hours, and even down to the minute.
     </p>
+    
+    <div class="pro-tip">
+      <strong>💡 Pro Tip:</strong> For more precise planning, manually subtract public holidays from the result. Pair this tool with our <a href="/pomodoro-timer">Pomodoro Timer</a> to break down your working days into focused productivity sessions.
+    </div>
+    
     <p>
       Whether you're a <strong>project manager</strong> estimating sprint capacity, a <strong>freelancer</strong> quoting a deadline, or a <strong>student</strong> planning study schedules — this tool provides surgical precision. Simply select your start and end date, and the calculator instantly shows you how many <strong>Monday-to-Friday workdays</strong> fall within that range, along with the equivalent hours (based on an 8-hour workday standard).
     </p>
     <p>
-      <strong>Pro tip:</strong> Use the "Quick" buttons to jump to common timeframes (7, 14, 30, or 90 days from today). The calculator also handles reverse date ranges — if your end date is before your start date, it auto-swaps them and shows a negative prefix.
+      All calculations run locally in your browser using JavaScript. This means your date inputs never leave your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
     </p>
 
     <div class="faq-list">
@@ -676,7 +767,13 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy</a>
+  </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
 </footer>
 
 <script>
