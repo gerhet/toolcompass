@@ -121,7 +121,7 @@
     /* Grain */
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
 
@@ -246,6 +246,59 @@
     }
     .copy-btn:hover { background: var(--travel); color: #0D0D0D; }
 
+    /* === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === */
+    .ymyl-disclaimer {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-left: 4px solid #EF4444;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 12.5px;
+      color: var(--muted);
+      animation: fadeUp .7s .2s ease both;
+    }
+    .ymyl-disclaimer strong { color: #FCA5A5; }
+    .ymyl-disclaimer a { color: var(--travel); text-decoration: none; border-bottom: 1px dashed var(--travel-border); }
+    .ymyl-disclaimer a:hover { border-bottom-style: solid; }
+
+    /* === NEW: HOW IT WORKS SECTION === */
+    .how-it-works {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      margin: 1.5rem 0;
+      animation: fadeUp .7s .25s ease both;
+    }
+    .how-it-works h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; font-style: italic;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    .how-it-works ol {
+      padding-left: 1.4rem; color: var(--muted);
+      font-size: 13.5px; line-height: 1.7;
+    }
+    .how-it-works li { margin-bottom: 0.5rem; }
+    .how-it-works strong { color: var(--text); font-weight: 500; }
+
+    /* === NEW: WHO IS THIS FOR BOX === */
+    .who-is-this-for {
+      background: linear-gradient(135deg, rgba(56,189,248,0.03) 0%, transparent 100%);
+      border: 1px solid var(--travel-border);
+      border-radius: 14px; padding: 1.2rem 1.5rem;
+      margin: 1rem 0 1.5rem;
+      font-size: 13px; color: var(--muted);
+    }
+    .who-is-this-for strong { color: var(--travel); }
+    .who-is-this-for ul {
+      margin: 0.5rem 0 0 1.2rem; padding: 0;
+      list-style: none;
+    }
+    .who-is-this-for li { margin-bottom: 0.3rem; }
+    .who-is-this-for li::before {
+      content: '✓ '; color: var(--travel); font-weight: 600;
+    }
+
     /* ─── SECTION BLOCKS ─── */
     .section-block {
       background: var(--surface); border: 1px solid var(--border);
@@ -279,6 +332,28 @@
     .style-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
     .style-cost { font-size: 13px; color: var(--travel); font-weight: 700; }
     .style-desc { font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+    /* === NEW: WHAT'S INCLUDED TABLE === */
+    .included-table {
+      width: 100%; border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      margin: 1rem 0; font-size: 12px;
+    }
+    .included-table th {
+      background: var(--surface2); padding: .6rem 1rem;
+      text-align: left; color: var(--muted);
+      font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; font-size: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .included-table td {
+      padding: .6rem 1rem; color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+    .included-table tr:last-child td { border-bottom: none; }
+    .included-table tr:hover td { background: rgba(255,255,255,.02); }
+    .included-yes { color: var(--travel); font-weight: 600; }
+    .included-no { color: var(--muted); opacity: 0.6; }
 
     /* ─── AD SLOT ─── */
     .ad-slot {
@@ -343,6 +418,8 @@
       line-height: 1.8; margin-bottom: 1rem;
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content a { color: var(--travel); text-decoration: none; border-bottom: 1px dashed var(--travel-border); }
+    .seo-content a:hover { border-bottom-style: solid; }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -362,6 +439,17 @@
     .faq-item.open .faq-a { max-height: 200px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
+    /* === NEW: PRO TIP BOX === */
+    .pro-tip {
+      background: rgba(232,213,163,0.06);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.2rem;
+      margin: 1.2rem 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pro-tip strong { color: var(--accent); }
+
     /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
@@ -373,7 +461,21 @@
       font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem;
     }
     .footer-logo em { color: var(--accent); font-style: italic; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 0.5rem 0 1rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      letter-spacing: .08em; text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .ad-disclosure {
+      font-size: 10px; color: var(--muted); opacity: 0.5;
+      margin-top: 0.8rem; line-height: 1.4;
+    }
 
     /* ─── ANIMATIONS & TOAST ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -462,6 +564,33 @@
       </div>
       <button class="copy-btn" onclick="copyResult()">Copy Estimate</button>
     </div>
+
+    <!-- === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === -->
+    <div class="ymyl-disclaimer">
+      <strong>⚠️ Important Notice:</strong> This calculator provides estimates only and does not constitute financial or travel advice. Actual travel costs vary significantly by destination, season, exchange rates, and personal preferences. Always research current prices for your specific trip and consult a travel professional for personalized planning. ToolCompass is not liable for any budgeting decisions based on these estimates.
+    </div>
+  </div>
+
+  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <div class="how-it-works">
+    <h3>🔧 How This Tool Works</h3>
+    <ol>
+      <li><strong>Enter trip duration:</strong> Type the number of days you plan to travel.</li>
+      <li><strong>Select travel style:</strong> Choose Backpacker, Standard, or Luxury based on your preferred comfort level.</li>
+      <li><strong>Get instant estimate:</strong> The calculator multiplies days × daily rate to show your estimated total cost.</li>
+      <li><strong>Copy or adjust:</strong> Copy the result for planning, or adjust inputs to compare different scenarios.</li>
+    </ol>
+  </div>
+
+  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <div class="who-is-this-for">
+    <strong>Who is this for?</strong> This planner helps travelers who want realistic budget expectations:
+    <ul>
+      <li>Backpackers planning multi-country trips on a tight budget</li>
+      <li>Families estimating vacation costs before booking flights</li>
+      <li>Digital nomads calculating monthly travel expenses</li>
+      <li>Travel bloggers creating budget guides for their audience</li>
+    </ul>
   </div>
 
   <!-- AD SLOT MID -->
@@ -503,6 +632,38 @@
         <div class="style-desc">Premium hotels, fine dining, private tours</div>
       </div>
     </div>
+  </div>
+
+  <!-- === NEW: WHAT'S INCLUDED TABLE === -->
+  <div class="section-block">
+    <div class="section-title">
+      What's Included?
+      <span class="section-title-badge">Transparency</span>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-bottom:1rem;">
+      Understanding what these estimates cover helps you plan more accurately.
+    </p>
+    <table class="included-table">
+      <thead>
+        <tr>
+          <th>Expense Category</th>
+          <th>Included in Estimate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Accommodation (hostel/hotel)</td><td class="included-yes">✓ Yes</td></tr>
+        <tr><td>Food & Drinks</td><td class="included-yes">✓ Yes</td></tr>
+        <tr><td>Local Transport (bus, taxi, metro)</td><td class="included-yes">✓ Yes</td></tr>
+        <tr><td>Activities & Entrance Fees</td><td class="included-yes">✓ Yes</td></tr>
+        <tr><td>Travel Insurance</td><td class="included-no">— No</td></tr>
+        <tr><td>Flights to/from Destination</td><td class="included-no">— No</td></tr>
+        <tr><td>Visa & Entry Fees</td><td class="included-no">— No</td></tr>
+        <tr><td>Shopping & Souvenirs</td><td class="included-no">— No</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color:var(--muted); font-style:italic; margin-top:0.5rem;">
+      Tip: Add 15–20% buffer to your estimate for unexpected costs.
+    </p>
   </div>
 
   <!-- OTHER TOOLS -->
@@ -550,6 +711,14 @@
       Simply enter the <strong>number of days</strong> for your trip and select your preferred <strong>travel style</strong>. The calculator instantly shows your estimated total cost, broken down by daily rate. You can copy the result to share with travel companions or paste it into your planning spreadsheet.
     </p>
 
+    <div class="pro-tip">
+      <strong>💡 Pro Tip:</strong> For more accurate planning, research destination-specific costs on sites like Numbeo or Budget Your Trip. Then use our <a href="/currency-converter">Currency Converter</a> to adjust for exchange rates. Add a 15–20% buffer to your estimate for unexpected expenses — it's better to have extra than to run short!
+    </div>
+
+    <p>
+      All calculations run locally in your browser using JavaScript. This means your trip planning data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
+    </p>
+
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
@@ -594,7 +763,13 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy</a>
+  </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
@@ -646,4 +821,62 @@ function calcBudget() {
 
 // Beim Laden der Seite alte Werte wiederherstellen (UX Boost)
 window.addEventListener('load', () => {
-    if(localStorage.getItem('tc
+    if(localStorage.getItem('tc_travel_days')) {
+        daysInput.value = localStorage.getItem('tc_travel_days');
+        styleSelect.value = localStorage.getItem('tc_travel_style');
+        // Highlight previously selected style
+        const prevStyle = localStorage.getItem('tc_travel_style');
+        if(prevStyle && styleCards[prevStyle]) {
+            Object.values(styleCards).forEach(card => card.classList.remove('current'));
+            styleCards[prevStyle].classList.add('current');
+        }
+    }
+});
+
+// Copy Funktion
+function copyResult() {
+    const text = resultValue.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied to clipboard!');
+    });
+}
+
+// Toast Notification
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.innerText = message;
+    toast.classList.add('active');
+    setTimeout(() => toast.classList.remove('active'), 2000);
+}
+
+// Enter-Taste Support
+document.querySelectorAll('.tool-input, .tool-select').forEach(input => {
+    input.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') {
+            calcBudget();
+        }
+    });
+});
+
+// ═══════════════════════════════════════════════
+// FAQ ACCORDION
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item   = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  });
+});
+
+// ─── ADSENSE aktivieren nach Approval ───
+// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
+// (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>
