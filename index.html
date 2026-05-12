@@ -15,24 +15,25 @@
      crossorigin="anonymous"></script>
 
   <title>ToolCompass | 31+ High-End Productivity Tools (Free & Private)</title>
-<meta name="description" content="Professional utilities for creators, devs, and finance. Instant results, no data logging, no account needed. Optimized for fast digital workflows.">
+  <meta name="description" content="Professional utilities for creators, devs, and finance. Instant results, no data logging, no account needed. Optimized for fast digital workflows.">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "ToolCompass",
-  "url": "https://toolcompass.org/",
-  "applicationCategory": "BusinessApplication, Productivity",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "description": "A collection of 31+ professional online tools including VAT calculators, AI summaries, and developer utilities.",
-  "operatingSystem": "All"
-}
-</script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ToolCompass",
+    "url": "https://toolcompass.org/",
+    "applicationCategory": "BusinessApplication, Productivity",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A collection of 31+ professional online tools including VAT calculators, AI summaries, and developer utilities. All tools are free, private, and run locally in your browser.",
+    "operatingSystem": "All",
+    "featureList": "VAT Calculator, Password Generator, JSON Formatter, BMI Calculator, Pomodoro Timer, and 26+ more productivity tools"
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -198,8 +199,24 @@
     .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, transparent, var(--muted)); animation: lineAnim 2s ease-in-out infinite; }
     @keyframes lineAnim { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 
+    /* === NEW: VALUE SECTION === */
+    .value-section {
+      max-width: 1280px; margin: 0 auto 4rem; padding: 0 2rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .value-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.3rem; text-align: center;
+      transition: border-color .2s;
+    }
+    .value-card:hover { border-color: var(--border-hover); }
+    .value-ico { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .value-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+    .value-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
     /* TOOLS SECTION */
-    .tools-wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem 6rem; }
+    .tools-wrap { max-width: 1280px; margin: 0 auto; padding: 0 2rem 4rem; }
     .cat-block { margin-bottom: 3.5rem; }
     .cat-header {
       display: flex; align-items: baseline; gap: 1rem;
@@ -273,14 +290,41 @@
     .cat-health .tool-card:hover { background: var(--health-bg); }
     .cat-health .icon-wrap { background: var(--health-bg); border-color: rgba(244,114,182,.15); }
 
+    /* === NEW: FAQ SECTION === */
+    .faq-section {
+      max-width: 800px; margin: 3rem auto 5rem; padding: 0 2rem;
+    }
+    .faq-title {
+      text-align: center; font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; margin-bottom: 1.5rem;
+    }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; margin-bottom: 0.8rem; overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; padding: 1rem 1.3rem; text-align: left;
+      background: none; border: none; color: var(--text);
+      font-weight: 500; font-size: 0.95rem; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq-q::after { content: '+'; font-size: 1.2rem; opacity: 0.6; }
+    .faq-q[aria-expanded="true"]::after { content: '−'; }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+      padding: 0 1.3rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;
+    }
+    .faq-a.open { padding: 0 1.3rem 1rem; max-height: 200px; }
+
     /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 3rem 2rem; text-align: center; }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.25rem; }
     .footer-logo em { color: var(--accent); font-style: italic; }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.25rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
     .footer-links a { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: .08em; text-transform: uppercase; transition: color .15s; }
     .footer-links a:hover { color: var(--text); }
-    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; margin-bottom: 0.8rem; }
+    .ad-disclosure { font-size: 10px; color: var(--muted); opacity: 0.6; max-width: 500px; margin: 0 auto; line-height: 1.5; }
 
     /* ANIMATIONS */
     @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
@@ -292,6 +336,11 @@
       .tools-wrap { padding: 0 1.25rem 4rem; }
       .tool-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
       .cat-header { flex-wrap: wrap; }
+      .value-section { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 420px) {
+      .value-section { grid-template-columns: 1fr; }
+      .tool-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -303,7 +352,10 @@
       <div class="logo-icon">🧭</div>
       <span class="logo-text">Tool<em>Compass</em>.org</span>
     </a>
-    <span class="live-badge"><span class="live-dot"></span>31 tools live</span>
+    <nav style="display:flex; gap:1rem; align-items:center;">
+      <a href="/about.html" style="font-size:12px; color:var(--muted); text-decoration:none;">About</a>
+      <span class="live-badge"><span class="live-dot"></span>31 tools live</span>
+    </nav>
   </div>
 </header>
 
@@ -321,6 +373,30 @@
     <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Free uses</div></div>
   </div>
   <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- === NEW: VALUE PROPOSITION SECTION === -->
+<section class="value-section">
+  <div class="value-card">
+    <div class="value-ico">🔒</div>
+    <div class="value-title">100% Private</div>
+    <div class="value-desc">All calculations run locally in your browser. We never see or store your data.</div>
+  </div>
+  <div class="value-card">
+    <div class="value-ico">⚡</div>
+    <div class="value-title">Instant & Fast</div>
+    <div class="value-desc">No signups, no waiting. Open a tool and get results immediately.</div>
+  </div>
+  <div class="value-card">
+    <div class="value-ico">🎯</div>
+    <div class="value-title">Focused Tools</div>
+    <div class="value-desc">Each tool does one thing well—no bloat, no distractions, just results.</div>
+  </div>
+  <div class="value-card">
+    <div class="value-ico">🌍</div>
+    <div class="value-title">Works Everywhere</div>
+    <div class="value-desc">Optimized for mobile, tablet, and desktop. No installation required.</div>
+  </div>
 </section>
 
 <div class="tools-wrap">
@@ -482,13 +558,40 @@
 
 </div>
 
+<!-- === NEW: FAQ SECTION === -->
+<section class="faq-section">
+  <h2 class="faq-title">Quick Questions?</h2>
+  
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">Is ToolCompass really free?</button>
+    <div class="faq-a">Yes — all 31+ tools are completely free to use, forever. No hidden costs, no premium tiers. We keep the site running through non-intrusive ads.</div>
+  </div>
+  
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">Do you store my data?</button>
+    <div class="faq-a">No. All calculations happen locally in your browser. Your inputs never leave your device, and we don't track or log any personal information.</div>
+  </div>
+  
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">Can I use these tools offline?</button>
+    <div class="faq-a">Most tools work offline after the first load. Since they run entirely in your browser, no server connection is needed for calculations.</div>
+  </div>
+  
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false">How do I suggest a new tool?</button>
+    <div class="faq-a">We'd love your input! Visit our <a href="/about.html" style="color:var(--accent);">About page</a> to find contact details, or email us directly.</div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   <div class="footer-links">
-    <a href="/impressum">Impressum</a>
-    <a href="/datenschutz">Datenschutz</a>
+    <a href="/about.html">About</a>
+    <a href="/impressum">Imprint</a>
+    <a href="/datenschutz">Privacy</a>
   </div>
   <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. You may use an ad-blocker — we respect your choice.</p>
 </footer>
 
 <script>
@@ -518,6 +621,16 @@
     });
   }, { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      const answer = btn.nextElementSibling;
+      answer.classList.toggle('open', !expanded);
+    });
+  });
 </script>
 
 </body>
