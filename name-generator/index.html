@@ -6,11 +6,24 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>X-IDENTITY | Ultimate Naming Engine | ToolCompass</title>
-  <meta name="description" content="Generate unique character names, brand identities, and gamertags instantly with the X-IDENTITY engine. Advanced linguistic algorithms, 100% private, browser-based.">
+  <title>Name Generator: Character Names & Brand Identities | ToolCompass</title>
+  <meta name="description" content="Generate unique character names, brand identities & gamertags instantly. Free AI naming engine with genre presets. Private, browser-based. Generate now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  <!-- Canonical: Dynamisch anpassbar für Subpages -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page.path}}"> -->
   <link rel="canonical" href="https://toolcompass.org/x-identity">
+  
+  <!-- Hreflang für mehrsprachige Vorbereitung -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/x-identity">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/x-identity">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/x-identity">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="name generator, character names, brand names, gamertag generator, username creator, fantasy names, business names">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
@@ -54,6 +67,7 @@
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "description": "An advanced name generator with multiple genre databases, customization options, vault saving, and export features.",
+        "featureList": ["4 genre presets (Fantasy, Cyber, Corporate, Modern)", "Customizable name complexity", "Honorifics & surnames toggle", "Live auto-generation", "Vault saving with export (TXT/CSV/JSON)", "Keyboard shortcuts", "100% browser-based privacy"],
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
       },
       {
@@ -72,7 +86,7 @@
             "name": "Are these names copyright free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, all generated names are algorithmic combinations and free to use. However, always check trademark databases for commercial projects."
+              "text": "Yes, all generated names are algorithmic combinations and free to use for personal or commercial projects. However, always check trademark databases like USPTO or EUIPO before using names for commercial brands to avoid conflicts."
             }
           },
           {
@@ -80,7 +94,7 @@
             "name": "Can I save my favorite names?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! Use the Vault feature to save unlimited names locally in your browser. Export them anytime as TXT, CSV, or JSON."
+              "text": "Yes! Click the star icon on any name card to save it to your Vault. Names are stored locally in your browser using localStorage and persist across sessions. Export them anytime as TXT, CSV, or JSON for use in your projects."
             }
           },
           {
@@ -88,16 +102,51 @@
             "name": "Does it work offline?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! Once loaded, all generation happens in your browser. No internet connection required after initial page load."
+              "text": "Yes! Once the page is loaded, all name generation happens entirely in your browser using JavaScript. No internet connection required after initial page load. Perfect for travel, remote work, or low-connectivity situations."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there keyboard shortcuts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Press Spacebar to generate new names, G to toggle auto-generate mode, and V to open/close your Vault. These shortcuts work when no input field is focused, perfect for rapid ideation sessions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are names generated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Our engine uses genre-specific linguistic databases with prefix, middle, and suffix components. Names are assembled algorithmically with randomization, ensuring unique combinations every time. No AI models or external APIs are used — all processing happens locally in your browser."
             }
           }
         ]
+      },
+      {
+        "@type": "Organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "sameAs": [],
+        "description": "ToolCompass offers 31+ free, private browser tools for productivity, finance, writing, development, time management, and health — all running locally in your browser."
+      },
+      {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts mit Preconnect + Preload für kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- ═══ DESIGN SYSTEM CSS ═══ -->
@@ -114,7 +163,17 @@
       --accent-glow: rgba(232, 213, 163, 0.15);
       --success: #22C55E;
       --danger: #EF4444;
+      --focus-ring: rgba(232, 213, 163, 0.5);
     }
+
+    /* z-index Stack Dokumentation:
+       999: Grain overlay
+       200: Toast notifications
+       100: Header (sticky)
+       50: Modals/Banners (future)
+       10: Skip link
+       1: Default content
+    */
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -126,6 +185,28 @@
       color: var(--text);
       min-height: 100vh;
       position: relative;
+      line-height: 1.5;
+    }
+
+    /* Skip to Content Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
     }
 
     /* Grain Overlay */
@@ -155,7 +236,11 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 4px;
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -197,6 +282,8 @@
       margin-bottom: 1rem;
       position: relative; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
 
     /* Mode Tabs */
@@ -218,9 +305,13 @@
       cursor: pointer;
       transition: all .2s;
     }
-    .mode-btn:hover {
+    .mode-btn:hover, .mode-btn:focus-visible {
       border-color: var(--accent);
       color: var(--accent);
+      outline: none;
+    }
+    .mode-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .mode-btn.active {
       background: var(--accent);
@@ -264,12 +355,29 @@
       transition: border-color 0.2s;
     }
     select:focus, input:focus { outline: none; border-color: var(--accent); }
+    select:focus-visible, input:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
-    .checkbox-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; cursor: pointer; padding: 0.5rem; border-radius: 6px; transition: background 0.2s; }
-    .checkbox-group:hover { background: var(--surface2); }
+    .checkbox-group { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 1rem; 
+      cursor: pointer; 
+      padding: 0.5rem; 
+      border-radius: 6px; 
+      transition: background 0.2s; 
+    }
+    .checkbox-group:hover, .checkbox-group:focus-within { background: var(--surface2); }
     .checkbox-group span { font-size: 0.9rem; color: var(--muted); transition: color 0.2s; }
-    .checkbox-group:hover span { color: var(--text); }
+    .checkbox-group:hover span, .checkbox-group:focus-within span { color: var(--text); }
     input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+    input[type="checkbox"]:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
     /* Segmented Control */
     .segmented-control {
@@ -291,6 +399,12 @@
       cursor: pointer;
       border-radius: 6px;
       transition: all 0.2s;
+    }
+    .seg-btn:hover, .seg-btn:focus-visible {
+      outline: none;
+    }
+    .seg-btn:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
     }
     .seg-btn.active {
       background: var(--accent);
@@ -316,9 +430,13 @@
       justify-content: center;
       gap: 8px;
     }
-    .generate-btn:hover {
+    .generate-btn:hover, .generate-btn:focus-visible {
       transform: translateY(-2px);
       box-shadow: 0 8px 20px var(--accent-glow);
+      outline: none;
+    }
+    .generate-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring), 0 8px 20px var(--accent-glow);
     }
     .generate-btn:active { transform: scale(0.98); }
 
@@ -344,11 +462,17 @@
       animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
       opacity: 0;
       transform: scale(0.9);
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
-    .name-card:hover {
+    .name-card:hover, .name-card:focus-within {
       transform: translateY(-4px);
       border-color: var(--accent);
       box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+      outline: none;
+    }
+    .name-card:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring), 0 10px 20px -5px rgba(0,0,0,0.3);
     }
     .name-card.copied {
       background: var(--accent);
@@ -367,8 +491,13 @@
       font-size: 1.2rem; 
       line-height: 1;
       color: var(--muted);
+      cursor: pointer;
     }
-    .name-card:hover .star-btn { opacity: 1; color: var(--accent); }
+    .name-card:hover .star-btn, .star-btn:focus-visible { opacity: 1; color: var(--accent); outline: none; }
+    .star-btn:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 4px;
+    }
     .name-card.saved .star-btn { opacity: 1; color: var(--accent); }
 
     /* Export Buttons */
@@ -391,13 +520,18 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .export-btn:hover {
+    .export-btn:hover, .export-btn:focus-visible {
       border-color: var(--accent);
       color: var(--accent);
+      outline: none;
+    }
+    .export-btn:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
     }
 
     /* Vault */
     .vault-section { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+    .vault-section.hidden { display: none; }
     .vault-header { display: flex; justify-content: space-between; margin-bottom: 1rem; }
     .vault-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: 250px; overflow-y: auto; }
     .vault-item {
@@ -410,10 +544,18 @@
       align-items: center;
       border: 1px solid transparent;
       transition: all 0.2s;
+      cursor: pointer;
     }
-    .vault-item:hover { border-color: var(--border-hover); }
+    .vault-item:hover, .vault-item:focus-visible { border-color: var(--border-hover); outline: none; }
+    .vault-item:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+    }
     .remove-btn { color: var(--muted); cursor: pointer; font-size: 1.2rem; line-height: 1; transition: color 0.2s; }
-    .remove-btn:hover { color: var(--danger); }
+    .remove-btn:hover, .remove-btn:focus-visible { color: var(--danger); outline: none; }
+    .remove-btn:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 4px;
+    }
 
     /* Stats Section */
     .stats-section {
@@ -511,6 +653,19 @@
       margin-bottom: 1rem;
     }
     .content-section strong { color: var(--text); font-weight: 500; }
+    .content-section a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--accent-glow);
+    }
+    .content-section a:hover, .content-section a:focus-visible {
+      border-bottom-style: solid;
+      outline: none;
+    }
+    .content-section a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
 
     /* FAQ */
     .faq-list { margin-top: 2rem; }
@@ -538,7 +693,10 @@
       gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
+    .faq-q:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--focus-ring);
+    }
     .faq-icon {
       font-size: 18px;
       color: var(--accent);
@@ -559,6 +717,43 @@
       font-weight: 300;
       line-height: 1.7;
     }
+
+    /* === COPYRIGHT DISCLAIMER BOX === */
+    .copyright-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .copyright-disclaimer strong { color: var(--text); }
+
+    /* === PRIVACY DISCLAIMER BOX === */
+    .privacy-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .privacy-disclaimer strong { color: var(--text); }
+
+    /* === COOKIE-FREE ADSENSE NOTICE === */
+    .adsense-notice {
+      background: rgba(232,213,163,0.05);
+      border: 1px solid var(--accent-glow);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .adsense-notice strong { color: var(--accent); }
 
     /* Footer */
     footer {
@@ -582,9 +777,33 @@
       text-transform: uppercase;
       opacity: .4;
     }
-    .footer-links { margin-top: 1rem; }
-    .footer-links a { margin: 0 15px; font-size: 0.85rem; color: var(--muted); }
-    .footer-links a:hover { color: var(--accent); }
+    .footer-links { 
+      display: flex; 
+      justify-content: center; 
+      gap: 1.5rem; 
+      margin: 0.5rem 0 1rem; 
+      flex-wrap: wrap; 
+    }
+    .footer-links a {
+      font-size: 11px; 
+      color: var(--muted); 
+      text-decoration: none;
+      letter-spacing: .08em; 
+      text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--text); outline: none; }
+    .footer-links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
+    .ad-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.5;
+      margin-top: 0.8rem;
+      line-height: 1.4;
+    }
 
     /* Toast */
     .toast {
@@ -621,6 +840,16 @@
       to { opacity: 1; transform: scale(1); }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .page-tag-dot { animation: none; }
+    }
+
     /* Responsive */
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
@@ -631,6 +860,9 @@
   </style>
 </head>
 <body>
+
+<!-- Skip to Content Link für Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header>
   <div class="header-inner">
@@ -643,7 +875,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -669,17 +901,17 @@
   <div class="hero-card">
     
     <!-- Mode Tabs -->
-    <div class="mode-tabs">
-      <button class="mode-btn active" data-genre="fantasy" onclick="setGenre('fantasy')">
+    <div class="mode-tabs" role="tablist" aria-label="Name genre presets">
+      <button class="mode-btn active" data-genre="fantasy" onclick="setGenre('fantasy')" role="tab" aria-selected="true" type="button">
         🏰 Fantasy
       </button>
-      <button class="mode-btn" data-genre="cyber" onclick="setGenre('cyber')">
+      <button class="mode-btn" data-genre="cyber" onclick="setGenre('cyber')" role="tab" aria-selected="false" type="button">
         🤖 Cyber
       </button>
-      <button class="mode-btn" data-genre="corp" onclick="setGenre('corp')">
+      <button class="mode-btn" data-genre="corp" onclick="setGenre('corp')" role="tab" aria-selected="false" type="button">
         🏢 Corporate
       </button>
-      <button class="mode-btn" data-genre="modern" onclick="setGenre('modern')">
+      <button class="mode-btn" data-genre="modern" onclick="setGenre('modern')" role="tab" aria-selected="false" type="button">
         👤 Modern
       </button>
     </div>
@@ -693,53 +925,53 @@
           
           <!-- Length Selector -->
           <div>
-            <label>Name Complexity</label>
-            <div class="segmented-control">
-              <button class="seg-btn" onclick="setLen('short')" id="btn-short">Short</button>
-              <button class="seg-btn active" onclick="setLen('med')" id="btn-med">Med</button>
-              <button class="seg-btn" onclick="setLen('long')" id="btn-long">Long</button>
+            <label for="nameComplexity">Name Complexity</label>
+            <div class="segmented-control" role="radiogroup" aria-label="Name complexity">
+              <button class="seg-btn" onclick="setLen('short')" id="btn-short" role="radio" aria-checked="false" type="button">Short</button>
+              <button class="seg-btn active" onclick="setLen('med')" id="btn-med" role="radio" aria-checked="true" type="button">Med</button>
+              <button class="seg-btn" onclick="setLen('long')" id="btn-long" role="radio" aria-checked="false" type="button">Long</button>
             </div>
           </div>
 
           <!-- Toggles -->
           <div style="margin-bottom: 1.5rem;">
-            <label class="checkbox-group">
+            <label class="checkbox-group" role="checkbox" aria-checked="false" tabindex="0">
               <span>Include Honorifics</span>
-              <input type="checkbox" id="useTitle">
+              <input type="checkbox" id="useTitle" aria-label="Include honorifics in names">
             </label>
-            <label class="checkbox-group">
+            <label class="checkbox-group" role="checkbox" aria-checked="true" tabindex="0">
               <span>Include Surnames</span>
-              <input type="checkbox" id="useLast" checked>
+              <input type="checkbox" id="useLast" checked aria-label="Include surnames in names">
             </label>
-            <label class="checkbox-group">
+            <label class="checkbox-group" role="checkbox" aria-checked="false" tabindex="0">
               <span>Add Ancient Traits</span>
-              <input type="checkbox" id="useTrait">
+              <input type="checkbox" id="useTrait" aria-label="Add ancient traits to names">
             </label>
-            <label class="checkbox-group">
+            <label class="checkbox-group" role="checkbox" aria-checked="true" tabindex="0">
               <span>Auto-Generate (Live)</span>
-              <input type="checkbox" id="autoGen" checked>
+              <input type="checkbox" id="autoGen" checked aria-label="Auto-generate names on change">
             </label>
           </div>
 
           <!-- Generate Button -->
-          <button class="generate-btn" onclick="generate()">
+          <button class="generate-btn" onclick="generate()" type="button">
             <span>✨</span> Generate 12 Names
           </button>
 
           <!-- Export Buttons -->
           <div class="export-buttons">
-            <button class="export-btn" onclick="exportNames('txt')">📄 TXT</button>
-            <button class="export-btn" onclick="exportNames('csv')">📊 CSV</button>
-            <button class="export-btn" onclick="exportNames('json')">⚙️ JSON</button>
+            <button class="export-btn" onclick="exportNames('txt')" type="button">📄 TXT</button>
+            <button class="export-btn" onclick="exportNames('csv')" type="button">📊 CSV</button>
+            <button class="export-btn" onclick="exportNames('json')" type="button">⚙️ JSON</button>
           </div>
 
           <!-- Vault Section -->
           <div id="vault-area" class="vault-section hidden">
             <div class="vault-header">
               <label style="margin:0;">Saved Vault (<span id="vaultCount">0</span>)</label>
-              <button onclick="clearVault()" style="background:none; border:none; color: var(--danger); cursor:pointer; font-size:0.8rem; font-weight:600;">Clear All</button>
+              <button onclick="clearVault()" style="background:none; border:none; color: var(--danger); cursor:pointer; font-size:0.8rem; font-weight:600;" type="button">Clear All</button>
             </div>
-            <div id="vault-list" class="vault-list"></div>
+            <div id="vault-list" class="vault-list" role="list"></div>
           </div>
         </div>
 
@@ -773,7 +1005,7 @@
             <span style="font-size: 0.8rem; color: var(--muted);">Click card to copy • Star to save</span>
           </div>
           
-          <div id="grid" class="results-grid">
+          <div id="grid" class="results-grid" role="list">
             <!-- Cards injected via JS -->
           </div>
         </div>
@@ -795,6 +1027,16 @@
     </div>
   </div>
 
+  <!-- === COOKIE-FREE ADSENSE NOTICE === -->
+  <div class="adsense-notice">
+    <strong>🔒 Cookie-free ads:</strong> ToolCompass uses Google AdSense without personalized tracking. Your creative ideas stay private — no cookies, no profiling.
+  </div>
+
+  <!-- === PRIVACY DISCLAIMER === -->
+  <div class="privacy-disclaimer">
+    <strong>🔐 Privacy First:</strong> All name generation runs locally in your browser. Your saved names are never sent to any server. No data storage, no tracking, no login required.
+  </div>
+
   <!-- SEO CONTENT + FAQ -->
   <div class="content-section">
     <h2>How to use <em>X-IDENTITY Engine</em></h2>
@@ -804,42 +1046,58 @@
     <p>
       <strong>Pro tips:</strong> Use the Live Auto-Generate feature for continuous inspiration, save your favorites to the Vault, and export your collection in multiple formats. All generation happens locally in your browser for complete privacy.
     </p>
+    <p>
+      <strong>About the creator:</strong> ToolCompass is maintained by a small team of productivity enthusiasts who believe powerful tools should be free, private, and instantly usable — no signups, no tracking, no bloat. We've been building browser-based utilities since 2024.
+    </p>
+    
+    <div class="copyright-disclaimer">
+      <strong>⚠️ Copyright Notice:</strong> All generated names are algorithmic combinations and free to use for personal or commercial projects. However, always verify trademark availability via official databases (USPTO, EUIPO, WIPO) before using names for commercial brands to avoid legal conflicts.
+    </div>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           Are these names copyright free?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes, all generated names are algorithmic combinations and free to use for personal or commercial projects. However, always check trademark databases before using names for commercial brands.</p>
+        <div class="faq-a" id="faq1">
+          <p class="faq-a-inner">Yes, all generated names are algorithmic combinations and free to use for personal or commercial projects. However, always check trademark databases like USPTO or EUIPO before using names for commercial brands to avoid conflicts.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Can I save my favorite names?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes! Click the star icon on any name card to save it to your Vault. Names are stored locally in your browser and persist across sessions. Export them anytime as TXT, CSV, or JSON.</p>
+        <div class="faq-a" id="faq2">
+          <p class="faq-a-inner">Yes! Click the star icon on any name card to save it to your Vault. Names are stored locally in your browser using localStorage and persist across sessions. Export them anytime as TXT, CSV, or JSON for use in your projects.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Does it work offline?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes! Once the page is loaded, all generation happens in your browser. No internet connection required after initial page load. Perfect for travel or low-connectivity situations.</p>
+        <div class="faq-a" id="faq3">
+          <p class="faq-a-inner">Yes! Once the page is loaded, all name generation happens entirely in your browser using JavaScript. No internet connection required after initial page load. Perfect for travel, remote work, or low-connectivity situations.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Are there keyboard shortcuts?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes! Press Spacebar to generate new names, G to toggle auto-generate mode, and V to open/close your Vault. Perfect for rapid ideation sessions.</p>
+        <div class="faq-a" id="faq4">
+          <p class="faq-a-inner">Yes! Press Spacebar to generate new names, G to toggle auto-generate mode, and V to open/close your Vault. These shortcuts work when no input field is focused, perfect for rapid ideation sessions.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          How are names generated?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">Our engine uses genre-specific linguistic databases with prefix, middle, and suffix components. Names are assembled algorithmically with randomization, ensuring unique combinations every time. No AI models or external APIs are used — all processing happens locally in your browser.</p>
         </div>
       </div>
     </div>
@@ -849,12 +1107,27 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <div class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy</a>
+  </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
-
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. No personalized tracking is used.</p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Name copied to clipboard!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Name copied to clipboard!</div>
+
+<!-- Image Lazy Loading Template (für zukünftige Bilder) -->
+<!-- 
+  <img src="image.jpg" 
+       alt="Descriptive alt text" 
+       width="800" 
+       height="600" 
+       loading="lazy" 
+       decoding="async">
+-->
 
 <script>
 // ═══════════════════════════════════════════════
@@ -890,16 +1163,22 @@ const db = {
 // State
 let currentGenre = 'fantasy';
 let currentLen = 'med';
-let vault = JSON.parse(localStorage.getItem('tc_vault') || '[]');
-let stats = JSON.parse(localStorage.getItem('tc_identity_stats') || '{"generated":0,"saved":0,"copied":0}');
+let vault = JSON.parse(localStorage?.getItem('tc_vault') || '[]');
+let stats = JSON.parse(localStorage?.getItem('tc_identity_stats') || '{"generated":0,"saved":0,"copied":0}');
 let autoGenerate = true;
 let generatedNames = [];
 
 // Audio Context for subtle feedback
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx;
+try {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+} catch(e) {
+  // Audio not supported
+}
 
 function playClickSound() {
   try {
+    if (!audioCtx || audioCtx?.state === 'suspended') return;
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
     oscillator.connect(gainNode);
@@ -915,6 +1194,7 @@ function playClickSound() {
 
 function playSuccessSound() {
   try {
+    if (!audioCtx || audioCtx?.state === 'suspended') return;
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
     oscillator.connect(gainNode);
@@ -936,19 +1216,24 @@ document.addEventListener('DOMContentLoaded', () => {
   setupListeners();
   
   // Resume audio context on first interaction
-  document.body.addEventListener('click', () => {
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
+  document.body?.addEventListener('click', () => {
+    if (audioCtx?.state === 'suspended') {
+      audioCtx.resume?.();
     }
   }, { once: true });
 });
 
 function setupListeners() {
-  document.getElementById('useTitle').addEventListener('change', () => { if(autoGenerate) generate(); });
-  document.getElementById('useLast').addEventListener('change', () => { if(autoGenerate) generate(); });
-  document.getElementById('useTrait').addEventListener('change', () => { if(autoGenerate) generate(); });
-  document.getElementById('autoGen').addEventListener('change', (e) => { 
-    autoGenerate = e.target.checked;
+  const useTitleEl = document.getElementById('useTitle');
+  const useLastEl = document.getElementById('useLast');
+  const useTraitEl = document.getElementById('useTrait');
+  const autoGenEl = document.getElementById('autoGen');
+  
+  useTitleEl?.addEventListener('change', () => { if(autoGenerate) generate(); });
+  useLastEl?.addEventListener('change', () => { if(autoGenerate) generate(); });
+  useTraitEl?.addEventListener('change', () => { if(autoGenerate) generate(); });
+  autoGenEl?.addEventListener('change', (e) => { 
+    autoGenerate = e?.target?.checked;
     if(autoGenerate) generate();
   });
 }
@@ -957,8 +1242,10 @@ function setGenre(genre) {
   currentGenre = genre;
   playClickSound();
   
-  document.querySelectorAll('.mode-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.genre === genre);
+  document.querySelectorAll('.mode-btn')?.forEach(btn => {
+    btn?.classList?.toggle('active', btn?.dataset?.genre === genre);
+    // Update aria-selected
+    btn?.setAttribute('aria-selected', btn?.dataset?.genre === genre);
   });
   
   if(autoGenerate) generate();
@@ -970,7 +1257,10 @@ function setLen(l) {
   
   ['short', 'med', 'long'].forEach(id => {
     const btn = document.getElementById('btn-'+id);
-    btn.classList.toggle('active', id === l);
+    if (btn) {
+      btn.classList.toggle('active', id === l);
+      btn.setAttribute('aria-checked', id === l);
+    }
   });
   
   if(autoGenerate) generate();
@@ -979,32 +1269,42 @@ function setLen(l) {
 function generate() {
   playClickSound();
   
-  const useTitle = document.getElementById('useTitle').checked;
-  const useLast = document.getElementById('useLast').checked;
-  const useTrait = document.getElementById('useTrait').checked;
-  const grid = document.getElementById('grid');
+  const useTitleEl = document.getElementById('useTitle');
+  const useLastEl = document.getElementById('useLast');
+  const useTraitEl = document.getElementById('useTrait');
+  const gridEl = document.getElementById('grid');
+  
+  if (!useTitleEl || !useLastEl || !useTraitEl || !gridEl) return;
+  
+  const useTitle = useTitleEl.checked;
+  const useLast = useLastEl.checked;
+  const useTrait = useTraitEl.checked;
 
-  grid.innerHTML = '';
+  gridEl.innerHTML = '';
   generatedNames = [];
   
   for(let i = 0; i < 12; i++) {
     let parts = [];
     if(useTitle) parts.push(db.titles[Math.floor(Math.random() * db.titles.length)]);
 
-    const p = db[currentGenre].p[Math.floor(Math.random() * db[currentGenre].p.length)];
-    const m = db[currentGenre].m[Math.floor(Math.random() * db[currentGenre].m.length)];
-    const s = db[currentGenre].s[Math.floor(Math.random() * db[currentGenre].s.length)];
+    const p = db[currentGenre]?.p?.[Math.floor(Math.random() * db[currentGenre]?.p?.length)];
+    const m = db[currentGenre]?.m?.[Math.floor(Math.random() * db[currentGenre]?.m?.length)];
+    const s = db[currentGenre]?.s?.[Math.floor(Math.random() * db[currentGenre]?.s?.length)];
+
+    if (!p || !m || !s) continue;
 
     let core = currentLen === 'short' ? p+s : (currentLen === 'med' ? p+m+s : p+m+m+s);
     if(currentGenre === 'fantasy') core = core.replace(/-/g, '');
     parts.push(core);
 
-    if(useLast) parts.push(db[currentGenre].s[Math.floor(Math.random() * db[currentGenre].s.length)]);
-    if(useTrait) parts.push(db.traits[Math.floor(Math.random() * db.traits.length)]);
+    if(useLast) parts.push(db[currentGenre]?.s?.[Math.floor(Math.random() * db[currentGenre]?.s?.length)]);
+    if(useTrait) parts.push(db.traits?.[Math.floor(Math.random() * db.traits?.length)]);
 
     const name = parts.join(currentGenre === 'cyber' ? '' : ' ');
-    generatedNames.push(name);
-    createCard(name, i * 0.05);
+    if (name) {
+      generatedNames.push(name);
+      createCard(name, i * 0.05);
+    }
   }
   
   // Update stats
@@ -1014,64 +1314,95 @@ function generate() {
 }
 
 function createCard(name, delay = 0) {
+  const gridEl = document.getElementById('grid');
+  if (!gridEl) return;
+  
   const card = document.createElement('div');
   card.className = "name-card";
   card.style.animationDelay = `${delay}s`;
+  card.setAttribute('role', 'listitem');
+  card.setAttribute('tabindex', '0');
   
-  const isSaved = vault.includes(name);
+  const isSaved = vault?.includes(name);
   if(isSaved) card.classList.add('saved');
 
   card.innerHTML = `
     <div class="name-text">${name}</div>
-    <div class="star-btn">${isSaved ? '★' : '☆'}</div>
+    <div class="star-btn" role="button" tabindex="0" aria-label="${isSaved ? 'Remove from vault' : 'Save to vault'}">${isSaved ? '★' : '☆'}</div>
   `;
   
   card.onclick = (e) => {
-    if(e.target.closest('.star-btn')) return; 
+    if(e?.target?.closest?.('.star-btn')) return; 
     copyToClipboard(name, card);
   };
   
-  const starBtn = card.querySelector('.star-btn');
-  starBtn.onclick = (e) => {
-    e.stopPropagation();
-    toggleVault(name, card, starBtn);
+  card.onkeydown = (e) => {
+    if (e?.key === 'Enter' || e?.key === ' ') {
+      e.preventDefault();
+      copyToClipboard(name, card);
+    }
   };
   
-  document.getElementById('grid').appendChild(card);
+  const starBtn = card.querySelector('.star-btn');
+  if (starBtn) {
+    starBtn.onclick = (e) => {
+      e?.stopPropagation?.();
+      toggleVault(name, card, starBtn);
+    };
+    starBtn.onkeydown = (e) => {
+      if (e?.key === 'Enter' || e?.key === ' ') {
+        e.preventDefault();
+        toggleVault(name, card, starBtn);
+      }
+    };
+  }
+  
+  gridEl.appendChild(card);
 }
 
 function copyToClipboard(text, cardElement) {
-  navigator.clipboard.writeText(text).then(() => {
+  if (!text || !cardElement) return;
+  
+  navigator.clipboard?.writeText(text).then(() => {
     cardElement.classList.add('copied');
     playSuccessSound();
     
     setTimeout(() => cardElement.classList.remove('copied'), 600);
 
-    stats.copied++;
+    stats.copied = (stats.copied || 0) + 1;
     saveStats();
     updateStats();
 
     showToast('✓ Copied: ' + text);
+  }).catch(() => {
+    showToast('Copy failed');
   });
 }
 
 function toggleVault(name, cardElement, starBtn) {
+  if (!name || !cardElement || !starBtn) return;
+  
   playClickSound();
   
-  if(vault.includes(name)) {
-    vault = vault.filter(n => n !== name);
+  if(vault?.includes(name)) {
+    vault = vault?.filter(n => n !== name);
     cardElement.classList.remove('saved');
-    starBtn.innerText = '☆';
+    if (starBtn) starBtn.innerText = '☆';
     showToast('Removed from Vault');
   } else {
-    vault.push(name);
+    vault?.push(name);
     cardElement.classList.add('saved');
-    starBtn.innerText = '★';
+    if (starBtn) starBtn.innerText = '★';
     showToast('✓ Saved to Vault');
   }
   
-  localStorage.setItem('tc_vault', JSON.stringify(vault));
-  stats.saved = vault.length;
+  try {
+    localStorage?.setItem('tc_vault', JSON.stringify(vault));
+  } catch(e) {
+    // Silent fail if storage is disabled
+  }
+  
+  stats.saved = vault?.length || 0;
   saveStats();
   updateVaultUI();
   updateStats();
@@ -1080,7 +1411,11 @@ function toggleVault(name, cardElement, starBtn) {
 function clearVault() {
   if(confirm("Are you sure you want to clear all saved names?")) {
     vault = [];
-    localStorage.setItem('tc_vault', JSON.stringify(vault));
+    try {
+      localStorage?.setItem('tc_vault', JSON.stringify(vault));
+    } catch(e) {
+      // Silent fail if storage is disabled
+    }
     stats.saved = 0;
     saveStats();
     updateVaultUI();
@@ -1091,30 +1426,38 @@ function clearVault() {
 }
 
 function updateVaultUI() {
-  const list = document.getElementById('vault-list');
-  const area = document.getElementById('vault-area');
-  const count = document.getElementById('vaultCount');
+  const listEl = document.getElementById('vault-list');
+  const areaEl = document.getElementById('vault-area');
+  const countEl = document.getElementById('vaultCount');
   
-  count.innerText = vault.length;
+  if (!listEl || !areaEl || !countEl) return;
   
-  if(vault.length > 0) {
-    area.classList.remove('hidden');
-    list.innerHTML = vault.map(name => `
-      <div class="vault-item">
+  countEl.innerText = vault?.length || 0;
+  
+  if(vault?.length > 0) {
+    areaEl.classList.remove('hidden');
+    listEl.innerHTML = vault?.map(name => `
+      <div class="vault-item" role="listitem" tabindex="0">
         <span style="color:var(--text); font-weight:500;">${name}</span>
-        <span class="remove-btn" onclick="removeFromVault('${name}')">×</span>
+        <span class="remove-btn" onclick="removeFromVault('${name}')" role="button" tabindex="0" aria-label="Remove ${name}">×</span>
       </div>
-    `).join('');
+    `).join('') || '';
   } else {
-    area.classList.add('hidden');
+    areaEl.classList.add('hidden');
   }
 }
 
 function removeFromVault(name) {
+  if (!name) return;
+  
   playClickSound();
-  vault = vault.filter(n => n !== name);
-  localStorage.setItem('tc_vault', JSON.stringify(vault));
-  stats.saved = vault.length;
+  vault = vault?.filter(n => n !== name);
+  try {
+    localStorage?.setItem('tc_vault', JSON.stringify(vault));
+  } catch(e) {
+    // Silent fail if storage is disabled
+  }
+  stats.saved = vault?.length || 0;
   saveStats();
   updateVaultUI();
   updateStats();
@@ -1122,7 +1465,7 @@ function removeFromVault(name) {
 }
 
 function exportNames(format) {
-  if(vault.length === 0) {
+  if(!vault || vault.length === 0) {
     showToast('⚠️ Vault is empty');
     return;
   }
@@ -1146,48 +1489,66 @@ function exportNames(format) {
     filename += '.json';
   }
   
-  const blob = new Blob([content], { type: mimeType });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(url);
-  
-  showToast('✓ Exported ' + vault.length + ' names');
+  try {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    showToast('✓ Exported ' + vault.length + ' names');
+  } catch(e) {
+    showToast('Export failed');
+  }
 }
 
 function updateStats() {
-  document.getElementById('statGenerated').innerText = stats.generated;
-  document.getElementById('statSaved').innerText = stats.saved;
-  document.getElementById('statCopied').innerText = stats.copied;
+  const generatedEl = document.getElementById('statGenerated');
+  const savedEl = document.getElementById('statSaved');
+  const copiedEl = document.getElementById('statCopied');
+  const statsSectionEl = document.getElementById('statsSection');
   
-  if(stats.generated > 0) {
-    document.getElementById('statsSection').classList.add('show');
+  if (generatedEl) generatedEl.innerText = stats.generated || 0;
+  if (savedEl) savedEl.innerText = stats.saved || 0;
+  if (copiedEl) copiedEl.innerText = stats.copied || 0;
+  
+  if((stats.generated || 0) > 0 && statsSectionEl) {
+    statsSectionEl.classList.add('show');
   }
 }
 
 function saveStats() {
-  localStorage.setItem('tc_identity_stats', JSON.stringify(stats));
+  try {
+    localStorage?.setItem('tc_identity_stats', JSON.stringify(stats));
+  } catch(e) {
+    // Silent fail if storage is disabled
+  }
 }
 
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
+  
   toast.innerText = message;
   toast.classList.add('active');
-  setTimeout(() => toast.classList.remove('active'), 2500);
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('active'), 2500);
 }
 
 function toggleFaq(el) {
-  const item = el.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
+  if (!el) return;
   
-  document.querySelectorAll('.faq-item').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+  const item = el.closest('.faq-item');
+  const isOpen = item?.classList.contains('open');
+  
+  document.querySelectorAll('.faq-item')?.forEach(i => {
+    i?.classList.remove('open');
+    i?.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
   });
   
-  if(!isOpen) {
+  if(item && !isOpen) {
     item.classList.add('open');
     el.setAttribute('aria-expanded', 'true');
   }
@@ -1195,22 +1556,29 @@ function toggleFaq(el) {
 
 // Keyboard Shortcuts
 document.addEventListener('keydown', (e) => {
-  if(e.target.tagName === 'INPUT') return;
+  if(e?.target?.tagName === 'INPUT') return;
   
-  if(e.code === 'Space') {
+  if(e?.code === 'Space') {
     e.preventDefault();
     generate();
-  } else if(e.code === 'KeyG') {
-    document.getElementById('autoGen').click();
-  } else if(e.code === 'KeyV') {
+  } else if(e?.code === 'KeyG') {
+    document.getElementById('autoGen')?.click();
+  } else if(e?.code === 'KeyV') {
     const vaultArea = document.getElementById('vault-area');
-    vaultArea.classList.toggle('hidden');
+    vaultArea?.classList?.toggle('hidden');
   }
 });
 
+// FAQ Accordion
+document.querySelectorAll('.faq-q')?.forEach(btn => {
+  btn.addEventListener('click', () => {
+    toggleFaq(btn);
+  });
+});
+
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
 
 </body>
