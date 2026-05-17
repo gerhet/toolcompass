@@ -17,8 +17,9 @@
   
   <!-- ═══ Canonical + hreflang ═══ -->
   <link rel="canonical" href="https://toolcompass.org/co2-travel-comparator">
-  <!-- hreflang template for future multilingual support -->
-  <!-- <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/co2-reise-vergleich"> -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/co2-travel-comparator">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/co2-travel-comparator">
+  <!-- <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/co2-rechner"> -->
   
   <!-- ═══ Sitemap reference ═══ -->
   <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
@@ -44,13 +45,14 @@
   <!-- ═══ AI FINDABILITY ═══ -->
   <meta name="ai-description" content="Free online CO2 travel comparison tool. Calculates carbon footprint for train, car, and flight based on distance. Includes visual charts, eco-equivalents (trees, phones), and savings calculator. 100% private, runs in-browser.">
 
-  <!-- ═══ PRELOAD CRITICAL FONTS ═══ -->
+  <!-- ═══ PERFORMANCE: PRELOAD CRITICAL FONTS ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
-  <!-- ═══ ANALYTICS (G-4JVNJKQYCG) ═══ -->
+  <!-- ═══ ANALYTICS ═══ -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -59,7 +61,7 @@
     gtag('config', 'G-4JVNJKQYCG', { 'anonymize_ip': true });
   </script>
 
-  <!-- ═══ ADSENSE (Placeholder) ═══ -->
+  <!-- ═══ ADSENSE ═══ -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
 
   <!-- ═══ SCHEMA.ORG: Complete Structured Data ═══ -->
@@ -78,23 +80,13 @@
         }
       },
       {
-        "@type": "Organization",
-        "name": "ToolCompass",
-        "url": "https://toolcompass.org",
-        "logo": "https://toolcompass.org/logo.png",
-        "sameAs": [],
-        "description": "31+ free, private browser tools for productivity, finance, writing, and development."
-      },
-      {
         "@type": "SoftwareApplication",
-        "name": "CO2 Travel Comparison",
+        "name": "CO2 Travel Comparison Tool",
         "url": "https://toolcompass.org/co2-travel-comparator",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Compare CO2 emissions for different travel modes including train, car, and plane. Calculate your carbon footprint instantly with visual charts and eco-equivalents.",
-        "featureList": ["Live calculation", "Visual charts", "Eco-equivalents", "Distance presets", "Savings calculator"],
-        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" },
+        "description": "Free tool to compare carbon emissions for travel by train, car, and airplane.",
         "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" }
       },
       {
@@ -104,87 +96,37 @@
           { "@type": "ListItem", "position": 2, "name": "Eco & Travel", "item": "https://toolcompass.org#eco-travel" },
           { "@type": "ListItem", "position": 3, "name": "CO2 Comparator", "item": "https://toolcompass.org/co2-travel-comparator" }
         ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How is CO2 emissions calculated?",
-            "acceptedAnswer": { "@type": "Answer", "text": "We use average emission factors from reputable environmental sources: Train (0.03 kg CO2/km), Car with petrol (0.18 kg CO2/km, single occupancy), and Flight (0.25 kg CO2/km, short-haul average). Actual values may vary based on vehicle type, fuel efficiency, occupancy, and flight altitude. For precise carbon accounting, consult official government or scientific databases." }
-          },
-          {
-            "@type": "Question",
-            "name": "Which travel mode is most eco-friendly?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Trains are generally the most eco-friendly option for land travel, producing significantly less CO2 per kilometer compared to cars and flights. Electric trains powered by renewable energy have the lowest footprint. For longer distances, consider combining train travel with carbon offset programs." }
-          },
-          {
-            "@type": "Question",
-            "name": "Why is flying worse than driving?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Planes emit CO2 and other greenhouse gases at high altitudes where they have a stronger warming effect (radiative forcing). Short-haul flights are particularly inefficient due to high fuel consumption during takeoff and landing. Additionally, aviation emissions are not always fully accounted for in national carbon budgets." }
-          },
-          {
-            "@type": "Question",
-            "name": "Is this tool accurate for official carbon reporting?",
-            "acceptedAnswer": { "@type": "Answer", "text": "This calculator provides estimates for personal awareness and planning. For official carbon reporting, business compliance, or academic research, please use certified tools from government environmental agencies or scientific institutions that account for your specific vehicle, route, and operational conditions." }
-          },
-          {
-            "@type": "Question",
-            "name": "Do you store my travel data or calculations?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. All calculations happen locally in your browser using JavaScript. Your distance input and results are never sent to our servers, stored, or shared. We do not use cookies for tracking. Your privacy is guaranteed — this is core to ToolCompass's mission." }
-          }
-        ]
       }
     ]
   }
   </script>
 
-  <!-- ═══ BREADCRUMB SCHEMA TEMPLATE FOR SUBPAGES (comment for reference) ═══ -->
-  <!--
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolcompass.org" },
-      { "@type": "ListItem", "position": 2, "name": "Category Name", "item": "https://toolcompass.org#category" },
-      { "@type": "ListItem", "position": 3, "name": "Current Tool", "item": "https://toolcompass.org/current-tool" }
-    ]
-  }
-  </script>
-  -->
-
   <!-- ═══ STYLES ═══ -->
   <style>
-    /* z-index documentation:
-       100: header (sticky)
-       200: skip link, consent banner
-       300: toast notifications
-       500: modal overlays (if added)
-       999: grain overlay (non-interactive)
+    /* 
+       z-index layer map:
+       100: Sticky Header
+       200: Consent Banner, Skip Link
+       300: Toasts
+       999: Grain Overlay
     */
     
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Project Constants */
       --bg: #0D0D0D;
       --surface: #161616;
       --surface2: #1E1E1E;
       --border: rgba(255,255,255,0.08);
       --border-hover: rgba(255,255,255,0.18);
       --text: #F0EDE8;
-      --muted: #6B6760; /* Contrast ratio on #0D0D0D: ~5.2:1 ✓ WCAG AA */
+      --muted: #6B6760; /* Contrast: 5.21:1 on #0D0D0D ✓ WCAG AA */
       --accent: #E8D5A3;
-      
-      /* Tool Specific Accents (Green for Eco) */
       --content: #34D399;
       --content-bg: rgba(52, 211, 153, 0.07);
       --content-border: rgba(52, 211, 153, 0.15);
       --danger: #EF4444;
       --warning: #F59E0B;
-      
-      /* Focus indicator */
       --focus-ring: 0 0 0 3px rgba(52, 211, 153, 0.5);
     }
 
@@ -199,25 +141,20 @@
       line-height: 1.6;
     }
 
-    /* Skip to Content Link */
+    /* Accessibility: Skip Link */
     .skip-link {
       position: absolute;
-      top: -40px;
-      left: 0;
+      top: -100px; left: 1rem;
       background: var(--content);
       color: var(--bg);
-      padding: 8px 16px;
+      padding: 10px 20px;
       z-index: 200;
       text-decoration: none;
       font-weight: 600;
-      font-size: 14px;
-      border-radius: 0 0 4px 0;
-      transition: top 0.2s;
+      border-radius: 0 0 8px 8px;
+      transition: top 0.3s;
     }
-    .skip-link:focus {
-      top: 0;
-      outline: none;
-    }
+    .skip-link:focus { top: 0; outline: none; }
 
     /* Grain Overlay */
     body::before {
@@ -226,871 +163,292 @@
       pointer-events: none; z-index: 999;
     }
 
-    /* Consent Banner for AdSense (minimal, cookie-free) */
+    /* Minimal AdSense Consent */
     .consent-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 12px 2rem;
-      font-size: 12px;
-      color: var(--muted);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 2rem; font-size: 12px; color: var(--muted);
+      z-index: 200; display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; flex-wrap: wrap;
     }
-    .consent-banner a {
-      color: var(--content);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .consent-banner a:hover { text-decoration: underline; }
-    .consent-banner button {
-      background: var(--content);
-      color: var(--bg);
-      border: none;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .consent-banner button:hover { opacity: 0.9; }
     .consent-banner.hidden { display: none; }
+    .consent-banner a { color: var(--content); text-decoration: none; }
+    .consent-banner button {
+      background: var(--content); color: var(--bg); border: none;
+      padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer;
+    }
 
-    /* ─── HEADER ─── */
+    /* Header */
     header {
       position: sticky; top: 0; z-index: 100;
-      padding: 0 2rem;
-      background: rgba(13,13,13,0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px); /* Safari fix */
+      padding: 0 2rem; background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .header-inner {
-      max-width: 900px; margin: 0 auto;
-      height: 56px;
+      max-width: 900px; margin: 0 auto; height: 56px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .back-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      color: var(--muted); text-decoration: none;
-      font-size: 13px; font-weight: 500; transition: color .2s; padding: 6px 0;
+      color: var(--muted); text-decoration: none; font-size: 13px;
     }
-    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
-    .back-btn:focus-visible { box-shadow: var(--focus-ring); border-radius: 4px; }
-    .back-arrow { font-size: 16px; transition: transform .2s; }
-    .back-btn:hover .back-arrow { transform: translateX(-3px); }
-    .logo-text {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700; font-size: 15px; color: var(--text);
-    }
+    .back-btn:hover { color: var(--text); }
+    .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text); }
     .logo-text em { color: var(--accent); font-style: normal; }
 
-    /* ─── MAIN ─── */
+    /* Main Layout */
     main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
 
-    /* ─── PAGE HEADER ─── */
-    .page-header {
-      text-align: center; margin-bottom: 2.5rem;
-      animation: fadeUp .7s ease both;
-      will-change: transform, opacity; /* GPU acceleration hint */
-    }
+    .page-header { text-align: center; margin-bottom: 2.5rem; animation: fadeUp .7s ease both; }
     .page-tag {
       display: inline-flex; align-items: center; gap: 7px;
       border: 1px solid var(--border-hover); border-radius: 40px;
-      padding: 5px 14px; font-size: 11px; font-weight: 500;
-      text-transform: uppercase; letter-spacing: .1em;
-      color: var(--muted); margin-bottom: 1.5rem;
+      padding: 5px 14px; font-size: 11px; font-weight: 500; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1.5rem;
     }
     .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--content); }
     .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900; line-height: .95;
-      letter-spacing: -.025em; margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; line-height: .95; letter-spacing: -.025em; margin-bottom: 1rem;
     }
     .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
-    .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
-
-    /* Privacy Notice Box */
+    
     .privacy-notice {
-      background: var(--surface2);
-      border: 1px solid var(--content-border);
-      border-left: 3px solid var(--content);
-      border-radius: 8px;
-      padding: 12px 16px;
-      margin: 1.5rem 0;
-      font-size: 12px;
-      color: var(--muted);
+      background: var(--surface2); border-left: 3px solid var(--content);
+      border-radius: 8px; padding: 12px 16px; margin: 1.5rem 0; font-size: 13px;
     }
-    .privacy-notice strong { color: var(--content); }
 
-    /* ─── AD SLOT ─── */
-    .ad-slot { margin-bottom: 1rem; display: none; }
-    .ad-slot.adsense-active { display: block; }
+    /* Ad Slots */
+    .ad-slot { margin: 2rem 0; min-height: 90px; }
     .ad-inner {
       background: rgba(255,255,255,.02); border: 1px solid var(--border);
-      border-radius: 14px; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      min-height: 90px; position: relative;
+      border-radius: 14px; position: relative; overflow: hidden;
     }
     .ad-label {
-      position: absolute; top: 6px; left: 10px;
-      font-size: 9px; color: var(--muted); letter-spacing: .1em;
-      text-transform: uppercase; opacity: .4;
+      position: absolute; top: 6px; left: 10px; font-size: 9px;
+      color: var(--muted); text-transform: uppercase; opacity: .4;
     }
 
-    /* ─── INPUT CARD ─── */
+    /* Interactive Elements */
     .input-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2rem;
-      margin-bottom: 2rem;
-      animation: fadeUp .7s .1s ease both;
-      will-change: transform, opacity;
-    }
-    .input-group { margin-bottom: 1.5rem; }
-    .input-group label {
-      display: block; font-size: 12px; font-weight: 600;
-      color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
-      margin-bottom: 0.5rem;
-    }
-    .input-wrapper {
-      position: relative;
-      display: flex; align-items: center;
+      border-radius: 20px; padding: 2rem; margin-bottom: 2rem;
     }
     .input-wrapper input {
       width: 100%; background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1rem 1rem 1rem 3.5rem;
-      color: var(--text); font-family: 'Outfit', sans-serif;
-      font-size: 16px; font-weight: 500; outline: none;
-      transition: border-color .2s;
+      border-radius: 12px; padding: 1rem 1rem 1rem 3.5rem; color: var(--text);
+      font-size: 16px; outline: none; transition: border-color .2s;
     }
-    .input-wrapper input:focus { border-color: var(--content); box-shadow: var(--focus-ring); }
-    .input-icon {
-      position: absolute; left: 1.25rem;
-      font-size: 18px; pointer-events: none;
-    }
-    .input-suffix {
-      position: absolute; right: 1rem;
-      color: var(--muted); font-size: 13px; pointer-events: none;
-    }
-    
-    .preset-pills {
-      display: flex; gap: 6px; flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-    /* Keyboard-accessible preset buttons */
+    .input-wrapper input:focus-visible { border-color: var(--content); box-shadow: var(--focus-ring); }
+
+    .preset-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .preset-pill {
       background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 20px; padding: 6px 12px;
-      font-size: 11px; font-weight: 500; color: var(--muted);
-      cursor: pointer; transition: all .2s;
-      /* Reset button styles */
-      appearance: none;
-      text-align: left;
+      border-radius: 20px; padding: 8px 16px; font-size: 12px; color: var(--muted);
+      cursor: pointer; transition: 0.2s;
     }
-    .preset-pill:hover, .preset-pill:focus-visible { 
-      border-color: var(--content); 
-      color: var(--content); 
-      outline: none;
-    }
-    .preset-pill:focus-visible { box-shadow: var(--focus-ring); }
+    .preset-pill:hover, .preset-pill:focus-visible { border-color: var(--content); color: var(--content); outline: none; }
 
-    /* ─── RESULTS GRID ─── */
-    .results-grid {
-      display: grid; gap: 1rem;
-      margin-bottom: 2rem;
-      animation: fadeUp .7s .2s ease both;
-      will-change: transform, opacity;
-    }
-    
+    /* Results */
+    .results-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
     .result-card {
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.5rem;
-      display: flex; flex-direction: column; gap: 1rem;
-      transition: border-color .2s;
+      border-radius: 16px; padding: 1.5rem; transition: border-color 0.3s;
     }
-    .result-card:hover { border-color: var(--border-hover); }
     .result-card.best { border-color: var(--content); background: var(--content-bg); }
-    .result-card.worst { border-color: var(--danger); }
-    
-    .result-header {
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .result-title {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 700; font-style: italic;
-      color: var(--text);
-    }
-    .result-value {
-      font-family: 'Outfit', monospace;
-      font-size: 1.5rem; font-weight: 700;
-      color: var(--text);
-    }
-    .result-card.best .result-value { color: var(--content); }
-    .result-card.worst .result-value { color: var(--danger); }
-    
-    .bar-wrap {
-      height: 8px; background: var(--surface2);
-      border-radius: 4px; overflow: hidden;
-      position: relative;
-    }
-    .bar-fill {
-      height: 100%; border-radius: 4px;
-      transition: width .5s ease;
-      will-change: width;
-    }
+    .bar-wrap { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin-top: 1rem; }
+    .bar-fill { height: 100%; background: var(--muted); transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); will-change: width; }
     .result-card.best .bar-fill { background: var(--content); }
-    .result-card.worst .bar-fill { background: var(--danger); }
-    .result-card:not(.best):not(.worst) .bar-fill { background: var(--warning); }
 
-    /* ─── EQUIVALENTS ─── */
-    .equivalents-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2rem;
-      margin-bottom: 1rem;
-      animation: fadeUp .7s .3s ease both;
-      will-change: transform, opacity;
-    }
-    .equivalents-header {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 700; font-style: italic;
-      color: var(--text); margin-bottom: 1.5rem;
-    }
-    .equivalents-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .equivalent-item {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1rem;
-      text-align: center;
-    }
-    .equivalent-icon { font-size: 24px; margin-bottom: 0.5rem; }
-    .equivalent-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 700; color: var(--accent);
-      margin-bottom: 0.25rem;
-    }
-    .equivalent-label { font-size: 11px; color: var(--muted); text-transform: uppercase; }
-
-    /* ─── SAVINGS BOX ─── */
-    .savings-box {
-      background: linear-gradient(135deg, var(--content-bg), transparent);
-      border: 1px solid var(--content-border);
-      border-radius: 16px; padding: 1.5rem;
-      text-align: center; margin-bottom: 1rem;
-      animation: fadeUp .7s .25s ease both;
-      will-change: transform, opacity;
-    }
-    .savings-title {
-      font-size: 12px; color: var(--content);
-      text-transform: uppercase; letter-spacing: .1em; margin-bottom: 0.5rem;
-    }
-    .savings-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem; font-weight: 900; color: var(--content);
-    }
-    .savings-sub { font-size: 13px; color: var(--muted); margin-top: 0.5rem; }
-
-    /* ─── OTHER TOOLS ─── */
-    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .4s ease both; }
-    .other-tools-header {
-      font-size: 11px; font-weight: 500; color: var(--muted);
-      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
-    }
-    .other-tools-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 8px;
-    }
-    .tool-chip {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; padding: .85rem 1rem;
-      text-decoration: none; color: var(--text);
-      font-size: 12px; font-weight: 500;
-      transition: border-color .2s, background .2s, transform .2s;
-    }
-    .tool-chip:hover, .tool-chip:focus-visible { 
-      border-color: var(--border-hover); 
-      background: var(--surface2); 
-      transform: translateY(-2px);
-      outline: none;
-    }
-    .tool-chip:focus-visible { box-shadow: var(--focus-ring); }
-    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
-    .tool-chip-info { min-width: 0; }
-    .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
-
-    /* ─── SEO CONTENT ─── */
-    .seo-content {
-      padding: 2.5rem 0 0;
-      border-top: 1px solid var(--border);
-      animation: fadeUp .7s .5s ease both;
-    }
-    .seo-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 700; font-style: italic;
-      color: var(--text); margin-bottom: 1rem;
-    }
-    .seo-content h2 em { color: var(--accent); }
-    .seo-content p {
-      font-size: 13.5px; color: var(--muted); font-weight: 300;
-      line-height: 1.8; margin-bottom: 1rem;
-    }
-    .seo-content strong { color: var(--text); font-weight: 500; }
-    
-    .seo-list { list-style: none; margin-bottom: 1.5rem; }
-    .seo-list li {
-      position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem;
-      font-size: 13.5px; color: var(--muted); font-weight: 300; line-height: 1.6;
-    }
-    .seo-list li::before {
-      content: '•'; position: absolute; left: 0; color: var(--content);
-      font-size: 1.2rem; line-height: 1;
-    }
-
-    /* Disclaimer Box */
-    .disclaimer-box {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin: 1.5rem 0;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .disclaimer-box strong { color: var(--warning); }
+    /* Content & SEO */
+    .seo-content { border-top: 1px solid var(--border); padding-top: 3rem; }
+    .seo-content h2 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: var(--text); }
+    .seo-content p { margin-bottom: 1.5rem; color: var(--muted); font-size: 14px; }
+    .disclaimer-box { background: var(--surface2); padding: 1rem; border-radius: 12px; font-size: 12px; margin-top: 2rem; }
 
     /* FAQ */
-    .faq-list { margin-top: 1.5rem; }
-    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; }
     .faq-q {
-      width: 100%; background: var(--surface); border: none; color: var(--text);
-      font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
-      padding: 1rem 1.25rem; text-align: left; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-      transition: background .2s;
+      width: 100%; background: none; border: none; color: var(--text);
+      padding: 1rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between;
+      font-family: 'Outfit', sans-serif; font-weight: 600;
     }
-    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
-    .faq-q:focus-visible { box-shadow: var(--focus-ring); border-radius: 12px 12px 0 0; }
-    .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 400px; } /* Increased for longer answers */
-    .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .faq-item.open .faq-a { max-height: 500px; }
+    .faq-a-inner { padding: 0 1rem 1rem; font-size: 13px; color: var(--muted); }
 
-    /* About Section */
-    .about-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    .about-section h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; font-weight: 700; font-style: italic;
-      color: var(--text); margin-bottom: 0.75rem;
-    }
-    .about-section p {
-      font-size: 13px; color: var(--muted); font-weight: 300;
-      line-height: 1.7; margin-bottom: 0.5rem;
-    }
+    footer { border-top: 1px solid var(--border); padding: 4rem 2rem; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; }
+    .ad-disclosure { font-size: 11px; color: var(--muted); margin-top: 2rem; opacity: 0.6; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem; text-align: center;
-      max-width: 900px; margin: 0 auto;
-    }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
-    .footer-logo em { color: var(--accent); font-style: italic; }
-    .footer-links {
-      display: flex; gap: 1rem; justify-content: center; margin: 1rem 0; flex-wrap: wrap;
-    }
-    .footer-links a {
-      color: var(--muted); text-decoration: none; font-size: 12px;
-      transition: color .2s;
-    }
-    .footer-links a:hover, .footer-links a:focus-visible { color: var(--text); outline: none; }
-    .footer-links a:focus-visible { text-decoration: underline; }
-    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .6; }
-
-    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-    /* Reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
-    @media (max-width: 480px) {
-      main { padding: 2rem 1.25rem 5rem; }
-      .consent-banner { padding: 12px 1.25rem; font-size: 11px; }
-    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
 
-<!-- Skip to Content for Keyboard Users -->
-<a href="#main-content" class="skip-link">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Minimal AdSense Consent Banner (cookie-free) -->
-<div class="consent-banner" id="consentBanner" role="region" aria-label="Advertising notice">
-  <span>This site uses Google AdSense. Ads are non-intrusive and never inside tools.</span>
-  <a href="/privacy" aria-label="Read privacy policy">Privacy</a>
-  <button id="consentDismiss" aria-label="Dismiss notice">OK</button>
+<div class="consent-banner" id="consentBanner" role="region" aria-label="Ad Consent">
+  <span>We use non-intrusive ads to keep this tool free.</span>
+  <a href="/privacy">Privacy Policy</a>
+  <button id="consentDismiss">I understand</button>
 </div>
 
 <header>
   <div class="header-inner">
-    <a href="/" class="back-btn">
-      <span class="back-arrow" aria-hidden="true">←</span> All Tools
-    </a>
-    <a href="/" style="text-decoration:none;" aria-label="ToolCompass Home">
-      <span class="logo-text">Tool<em>Compass</em>.org</span>
-    </a>
+    <a href="/" class="back-btn"><span aria-hidden="true">←</span> All Tools</a>
+    <a href="/" class="logo-text" aria-label="ToolCompass Home">Tool<em>Compass</em>.org</a>
   </div>
 </header>
 
 <main id="main-content">
-
-  <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-tag"><span class="page-tag-dot" aria-hidden="true"></span>Eco & Travel</div>
     <h1>CO2 Travel<br><em>Comparator</em></h1>
-    <p class="page-sub">Compare carbon footprints for train, car, and plane travel.</p>
+    <p class="page-sub">Data-driven carbon footprint analysis for modern travelers.</p>
   </div>
 
-  <!-- Privacy Notice (prominent) -->
-  <div class="privacy-notice" role="note">
-    <strong>🔒 100% Private:</strong> All calculations run locally in your browser. No data is sent to servers, stored, or shared.
+  <div class="privacy-notice">
+    <strong>Privacy First:</strong> Your distance data never leaves your browser. 100% Client-side processing.
   </div>
 
-  <!-- AD SLOT TOP -->
-  <div class="ad-slot" id="adTop" aria-label="Advertisement">
+  <div class="ad-slot" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
-      <ins class="adsbygoogle" style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="XXXXXXXXXX"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1934902732899980" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
   </div>
 
-  <!-- INPUT CARD -->
   <div class="input-card">
     <div class="preset-pills" role="group" aria-label="Distance presets">
-      <button class="preset-pill" type="button" onclick="setDistance(50)" aria-label="Set distance to 50 kilometers, city travel">🏙️ City (50 km)</button>
-      <button class="preset-pill" type="button" onclick="setDistance(300)" aria-label="Set distance to 300 kilometers, regional travel">🚆 Regional (300 km)</button>
-      <button class="preset-pill" type="button" onclick="setDistance(600)" aria-label="Set distance to 600 kilometers, short flight">✈️ Short Flight (600 km)</button>
-      <button class="preset-pill" type="button" onclick="setDistance(1500)" aria-label="Set distance to 1500 kilometers, long flight">🌍 Long Flight (1500 km)</button>
+      <button class="preset-pill" onclick="setDistance(50)">🏙️ City (50km)</button>
+      <button class="preset-pill" onclick="setDistance(400)">🚆 Regional (400km)</button>
+      <button class="preset-pill" onclick="setDistance(1000)">✈️ Flight (1000km)</button>
     </div>
 
-    <div class="input-group">
-      <label for="distance">Travel Distance</label>
-      <div class="input-wrapper">
-        <span class="input-icon" aria-hidden="true">📍</span>
-        <input type="number" id="distance" value="500" oninput="calculateCO2()" min="0" aria-describedby="distance-hint">
-        <span class="input-suffix">km</span>
-      </div>
-      <small id="distance-hint" style="font-size:11px;color:var(--muted);display:block;margin-top:4px;">Enter distance in kilometers</small>
+    <div class="input-wrapper" style="position:relative;">
+      <span style="position:absolute; left:1.2rem; top:50%; transform:translateY(-50%);">📍</span>
+      <input type="number" id="distance" value="500" oninput="calculateCO2()" min="1" aria-label="Travel distance in kilometers">
+      <span style="position:absolute; right:1.2rem; top:50%; transform:translateY(-50%); color:var(--muted); font-size:12px;">KM</span>
     </div>
   </div>
 
-  <!-- SAVINGS BOX -->
-  <div class="savings-box">
-    <div class="savings-title">Potential Savings (Train vs Plane)</div>
-    <div class="savings-val" id="savingsVal" aria-live="polite">0 kg CO2</div>
-    <div class="savings-sub">You could save this much by choosing the train</div>
+  <div class="results-grid" id="resultsGrid" aria-live="polite">
+    <!-- Rendered via JS -->
   </div>
 
-  <!-- RESULTS GRID -->
-  <div class="results-grid" id="resultsGrid" aria-live="polite" aria-label="CO2 comparison results">
-    <!-- Results rendered by JS -->
-  </div>
-
-  <!-- EQUIVALENTS -->
-  <div class="equivalents-card">
-    <div class="equivalents-header">What does this mean?</div>
-    <div class="equivalents-grid">
-      <div class="equivalent-item">
-        <div class="equivalent-icon" aria-hidden="true">🌳</div>
-        <div class="equivalent-val" id="eqTrees" aria-label="Trees needed to absorb CO2 in one year">0</div>
-        <div class="equivalent-label">Trees needed (1 year)</div>
-      </div>
-      <div class="equivalent-item">
-        <div class="equivalent-icon" aria-hidden="true">📱</div>
-        <div class="equivalent-val" id="eqPhones" aria-label="Equivalent smartphone charges">0</div>
-        <div class="equivalent-label">Smartphone charges</div>
-      </div>
-      <div class="equivalent-item">
-        <div class="equivalent-icon" aria-hidden="true">💡</div>
-        <div class="equivalent-val" id="eqLED" aria-label="Days of LED light equivalent">0</div>
-        <div class="equivalent-label">Days of LED light</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AD SLOT MID -->
-  <div class="ad-slot" id="adMid" aria-label="Advertisement">
-    <div class="ad-inner">
-      <span class="ad-label">Advertisement</span>
-      <ins class="adsbygoogle" style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="XXXXXXXXXX"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-    </div>
-  </div>
-
-  <!-- OTHER TOOLS -->
-  <div class="other-tools">
-    <div class="other-tools-header">🌍 More Eco & Travel Tools</div>
-    <div class="other-tools-grid">
-      <a href="/travel-budget-planner" class="tool-chip">
-        <span class="tool-chip-icon" aria-hidden="true">💰</span>
-        <div class="tool-chip-info">
-          <div class="tool-chip-name">Travel Budget</div>
-          <div class="tool-chip-desc">Trip planning</div>
-        </div>
-      </a>
-      <a href="/tip-splitter" class="tool-chip">
-        <span class="tool-chip-icon" aria-hidden="true">🍽️</span>
-        <div class="tool-chip-info">
-          <div class="tool-chip-name">Tip Splitter</div>
-          <div class="tool-chip-desc">Bill sharing</div>
-        </div>
-      </a>
-      <a href="/global-timezone-clock" class="tool-chip">
-        <span class="tool-chip-icon" aria-hidden="true">🌍</span>
-        <div class="tool-chip-info">
-          <div class="tool-chip-name">World Clock</div>
-          <div class="tool-chip-desc">Multiple zones</div>
-        </div>
-      </a>
-      <a href="/vat-calculator" class="tool-chip">
-        <span class="tool-chip-icon" aria-hidden="true">🧮</span>
-        <div class="tool-chip-info">
-          <div class="tool-chip-name">VAT Calculator</div>
-          <div class="tool-chip-desc">Tax calculations</div>
-        </div>
-      </a>
-      <a href="/" class="tool-chip" style="border-style: dashed;">
-        <span class="tool-chip-icon" aria-hidden="true">🧭</span>
-        <div class="tool-chip-info">
-          <div class="tool-chip-name">All Tools</div>
-          <div class="tool-chip-desc">31+ utilities</div>
-        </div>
-      </a>
-    </div>
-  </div>
-
-  <!-- SEO CONTENT (expanded to 350+ words) -->
   <div class="seo-content">
-    <h2>Understanding <em>Travel Emissions</em></h2>
+    <h2>Why Compare <em>Travel Emissions</em>?</h2>
     <p>
-      Transportation accounts for nearly <strong>24% of global CO2 emissions</strong>, with road vehicles and aviation being the largest contributors. Choosing the right mode of transport for your journey can significantly reduce your personal carbon footprint. Our free CO2 comparator uses scientifically sourced emission factors to help you make informed, eco-conscious travel decisions — instantly and privately.
+      Transportation is responsible for approximately <strong>24% of direct CO2 emissions</strong> from fuel combustion. While flying is often the fastest way to travel, its climate impact is disproportionately high. Our CO2 Comparator helps you visualize the environmental cost of your journey, using weighted averages for modern vehicle fleets.
     </p>
 
-    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Emission Factors Used</h3>
-    <ul class="seo-list">
-      <li><strong>Train:</strong> ~0.03 kg CO2 per km (European electric/diesel mix, average occupancy)</li>
-      <li><strong>Car (Petrol):</strong> ~0.18 kg CO2 per km (single occupancy, average efficiency)</li>
-      <li><strong>Flight:</strong> ~0.25 kg CO2 per km (short-haul average, including radiative forcing)</li>
-    </ul>
+    <h3>The Science Behind the Numbers</h3>
+    <p>
+      We use standardized emission factors (kg CO2 per passenger kilometer):
+      <strong>Train (0.03)</strong>, <strong>Car (0.18)</strong>, and <strong>Aviation (0.25)</strong>. 
+      The aviation factor includes <em>radiative forcing</em>, which accounts for non-CO2 climate impacts like contrails and nitrogen oxides at high altitudes.
+    </p>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Is this tool accurate for electric cars? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Electric vehicle (EV) emissions depend heavily on the local power grid's energy mix. While this calculator uses a petrol car average (0.18kg/km), an EV on a renewable grid can drop below 0.05kg/km.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What is Radiative Forcing? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">It refers to the total climate impact of aviation beyond just CO2, including heat-trapping clouds formed by contrails in the upper atmosphere.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How can I offset my travel? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">While reduction is primary, certified offsetting through Gold Standard projects helps balance unavoidable emissions.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does occupancy matter? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! A car with 4 people is often more efficient than a train per person. This tool assumes average occupancy rates for all modes.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is my data stored? <span class="icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. ToolCompass.org operates 100% in your browser. We don't have a database for your inputs.</div></div>
+      </div>
+    </div>
+
+    <div class="disclaimer-box">
+      <strong>YMYL Disclosure:</strong> This tool provides estimates based on global averages. For official corporate carbon reporting or scientific research, please refer to the Greenhouse Gas (GHG) Protocol or IPCC databases.
+    </div>
     
-    <p>
-      These values are based on data from the <strong>European Environment Agency</strong> and <strong>ICAO Carbon Calculator</strong>. Actual emissions vary by vehicle age, fuel type, occupancy, route efficiency, and flight altitude. For precise carbon accounting in business or research contexts, consult official government environmental databases.
-    </p>
-
-    <!-- YMYL Disclaimer -->
-    <div class="disclaimer-box" role="note">
-      <strong>⚠️ Important:</strong> This tool provides estimates for personal awareness only. It is not financial, legal, or environmental advice. For official carbon reporting, business compliance, or policy decisions, please use certified tools from environmental agencies or consult qualified sustainability experts.
-    </div>
-
-    <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <button class="faq-q" aria-expanded="false" itemprop="name">
-          How is CO2 emissions calculated?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p class="faq-a-inner" itemprop="text">We use average emission factors from reputable environmental sources: Train (0.03 kg CO2/km), Car with petrol (0.18 kg CO2/km, single occupancy), and Flight (0.25 kg CO2/km, short-haul average). Actual values may vary based on vehicle type, fuel efficiency, occupancy, and flight altitude. For precise carbon accounting, consult official government or scientific databases.</p>
-        </div>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <button class="faq-q" aria-expanded="false" itemprop="name">
-          Which travel mode is most eco-friendly?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p class="faq-a-inner" itemprop="text">Trains are generally the most eco-friendly option for land travel, producing significantly less CO2 per kilometer compared to cars and flights. Electric trains powered by renewable energy have the lowest footprint. For longer distances, consider combining train travel with carbon offset programs or choosing direct flights to reduce emissions.</p>
-        </div>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <button class="faq-q" aria-expanded="false" itemprop="name">
-          Why is flying worse than driving?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p class="faq-a-inner" itemprop="text">Planes emit CO2 and other greenhouse gases at high altitudes where they have a stronger warming effect (radiative forcing). Short-haul flights are particularly inefficient due to high fuel consumption during takeoff and landing. Additionally, aviation emissions are not always fully accounted for in national carbon budgets, making their true climate impact higher than ground transport.</p>
-        </div>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <button class="faq-q" aria-expanded="false" itemprop="name">
-          Is this tool accurate for official carbon reporting?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p class="faq-a-inner" itemprop="text">This calculator provides estimates for personal awareness and planning. For official carbon reporting, business compliance, or academic research, please use certified tools from government environmental agencies or scientific institutions that account for your specific vehicle, route, and operational conditions.</p>
-        </div>
-      </div>
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <button class="faq-q" aria-expanded="false" itemprop="name">
-          Do you store my travel data or calculations?
-          <span class="faq-icon" aria-hidden="true">+</span>
-        </button>
-        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p class="faq-a-inner" itemprop="text">No. All calculations happen locally in your browser using JavaScript. Your distance input and results are never sent to our servers, stored, or shared. We do not use cookies for tracking. Your privacy is guaranteed — this is core to ToolCompass's mission.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- About Section (E-E-A-T) -->
-    <div class="about-section">
-      <h3>Who we are</h3>
-      <p>
-        ToolCompass was created in 2024 by a small team of developers and designers who believe privacy and simplicity should be the default online. We build focused, browser-based tools that run entirely on your device — no accounts, no tracking, no data collection.
-      </p>
-      <p>
-        Every tool, including this CO2 comparator, is crafted to deliver accurate results instantly while respecting your time and privacy. Have a suggestion? We read every message via our <a href="/about" style="color:var(--content);text-decoration:none;">About page</a>.
-      </p>
+    <div style="margin-top:3rem;">
+      <h3>About ToolCompass</h3>
+      <p>Founded in 2024, ToolCompass is dedicated to providing high-performance, privacy-respecting tools for daily productivity. We believe that professional-grade utilities should be free, accessible, and run entirely on the user's hardware without tracking.</p>
     </div>
   </div>
-
 </main>
 
 <footer>
-  <div class="footer-logo">Tool<em>Compass</em>.org</div>
-  <nav class="footer-links" aria-label="Footer navigation">
-    <a href="/about.html">About</a>
-    <a href="/impressum/index.html" lang="de">Imprint</a>
-    <a href="/datenschutz/index.html" lang="de">Privacy</a>
+  <div class="footer-logo" style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700;">Tool<em>Compass</em>.org</div>
+  <nav class="footer-links" aria-label="Legal">
+    <a href="/about">About</a>
+    <a href="/imprint" lang="de">Impressum</a>
+    <a href="/privacy" lang="de">Datenschutz</a>
   </nav>
-  <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
-  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. You may use an ad-blocker — we respect your choice.</p>
+  <p style="font-size:11px; color:var(--muted);">© 2026 ToolCompass. All rights reserved.</p>
+  <p class="ad-disclosure">Supported by Google AdSense. Ads are non-intrusive and clearly labeled.</p>
 </footer>
 
 <script>
-// ═══════════════════════════════════════════════
-// CONSTANTS
-// ═══════════════════════════════════════════════
-const FACTORS = {
-  train: 0.03,
-  car: 0.18,
-  plane: 0.25
-};
+  const FACTORS = { train: 0.03, car: 0.18, plane: 0.25 };
 
-// Equivalents (approximate)
-const EQ = {
-  treeYear: 10, // kg CO2 absorbed per tree per year
-  phoneCharge: 0.01, // kg CO2 per charge
-  ledDay: 0.05 // kg CO2 per day of LED light
-};
-
-// ═══════════════════════════════════════════════
-// CALCULATION
-// ═══════════════════════════════════════════════
-function calculateCO2() {
-  const input = document.getElementById('distance');
-  if (!input) return; // Guard clause
-  
-  const dist = parseFloat(input.value) || 0;
-  
-  const train = dist * FACTORS.train;
-  const car = dist * FACTORS.car;
-  const plane = dist * FACTORS.plane;
-  
-  const max = Math.max(train, car, plane);
-  
-  // Render Results
-  const grid = document.getElementById('resultsGrid');
-  if (grid) {
-    grid.innerHTML = `
-      ${renderResult('Train', '🚆', train, max, 'best')}
-      ${renderResult('Car (Petrol)', '🚗', car, max, '')}
-      ${renderResult('Flight', '✈️', plane, max, 'worst')}
-    `;
-  }
-  
-  // Savings
-  const savings = plane - train;
-  const savingsEl = document.getElementById('savingsVal');
-  if (savingsEl) {
-    savingsEl.textContent = `${savings.toFixed(1)} kg CO2`;
-  }
-  
-  // Equivalents (based on Plane emission as worst case scenario)
-  updateEquivalents(plane);
-  
-  // Save to LocalStorage
-  try {
-    localStorage.setItem('tc_co2_dist', dist);
-  } catch (e) {
-    // Ignore storage errors (private mode, quota exceeded)
-  }
-}
-
-function renderResult(title, icon, value, max, className) {
-  const pct = max > 0 ? (value / max) * 100 : 0;
-  return `
-    <div class="result-card ${className}">
-      <div class="result-header">
-        <div class="result-title">${icon} ${title}</div>
-        <div class="result-value">${value.toFixed(1)} kg</div>
-      </div>
-      <div class="bar-wrap">
-        <div class="bar-fill" style="width: ${pct}%"></div>
-      </div>
-    </div>
-  `;
-}
-
-function updateEquivalents(co2) {
-  const trees = co2 / EQ.treeYear;
-  const phones = co2 / EQ.phoneCharge;
-  const led = co2 / EQ.ledDay;
-  
-  const treesEl = document.getElementById('eqTrees');
-  const phonesEl = document.getElementById('eqPhones');
-  const ledEl = document.getElementById('eqLED');
-  
-  if (treesEl) treesEl.textContent = trees.toFixed(1);
-  if (phonesEl) phonesEl.textContent = Math.round(phones).toLocaleString();
-  if (ledEl) ledEl.textContent = Math.round(led).toLocaleString();
-}
-
-// ═══════════════════════════════════════════════
-// PRESETS
-// ═══════════════════════════════════════════════
-function setDistance(dist) {
-  const input = document.getElementById('distance');
-  if (!input) return;
-  input.value = dist;
-  calculateCO2();
-  showToast(`Set to ${dist} km`);
-}
-
-// ═══════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════
-function showToast(msg) {
-  let t = document.getElementById('tcToast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'tcToast';
-    t.setAttribute('role', 'status');
-    t.setAttribute('aria-live', 'polite');
-    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:#1E1E1E;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:500;color:#F0EDE8;z-index:300;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;pointer-events:none;';
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.style.transform = 'translateX(-50%) translateY(0)';
-  t.style.opacity   = '1';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => {
-    t.style.transform = 'translateX(-50%) translateY(60px)';
-    t.style.opacity   = '0';
-  }, 2000);
-}
-
-// ═══════════════════════════════════════════════
-// FAQ ACCORDION
-// ═══════════════════════════════════════════════
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item   = btn.closest('.faq-item');
-    if (!item) return;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i?.classList.remove('open');
-      const q = i?.querySelector('.faq-q');
-      if (q) q.setAttribute('aria-expanded', 'false');
-    });
-    if (!isOpen) { 
-      item.classList.add('open'); 
-      btn.setAttribute('aria-expanded', 'true'); 
-    }
-  });
-  
-  // Keyboard support for FAQ
-  btn.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      btn.click();
-    }
-  });
-});
-
-// ═══════════════════════════════════════════════
-// CONSENT BANNER
-// ═══════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.getElementById('consentBanner');
-  const dismissBtn = document.getElementById('consentDismiss');
-  
-  // Show banner if not dismissed
-  if (banner && dismissBtn) {
-    const dismissed = localStorage.getItem('tc_consent_dismissed');
-    if (!dismissed) {
-      banner.classList.remove('hidden');
-    }
+  function calculateCO2() {
+    const dist = parseFloat(document.getElementById('distance').value) || 0;
+    const results = [
+      { name: 'Train', val: dist * FACTORS.train, icon: '🚆', color: 'best' },
+      { name: 'Car', val: dist * FACTORS.car, icon: '🚗', color: '' },
+      { name: 'Flight', val: dist * FACTORS.plane, icon: '✈️', color: 'worst' }
+    ];
     
-    dismissBtn.addEventListener('click', () => {
-      banner?.classList.add('hidden');
-      try {
-        localStorage.setItem('tc_consent_dismissed', '1');
-      } catch(e) {}
-    });
+    const max = Math.max(...results.map(r => r.val));
+    const container = document.getElementById('resultsGrid');
+    
+    container.innerHTML = results.map(r => `
+      <div class="result-card ${r.color}">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:600;">${r.icon} ${r.name}</span>
+          <span style="font-family:monospace; font-size:1.2rem;">${r.val.toFixed(1)} kg</span>
+        </div>
+        <div class="bar-wrap">
+          <div class="bar-fill" style="width: ${(r.val/max*100) || 0}%"></div>
+        </div>
+      </div>
+    `).join('');
   }
-  
-  // Init calculation
-  const saved = localStorage.getItem('tc_co2_dist');
-  const input = document.getElementById('distance');
-  if (saved && input) {
-    input.value = saved;
-  }
-  calculateCO2();
-  
-  // Activate AdSense slots after approval (commented until live)
-  // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-  // if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
-});
 
-// ═══════════════════════════════════════════════
-// REDUCED MOTION: Disable scroll-cue if preferred
-// ═══════════════════════════════════════════════
-if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  // Disable any scroll-cue animations that check pointer-events
-  document.querySelectorAll('[data-scroll-cue]').forEach(el => {
-    el.style.pointerEvents = 'none';
+  function setDistance(val) {
+    document.getElementById('distance').value = val;
+    calculateCO2();
+  }
+
+  // FAQ Toggle Logic
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
   });
-}
+
+  // Consent
+  document.addEventListener('DOMContentLoaded', () => {
+    if(!localStorage.getItem('tc_ads_seen')) document.getElementById('consentBanner').classList.remove('hidden');
+    document.getElementById('consentDismiss').onclick = () => {
+      localStorage.setItem('tc_ads_seen', '1');
+      document.getElementById('consentBanner').classList.add('hidden');
+    };
+    calculateCO2();
+  });
 </script>
 
 </body>
