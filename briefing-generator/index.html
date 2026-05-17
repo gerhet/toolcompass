@@ -12,9 +12,10 @@
   
   <!-- SEO: hreflang für deutsche Seite + Sitemap-Referenz -->
   <link rel="alternate" hreflang="de" href="https://toolcompass.org/briefing-generator">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/briefing-generator">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   
-  <!-- SEO: Breadcrumb Schema als Vorlage für Unterseiten (Kommentar) -->
+  <!-- SEO: Breadcrumb Schema als Vorlage für Unterseiten (entsperren bei Bedarf) -->
   <!--
   <script type="application/ld+json">
   {
@@ -83,6 +84,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    /* 
+     * z-index documentation:
+     * 9999: ad-consent banner
+     * 1000: skip link
+     * 999: grain overlay
+     * 200: toast notifications
+     * 100: header (fixed)
+     * 50: modals (future)
+     * 10: focus rings
+     * 1: default content
+     */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -207,6 +219,7 @@
       background: var(--finance);
       transform: scaleX(0); transform-origin: left;
       transition: transform .45s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
     }
     .prog-step.done::after { transform: scaleX(1); }
     .prog-step.active::after { transform: scaleX(1); background: var(--accent); }
@@ -357,6 +370,7 @@
       padding: 12px 28px; cursor: pointer;
       display: flex; align-items: center; gap: 8px;
       transition: all .2s;
+      will-change: transform;
     }
     .btn-next:hover { opacity: .88; transform: translateY(-1px); }
     .btn-next:active { transform: translateY(0); }
@@ -370,6 +384,7 @@
       white-space: pre-wrap; font-family: 'Outfit', monospace;
       color: var(--text);
       max-height: 420px; overflow-y: auto;
+      will-change: contents;
     }
     .result-block::-webkit-scrollbar { width: 4px; }
     .result-block::-webkit-scrollbar-track { background: transparent; }
@@ -391,6 +406,7 @@
       display: flex; align-items: center; gap: 8px;
       transition: all .2s; flex: 1;
       justify-content: center;
+      will-change: transform;
     }
     .btn-copy-main:hover { opacity: .88; transform: translateY(-1px); }
     .btn-copy-main:focus-visible { outline: none; box-shadow: var(--focus-ring); }
@@ -541,6 +557,7 @@
       font-size: 13px; font-weight: 500;
       opacity: 0; transition: all .3s; pointer-events: none; z-index: 200;
       display: flex; align-items: center; gap: 8px;
+      will-change: transform, opacity;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -994,27 +1011,27 @@
   }
 
   function setStep(n) {
-    const currentEl = document.getElementById('s' + currentStep);
+    const currentEl = document?.getElementById?.('s' + currentStep);
     if (currentEl) currentEl.classList.remove('active');
     
     currentStep = n;
-    const nextEl = document.getElementById('s' + currentStep);
+    const nextEl = document?.getElementById?.('s' + currentStep);
     if (nextEl) nextEl.classList.add('active');
 
     // Progress bar
     for (let i = 0; i < TOTAL_STEPS; i++) {
-      const seg = document.getElementById('p' + i);
+      const seg = document?.getElementById?.('p' + i);
       if (!seg) continue;
       seg.className = 'prog-step' + (i < n ? ' done' : i === n ? ' active' : '');
     }
 
-    const phaseLabel = document.getElementById('phaseLabel');
-    const phasePct = document.getElementById('phasePct');
+    const phaseLabel = document?.getElementById?.('phaseLabel');
+    const phasePct = document?.getElementById?.('phasePct');
     if (phaseLabel) phaseLabel.textContent = phaseNames[n];
     if (phasePct) phasePct.textContent = phasePcts[n];
 
     if (n === 4) buildResult();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window?.scrollTo?.({ top: 0, behavior: 'smooth' });
   }
 
   // ─────────────────────────────────────────
@@ -1023,8 +1040,8 @@
   function toggleTag(el, group) {
     if (!el) return;
     el.classList.toggle('selected');
-    const val = el.textContent?.trim();
-    if (!val || !tags[group]) return;
+    const val = el?.textContent?.trim?.();
+    if (!val || !tags?.[group]) return;
     
     const idx = tags[group].indexOf(val);
     if (idx === -1) tags[group].push(val);
@@ -1036,8 +1053,8 @@
   // HELPERS
   // ─────────────────────────────────────────
   function val(id) {
-    const el = document.getElementById(id);
-    return el?.value?.trim() || '';
+    const el = document?.getElementById?.(id);
+    return el?.value?.trim?.() || '';
   }
   function fmt(v, fallback) { return v || fallback || '—'; }
 
@@ -1057,7 +1074,7 @@
       tags: JSON.parse(JSON.stringify(tags)) // Deep copy
     };
     try {
-      localStorage.setItem('tc_briefing', JSON.stringify(data));
+      localStorage?.setItem?.('tc_briefing', JSON.stringify(data));
     } catch(e) {
       // Quota exceeded or private mode
       console.warn('Auto-save failed:', e);
@@ -1066,25 +1083,25 @@
 
   function loadSaved() {
     try {
-      const raw = localStorage.getItem('tc_briefing');
+      const raw = localStorage?.getItem?.('tc_briefing');
       if (!raw) return;
       const d = JSON.parse(raw);
       const fields = ['company','contact','email','phone','website','projname','goal','scope','excluded','start','deadline','revisions','comm','budget','billing','refs','notes'];
       fields.forEach(k => { 
-        const el = document.getElementById('f-' + k); 
-        if (el && d[k]) el.value = d[k]; 
+        const el = document?.getElementById?.('f-' + k); 
+        if (el && d?.[k]) el.value = d[k]; 
       });
 
       // Restore tags
-      if (d.tags) {
+      if (d?.tags) {
         Object.keys(d.tags).forEach(group => {
           if (Array.isArray(d.tags[group])) {
             tags[group] = [...d.tags[group]];
-            const container = document.getElementById('tags-' + group);
+            const container = document?.getElementById?.('tags-' + group);
             if (container) {
-              container.querySelectorAll('.tag-pill').forEach(pill => {
-                const pillVal = pill.textContent?.trim();
-                if (pillVal && tags[group].includes(pillVal)) {
+              container.querySelectorAll?.('.tag-pill')?.forEach?.(pill => {
+                const pillVal = pill?.textContent?.trim?.();
+                if (pillVal && tags[group]?.includes?.(pillVal)) {
                   pill.classList.add('selected');
                 }
               });
@@ -1116,14 +1133,14 @@
     const deadline = fmt(val('f-deadline'));
     const rev      = fmt(val('f-revisions'));
     const comm     = fmt(val('f-comm'));
-    const budget   = val('f-budget') ? `€ ${parseInt(val('f-budget')).toLocaleString('de-DE')}` : '—';
+    const budget   = val('f-budget') ? `€ ${parseInt(val('f-budget'))?.toLocaleString?.('de-DE')}` : '—';
     const billing  = fmt(val('f-billing'));
     const payment  = tags.payment?.length ? tags.payment.join(', ') : '—';
     const refs     = fmt(val('f-refs'));
     const notes    = fmt(val('f-notes'));
 
     // Summary cards
-    const summaryCards = document.getElementById('summaryCards');
+    const summaryCards = document?.getElementById?.('summaryCards');
     if (summaryCards) {
       summaryCards.innerHTML = `
         <div class="summary-card"><div class="summary-card-label">Auftraggeber</div><div class="summary-card-value">${company}<br><span style="color:var(--muted);font-size:12px;">${contact}</span></div></div>
@@ -1134,7 +1151,7 @@
     }
 
     // Full briefing text
-    const now = new Date().toLocaleDateString('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
+    const now = new Date()?.toLocaleDateString?.('de-DE', { day:'2-digit', month:'2-digit', year:'numeric' });
     const text = [
       `╔══════════════════════════════════════════╗`,
       `   PROJEKT BRIEFING`,
@@ -1181,7 +1198,7 @@
       `Generiert mit ToolCompass.org/briefing-generator`,
     ].join('\n');
 
-    const resultText = document.getElementById('resultText');
+    const resultText = document?.getElementById?.('resultText');
     if (resultText) resultText.textContent = text;
   }
 
@@ -1189,26 +1206,28 @@
   // COPY / DOWNLOAD
   // ─────────────────────────────────────────
   function copyBriefing() {
-    const text = document.getElementById('resultText')?.textContent;
+    const text = document?.getElementById?.('resultText')?.textContent;
     if (!text) return;
-    navigator.clipboard?.writeText(text).then(() => showToast('✓', 'Briefing kopiert!')).catch(() => showToast('⚠️', 'Kopieren fehlgeschlagen'));
+    navigator?.clipboard?.writeText?.(text)?.then?.(() => showToast('✓', 'Briefing kopiert!'))?.catch?.(() => showToast('⚠️', 'Kopieren fehlgeschlagen'));
   }
 
   function downloadBriefing() {
-    const text = document.getElementById('resultText')?.textContent;
+    const text = document?.getElementById?.('resultText')?.textContent;
     if (!text) return;
-    const company = val('f-company').replace(/\s+/g,'-').toLowerCase() || 'briefing';
+    const company = val('f-company')?.replace?.(/\s+/g,'-')?.toLowerCase?.() || 'briefing';
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = `briefing-${company}.txt`;
-    a.click(); URL.revokeObjectURL(url);
+    const a = document?.createElement?.('a');
+    if (a) {
+      a.href = url; a.download = `briefing-${company}.txt`;
+      a?.click?.(); URL.revokeObjectURL(url);
+    }
     showToast('💾', 'Datei gespeichert!');
   }
 
   function restartForm() {
     if (!confirm('Briefing wirklich zurücksetzen?')) return;
-    localStorage.removeItem('tc_briefing');
+    localStorage?.removeItem?.('tc_briefing');
     location.reload();
   }
 
@@ -1216,15 +1235,15 @@
   // TOAST
   // ─────────────────────────────────────────
   function showToast(icon, msg) {
-    const iconEl = document.getElementById('toastIcon');
-    const msgEl = document.getElementById('toastMsg');
-    const toast = document.getElementById('toast');
+    const iconEl = document?.getElementById?.('toastIcon');
+    const msgEl = document?.getElementById?.('toastMsg');
+    const toast = document?.getElementById?.('toast');
     if (!iconEl || !msgEl || !toast) return;
     
     iconEl.textContent = icon;
     msgEl.textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2500);
+    setTimeout(() => toast?.classList?.remove?.('show'), 2500);
   }
 
   // ─────────────────────────────────────────
@@ -1232,45 +1251,45 @@
   // ─────────────────────────────────────────
   function toggleFaq(btn) {
     if (!btn) return;
-    const item = btn.closest('.faq-item');
+    const item = btn?.closest?.('.faq-item');
     if (!item) return;
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+    const isOpen = item?.classList?.contains?.('open');
+    document?.querySelectorAll?.('.faq-item.open')?.forEach?.(i => i?.classList?.remove?.('open'));
+    if (!isOpen) item?.classList?.add?.('open');
   }
 
   // ─────────────────────────────────────────
   // AD CONSENT BANNER
   // ─────────────────────────────────────────
   function initAdConsent() {
-    const banner = document.getElementById('adConsent');
-    const btn = document.getElementById('adConsentBtn');
+    const banner = document?.getElementById?.('adConsent');
+    const btn = document?.getElementById?.('adConsentBtn');
     if (!banner || !btn) return;
     
     // Nur anzeigen, wenn AdSense-Platzhalter sichtbar sind (nach Approval)
-    const adSlots = document.querySelectorAll('.ad-slot');
-    const hasActiveAds = Array.from(adSlots).some(el => el.classList.contains('adsense-active'));
+    const adSlots = document?.querySelectorAll?.('.ad-slot');
+    const hasActiveAds = Array?.from?.(adSlots)?.some?.(el => el?.classList?.contains?.('adsense-active'));
     
-    if (hasActiveAds && !localStorage.getItem('tc_ad_consent')) {
-      banner.classList.add('show');
+    if (hasActiveAds && !localStorage?.getItem?.('tc_ad_consent')) {
+      banner?.classList?.add?.('show');
     }
     
-    btn.addEventListener('click', () => {
-      localStorage.setItem('tc_ad_consent', '1');
-      banner.classList.remove('show');
+    btn?.addEventListener?.('click', () => {
+      localStorage?.setItem?.('tc_ad_consent', '1');
+      banner?.classList?.remove?.('show');
     });
   }
 
   // ─────────────────────────────────────────
   // INIT
   // ─────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', () => {
+  document?.addEventListener?.('DOMContentLoaded', () => {
     loadSaved();
     initAdConsent();
     
     // AdSense nach Approval aktivieren (Kommentar entfernen wenn live)
-    // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-    // if (typeof adsbygoogle !== 'undefined') (adsbygoogle = window.adsbygoogle || []).push({});
+    // document.querySelectorAll('.ad-slot').forEach?.(el => el?.classList?.add?.('adsense-active'));
+    // if (typeof adsbygoogle !== 'undefined') (adsbygoogle = window.adsbygoogle || []).push?.({});
   });
 </script>
 
