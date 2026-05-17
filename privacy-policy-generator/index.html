@@ -6,24 +6,35 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>Privacy Policy Generator – GDPR & CCPA Compliant | ToolCompass</title>
-  <meta name="description" content="Free privacy policy generator for websites and apps. GDPR, CCPA, and CalOPPA compliant. Customize for your business, download in HTML/TXT. Private, no signup.">
+  <title>Privacy Policy Generator – GDPR/CCPA | ToolCompass</title>
+  <meta name="description" content="Free privacy policy generator: GDPR, CCPA & CalOPPA compliant. Customize, preview, download in seconds. Private, browser-based. Generate yours now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/privacy-policy-generator">
+  <!-- 🔧 DYNAMIC CANONICAL TEMPLATE: Replace URL with current page path -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page_path}}"> -->
+  
+  <!-- 🌍 HREFLANG for multilingual support -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/privacy-policy-generator">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/datenschutz-generator">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/privacy-policy-generator">
+  
+  <!-- 🗺️ SITEMAP reference -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Privacy Policy Generator – GDPR & CCPA Compliant">
-  <meta property="og:description" content="Generate professional privacy policies for your website or app. Free, compliant, customizable.">
+  <meta property="og:title" content="Privacy Policy Generator – GDPR/CCPA">
+  <meta property="og:description" content="Generate professional, compliant privacy policies for your website or app. Free & private.">
   <meta property="og:url" content="https://toolcompass.org/privacy-policy-generator">
   <meta property="og:image" content="https://toolcompass.org/og-privacy-generator.png">
   <meta property="og:site_name" content="ToolCompass">
 
   <!-- ═══ TWITTER ═══ -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Privacy Policy Generator – GDPR & CCPA Compliant">
-  <meta name="twitter:description" content="Generate professional privacy policies for your website or app. Free & private.">
+  <meta name="twitter:title" content="Privacy Policy Generator – GDPR/CCPA">
+  <meta name="twitter:description" content="Generate professional, compliant privacy policies. Free & private.">
   <meta name="twitter:image" content="https://toolcompass.org/og-privacy-generator.png">
 
   <!-- ═══ AI FINDABILITY ═══ -->
@@ -98,14 +109,39 @@
               "@type": "Answer",
               "text": "Absolutely. All policy generation happens locally in your browser. Your business information is never sent to our servers or stored anywhere."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I still need a lawyer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For simple websites, our generator may be sufficient. However, for complex businesses, sensitive data handling, or high-risk industries, we strongly recommend consulting a qualified attorney to review your policy."
+            }
           }
         ]
       }
     ]
   }
   </script>
+  
+  <!-- 🔧 BREADCRUMB TEMPLATE FOR SUBPAGES (copy & adapt) -->
+  <!--
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+      { "@type": "ListItem", "position": 2, "name": "Category", "item": "https://toolcompass.org/#category" },
+      { "@type": "ListItem", "position": 3, "name": "Current Tool", "item": "https://toolcompass.org/current-tool" }
+    ]
+  }
+  </script>
+  -->
 
+  <!-- 🚀 Preload critical fonts with crossorigin for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -128,6 +164,9 @@
       --warning: #EF4444;
       --warning-bg: rgba(239,68,68,0.07);
       --warning-border: rgba(239,68,68,0.15);
+      --tech: #3B82F6;
+      --tech-bg: rgba(59,130,246,0.07);
+      /* z-index documentation: 999=grain, 200=toast, 150=consent, 100=header, 50=modals, 10=content */
     }
 
     html { scroll-behavior: smooth; }
@@ -144,6 +183,26 @@
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
+    }
+
+    /* ─── SKIP LINK (Accessibility) ─── */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      z-index: 1000;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 8px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
     }
 
     /* ─── HEADER ─── */
@@ -166,7 +225,7 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -214,33 +273,19 @@
       background: linear-gradient(90deg, transparent, rgba(251,146,60,.25), transparent);
     }
 
-    /* Trust Badges (NEW - AdSense Trust Signals) */
+    /* Trust Badges */
     .trust-badges {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: flex; gap: 12px; margin-bottom: 1.5rem; flex-wrap: wrap; justify-content: center;
     }
     .trust-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 20px;
+      font-size: 11px; color: var(--muted); font-weight: 500;
     }
-    .trust-badge svg {
-      width: 14px;
-      height: 14px;
-      color: var(--success);
-    }
+    .trust-badge svg { width: 14px; height: 14px; color: var(--success); }
 
-    /* ⚠️ YMYL DISCLAIMER (REQUIRED FOR LEGAL TOOLS) */
+    /* ⚠️ YMYL DISCLAIMER */
     .ymyl-disclaimer {
       background: var(--warning-bg);
       border: 1px solid var(--warning-border);
@@ -250,724 +295,408 @@
       margin-bottom: 1.5rem;
     }
     .ymyl-disclaimer-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--warning);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; color: var(--warning);
+      margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;
     }
     .ymyl-disclaimer p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
+      font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0;
     }
     .ymyl-disclaimer a {
-      color: var(--content);
-      text-decoration: none;
-      font-weight: 600;
+      color: var(--content); text-decoration: none; font-weight: 600;
       border-bottom: 1px dashed var(--content);
     }
-    .ymyl-disclaimer a:hover {
-      opacity: 0.85;
-    }
+    .ymyl-disclaimer a:hover, .ymyl-disclaimer a:focus-visible { opacity: 0.85; outline: none; }
 
     /* Form Sections */
     .form-section {
-      margin-bottom: 2rem;
-      padding-bottom: 2rem;
+      margin-bottom: 2rem; padding-bottom: 2rem;
       border-bottom: 1px solid var(--border);
     }
-    .form-section:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
+    .form-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      font-weight: 700; font-style: italic; color: var(--text);
+      margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px;
     }
-    .section-icon {
-      font-size: 18px;
-    }
+    .section-icon { font-size: 18px; }
 
     /* Input Groups */
     .input-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;
     }
-    @media (max-width: 520px) {
-      .input-grid { grid-template-columns: 1fr; }
-    }
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    @media (max-width: 520px) { .input-grid { grid-template-columns: 1fr; } }
+    .input-group { display: flex; flex-direction: column; gap: 8px; }
     .input-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
+      font-size: 11px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em;
     }
     .tool-input, .tool-select, .tool-textarea {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 14px;
-      border-radius: 8px;
-      font-family: 'Outfit';
-      font-size: 14px;
-      transition: border-color .2s;
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 14px; border-radius: 8px;
+      font-family: 'Outfit'; font-size: 14px; transition: border-color .2s;
     }
     .tool-input:focus, .tool-select:focus, .tool-textarea:focus {
-      outline: none;
-      border-color: var(--content);
+      outline: none; border-color: var(--content);
+      box-shadow: 0 0 0 3px rgba(251,146,60,0.2);
     }
-    .tool-textarea {
-      resize: vertical;
-      min-height: 100px;
+    .tool-input:focus-visible, .tool-select:focus-visible, .tool-textarea:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
     }
+    .tool-textarea { resize: vertical; min-height: 100px; }
 
-    /* Checkbox Group (ADDICTIVE - Toggle Options) */
+    /* Checkbox Group */
     .checkbox-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 1rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem;
     }
-    @media (max-width: 520px) {
-      .checkbox-group { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px) { .checkbox-group { grid-template-columns: 1fr; } }
     .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all .2s;
+      display: flex; align-items: center; gap: 10px; padding: 12px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; cursor: pointer; transition: all .2s;
     }
-    .checkbox-item:hover {
-      border-color: var(--content);
+    .checkbox-item:hover, .checkbox-item:focus-visible {
+      border-color: var(--content); outline: none;
+      box-shadow: 0 0 0 3px rgba(251,146,60,0.2);
     }
-    .checkbox-item.checked {
-      background: var(--content-bg);
-      border-color: var(--content);
-    }
+    .checkbox-item.checked { background: var(--content-bg); border-color: var(--content); }
     .checkbox-custom {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all .2s;
+      width: 20px; height: 20px; border: 2px solid var(--border);
+      border-radius: 4px; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; transition: all .2s;
     }
     .checkbox-item.checked .checkbox-custom {
-      background: var(--content);
-      border-color: var(--content);
+      background: var(--content); border-color: var(--content);
     }
     .checkbox-item.checked .checkbox-custom::after {
-      content: '✓';
-      color: #0D0D0D;
-      font-size: 12px;
-      font-weight: 700;
+      content: '✓'; color: #0D0D0D; font-size: 12px; font-weight: 700;
     }
-    .checkbox-label {
-      font-size: 13px;
-      color: var(--text);
+    .checkbox-label { font-size: 13px; color: var(--text); }
+    .checkbox-item input[type="checkbox"] {
+      position: absolute; opacity: 0; pointer-events: none;
     }
 
-    /* Template Selector (ADDICTIVE - Style Options) */
+    /* Template Selector */
     .template-selector {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 1.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem;
     }
-    @media (max-width: 520px) {
-      .template-selector { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px) { .template-selector { grid-template-columns: 1fr; } }
     .template-card {
-      padding: 1rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all .2s;
-      text-align: center;
+      padding: 1rem; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; cursor: pointer; transition: all .2s; text-align: center;
     }
-    .template-card:hover {
-      border-color: var(--content);
+    .template-card:hover, .template-card:focus-visible {
+      border-color: var(--content); outline: none;
+      box-shadow: 0 0 0 3px rgba(251,146,60,0.2);
     }
-    .template-card.active {
-      background: var(--content-bg);
-      border-color: var(--content);
-    }
-    .template-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    .template-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .template-desc {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
+    .template-card.active { background: var(--content-bg); border-color: var(--content); }
+    .template-icon { font-size: 24px; margin-bottom: 8px; }
+    .template-name { font-size: 12px; font-weight: 600; color: var(--text); }
+    .template-desc { font-size: 10px; color: var(--muted); margin-top: 4px; }
 
     /* Generate Button */
     .generate-btn {
-      width: 100%;
-      padding: 16px;
-      border-radius: 10px;
-      border: none;
-      background: var(--content);
-      color: #0D0D0D;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all .2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      width: 100%; padding: 16px; border-radius: 10px; border: none;
+      background: var(--content); color: #0D0D0D; font-weight: 700;
+      font-size: 15px; cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .generate-btn:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
+    .generate-btn:hover, .generate-btn:focus-visible {
+      opacity: 0.9; transform: translateY(-1px); outline: none;
+      box-shadow: 0 0 0 3px rgba(251,146,60,0.3);
     }
-    .generate-btn:active {
-      transform: scale(0.99);
-    }
+    .generate-btn:active { transform: scale(0.99); }
 
-    /* Preview Area (ADDICTIVE - Live Preview) */
+    /* Preview Area */
     .preview-area {
-      margin-top: 2rem;
-      display: none;
-      animation: slideUp .3s ease;
+      margin-top: 2rem; display: none; animation: slideUp .3s ease;
     }
-    .preview-area.show {
-      display: block;
-    }
+    .preview-area.show { display: block; }
     .preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+      flex-wrap: wrap; gap: 10px;
     }
     .preview-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em;
     }
-    .preview-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .action-btn {
-      padding: 8px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      padding: 8px 14px; border-radius: 6px; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--text); font-size: 12px;
+      font-weight: 600; cursor: pointer; transition: all .2s;
+      display: flex; align-items: center; gap: 6px;
     }
-    .action-btn:hover {
-      border-color: var(--content);
-      color: var(--content);
+    .action-btn:hover, .action-btn:focus-visible {
+      border-color: var(--content); color: var(--content); outline: none;
     }
     .action-btn.primary {
-      background: var(--content);
-      border-color: var(--content);
-      color: #0D0D0D;
+      background: var(--content); border-color: var(--content); color: #0D0D0D;
     }
-    .action-btn.primary:hover {
-      opacity: 0.9;
-    }
+    .action-btn.primary:hover { opacity: 0.9; }
 
     .preview-content {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      max-height: 500px;
-      overflow-y: auto;
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      line-height: 1.8;
-      color: var(--muted);
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; max-height: 500px;
+      overflow-y: auto; font-family: 'Outfit', sans-serif; font-size: 13px;
+      line-height: 1.8; color: var(--muted);
+      will-change: transform; /* GPU acceleration hint */
     }
     .preview-content h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--text);
-      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      color: var(--text); margin-bottom: 1rem;
     }
-    .preview-content h2 {
-      font-size: 1.1rem;
-      color: var(--text);
-      margin: 1.5rem 0 0.75rem;
-    }
-    .preview-content p {
-      margin-bottom: 1rem;
-    }
-    .preview-content ul {
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .preview-content li {
-      margin-bottom: 0.5rem;
-    }
+    .preview-content h2 { font-size: 1.1rem; color: var(--text); margin: 1.5rem 0 0.75rem; }
+    .preview-content p { margin-bottom: 1rem; }
+    .preview-content ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+    .preview-content li { margin-bottom: 0.5rem; }
 
-    /* Compliance Badges (ADDICTIVE - Trust Indicators) */
+    /* Compliance Badges */
     .compliance-badges {
-      display: flex;
-      gap: 10px;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
+      display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap;
     }
     .badge {
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .05em;
+      padding: 6px 12px; border-radius: 20px; font-size: 10px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
     }
-    .badge-gdpr {
-      background: var(--success-bg);
-      color: var(--success);
-      border: 1px solid var(--success);
-    }
-    .badge-ccpa {
-      background: var(--content-bg);
-      color: var(--content);
-      border: 1px solid var(--content);
-    }
-    .badge-caloppa {
-      background: var(--tech-bg);
-      color: var(--tech);
-      border: 1px solid var(--tech);
-    }
+    .badge-gdpr { background: var(--success-bg); color: var(--success); border: 1px solid var(--success); }
+    .badge-ccpa { background: var(--content-bg); color: var(--content); border: 1px solid var(--content); }
+    .badge-caloppa { background: var(--tech-bg); color: var(--tech); border: 1px solid var(--tech); }
 
     /* ─── SECTION BLOCKS ─── */
     .section-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem;
       animation: fadeUp .7s .3s ease both;
     }
     .section-title-block {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      font-weight: 700; font-style: italic; color: var(--text);
+      margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px;
     }
     .section-title-badge {
-      font-size: 10px;
-      font-weight: 600;
-      background: var(--content-bg);
-      color: var(--content);
-      border: 1px solid var(--content-border);
-      padding: 2px 8px;
-      border-radius: 20px;
-      letter-spacing: .06em;
-      font-style: normal;
+      font-size: 10px; font-weight: 600; background: var(--content-bg);
+      color: var(--content); border: 1px solid var(--content-border);
+      padding: 2px 8px; border-radius: 20px; letter-spacing: .06em; font-style: normal;
     }
 
-    /* How It Works - Ordered List (NEW - AdSense Requirement) */
-    .how-it-works ol {
-      counter-reset: step;
-      list-style: none;
-      padding-left: 0;
-    }
+    /* How It Works */
+    .how-it-works ol { counter-reset: step; list-style: none; padding-left: 0; }
     .how-it-works li {
-      position: relative;
-      padding-left: 36px;
-      margin-bottom: 1rem;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
-      counter-increment: step;
+      position: relative; padding-left: 36px; margin-bottom: 1rem;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7; counter-increment: step;
     }
     .how-it-works li::before {
-      content: counter(step);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: var(--content);
-      color: #0D0D0D;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
+      content: counter(step); position: absolute; left: 0; top: 0;
+      width: 24px; height: 24px; background: var(--content); color: var(--bg);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 700;
     }
 
-    /* Who Is This For - Explicit List (NEW) */
-    .who-for ul {
-      list-style: none;
-      padding-left: 0;
-    }
+    /* Who Is This For */
+    .who-for ul { list-style: none; padding-left: 0; }
     .who-for li {
-      position: relative;
-      padding-left: 24px;
-      margin-bottom: 0.75rem;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
+      position: relative; padding-left: 24px; margin-bottom: 0.75rem;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7;
     }
     .who-for li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--success);
-      font-weight: 700;
-      font-size: 14px;
+      content: '✓'; position: absolute; left: 0;
+      color: var(--success); font-weight: 700; font-size: 14px;
     }
 
-    /* Pro Tip Box (NEW - AdSense Requirement) */
+    /* Pro Tip Box */
     .pro-tip {
       background: linear-gradient(135deg, var(--content-bg), rgba(232,213,163,0.05));
-      border: 1px solid var(--content-border);
-      border-left: 3px solid var(--accent);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin-top: 1rem;
+      border: 1px solid var(--content-border); border-left: 3px solid var(--accent);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem;
     }
     .pro-tip-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--content);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; color: var(--content);
+      margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;
     }
-    .pro-tip p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-    }
+    .pro-tip p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
     .pro-tip a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px dashed var(--accent);
-      transition: opacity 0.2s;
+      color: var(--accent); text-decoration: none; font-weight: 600;
+      border-bottom: 1px dashed var(--accent); transition: opacity 0.2s;
     }
-    .pro-tip a:hover {
-      opacity: 0.85;
-    }
+    .pro-tip a:hover, .pro-tip a:focus-visible { opacity: 0.85; outline: none; }
 
+    /* Features */
     .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 1rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem;
     }
-    @media (max-width: 520px) {
-      .feature-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px) { .feature-grid { grid-template-columns: 1fr; } }
     .feature-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
     }
-    .feature-icon {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    .feature-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .feature-desc {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .feature-icon { font-size: 20px; margin-bottom: 8px; }
+    .feature-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .feature-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
     /* ─── AD SLOT ─── */
-    .ad-slot {
-      margin-bottom: 1rem;
-      display: none;
-    }
-    .ad-slot.adsense-active {
-      display: block;
-    }
+    .ad-slot { margin-bottom: 1rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
     .ad-inner {
-      background: rgba(255,255,255,.02);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 90px;
-      position: relative;
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; display: flex;
+      align-items: center; justify-content: center; min-height: 90px; position: relative;
     }
     .ad-label {
-      position: absolute;
-      top: 6px;
-      left: 10px;
-      font-size: 9px;
-      color: var(--muted);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .4;
+      position: absolute; top: 6px; left: 10px; font-size: 9px;
+      color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4;
     }
 
     /* ─── OTHER TOOLS ─── */
-    .other-tools {
-      margin-bottom: 1rem;
-      animation: fadeUp .7s .5s ease both;
-    }
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .5s ease both; }
     .other-tools-header {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
     }
     .other-tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 8px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px;
     }
     .tool-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: .85rem 1rem;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 500;
+      display: flex; align-items: center; gap: 10px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text); font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
-      border-color: var(--border-hover);
-      background: var(--surface2);
-      transform: translateY(-2px);
+    .tool-chip:hover, .tool-chip:focus-visible {
+      border-color: var(--border-hover); background: var(--surface2);
+      transform: translateY(-2px); outline: none;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
     }
-    .tool-chip-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .tool-chip-info {
-      min-width: 0;
-    }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
     .tool-chip-name {
-      font-weight: 600;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 600; font-size: 12px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
     }
-    .tool-chip-desc {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
     /* ─── SEO CONTENT ─── */
     .seo-content {
-      padding: 2.5rem 0 0;
-      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 0; border-top: 1px solid var(--border);
       animation: fadeUp .7s .6s ease both;
     }
     .seo-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      font-weight: 700; font-style: italic; color: var(--text); margin-bottom: 1rem;
     }
-    .seo-content h2 em {
-      color: var(--accent);
-    }
+    .seo-content h2 em { color: var(--accent); }
     .seo-content p {
-      font-size: 13.5px;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      font-size: 13.5px; color: var(--muted); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
     }
-    .seo-content strong {
-      color: var(--text);
-      font-weight: 500;
+    .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content ul { color: var(--muted); margin-left: 1.5rem; margin-bottom: 1rem; }
+    .seo-content li { margin-bottom: 0.5rem; }
+
+    /* Category Intro (NEW) */
+    .category-intro {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
     }
-    .seo-content ul {
-      color: var(--muted);
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .seo-content li {
-      margin-bottom: 0.5rem;
+    .category-intro p {
+      font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0;
     }
 
-    /* FAQ */
-    .faq-list {
-      margin-top: 1.5rem;
+    /* Privacy Note (NEW - reinforce no-data-storage) */
+    .privacy-note {
+      background: var(--success-bg); border: 1px solid var(--success);
+      border-left: 3px solid var(--success); border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1.5rem 0;
     }
+    .privacy-note p {
+      font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0;
+    }
+    .privacy-note strong { color: var(--text); }
+
+    /* FAQ */
+    .faq-list { margin-top: 1.5rem; }
     .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 8px;
-      overflow: hidden;
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 8px; overflow: hidden;
     }
     .faq-q {
-      width: 100%;
-      background: var(--surface);
-      border: none;
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 1rem 1.25rem;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      width: 100%; background: var(--surface); border: none;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 13px; font-weight: 500; padding: 1rem 1.25rem;
+      text-align: left; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover {
-      background: var(--surface2);
+    .faq-q:hover, .faq-q:focus-visible {
+      background: var(--surface2); outline: none;
+      box-shadow: inset 0 0 0 2px var(--content);
     }
     .faq-icon {
-      font-size: 18px;
-      color: var(--accent);
-      transition: transform .3s;
-      flex-shrink: 0;
+      font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0;
     }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease;
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
     }
-    .faq-item.open .faq-a {
-      max-height: 200px;
-    }
+    .faq-item.open .faq-a { max-height: 250px; }
     .faq-a-inner {
-      padding: .25rem 1.25rem 1rem;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.7;
+      padding: .25rem 1.25rem 1rem; font-size: 13px;
+      color: var(--muted); font-weight: 300; line-height: 1.7;
     }
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto;
+      border-top: 1px solid var(--border); padding: 2.5rem 2rem;
+      text-align: center; max-width: 860px; margin: 0 auto;
     }
     .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      font-weight: 700; margin-bottom: 0.75rem;
     }
-    .footer-logo em {
-      color: var(--accent);
-      font-style: italic;
-    }
+    .footer-logo em { color: var(--accent); font-style: italic; }
     .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1rem 0;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 1rem 0; flex-wrap: wrap;
     }
     .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 500;
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none; font-size: 11px;
+      font-weight: 500; transition: color 0.2s;
     }
-    .footer-links a:hover {
-      color: var(--text);
+    .footer-links a:hover, .footer-links a:focus-visible {
+      color: var(--text); outline: none; text-decoration: underline;
     }
     .footer-adsense-disclosure {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 1rem;
-      opacity: 0.7;
-      line-height: 1.5;
+      font-size: 10px; color: var(--muted); margin-top: 1rem;
+      opacity: 0.7; line-height: 1.5;
     }
+    .footer-about {
+      font-size: 11px; color: var(--muted); margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+    .footer-about strong { color: var(--text); }
     .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .4;
-      margin-top: 0.5rem;
+      font-size: 11px; color: var(--muted); letter-spacing: .1em;
+      text-transform: uppercase; opacity: .4; margin-top: 0.5rem;
     }
+
+    /* ─── CONSENT HINT (Cookie-free for AdSense) ─── */
+    .consent-hint {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 2rem; font-size: 11px; color: var(--muted);
+      text-align: center; z-index: 150; display: none;
+    }
+    .consent-hint.show { display: block; animation: slideUp .3s ease; }
+    .consent-hint a { color: var(--accent); text-decoration: none; }
+    .consent-hint a:hover { text-decoration: underline; }
+    .consent-close {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--muted);
+      font-size: 18px; cursor: pointer; padding: 4px;
+    }
+    .consent-close:hover, .consent-close:focus-visible { color: var(--text); outline: none; }
 
     /* ─── ANIMATIONS & TOAST ─── */
     @keyframes fadeUp {
@@ -980,49 +709,43 @@
     }
 
     .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
+      position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: var(--accent);
-      color: #0D0D0D;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s;
-      z-index: 200;
+      background: var(--accent); color: var(--bg);
+      padding: 10px 20px; border-radius: 30px;
+      font-size: 13px; font-weight: 600; opacity: 0;
+      pointer-events: none; transition: all 0.3s; z-index: 200;
+      will-change: transform, opacity;
     }
     .toast.active {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     @media (max-width: 480px) {
-      main {
-        padding: 2rem 1.25rem 5rem;
-      }
-      .hero-card {
-        padding: 1.5rem;
-      }
-      .preview-actions {
-        flex-direction: column;
-      }
-      .action-btn {
-        width: 100%;
-        justify-content: center;
-      }
-      .footer-links {
-        gap: 1rem;
-        flex-direction: column;
-        align-items: center;
-      }
+      main { padding: 2rem 1.25rem 5rem; }
+      .hero-card { padding: 1.5rem; }
+      .preview-actions { flex-direction: column; }
+      .action-btn { width: 100%; justify-content: center; }
+      .footer-links { gap: 1rem; flex-direction: column; align-items: center; }
+      .consent-hint { padding: 12px 1.25rem; font-size: 10px; }
+      .consent-close { right: 12px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ♿ SKIP LINK for keyboard users -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <header>
   <div class="header-inner">
@@ -1035,7 +758,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -1044,7 +767,17 @@
     <p class="page-sub">Create GDPR & CCPA compliant privacy policies in minutes.</p>
   </div>
 
-  <!-- AD SLOT TOP (nach Approval aktivieren) -->
+  <!-- Category Intro (NEW - 2+ sentences) -->
+  <div class="category-intro">
+    <p><strong>Legal & Content Tools:</strong> Our privacy policy generator helps website owners, app developers, and startups create compliant policies instantly. Part of ToolCompass's collection of 31+ free browser-based utilities—no signup, no data collection.</p>
+  </div>
+
+  <!-- Privacy Note (NEW - reinforce no-data-storage) -->
+  <div class="privacy-note">
+    <p><strong>100% Private:</strong> All policy generation happens locally in your browser. Your business information is never sent to our servers, stored, or shared. Complete privacy guaranteed.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
   <div class="ad-slot" id="adTop">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
@@ -1060,7 +793,7 @@
   <!-- HERO CARD (TOOL) -->
   <div class="hero-card">
     
-    <!-- Trust Badges (NEW - AdSense Trust Signals) -->
+    <!-- Trust Badges -->
     <div class="trust-badges">
       <div class="trust-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1076,7 +809,7 @@
       </div>
     </div>
 
-    <!-- ⚠️ YMYL DISCLAIMER (REQUIRED FOR LEGAL TOOLS) -->
+    <!-- ⚠️ YMYL DISCLAIMER -->
     <div class="ymyl-disclaimer">
       <div class="ymyl-disclaimer-title">
         <span>⚠️</span>
@@ -1091,24 +824,24 @@
       </p>
     </div>
 
-    <!-- Template Selector (ADDICTIVE - Style Options) -->
+    <!-- Template Selector -->
     <div class="form-section">
       <div class="section-title">
         <span class="section-icon">📄</span>
         Choose Template
       </div>
-      <div class="template-selector">
-        <div class="template-card active" data-template="basic" onclick="setTemplate('basic')">
+      <div class="template-selector" role="tablist" aria-label="Policy templates">
+        <div class="template-card active" data-template="basic" onclick="setTemplate('basic')" role="tab" aria-selected="true" id="tab-basic" tabindex="0">
           <div class="template-icon">📝</div>
           <div class="template-name">Basic</div>
           <div class="template-desc">Simple websites</div>
         </div>
-        <div class="template-card" data-template="ecommerce" onclick="setTemplate('ecommerce')">
+        <div class="template-card" data-template="ecommerce" onclick="setTemplate('ecommerce')" role="tab" aria-selected="false" id="tab-ecommerce" tabindex="0">
           <div class="template-icon">🛒</div>
           <div class="template-name">E-Commerce</div>
           <div class="template-desc">Online stores</div>
         </div>
-        <div class="template-card" data-template="app" onclick="setTemplate('app')">
+        <div class="template-card" data-template="app" onclick="setTemplate('app')" role="tab" aria-selected="false" id="tab-app" tabindex="0">
           <div class="template-icon">📱</div>
           <div class="template-name">Mobile App</div>
           <div class="template-desc">iOS & Android</div>
@@ -1124,101 +857,109 @@
       </div>
       <div class="input-grid">
         <div class="input-group">
-          <label class="input-label">Website/App Name *</label>
-          <input type="text" id="siteName" class="tool-input" placeholder="My Website">
+          <label class="input-label" for="siteName">Website/App Name *</label>
+          <input type="text" id="siteName" class="tool-input" placeholder="My Website" aria-required="true">
         </div>
         <div class="input-group">
-          <label class="input-label">Company Name</label>
+          <label class="input-label" for="companyName">Company Name</label>
           <input type="text" id="companyName" class="tool-input" placeholder="My Company LLC">
         </div>
       </div>
       <div class="input-grid">
         <div class="input-group">
-          <label class="input-label">Contact Email *</label>
-          <input type="email" id="contactEmail" class="tool-input" placeholder="hello@example.com">
+          <label class="input-label" for="contactEmail">Contact Email *</label>
+          <input type="email" id="contactEmail" class="tool-input" placeholder="hello@example.com" aria-required="true">
         </div>
         <div class="input-group">
-          <label class="input-label">Website URL</label>
+          <label class="input-label" for="websiteUrl">Website URL</label>
           <input type="url" id="websiteUrl" class="tool-input" placeholder="https://example.com">
         </div>
       </div>
       <div class="input-group">
-        <label class="input-label">Business Address</label>
-        <textarea id="businessAddress" class="tool-textarea" placeholder="Full business address (optional)"></textarea>
+        <label class="input-label" for="businessAddress">Business Address</label>
+        <textarea id="businessAddress" class="tool-textarea" placeholder="Full business address (optional)" aria-label="Business address"></textarea>
       </div>
     </div>
 
-    <!-- Data Collection (ADDICTIVE - Toggle Options) -->
+    <!-- Data Collection -->
     <div class="form-section">
       <div class="section-title">
         <span class="section-icon">📊</span>
         Data Collection
       </div>
       <p style="font-size:13px; color:var(--muted); margin-bottom:1rem;">Select what data you collect from users:</p>
-      <div class="checkbox-group">
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+      <div class="checkbox-group" role="group" aria-label="Data collection options">
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Email Addresses" aria-label="Collect email addresses">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Email Addresses</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Names" aria-label="Collect names">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Names</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Phone Numbers" aria-label="Collect phone numbers">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Phone Numbers</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Payment Information" aria-label="Collect payment information">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Payment Information</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Location Data" aria-label="Collect location data">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Location Data</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Usage Analytics" aria-label="Collect usage analytics">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Usage Analytics</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Cookies" aria-label="Use cookies">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Cookies</span>
-        </div>
-        <div class="checkbox-item" onclick="toggleCheckbox(this)">
-          <div class="checkbox-custom"></div>
+        </label>
+        <label class="checkbox-item" tabindex="0">
+          <input type="checkbox" value="Third-Party Services" aria-label="Use third-party services">
+          <div class="checkbox-custom" aria-hidden="true"></div>
           <span class="checkbox-label">Third-Party Services</span>
-        </div>
+        </label>
       </div>
     </div>
 
     <!-- Generate Button -->
-    <button class="generate-btn" onclick="generatePolicy()">
+    <button class="generate-btn" onclick="generatePolicy()" aria-label="Generate privacy policy">
       <span>✨</span>
       <span>Generate Privacy Policy</span>
     </button>
 
     <!-- Preview Area -->
-    <div class="preview-area" id="previewArea">
+    <div class="preview-area" id="previewArea" aria-live="polite">
       <div class="preview-header">
         <span class="preview-title">📄 Policy Preview</span>
         <div class="preview-actions">
-          <button class="action-btn primary" onclick="copyPolicy()">
+          <button class="action-btn primary" onclick="copyPolicy()" aria-label="Copy policy to clipboard">
             <span>📋</span> Copy
           </button>
-          <button class="action-btn" onclick="downloadPolicy('txt')">
+          <button class="action-btn" onclick="downloadPolicy('txt')" aria-label="Download as TXT">
             <span>📥</span> TXT
           </button>
-          <button class="action-btn" onclick="downloadPolicy('html')">
+          <button class="action-btn" onclick="downloadPolicy('html')" aria-label="Download as HTML">
             <span>🌐</span> HTML
           </button>
-          <button class="action-btn" onclick="printPolicy()">
+          <button class="action-btn" onclick="printPolicy()" aria-label="Print policy">
             <span>🖨️</span> Print
           </button>
         </div>
       </div>
       <div class="preview-content" id="policyContent"></div>
       
-      <!-- Compliance Badges (ADDICTIVE - Trust Indicators) -->
+      <!-- Compliance Badges -->
       <div class="compliance-badges">
         <span class="badge badge-gdpr">✓ GDPR Compliant</span>
         <span class="badge badge-ccpa">✓ CCPA Ready</span>
@@ -1240,7 +981,7 @@
     </div>
   </div>
 
-  <!-- HOW IT WORKS (NEW - AdSense Requirement: Ordered List) -->
+  <!-- HOW IT WORKS -->
   <div class="section-block how-it-works">
     <div class="section-title">
       How It Works
@@ -1253,7 +994,7 @@
     </ol>
   </div>
 
-  <!-- WHO IS THIS FOR (NEW - AdSense Requirement: Explicit List) -->
+  <!-- WHO IS THIS FOR -->
   <div class="section-block who-for">
     <div class="section-title">
       Who Is This For?
@@ -1267,7 +1008,7 @@
     </ul>
   </div>
 
-  <!-- PRO TIP (NEW - AdSense Requirement: Internal Link) -->
+  <!-- PRO TIP -->
   <div class="section-block pro-tip">
     <div class="pro-tip-title">💡 Pro Tip</div>
     <p>After generating your privacy policy, consider creating matching <a href="/terms-generator">Terms of Service</a> and a <a href="/cookie-policy">Cookie Policy</a> for complete legal coverage on your website.</p>
@@ -1360,51 +1101,54 @@
     <p>
       <strong>Important:</strong> While our generator creates compliant templates, we recommend having a legal professional review your specific situation, especially for complex businesses or sensitive data handling.
     </p>
+    <p>
+      <strong>Privacy guarantee:</strong> All policy generation happens entirely in your browser. We don't collect, store, or transmit any of your input data. Your business information stays on your device.
+    </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           Is this privacy policy generator free?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">Yes, our privacy policy generator is 100% free with no limitations. You can generate unlimited policies for your websites, apps, and online services.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Is the generated policy legally binding?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">Our generator creates compliant templates based on GDPR, CCPA, and CalOPPA requirements. However, we recommend having a legal professional review your specific situation, especially for complex businesses.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Can I customize the policy?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq3">
           <p class="faq-a-inner">Yes! You can customize all sections including company information, data collection practices, cookies, third-party services, user rights, and contact information.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Is my business data private?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq4">
           <p class="faq-a-inner">Absolutely. All policy generation happens locally in your browser. Your business information is never sent to our servers or stored anywhere. Complete privacy guaranteed.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          What formats can I download?
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          Do I still need a lawyer?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">You can download your privacy policy as plain text (TXT), HTML for web pages, copy directly to clipboard, or print directly from the tool.</p>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">For simple websites, our generator may be sufficient. However, for complex businesses, sensitive data handling, or high-risk industries, we strongly recommend consulting a qualified attorney to review your policy.</p>
         </div>
       </div>
     </div>
@@ -1415,23 +1159,35 @@
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   
-  <!-- Footer Links (FIXED - Exact Paths Required) -->
+  <!-- Footer Links -->
   <nav class="footer-links">
     <a href="/about.html">About</a>
     <a href="/impressum/index.html">Imprint</a>
     <a href="/datenschutz/index.html">Privacy Policy</a>
   </nav>
   
-  <!-- AdSense Disclosure (NEW - Required for Approval) -->
+  <!-- About hint (E-E-A-T) -->
+  <p class="footer-about">
+    <strong>Who we are:</strong> ToolCompass is built by a small team of developers and writers. We create free, privacy-first browser tools since 2024. No tracking, no paywalls.
+  </p>
+  
+  <!-- AdSense Disclosure -->
   <p class="footer-adsense-disclosure">
-    This site is supported by advertising. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you.
+    This site is supported by advertising via Google AdSense. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you. Ads are served by Google and governed by their privacy policy.
   </p>
   
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
 </footer>
 
+<!-- Cookie-free Consent Hint for AdSense -->
+<div class="consent-hint" id="consentHint">
+  This site uses Google AdSense for advertising. By continuing, you consent to ads being shown. 
+  <a href="/datenschutz/index.html">Learn more</a>
+  <button class="consent-close" id="consentClose" aria-label="Dismiss notice">×</button>
+</div>
+
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Copied!</div>
+<div class="toast" id="toast" role="status" aria-live="assertive">Copied!</div>
 
 <script>
 // ═══════════════════════════════════════════════
@@ -1442,35 +1198,64 @@ let currentTemplate = 'basic';
 let selectedData = [];
 let generatedPolicy = '';
 
-// Set Template (ADDICTIVE - Style Options)
+// Set Template with accessibility support
 function setTemplate(template) {
   currentTemplate = template;
-  document.querySelectorAll('.template-card').forEach(card => {
-    card.classList.toggle('active', card.dataset.template === template);
+  document.querySelectorAll('.template-card')?.forEach(card => {
+    const isActive = card.dataset.template === template;
+    card.classList.toggle('active', isActive);
+    card.setAttribute('aria-selected', isActive ? 'true' : 'false');
   });
 }
 
-// Toggle Checkbox (ADDICTIVE - Visual Feedback)
+// Toggle Checkbox with keyboard support
 function toggleCheckbox(element) {
-  element.classList.toggle('checked');
-  const label = element.querySelector('.checkbox-label').innerText;
-  
-  if (element.classList.contains('checked')) {
-    selectedData.push(label);
-  } else {
-    selectedData = selectedData.filter(item => item !== label);
+  const checkbox = element.querySelector('input[type="checkbox"]');
+  if (checkbox) {
+    checkbox.checked = !checkbox.checked;
+    element.classList.toggle('checked', checkbox.checked);
+    
+    const label = element.querySelector('.checkbox-label')?.innerText || '';
+    if (checkbox.checked) {
+      if (!selectedData.includes(label)) selectedData.push(label);
+    } else {
+      selectedData = selectedData.filter(item => item !== label);
+    }
   }
 }
 
+// Keyboard support for checkbox items
+document.querySelectorAll('.checkbox-item')?.forEach(item => {
+  item.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleCheckbox(item);
+    }
+  });
+});
+
+// Keyboard support for template cards
+document.querySelectorAll('.template-card')?.forEach(card => {
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setTemplate(card.dataset.template);
+    }
+  });
+});
+
 // Generate Privacy Policy
 function generatePolicy() {
-  const siteName = document.getElementById('siteName').value || 'Our Website';
-  const companyName = document.getElementById('companyName').value || siteName;
-  const contactEmail = document.getElementById('contactEmail').value || 'contact@example.com';
-  const websiteUrl = document.getElementById('websiteUrl').value || 'https://example.com';
-  const businessAddress = document.getElementById('businessAddress').value;
+  const siteNameEl = document.getElementById('siteName');
+  const contactEmailEl = document.getElementById('contactEmail');
+  
+  const siteName = siteNameEl?.value || 'Our Website';
+  const companyName = document.getElementById('companyName')?.value || siteName;
+  const contactEmail = contactEmailEl?.value || 'contact@example.com';
+  const websiteUrl = document.getElementById('websiteUrl')?.value || 'https://example.com';
+  const businessAddress = document.getElementById('businessAddress')?.value || '';
 
-  if (!document.getElementById('siteName').value || !document.getElementById('contactEmail').value) {
+  if (!siteNameEl?.value || !contactEmailEl?.value) {
     showToast('Please fill in required fields (*)');
     return;
   }
@@ -1542,32 +1327,60 @@ function generatePolicy() {
   const previewArea = document.getElementById('previewArea');
   const policyContent = document.getElementById('policyContent');
   
-  policyContent.innerHTML = generatedPolicy;
-  previewArea.classList.add('show');
+  if (policyContent) policyContent.innerHTML = generatedPolicy;
+  previewArea?.classList.add('show');
   
-  // Save to LocalStorage (ADDICTIVE - Persistence)
-  localStorage.setItem('tc_privacy_policy', generatedPolicy);
-  localStorage.setItem('tc_privacy_site', siteName);
+  // Save to LocalStorage
+  try {
+    localStorage.setItem('tc_privacy_policy', generatedPolicy);
+    localStorage.setItem('tc_privacy_site', siteName);
+  } catch(e) {}
   
   // Scroll to preview
-  previewArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  previewArea?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   
   showToast('Policy generated!');
 }
 
-// Copy Policy (ADDICTIVE - Shareability)
+// Copy Policy
 function copyPolicy() {
-  const text = document.getElementById('policyContent').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    showToast('Copied to clipboard!');
-  });
+  const policyContent = document.getElementById('policyContent');
+  const text = policyContent?.innerText || '';
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Copied to clipboard!');
+    }).catch(() => {
+      fallbackCopy(text);
+    });
+  } else {
+    fallbackCopy(text);
+  }
 }
 
-// Download Policy (ADDICTIVE - Multiple Formats)
+// Fallback copy for older browsers
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body?.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showToast('Copied to clipboard!');
+  } catch(e) {
+    showToast('Copy failed');
+  }
+  document.body?.removeChild(textarea);
+}
+
+// Download Policy
 function downloadPolicy(format) {
-  const content = document.getElementById('policyContent').innerHTML;
-  const text = document.getElementById('policyContent').innerText;
-  const siteName = document.getElementById('siteName').value || 'privacy-policy';
+  const policyContent = document.getElementById('policyContent');
+  if (!policyContent) return;
+  
+  const content = policyContent.innerHTML;
+  const text = policyContent.innerText;
+  const siteNameEl = document.getElementById('siteName');
+  const siteName = siteNameEl?.value || 'privacy-policy';
   
   if (format === 'txt') {
     const blob = new Blob([text], { type: 'text/plain' });
@@ -1607,63 +1420,82 @@ function downloadPolicy(format) {
 
 // Print Policy
 function printPolicy() {
-  const content = document.getElementById('policyContent').innerHTML;
+  const policyContent = document.getElementById('policyContent');
+  if (!policyContent) return;
+  
+  const content = policyContent.innerHTML;
   const printWindow = window.open('', '_blank');
-  printWindow.document.write(`
-    <html>
-    <head>
-      <title>Print Privacy Policy</title>
-      <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; line-height: 1.8; color: #333; }
-        h1 { font-size: 2em; margin-bottom: 0.5em; }
-        h2 { font-size: 1.5em; margin-top: 2em; margin-bottom: 0.75em; }
-        @media print { body { padding: 0; } }
-      </style>
-    </head>
-    <body>${content}</body>
-    </html>
-  `);
-  printWindow.document.close();
-  printWindow.print();
+  if (printWindow) {
+    printWindow.document.write(`
+      <html>
+      <head>
+        <title>Print Privacy Policy</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; line-height: 1.8; color: #333; }
+          h1 { font-size: 2em; margin-bottom: 0.5em; }
+          h2 { font-size: 1.5em; margin-top: 2em; margin-bottom: 0.75em; }
+          @media print { body { padding: 0; } }
+        </style>
+      </head>
+      <body>${content}</body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  }
 }
 
-// Load Saved Policy on Page Load (ADDICTIVE - Convenience)
+// Load Saved Policy on Page Load
 window.addEventListener('load', () => {
-  const saved = localStorage.getItem('tc_privacy_policy');
-  const savedSite = localStorage.getItem('tc_privacy_site');
-  
-  if (saved && savedSite) {
-    document.getElementById('siteName').value = savedSite;
-    // Could restore full preview if desired
-  }
+  try {
+    const saved = localStorage.getItem('tc_privacy_policy');
+    const savedSite = localStorage.getItem('tc_privacy_site');
+    
+    if (saved && savedSite) {
+      const siteNameEl = document.getElementById('siteName');
+      if (siteNameEl) siteNameEl.value = savedSite;
+    }
+  } catch(e) {}
 });
 
 // Toast Notification
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.innerText = message;
   toast.classList.add('active');
   setTimeout(() => toast.classList.remove('active'), 2000);
 }
 
-// FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+// FAQ Accordion with keyboard support
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
+    const item = btn?.closest('.faq-item');
+    if (!item) return;
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
       i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      const q = i.querySelector('.faq-q');
+      if (q) q.setAttribute('aria-expanded', 'false');
     });
+    
     if (!isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
     }
   });
+  
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
 });
 
 // Enter key to generate
-document.querySelectorAll('.tool-input').forEach(input => {
+document.querySelectorAll('.tool-input')?.forEach(input => {
   input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       generatePolicy();
@@ -1671,11 +1503,30 @@ document.querySelectorAll('.tool-input').forEach(input => {
   });
 });
 
+// Consent hint logic
+document.addEventListener('DOMContentLoaded', () => {
+  const consentHint = document.getElementById('consentHint');
+  const consentClose = document.getElementById('consentClose');
+  
+  if (consentHint && !sessionStorage.getItem('consentDismissed')) {
+    setTimeout(() => { consentHint?.classList.add('show'); }, 3000);
+  }
+  
+  consentClose?.addEventListener('click', () => {
+    consentHint?.classList.remove('show');
+    try { sessionStorage.setItem('consentDismissed', 'true'); } catch(e) {}
+  });
+});
+
 // ─── ADSENSE aktivieren nach Approval ───
-// Nach Freischaltung diese Zeilen aktivieren:
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
+
+<!-- 🖼️ IMAGE TEMPLATE for future use -->
+<!-- 
+<img src="image.jpg" alt="Description" width="800" height="600" loading="lazy" decoding="async">
+-->
 
 </body>
 </html>
