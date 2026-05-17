@@ -205,6 +205,32 @@
       background: linear-gradient(90deg, transparent, rgba(139,92,246,.25), transparent);
     }
 
+    /* Trust Badges (NEW - AdSense Trust Signals) */
+    .trust-badges {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .trust-badge svg {
+      width: 14px;
+      height: 14px;
+      color: var(--success);
+    }
+
     /* Calculator Tabs (ADDICTIVE - Multiple Options) */
     .calc-tabs {
       display: flex;
@@ -440,6 +466,97 @@
       font-style: normal;
     }
 
+    /* How It Works - Ordered List (NEW - AdSense Requirement) */
+    .how-it-works ol {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+    .how-it-works li {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 1rem;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      counter-increment: step;
+    }
+    .how-it-works li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--calc);
+      color: #0D0D0D;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Who Is This For - Explicit List (NEW) */
+    .who-for ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .who-for li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 0.75rem;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .who-for li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* Pro Tip Box (NEW - AdSense Requirement) */
+    .pro-tip {
+      background: linear-gradient(135deg, var(--calc-bg), rgba(232,213,163,0.05));
+      border: 1px solid var(--calc-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .pro-tip-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--calc);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pro-tip p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .pro-tip a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px dashed var(--accent);
+      transition: opacity 0.2s;
+    }
+    .pro-tip a:hover {
+      opacity: 0.85;
+    }
+
     .formula-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -668,11 +785,35 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: .75rem;
+      margin-bottom: 0.75rem;
     }
     .footer-logo em {
       color: var(--accent);
       font-style: italic;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--text);
+    }
+    .footer-adsense-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1rem;
+      opacity: 0.7;
+      line-height: 1.5;
     }
     .footer-copy {
       font-size: 11px;
@@ -680,6 +821,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       opacity: .4;
+      margin-top: 0.5rem;
     }
 
     /* ─── ANIMATIONS & TOAST ─── */
@@ -728,6 +870,11 @@
       .calc-tab {
         flex-shrink: 0;
       }
+      .footer-links {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -769,6 +916,22 @@
   <!-- HERO CARD (TOOL) -->
   <div class="hero-card">
     
+    <!-- Trust Badges (NEW - AdSense Trust Signals) -->
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        100% Private
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Browser-Based
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        No Signup
+      </div>
+    </div>
+
     <!-- Calculator Tabs (ADDICTIVE - Multiple Options) -->
     <div class="calc-tabs">
       <button class="calc-tab active" data-calc="basic" onclick="setCalc('basic')">Basic %</button>
@@ -897,6 +1060,39 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
     </div>
+  </div>
+
+  <!-- HOW IT WORKS (NEW - AdSense Requirement: Ordered List) -->
+  <div class="section-block how-it-works">
+    <div class="section-title">
+      How It Works
+      <span class="section-title-badge">3 Steps</span>
+    </div>
+    <ol>
+      <li><strong>Select calculation type</strong>: Choose from Basic %, Reverse %, % Change, Increase, or Decrease.</li>
+      <li><strong>Enter your values</strong>: Fill in the input fields – results update instantly as you type.</li>
+      <li><strong>Copy or save</strong>: Use the Copy button or check your history for recent calculations.</li>
+    </ol>
+  </div>
+
+  <!-- WHO IS THIS FOR (NEW - AdSense Requirement: Explicit List) -->
+  <div class="section-block who-for">
+    <div class="section-title">
+      Who Is This For?
+      <span class="section-title-badge">Target Users</span>
+    </div>
+    <ul>
+      <li><strong>Students:</strong> Solve math homework, calculate grade percentages, and understand fraction conversions.</li>
+      <li><strong>Shoppers:</strong> Quickly compute discounts, sale prices, and tax amounts while browsing deals.</li>
+      <li><strong>Professionals:</strong> Calculate salary increases, commission rates, and business growth metrics.</li>
+      <li><strong>Everyday Users:</strong> Split bills, calculate tips, and handle daily percentage questions with ease.</li>
+    </ul>
+  </div>
+
+  <!-- PRO TIP (NEW - AdSense Requirement: Internal Link) -->
+  <div class="section-block pro-tip">
+    <div class="pro-tip-title">💡 Pro Tip</div>
+    <p>For financial calculations like taxes or tips, combine this percentage calculator with our <a href="/vat-calculator">VAT Calculator</a> or <a href="/tip-splitter">Tip Splitter</a> for complete bill management.</p>
   </div>
 
   <!-- FORMULAS -->
@@ -1031,6 +1227,19 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  
+  <!-- Footer Links (FIXED - Exact Paths Required) -->
+  <nav class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy Policy</a>
+  </nav>
+  
+  <!-- AdSense Disclosure (NEW - Required for Approval) -->
+  <p class="footer-adsense-disclosure">
+    This site is supported by advertising. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you.
+  </p>
+  
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
 </footer>
 
@@ -1241,6 +1450,7 @@ document.querySelectorAll('.input-field').forEach(input => {
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
+// Nach Freischaltung diese Zeilen aktivieren:
 // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
 // (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
