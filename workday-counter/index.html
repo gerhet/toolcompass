@@ -6,10 +6,22 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>Workday Counter – Business Days Between Dates Calculator | ToolCompass</title>
-  <meta name="description" content="Calculate working days between two dates instantly. Excludes weekends, shows total business hours & minutes. Free workday calculator for project planning.">
+  <title>Workday Counter: Business Days Calculator | ToolCompass</title>
+  <meta name="description" content="Calculate working days between dates instantly. Excludes weekends, shows hours & minutes. Free, private tool for project planning. Try now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  <!-- Canonical: Dynamisch anpassbar für Subpages -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page.path}}"> -->
   <link rel="canonical" href="https://toolcompass.org/workday-counter">
+  
+  <!-- Hreflang für mehrsprachige Vorbereitung -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/workday-counter">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/workday-counter">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/workday-counter">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
   <meta name="keywords" content="workday calculator, business days calculator, working days between dates, net working days, project timeline calculator">
 
@@ -91,14 +103,49 @@
               "@type": "Answer",
               "text": "Yes. If your end date is before your start date, the calculator automatically swaps them and shows the result with a negative prefix."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator exclude public holidays?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This version excludes weekends only. National and regional holidays vary by country and are not automatically subtracted. You can manually subtract those days from the result if needed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are work hours and minutes calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We multiply net working days by 8 hours (standard workday) to get total work hours, then by 60 for minutes. Example: 10 working days = 80 hours = 4,800 minutes. Adjust proportionally if your workday differs."
+            }
           }
         ]
+      },
+      {
+        "@type": "Organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "sameAs": [],
+        "description": "ToolCompass offers 31+ free, private browser tools for productivity, finance, writing, development, time management, and health — all running locally in your browser."
+      },
+      {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts mit Preconnect + Preload für kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -116,7 +163,16 @@
       --time: #22D3EE;
       --time-bg: rgba(34,211,238,0.07);
       --time-border: rgba(34,211,238,0.15);
+      --focus-ring: rgba(34,211,238,0.5);
     }
+
+    /* z-index Stack Dokumentation:
+       999: Grain overlay
+       100: Header (sticky)
+       50: Modals/Banners (future)
+       10: Skip link
+       1: Default content
+    */
 
     html { scroll-behavior: smooth; }
 
@@ -126,6 +182,28 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Skip to Content Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
     }
 
     /* Grain */
@@ -155,7 +233,11 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 4px;
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -195,6 +277,8 @@
       border-radius: 20px; padding: 2.5rem;
       margin-bottom: 1rem; position: relative; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
     .calc-card::before {
       content: '';
@@ -229,6 +313,10 @@
       background: rgba(34,211,238,.03);
       box-shadow: 0 0 0 3px rgba(34,211,238,.08);
     }
+    input[type="date"]:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
     .quick-btns {
       display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap;
@@ -240,9 +328,13 @@
       cursor: pointer; transition: all .2s;
       font-family: 'Outfit', sans-serif;
     }
-    .quick-btn:hover {
+    .quick-btn:hover, .quick-btn:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface); color: var(--text);
+      outline: none;
+    }
+    .quick-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
 
     .swap-btn {
@@ -254,10 +346,14 @@
       margin-bottom: 1.5rem; display: flex;
       align-items: center; justify-content: center; gap: 8px;
     }
-    .swap-btn:hover {
+    .swap-btn:hover, .swap-btn:focus-visible {
       border-color: var(--border-hover);
       color: var(--text);
       background: rgba(255,255,255,.02);
+      outline: none;
+    }
+    .swap-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
 
     /* ─── RESULT ─── */
@@ -291,6 +387,8 @@
       border: 1px solid var(--border);
       border-radius: 12px; text-align: center;
       transition: border-color .2s;
+      will-change: transform;
+      transform: translateZ(0);
     }
     .sub-card:hover { border-color: var(--border-hover); }
     .sub-val {
@@ -331,7 +429,7 @@
     }
     .holiday-hint svg { opacity: .5; }
 
-    /* === NEW: HOW IT WORKS SECTION === */
+    /* === HOW IT WORKS SECTION === */
     .how-it-works {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
@@ -350,7 +448,7 @@
     .how-it-works li { margin-bottom: 0.5rem; }
     .how-it-works strong { color: var(--text); font-weight: 500; }
 
-    /* === NEW: WHO IS THIS FOR BOX === */
+    /* === WHO IS THIS FOR BOX === */
     .who-is-this-for {
       background: linear-gradient(135deg, rgba(34,211,238,0.03) 0%, transparent 100%);
       border: 1px solid var(--time-border);
@@ -404,10 +502,14 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
+    .tool-chip:hover, .tool-chip:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface2);
       transform: translateY(-2px);
+      outline: none;
+    }
+    .tool-chip:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
@@ -432,7 +534,11 @@
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
     .seo-content a { color: var(--time); text-decoration: none; border-bottom: 1px dashed var(--time-border); }
-    .seo-content a:hover { border-bottom-style: solid; }
+    .seo-content a:hover, .seo-content a:focus-visible { border-bottom-style: solid; outline: none; }
+    .seo-content a:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 2px;
+    }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -445,14 +551,17 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
+    .faq-q:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--focus-ring);
+    }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-item.open .faq-a { max-height: 300px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-    /* === NEW: PRO TIP BOX === */
+    /* === PRO TIP BOX === */
     .pro-tip {
       background: rgba(232,213,163,0.06);
       border-left: 3px solid var(--accent);
@@ -462,6 +571,31 @@
       color: var(--muted);
     }
     .pro-tip strong { color: var(--accent); }
+
+    /* === PRIVACY DISCLAIMER BOX === */
+    .privacy-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .privacy-disclaimer strong { color: var(--text); }
+
+    /* === COOKIE-FREE ADSENSE NOTICE === */
+    .adsense-notice {
+      background: rgba(34,211,238,0.05);
+      border: 1px solid var(--time-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .adsense-notice strong { color: var(--time); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -483,7 +617,11 @@
       letter-spacing: .08em; text-transform: uppercase;
       transition: color .15s;
     }
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--text); outline: none; }
+    .footer-links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
     .ad-disclosure {
       font-size: 10px; color: var(--muted); opacity: 0.5;
@@ -494,6 +632,15 @@
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
       .calc-card { padding: 1.75rem; }
@@ -501,6 +648,9 @@
   </style>
 </head>
 <body>
+
+<!-- Skip to Content Link für Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header>
   <div class="header-inner">
@@ -513,7 +663,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -549,13 +699,13 @@
     </div>
 
     <div class="quick-btns">
-      <button class="quick-btn" onclick="setQuick(7)">Next 7 days</button>
-      <button class="quick-btn" onclick="setQuick(14)">Next 14 days</button>
-      <button class="quick-btn" onclick="setQuick(30)">Next 30 days</button>
-      <button class="quick-btn" onclick="setQuick(90)">Next 90 days</button>
+      <button class="quick-btn" type="button" onclick="setQuick(7)">Next 7 days</button>
+      <button class="quick-btn" type="button" onclick="setQuick(14)">Next 14 days</button>
+      <button class="quick-btn" type="button" onclick="setQuick(30)">Next 30 days</button>
+      <button class="quick-btn" type="button" onclick="setQuick(90)">Next 90 days</button>
     </div>
 
-    <button class="swap-btn" onclick="swapDates()">
+    <button class="swap-btn" type="button" onclick="swapDates()">
       <span>⇅</span> Swap Dates
     </button>
 
@@ -608,7 +758,7 @@
     </div>
   </div>
 
-  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <!-- === HOW IT WORKS SECTION === -->
   <div class="how-it-works">
     <h3>🔧 How This Tool Works</h3>
     <ol>
@@ -619,7 +769,7 @@
     </ol>
   </div>
 
-  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <!-- === WHO IS THIS FOR BOX === -->
   <div class="who-is-this-for">
     <strong>Who is this for?</strong> This calculator helps professionals who need precise timeline estimates:
     <ul>
@@ -641,6 +791,16 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
     </div>
+  </div>
+
+  <!-- === COOKIE-FREE ADSENSE NOTICE === -->
+  <div class="adsense-notice">
+    <strong>🔒 Cookie-free ads:</strong> ToolCompass uses Google AdSense without personalized tracking. Your data stays private — no cookies, no profiling.
+  </div>
+
+  <!-- === PRIVACY DISCLAIMER === -->
+  <div class="privacy-disclaimer">
+    <strong>🔐 Privacy First:</strong> All calculations run locally in your browser. Your dates are never sent to any server. No data storage, no tracking, no login required.
   </div>
 
   <!-- OTHER TOOLS -->
@@ -707,56 +867,62 @@
       Whether you're a <strong>project manager</strong> estimating sprint capacity, a <strong>freelancer</strong> quoting a deadline, or a <strong>student</strong> planning study schedules — this tool provides surgical precision. Simply select your start and end date, and the calculator instantly shows you how many <strong>Monday-to-Friday workdays</strong> fall within that range, along with the equivalent hours (based on an 8-hour workday standard).
     </p>
     <p>
-      All calculations run locally in your browser using JavaScript. This means your date inputs never leave your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
+      All calculations run locally in your browser using JavaScript. This means your date inputs never leave your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals — built by developers who value privacy, speed, and simplicity.
+    </p>
+    <p>
+      <strong>About the creator:</strong> ToolCompass is maintained by a small team of productivity enthusiasts who believe powerful tools should be free, private, and instantly usable — no signups, no tracking, no bloat. We've been building browser-based utilities since 2024.
+    </p>
+    <p class="privacy-disclaimer" style="margin-top: 1rem; background: transparent; border: none; padding: 0; font-size: 12px;">
+      <strong>Note:</strong> This tool is for estimation purposes only. It does not account for public holidays, company-specific schedules, or regional variations. For legal or payroll calculations, please consult official resources.
     </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           How do I calculate working days between two dates?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">Enter your start and end date in the fields above. The Workday Counter automatically excludes weekends (Saturday & Sunday) and displays the total number of Monday-Friday business days, plus equivalent work hours and minutes.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Does this calculator exclude public holidays?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">No. This version excludes weekends only. National and regional holidays vary by country and are not automatically subtracted. You can manually subtract those days from the result if needed.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Can I calculate business days in reverse?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq3">
           <p class="faq-a-inner">Yes. If your end date is earlier than your start date, the calculator automatically swaps them and displays the result with a negative (-) prefix to indicate reverse direction.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           What does "work weeks" mean?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq4">
           <p class="faq-a-inner">Work weeks are calculated by dividing the total working days by 5 (the standard Monday-Friday work week). A result of "2.4 work weeks" means 12 working days, or 2 full weeks plus 2 extra days.</p>
         </div>
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
           How are work hours calculated?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq5">
           <p class="faq-a-inner">We multiply the net working days by 8 (standard workday). For example, 10 working days = 80 work hours. If your workday differs (e.g. 7.5h or 9h), simply adjust the result proportionally.</p>
         </div>
       </div>
@@ -773,21 +939,35 @@
     <a href="/datenschutz/index.html">Privacy</a>
   </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
-  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. No personalized tracking is used.</p>
 </footer>
+
+<!-- Image Lazy Loading Template (für zukünftige Bilder) -->
+<!-- 
+  <img src="image.jpg" 
+       alt="Descriptive alt text" 
+       width="800" 
+       height="600" 
+       loading="lazy" 
+       decoding="async">
+-->
 
 <script>
 // ═══════════════════════════════════════════════
 // WORKDAY CALCULATOR
 // ═══════════════════════════════════════════════
 function countWorkdays() {
-  const startInput = document.getElementById('startDate').value;
-  const endInput   = document.getElementById('endDate').value;
+  const startInput = document.getElementById('startDate')?.value;
+  const endInput   = document.getElementById('endDate')?.value;
 
   if (!startInput || !endInput) return;
 
-  let start = new Date(startInput);
-  let end   = new Date(endInput);
+  const start = new Date(startInput);
+  const end   = new Date(endInput);
+  
+  // Guard against invalid dates
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return;
+  
   start.setHours(0, 0, 0, 0);
   end.setHours(0, 0, 0, 0);
 
@@ -817,13 +997,20 @@ function countWorkdays() {
   const totalMins  = totalHours * 60;
   const workWeeks  = (workdays / 5).toFixed(1);
 
-  // Update DOM
-  document.getElementById('dayCount').textContent    = prefix + workdays;
-  document.getElementById('totalDays').textContent   = prefix + totalDays;
-  document.getElementById('weekendDays').textContent = prefix + weekends;
-  document.getElementById('workWeeks').textContent   = prefix + workWeeks;
-  document.getElementById('hourCount').textContent   = prefix + totalHours.toLocaleString();
-  document.getElementById('minCount').textContent    = prefix + totalMins.toLocaleString();
+  // Update DOM with null-checks
+  const dayCountEl = document.getElementById('dayCount');
+  const totalDaysEl = document.getElementById('totalDays');
+  const weekendDaysEl = document.getElementById('weekendDays');
+  const workWeeksEl = document.getElementById('workWeeks');
+  const hourCountEl = document.getElementById('hourCount');
+  const minCountEl = document.getElementById('minCount');
+  
+  if (dayCountEl) dayCountEl.textContent = prefix + workdays;
+  if (totalDaysEl) totalDaysEl.textContent = prefix + totalDays;
+  if (weekendDaysEl) weekendDaysEl.textContent = prefix + weekends;
+  if (workWeeksEl) workWeeksEl.textContent = prefix + workWeeks;
+  if (hourCountEl) hourCountEl.textContent = prefix + totalHours.toLocaleString();
+  if (minCountEl) minCountEl.textContent = prefix + totalMins.toLocaleString();
 }
 
 // ═══════════════════════════════════════════════
@@ -834,9 +1021,14 @@ function setQuick(days) {
   const future = new Date();
   future.setDate(today.getDate() + days);
 
-  document.getElementById('startDate').value = today.toISOString().split('T')[0];
-  document.getElementById('endDate').value   = future.toISOString().split('T')[0];
-  countWorkdays();
+  const startDate = document.getElementById('startDate');
+  const endDate = document.getElementById('endDate');
+  
+  if (startDate && endDate) {
+    startDate.value = today.toISOString().split('T')[0];
+    endDate.value   = future.toISOString().split('T')[0];
+    countWorkdays();
+  }
 }
 
 // ═══════════════════════════════════════════════
@@ -845,15 +1037,24 @@ function setQuick(days) {
 function swapDates() {
   const s = document.getElementById('startDate');
   const e = document.getElementById('endDate');
-  [s.value, e.value] = [e.value, s.value];
-  countWorkdays();
+  if (s?.value && e?.value) {
+    [s.value, e.value] = [e.value, s.value];
+    countWorkdays();
+  }
 }
 
 // ═══════════════════════════════════════════════
 // AUTO-CALC ON INPUT
 // ═══════════════════════════════════════════════
-document.getElementById('startDate').addEventListener('input', countWorkdays);
-document.getElementById('endDate').addEventListener('input', countWorkdays);
+const startDateInput = document.getElementById('startDate');
+const endDateInput = document.getElementById('endDate');
+
+if (startDateInput) {
+  startDateInput.addEventListener('input', countWorkdays);
+}
+if (endDateInput) {
+  endDateInput.addEventListener('input', countWorkdays);
+}
 
 // ═══════════════════════════════════════════════
 // INIT (default 14 days from today)
@@ -865,21 +1066,26 @@ window.addEventListener('DOMContentLoaded', () => {
 // ═══════════════════════════════════════════════
 // FAQ ACCORDION
 // ═══════════════════════════════════════════════
-document.querySelectorAll('.faq-q').forEach(btn => {
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item   = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    const isOpen = item?.classList.contains('open');
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
+      i?.classList.remove('open');
+      i?.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
     });
-    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    
+    if (item && !isOpen) { 
+      item.classList.add('open'); 
+      btn.setAttribute('aria-expanded', 'true'); 
+    }
   });
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
 
 </body>
