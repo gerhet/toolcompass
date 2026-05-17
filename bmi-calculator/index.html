@@ -14,12 +14,13 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/bmi-calculator">
   
-  <!-- NEW: hreflang + sitemap reference -->
+  <!-- NEW: Complete hreflang setup + sitemap reference -->
   <link rel="alternate" hreflang="en" href="https://toolcompass.org/bmi-calculator">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/bmi-rechner">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/bmi-calculator">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   
-  <!-- NEW: Breadcrumb Schema Template (commented for future use) -->
-  <!--
+  <!-- NEW: Breadcrumb Schema (activated for better crawl structure) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -30,7 +31,6 @@
     ]
   }
   </script>
-  -->
   
   <meta name="author" content="ToolCompass">
   <meta name="keywords" content="bmi calculator, body mass index, health calculator, weight calculator, bmi chart, healthy weight">
@@ -42,6 +42,7 @@
   <meta property="og:url" content="https://toolcompass.org/bmi-calculator">
   <meta property="og:image" content="https://toolcompass.org/og-bmi.png">
   <meta property="og:site_name" content="ToolCompass">
+  <meta property="og:locale" content="en_US">
 
   <!-- ═══ TWITTER ═══ -->
   <meta name="twitter:card" content="summary_large_image">
@@ -58,30 +59,46 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-4JVNJKQYCG');
+    gtag('config', 'G-4JVNJKQYCG', { 'anonymize_ip': true });
   </script>
 
   <!-- ═══ ADSENSE (Placeholder) ═══ -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
 
-  <!-- ═══ SCHEMA.ORG ═══ -->
+  <!-- ═══ SCHEMA.ORG - Complete Graph ═══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://toolcompass.org/#website",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
         "@type": "SoftwareApplication",
+        "@id": "https://toolcompass.org/bmi-calculator#application",
         "name": "BMI Calculator",
         "url": "https://toolcompass.org/bmi-calculator",
         "applicationCategory": "HealthApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Calculate Body Mass Index (BMI) with health tips and visual scale.",
+        "description": "Calculate Body Mass Index (BMI) with health tips and visual scale. Free, private, browser-based tool.",
         "featureList": ["Live calculation", "BMI scale visualization", "Health tips", "Unit conversion", "Progress tracking", "History save"],
-        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" },
+        "inLanguage": "en"
       },
       {
         "@type": "FAQPage",
+        "@id": "https://toolcompass.org/bmi-calculator#faq",
+        "inLanguage": "en",
         "mainEntity": [
           { "@type": "Question", "name": "What is BMI?", "acceptedAnswer": { "@type": "Answer", "text": "BMI (Body Mass Index) is a measure of body fat based on height and weight. It's calculated by dividing weight in kg by height in meters squared." } },
           { "@type": "Question", "name": "What is a healthy BMI range?", "acceptedAnswer": { "@type": "Answer", "text": "A healthy BMI range is typically between 18.5 and 24.9. Below 18.5 is underweight, 25-29.9 is overweight, and 30+ is obese." } },
@@ -92,6 +109,7 @@
       },
       {
         "@type": "Organization",
+        "@id": "https://toolcompass.org/#organization",
         "name": "ToolCompass",
         "url": "https://toolcompass.org",
         "description": "ToolCompass offers 31+ free browser tools for productivity, health, finance, and writing — all privacy-friendly, no login required.",
@@ -101,10 +119,13 @@
   }
   </script>
 
-  <!-- ═══ FONTS ═══ -->
+  <!-- ═══ FONTS - Preload with display=swap ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  </noscript>
 
   <!-- ═══ STYLES ═══ -->
   <style>
@@ -194,6 +215,7 @@
       font-weight: 700; font-size: 15px; color: var(--text);
     }
     .logo-text em { color: var(--accent); font-style: normal; }
+    .logo-text:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
 
     /* ─── MAIN ─── */
     main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
@@ -202,6 +224,7 @@
     .page-header {
       text-align: center; margin-bottom: 2.5rem;
       animation: fadeUp .7s ease both;
+      will-change: transform, opacity;
     }
     .page-tag {
       display: inline-flex; align-items: center; gap: 7px;
@@ -241,6 +264,7 @@
       border-radius: 20px; padding: 2rem;
       margin-bottom: 1.5rem;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
     }
     
     .unit-toggle {
@@ -256,7 +280,7 @@
       font-family: 'Outfit', sans-serif;
     }
     .unit-btn.active { background: var(--accent); color: #000; }
-    .unit-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .unit-btn:hover, .unit-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
     
     .input-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
@@ -278,6 +302,7 @@
       transition: border-color .2s;
     }
     .input-wrapper input:focus { border-color: var(--accent); box-shadow: var(--focus-ring); }
+    .input-wrapper input:focus-visible { outline: none; box-shadow: var(--focus-ring); }
     .input-icon {
       position: absolute; left: 1rem; top: 50%;
       transform: translateY(-50%); font-size: 18px;
@@ -294,17 +319,20 @@
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 16px; padding: 2rem; text-align: center;
       margin-bottom: 1.5rem;
+      will-change: contents;
     }
     .result-bmi {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3rem, 6vw, 5rem); font-weight: 900;
       line-height: 1; margin-bottom: 0.5rem;
+      will-change: color;
     }
     .result-status {
       font-size: 14px; font-weight: 600;
       text-transform: uppercase; letter-spacing: .15em;
       padding: 0.5rem 1rem; border-radius: 20px;
       display: inline-block; margin-bottom: 1rem;
+      will-change: background-color, color;
     }
     .result-status.underweight { background: rgba(96,165,250,0.15); color: var(--underweight); }
     .result-status.normal { background: rgba(52,211,153,0.15); color: var(--normal); }
@@ -331,11 +359,9 @@
       width: 4px; height: 24px;
       background: #fff; border: 2px solid var(--bg);
       border-radius: 2px;
-      transform: translateX(-50%);
-      transition: left .5s ease;
-      /* NEW: GPU acceleration for smooth animation */
-      will-change: left;
       transform: translateZ(0) translateX(-50%);
+      transition: left .5s ease;
+      will-change: left;
     }
     .bmi-labels {
       display: flex; justify-content: space-between;
@@ -348,6 +374,7 @@
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
       margin-bottom: 1rem;
+      animation: fadeUp .7s .2s ease both;
     }
     .tips-header {
       font-family: 'Playfair Display', serif;
@@ -370,6 +397,7 @@
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
       margin-bottom: 1rem;
+      animation: fadeUp .7s .25s ease both;
     }
     .history-header {
       display: flex; justify-content: space-between; align-items: center;
@@ -521,18 +549,87 @@
       font-size: 13px; font-weight: 500; color: var(--text);
       z-index: 500; transition: transform .3s, opacity .3s; opacity: 0;
       white-space: nowrap; font-family: 'Outfit', sans-serif; pointer-events: none;
+      will-change: transform, opacity;
     }
     #tcToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem; text-align: center;
-      max-width: 900px; margin: 0 auto;
+    /* ─── FOOTER - EXACT STRUCTURE AS SPECIFIED ─── */
+    footer { 
+      border-top: 1px solid var(--border); 
+      padding: 2.5rem 2rem; 
+      text-align: center; 
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg);
     }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .footer-logo { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 1.2rem; 
+      font-weight: 700; 
+      margin-bottom: .75rem; 
+      color: var(--text);
+    }
     .footer-logo em { color: var(--accent); font-style: italic; }
-    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .15s, opacity .15s;
+      opacity: 0.9;
+    }
+    .footer-links a:hover,
+    .footer-links a:focus-visible { 
+      color: var(--accent); 
+      opacity: 1;
+      outline: none;
+    }
+    .footer-links a:focus-visible { 
+      text-decoration: underline; 
+      border-radius: 3px;
+    }
+    
+    /* Separator between footer links */
+    .footer-links a:not(:last-child)::after {
+      content: "·";
+      margin-left: 1rem;
+      color: var(--border-hover);
+      opacity: 0.5;
+    }
+    
+    .footer-copy { 
+      font-size: 11px; 
+      color: var(--muted); 
+      letter-spacing: .1em; 
+      text-transform: uppercase; 
+      opacity: .7; 
+    }
+    
+    .ad-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      opacity: 0.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+    .ad-disclosure a {
+      color: var(--normal);
+      text-decoration: none;
+    }
+    .ad-disclosure a:hover { text-decoration: underline; }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
@@ -540,6 +637,8 @@
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
       .ad-consent { flex-direction: column; gap: 0.75rem; padding: 1rem 1.25rem; }
+      .footer-links { gap: 1.5rem; }
+      .footer-links a:not(:last-child)::after { margin-left: 0.75rem; }
     }
   </style>
 </head>
@@ -643,7 +742,7 @@
   <div class="history-section">
     <div class="history-header">
       <span class="history-title">📊 Calculation History</span>
-      <span class="history-clear" onclick="clearHistory()" role="button" tabindex="0">Clear All</span>
+      <span class="history-clear" onclick="clearHistory()" role="button" tabindex="0" aria-label="Clear calculation history">Clear All</span>
     </div>
     <div class="history-list" id="historyList" aria-live="polite">
       <div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start calculating!</div>
@@ -801,6 +900,7 @@
 
 </main>
 
+<!-- ✅ EXACT FOOTER STRUCTURE AS SPECIFIED -->
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   <nav class="footer-links" aria-label="Footer navigation">
@@ -1071,23 +1171,23 @@ function showToast(msg) {
 // ═══════════════════════════════════════════════
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
+    const item = btn?.closest?.('.faq-item');
     if (!item) return;
-    const isOpen = item.classList.contains('open');
-    const faqId = btn.getAttribute('aria-controls');
+    const isOpen = item?.classList?.contains?.('open');
+    const faqId = btn?.getAttribute?.('aria-controls');
     const answer = faqId ? document.getElementById(faqId) : null;
     
     document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      const q = i.querySelector('.faq-q');
-      if (q) q.setAttribute('aria-expanded', 'false');
+      i?.classList?.remove?.('open');
+      const q = i?.querySelector?.('.faq-q');
+      if (q) q?.setAttribute?.('aria-expanded', 'false');
     });
     
     if (!isOpen) { 
-      item.classList.add('open'); 
-      btn.setAttribute('aria-expanded', 'true');
+      item?.classList?.add?.('open'); 
+      btn?.setAttribute?.('aria-expanded', 'true');
       // Focus management for accessibility
-      if (answer) answer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (answer) answer?.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
     }
   });
   
@@ -1095,9 +1195,31 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      btn.click();
+      btn?.click?.();
     }
   });
+});
+
+// ═══════════════════════════════════════════════
+// UNIT BUTTONS KEYBOARD SUPPORT
+// ═══════════════════════════════════════════════
+document.querySelectorAll('.unit-btn').forEach(btn => {
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn?.click?.();
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════
+// HISTORY CLEAR KEYBOARD SUPPORT
+// ═══════════════════════════════════════════════
+document.querySelector('.history-clear')?.addEventListener?.('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    clearHistory();
+  }
 });
 
 // ═══════════════════════════════════════════════
@@ -1161,17 +1283,6 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('tc_bmi_unit', unit);
     });
   });
-  
-  // Make history-clear keyboard accessible
-  const clearBtn = document.querySelector('.history-clear');
-  if (clearBtn) {
-    clearBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        clearHistory();
-      }
-    });
-  }
 });
 
 // ─── ADSENSE nach Approval ───
