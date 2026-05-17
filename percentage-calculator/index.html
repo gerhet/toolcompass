@@ -6,24 +6,35 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>Percentage Calculator – All Percentage Calculations | ToolCompass</title>
-  <meta name="description" content="Free percentage calculator with multiple calculation types. Calculate percentages, percentage change, increase/decrease, and more. Instant results, private, no signup.">
+  <title>Percentage Calculator – Free % Tool | ToolCompass</title>
+  <meta name="description" content="Calculate percentages instantly: basic, change, increase/decrease. Free, private, browser-based. No signup. Try the tool now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/percentage-calculator">
+  <!-- 🔧 DYNAMIC CANONICAL TEMPLATE: Replace URL with current page path -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page_path}}"> -->
+  
+  <!-- 🌍 HREFLANG for multilingual support (add if German version exists) -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/percentage-calculator">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/prozentrechner">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/percentage-calculator">
+  
+  <!-- 🗺️ SITEMAP reference -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Percentage Calculator – All Percentage Calculations">
-  <meta property="og:description" content="Free percentage calculator with multiple calculation types. Instant results, private.">
+  <meta property="og:title" content="Percentage Calculator – Free % Tool">
+  <meta property="og:description" content="Calculate percentages instantly. Free, private, browser-based.">
   <meta property="og:url" content="https://toolcompass.org/percentage-calculator">
   <meta property="og:image" content="https://toolcompass.org/og-percentage.png">
   <meta property="og:site_name" content="ToolCompass">
 
   <!-- ═══ TWITTER ═══ -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Percentage Calculator – All Percentage Calculations">
-  <meta name="twitter:description" content="Free percentage calculator with multiple calculation types.">
+  <meta name="twitter:title" content="Percentage Calculator – Free % Tool">
+  <meta name="twitter:description" content="Calculate percentages instantly. Free, private.">
   <meta name="twitter:image" content="https://toolcompass.org/og-percentage.png">
 
   <!-- ═══ AI FINDABILITY ═══ -->
@@ -72,7 +83,7 @@
             "name": "How do I calculate percentage?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "To calculate percentage, divide the part by the whole and multiply by 100. For example, 50 out of 250 is (50/250) × 100 = 20%."
+              "text": "To calculate percentage, divide the part by the whole and multiply by 100. For example, 50 out of 250 is (50/250) × 100 = 20%. Our calculator does this automatically."
             }
           },
           {
@@ -88,7 +99,23 @@
             "name": "Is this calculator free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, our percentage calculator is 100% free with no limitations. All calculations happen in your browser with complete privacy."
+              "text": "Yes, our percentage calculator is 100% free with no limitations. All calculations happen in your browser with complete privacy—no data is stored or shared."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I save my calculations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Your recent calculations are automatically saved in your browser's local storage. You can revisit them anytime or clear the history with one click."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this financial advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This tool provides mathematical calculations only. For financial decisions, please consult a qualified professional. Results are for informational purposes."
             }
           }
         ]
@@ -96,8 +123,25 @@
     ]
   }
   </script>
+  
+  <!-- 🔧 BREADCRUMB TEMPLATE FOR SUBPAGES (copy & adapt) -->
+  <!--
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+      { "@type": "ListItem", "position": 2, "name": "Category", "item": "https://toolcompass.org/#category" },
+      { "@type": "ListItem", "position": 3, "name": "Current Tool", "item": "https://toolcompass.org/current-tool" }
+    ]
+  }
+  </script>
+  -->
 
+  <!-- 🚀 Preload critical fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -119,6 +163,7 @@
       --success-bg: rgba(34,197,94,0.07);
       --danger: #EF4444;
       --danger-bg: rgba(239,68,68,0.07);
+      /* z-index documentation: 999=grain, 200=toast, 100=header, 50=modals, 10=content */
     }
 
     html { scroll-behavior: smooth; }
@@ -135,6 +180,26 @@
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
+    }
+
+    /* ─── SKIP LINK (Accessibility) ─── */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      z-index: 1000;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 8px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
     }
 
     /* ─── HEADER ─── */
@@ -157,7 +222,7 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -205,624 +270,373 @@
       background: linear-gradient(90deg, transparent, rgba(139,92,246,.25), transparent);
     }
 
-    /* Trust Badges (NEW - AdSense Trust Signals) */
+    /* Trust Badges */
     .trust-badges {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: flex; gap: 12px; margin-bottom: 1.5rem; flex-wrap: wrap; justify-content: center;
     }
     .trust-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 20px;
+      font-size: 11px; color: var(--muted); font-weight: 500;
     }
-    .trust-badge svg {
-      width: 14px;
-      height: 14px;
-      color: var(--success);
-    }
+    .trust-badge svg { width: 14px; height: 14px; color: var(--success); }
 
-    /* Calculator Tabs (ADDICTIVE - Multiple Options) */
+    /* Calculator Tabs */
     .calc-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: flex; gap: 8px; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center;
     }
     .calc-tab {
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
+      padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--muted);
+      font-size: 12px; font-weight: 600; cursor: pointer;
       transition: all .2s;
     }
-    .calc-tab:hover {
-      border-color: var(--calc);
-      color: var(--calc);
+    .calc-tab:hover, .calc-tab:focus-visible {
+      border-color: var(--calc); color: var(--calc); outline: none;
     }
     .calc-tab.active {
-      background: var(--calc);
-      border-color: var(--calc);
-      color: #0D0D0D;
+      background: var(--calc); border-color: var(--calc); color: var(--bg);
     }
 
     /* Calculator Sections */
-    .calc-section {
-      display: none;
-      animation: slideUp .3s ease;
-    }
-    .calc-section.active {
-      display: block;
-    }
+    .calc-section { display: none; animation: slideUp .3s ease; }
+    .calc-section.active { display: block; }
 
-    /* Input Rows (ADDICTIVE - Inline Calculation) */
+    /* Input Rows */
     .input-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 1.5rem; flex-wrap: wrap; justify-content: center;
     }
     @media (max-width: 520px) {
       .input-row { flex-direction: column; align-items: stretch; }
     }
     .input-field {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 12px 16px;
-      border-radius: 8px;
-      font-family: 'Outfit';
-      font-size: 16px;
-      font-weight: 600;
-      text-align: center;
-      transition: border-color .2s;
-      width: 120px;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 12px 16px; border-radius: 8px;
+      font-family: 'Outfit'; font-size: 16px; font-weight: 600;
+      text-align: center; transition: border-color .2s; width: 120px;
     }
     .input-field:focus {
-      outline: none;
-      border-color: var(--calc);
+      outline: none; border-color: var(--calc);
+      box-shadow: 0 0 0 3px rgba(139,92,246,0.2);
     }
-    .input-label {
-      font-size: 14px;
-      color: var(--muted);
-      font-weight: 500;
+    .input-field:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
     }
+    .input-label { font-size: 14px; color: var(--muted); font-weight: 500; }
 
-    /* Result Box (ADDICTIVE - Live Results) */
+    /* Result Box */
     .result-box {
-      background: var(--calc-bg);
-      border: 1px solid var(--calc-border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-      margin-top: 1.5rem;
+      background: var(--calc-bg); border: 1px solid var(--calc-border);
+      border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1.5rem;
     }
     .result-label {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-bottom: 0.5rem;
+      font-size: 11px; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .05em; margin-bottom: 0.5rem;
     }
     .result-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--calc);
-      line-height: 1;
+      font-family: 'Playfair Display', serif; font-size: 2.5rem;
+      font-weight: 700; color: var(--calc); line-height: 1;
     }
     .result-formula {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 1rem;
-      font-family: monospace;
+      font-size: 12px; color: var(--muted); margin-top: 1rem; font-family: monospace;
     }
     .copy-btn {
-      margin-top: 1rem;
-      background: transparent;
-      border: 1px solid var(--calc-border);
-      color: var(--calc);
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
+      margin-top: 1rem; background: transparent; border: 1px solid var(--calc-border);
+      color: var(--calc); padding: 8px 16px; border-radius: 6px;
+      font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s;
     }
-    .copy-btn:hover {
-      background: var(--calc);
-      color: #0D0D0D;
+    .copy-btn:hover, .copy-btn:focus-visible {
+      background: var(--calc); color: var(--bg); outline: none;
+      box-shadow: 0 0 0 3px rgba(139,92,246,0.3);
     }
 
-    /* Progress Bar (ADDICTIVE - Visual) */
-    .progress-container {
-      margin-top: 1.5rem;
-    }
+    /* Progress Bar */
+    .progress-container { margin-top: 1.5rem; }
     .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 6px;
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--muted); margin-bottom: 6px;
     }
     .progress-bar {
-      height: 8px;
-      background: var(--surface2);
-      border-radius: 4px;
-      overflow: hidden;
+      height: 8px; background: var(--surface2);
+      border-radius: 4px; overflow: hidden;
     }
     .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--calc) 0%, rgba(139,92,246,0.5) 100%);
-      border-radius: 4px;
-      transition: width .5s ease;
-      width: 0%;
+      height: 100%; background: linear-gradient(90deg, var(--calc) 0%, rgba(139,92,246,0.5) 100%);
+      border-radius: 4px; transition: width .5s ease; width: 0%;
+      will-change: width; /* GPU acceleration hint */
     }
 
-    /* History Section (ADDICTIVE - Recent Calculations) */
+    /* History Section */
     .history-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: none;
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid var(--border); display: none;
     }
-    .history-section.show {
-      display: block;
-    }
+    .history-section.show { display: block; }
     .history-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 1rem;
     }
     .history-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em;
     }
     .history-clear {
-      font-size: 11px;
-      color: var(--muted);
-      cursor: pointer;
+      font-size: 11px; color: var(--muted); cursor: pointer;
       transition: color .2s;
     }
-    .history-clear:hover { color: var(--calc); }
-    .history-list {
-      max-height: 300px;
-      overflow-y: auto;
-    }
+    .history-clear:hover, .history-clear:focus-visible { color: var(--calc); }
+    .history-list { max-height: 300px; overflow-y: auto; }
     .history-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px;
-      background: var(--surface2);
-      border-radius: 8px;
-      margin-bottom: 8px;
-      cursor: pointer;
-      transition: all .2s;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px; background: var(--surface2); border-radius: 8px;
+      margin-bottom: 8px; cursor: pointer; transition: all .2s;
     }
-    .history-item:hover {
-      background: var(--calc-bg);
-      border: 1px solid var(--calc-border);
+    .history-item:hover, .history-item:focus-visible {
+      background: var(--calc-bg); border: 1px solid var(--calc-border);
+      outline: none;
     }
-    .history-calc {
-      font-size: 12px;
-      color: var(--text);
-    }
-    .history-result {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--calc);
-    }
+    .history-calc { font-size: 12px; color: var(--text); }
+    .history-result { font-size: 14px; font-weight: 700; color: var(--calc); }
 
     /* ─── SECTION BLOCKS ─── */
     .section-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem;
       animation: fadeUp .7s .3s ease both;
     }
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      font-weight: 700; font-style: italic; color: var(--text);
+      margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px;
     }
     .section-title-badge {
-      font-size: 10px;
-      font-weight: 600;
-      background: var(--calc-bg);
-      color: var(--calc);
-      border: 1px solid var(--calc-border);
-      padding: 2px 8px;
-      border-radius: 20px;
-      letter-spacing: .06em;
-      font-style: normal;
+      font-size: 10px; font-weight: 600; background: var(--calc-bg);
+      color: var(--calc); border: 1px solid var(--calc-border);
+      padding: 2px 8px; border-radius: 20px; letter-spacing: .06em; font-style: normal;
     }
 
-    /* How It Works - Ordered List (NEW - AdSense Requirement) */
-    .how-it-works ol {
-      counter-reset: step;
-      list-style: none;
-      padding-left: 0;
-    }
+    /* How It Works */
+    .how-it-works ol { counter-reset: step; list-style: none; padding-left: 0; }
     .how-it-works li {
-      position: relative;
-      padding-left: 36px;
-      margin-bottom: 1rem;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
-      counter-increment: step;
+      position: relative; padding-left: 36px; margin-bottom: 1rem;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7; counter-increment: step;
     }
     .how-it-works li::before {
-      content: counter(step);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: var(--calc);
-      color: #0D0D0D;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
+      content: counter(step); position: absolute; left: 0; top: 0;
+      width: 24px; height: 24px; background: var(--calc); color: var(--bg);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 700;
     }
 
-    /* Who Is This For - Explicit List (NEW) */
-    .who-for ul {
-      list-style: none;
-      padding-left: 0;
-    }
+    /* Who Is This For */
+    .who-for ul { list-style: none; padding-left: 0; }
     .who-for li {
-      position: relative;
-      padding-left: 24px;
-      margin-bottom: 0.75rem;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
+      position: relative; padding-left: 24px; margin-bottom: 0.75rem;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7;
     }
     .who-for li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--success);
-      font-weight: 700;
-      font-size: 14px;
+      content: '✓'; position: absolute; left: 0;
+      color: var(--success); font-weight: 700; font-size: 14px;
     }
 
-    /* Pro Tip Box (NEW - AdSense Requirement) */
+    /* Pro Tip Box */
     .pro-tip {
       background: linear-gradient(135deg, var(--calc-bg), rgba(232,213,163,0.05));
-      border: 1px solid var(--calc-border);
-      border-left: 3px solid var(--accent);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin-top: 1rem;
+      border: 1px solid var(--calc-border); border-left: 3px solid var(--accent);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem;
     }
     .pro-tip-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--calc);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; color: var(--calc);
+      margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;
     }
-    .pro-tip p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-    }
+    .pro-tip p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
     .pro-tip a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px dashed var(--accent);
-      transition: opacity 0.2s;
+      color: var(--accent); text-decoration: none; font-weight: 600;
+      border-bottom: 1px dashed var(--accent); transition: opacity 0.2s;
     }
-    .pro-tip a:hover {
-      opacity: 0.85;
-    }
+    .pro-tip a:hover, .pro-tip a:focus-visible { opacity: 0.85; outline: none; }
 
+    /* Formulas */
     .formula-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 1rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem;
     }
-    @media (max-width: 520px) {
-      .formula-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px) { .formula-grid { grid-template-columns: 1fr; } }
     .formula-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
     }
-    .formula-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
+    .formula-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
     .formula-code {
-      font-size: 11px;
-      color: var(--calc);
-      font-family: monospace;
-      background: var(--surface2);
-      padding: 6px 10px;
-      border-radius: 4px;
-      display: block;
-      margin-bottom: 6px;
+      font-size: 11px; color: var(--calc); font-family: monospace;
+      background: var(--surface2); padding: 6px 10px; border-radius: 4px;
+      display: block; margin-bottom: 6px;
     }
-    .formula-desc {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .formula-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
     /* ─── AD SLOT ─── */
-    .ad-slot {
-      margin-bottom: 1rem;
-      display: none;
-    }
-    .ad-slot.adsense-active {
-      display: block;
-    }
+    .ad-slot { margin-bottom: 1rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
     .ad-inner {
-      background: rgba(255,255,255,.02);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 90px;
-      position: relative;
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; display: flex;
+      align-items: center; justify-content: center; min-height: 90px; position: relative;
     }
     .ad-label {
-      position: absolute;
-      top: 6px;
-      left: 10px;
-      font-size: 9px;
-      color: var(--muted);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .4;
+      position: absolute; top: 6px; left: 10px; font-size: 9px;
+      color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4;
     }
 
     /* ─── OTHER TOOLS ─── */
-    .other-tools {
-      margin-bottom: 1rem;
-      animation: fadeUp .7s .5s ease both;
-    }
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .5s ease both; }
     .other-tools-header {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
     }
     .other-tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 8px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px;
     }
     .tool-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: .85rem 1rem;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 500;
+      display: flex; align-items: center; gap: 10px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text); font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
-      border-color: var(--border-hover);
-      background: var(--surface2);
-      transform: translateY(-2px);
+    .tool-chip:hover, .tool-chip:focus-visible {
+      border-color: var(--border-hover); background: var(--surface2);
+      transform: translateY(-2px); outline: none;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
     }
-    .tool-chip-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .tool-chip-info {
-      min-width: 0;
-    }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
     .tool-chip-name {
-      font-weight: 600;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 600; font-size: 12px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
     }
-    .tool-chip-desc {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
     /* ─── SEO CONTENT ─── */
     .seo-content {
-      padding: 2.5rem 0 0;
-      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 0; border-top: 1px solid var(--border);
       animation: fadeUp .7s .6s ease both;
     }
     .seo-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      font-weight: 700; font-style: italic; color: var(--text); margin-bottom: 1rem;
     }
-    .seo-content h2 em {
-      color: var(--accent);
-    }
+    .seo-content h2 em { color: var(--accent); }
     .seo-content p {
-      font-size: 13.5px;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      font-size: 13.5px; color: var(--muted); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
     }
-    .seo-content strong {
-      color: var(--text);
-      font-weight: 500;
+    .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content ul { color: var(--muted); margin-left: 1.5rem; margin-bottom: 1rem; }
+    .seo-content li { margin-bottom: 0.5rem; }
+
+    /* Category Intro (NEW) */
+    .category-intro {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
     }
-    .seo-content ul {
-      color: var(--muted);
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .seo-content li {
-      margin-bottom: 0.5rem;
+    .category-intro p {
+      font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0;
     }
 
-    /* FAQ */
-    .faq-list {
-      margin-top: 1.5rem;
+    /* Disclaimer Box (NEW - YMYL) */
+    .disclaimer-box {
+      background: var(--danger-bg); border: 1px solid rgba(239,68,68,0.2);
+      border-left: 3px solid var(--danger); border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1.5rem 0;
     }
+    .disclaimer-box p {
+      font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0;
+    }
+    .disclaimer-box strong { color: var(--text); }
+
+    /* FAQ */
+    .faq-list { margin-top: 1.5rem; }
     .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 8px;
-      overflow: hidden;
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 8px; overflow: hidden;
     }
     .faq-q {
-      width: 100%;
-      background: var(--surface);
-      border: none;
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 1rem 1.25rem;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      width: 100%; background: var(--surface); border: none;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 13px; font-weight: 500; padding: 1rem 1.25rem;
+      text-align: left; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover {
-      background: var(--surface2);
+    .faq-q:hover, .faq-q:focus-visible {
+      background: var(--surface2); outline: none;
+      box-shadow: inset 0 0 0 2px var(--calc);
     }
     .faq-icon {
-      font-size: 18px;
-      color: var(--accent);
-      transition: transform .3s;
-      flex-shrink: 0;
+      font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0;
     }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease;
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
     }
-    .faq-item.open .faq-a {
-      max-height: 200px;
-    }
+    .faq-item.open .faq-a { max-height: 250px; }
     .faq-a-inner {
-      padding: .25rem 1.25rem 1rem;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.7;
+      padding: .25rem 1.25rem 1rem; font-size: 13px;
+      color: var(--muted); font-weight: 300; line-height: 1.7;
     }
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto;
+      border-top: 1px solid var(--border); padding: 2.5rem 2rem;
+      text-align: center; max-width: 860px; margin: 0 auto;
     }
     .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      font-weight: 700; margin-bottom: 0.75rem;
     }
-    .footer-logo em {
-      color: var(--accent);
-      font-style: italic;
-    }
+    .footer-logo em { color: var(--accent); font-style: italic; }
     .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1rem 0;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 1rem 0; flex-wrap: wrap;
     }
     .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 500;
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none; font-size: 11px;
+      font-weight: 500; transition: color 0.2s;
     }
-    .footer-links a:hover {
-      color: var(--text);
+    .footer-links a:hover, .footer-links a:focus-visible {
+      color: var(--text); outline: none; text-decoration: underline;
     }
     .footer-adsense-disclosure {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 1rem;
-      opacity: 0.7;
-      line-height: 1.5;
+      font-size: 10px; color: var(--muted); margin-top: 1rem;
+      opacity: 0.7; line-height: 1.5;
     }
+    .footer-about {
+      font-size: 11px; color: var(--muted); margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+    .footer-about strong { color: var(--text); }
     .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .4;
-      margin-top: 0.5rem;
+      font-size: 11px; color: var(--muted); letter-spacing: .1em;
+      text-transform: uppercase; opacity: .4; margin-top: 0.5rem;
     }
+
+    /* ─── CONSENT HINT (Cookie-free for AdSense) ─── */
+    .consent-hint {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 2rem; font-size: 11px; color: var(--muted);
+      text-align: center; z-index: 150; display: none;
+    }
+    .consent-hint.show { display: block; animation: slideUp .3s ease; }
+    .consent-hint a { color: var(--accent); text-decoration: none; }
+    .consent-hint a:hover { text-decoration: underline; }
+    .consent-close {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--muted);
+      font-size: 18px; cursor: pointer; padding: 4px;
+    }
+    .consent-close:hover, .consent-close:focus-visible { color: var(--text); outline: none; }
 
     /* ─── ANIMATIONS & TOAST ─── */
     @keyframes fadeUp {
@@ -835,50 +649,47 @@
     }
 
     .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
+      position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: var(--accent);
-      color: #0D0D0D;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s;
-      z-index: 200;
+      background: var(--accent); color: var(--bg);
+      padding: 10px 20px; border-radius: 30px;
+      font-size: 13px; font-weight: 600; opacity: 0;
+      pointer-events: none; transition: all 0.3s; z-index: 200;
+      will-change: transform, opacity;
     }
     .toast.active {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     @media (max-width: 480px) {
-      main {
-        padding: 2rem 1.25rem 5rem;
-      }
-      .hero-card {
-        padding: 1.5rem;
-      }
+      main { padding: 2rem 1.25rem 5rem; }
+      .hero-card { padding: 1.5rem; }
       .calc-tabs {
-        justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
+        justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap;
       }
-      .calc-tab {
-        flex-shrink: 0;
-      }
+      .calc-tab { flex-shrink: 0; }
       .footer-links {
-        gap: 1rem;
-        flex-direction: column;
-        align-items: center;
+        gap: 1rem; flex-direction: column; align-items: center;
       }
+      .consent-hint { padding: 12px 1.25rem; font-size: 10px; }
+      .consent-close { right: 12px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ♿ SKIP LINK for keyboard users -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <header>
   <div class="header-inner">
@@ -891,7 +702,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -900,7 +711,17 @@
     <p class="page-sub">All percentage calculations in one place. Instant results.</p>
   </div>
 
-  <!-- AD SLOT TOP (nach Approval aktivieren) -->
+  <!-- Category Intro (NEW - 2+ sentences) -->
+  <div class="category-intro">
+    <p><strong>Finance & Math Tools:</strong> Our percentage calculator helps students, professionals, and everyday users solve percentage problems instantly. Part of ToolCompass's collection of 31+ free browser-based utilities—no signup, no data collection.</p>
+  </div>
+
+  <!-- YMYL Disclaimer (NEW - Finance Tool Protection) -->
+  <div class="disclaimer-box">
+    <p><strong>Disclaimer:</strong> This tool provides mathematical calculations only. It does not constitute financial, tax, or legal advice. For important decisions, consult a qualified professional.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
   <div class="ad-slot" id="adTop">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
@@ -916,7 +737,7 @@
   <!-- HERO CARD (TOOL) -->
   <div class="hero-card">
     
-    <!-- Trust Badges (NEW - AdSense Trust Signals) -->
+    <!-- Trust Badges -->
     <div class="trust-badges">
       <div class="trust-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -932,29 +753,29 @@
       </div>
     </div>
 
-    <!-- Calculator Tabs (ADDICTIVE - Multiple Options) -->
-    <div class="calc-tabs">
-      <button class="calc-tab active" data-calc="basic" onclick="setCalc('basic')">Basic %</button>
-      <button class="calc-tab" data-calc="reverse" onclick="setCalc('reverse')">Reverse %</button>
-      <button class="calc-tab" data-calc="change" onclick="setCalc('change')">% Change</button>
-      <button class="calc-tab" data-calc="increase" onclick="setCalc('increase')">Increase</button>
-      <button class="calc-tab" data-calc="decrease" onclick="setCalc('decrease')">Decrease</button>
+    <!-- Calculator Tabs -->
+    <div class="calc-tabs" role="tablist" aria-label="Calculation types">
+      <button class="calc-tab active" data-calc="basic" onclick="setCalc('basic')" role="tab" aria-selected="true" id="tab-basic">Basic %</button>
+      <button class="calc-tab" data-calc="reverse" onclick="setCalc('reverse')" role="tab" aria-selected="false" id="tab-reverse">Reverse %</button>
+      <button class="calc-tab" data-calc="change" onclick="setCalc('change')" role="tab" aria-selected="false" id="tab-change">% Change</button>
+      <button class="calc-tab" data-calc="increase" onclick="setCalc('increase')" role="tab" aria-selected="false" id="tab-increase">Increase</button>
+      <button class="calc-tab" data-calc="decrease" onclick="setCalc('decrease')" role="tab" aria-selected="false" id="tab-decrease">Decrease</button>
     </div>
 
     <!-- Basic: What is X% of Y? -->
-    <div class="calc-section active" id="calc-basic">
+    <div class="calc-section active" id="calc-basic" role="tabpanel" aria-labelledby="tab-basic">
       <div class="input-row">
         <span class="input-label">What is</span>
-        <input type="number" id="basic-percent" class="input-field" placeholder="10" oninput="calcBasic()">
+        <input type="number" id="basic-percent" class="input-field" placeholder="10" oninput="calcBasic()" aria-label="Percentage value">
         <span class="input-label">%</span>
         <span class="input-label">of</span>
-        <input type="number" id="basic-value" class="input-field" placeholder="200" oninput="calcBasic()">
+        <input type="number" id="basic-value" class="input-field" placeholder="200" oninput="calcBasic()" aria-label="Base value">
       </div>
       <div class="result-box">
         <div class="result-label">Result</div>
-        <div class="result-value" id="basic-result">0</div>
+        <div class="result-value" id="basic-result" aria-live="polite">0</div>
         <div class="result-formula" id="basic-formula"></div>
-        <button class="copy-btn" onclick="copyResult('basic')">📋 Copy Result</button>
+        <button class="copy-btn" onclick="copyResult('basic')" aria-label="Copy result to clipboard">📋 Copy Result</button>
       </div>
       <div class="progress-container">
         <div class="progress-label">
@@ -968,17 +789,17 @@
     </div>
 
     <!-- Reverse: X is what % of Y? -->
-    <div class="calc-section" id="calc-reverse">
+    <div class="calc-section" id="calc-reverse" role="tabpanel" aria-labelledby="tab-reverse">
       <div class="input-row">
-        <input type="number" id="reverse-part" class="input-field" placeholder="50" oninput="calcReverse()">
+        <input type="number" id="reverse-part" class="input-field" placeholder="50" oninput="calcReverse()" aria-label="Part value">
         <span class="input-label">is what % of</span>
-        <input type="number" id="reverse-whole" class="input-field" placeholder="250" oninput="calcReverse()">
+        <input type="number" id="reverse-whole" class="input-field" placeholder="250" oninput="calcReverse()" aria-label="Whole value">
       </div>
       <div class="result-box">
         <div class="result-label">Result</div>
-        <div class="result-value" id="reverse-result">0%</div>
+        <div class="result-value" id="reverse-result" aria-live="polite">0%</div>
         <div class="result-formula" id="reverse-formula"></div>
-        <button class="copy-btn" onclick="copyResult('reverse')">📋 Copy Result</button>
+        <button class="copy-btn" onclick="copyResult('reverse')" aria-label="Copy result to clipboard">📋 Copy Result</button>
       </div>
       <div class="progress-container">
         <div class="progress-label">
@@ -992,60 +813,60 @@
     </div>
 
     <!-- Change: Percentage Change -->
-    <div class="calc-section" id="calc-change">
+    <div class="calc-section" id="calc-change" role="tabpanel" aria-labelledby="tab-change">
       <div class="input-row">
         <span class="input-label">From</span>
-        <input type="number" id="change-from" class="input-field" placeholder="100" oninput="calcChange()">
+        <input type="number" id="change-from" class="input-field" placeholder="100" oninput="calcChange()" aria-label="Original value">
         <span class="input-label">to</span>
-        <input type="number" id="change-to" class="input-field" placeholder="150" oninput="calcChange()">
+        <input type="number" id="change-to" class="input-field" placeholder="150" oninput="calcChange()" aria-label="New value">
       </div>
       <div class="result-box">
         <div class="result-label">Percentage Change</div>
-        <div class="result-value" id="change-result">0%</div>
+        <div class="result-value" id="change-result" aria-live="polite">0%</div>
         <div class="result-formula" id="change-formula"></div>
-        <button class="copy-btn" onclick="copyResult('change')">📋 Copy Result</button>
+        <button class="copy-btn" onclick="copyResult('change')" aria-label="Copy result to clipboard">📋 Copy Result</button>
       </div>
     </div>
 
     <!-- Increase: Add Percentage -->
-    <div class="calc-section" id="calc-increase">
+    <div class="calc-section" id="calc-increase" role="tabpanel" aria-labelledby="tab-increase">
       <div class="input-row">
-        <input type="number" id="increase-value" class="input-field" placeholder="200" oninput="calcIncrease()">
+        <input type="number" id="increase-value" class="input-field" placeholder="200" oninput="calcIncrease()" aria-label="Base value">
         <span class="input-label">increase by</span>
-        <input type="number" id="increase-percent" class="input-field" placeholder="15" oninput="calcIncrease()">
+        <input type="number" id="increase-percent" class="input-field" placeholder="15" oninput="calcIncrease()" aria-label="Percentage to add">
         <span class="input-label">%</span>
       </div>
       <div class="result-box">
         <div class="result-label">New Value</div>
-        <div class="result-value" id="increase-result">0</div>
+        <div class="result-value" id="increase-result" aria-live="polite">0</div>
         <div class="result-formula" id="increase-formula"></div>
-        <button class="copy-btn" onclick="copyResult('increase')">📋 Copy Result</button>
+        <button class="copy-btn" onclick="copyResult('increase')" aria-label="Copy result to clipboard">📋 Copy Result</button>
       </div>
     </div>
 
     <!-- Decrease: Subtract Percentage -->
-    <div class="calc-section" id="calc-decrease">
+    <div class="calc-section" id="calc-decrease" role="tabpanel" aria-labelledby="tab-decrease">
       <div class="input-row">
-        <input type="number" id="decrease-value" class="input-field" placeholder="200" oninput="calcDecrease()">
+        <input type="number" id="decrease-value" class="input-field" placeholder="200" oninput="calcDecrease()" aria-label="Base value">
         <span class="input-label">decrease by</span>
-        <input type="number" id="decrease-percent" class="input-field" placeholder="15" oninput="calcDecrease()">
+        <input type="number" id="decrease-percent" class="input-field" placeholder="15" oninput="calcDecrease()" aria-label="Percentage to subtract">
         <span class="input-label">%</span>
       </div>
       <div class="result-box">
         <div class="result-label">New Value</div>
-        <div class="result-value" id="decrease-result">0</div>
+        <div class="result-value" id="decrease-result" aria-live="polite">0</div>
         <div class="result-formula" id="decrease-formula"></div>
-        <button class="copy-btn" onclick="copyResult('decrease')">📋 Copy Result</button>
+        <button class="copy-btn" onclick="copyResult('decrease')" aria-label="Copy result to clipboard">📋 Copy Result</button>
       </div>
     </div>
 
-    <!-- History Section (ADDICTIVE - Recent Calculations) -->
+    <!-- History Section -->
     <div class="history-section" id="historySection">
       <div class="history-header">
         <span class="history-title">🕐 Recent Calculations</span>
-        <span class="history-clear" onclick="clearHistory()">Clear All</span>
+        <span class="history-clear" onclick="clearHistory()" role="button" tabindex="0">Clear All</span>
       </div>
-      <div class="history-list" id="historyList"></div>
+      <div class="history-list" id="historyList" role="list"></div>
     </div>
   </div>
 
@@ -1062,7 +883,7 @@
     </div>
   </div>
 
-  <!-- HOW IT WORKS (NEW - AdSense Requirement: Ordered List) -->
+  <!-- HOW IT WORKS -->
   <div class="section-block how-it-works">
     <div class="section-title">
       How It Works
@@ -1075,7 +896,7 @@
     </ol>
   </div>
 
-  <!-- WHO IS THIS FOR (NEW - AdSense Requirement: Explicit List) -->
+  <!-- WHO IS THIS FOR -->
   <div class="section-block who-for">
     <div class="section-title">
       Who Is This For?
@@ -1089,7 +910,7 @@
     </ul>
   </div>
 
-  <!-- PRO TIP (NEW - AdSense Requirement: Internal Link) -->
+  <!-- PRO TIP -->
   <div class="section-block pro-tip">
     <div class="pro-tip-title">💡 Pro Tip</div>
     <p>For financial calculations like taxes or tips, combine this percentage calculator with our <a href="/vat-calculator">VAT Calculator</a> or <a href="/tip-splitter">Tip Splitter</a> for complete bill management.</p>
@@ -1182,42 +1003,54 @@
     <p>
       <strong>Common uses:</strong> Calculate discounts, tips, tax amounts, salary increases, grade percentages, investment returns, and more. Perfect for students, professionals, and everyday calculations.
     </p>
+    <p>
+      <strong>Privacy guarantee:</strong> All calculations happen entirely in your browser. We don't collect, store, or transmit any of your input data. Your numbers stay on your device.
+    </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           How do I calculate percentage?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">To calculate percentage, divide the part by the whole and multiply by 100. For example, 50 out of 250 is (50/250) × 100 = 20%. Our calculator does this automatically.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           What is percentage change formula?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">Percentage change = ((New Value - Original Value) / Original Value) × 100. A positive result means increase, negative means decrease.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Is this calculator free?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes, our percentage calculator is 100% free with no limitations. All calculations happen in your browser with complete privacy.</p>
+        <div class="faq-a" id="faq3">
+          <p class="faq-a-inner">Yes, our percentage calculator is 100% free with no limitations. All calculations happen in your browser with complete privacy—no data is stored or shared.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Can I save my calculations?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes! Your recent calculations are automatically saved in your browser history. You can revisit them anytime or clear the history when done.</p>
+        <div class="faq-a" id="faq4">
+          <p class="faq-a-inner">Yes! Your recent calculations are automatically saved in your browser's local storage. You can revisit them anytime or clear the history with one click.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          Is this financial advice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">No. This tool provides mathematical calculations only. For financial decisions, please consult a qualified professional. Results are for informational purposes.</p>
         </div>
       </div>
     </div>
@@ -1228,23 +1061,35 @@
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   
-  <!-- Footer Links (FIXED - Exact Paths Required) -->
+  <!-- Footer Links -->
   <nav class="footer-links">
     <a href="/about.html">About</a>
     <a href="/impressum/index.html">Imprint</a>
     <a href="/datenschutz/index.html">Privacy Policy</a>
   </nav>
   
-  <!-- AdSense Disclosure (NEW - Required for Approval) -->
+  <!-- About hint (E-E-A-T) -->
+  <p class="footer-about">
+    <strong>Who we are:</strong> ToolCompass is built by a small team of developers and writers. We create free, privacy-first browser tools since 2024. No tracking, no paywalls.
+  </p>
+  
+  <!-- AdSense Disclosure -->
   <p class="footer-adsense-disclosure">
-    This site is supported by advertising. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you.
+    This site is supported by advertising via Google AdSense. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you. Ads are served by Google and governed by their privacy policy.
   </p>
   
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
 </footer>
 
+<!-- Cookie-free Consent Hint for AdSense (minimal, non-blocking) -->
+<div class="consent-hint" id="consentHint">
+  This site uses Google AdSense for advertising. By continuing, you consent to ads being shown. 
+  <a href="/datenschutz/index.html">Learn more</a>
+  <button class="consent-close" id="consentClose" aria-label="Dismiss notice">×</button>
+</div>
+
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Copied!</div>
+<div class="toast" id="toast" role="status" aria-live="assertive">Copied!</div>
 
 <script>
 // ═══════════════════════════════════════════════
@@ -1254,29 +1099,38 @@
 let currentCalc = 'basic';
 let calcHistory = [];
 
-// Set Calculator Type
+// Set Calculator Type with accessibility support
 function setCalc(type) {
   currentCalc = type;
   
-  document.querySelectorAll('.calc-tab').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.calc === type);
+  document.querySelectorAll('.calc-tab')?.forEach(tab => {
+    const isActive = tab.dataset.calc === type;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
   });
   
-  document.querySelectorAll('.calc-section').forEach(section => {
+  document.querySelectorAll('.calc-section')?.forEach(section => {
     section.classList.toggle('active', section.id === `calc-${type}`);
   });
 }
 
-// Basic: What is X% of Y? (ADDICTIVE - Live Calculation)
+// Basic: What is X% of Y?
 function calcBasic() {
-  const percent = parseFloat(document.getElementById('basic-percent').value) || 0;
-  const value = parseFloat(document.getElementById('basic-value').value) || 0;
+  const percentInput = document.getElementById('basic-percent');
+  const valueInput = document.getElementById('basic-value');
+  const percent = parseFloat(percentInput?.value) || 0;
+  const value = parseFloat(valueInput?.value) || 0;
   const result = (value * percent) / 100;
   
-  document.getElementById('basic-result').innerText = result.toFixed(2);
-  document.getElementById('basic-formula').innerText = `${value} × ${percent}% = ${result.toFixed(2)}`;
-  document.getElementById('basic-percent-display').innerText = percent + '%';
-  document.getElementById('basic-progress').style.width = Math.min(percent, 100) + '%';
+  const resultEl = document.getElementById('basic-result');
+  const formulaEl = document.getElementById('basic-formula');
+  const percentDisplay = document.getElementById('basic-percent-display');
+  const progressFill = document.getElementById('basic-progress');
+  
+  if (resultEl) resultEl.innerText = result.toFixed(2);
+  if (formulaEl) formulaEl.innerText = `${value} × ${percent}% = ${result.toFixed(2)}`;
+  if (percentDisplay) percentDisplay.innerText = percent + '%';
+  if (progressFill) progressFill.style.width = Math.min(percent, 100) + '%';
   
   if (percent > 0 && value > 0) {
     addToHistory(`${percent}% of ${value}`, result.toFixed(2));
@@ -1285,14 +1139,19 @@ function calcBasic() {
 
 // Reverse: X is what % of Y?
 function calcReverse() {
-  const part = parseFloat(document.getElementById('reverse-part').value) || 0;
-  const whole = parseFloat(document.getElementById('reverse-whole').value) || 1;
+  const part = parseFloat(document.getElementById('reverse-part')?.value) || 0;
+  const whole = parseFloat(document.getElementById('reverse-whole')?.value) || 1;
   const result = (part / whole) * 100;
   
-  document.getElementById('reverse-result').innerText = result.toFixed(2) + '%';
-  document.getElementById('reverse-formula').innerText = `(${part} / ${whole}) × 100 = ${result.toFixed(2)}%`;
-  document.getElementById('reverse-percent-display').innerText = result.toFixed(1) + '%';
-  document.getElementById('reverse-progress').style.width = Math.min(result, 100) + '%';
+  const resultEl = document.getElementById('reverse-result');
+  const formulaEl = document.getElementById('reverse-formula');
+  const percentDisplay = document.getElementById('reverse-percent-display');
+  const progressFill = document.getElementById('reverse-progress');
+  
+  if (resultEl) resultEl.innerText = result.toFixed(2) + '%';
+  if (formulaEl) formulaEl.innerText = `(${part} / ${whole}) × 100 = ${result.toFixed(2)}%`;
+  if (percentDisplay) percentDisplay.innerText = result.toFixed(1) + '%';
+  if (progressFill) progressFill.style.width = Math.min(result, 100) + '%';
   
   if (part > 0 && whole > 0) {
     addToHistory(`${part} is what % of ${whole}`, result.toFixed(2) + '%');
@@ -1301,20 +1160,25 @@ function calcReverse() {
 
 // Change: Percentage Change
 function calcChange() {
-  const from = parseFloat(document.getElementById('change-from').value) || 0;
-  const to = parseFloat(document.getElementById('change-to').value) || 0;
+  const from = parseFloat(document.getElementById('change-from')?.value) || 0;
+  const to = parseFloat(document.getElementById('change-to')?.value) || 0;
   
   if (from === 0) {
-    document.getElementById('change-result').innerText = '0%';
+    document.getElementById('change-result')?.innerText = '0%';
     return;
   }
   
   const result = ((to - from) / from) * 100;
   const sign = result >= 0 ? '+' : '';
   
-  document.getElementById('change-result').innerText = sign + result.toFixed(2) + '%';
-  document.getElementById('change-result').style.color = result >= 0 ? 'var(--success)' : 'var(--danger)';
-  document.getElementById('change-formula').innerText = `((${to} - ${from}) / ${from}) × 100 = ${sign}${result.toFixed(2)}%`;
+  const resultEl = document.getElementById('change-result');
+  const formulaEl = document.getElementById('change-formula');
+  
+  if (resultEl) {
+    resultEl.innerText = sign + result.toFixed(2) + '%';
+    resultEl.style.color = result >= 0 ? 'var(--success)' : 'var(--danger)';
+  }
+  if (formulaEl) formulaEl.innerText = `((${to} - ${from}) / ${from}) × 100 = ${sign}${result.toFixed(2)}%`;
   
   if (from > 0 && to > 0) {
     addToHistory(`${from} → ${to}`, sign + result.toFixed(2) + '%');
@@ -1323,12 +1187,15 @@ function calcChange() {
 
 // Increase: Add Percentage
 function calcIncrease() {
-  const value = parseFloat(document.getElementById('increase-value').value) || 0;
-  const percent = parseFloat(document.getElementById('increase-percent').value) || 0;
+  const value = parseFloat(document.getElementById('increase-value')?.value) || 0;
+  const percent = parseFloat(document.getElementById('increase-percent')?.value) || 0;
   const result = value * (1 + percent / 100);
   
-  document.getElementById('increase-result').innerText = result.toFixed(2);
-  document.getElementById('increase-formula').innerText = `${value} × (1 + ${percent}/100) = ${result.toFixed(2)}`;
+  const resultEl = document.getElementById('increase-result');
+  const formulaEl = document.getElementById('increase-formula');
+  
+  if (resultEl) resultEl.innerText = result.toFixed(2);
+  if (formulaEl) formulaEl.innerText = `${value} × (1 + ${percent}/100) = ${result.toFixed(2)}`;
   
   if (value > 0 && percent > 0) {
     addToHistory(`${value} + ${percent}%`, result.toFixed(2));
@@ -1337,19 +1204,22 @@ function calcIncrease() {
 
 // Decrease: Subtract Percentage
 function calcDecrease() {
-  const value = parseFloat(document.getElementById('decrease-value').value) || 0;
-  const percent = parseFloat(document.getElementById('decrease-percent').value) || 0;
+  const value = parseFloat(document.getElementById('decrease-value')?.value) || 0;
+  const percent = parseFloat(document.getElementById('decrease-percent')?.value) || 0;
   const result = value * (1 - percent / 100);
   
-  document.getElementById('decrease-result').innerText = result.toFixed(2);
-  document.getElementById('decrease-formula').innerText = `${value} × (1 - ${percent}/100) = ${result.toFixed(2)}`;
+  const resultEl = document.getElementById('decrease-result');
+  const formulaEl = document.getElementById('decrease-formula');
+  
+  if (resultEl) resultEl.innerText = result.toFixed(2);
+  if (formulaEl) formulaEl.innerText = `${value} × (1 - ${percent}/100) = ${result.toFixed(2)}`;
   
   if (value > 0 && percent > 0) {
     addToHistory(`${value} - ${percent}%`, result.toFixed(2));
   }
 }
 
-// Add to History (ADDICTIVE - Persistence)
+// Add to History
 function addToHistory(calculation, result) {
   calcHistory.unshift({
     calc: calculation,
@@ -1361,7 +1231,11 @@ function addToHistory(calculation, result) {
   calcHistory = calcHistory.slice(0, 10);
   
   // Save to LocalStorage
-  localStorage.setItem('tc_percent_history', JSON.stringify(calcHistory));
+  try {
+    localStorage.setItem('tc_percent_history', JSON.stringify(calcHistory));
+  } catch(e) {
+    // Storage might be disabled
+  }
   
   renderHistory();
 }
@@ -1371,6 +1245,8 @@ function renderHistory() {
   const historySection = document.getElementById('historySection');
   const historyList = document.getElementById('historyList');
   
+  if (!historySection || !historyList) return;
+  
   if (calcHistory.length === 0) {
     historySection.classList.remove('show');
     return;
@@ -1378,7 +1254,7 @@ function renderHistory() {
   
   historySection.classList.add('show');
   historyList.innerHTML = calcHistory.map((item, index) => `
-    <div class="history-item" onclick="loadFromHistory(${index})">
+    <div class="history-item" onclick="loadFromHistory(${index})" role="listitem" tabindex="0">
       <span class="history-calc">${item.calc}</span>
       <span class="history-result">${item.result}</span>
     </div>
@@ -1388,60 +1264,106 @@ function renderHistory() {
 // Load from History
 function loadFromHistory(index) {
   const item = calcHistory[index];
-  showToast(`Loaded: ${item.calc} = ${item.result}`);
+  if (item) showToast(`Loaded: ${item.calc} = ${item.result}`);
 }
 
 // Clear History
 function clearHistory() {
   calcHistory = [];
-  localStorage.removeItem('tc_percent_history');
+  try {
+    localStorage.removeItem('tc_percent_history');
+  } catch(e) {}
   renderHistory();
   showToast('History cleared');
 }
 
-// Copy Result (ADDICTIVE - Shareability)
+// Copy Result
 function copyResult(type) {
-  const result = document.getElementById(`${type}-result`).innerText;
-  navigator.clipboard.writeText(result).then(() => {
+  const resultEl = document.getElementById(`${type}-result`);
+  const result = resultEl?.innerText || '';
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(result).then(() => {
+      showToast('Copied to clipboard!');
+    }).catch(() => {
+      fallbackCopy(result);
+    });
+  } else {
+    fallbackCopy(result);
+  }
+}
+
+// Fallback copy for older browsers
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
     showToast('Copied to clipboard!');
-  });
+  } catch(e) {
+    showToast('Copy failed');
+  }
+  document.body.removeChild(textarea);
 }
 
 // Load History on Page Load
 window.addEventListener('load', () => {
-  const saved = localStorage.getItem('tc_percent_history');
-  if (saved) {
-    calcHistory = JSON.parse(saved);
-    renderHistory();
-  }
+  try {
+    const saved = localStorage.getItem('tc_percent_history');
+    if (saved) {
+      calcHistory = JSON.parse(saved);
+      renderHistory();
+    }
+  } catch(e) {}
 });
 
 // Toast Notification
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.innerText = message;
   toast.classList.add('active');
   setTimeout(() => toast.classList.remove('active'), 2000);
 }
 
-// FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+// FAQ Accordion with keyboard support
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
+    if (!item) return;
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
       i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      const q = i.querySelector('.faq-q');
+      if (q) q.setAttribute('aria-expanded', 'false');
     });
+    
     if (!isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
     }
   });
+  
+  // Keyboard support for FAQ
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
 });
 
-// Enter key support
-document.querySelectorAll('.input-field').forEach(input => {
+// History clear keyboard support
+document.getElementById('historyList')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.target.classList.contains('history-item')) {
+    e.target.click();
+  }
+});
+
+// Enter key support for inputs
+document.querySelectorAll('.input-field')?.forEach(input => {
   input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       input.blur();
@@ -1449,11 +1371,38 @@ document.querySelectorAll('.input-field').forEach(input => {
   });
 });
 
+// Consent hint logic (cookie-free, session-only)
+document.addEventListener('DOMContentLoaded', () => {
+  const consentHint = document.getElementById('consentHint');
+  const consentClose = document.getElementById('consentClose');
+  
+  // Show hint if not dismissed this session
+  if (consentHint && !sessionStorage.getItem('consentDismissed')) {
+    setTimeout(() => {
+      consentHint.classList.add('show');
+    }, 3000);
+  }
+  
+  if (consentClose) {
+    consentClose.addEventListener('click', () => {
+      consentHint?.classList.remove('show');
+      try {
+        sessionStorage.setItem('consentDismissed', 'true');
+      } catch(e) {}
+    });
+  }
+});
+
 // ─── ADSENSE aktivieren nach Approval ───
 // Nach Freischaltung diese Zeilen aktivieren:
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
+
+<!-- 🖼️ IMAGE TEMPLATE for future use (add loading="lazy" + decoding="async") -->
+<!-- 
+<img src="image.jpg" alt="Description" width="800" height="600" loading="lazy" decoding="async">
+-->
 
 </body>
 </html>
