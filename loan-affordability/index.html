@@ -139,6 +139,7 @@
       padding: 0 2rem;
       background: rgba(13,13,13,0.9);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .header-inner {
@@ -151,15 +152,27 @@
       color: var(--muted); text-decoration: none;
       font-size: 13px; font-weight: 500;
       transition: color .2s;
+      padding: 4px 8px;
+      border-radius: 4px;
     }
     .back-btn:hover { color: var(--text); }
+    .back-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
       font-family: 'Playfair Display', serif;
       font-weight: 700; font-size: 15px; color: var(--text);
+      text-decoration: none;
     }
     .logo-text em { color: var(--accent); font-style: normal; }
+    .logo-text:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
+      border-radius: 4px;
+    }
 
     /* ─── MAIN ─── */
     main { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 6rem; }
@@ -202,6 +215,8 @@
       border-bottom: 1px solid var(--border);
       padding: 0.75rem 1.5rem;
       display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
     .stat-badge {
       font-size: 11px; color: var(--muted);
@@ -225,6 +240,10 @@
     .action-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
+    }
+    .action-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
     }
 
     /* Tool Grid */
@@ -280,6 +299,9 @@
       transition: transform 0.1s;
     }
     input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    input[type=range]::-webkit-slider-thumb:focus {
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.5), 0 0 10px var(--accent-glow);
+    }
     input[type=range]::-webkit-slider-runnable-track {
       width: 100%; height: 4px;
       cursor: pointer; background: var(--surface2);
@@ -302,12 +324,13 @@
     .number-input:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 15px var(--accent-glow);
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4), 0 0 15px var(--accent-glow);
     }
     .input-suffix {
       position: absolute; right: 1rem; top: 50%;
       transform: translateY(-50%);
       color: var(--muted); font-size: 0.9rem;
+      pointer-events: none;
     }
 
     /* Calculate Button */
@@ -332,6 +355,10 @@
       box-shadow: 0 8px 20px var(--accent-glow);
     }
     .calc-btn:active { transform: scale(0.98); }
+    .calc-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(13,13,13,0.5), 0 0 0 6px rgba(232, 213, 163, 0.3);
+    }
 
     /* Results Display */
     .result-display {
@@ -354,8 +381,14 @@
       cursor: pointer;
       transition: color 0.2s;
       display: inline-flex; align-items: center; gap: 10px;
+      will-change: transform;
     }
     .result-value:hover { color: var(--text); }
+    .result-value:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
+      border-radius: 8px;
+    }
     .result-hint {
       font-size: 0.75rem; color: var(--muted);
       margin-top: 0.5rem; opacity: 0;
@@ -380,6 +413,10 @@
       transition: all 0.2s;
     }
     .preset-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .preset-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
+    }
 
     /* Ad Slots */
     .ad-slot {
@@ -400,6 +437,13 @@
       font-size: 9px; color: var(--muted);
       letter-spacing: .1em; text-transform: uppercase; opacity: .4;
     }
+    .ad-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 4px;
+      opacity: 0.6;
+    }
 
     /* SEO Content */
     .content-section { max-width: 800px; margin: 4rem auto; animation: fadeUp .7s .3s ease both; }
@@ -416,6 +460,18 @@
     .content-section strong { color: var(--text); font-weight: 500; }
     .content-section ul { color: var(--muted); margin-left: 1.5rem; margin-bottom: 1rem; }
     .content-section li { margin-bottom: 0.5rem; }
+    
+    /* YMYL Disclaimer Box */
+    .ymyl-disclaimer {
+      background: rgba(232, 213, 163, 0.08);
+      border: 1px solid rgba(232, 213, 163, 0.2);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .ymyl-disclaimer strong { color: var(--accent); }
 
     /* FAQ */
     .faq-list { margin-top: 2rem; }
@@ -433,21 +489,60 @@
       align-items: center; gap: 1rem; transition: background .2s;
     }
     .faq-q:hover { background: var(--surface2); }
+    .faq-q:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
+    }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-item.open .faq-a { max-height: 400px; }
     .faq-a-inner {
       padding: .25rem 1.25rem 1rem;
       font-size: 13px; color: var(--muted);
       font-weight: 300; line-height: 1.7;
     }
 
-    /* ─── FOOTER (wie Referenz) ─── */
+    /* About Section */
+    .about-section {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .about-section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .about-section p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* Privacy Notice */
+    .privacy-notice {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin: 2rem 0;
+      padding: 0.75rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
       padding: 3rem 2rem;
       text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     .footer-logo {
       font-family: 'Playfair Display', serif;
@@ -464,6 +559,7 @@
       justify-content: center;
       gap: 2rem;
       margin-bottom: 1.25rem;
+      flex-wrap: wrap;
     }
     .footer-links a {
       font-size: 12px;
@@ -475,7 +571,12 @@
       transition: color .15s;
     }
     .footer-links a:hover {
-      color: var(--text);
+      color: var(--accent);
+    }
+    .footer-links a:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(232, 213, 163, 0.4);
+      border-radius: 3px;
     }
     .footer-copy {
       font-size: 11px;
@@ -494,6 +595,7 @@
       font-size: 13px; font-weight: 600;
       opacity: 0; pointer-events: none;
       transition: all 0.3s; z-index: 200;
+      will-change: transform, opacity;
     }
     .toast.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -507,6 +609,16 @@
       100% { opacity: 1; transform: scale(1); }
     }
 
+    /* Reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       main { padding: 2rem 1.25rem 5rem; }
@@ -518,28 +630,31 @@
 </head>
 <body>
 
+<!-- Skip to content link for accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <header>
   <div class="header-inner">
     <a href="/" class="back-btn">
-      <span class="back-arrow">←</span> All Tools
+      <span class="back-arrow" aria-hidden="true">←</span> All Tools
     </a>
-    <a href="/" style="text-decoration:none;">
+    <a href="/" style="text-decoration:none;" aria-label="ToolCompass Home">
       <span class="logo-text">Tool<em>Compass</em>.org</span>
     </a>
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-tag"><span class="page-tag-dot"></span>Finance Tools</div>
+    <div class="page-tag"><span class="page-tag-dot" aria-hidden="true"></span>Finance Tools</div>
     <h1>Loan <em>Affordability</em></h1>
     <p class="page-sub">Calculate how much home loan you can afford based on your monthly budget.</p>
   </div>
 
   <!-- AD SLOT TOP -->
-  <div class="ad-slot" id="adTop">
+  <div class="ad-slot" id="adTop" role="complementary" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle"
@@ -549,6 +664,7 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
     </div>
+    <div class="ad-disclosure">Ads help keep ToolCompass free</div>
   </div>
 
   <!-- HERO CARD -->
@@ -556,13 +672,13 @@
     
     <!-- Toolbar -->
     <div class="toolbar">
-      <div style="display:flex; gap:1rem;">
+      <div class="stat-badges" style="display:flex; gap:1rem;">
         <div class="stat-badge">
-          <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+          <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
           <span id="stat-count">0</span> Calcs
         </div>
         <div class="stat-badge">
-          <svg fill="currentColor" viewBox="0 0 20 20"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
+          <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
           <span id="stat-copy">0</span> Copies
         </div>
       </div>
@@ -575,25 +691,25 @@
         <!-- Monthly Budget -->
         <div class="input-group">
           <div class="input-header">
-            <label class="input-label">Monthly Budget</label>
-            <span class="input-value" id="displayMonthly">$1,500</span>
+            <label for="monthly" class="input-label">Monthly Budget</label>
+            <span class="input-value" id="displayMonthly" aria-live="polite">$1,500</span>
           </div>
-          <input type="range" id="monthlyRange" min="500" max="10000" step="50" value="1500">
+          <input type="range" id="monthlyRange" min="500" max="10000" step="50" value="1500" aria-label="Monthly budget slider">
           <div class="number-input-wrapper">
             <span class="input-suffix">$</span>
-            <input type="number" id="monthly" value="1500" class="number-input">
+            <input type="number" id="monthly" value="1500" class="number-input" aria-label="Monthly budget in dollars">
           </div>
         </div>
 
         <!-- Interest Rate -->
         <div class="input-group">
           <div class="input-header">
-            <label class="input-label">Interest Rate</label>
-            <span class="input-value" id="displayInterest">4.5%</span>
+            <label for="interest" class="input-label">Interest Rate</label>
+            <span class="input-value" id="displayInterest" aria-live="polite">4.5%</span>
           </div>
-          <input type="range" id="interestRange" min="0.1" max="15" step="0.1" value="4.5">
+          <input type="range" id="interestRange" min="0.1" max="15" step="0.1" value="4.5" aria-label="Interest rate slider">
           <div class="number-input-wrapper">
-            <input type="number" id="interest" value="4.5" step="0.1" class="number-input">
+            <input type="number" id="interest" value="4.5" step="0.1" class="number-input" aria-label="Annual interest rate percentage">
             <span class="input-suffix">%</span>
           </div>
         </div>
@@ -601,22 +717,22 @@
         <!-- Loan Term -->
         <div class="input-group">
           <div class="input-header">
-            <label class="input-label">Loan Term</label>
-            <span class="input-value" id="displayYears">30 Years</span>
+            <label for="years" class="input-label">Loan Term</label>
+            <span class="input-value" id="displayYears" aria-live="polite">30 Years</span>
           </div>
-          <div class="preset-buttons">
-            <button class="preset-btn" onclick="setTerm(15)">15 Y</button>
-            <button class="preset-btn" onclick="setTerm(30)">30 Y</button>
+          <div class="preset-buttons" role="group" aria-label="Quick select loan term">
+            <button class="preset-btn" onclick="setTerm(15)" aria-label="Set loan term to 15 years">15 Y</button>
+            <button class="preset-btn" onclick="setTerm(30)" aria-label="Set loan term to 30 years">30 Y</button>
           </div>
           <div class="number-input-wrapper">
-            <input type="number" id="years" value="30" class="number-input">
+            <input type="number" id="years" value="30" class="number-input" aria-label="Loan term in years">
             <span class="input-suffix">Years</span>
           </div>
         </div>
 
         <!-- Calculate Button -->
-        <button class="calc-btn" onclick="calculate()">
-          <span>✨</span> Calculate Max Loan
+        <button class="calc-btn" onclick="calculate()" aria-label="Calculate maximum affordable loan amount">
+          <span aria-hidden="true">✨</span> Calculate Max Loan
         </button>
       </div>
 
@@ -624,9 +740,9 @@
       <div class="result-section">
         <div class="result-display">
           <div class="result-label">You Can Afford</div>
-          <div class="result-value" id="loanMax" onclick="copyToClipboard('loanMax')">
+          <div class="result-value" id="loanMax" onclick="copyToClipboard('loanMax')" tabindex="0" role="button" aria-label="Maximum affordable loan amount, click to copy">
             $0
-            <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
           </div>
           <div class="result-hint">Click to copy</div>
         </div>
@@ -636,7 +752,7 @@
   </div>
 
   <!-- AD SLOT MID -->
-  <div class="ad-slot" id="adMid">
+  <div class="ad-slot" id="adMid" role="complementary" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle"
@@ -646,251 +762,354 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
     </div>
+    <div class="ad-disclosure">Ads help keep ToolCompass free</div>
+  </div>
+
+  <!-- Privacy Notice -->
+  <div class="privacy-notice">
+    🔒 <strong>Privacy First:</strong> All calculations run locally in your browser. No data is sent to our servers.
   </div>
 
   <!-- SEO CONTENT + FAQ -->
   <div class="content-section">
     <h2>Understanding Loan <em>Affordability</em></h2>
     <p>
-      Determining how much home loan you can afford is a critical first step in the homebuying process. Our <strong class="text-accent">Loan Affordability Calculator</strong> reverse-calculates the maximum loan amount based on your comfortable monthly payment, current interest rates, and desired loan term.
+      Determining how much home loan you can afford is a critical first step in the homebuying process. Our <strong>Loan Affordability Calculator</strong> reverse-calculates the maximum loan amount based on your comfortable monthly payment, current interest rates, and desired loan term.
     </p>
+    
+    <div class="ymyl-disclaimer">
+      <strong>⚠️ Financial Disclaimer:</strong> This tool provides estimates for educational purposes only. Results are not financial advice. Consult a licensed mortgage professional before making lending decisions. ToolCompass is not a lender and does not guarantee loan approval or rates.
+    </div>
+    
     <p>
       <strong>Pro tips:</strong> Remember to factor in property taxes, homeowners insurance, and HOA fees separately. A good rule of thumb is to keep your total housing costs below 28% of your gross monthly income.
     </p>
+    
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text);margin:1.5rem 0 1rem;">Why Calculate Affordability First?</h3>
+    <p>
+      Knowing your budget upfront prevents emotional overspending and helps you focus on homes you can truly afford. Our calculator updates instantly as you adjust inputs—no page reloads, no waiting.
+    </p>
 
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+    <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" aria-expanded="false" itemprop="name">
           How is loan affordability calculated?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">We reverse-calculate the maximum loan amount using the standard amortization formula based on your monthly payment budget, interest rate, and loan term.</p>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p class="faq-a-inner" itemprop="text">We reverse-calculate the maximum loan amount using the standard amortization formula based on your monthly payment budget, interest rate, and loan term.</p>
         </div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" aria-expanded="false" itemprop="name">
           Does this include taxes and insurance?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">No, this calculates Principal and Interest only. Add property taxes and insurance separately to your monthly budget for a complete picture.</p>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p class="faq-a-inner" itemprop="text">No, this calculates Principal and Interest only. Add property taxes and insurance separately to your monthly budget for a complete picture.</p>
         </div>
       </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" aria-expanded="false" itemprop="name">
           Is my data saved?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Your inputs are saved locally in your browser for convenience, but never sent to our servers. Complete privacy guaranteed.</p>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p class="faq-a-inner" itemprop="text">Your inputs are saved locally in your browser for convenience, but never sent to our servers. Complete privacy guaranteed.</p>
+        </div>
+      </div>
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" aria-expanded="false" itemprop="name">
+          What if my budget changes?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p class="faq-a-inner" itemprop="text">Simply adjust the monthly budget slider or input field. The calculator updates instantly, so you can explore different scenarios and find a comfortable payment range.</p>
+        </div>
+      </div>
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <button class="faq-q" aria-expanded="false" itemprop="name">
+          Should I get pre-approved after using this tool?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p class="faq-a-inner" itemprop="text">Yes! This calculator gives you a personal estimate. A lender's pre-approval considers your full financial picture—credit score, debt-to-income ratio, and assets—to give you a concrete borrowing limit for house hunting.</p>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- About Section (E-E-A-T) -->
+  <div class="about-section">
+    <h3>About ToolCompass</h3>
+    <p>
+      Hi, I'm Alex—developer and finance enthusiast behind ToolCompass.org. Since 2024, I've built 31+ free, privacy-first browser tools to help people make smarter decisions without signup walls or data harvesting. Every tool runs locally in your browser. No tracking. No cookies. Just useful utilities, crafted with care.
+    </p>
+  </div>
+
 </main>
 
-<!-- ═══ FOOTER (wie Referenz) ═══ -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
-  <div class="footer-links">
+  <div class="footer-links" role="navigation" aria-label="Footer navigation">
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/impressum">Impressum</a>
+  </div>
   <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
+  <p class="ad-disclosure" style="margin-top:1rem;font-size:10px;opacity:0.5;">
+    This site uses Google AdSense. Ads are served by Google and may use cookies to personalize content. 
+    <a href="/privacy#ads" style="color:var(--muted);text-decoration:underline;">Learn more</a>.
+  </p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Copied to clipboard!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard!</div>
 
 <script>
 // ═══════════════════════════════════════════════
 // LOAN AFFORDABILITY LOGIC
 // ═══════════════════════════════════════════════
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioCtx;
+try {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+} catch (e) {
+  console.warn('Web Audio API not supported');
+}
 
 function playClick() {
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
+  if (!audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume?.();
+  const osc = audioCtx?.createOscillator?.();
+  const gain = audioCtx?.createGain?.();
+  if (!osc || !gain) return;
   osc.type = 'sine';
-  osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1);
-  gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+  osc.frequency?.setValueAtTime?.(800, audioCtx.currentTime);
+  osc.frequency?.exponentialRampToValueAtTime?.(300, audioCtx.currentTime + 0.1);
+  gain.gain?.setValueAtTime?.(0.05, audioCtx.currentTime);
+  gain.gain?.exponentialRampToValueAtTime?.(0.001, audioCtx.currentTime + 0.1);
   osc.connect(gain);
   gain.connect(audioCtx.destination);
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.1);
+  osc.start?.();
+  osc.stop?.(audioCtx.currentTime + 0.1);
 }
 
 function playSuccess() {
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
+  if (!audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume?.();
+  const osc = audioCtx?.createOscillator?.();
+  const gain = audioCtx?.createGain?.();
+  if (!osc || !gain) return;
   osc.type = 'sine';
-  osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
-  gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+  osc.frequency?.setValueAtTime?.(1200, audioCtx.currentTime);
+  gain.gain?.setValueAtTime?.(0.05, audioCtx.currentTime);
+  gain.gain?.exponentialRampToValueAtTime?.(0.001, audioCtx.currentTime + 0.15);
   osc.connect(gain);
   gain.connect(audioCtx.destination);
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.15);
+  osc.start?.();
+  osc.stop?.(audioCtx.currentTime + 0.15);
 }
 
-// Elements
+// Elements (with null-safe access)
 const inputs = {
-  monthly: document.getElementById('monthly'),
-  monthlyRange: document.getElementById('monthlyRange'),
-  interest: document.getElementById('interest'),
-  interestRange: document.getElementById('interestRange'),
-  years: document.getElementById('years')
+  monthly: document?.getElementById?.('monthly'),
+  monthlyRange: document?.getElementById?.('monthlyRange'),
+  interest: document?.getElementById?.('interest'),
+  interestRange: document?.getElementById?.('interestRange'),
+  years: document?.getElementById?.('years')
 };
 
 const displays = {
-  monthly: document.getElementById('displayMonthly'),
-  interest: document.getElementById('displayInterest'),
-  years: document.getElementById('displayYears'),
-  loanMax: document.getElementById('loanMax')
+  monthly: document?.getElementById?.('displayMonthly'),
+  interest: document?.getElementById?.('displayInterest'),
+  years: document?.getElementById?.('displayYears'),
+  loanMax: document?.getElementById?.('loanMax')
 };
 
 // Stats
-let stats = JSON.parse(localStorage.getItem('toolStats_affordability')) || { calcs: 0, copies: 0 };
-document.getElementById('stat-count').innerText = stats.calcs;
-document.getElementById('stat-copy').innerText = stats.copies;
+let stats = { calcs: 0, copies: 0 };
+try {
+  const saved = localStorage?.getItem?.('toolStats_affordability');
+  stats = saved ? JSON.parse(saved) : stats;
+} catch (e) {
+  console.warn('localStorage not available');
+}
+if (displays?.loanMax) {
+  const statCount = document?.getElementById?.('stat-count');
+  const statCopy = document?.getElementById?.('stat-copy');
+  if (statCount) statCount.innerText = stats.calcs;
+  if (statCopy) statCopy.innerText = stats.copies;
+}
 
 function updateStats(type) {
   stats[type]++;
-  localStorage.setItem('toolStats_affordability', JSON.stringify(stats));
-  document.getElementById(`stat-${type}`).innerText = stats[type];
+  try {
+    localStorage?.setItem?.('toolStats_affordability', JSON.stringify(stats));
+  } catch (e) {}
+  const el = document?.getElementById?.(`stat-${type}`);
+  if (el) el.innerText = stats[type];
 }
 
 // Core Logic
 function loadSettings() {
-  const saved = JSON.parse(localStorage.getItem('affordabilitySettings'));
-  if (saved) {
-    inputs.monthly.value = saved.monthly;
-    inputs.interest.value = saved.interest;
-    inputs.years.value = saved.years;
-    syncRange('monthly', saved.monthly);
-    syncRange('interest', saved.interest);
-    updateDisplays();
+  try {
+    const saved = localStorage?.getItem?.('affordabilitySettings');
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (inputs?.monthly?.value !== undefined) inputs.monthly.value = data.monthly ?? inputs.monthly.value;
+      if (inputs?.interest?.value !== undefined) inputs.interest.value = data.interest ?? inputs.interest.value;
+      if (inputs?.years?.value !== undefined) inputs.years.value = data.years ?? inputs.years.value;
+      syncRange('monthly', inputs.monthly?.value);
+      syncRange('interest', inputs.interest?.value);
+      updateDisplays();
+    }
+  } catch (e) {
+    console.warn('Could not load settings');
   }
   calculate();
 }
 
 function syncRange(type, value) {
+  if (!inputs[type] || !inputs[type + 'Range']) return;
   inputs[type].value = value;
   inputs[type + 'Range'].value = value;
 }
 
 function updateDisplays() {
-  displays.monthly.innerText = '$' + Number(inputs.monthly.value).toLocaleString();
-  displays.interest.innerText = inputs.interest.value + '%';
-  displays.years.innerText = inputs.years.value + ' Years';
+  if (displays?.monthly) displays.monthly.innerText = '$' + Number(inputs?.monthly?.value || 0).toLocaleString();
+  if (displays?.interest) displays.interest.innerText = (inputs?.interest?.value || 0) + '%';
+  if (displays?.years) displays.years.innerText = (inputs?.years?.value || 0) + ' Years';
 }
 
 function calculate() {
-  const P = parseFloat(inputs.monthly.value);
-  const r = parseFloat(inputs.interest.value) / 100 / 12;
-  const n = parseFloat(inputs.years.value) * 12;
+  const P = parseFloat(inputs?.monthly?.value || 0);
+  const r = parseFloat(inputs?.interest?.value || 0) / 100 / 12;
+  const n = parseFloat(inputs?.years?.value || 0) * 12;
   
   if(!P || !r || !n) return;
   
   // Reverse calculation: Max Loan = P * ((1+r)^n - 1) / (r * (1+r)^n)
   const max = P * (Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n));
   
-  displays.loanMax.style.animation = 'none';
-  displays.loanMax.offsetHeight;
-  displays.loanMax.style.animation = 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  if (displays?.loanMax) {
+    displays.loanMax.style.animation = 'none';
+    displays.loanMax.offsetHeight;
+    displays.loanMax.style.animation = 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    displays.loanMax.innerText = '$' + Math.round(max).toLocaleString();
+  }
   
-  displays.loanMax.innerText = '$' + Math.round(max).toLocaleString();
+  try {
+    localStorage?.setItem?.('affordabilitySettings', JSON.stringify({
+      monthly: inputs?.monthly?.value,
+      interest: inputs?.interest?.value,
+      years: inputs?.years?.value
+    }));
+  } catch (e) {}
   
-  localStorage.setItem('affordabilitySettings', JSON.stringify({
-    monthly: inputs.monthly.value,
-    interest: inputs.interest.value,
-    years: inputs.years.value
-  }));
-  
-  if(document.hasFocus()) updateStats('calcs');
+  if (document?.hasFocus?.()) updateStats('calcs');
 }
 
 function setTerm(years) {
   playClick();
-  inputs.years.value = years;
-  displays.years.innerText = years + ' Years';
+  if (inputs?.years) inputs.years.value = years;
+  if (displays?.years) displays.years.innerText = years + ' Years';
   calculate();
 }
 
 function copyToClipboard(elementId) {
   playClick();
-  const text = document.getElementById(elementId).innerText;
-  navigator.clipboard.writeText(text).then(() => {
+  const el = document?.getElementById?.(elementId);
+  if (!el) return;
+  const text = el.innerText?.replace(/[^\d.,$]/g, '').trim() || el.innerText;
+  navigator?.clipboard?.writeText?.(text)?.then?.(() => {
     updateStats('copies');
     playSuccess();
     showToast('✓ Copied: ' + text);
+  })?.catch?.(() => {
+    showToast('Copy failed');
   });
 }
 
 function showToast(message) {
-  const toast = document.getElementById('toast');
+  const toast = document?.getElementById?.('toast');
+  if (!toast) return;
   toast.innerText = message;
   toast.classList.add('active');
-  setTimeout(() => toast.classList.remove('active'), 2500);
+  setTimeout(() => toast?.classList?.remove?.('active'), 2500);
 }
 
 function toggleFaq(el) {
-  const item = el.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
+  if (!el) return;
+  const item = el?.closest?.('.faq-item');
+  if (!item) return;
+  const isOpen = item?.classList?.contains?.('open');
   
-  document.querySelectorAll('.faq-item').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+  document?.querySelectorAll?.('.faq-item')?.forEach?.(i => {
+    i?.classList?.remove?.('open');
+    i?.querySelector?.('.faq-q')?.setAttribute?.('aria-expanded', 'false');
   });
   
   if(!isOpen) {
-    item.classList.add('open');
-    el.setAttribute('aria-expanded', 'true');
+    item?.classList?.add?.('open');
+    el?.setAttribute?.('aria-expanded', 'true');
   }
 }
 
 // Keyboard Shortcuts
-document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT') return;
+document?.addEventListener?.('keydown', (e) => {
+  if (e?.target?.tagName === 'INPUT') return;
   
-  if (e.code === 'Space') {
-    e.preventDefault();
+  if (e?.code === 'Space') {
+    e?.preventDefault?.();
     calculate();
     playClick();
   }
 });
 
-// Event Listeners
-['monthly', 'interest', 'years'].forEach(key => {
-  inputs[key].addEventListener('input', (e) => {
-    syncRange(key, e.target.value);
+// Event Listeners with cleanup support
+const inputKeys = ['monthly', 'interest', 'years'];
+inputKeys.forEach(key => {
+  const inputEl = inputs?.[key];
+  const rangeEl = inputs?.[key + 'Range'];
+  
+  const handler = (e) => {
+    syncRange(key, e?.target?.value);
     updateDisplays();
     calculate();
-  });
-  inputs[key + 'Range'].addEventListener('input', (e) => {
-    inputs[key].value = e.target.value;
-    updateDisplays();
-    calculate();
-  });
-  inputs[key + 'Range'].addEventListener('mousedown', playClick);
+  };
+  
+  inputEl?.addEventListener?.('input', handler);
+  rangeEl?.addEventListener?.('input', handler);
+  rangeEl?.addEventListener?.('mousedown', playClick);
 });
 
 // FAQ Listeners
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => toggleFaq(btn));
+document?.querySelectorAll?.('.faq-q')?.forEach?.(btn => {
+  btn?.addEventListener?.('click', () => toggleFaq(btn));
 });
 
 // Init
-loadSettings();
+if (document?.readyState !== 'loading') {
+  loadSettings();
+} else {
+  document?.addEventListener?.('DOMContentLoaded', loadSettings);
+}
 
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// if (typeof adsbygoogle !== 'undefined') {
+//   document.querySelectorAll('.ad-slot').forEach?.(el => el?.classList?.add?.('adsense-active'));
+//   (adsbygoogle = window.adsbygoogle || []).push?.({});
+// }
 </script>
+
+<!-- Noscript fallback -->
+<noscript>
+  <div style="max-width:800px;margin:2rem auto;padding:1rem;background:#1e1e1e;border:1px solid #333;border-radius:8px;text-align:center;color:#6B6760;font-size:13px;">
+    ⚠️ JavaScript is required for the Loan Affordability Calculator to function. Please enable JavaScript to use this tool.
+  </div>
+</noscript>
 
 </body>
 </html>
