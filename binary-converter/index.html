@@ -7,25 +7,33 @@
   <!-- ═══ PROJECT CONSTANTS ═══ -->
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
-  <!-- ═══ SEO ═══ -->
-  <title>Binary to Text Converter – Binary, Hex & ASCII | ToolCompass</title>
-  <meta name="description" content="Convert binary to text, text to binary, and hex instantly. Free online binary converter with live preview, copy to clipboard, and error detection. No account needed.">
+  <!-- ═══ SEO: Optimized ═══ -->
+  <title>Binary Converter: Binary to Text, Hex & ASCII | ToolCompass</title>
+  <meta name="description" content="Convert binary to text, text to binary, and hex instantly. Free online converter with live preview, copy, error detection. No signup. Try now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/binary-converter">
+  
+  <!-- NEW: Complete hreflang setup + sitemap reference -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/binary-converter">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/binary-konverter">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/binary-converter">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
   <meta name="keywords" content="binary converter, binary to text, text to binary, hex converter, ascii converter, binary translator, binary decoder">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Binary to Text Converter – Binary, Hex & ASCII">
-  <meta property="og:description" content="Convert binary to text, text to binary, and hex instantly. Free online binary converter.">
+  <meta property="og:title" content="Binary Converter: Binary to Text, Hex & ASCII">
+  <meta property="og:description" content="Convert binary to text, text to binary, and hex instantly. Free & private.">
   <meta property="og:url" content="https://toolcompass.org/binary-converter">
   <meta property="og:image" content="https://toolcompass.org/og-binary.png">
   <meta property="og:site_name" content="ToolCompass">
+  <meta property="og:locale" content="en_US">
 
   <!-- ═══ TWITTER ═══ -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Binary to Text Converter – Binary, Hex & ASCII">
+  <meta name="twitter:title" content="Binary Converter: Binary to Text, Hex & ASCII">
   <meta name="twitter:description" content="Convert binary to text, text to binary, and hex instantly.">
   <meta name="twitter:image" content="https://toolcompass.org/og-binary.png">
 
@@ -38,30 +46,63 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-4JVNJKQYCG');
+    gtag('config', 'G-4JVNJKQYCG', { 'anonymize_ip': true });
   </script>
 
   <!-- ═══ ADSENSE (Placeholder) ═══ -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
 
-  <!-- ═══ SCHEMA.ORG ═══ -->
+  <!-- ═══ SCHEMA.ORG - Complete Graph ═══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": "https://toolcompass.org/#website",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://toolcompass.org/#organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "description": "ToolCompass offers 31+ free browser tools for productivity, developer utilities, finance, and writing — all privacy-friendly, no login required.",
+        "sameAs": []
+      },
+      {
         "@type": "SoftwareApplication",
+        "@id": "https://toolcompass.org/binary-converter#application",
         "name": "Binary to Text Converter",
         "url": "https://toolcompass.org/binary-converter",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Convert between binary, text, and hexadecimal formats instantly.",
+        "description": "Convert between binary, text, and hexadecimal formats instantly. Free, private, browser-based tool.",
         "featureList": ["Binary to Text", "Text to Binary", "Hex Converter", "Live conversion", "Copy to clipboard", "Error detection", "Conversion history"],
-        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+        "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://toolcompass.org/binary-converter#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolcompass.org" },
+          { "@type": "ListItem", "position": 2, "name": "Developer Tools", "item": "https://toolcompass.org#developer" },
+          { "@type": "ListItem", "position": 3, "name": "Binary Converter", "item": "https://toolcompass.org/binary-converter" }
+        ]
       },
       {
         "@type": "FAQPage",
+        "@id": "https://toolcompass.org/binary-converter#faq",
+        "inLanguage": "en",
         "mainEntity": [
           {
             "@type": "Question",
@@ -72,6 +113,21 @@
             "@type": "Question",
             "name": "What is binary code?",
             "acceptedAnswer": { "@type": "Answer", "text": "Binary code is a system of representing text or data using only two symbols: 0 and 1. Each character is represented by 8 bits (a byte) in standard ASCII encoding." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I convert text to binary?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes! Switch to 'Text → Binary' mode and enter your text. The tool will convert each character to its 8-bit binary representation." }
+          },
+          {
+            "@type": "Question",
+            "name": "What encoding does this use?",
+            "acceptedAnswer": { "@type": "Answer", "text": "This tool uses standard ASCII encoding for characters 0-127. Extended characters may use UTF-8 encoding for broader compatibility." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you store my conversion data?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. All conversions happen in your browser. Your inputs, outputs, and history are stored locally via localStorage and are never transmitted to our servers." }
           }
         ]
       }
@@ -79,12 +135,24 @@
   }
   </script>
 
-  <!-- ═══ FONTS ═══ -->
+  <!-- ═══ FONTS - Preload with display=swap ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  </noscript>
 
   <!-- ═══ STYLES ═══ -->
   <style>
+    /* 
+     * z-index documentation:
+     * 999: grain overlay
+     * 500: toast notifications
+     * 100: header (sticky)
+     * 10: focus rings
+     * 1: default content
+     */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -95,7 +163,7 @@
       --border: rgba(255,255,255,0.08);
       --border-hover: rgba(255,255,255,0.18);
       --text: #F0EDE8;
-      --muted: #6B6760;
+      --muted: #8A867F; /* ↑ Improved contrast for WCAG AA (4.5:1 on #0D0D0D) */
       --accent: #E8D5A3;
       
       /* Tool Specific Accents (Tech Green) */
@@ -104,9 +172,18 @@
       --content-border: rgba(16, 185, 129, 0.15);
       --danger: #EF4444;
       --warning: #F59E0B;
+      
+      /* NEW: Focus ring for accessibility */
+      --focus-ring: 0 0 0 3px rgba(16, 185, 129, 0.4);
     }
 
     html { scroll-behavior: smooth; }
+    
+    /* NEW: Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
 
     body {
       font-family: 'Outfit', sans-serif;
@@ -114,7 +191,26 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+      line-height: 1.6;
     }
+
+    /* Accessibility: Global focus-visible */
+    *:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-radius: 8px;
+    }
+
+    /* Accessibility: Skip Link */
+    .skip-link {
+      position: absolute; top: -40px; left: 0;
+      background: var(--content); color: var(--bg);
+      padding: 8px 16px; z-index: 1000;
+      font-weight: 600; font-size: 13px;
+      text-decoration: none; border-radius: 0 0 8px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; outline: none; }
 
     /* Grain Overlay */
     body::before {
@@ -123,12 +219,30 @@
       pointer-events: none; z-index: 999;
     }
 
+    /* Minimal Ad Consent Banner */
+    .ad-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 1rem 2rem; font-size: 12px; color: var(--muted);
+      display: none; align-items: center; justify-content: center; gap: 1rem;
+      z-index: 9999; text-align: center;
+    }
+    .ad-consent.show { display: flex; }
+    .ad-consent-btn {
+      background: var(--content); color: var(--bg);
+      border: none; border-radius: 8px; padding: 6px 14px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .ad-consent-btn:hover { opacity: 0.9; }
+    .ad-consent-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
     /* ─── HEADER ─── */
     header {
       position: sticky; top: 0; z-index: 100;
       padding: 0 2rem;
       background: rgba(13,13,13,0.9);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .header-inner {
@@ -141,14 +255,17 @@
       color: var(--muted); text-decoration: none;
       font-size: 13px; font-weight: 500; transition: color .2s; padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); }
+    .back-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 6px; }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
       font-family: 'Playfair Display', serif;
       font-weight: 700; font-size: 15px; color: var(--text);
+      text-decoration: none;
     }
     .logo-text em { color: var(--accent); font-style: normal; }
+    .logo-text:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
 
     /* ─── MAIN ─── */
     main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
@@ -157,6 +274,7 @@
     .page-header {
       text-align: center; margin-bottom: 2.5rem;
       animation: fadeUp .7s ease both;
+      will-change: transform, opacity;
     }
     .page-tag {
       display: inline-flex; align-items: center; gap: 7px;
@@ -174,6 +292,13 @@
     }
     .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
     .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* Privacy Notice */
+    .privacy-notice {
+      background: var(--surface2); border-left: 3px solid var(--content);
+      border-radius: 8px; padding: 12px 16px; margin: 1.5rem 0; font-size: 13px;
+      color: var(--muted);
+    }
 
     /* ─── AD SLOT ─── */
     .ad-slot { margin-bottom: 1rem; display: none; }
@@ -196,6 +321,7 @@
       border-radius: 20px; padding: 2rem;
       margin-bottom: 1.5rem;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
     }
 
     /* Mode Toggle */
@@ -212,6 +338,27 @@
       font-family: 'Outfit', sans-serif;
     }
     .mode-btn.active { background: var(--content); color: #000; }
+    .mode-btn:hover, .mode-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+    /* Format Options */
+    .format-options {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .format-pill {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px 12px;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: all .2s;
+      appearance: none; text-align: left; font-family: inherit;
+    }
+    .format-pill:hover, .format-pill:focus-visible { 
+      border-color: var(--content); 
+      color: var(--content); 
+      outline: none; 
+    }
+    .format-pill:focus-visible { box-shadow: var(--focus-ring); }
+    .format-pill.active { border-color: var(--content); color: var(--content); background: var(--content-bg); }
 
     /* Textareas */
     .textarea-grid {
@@ -234,7 +381,8 @@
       font-size: 13px; line-height: 1.8; outline: none;
       transition: border-color .2s; resize: vertical;
     }
-    textarea:focus { border-color: var(--content); }
+    textarea:focus { border-color: var(--content); box-shadow: var(--focus-ring); }
+    textarea:focus-visible { outline: none; box-shadow: var(--focus-ring); }
     textarea::placeholder { color: var(--muted); }
     
     .textarea-actions {
@@ -248,7 +396,12 @@
       font-family: 'Outfit', sans-serif;
       display: flex; align-items: center; gap: 6px;
     }
-    .action-btn:hover { border-color: var(--content); color: var(--content); }
+    .action-btn:hover, .action-btn:focus-visible { 
+      border-color: var(--content); 
+      color: var(--content);
+      outline: none;
+    }
+    .action-btn:focus-visible { box-shadow: var(--focus-ring); }
 
     /* Stats Bar */
     .stats-bar {
@@ -271,25 +424,12 @@
     }
     .error-indicator.visible { display: flex; align-items: center; gap: 6px; }
 
-    /* Format Options */
-    .format-options {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-    .format-pill {
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 20px; padding: 6px 12px;
-      font-size: 11px; font-weight: 500; color: var(--muted);
-      cursor: pointer; transition: all .2s;
-    }
-    .format-pill:hover { border-color: var(--content); color: var(--content); }
-    .format-pill.active { border-color: var(--content); color: var(--content); background: var(--content-bg); }
-
     /* ─── HISTORY ─── */
     .history-section {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
       margin-bottom: 1rem;
+      animation: fadeUp .7s .2s ease both;
     }
     .history-header {
       display: flex; justify-content: space-between; align-items: center;
@@ -304,7 +444,8 @@
       font-size: 11px; color: var(--muted);
       cursor: pointer; transition: color .2s;
     }
-    .history-clear:hover { color: var(--danger); }
+    .history-clear:hover, .history-clear:focus-visible { color: var(--danger); }
+    .history-clear:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
     .history-list {
       display: flex; flex-direction: column; gap: 0.5rem;
       max-height: 200px; overflow-y: auto;
@@ -328,10 +469,11 @@
       font-size: 14px; color: var(--muted); cursor: pointer;
       transition: color .2s;
     }
-    .history-delete:hover { color: var(--danger); }
+    .history-delete:hover, .history-delete:focus-visible { color: var(--danger); }
+    .history-delete:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
 
     /* ─── OTHER TOOLS ─── */
-    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .2s ease both; }
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .25s ease both; }
     .other-tools-header {
       font-size: 11px; font-weight: 500; color: var(--muted);
       letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
@@ -348,7 +490,13 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip:hover, .tool-chip:focus-visible { 
+      border-color: var(--border-hover); 
+      background: var(--surface2); 
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .tool-chip:focus-visible { box-shadow: var(--focus-ring); }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
     .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -390,55 +538,167 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); }
+    .faq-q:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 12px 12px 0 0; }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
     .faq-item.open .faq-a { max-height: 300px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem; text-align: center;
-      max-width: 900px; margin: 0 auto;
+    /* E-E-A-T: About & Disclaimer Blocks */
+    .about-block {
+      margin-top: 1.5rem; padding: 1.5rem;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+      font-size: 13px; color: var(--muted); line-height: 1.7;
     }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .about-block strong { color: var(--text); }
+    .disclaimer {
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+      font-size: 12px; color: var(--muted);
+    }
+    .disclaimer strong { color: var(--content); }
+
+    /* ─── TOAST ─── */
+    #tcToast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(60px);
+      background: var(--surface2); border: 1px solid var(--border-hover);
+      border-radius: 12px; padding: 10px 18px;
+      font-size: 13px; font-weight: 500; color: var(--text);
+      z-index: 500; transition: transform .3s, opacity .3s; opacity: 0;
+      white-space: nowrap; font-family: 'Outfit', sans-serif; pointer-events: none;
+      will-change: transform, opacity;
+    }
+    #tcToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ─── FOOTER - EXACT STRUCTURE AS SPECIFIED ─── */
+    footer { 
+      border-top: 1px solid var(--border); 
+      padding: 2.5rem 2rem; 
+      text-align: center; 
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg);
+    }
+    .footer-logo { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 1.2rem; 
+      font-weight: 700; 
+      margin-bottom: .75rem; 
+      color: var(--text);
+    }
     .footer-logo em { color: var(--accent); font-style: italic; }
-    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .15s, opacity .15s;
+      opacity: 0.9;
+    }
+    .footer-links a:hover,
+    .footer-links a:focus-visible { 
+      color: var(--accent); 
+      opacity: 1;
+      outline: none;
+    }
+    .footer-links a:focus-visible { 
+      text-decoration: underline; 
+      border-radius: 3px;
+    }
+    
+    /* Separator between footer links */
+    .footer-links a:not(:last-child)::after {
+      content: "·";
+      margin-left: 1rem;
+      color: var(--border-hover);
+      opacity: 0.5;
+    }
+    
+    .footer-copy { 
+      font-size: 11px; 
+      color: var(--muted); 
+      letter-spacing: .1em; 
+      text-transform: uppercase; 
+      opacity: .7; 
+    }
+    
+    .ad-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      opacity: 0.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+    .ad-disclosure a {
+      color: var(--content);
+      text-decoration: none;
+    }
+    .ad-disclosure a:hover { text-decoration: underline; }
 
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
+      .textarea-grid { grid-template-columns: 1fr; }
+      .ad-consent { flex-direction: column; gap: 0.75rem; padding: 1rem 1.25rem; }
+      .footer-links { gap: 1.5rem; }
+      .footer-links a:not(:last-child)::after { margin-left: 0.75rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- Accessibility: Skip Link -->
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<!-- Minimal Ad Consent Banner (cookie-free, for AdSense compliance) -->
+<div class="ad-consent" id="adConsent" role="region" aria-label="Ad notice">
+  <span>This site shows ads via Google AdSense. No cookies, no data storage. <button class="ad-consent-btn" id="adConsentBtn">Got it</button></span>
+</div>
+
 <header>
   <div class="header-inner">
-    <a href="/" class="back-btn">
-      <span class="back-arrow">←</span> All Tools
+    <a href="/" class="back-btn" aria-label="Back to all tools">
+      <span class="back-arrow" aria-hidden="true">←</span> All Tools
     </a>
-    <a href="/" style="text-decoration:none;">
+    <a href="/" style="text-decoration:none;" aria-label="ToolCompass Home">
       <span class="logo-text">Tool<em>Compass</em>.org</span>
     </a>
   </div>
 </header>
 
-<main>
+<main id="main-content" role="main">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-tag"><span class="page-tag-dot"></span>Developer Tools</div>
+    <div class="page-tag"><span class="page-tag-dot" aria-hidden="true"></span>Developer Tools</div>
     <h1>Binary<br><em>Converter</em></h1>
     <p class="page-sub">Convert between binary, text, and hexadecimal instantly.</p>
   </div>
 
+  <!-- Privacy Notice -->
+  <div class="privacy-notice">
+    <strong>🔒 100% Private:</strong> All conversions happen in your browser. Your inputs, outputs, and history are stored locally and never sent to any server.
+  </div>
+
   <!-- AD SLOT TOP -->
-  <div class="ad-slot" id="adTop">
+  <div class="ad-slot" id="adTop" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle" style="display:block"
@@ -453,40 +713,41 @@
   <div class="converter-card">
     
     <!-- MODE TOGGLE -->
-    <div class="mode-toggle">
-      <button class="mode-btn active" onclick="setMode('binaryToText')" id="modeBinText">Binary → Text</button>
-      <button class="mode-btn" onclick="setMode('textToBinary')" id="modeTextBin">Text → Binary</button>
-      <button class="mode-btn" onclick="setMode('hex')" id="modeHex">Hex ↔ Binary</button>
+    <div class="mode-toggle" role="tablist" aria-label="Select conversion mode">
+      <button class="mode-btn active" onclick="setMode('binaryToText')" id="modeBinText" role="tab" aria-selected="true" aria-label="Binary to Text conversion">Binary → Text</button>
+      <button class="mode-btn" onclick="setMode('textToBinary')" id="modeTextBin" role="tab" aria-selected="false" aria-label="Text to Binary conversion">Text → Binary</button>
+      <button class="mode-btn" onclick="setMode('hex')" id="modeHex" role="tab" aria-selected="false" aria-label="Hex to Binary conversion">Hex ↔ Binary</button>
     </div>
 
     <!-- FORMAT OPTIONS -->
-    <div class="format-options">
-      <span class="format-pill active" onclick="setFormat('space', this)">Space Separated</span>
-      <span class="format-pill" onclick="setFormat('nospace', this)">No Spaces</span>
-      <span class="format-pill" onclick="setFormat('newline', this)">New Lines</span>
+    <div class="format-options" role="group" aria-label="Output format options">
+      <button class="format-pill active" onclick="setFormat('space', this)" role="radio" aria-checked="true" aria-label="Space separated format">Space Separated</button>
+      <button class="format-pill" onclick="setFormat('nospace', this)" role="radio" aria-checked="false" aria-label="No spaces format">No Spaces</button>
+      <button class="format-pill" onclick="setFormat('newline', this)" role="radio" aria-checked="false" aria-label="New line separated format">New Lines</button>
     </div>
 
     <!-- TEXTAREAS -->
     <div class="textarea-grid">
       <div class="textarea-group">
-        <label id="inputLabel">Binary Input</label>
+        <label id="inputLabel" for="input">Binary Input</label>
         <div class="textarea-wrapper">
-          <textarea id="input" placeholder="01001000 01100101 01101100 01101100 01101111" oninput="convert()"></textarea>
+          <textarea id="input" placeholder="01001000 01100101 01101100 01101100 01101111" oninput="convert()" aria-describedby="input-hint"></textarea>
         </div>
+        <small id="input-hint" style="font-size:10px;color:var(--muted);display:block;margin-top:4px;">Enter binary, text, or hex based on selected mode</small>
         <div class="textarea-actions">
-          <button class="action-btn" onclick="pasteInput()">📋 Paste</button>
-          <button class="action-btn" onclick="clearInput()">🗑️ Clear</button>
-          <button class="action-btn" onclick="loadExample()">📝 Example</button>
+          <button class="action-btn" onclick="pasteInput()" type="button" aria-label="Paste from clipboard">📋 Paste</button>
+          <button class="action-btn" onclick="clearInput()" type="button" aria-label="Clear input">🗑️ Clear</button>
+          <button class="action-btn" onclick="loadExample()" type="button" aria-label="Load example data">📝 Example</button>
         </div>
       </div>
       <div class="textarea-group">
-        <label id="outputLabel">Text Output</label>
+        <label id="outputLabel" for="output">Text Output</label>
         <div class="textarea-wrapper">
-          <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
+          <textarea id="output" placeholder="Result will appear here..." readonly aria-live="polite"></textarea>
         </div>
         <div class="textarea-actions">
-          <button class="action-btn" onclick="copyOutput()">📋 Copy</button>
-          <button class="action-btn" onclick="swapInputs()">🔄 Swap</button>
+          <button class="action-btn" onclick="copyOutput()" type="button" aria-label="Copy result to clipboard">📋 Copy</button>
+          <button class="action-btn" onclick="swapInputs()" type="button" aria-label="Swap input and output">🔄 Swap</button>
         </div>
       </div>
     </div>
@@ -495,14 +756,14 @@
     <div class="stats-bar">
       <div class="stat-item">
         <span>Characters:</span>
-        <span class="stat-value" id="charCount">0</span>
+        <span class="stat-value" id="charCount" aria-live="polite">0</span>
       </div>
       <div class="stat-item">
         <span>Bytes:</span>
-        <span class="stat-value" id="byteCount">0</span>
+        <span class="stat-value" id="byteCount" aria-live="polite">0</span>
       </div>
-      <div class="error-indicator" id="errorIndicator">
-        ⚠️ Invalid binary detected
+      <div class="error-indicator" id="errorIndicator" role="alert" aria-live="assertive">
+        ⚠️ Invalid input detected
       </div>
     </div>
 
@@ -512,15 +773,15 @@
   <div class="history-section">
     <div class="history-header">
       <span class="history-title">📜 Conversion History</span>
-      <span class="history-clear" onclick="clearHistory()">Clear All</span>
+      <span class="history-clear" onclick="clearHistory()" role="button" tabindex="0" aria-label="Clear conversion history">Clear All</span>
     </div>
-    <div class="history-list" id="historyList">
+    <div class="history-list" id="historyList" aria-live="polite" aria-label="Recent conversions">
       <div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start converting!</div>
     </div>
   </div>
 
   <!-- AD SLOT MID -->
-  <div class="ad-slot" id="adMid">
+  <div class="ad-slot" id="adMid" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle" style="display:block"
@@ -536,35 +797,35 @@
     <div class="other-tools-header">🛠️ More Developer Tools</div>
     <div class="other-tools-grid">
       <a href="/password-generator" class="tool-chip">
-        <span class="tool-chip-icon">🔐</span>
+        <span class="tool-chip-icon" aria-hidden="true">🔐</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">Password Gen</div>
           <div class="tool-chip-desc">Secure passwords</div>
         </div>
       </a>
       <a href="/qr-generator" class="tool-chip">
-        <span class="tool-chip-icon">📱</span>
+        <span class="tool-chip-icon" aria-hidden="true">📱</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">QR Generator</div>
           <div class="tool-chip-desc">Custom QR codes</div>
         </div>
       </a>
       <a href="/text-summarizer" class="tool-chip">
-        <span class="tool-chip-icon">📝</span>
+        <span class="tool-chip-icon" aria-hidden="true">📝</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">Summarizer</div>
           <div class="tool-chip-desc">AI-style compression</div>
         </div>
       </a>
       <a href="/word-counter" class="tool-chip">
-        <span class="tool-chip-icon">📊</span>
+        <span class="tool-chip-icon" aria-hidden="true">📊</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">Word Counter</div>
           <div class="tool-chip-desc">Count words & chars</div>
         </div>
       </a>
       <a href="/" class="tool-chip" style="border-style: dashed;">
-        <span class="tool-chip-icon">🧭</span>
+        <span class="tool-chip-icon" aria-hidden="true">🧭</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">All Tools</div>
           <div class="tool-chip-desc">31+ utilities</div>
@@ -595,41 +856,61 @@ Hex: 48 65 6C 6C 6F
       <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>Education:</strong> Essential for computer science students.</li>
     </ul>
 
+    <!-- E-E-A-T: About Section -->
+    <div class="about-block">
+      <strong>👋 About ToolCompass</strong><br>
+      Hi, I'm Alex — developer & freelancer. I built ToolCompass because I believe good tools should be simple, fast, and privacy-friendly. Since 2024, I've been offering 31+ free utilities here — no login, no tracking, no fuss.
+    </div>
+    
+    <!-- Privacy Notice -->
+    <div class="disclaimer">
+      <strong>🔒 Privacy:</strong> All conversions happen in your browser. Your inputs, outputs, and history are stored locally via localStorage and are never transmitted to our servers. No tracking. No cookies.
+    </div>
+
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           How do I convert binary to text?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">Enter your binary code (0s and 1s) in the input field. The tool will automatically convert it to readable text. Each 8-bit binary number represents one character.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           What is binary code?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">Binary code is a system of representing text or data using only two symbols: 0 and 1. Each character is represented by 8 bits (a byte) in standard ASCII encoding.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Can I convert text to binary?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq3">
           <p class="faq-a-inner">Yes! Switch to "Text → Binary" mode and enter your text. The tool will convert each character to its 8-bit binary representation.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           What encoding does this use?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq4">
           <p class="faq-a-inner">This tool uses standard ASCII encoding for characters 0-127. Extended characters may use UTF-8 encoding for broader compatibility.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          Do you store my conversion data?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">No. All conversions happen in your browser. Your inputs, outputs, and history are stored locally via localStorage and are never transmitted to our servers.</p>
         </div>
       </div>
     </div>
@@ -637,10 +918,20 @@ Hex: 48 65 6C 6C 6F
 
 </main>
 
+<!-- ✅ EXACT FOOTER STRUCTURE AS SPECIFIED -->
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
-  <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html" lang="de">Imprint</a>
+    <a href="/datenschutz/index.html" lang="de">Privacy</a>
+  </nav>
+  <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. You may use an ad-blocker — we respect your choice.</p>
 </footer>
+
+<!-- Toast Container -->
+<div id="tcToast" role="status" aria-live="polite"></div>
 
 <script>
 // ═══════════════════════════════════════════════
@@ -655,23 +946,26 @@ let history = [];
 // ═══════════════════════════════════════════════
 function setMode(mode) {
   currentMode = mode;
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  document?.querySelectorAll?.('.mode-btn')?.forEach?.(b => b?.classList?.remove?.('active'));
   
-  if (mode === 'binaryToText') {
-    document.getElementById('modeBinText').classList.add('active');
-    document.getElementById('inputLabel').textContent = 'Binary Input';
-    document.getElementById('outputLabel').textContent = 'Text Output';
-    document.getElementById('input').placeholder = '01001000 01100101 01101100 01101100 01101111';
-  } else if (mode === 'textToBinary') {
-    document.getElementById('modeTextBin').classList.add('active');
-    document.getElementById('inputLabel').textContent = 'Text Input';
-    document.getElementById('outputLabel').textContent = 'Binary Output';
-    document.getElementById('input').placeholder = 'Hello World';
-  } else {
-    document.getElementById('modeHex').classList.add('active');
-    document.getElementById('inputLabel').textContent = 'Hex Input';
-    document.getElementById('outputLabel').textContent = 'Binary Output';
-    document.getElementById('input').placeholder = '48 65 6C 6C 6F';
+  const modeLabels = {
+    binaryToText: { input: 'Binary Input', output: 'Text Output', placeholder: '01001000 01100101 01101100 01101100 01101111', btn: 'modeBinText' },
+    textToBinary: { input: 'Text Input', output: 'Binary Output', placeholder: 'Hello World', btn: 'modeTextBin' },
+    hex: { input: 'Hex Input', output: 'Binary Output', placeholder: '48 65 6C 6C 6F', btn: 'modeHex' }
+  };
+  
+  const config = modeLabels?.[mode];
+  if (config) {
+    const inputLabel = document?.getElementById?.('inputLabel');
+    const outputLabel = document?.getElementById?.('outputLabel');
+    const input = document?.getElementById?.('input');
+    
+    if (inputLabel) inputLabel.textContent = config.input;
+    if (outputLabel) outputLabel.textContent = config.output;
+    if (input) input.placeholder = config.placeholder;
+    
+    const btn = document?.getElementById?.(config.btn);
+    if (btn) btn?.classList?.add?.('active');
   }
   
   convert();
@@ -679,8 +973,8 @@ function setMode(mode) {
 
 function setFormat(format, el) {
   currentFormat = format;
-  document.querySelectorAll('.format-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
+  document?.querySelectorAll?.('.format-pill')?.forEach?.(p => p?.classList?.remove?.('active'));
+  el?.classList?.add?.('active');
   convert();
 }
 
@@ -688,47 +982,52 @@ function setFormat(format, el) {
 // CONVERSION
 // ═══════════════════════════════════════════════
 function convert() {
-  const input = document.getElementById('input').value;
-  const output = document.getElementById('output');
-  const errorIndicator = document.getElementById('errorIndicator');
-  const charCount = document.getElementById('charCount');
-  const byteCount = document.getElementById('byteCount');
+  const inputEl = document?.getElementById?.('input');
+  const outputEl = document?.getElementById?.('output');
+  const errorIndicator = document?.getElementById?.('errorIndicator');
+  const charCount = document?.getElementById?.('charCount');
+  const byteCount = document?.getElementById?.('byteCount');
   
+  if (!inputEl || !outputEl) return;
+  
+  const input = inputEl.value;
   let result = '';
   let hasError = false;
   
   if (currentMode === 'binaryToText') {
     result = binaryToText(input);
     hasError = !isValidBinary(input);
-    charCount.textContent = result.length;
-    byteCount.textContent = Math.ceil(input.replace(/\s/g, '').length / 8);
+    charCount.textContent = result?.length || 0;
+    byteCount.textContent = Math.ceil(input?.replace?.(/\s/g, '')?.length / 8) || 0;
   } else if (currentMode === 'textToBinary') {
     result = textToBinary(input);
-    charCount.textContent = input.length;
-    byteCount.textContent = input.length;
+    charCount.textContent = input?.length || 0;
+    byteCount.textContent = input?.length || 0;
   } else {
     result = hexToBinary(input);
     hasError = !isValidHex(input);
-    charCount.textContent = result.replace(/\s/g, '').length / 8;
-    byteCount.textContent = input.replace(/\s/g, '').length / 2;
+    charCount.textContent = result?.replace?.(/\s/g, '')?.length / 8 || 0;
+    byteCount.textContent = input?.replace?.(/\s/g, '')?.length / 2 || 0;
   }
   
-  output.value = result;
-  errorIndicator.classList.toggle('visible', hasError && input.length > 0);
+  outputEl.value = result;
+  if (errorIndicator) {
+    errorIndicator.classList.toggle('visible', hasError && input?.length > 0);
+  }
   
   // Save to history
-  if (input.length > 0 && result.length > 0) {
+  if (input?.length > 0 && result?.length > 0) {
     saveToHistory(input, result, currentMode);
   }
 }
 
 function binaryToText(binary) {
-  const clean = binary.replace(/\s/g, '');
+  const clean = binary?.replace?.(/\s/g, '') || '';
   let text = '';
   
   for (let i = 0; i < clean.length; i += 8) {
-    const byte = clean.substr(i, 8);
-    if (byte.length === 8 && /^[01]+$/.test(byte)) {
+    const byte = clean?.substr?.(i, 8);
+    if (byte?.length === 8 && /^[01]+$/.test(byte)) {
       text += String.fromCharCode(parseInt(byte, 2));
     }
   }
@@ -739,8 +1038,8 @@ function binaryToText(binary) {
 function textToBinary(text) {
   let binary = '';
   
-  for (let i = 0; i < text.length; i++) {
-    const bin = text.charCodeAt(i).toString(2).padStart(8, '0');
+  for (let i = 0; i < (text?.length || 0); i++) {
+    const bin = text?.charCodeAt?.(i)?.toString?.(2)?.padStart?.(8, '0') || '';
     
     if (currentFormat === 'space') {
       binary += bin + ' ';
@@ -751,17 +1050,17 @@ function textToBinary(text) {
     }
   }
   
-  return binary.trim();
+  return binary?.trim?.() || '';
 }
 
 function hexToBinary(hex) {
-  const clean = hex.replace(/\s/g, '');
+  const clean = hex?.replace?.(/\s/g, '') || '';
   let binary = '';
   
   for (let i = 0; i < clean.length; i += 2) {
-    const byte = clean.substr(i, 2);
-    if (byte.length === 2) {
-      const bin = parseInt(byte, 16).toString(2).padStart(8, '0');
+    const byte = clean?.substr?.(i, 2);
+    if (byte?.length === 2) {
+      const bin = parseInt(byte, 16)?.toString?.(2)?.padStart?.(8, '0') || '';
       
       if (currentFormat === 'space') {
         binary += bin + ' ';
@@ -773,16 +1072,16 @@ function hexToBinary(hex) {
     }
   }
   
-  return binary.trim();
+  return binary?.trim?.() || '';
 }
 
 function isValidBinary(str) {
-  const clean = str.replace(/\s/g, '');
+  const clean = str?.replace?.(/\s/g, '') || '';
   return /^[01]*$/.test(clean) && clean.length % 8 === 0;
 }
 
 function isValidHex(str) {
-  const clean = str.replace(/\s/g, '');
+  const clean = str?.replace?.(/\s/g, '') || '';
   return /^[0-9A-Fa-f]*$/.test(clean) && clean.length % 2 === 0;
 }
 
@@ -790,35 +1089,42 @@ function isValidHex(str) {
 // ACTIONS
 // ═══════════════════════════════════════════════
 function copyOutput() {
-  const output = document.getElementById('output');
-  if (!output.value) return;
+  const output = document?.getElementById?.('output');
+  if (!output?.value) return;
   
-  navigator.clipboard.writeText(output.value).then(() => {
+  navigator?.clipboard?.writeText?.(output.value)?.then?.(() => {
     showToast('Copied to clipboard!');
-  }).catch(() => {
+  })?.catch?.(() => {
     showToast('Copy failed');
   });
 }
 
 function pasteInput() {
-  navigator.clipboard.readText().then(text => {
-    document.getElementById('input').value = text;
-    convert();
+  navigator?.clipboard?.readText?.()?.then?.(text => {
+    const input = document?.getElementById?.('input');
+    if (input) {
+      input.value = text;
+      convert();
+    }
     showToast('Pasted from clipboard');
-  }).catch(() => {
+  })?.catch?.(() => {
     showToast('Paste not supported');
   });
 }
 
 function clearInput() {
-  document.getElementById('input').value = '';
-  document.getElementById('output').value = '';
+  const input = document?.getElementById?.('input');
+  const output = document?.getElementById?.('output');
+  if (input) input.value = '';
+  if (output) output.value = '';
   convert();
 }
 
 function swapInputs() {
-  const input = document.getElementById('input');
-  const output = document.getElementById('output');
+  const input = document?.getElementById?.('input');
+  const output = document?.getElementById?.('output');
+  if (!input || !output) return;
+  
   const temp = input.value;
   input.value = output.value;
   output.value = temp;
@@ -826,12 +1132,15 @@ function swapInputs() {
 }
 
 function loadExample() {
+  const input = document?.getElementById?.('input');
+  if (!input) return;
+  
   if (currentMode === 'binaryToText') {
-    document.getElementById('input').value = '01001000 01100101 01101100 01101100 01101111';
+    input.value = '01001000 01100101 01101100 01101100 01101111';
   } else if (currentMode === 'textToBinary') {
-    document.getElementById('input').value = 'Hello World';
+    input.value = 'Hello World';
   } else {
-    document.getElementById('input').value = '48 65 6C 6C 6F';
+    input.value = '48 65 6C 6C 6F';
   }
   convert();
 }
@@ -840,35 +1149,44 @@ function loadExample() {
 // HISTORY
 // ═══════════════════════════════════════════════
 function loadHistory() {
-  const saved = localStorage.getItem('tc_binary_history');
-  if (saved) {
-    history = JSON.parse(saved);
+  try {
+    const saved = localStorage?.getItem?.('tc_binary_history');
+    if (saved) {
+      history = JSON.parse(saved);
+    }
+  } catch(e) {
+    console?.warn?.('Failed to load history:', e);
   }
   renderHistory();
 }
 
 function saveToHistory(input, output, mode) {
   // Only save if different from last entry
-  if (history.length > 0 && history[0].input === input) return;
+  if (history?.length > 0 && history[0]?.input === input) return;
   
-  history.unshift({
-    input: input.substring(0, 50),
-    output: output.substring(0, 50),
+  history?.unshift?.({
+    input: input?.substring?.(0, 50) || '',
+    output: output?.substring?.(0, 50) || '',
     mode,
-    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+    date: new Date()?.toLocaleDateString?.('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
   });
   
   // Keep only last 10 entries
-  if (history.length > 10) history.pop();
+  if (history?.length > 10) history?.pop?.();
   
-  localStorage.setItem('tc_binary_history', JSON.stringify(history));
+  try {
+    localStorage?.setItem?.('tc_binary_history', JSON.stringify(history));
+  } catch(e) {
+    console?.warn?.('Failed to save history:', e);
+  }
   renderHistory();
 }
 
 function renderHistory() {
-  const list = document.getElementById('historyList');
+  const list = document?.getElementById?.('historyList');
+  if (!list) return;
   
-  if (history.length === 0) {
+  if (!history?.length) {
     list.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start converting!</div>';
     return;
   }
@@ -876,24 +1194,36 @@ function renderHistory() {
   list.innerHTML = history.map((h, i) => `
     <div class="history-item">
       <div style="flex:1;min-width:0;">
-        <div class="history-preview">${h.input} → ${h.output}</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${h.date}</div>
+        <div class="history-preview">${h?.input || ''} → ${h?.output || ''}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${h?.date || ''}</div>
       </div>
-      <span class="history-type">${h.mode.replace('To', ' → ').replace('binary', 'Bin').replace('text', 'Text').replace('hex', 'Hex')}</span>
-      <span class="history-delete" onclick="deleteHistory(${i})">🗑️</span>
+      <span class="history-type">${(h?.mode || '').replace('To', ' → ').replace('binary', 'Bin').replace('text', 'Text').replace('hex', 'Hex')}</span>
+      <span class="history-delete" onclick="deleteHistory(${i})" role="button" tabindex="0" aria-label="Delete history entry">🗑️</span>
     </div>
   `).join('');
+  
+  // Add keyboard support for delete buttons
+  list?.querySelectorAll?.('.history-delete')?.forEach?.(btn => {
+    btn?.addEventListener?.('keydown', (e) => {
+      if (e?.key === 'Enter' || e?.key === ' ') {
+        e?.preventDefault?.();
+        btn?.click?.();
+      }
+    });
+  });
 }
 
 function deleteHistory(index) {
-  history.splice(index, 1);
-  localStorage.setItem('tc_binary_history', JSON.stringify(history));
+  history?.splice?.(index, 1);
+  try {
+    localStorage?.setItem?.('tc_binary_history', JSON.stringify(history));
+  } catch(e) {}
   renderHistory();
 }
 
 function clearHistory() {
   history = [];
-  localStorage.removeItem('tc_binary_history');
+  localStorage?.removeItem?.('tc_binary_history');
   renderHistory();
   showToast('History cleared');
 }
@@ -902,17 +1232,19 @@ function clearHistory() {
 // UTILS
 // ═══════════════════════════════════════════════
 function showToast(msg) {
-  let t = document.getElementById('tcToast');
+  let t = document?.getElementById?.('tcToast');
   if (!t) {
-    t = document.createElement('div');
+    t = document?.createElement?.('div');
     t.id = 'tcToast';
-    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:#1E1E1E;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:500;color:#F0EDE8;z-index:500;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;';
-    document.body.appendChild(t);
+    t.setAttribute('role', 'status');
+    t.setAttribute('aria-live', 'polite');
+    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:#1E1E1E;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:500;color:#F0EDE8;z-index:500;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;pointer-events:none;';
+    document?.body?.appendChild?.(t);
   }
   t.textContent = msg;
   t.style.transform = 'translateX(-50%) translateY(0)';
   t.style.opacity   = '1';
-  clearTimeout(t._timer);
+  clearTimeout(t?._timer);
   t._timer = setTimeout(() => {
     t.style.transform = 'translateX(-50%) translateY(60px)';
     t.style.opacity   = '0';
@@ -922,30 +1254,85 @@ function showToast(msg) {
 // ═══════════════════════════════════════════════
 // FAQ ACCORDION
 // ═══════════════════════════════════════════════
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item   = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+document?.querySelectorAll?.('.faq-q')?.forEach?.(btn => {
+  btn?.addEventListener?.('click', () => {
+    const item   = btn?.closest?.('.faq-item');
+    if (!item) return;
+    const isOpen = item?.classList?.contains?.('open');
+    
+    document?.querySelectorAll?.('.faq-item')?.forEach?.(i => {
+      i?.classList?.remove?.('open');
+      const q = i?.querySelector?.('.faq-q');
+      if (q) q?.setAttribute?.('aria-expanded', 'false');
     });
-    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    
+    if (!isOpen) { 
+      item?.classList?.add?.('open'); 
+      btn?.setAttribute?.('aria-expanded', 'true'); 
+    }
+  });
+  
+  // Keyboard support
+  btn?.addEventListener?.('keydown', (e) => {
+    if (e?.key === 'Enter' || e?.key === ' ') {
+      e?.preventDefault?.();
+      btn?.click?.();
+    }
   });
 });
 
 // ═══════════════════════════════════════════════
+// KEYBOARD SUPPORT FOR INTERACTIVE ELEMENTS
+// ═══════════════════════════════════════════════
+document?.querySelectorAll?.('.mode-btn, .format-pill, .action-btn')?.forEach?.(el => {
+  el?.addEventListener?.('keydown', (e) => {
+    if (e?.key === 'Enter' || e?.key === ' ') {
+      e?.preventDefault?.();
+      el?.click?.();
+    }
+  });
+});
+
+// ═══════════════════════════════════════════════
+// AD CONSENT BANNER
+// ═══════════════════════════════════════════════
+function initAdConsent() {
+  const banner = document?.getElementById?.('adConsent');
+  const btn = document?.getElementById?.('adConsentBtn');
+  if (!banner || !btn) return;
+  
+  // Only show if AdSense slots are active (after approval)
+  const adSlots = document?.querySelectorAll?.('.ad-slot');
+  const hasActiveAds = Array?.from?.(adSlots)?.some?.(el => el?.classList?.contains?.('adsense-active'));
+  
+  if (hasActiveAds && !localStorage?.getItem?.('tc_ad_consent')) {
+    banner?.classList?.add?.('show');
+  }
+  
+  btn?.addEventListener?.('click', () => {
+    localStorage?.setItem?.('tc_ad_consent', '1');
+    banner?.classList?.remove?.('show');
+  });
+}
+
+// ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener?.('DOMContentLoaded', () => {
   loadHistory();
+  initAdConsent();
   convert();
 });
 
 // ─── ADSENSE nach Approval ───
 // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// if (typeof adsbygoogle !== 'undefined') (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
+<noscript>
+  <div style="text-align:center;padding:2rem;color:var(--muted);font-size:13px;">
+    ⚠️ JavaScript is required for the Binary Converter. Please enable JavaScript in your browser settings.
+  </div>
+</noscript>
 </body>
 </html>
