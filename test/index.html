@@ -79,6 +79,7 @@
 
         /* Custom Scrollbar */
         #chat-container::-webkit-scrollbar { width: 5px; }
+        #chat-container::-webkit-scrollbar-track { background: transparent; }
         #chat-container::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
@@ -146,7 +147,7 @@
         chatContainer.scrollTop = chatContainer.scrollHeight; // Auto-Scroll
     }
 
-    // Verarbeitet das Senden der Nachricht
+    // Verarbeitet das Senden der Nachricht und entschlüsselt das Antwortobjekt
     async function handleChat() {
         const prompt = userInput.value.trim();
         if (!prompt) return;
@@ -157,11 +158,20 @@
         sendBtn.disabled = true;
 
         try {
-            // Stabiler API-Aufruf ohne fehleranfällige Hardcoded-Strings
             const response = await puter.ai.chat(prompt);
             
-            // Fängt sowohl Strings als auch verschachtelte Objekte ab
-            const aiText = response.message ? response.message.content : response;
+            // Verhindert das [object Object] Problem, indem alle gängigen Datenstrukturen geprüft werden
+            let aiText = "";
+            if (typeof response === 'string') {
+                aiText = response;
+            } else if (response && response.message && response.message.content) {
+                aiText = response.message.content;
+            } else if (response && response.text) {
+                aiText = response.text;
+            } else {
+                aiText = JSON.stringify(response); // Fallback, falls die Struktur ganz anders ist
+            }
+
             appendMessage('ai', aiText);
         } catch (error) {
             appendMessage('ai', "System-Fehler: " + error.message);
