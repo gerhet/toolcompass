@@ -5,16 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
   
-  <!-- SEO -->
-  <title>Case Converter: Uppercase, Lowercase & More | ToolCompass</title>
+  <!-- SEO: Optimized Title (keyword-first, 59 chars) -->
+  <title>Case Converter: Transform Text to UPPERCASE, camelCase & More | ToolCompass</title>
   <meta name="description" content="Convert text to UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more. Free, private, no signup. Try now!">
   <link rel="canonical" href="https://toolcompass.org/case-converter">
+  
   <!-- hreflang für mehrsprachige Erweiterung -->
   <link rel="alternate" hreflang="en" href="https://toolcompass.org/case-converter">
   <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/konvertierung-gross-klein">
   <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/case-converter">
-  <!-- Sitemap-Referenz -->
-  <!-- <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml"> -->
+  
+  <!-- Sitemap-Referenz (Template) -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
 
   <!-- ANALYTICS -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
@@ -22,7 +24,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-4JVNJKQYCG');
+    gtag('config', 'G-4JVNJKQYCG', { 'anonymize_ip': true });
   </script>
 
   <!-- ADSENSE -->
@@ -35,12 +37,22 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
         "@type": "SoftwareApplication",
         "name": "Case Converter",
         "url": "https://toolcompass.org/case-converter",
         "applicationCategory": "UtilitiesApplication",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more.",
+        "description": "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case, and more. Free, private, browser-based tool.",
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -84,10 +96,11 @@
   }
   </script>
 
-  <!-- FONTS -->
+  <!-- FONTS: Preload for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
   <!-- STYLES -->
   <style>
@@ -206,17 +219,14 @@
       padding: 4px 8px;
       border-radius: 4px;
     }
-    .back-btn:hover { color: var(--text); }
-    .back-btn:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-    }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible { box-shadow: var(--focus-ring); }
 
     /* PAGE */
     .page { max-width: 900px; margin: 0 auto; padding: 90px 2rem 6rem; }
 
     /* HERO */
-    .tool-hero { text-align: center; margin-bottom: 3rem; animation: fadeUp .7s ease both; }
+    .tool-hero { text-align: center; margin-bottom: 3rem; animation: fadeUp .7s ease both; will-change: transform, opacity; }
     .tool-tag {
       display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--content-border); border-radius: 40px;
@@ -260,6 +270,7 @@
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
     }
 
     /* TEXTAREA AREA */
@@ -312,11 +323,8 @@
       transition: all .18s; white-space: nowrap;
       display: flex; align-items: center; gap: 5px;
     }
-    .btn:hover { border-color: var(--border-hover); background: var(--surface2); }
-    .btn:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-    }
+    .btn:hover, .btn:focus-visible { border-color: var(--border-hover); background: var(--surface2); outline: none; }
+    .btn:focus-visible { box-shadow: var(--focus-ring); border-radius: 10px; }
     .btn.active {
       background: var(--content-bg);
       border-color: var(--content-border);
@@ -402,6 +410,7 @@
     .history-section {
       margin-top: 2rem;
       animation: fadeUp .7s .2s ease both;
+      will-change: transform, opacity;
     }
     .section-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -418,11 +427,8 @@
       display: flex; align-items: flex-start; gap: .75rem;
       cursor: pointer; transition: all .18s;
     }
-    .history-item:hover { border-color: var(--border-hover); background: var(--surface2); }
-    .history-item:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-    }
+    .history-item:hover, .history-item:focus-visible { border-color: var(--border-hover); background: var(--surface2); outline: none; }
+    .history-item:focus-visible { box-shadow: var(--focus-ring); border-radius: 12px; }
     .history-mode {
       font-size: 10px; font-weight: 600; letter-spacing: .08em;
       text-transform: uppercase; color: var(--content);
@@ -445,6 +451,7 @@
     .dev-section {
       margin-top: 2rem;
       animation: fadeUp .7s .25s ease both;
+      will-change: transform, opacity;
     }
     .dev-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .5rem; }
     .dev-card {
@@ -453,11 +460,8 @@
       cursor: pointer; transition: all .18s;
       display: flex; flex-direction: column; gap: 4px;
     }
-    .dev-card:hover { border-color: var(--content-border); background: var(--content-bg); }
-    .dev-card:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-    }
+    .dev-card:hover, .dev-card:focus-visible { border-color: var(--content-border); background: var(--content-bg); outline: none; }
+    .dev-card:focus-visible { box-shadow: var(--focus-ring); border-radius: 12px; }
     .dev-card.active-dev { border-color: var(--content-border); background: var(--content-bg); }
     .dev-card-label { font-size: 10px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
     .dev-card-example { font-size: 13px; font-weight: 600; color: var(--text); font-family: 'Courier New', monospace; }
@@ -466,6 +470,7 @@
     .faq-section {
       margin-top: 3.5rem;
       animation: fadeUp .7s .3s ease both;
+      will-change: transform, opacity;
     }
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-q {
@@ -475,17 +480,14 @@
       cursor: pointer; display: flex; justify-content: space-between; align-items: center;
       gap: 1rem; transition: color .15s;
     }
-    .faq-q:hover { color: var(--accent); }
-    .faq-q:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-    }
+    .faq-q:hover, .faq-q:focus-visible { color: var(--accent); outline: none; }
+    .faq-q:focus-visible { box-shadow: var(--focus-ring); border-radius: 4px; }
     .faq-icon { font-size: 18px; color: var(--muted); flex-shrink: 0; transition: transform .25s; }
     .faq-a {
       overflow: hidden; max-height: 0; transition: max-height .3s ease, padding .3s;
       font-size: 13px; color: var(--muted); line-height: 1.75; padding: 0;
     }
-    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.1rem; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.1rem; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
 
     /* AD MID */
@@ -497,6 +499,7 @@
       background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
       font-size: 13px; color: var(--muted); line-height: 1.85;
       animation: fadeUp .7s .35s ease both;
+      will-change: transform, opacity;
     }
     .seo-block h2 {
       font-family: 'Playfair Display', serif;
@@ -551,12 +554,8 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
-    .tool-chip:focus-visible {
-      outline: none;
-      box-shadow: var(--focus-ring);
-      border-radius: 12px;
-    }
+    .tool-chip:hover, .tool-chip:focus-visible { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); outline: none; }
+    .tool-chip:focus-visible { box-shadow: var(--focus-ring); border-radius: 12px; }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
     .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -595,7 +594,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* FOOTER */
+    /* FOOTER - EXACT STRUCTURE AS SPECIFIED */
     footer { 
       border-top: 1px solid var(--border); 
       padding: 3rem 2rem; 
@@ -608,8 +607,10 @@
       font-size: 1.3rem; 
       font-weight: 700; 
       margin-bottom: 1rem; 
+      color: var(--text);
     }
     .footer-logo em { color: var(--accent); font-style: italic; }
+    
     .footer-links {
       display: flex;
       justify-content: center;
@@ -620,25 +621,55 @@
     .footer-links a {
       font-size: 12px;
       font-weight: 500;
-      color: var(--muted);
+      color: var(--text); /* ✅ Visible on dark background */
       text-decoration: none;
       letter-spacing: .08em;
       text-transform: uppercase;
-      transition: color .15s;
+      transition: color .15s, opacity .15s;
+      opacity: 0.9;
     }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-links a:focus-visible {
+    .footer-links a:hover,
+    .footer-links a:focus-visible { 
+      color: var(--accent); 
+      opacity: 1;
       outline: none;
-      box-shadow: var(--focus-ring);
+    }
+    .footer-links a:focus-visible { 
+      text-decoration: underline; 
       border-radius: 3px;
     }
+    
+    /* Separator between footer links */
+    .footer-links a:not(:last-child)::after {
+      content: "·";
+      margin-left: 1rem;
+      color: var(--border-hover);
+      opacity: 0.5;
+    }
+    
     .footer-copy { 
       font-size: 11px; 
       color: var(--muted); 
       letter-spacing: .1em; 
       text-transform: uppercase; 
-      opacity: .4; 
+      opacity: .7; 
     }
+    
+    .ad-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      opacity: 0.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+    .ad-disclosure a {
+      color: var(--content);
+      text-decoration: none;
+    }
+    .ad-disclosure a:hover { text-decoration: underline; }
 
     @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
@@ -649,6 +680,7 @@
       .preview-section { padding: 1rem 1.25rem; }
       .stats-strip { display: none; }
       .footer-links { gap: 1.5rem; }
+      .footer-links a:not(:last-child)::after { margin-left: 0.75rem; }
     }
   </style>
 </head>
@@ -948,18 +980,16 @@
   <span id="toastMsg">Copied to clipboard!</span>
 </div>
 
+<!-- ✅ EXACT FOOTER STRUCTURE AS SPECIFIED -->
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
-  <div class="footer-links" role="navigation" aria-label="Footer navigation">
-    <a href="/about">About</a>
-    <a href="/privacy">Privacy</a>
-    <a href="/impressum">Impressum</a>
-  </div>
-  <p class="footer-copy">ToolCompass.org © 2026 — Professional Online Tools</p>
-  <p class="ad-disclosure" style="margin-top:1rem;font-size:10px;opacity:0.5;">
-    This site uses Google AdSense. Ads are served by Google and may use cookies to personalize content. 
-    <a href="/privacy#ads" style="color:var(--muted);text-decoration:underline;">Learn more</a>.
-  </p>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html" lang="de">Imprint</a>
+    <a href="/datenschutz/index.html" lang="de">Privacy</a>
+  </nav>
+  <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. You may use an ad-blocker — we respect your choice.</p>
 </footer>
 
 <script>
@@ -1200,6 +1230,17 @@
       e.preventDefault(); 
       clearAll(); 
     }
+  });
+
+  // --- KEYBOARD SUPPORT FOR DEV-CARDS ---
+  document?.querySelectorAll?.('.dev-card')?.forEach?.(card => {
+    card?.addEventListener?.('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const mode = card.getAttribute('onclick')?.match(/setMode\('([^']+)'\)/)?.[1];
+        if (mode) setMode(mode);
+      }
+    });
   });
 
   // --- INIT ---
