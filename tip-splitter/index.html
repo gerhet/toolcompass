@@ -6,11 +6,24 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>Tip & Bill Splitter – Split Restaurant Bills Instantly | ToolCompass</title>
-  <meta name="description" content="Free tip calculator and bill splitter. Split restaurant bills fairly among friends. Calculate tips, tax, and per-person costs instantly. Private, no login.">
+  <title>Tip Splitter: Split Bills & Calculate Tips | ToolCompass</title>
+  <meta name="description" content="Split restaurant bills instantly. Free tip calculator for groups. Calculate tips, tax & per-person costs. Private, no login. Split your bill now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  <!-- Canonical: Dynamisch anpassbar für Subpages -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page.path}}"> -->
   <link rel="canonical" href="https://toolcompass.org/tip-splitter">
+  
+  <!-- Hreflang für mehrsprachige Vorbereitung -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/tip-splitter">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/tip-splitter">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/tip-splitter">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="tip calculator, bill splitter, restaurant bill calculator, split check, tip percentage calculator">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
@@ -54,6 +67,7 @@
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "description": "A free tip calculator and bill splitter that divides restaurant checks among multiple people with custom tip percentages.",
+        "featureList": ["Instant bill splitting", "Custom tip percentages", "People counter", "Copy result", "Works offline"],
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
       },
       {
@@ -69,27 +83,70 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How do I split a bill with tip?",
+            "name": "What is a standard tip percentage?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Enter the total bill amount, select your desired tip percentage, and enter the number of people. Our calculator instantly shows how much each person owes."
+              "text": "In the United States, 15-18% is considered standard for good restaurant service. 20% or more is appreciated for exceptional service. For basic service, 10% is acceptable. Always consider local customs when traveling."
             }
           },
           {
             "@type": "Question",
-            "name": "What is a standard tip percentage?",
+            "name": "Should I tip before or after tax?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Standard tip percentages range from 15-20% for good service. 18% is common for restaurants, while 20%+ is appreciated for exceptional service."
+              "text": "Etiquette experts recommend calculating tip on the pre-tax subtotal. However, many people tip on the total amount for simplicity. Our calculator uses the bill amount you enter — you can choose whichever method you prefer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I split uneven amounts with this tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "This calculator splits the total evenly among all people. For uneven splits (when people ordered different items), calculate individual amounts separately or use a dedicated app like Splitwise for complex group bills."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my bill data stored or shared?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All calculations happen entirely in your browser using JavaScript. We don't store or transmit any financial data. Your privacy is completely protected — no tracking, no cookies, no login required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do tipping customs differ by country?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tipping varies widely: USA/Canada expect 15-20%; UK/Europe often include service charges; Australia/NZ tip optionally; Japan/South Korea rarely tip and may refuse it. Always research local customs before traveling to avoid awkward situations."
             }
           }
         ]
+      },
+      {
+        "@type": "Organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "sameAs": [],
+        "description": "ToolCompass offers 31+ free, private browser tools for productivity, finance, writing, development, time management, and health — all running locally in your browser."
+      },
+      {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts mit Preconnect + Preload für kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -107,7 +164,17 @@
       --tip: #22C55E;
       --tip-bg: rgba(34,197,94,0.07);
       --tip-border: rgba(34,197,94,0.15);
+      --focus-ring: rgba(34,197,94,0.5);
     }
+
+    /* z-index Stack Dokumentation:
+       999: Grain overlay
+       200: Toast notifications
+       100: Header (sticky)
+       50: Modals/Banners (future)
+       10: Skip link
+       1: Default content
+    */
 
     html { scroll-behavior: smooth; }
 
@@ -116,12 +183,34 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      line-height: 1.5;
     }
 
-    /* Grain */
+    /* Skip to Content Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--tip);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
+    }
+
+    /* Grain - korrigierte SVG-URL */
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
 
@@ -145,7 +234,11 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 4px;
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -186,6 +279,8 @@
       margin-bottom: 1rem;
       position: relative; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
     .hero-card::before {
       content: '';
@@ -209,8 +304,12 @@
       transition: border-color .2s;
     }
     .tool-input:focus { outline: none; border-color: var(--tip); }
+    .tool-input:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
-    /* Quick Tip Buttons (ADDICTIVE FEATURE) */
+    /* Quick Tip Buttons */
     .tip-quick {
       display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap;
     }
@@ -224,14 +323,17 @@
       cursor: pointer;
       transition: all .2s;
     }
-    .tip-btn:hover { border-color: var(--tip); color: var(--tip); }
+    .tip-btn:hover, .tip-btn:focus-visible { border-color: var(--tip); color: var(--tip); outline: none; }
+    .tip-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
     .tip-btn.active {
       background: var(--tip);
       border-color: var(--tip);
       color: #0D0D0D;
     }
 
-    /* People Counter (ADDICTIVE FEATURE) */
+    /* People Counter */
     .people-counter {
       display: flex; align-items: center; gap: 1rem;
       background: var(--bg);
@@ -248,7 +350,10 @@
       font-size: 18px; cursor: pointer;
       transition: all .2s;
     }
-    .people-btn:hover { background: var(--tip); color: #0D0D0D; }
+    .people-btn:hover, .people-btn:focus-visible { background: var(--tip); color: #0D0D0D; outline: none; }
+    .people-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
     .people-display {
       flex: 1; text-align: center;
       font-size: 16px; font-weight: 600;
@@ -260,8 +365,12 @@
       font-family: 'Outfit'; font-weight: 600;
     }
     .people-input:focus { outline: none; }
+    .people-input:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
-    /* Result Breakdown (ADDICTIVE FEATURE - Detailed View) */
+    /* Result Breakdown */
     .result-breakdown {
       display: grid; grid-template-columns: repeat(2, 1fr);
       gap: 10px; margin-top: 1.5rem;
@@ -303,9 +412,12 @@
       font-size: 12px; font-weight: 600; cursor: pointer;
       transition: all .2s;
     }
-    .copy-btn:hover { background: var(--tip); color: #0D0D0D; }
+    .copy-btn:hover, .copy-btn:focus-visible { background: var(--tip); color: #0D0D0D; outline: none; }
+    .copy-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
 
-    /* === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === */
+    /* === YMYL DISCLAIMER BOX === */
     .ymyl-disclaimer {
       background: rgba(239, 68, 68, 0.08);
       border: 1px solid rgba(239, 68, 68, 0.3);
@@ -319,9 +431,13 @@
     }
     .ymyl-disclaimer strong { color: #FCA5A5; }
     .ymyl-disclaimer a { color: var(--tip); text-decoration: none; border-bottom: 1px dashed var(--tip-border); }
-    .ymyl-disclaimer a:hover { border-bottom-style: solid; }
+    .ymyl-disclaimer a:hover, .ymyl-disclaimer a:focus-visible { border-bottom-style: solid; outline: none; }
+    .ymyl-disclaimer a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
 
-    /* === NEW: HOW IT WORKS SECTION === */
+    /* === HOW IT WORKS SECTION === */
     .how-it-works {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
@@ -340,7 +456,7 @@
     .how-it-works li { margin-bottom: 0.5rem; }
     .how-it-works strong { color: var(--text); font-weight: 500; }
 
-    /* === NEW: WHO IS THIS FOR BOX === */
+    /* === WHO IS THIS FOR BOX === */
     .who-is-this-for {
       background: linear-gradient(135deg, rgba(34,197,94,0.03) 0%, transparent 100%);
       border: 1px solid var(--tip-border);
@@ -386,12 +502,16 @@
     .tip-card {
       background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; padding: 1rem; text-align: center;
+      transition: border-color .2s;
+      will-change: transform;
+      transform: translateZ(0);
     }
     .tip-card.recommended { border-color: var(--tip); background: var(--tip-bg); }
+    .tip-card:hover { border-color: var(--border-hover); }
     .tip-percent { font-size: 20px; font-weight: 700; color: var(--tip); margin-bottom: 4px; }
     .tip-situation { font-size: 11px; color: var(--muted); }
 
-    /* === NEW: TIPPING BY COUNTRY BOX === */
+    /* === TIPPING BY COUNTRY BOX === */
     .tipping-countries {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -445,10 +565,14 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
+    .tool-chip:hover, .tool-chip:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface2);
       transform: translateY(-2px);
+      outline: none;
+    }
+    .tool-chip:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
@@ -473,7 +597,11 @@
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
     .seo-content a { color: var(--tip); text-decoration: none; border-bottom: 1px dashed var(--tip-border); }
-    .seo-content a:hover { border-bottom-style: solid; }
+    .seo-content a:hover, .seo-content a:focus-visible { border-bottom-style: solid; outline: none; }
+    .seo-content a:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 2px;
+    }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -486,14 +614,17 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
+    .faq-q:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--focus-ring);
+    }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-item.open .faq-a { max-height: 350px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-    /* === NEW: PRO TIP BOX === */
+    /* === PRO TIP BOX === */
     .pro-tip {
       background: rgba(232,213,163,0.06);
       border-left: 3px solid var(--accent);
@@ -503,6 +634,31 @@
       color: var(--muted);
     }
     .pro-tip strong { color: var(--accent); }
+
+    /* === PRIVACY DISCLAIMER BOX === */
+    .privacy-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .privacy-disclaimer strong { color: var(--text); }
+
+    /* === COOKIE-FREE ADSENSE NOTICE === */
+    .adsense-notice {
+      background: rgba(34,197,94,0.05);
+      border: 1px solid var(--tip-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .adsense-notice strong { color: var(--tip); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -524,7 +680,11 @@
       letter-spacing: .08em; text-transform: uppercase;
       transition: color .15s;
     }
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--text); outline: none; }
+    .footer-links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
     .ad-disclosure {
       font-size: 10px; color: var(--muted); opacity: 0.5;
@@ -543,6 +703,15 @@
     }
     .toast.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
       .tip-guide { grid-template-columns: 1fr; }
@@ -552,6 +721,9 @@
   </style>
 </head>
 <body>
+
+<!-- Skip to Content Link für Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header>
   <div class="header-inner">
@@ -564,7 +736,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -592,41 +764,41 @@
     <div class="tool-inputs">
       <div class="input-group">
         <label class="input-label" for="bill">Total Bill ($)</label>
-        <input type="number" id="bill" class="tool-input" placeholder="0.00" inputmode="decimal" step="0.01">
+        <input type="number" id="bill" class="tool-input" placeholder="0.00" inputmode="decimal" step="0.01" aria-label="Total bill amount">
       </div>
       <div class="input-group">
         <label class="input-label" for="tip">Tip Percentage (%)</label>
-        <input type="number" id="tip" class="tool-input" value="15" inputmode="decimal">
+        <input type="number" id="tip" class="tool-input" value="15" inputmode="decimal" aria-label="Tip percentage">
       </div>
     </div>
 
-    <!-- Quick Tip Buttons (ADDICTIVE - One-Click) -->
+    <!-- Quick Tip Buttons -->
     <div class="tip-quick">
-      <button class="tip-btn" data-tip="10">10%</button>
-      <button class="tip-btn active" data-tip="15">15%</button>
-      <button class="tip-btn" data-tip="18">18%</button>
-      <button class="tip-btn" data-tip="20">20%</button>
-      <button class="tip-btn" data-tip="25">25%</button>
+      <button class="tip-btn" type="button" data-tip="10">10%</button>
+      <button class="tip-btn active" type="button" data-tip="15">15%</button>
+      <button class="tip-btn" type="button" data-tip="18">18%</button>
+      <button class="tip-btn" type="button" data-tip="20">20%</button>
+      <button class="tip-btn" type="button" data-tip="25">25%</button>
     </div>
 
-    <!-- People Counter (ADDICTIVE - Visual) -->
+    <!-- People Counter -->
     <div class="people-counter">
-      <button class="people-btn" onclick="adjustPeople(-1)">−</button>
+      <button class="people-btn" type="button" onclick="adjustPeople(-1)" aria-label="Decrease number of people">−</button>
       <div class="people-display">
-        <input type="number" id="people" class="people-input" value="2" min="1" onchange="calculate()">
+        <input type="number" id="people" class="people-input" value="2" min="1" onchange="calculate()" aria-label="Number of people">
         <div style="font-size:10px; color:var(--muted); margin-top:2px;">People</div>
       </div>
-      <button class="people-btn" onclick="adjustPeople(1)">+</button>
+      <button class="people-btn" type="button" onclick="adjustPeople(1)" aria-label="Increase number of people">+</button>
     </div>
 
     <!-- Main Result -->
     <div class="result-main" id="resultMain">
       <div class="result-label">Each Person Pays</div>
       <div class="result-value" id="resultValue">$0.00</div>
-      <button class="copy-btn" onclick="copyResult()">Copy Amount</button>
+      <button class="copy-btn" type="button" onclick="copyResult()">Copy Amount</button>
     </div>
 
-    <!-- Detailed Breakdown (ADDICTIVE - Transparency) -->
+    <!-- Detailed Breakdown -->
     <div class="result-breakdown">
       <div class="breakdown-item">
         <span class="breakdown-label">Subtotal</span>
@@ -642,13 +814,13 @@
       </div>
     </div>
 
-    <!-- === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === -->
+    <!-- === YMYL DISCLAIMER BOX === -->
     <div class="ymyl-disclaimer">
       <strong>⚠️ Important Notice:</strong> This calculator is for informational purposes only and does not constitute financial or etiquette advice. Tipping customs vary significantly by country, culture, and establishment. In some countries (e.g., Japan, South Korea), tipping is uncommon or even considered rude. Always research local customs and consider service quality when deciding on a tip. ToolCompass is not liable for any social or financial decisions based on these calculations.
     </div>
   </div>
 
-  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <!-- === HOW IT WORKS SECTION === -->
   <div class="how-it-works">
     <h3>🔧 How This Tool Works</h3>
     <ol>
@@ -659,7 +831,7 @@
     </ol>
   </div>
 
-  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <!-- === WHO IS THIS FOR BOX === -->
   <div class="who-is-this-for">
     <strong>Who is this for?</strong> This splitter helps groups who want fair, stress-free bill division:
     <ul>
@@ -681,6 +853,16 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
     </div>
+  </div>
+
+  <!-- === COOKIE-FREE ADSENSE NOTICE === -->
+  <div class="adsense-notice">
+    <strong>🔒 Cookie-free ads:</strong> ToolCompass uses Google AdSense without personalized tracking. Your financial data stays private — no cookies, no profiling.
+  </div>
+
+  <!-- === PRIVACY DISCLAIMER === -->
+  <div class="privacy-disclaimer">
+    <strong>🔐 Privacy First:</strong> All calculations run locally in your browser. Your bill data is never sent to any server. No data storage, no tracking, no login required.
   </div>
 
   <!-- TIP GUIDE -->
@@ -707,7 +889,7 @@
       </div>
     </div>
 
-    <!-- === NEW: TIPPING BY COUNTRY BOX === -->
+    <!-- === TIPPING BY COUNTRY BOX === -->
     <div class="tipping-countries">
       <strong>🌍 Tipping varies by country:</strong>
       <ul>
@@ -773,44 +955,59 @@
     </div>
 
     <p>
-      All calculations run locally in your browser using JavaScript. This means your financial data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
+      All calculations run locally in your browser using JavaScript. This means your financial data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals — built by developers who value privacy, speed, and simplicity.
+    </p>
+    <p>
+      <strong>About the creator:</strong> ToolCompass is maintained by a small team of productivity enthusiasts who believe powerful tools should be free, private, and instantly usable — no signups, no tracking, no bloat. We've been building browser-based utilities since 2024.
+    </p>
+    <p class="privacy-disclaimer" style="margin-top: 1rem; background: transparent; border: none; padding: 0; font-size: 12px;">
+      <strong>Note:</strong> This tool is for estimation purposes only. Tipping customs and financial etiquette vary by culture and situation. For official expense reports or business accounting, always verify with your finance department or local guidelines.
     </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           What is a standard tip percentage?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">In the United States, 15-18% is considered standard for good restaurant service. 20% or more is appreciated for exceptional service. For basic service, 10% is acceptable.</p>
+        <div class="faq-a" id="faq1">
+          <p class="faq-a-inner">In the United States, 15-18% is considered standard for good restaurant service. 20% or more is appreciated for exceptional service. For basic service, 10% is acceptable. Always consider local customs when traveling.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Should I tip before or after tax?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Etiquette experts recommend calculating tip on the pre-tax subtotal. However, many people tip on the total amount for simplicity. Our calculator uses the bill amount you enter.</p>
+        <div class="faq-a" id="faq2">
+          <p class="faq-a-inner">Etiquette experts recommend calculating tip on the pre-tax subtotal. However, many people tip on the total amount for simplicity. Our calculator uses the bill amount you enter — you can choose whichever method you prefer.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Can I split uneven amounts?
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
+          Can I split uneven amounts with this tool?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">This calculator splits evenly among all people. For uneven splits (different orders), you may need to calculate individual amounts separately or use a dedicated app.</p>
+        <div class="faq-a" id="faq3">
+          <p class="faq-a-inner">This calculator splits the total evenly among all people. For uneven splits (when people ordered different items), calculate individual amounts separately or use a dedicated app like Splitwise for complex group bills.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Is my bill data stored?
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
+          Is my bill data stored or shared?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">No. All calculations happen in your browser. We don't store or transmit any financial data. Your privacy is completely protected.</p>
+        <div class="faq-a" id="faq4">
+          <p class="faq-a-inner">No. All calculations happen entirely in your browser using JavaScript. We don't store or transmit any financial data. Your privacy is completely protected — no tracking, no cookies, no login required.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          How do tipping customs differ by country?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">Tipping varies widely: USA/Canada expect 15-20%; UK/Europe often include service charges; Australia/NZ tip optionally; Japan/South Korea rarely tip and may refuse it. Always research local customs before traveling to avoid awkward situations.</p>
         </div>
       </div>
     </div>
@@ -826,11 +1023,21 @@
     <a href="/datenschutz/index.html">Privacy</a>
   </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
-  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. No personalized tracking is used.</p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Copied to clipboard!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard!</div>
+
+<!-- Image Lazy Loading Template (für zukünftige Bilder) -->
+<!-- 
+  <img src="image.jpg" 
+       alt="Descriptive alt text" 
+       width="800" 
+       height="600" 
+       loading="lazy" 
+       decoding="async">
+-->
 
 <script>
 // ═══════════════════════════════════════════════
@@ -845,96 +1052,122 @@ const breakdownTip = document.getElementById('breakdownTip');
 const breakdownTotal = document.getElementById('breakdownTotal');
 const tipButtons = document.querySelectorAll('.tip-btn');
 
-// Quick Tip Buttons (ADDICTIVE - One-Click Selection)
-tipButtons.forEach(btn => {
+// Quick Tip Buttons
+tipButtons?.forEach(btn => {
   btn.addEventListener('click', () => {
-    tipButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    tipInput.value = btn.dataset.tip;
+    tipButtons?.forEach(b => b?.classList.remove('active'));
+    btn?.classList.add('active');
+    if (tipInput) tipInput.value = btn.dataset.tip;
     calculate();
   });
 });
 
-// People Counter (ADDICTIVE - Visual Control)
+// People Counter
 function adjustPeople(delta) {
-  let current = parseInt(peopleInput.value) || 1;
+  const peopleEl = document.getElementById('people');
+  if (!peopleEl) return;
+  
+  let current = parseInt(peopleEl.value) || 1;
   current = Math.max(1, current + delta);
-  peopleInput.value = current;
+  peopleEl.value = current;
   calculate();
 }
 
-// Main Calculation (REAL-TIME - ADDICTIVE)
+// Main Calculation
 function calculate() {
-  const bill = parseFloat(billInput.value) || 0;
-  const tipPercent = parseFloat(tipInput.value) || 0;
-  const people = parseInt(peopleInput.value) || 1;
+  const billEl = document.getElementById('bill');
+  const tipEl = document.getElementById('tip');
+  const peopleEl = document.getElementById('people');
+  
+  if (!billEl || !tipEl || !peopleEl) return;
+  
+  const bill = parseFloat(billEl.value) || 0;
+  const tipPercent = parseFloat(tipEl.value) || 0;
+  const people = parseInt(peopleEl.value) || 1;
 
   const tipAmount = bill * (tipPercent / 100);
   const total = bill + tipAmount;
   const perPerson = total / people;
 
-  // Update Main Result
-  resultValue.innerText = '$' + perPerson.toFixed(2);
+  // Update Main Result with null-checks
+  if (resultValue) resultValue.innerText = '$' + perPerson.toFixed(2);
 
-  // Update Breakdown (ADDICTIVE - Transparency)
-  breakdownSubtotal.innerText = '$' + bill.toFixed(2);
-  breakdownTip.innerText = '$' + tipAmount.toFixed(2);
-  breakdownTotal.innerText = '$' + total.toFixed(2);
+  // Update Breakdown
+  if (breakdownSubtotal) breakdownSubtotal.innerText = '$' + bill.toFixed(2);
+  if (breakdownTip) breakdownTip.innerText = '$' + tipAmount.toFixed(2);
+  if (breakdownTotal) breakdownTotal.innerText = '$' + total.toFixed(2);
 
-  // Save to LocalStorage (ADDICTIVE - Persistence)
-  localStorage.setItem('tc_bill_amount', bill);
-  localStorage.setItem('tc_bill_tip', tipPercent);
-  localStorage.setItem('tc_bill_people', people);
+  // Save to LocalStorage with try/catch
+  try {
+    localStorage.setItem('tc_bill_amount', bill);
+    localStorage.setItem('tc_bill_tip', tipPercent);
+    localStorage.setItem('tc_bill_people', people);
+  } catch(e) {
+    // Silent fail if storage is disabled
+  }
 }
 
-// Real-time Calculation on Input (ADDICTIVE - Instant Feedback)
-billInput.addEventListener('input', calculate);
-tipInput.addEventListener('input', calculate);
-peopleInput.addEventListener('input', calculate);
+// Real-time Calculation on Input
+if (billInput) billInput.addEventListener('input', calculate);
+if (tipInput) tipInput.addEventListener('input', calculate);
+if (peopleInput) peopleInput.addEventListener('input', calculate);
 
-// Load Saved Values on Page Load (ADDICTIVE - Convenience)
+// Load Saved Values on Page Load
 window.addEventListener('load', () => {
-  if(localStorage.getItem('tc_bill_amount')) {
-    billInput.value = localStorage.getItem('tc_bill_amount');
-    tipInput.value = localStorage.getItem('tc_bill_tip');
-    peopleInput.value = localStorage.getItem('tc_bill_people');
-    
-    // Update active tip button
-    const savedTip = localStorage.getItem('tc_bill_tip');
-    tipButtons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tip === savedTip);
-    });
-    
-    calculate();
+  try {
+    if(localStorage?.getItem('tc_bill_amount')) {
+      if (billInput) billInput.value = localStorage.getItem('tc_bill_amount');
+      if (tipInput) tipInput.value = localStorage.getItem('tc_bill_tip');
+      if (peopleInput) peopleInput.value = localStorage.getItem('tc_bill_people');
+      
+      // Update active tip button
+      const savedTip = localStorage.getItem('tc_bill_tip');
+      tipButtons?.forEach(btn => {
+        btn?.classList.toggle('active', btn?.dataset.tip === savedTip);
+      });
+      
+      calculate();
+    }
+  } catch(e) {
+    // Silent fail if storage is disabled
   }
 });
 
-// Copy Function (ADDICTIVE - Shareability)
+// Copy Function
 function copyResult() {
-  const text = resultValue.innerText;
-  navigator.clipboard.writeText(text).then(() => {
+  const text = resultValue?.innerText;
+  if (!text) return;
+  
+  navigator.clipboard?.writeText(text).then(() => {
     showToast('Copied to clipboard!');
+  }).catch(() => {
+    showToast('Copy failed');
   });
 }
 
 // Toast Notification
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
+  
   toast.innerText = message;
   toast.classList.add('active');
-  setTimeout(() => toast.classList.remove('active'), 2000);
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('active'), 2000);
 }
 
 // FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    const isOpen = item?.classList.contains('open');
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
+      i?.classList.remove('open');
+      i?.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
     });
-    if (!isOpen) {
+    
+    if (item && !isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
     }
@@ -942,8 +1175,8 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
 
 </body>
