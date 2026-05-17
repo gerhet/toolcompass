@@ -10,6 +10,17 @@
   <meta name="description" content="How much of 2026 is gone? Live year progress with exact percentage, day grid, quarter breakdown & week number. Free, private, real-time.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/year-progress">
+  <!-- 🔧 DYNAMIC CANONICAL TEMPLATE: Replace URL with current page path -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page_path}}"> -->
+  
+  <!-- 🌍 HREFLANG for multilingual support -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/year-progress">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/jahresfortschritt">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/year-progress">
+  
+  <!-- 🗺️ SITEMAP reference -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
 
   <!-- ═══ OPEN GRAPH ═══ -->
@@ -60,7 +71,8 @@
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
-          { "@type": "ListItem", "position": 2, "name": "Year Progress", "item": "https://toolcompass.org/year-progress" }
+          { "@type": "ListItem", "position": 2, "name": "Time Tools", "item": "https://toolcompass.org/#time" },
+          { "@type": "ListItem", "position": 3, "name": "Year Progress", "item": "https://toolcompass.org/year-progress" }
         ]
       },
       {
@@ -81,14 +93,55 @@
               "@type": "Answer",
               "text": "The Year Progress Tracker on ToolCompass shows the current ISO week number updated in real time alongside the day of year, month, and quarter."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "What day of the year is it today?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Year Progress Tracker automatically calculates and displays today's day of the year (day 1–365) updated in real time. You can see it in the 'Days gone' stat card."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the year percentage calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We calculate the milliseconds elapsed since January 1st 00:00:00 divided by the total milliseconds in the year. This gives a high-precision percentage updated every second — not just once per day."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is any data stored or sent to a server?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. The entire tracker runs in your browser using JavaScript. No data is sent anywhere. Your timezone is determined locally by your device."
+            }
           }
         ]
       }
     ]
   }
   </script>
+  
+  <!-- 🔧 BREADCRUMB TEMPLATE FOR SUBPAGES (copy & adapt) -->
+  <!--
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+      { "@type": "ListItem", "position": 2, "name": "Category", "item": "https://toolcompass.org/#category" },
+      { "@type": "ListItem", "position": 3, "name": "Current Tool", "item": "https://toolcompass.org/current-tool" }
+    ]
+  }
+  </script>
+  -->
 
+  <!-- 🚀 Preload critical fonts with crossorigin for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -106,6 +159,7 @@
       --time: #22D3EE;
       --time-bg: rgba(34,211,238,0.07);
       --time-border: rgba(34,211,238,0.15);
+      /* z-index documentation: 999=grain, 200=toast, 150=consent, 100=header, 50=modals, 10=content */
     }
 
     html { scroll-behavior: smooth; }
@@ -122,6 +176,26 @@
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
+    }
+
+    /* ─── SKIP LINK (Accessibility) ─── */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      z-index: 1000;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 8px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
     }
 
     /* ─── HEADER ─── */
@@ -144,7 +218,7 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -218,6 +292,7 @@
       width: 0%;
       transition: width 1.4s cubic-bezier(.22,1,.36,1);
       position: relative;
+      will-change: width; /* GPU acceleration hint */
     }
     .main-bar-fill::after {
       content: '';
@@ -257,7 +332,7 @@
       border-radius: 14px; padding: 1.25rem 1rem; text-align: center;
       transition: border-color .2s;
     }
-    .stat-card:hover { border-color: var(--border-hover); }
+    .stat-card:hover, .stat-card:focus-within { border-color: var(--border-hover); }
     .stat-val {
       font-family: 'Playfair Display', serif;
       font-size: 1.9rem; font-weight: 700; color: var(--accent);
@@ -455,10 +530,12 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
+    .tool-chip:hover, .tool-chip:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface2);
       transform: translateY(-2px);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
     }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
@@ -485,6 +562,26 @@
     .seo-content a { color: var(--time); text-decoration: none; border-bottom: 1px dashed var(--time-border); }
     .seo-content a:hover { border-bottom-style: solid; }
 
+    /* Category Intro (NEW) */
+    .category-intro {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
+    }
+    .category-intro p {
+      font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0;
+    }
+
+    /* Privacy Note (NEW - reinforce no-data-storage) */
+    .privacy-note {
+      background: var(--time-bg); border: 1px solid var(--time-border);
+      border-left: 3px solid var(--time); border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1.5rem 0;
+    }
+    .privacy-note p {
+      font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0;
+    }
+    .privacy-note strong { color: var(--text); }
+
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
     .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
@@ -496,11 +593,15 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible {
+      background: var(--surface2);
+      outline: none;
+      box-shadow: inset 0 0 0 2px var(--time);
+    }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-item.open .faq-a { max-height: 250px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
     /* === NEW: PRO TIP BOX === */
@@ -534,24 +635,66 @@
       letter-spacing: .08em; text-transform: uppercase;
       transition: color .15s;
     }
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover, .footer-links a:focus-visible {
+      color: var(--text);
+      outline: none;
+      text-decoration: underline;
+    }
+    .footer-about {
+      font-size: 11px; color: var(--muted); margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+    .footer-about strong { color: var(--text); }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
     .ad-disclosure {
       font-size: 10px; color: var(--muted); opacity: 0.5;
       margin-top: 0.8rem; line-height: 1.4;
     }
 
+    /* ─── CONSENT HINT (Cookie-free for AdSense) ─── */
+    .consent-hint {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 2rem; font-size: 11px; color: var(--muted);
+      text-align: center; z-index: 150; display: none;
+    }
+    .consent-hint.show { display: block; animation: fadeUp .3s ease; }
+    .consent-hint a { color: var(--accent); text-decoration: none; }
+    .consent-hint a:hover { text-decoration: underline; }
+    .consent-close {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--muted);
+      font-size: 18px; cursor: pointer; padding: 4px;
+    }
+    .consent-close:hover, .consent-close:focus-visible { color: var(--text); outline: none; }
+
     /* ─── ANIMATIONS ─── */
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
     @keyframes todayPulse { 0%,100%{opacity:1;box-shadow:0 0 6px var(--time)} 50%{opacity:.6;box-shadow:0 0 12px var(--time)} }
 
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
       .quarter-row { grid-template-columns: 56px 1fr 42px; gap: 10px; }
+      .footer-links { gap: 1rem; flex-direction: column; align-items: center; }
+      .consent-hint { padding: 12px 1.25rem; font-size: 10px; }
+      .consent-close { right: 12px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ♿ SKIP LINK for keyboard users -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <header>
   <div class="header-inner">
@@ -564,7 +707,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -573,7 +716,17 @@
     <p class="page-sub">Every second counts. Here's exactly where you stand.</p>
   </div>
 
-  <!-- AD SLOT TOP (nach Approval aktivieren) -->
+  <!-- Category Intro (NEW - 2+ sentences) -->
+  <div class="category-intro">
+    <p><strong>Time & Productivity Tools:</strong> Our year progress tracker helps freelancers, students, and professionals visualize time as a finite resource. Part of ToolCompass's collection of 31+ free browser-based utilities—no signup, no data collection.</p>
+  </div>
+
+  <!-- Privacy Note (NEW - reinforce no-data-storage) -->
+  <div class="privacy-note">
+    <p><strong>100% Private:</strong> All calculations happen locally in your browser. No data is sent to our servers, stored, or shared. Complete privacy guaranteed.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
   <div class="ad-slot" id="adTop">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
@@ -764,39 +917,48 @@
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           What day of the year is it today?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">The Year Progress Tracker automatically calculates and displays today's day of the year (day 1–365) updated in real time. You can see it in the "Days gone" stat card above.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           What week number is it in 2026?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">The current ISO week number is displayed live in the "Week no." stat card. It updates automatically at midnight each Monday.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           How is the year percentage calculated?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq3">
           <p class="faq-a-inner">We calculate the milliseconds elapsed since January 1st 00:00:00 divided by the total milliseconds in the year. This gives a high-precision percentage updated every second — not just once per day.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Is any data stored or sent to a server?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq4">
           <p class="faq-a-inner">No. The entire tracker runs in your browser using JavaScript. No data is sent anywhere. Your timezone is determined locally by your device.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          Is this financial or life advice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">This tool provides time tracking only. For financial planning, life coaching, or professional advice, please consult qualified experts in those fields.</p>
         </div>
       </div>
     </div>
@@ -811,9 +973,20 @@
     <a href="/impressum/index.html">Imprint</a>
     <a href="/datenschutz/index.html">Privacy</a>
   </div>
+  <!-- About hint (E-E-A-T) -->
+  <p class="footer-about">
+    <strong>Who we are:</strong> ToolCompass is built by a small team of developers and writers. We create free, privacy-first browser tools since 2024. No tracking, no paywalls.
+  </p>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
   <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
 </footer>
+
+<!-- Cookie-free Consent Hint for AdSense -->
+<div class="consent-hint" id="consentHint">
+  This site uses Google AdSense for advertising. By continuing, you consent to ads being shown. 
+  <a href="/datenschutz/index.html">Learn more</a>
+  <button class="consent-close" id="consentClose" aria-label="Dismiss notice">×</button>
+</div>
 
 <script>
 // ═══════════════════════════════════════════════
@@ -867,28 +1040,39 @@ function update() {
   const daysLeft    = totalDays - daysGone;
 
   // Big percent
-  document.getElementById('bigPercent').textContent = pct.toFixed(4) + '%';
+  const bigPercent = document.getElementById('bigPercent');
+  if (bigPercent) bigPercent.textContent = pct.toFixed(4) + '%';
 
   // Bar
-  document.getElementById('mainBar').style.width = pct + '%';
+  const mainBar = document.getElementById('mainBar');
+  if (mainBar) mainBar.style.width = pct + '%';
 
   // Labels
-  document.getElementById('labelElapsed').textContent   = `${daysGone} day${daysGone !== 1 ? 's' : ''} elapsed`;
-  document.getElementById('labelRemaining').textContent  = `${daysLeft} day${daysLeft !== 1 ? 's' : ''} remaining`;
+  const labelElapsed = document.getElementById('labelElapsed');
+  const labelRemaining = document.getElementById('labelRemaining');
+  if (labelElapsed) labelElapsed.textContent = `${daysGone} day${daysGone !== 1 ? 's' : ''} elapsed`;
+  if (labelRemaining) labelRemaining.textContent = `${daysLeft} day${daysLeft !== 1 ? 's' : ''} remaining`;
 
   // Clock
-  document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-GB');
+  const liveClock = document.getElementById('liveClock');
+  if (liveClock) liveClock.textContent = now.toLocaleTimeString('en-GB');
 
   // Date
-  document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US', {
+  const liveDate = document.getElementById('liveDate');
+  if (liveDate) liveDate.textContent = now.toLocaleDateString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
 
   // Stats
-  document.getElementById('statDaysGone').textContent = daysGone;
-  document.getElementById('statDaysLeft').textContent = daysLeft;
-  document.getElementById('statWeek').textContent     = 'W' + String(getISOWeek(now)).padStart(2, '0');
-  document.getElementById('statQuarter').textContent  = 'Q' + (Math.floor(now.getMonth() / 3) + 1);
+  const statDaysGone = document.getElementById('statDaysGone');
+  const statDaysLeft = document.getElementById('statDaysLeft');
+  const statWeek = document.getElementById('statWeek');
+  const statQuarter = document.getElementById('statQuarter');
+  
+  if (statDaysGone) statDaysGone.textContent = daysGone;
+  if (statDaysLeft) statDaysLeft.textContent = daysLeft;
+  if (statWeek) statWeek.textContent = 'W' + String(getISOWeek(now)).padStart(2, '0');
+  if (statQuarter) statQuarter.textContent = 'Q' + (Math.floor(now.getMonth() / 3) + 1);
 }
 
 // ═══════════════════════════════════════════════
@@ -901,107 +1085,156 @@ function init() {
   const currentQ     = Math.floor(currentMonth / 3);
 
   // Labels
-  document.getElementById('yearLabel').textContent       = Y;
-  document.getElementById('yearLabelInline').textContent = Y;
-  document.getElementById('gridYear').textContent        = Y;
-  document.getElementById('currentQBadge').textContent   = `Q${currentQ + 1} Active`;
+  const yearLabel = document.getElementById('yearLabel');
+  const yearLabelInline = document.getElementById('yearLabelInline');
+  const gridYear = document.getElementById('gridYear');
+  const currentQBadge = document.getElementById('currentQBadge');
+  
+  if (yearLabel) yearLabel.textContent = Y;
+  if (yearLabelInline) yearLabelInline.textContent = Y;
+  if (gridYear) gridYear.textContent = Y;
+  if (currentQBadge) currentQBadge.textContent = `Q${currentQ + 1} Active`;
 
   // ── QUARTERS ──
   const qEl = document.getElementById('quartersEl');
-  QUARTERS.forEach((q, i) => {
-    const qStart  = new Date(Y, q.startMonth, 1);
-    const qEnd    = new Date(Y, q.endMonth + 1, 1);
-    const qTotal  = qEnd - qStart;
-    let   qPct    = 0;
-    let   barClass = 'q-future';
+  if (qEl) {
+    qEl.innerHTML = '';
+    QUARTERS.forEach((q, i) => {
+      const qStart  = new Date(Y, q.startMonth, 1);
+      const qEnd    = new Date(Y, q.endMonth + 1, 1);
+      const qTotal  = qEnd - qStart;
+      let   qPct    = 0;
+      let   barClass = 'q-future';
 
-    if (currentMonth > q.endMonth) {
-      qPct = 100; barClass = 'q-done';
-    } else if (currentMonth >= q.startMonth && currentMonth <= q.endMonth) {
-      qPct = Math.min(100, ((now - qStart) / qTotal) * 100);
-      barClass = 'q-active';
-    }
+      if (currentMonth > q.endMonth) {
+        qPct = 100; barClass = 'q-done';
+      } else if (currentMonth >= q.startMonth && currentMonth <= q.endMonth) {
+        qPct = Math.min(100, ((now - qStart) / qTotal) * 100);
+        barClass = 'q-active';
+      }
 
-    const pctClass = barClass === 'q-active' ? 'q-active-pct' : '';
-    qEl.innerHTML += `
-      <div class="quarter-row">
-        <div class="q-info">
-          <div class="q-label">${q.label}</div>
-          <div class="q-dates">${q.dates}</div>
-        </div>
-        <div class="q-bar-wrap">
-          <div class="q-bar-fill ${barClass}" style="width:${qPct.toFixed(1)}%"></div>
-        </div>
-        <div class="q-pct ${pctClass}">${qPct.toFixed(0)}%</div>
-      </div>`;
-  });
+      const pctClass = barClass === 'q-active' ? 'q-active-pct' : '';
+      qEl.innerHTML += `
+        <div class="quarter-row">
+          <div class="q-info">
+            <div class="q-label">${q.label}</div>
+            <div class="q-dates">${q.dates}</div>
+          </div>
+          <div class="q-bar-wrap">
+            <div class="q-bar-fill ${barClass}" style="width:${qPct.toFixed(1)}%"></div>
+          </div>
+          <div class="q-pct ${pctClass}">${qPct.toFixed(0)}%</div>
+        </div>`;
+    });
+  }
 
   // ── MONTHS ──
   const mg = document.getElementById('monthGrid');
-  const totalDaysInYear = Math.round((new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000);
+  if (mg) {
+    mg.innerHTML = '';
+    const totalDaysInYear = Math.round((new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000);
 
-  MONTHS_SHORT.forEach((m, i) => {
-    const mStart = new Date(Y, i, 1);
-    const mEnd   = new Date(Y, i + 1, 1);
-    const mTotal = mEnd - mStart;
-    let   mPct   = 0;
-    let   cls    = 'future';
+    MONTHS_SHORT.forEach((m, i) => {
+      const mStart = new Date(Y, i, 1);
+      const mEnd   = new Date(Y, i + 1, 1);
+      const mTotal = mEnd - mStart;
+      let   mPct   = 0;
+      let   cls    = 'future';
 
-    if (i < currentMonth)      { mPct = 100; cls = 'past'; }
-    else if (i === currentMonth){ mPct = Math.min(100, ((now - mStart) / mTotal) * 100); cls = 'current'; }
+      if (i < currentMonth)      { mPct = 100; cls = 'past'; }
+      else if (i === currentMonth){ mPct = Math.min(100, ((now - mStart) / mTotal) * 100); cls = 'current'; }
 
-    mg.innerHTML += `
-      <div class="month-card ${cls}">
-        <div class="month-name">${m}</div>
-        <div class="month-pct">${cls === 'future' ? '—' : mPct.toFixed(0) + '%'}</div>
-      </div>`;
-  });
+      mg.innerHTML += `
+        <div class="month-card ${cls}">
+          <div class="month-name">${m}</div>
+          <div class="month-pct">${cls === 'future' ? '—' : mPct.toFixed(0) + '%'}</div>
+        </div>`;
+    });
+  }
 
   // ── DAY GRID ──
   const dg = document.getElementById('dayGrid');
-  const totalDays  = Math.round((new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000);
-  const currentDay = Math.floor((now - new Date(Y,0,1)) / 86400000) + 1;
-  const frag = document.createDocumentFragment();
+  if (dg) {
+    dg.innerHTML = '';
+    const totalDays  = Math.round((new Date(Y+1,0,1) - new Date(Y,0,1)) / 86400000);
+    const currentDay = Math.floor((now - new Date(Y,0,1)) / 86400000) + 1;
+    const frag = document.createDocumentFragment();
 
-  for (let i = 1; i <= totalDays; i++) {
-    const cell = document.createElement('div');
-    if (i < currentDay)       cell.className = 'day-cell gone';
-    else if (i === currentDay) cell.className = 'day-cell today';
-    else                       cell.className = 'day-cell';
-    frag.appendChild(cell);
+    for (let i = 1; i <= totalDays; i++) {
+      const cell = document.createElement('div');
+      if (i < currentDay)       cell.className = 'day-cell gone';
+      else if (i === currentDay) cell.className = 'day-cell today';
+      else                       cell.className = 'day-cell';
+      frag.appendChild(cell);
+    }
+    dg.appendChild(frag);
   }
-  dg.appendChild(frag);
 
   // ── MOTIVATION ──
   // Deterministic per day so it doesn't flicker on re-render
   const dayIndex = Math.floor((now - new Date(Y,0,1)) / 86400000);
   const quote    = QUOTES[dayIndex % QUOTES.length];
-  document.getElementById('motivationQuote').textContent = `"${quote.text}"`;
-  document.getElementById('motivationIcon').textContent  = quote.icon;
+  const motivationQuote = document.getElementById('motivationQuote');
+  const motivationIcon = document.getElementById('motivationIcon');
+  
+  if (motivationQuote) motivationQuote.textContent = `"${quote.text}"`;
+  if (motivationIcon) motivationIcon.textContent = quote.icon;
 }
 
-// ── FAQ ACCORDION ──
-document.querySelectorAll('.faq-q').forEach(btn => {
+// ── FAQ ACCORDION WITH KEYBOARD SUPPORT ──
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item   = btn.closest('.faq-item');
+    if (!item) return;
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
+    document.querySelectorAll('.faq-item')?.forEach(i => {
       i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      const q = i.querySelector('.faq-q');
+      if (q) q.setAttribute('aria-expanded', 'false');
     });
-    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    if (!isOpen) { 
+      item.classList.add('open'); 
+      btn.setAttribute('aria-expanded', 'true'); 
+    }
+  });
+  
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+});
+
+// Consent hint logic
+document.addEventListener('DOMContentLoaded', () => {
+  const consentHint = document.getElementById('consentHint');
+  const consentClose = document.getElementById('consentClose');
+  
+  if (consentHint && !sessionStorage.getItem('consentDismissed')) {
+    setTimeout(() => { consentHint?.classList.add('show'); }, 3000);
+  }
+  
+  consentClose?.addEventListener('click', () => {
+    consentHint?.classList.remove('show');
+    try { sessionStorage.setItem('consentDismissed', 'true'); } catch(e) {}
   });
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 
 // ── START ──
 init();
 update();
 setInterval(update, 1000);
 </script>
+
+<!-- 🖼️ IMAGE TEMPLATE for future use -->
+<!-- 
+<img src="image.jpg" alt="Description" width="800" height="600" loading="lazy" decoding="async">
+-->
 
 </body>
 </html>
