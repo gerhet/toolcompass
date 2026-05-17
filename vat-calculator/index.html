@@ -6,11 +6,24 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>VAT & Sales Tax Calculator – Add or Remove Tax Instantly | ToolCompass</title>
-  <meta name="description" content="Professional VAT Calculator. Add or remove sales tax instantly with this free, private tool. No login required. Optimized for freelancers and businesses.">
+  <title>VAT Calculator: Add/Remove Sales Tax | ToolCompass</title>
+  <meta name="description" content="Calculate VAT instantly. Add or remove sales tax from any amount. Free, private, no login. Perfect for invoices & receipts. Calculate now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  <!-- Canonical: Dynamisch anpassbar für Subpages -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page.path}}"> -->
   <link rel="canonical" href="https://toolcompass.org/vat-calculator">
+  
+  <!-- Hreflang für mehrsprachige Vorbereitung -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/vat-calculator">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/vat-calculator">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/vat-calculator">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="vat calculator, sales tax calculator, add vat, remove vat, tax calculator online, invoice calculator">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
@@ -54,6 +67,7 @@
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "description": "A free online tool to calculate Value Added Tax (VAT) by adding or removing it from a price. Includes copy-to-clipboard and auto-save features.",
+        "featureList": ["Add VAT", "Remove VAT", "Copy result", "Auto-save inputs", "Works offline"],
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
       },
       {
@@ -69,10 +83,10 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How do I calculate VAT?",
+            "name": "How do I calculate VAT manually?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "To add VAT, multiply the net price by (1 + VAT rate). To remove VAT, divide the gross price by (1 + VAT rate). Our tool does this instantly."
+              "text": "To add VAT, multiply the net price by (1 + VAT rate). For example, €100 × 1.19 = €119. To remove VAT, divide the gross price by (1 + VAT rate). For example, €119 / 1.19 = €100."
             }
           },
           {
@@ -80,16 +94,59 @@
             "name": "Is this VAT calculator free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, the ToolCompass VAT Calculator is 100% free, private, and requires no account or login."
+              "text": "Yes, the ToolCompass VAT Calculator is 100% free, private, and requires no account or login. All calculations run locally in your browser."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my financial data secure when using this tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. All calculations happen entirely in your browser using JavaScript. No data is sent to our servers or any third party. Your financial figures remain completely private."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator handle reduced VAT rates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Simply enter the applicable reduced rate (e.g., 7% for books in Germany, 5.5% for food in France) in the 'VAT Rate' field. The calculator works with any percentage you enter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this tool for US sales tax calculations?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. While VAT and US sales tax work differently legally, the math is identical: enter your local rate (0–10% depending on state) and use 'Add Tax' to calculate the final price. Always verify rates with your state's tax authority."
             }
           }
         ]
+      },
+      {
+        "@type": "Organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "sameAs": [],
+        "description": "ToolCompass offers 31+ free, private browser tools for productivity, finance, writing, development, time management, and health — all running locally in your browser."
+      },
+      {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts mit Preconnect + Preload für kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -107,7 +164,17 @@
       --finance: #4ADE80;
       --finance-bg: rgba(74,222,128,0.07);
       --finance-border: rgba(74,222,128,0.15);
+      --focus-ring: rgba(74,222,128,0.5);
     }
+
+    /* z-index Stack Dokumentation:
+       999: Grain overlay
+       200: Toast notifications
+       100: Header (sticky)
+       50: Modals/Banners (future)
+       10: Skip link
+       1: Default content
+    */
 
     html { scroll-behavior: smooth; }
 
@@ -116,12 +183,34 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      line-height: 1.5;
     }
 
-    /* Grain */
+    /* Skip to Content Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--finance);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
+    }
+
+    /* Grain - korrigierte SVG-URL */
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
 
@@ -145,7 +234,11 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 4px;
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -186,6 +279,8 @@
       text-align: center; margin-bottom: 1rem;
       position: relative; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
     .hero-card::before {
       content: '';
@@ -209,6 +304,10 @@
       transition: border-color .2s;
     }
     .tool-input:focus { outline: none; border-color: var(--finance); }
+    .tool-input:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
     .tool-actions { display: flex; gap: 1rem; margin-bottom: 2rem; }
     .tool-btn {
@@ -217,6 +316,10 @@
       transition: transform .1s, opacity .2s;
     }
     .tool-btn:active { transform: scale(0.98); }
+    .tool-btn:hover, .tool-btn:focus-visible { outline: none; opacity: 0.95; }
+    .tool-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
     .tool-btn-primary { background: var(--finance); color: #0D0D0D; }
     .tool-btn-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
 
@@ -238,9 +341,12 @@
       color: var(--finance); padding: 6px 12px; border-radius: 6px;
       font-size: 11px; cursor: pointer; transition: all .2s;
     }
-    .copy-btn:hover { background: var(--finance); color: #0D0D0D; }
+    .copy-btn:hover, .copy-btn:focus-visible { background: var(--finance); color: #0D0D0D; outline: none; }
+    .copy-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
 
-    /* === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === */
+    /* === YMYL DISCLAIMER BOX (KRITISCH!) === */
     .ymyl-disclaimer {
       background: rgba(239, 68, 68, 0.08);
       border: 1px solid rgba(239, 68, 68, 0.3);
@@ -254,9 +360,13 @@
     }
     .ymyl-disclaimer strong { color: #FCA5A5; }
     .ymyl-disclaimer a { color: var(--finance); text-decoration: none; border-bottom: 1px dashed var(--finance-border); }
-    .ymyl-disclaimer a:hover { border-bottom-style: solid; }
+    .ymyl-disclaimer a:hover, .ymyl-disclaimer a:focus-visible { border-bottom-style: solid; outline: none; }
+    .ymyl-disclaimer a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
 
-    /* === NEW: HOW IT WORKS SECTION === */
+    /* === HOW IT WORKS SECTION === */
     .how-it-works {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
@@ -275,7 +385,7 @@
     .how-it-works li { margin-bottom: 0.5rem; }
     .how-it-works strong { color: var(--text); font-weight: 500; }
 
-    /* === NEW: WHO IS THIS FOR BOX === */
+    /* === WHO IS THIS FOR BOX === */
     .who-is-this-for {
       background: linear-gradient(135deg, rgba(74,222,128,0.03) 0%, transparent 100%);
       border: 1px solid var(--finance-border);
@@ -321,7 +431,7 @@
       font-size: 13px;
     }
 
-    /* === NEW: VAT RATES TABLE === */
+    /* === VAT RATES BY COUNTRY TABLE === */
     .vat-rates-table {
       width: 100%; border: 1px solid var(--border);
       border-radius: 12px; overflow: hidden;
@@ -378,10 +488,14 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
+    .tool-chip:hover, .tool-chip:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface2);
       transform: translateY(-2px);
+      outline: none;
+    }
+    .tool-chip:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
@@ -406,7 +520,11 @@
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
     .seo-content a { color: var(--finance); text-decoration: none; border-bottom: 1px dashed var(--finance-border); }
-    .seo-content a:hover { border-bottom-style: solid; }
+    .seo-content a:hover, .seo-content a:focus-visible { border-bottom-style: solid; outline: none; }
+    .seo-content a:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 2px;
+    }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -419,14 +537,17 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
+    .faq-q:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--focus-ring);
+    }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-item.open .faq-a { max-height: 300px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-    /* === NEW: PRO TIP BOX === */
+    /* === PRO TIP BOX === */
     .pro-tip {
       background: rgba(232,213,163,0.06);
       border-left: 3px solid var(--accent);
@@ -436,6 +557,31 @@
       color: var(--muted);
     }
     .pro-tip strong { color: var(--accent); }
+
+    /* === PRIVACY DISCLAIMER BOX === */
+    .privacy-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .privacy-disclaimer strong { color: var(--text); }
+
+    /* === COOKIE-FREE ADSENSE NOTICE === */
+    .adsense-notice {
+      background: rgba(74,222,128,0.05);
+      border: 1px solid var(--finance-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .adsense-notice strong { color: var(--finance); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -457,7 +603,11 @@
       letter-spacing: .08em; text-transform: uppercase;
       transition: color .15s;
     }
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--text); outline: none; }
+    .footer-links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
     .ad-disclosure {
       font-size: 10px; color: var(--muted); opacity: 0.5;
@@ -476,12 +626,24 @@
     }
     .toast.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
     }
   </style>
 </head>
 <body>
+
+<!-- Skip to Content Link für Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header>
   <div class="header-inner">
@@ -494,7 +656,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -522,17 +684,17 @@
     <div class="tool-inputs">
       <div class="input-group">
         <label class="input-label" for="amount">Amount</label>
-        <input type="number" id="amount" class="tool-input" placeholder="100.00" inputmode="decimal">
+        <input type="number" id="amount" class="tool-input" placeholder="100.00" inputmode="decimal" aria-label="Amount to calculate VAT for">
       </div>
       <div class="input-group">
         <label class="input-label" for="taxRate">VAT Rate (%)</label>
-        <input type="number" id="taxRate" class="tool-input" value="19" inputmode="decimal">
+        <input type="number" id="taxRate" class="tool-input" value="19" inputmode="decimal" aria-label="VAT rate percentage">
       </div>
     </div>
 
     <div class="tool-actions">
-      <button class="tool-btn tool-btn-secondary" onclick="calcVAT(true)">Add VAT</button>
-      <button class="tool-btn tool-btn-secondary" onclick="calcVAT(false)">Remove VAT</button>
+      <button class="tool-btn tool-btn-secondary" type="button" onclick="calcVAT(true)">Add VAT</button>
+      <button class="tool-btn tool-btn-secondary" type="button" onclick="calcVAT(false)">Remove VAT</button>
     </div>
 
     <!-- RESULT (Mit Copy Funktion) -->
@@ -541,16 +703,16 @@
         <div class="result-label">Total Amount</div>
         <div class="result-value" id="resultValue">0.00</div>
       </div>
-      <button class="copy-btn" onclick="copyResult()">Copy</button>
+      <button class="copy-btn" type="button" onclick="copyResult()">Copy</button>
     </div>
 
-    <!-- === NEW: YMYL DISCLAIMER BOX (KRITISCH!) === -->
+    <!-- === YMYL DISCLAIMER BOX (KRITISCH!) === -->
     <div class="ymyl-disclaimer">
       <strong>⚠️ Important Notice:</strong> This calculator is for informational purposes only and does not constitute tax, legal, or financial advice. VAT rates and rules vary by country and may change. For binding tax calculations, please consult a certified tax advisor or your local tax authority. ToolCompass is not liable for any errors or consequences arising from the use of this tool.
     </div>
   </div>
 
-  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <!-- === HOW IT WORKS SECTION === -->
   <div class="how-it-works">
     <h3>🔧 How This Tool Works</h3>
     <ol>
@@ -561,7 +723,7 @@
     </ol>
   </div>
 
-  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <!-- === WHO IS THIS FOR BOX === -->
   <div class="who-is-this-for">
     <strong>Who is this for?</strong> This calculator helps professionals who handle invoices and expenses:
     <ul>
@@ -585,6 +747,16 @@
     </div>
   </div>
 
+  <!-- === COOKIE-FREE ADSENSE NOTICE === -->
+  <div class="adsense-notice">
+    <strong>🔒 Cookie-free ads:</strong> ToolCompass uses Google AdSense without personalized tracking. Your financial data stays private — no cookies, no profiling.
+  </div>
+
+  <!-- === PRIVACY DISCLAIMER === -->
+  <div class="privacy-disclaimer">
+    <strong>🔐 Privacy First:</strong> All calculations run locally in your browser. Your financial figures are never sent to any server. No data storage, no tracking, no login required.
+  </div>
+
   <!-- FORMULA EXPLANATION -->
   <div class="section-block">
     <div class="section-title">
@@ -600,7 +772,7 @@
     </div>
   </div>
 
-  <!-- === NEW: VAT RATES BY COUNTRY TABLE === -->
+  <!-- === VAT RATES BY COUNTRY TABLE === -->
   <div class="section-block">
     <div class="section-title">
       Common VAT Rates
@@ -683,44 +855,59 @@
     </div>
 
     <p>
-      All calculations run locally in your browser using JavaScript. This means your financial data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
+      All calculations run locally in your browser using JavaScript. This means your financial data never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals — built by developers who value privacy, speed, and simplicity.
+    </p>
+    <p>
+      <strong>About the creator:</strong> ToolCompass is maintained by a small team of productivity enthusiasts who believe powerful tools should be free, private, and instantly usable — no signups, no tracking, no bloat. We've been building browser-based utilities since 2024.
+    </p>
+    <p class="privacy-disclaimer" style="margin-top: 1rem; background: transparent; border: none; padding: 0; font-size: 12px;">
+      <strong>Note:</strong> This tool is for estimation purposes only. Tax laws vary by jurisdiction and change frequently. For official tax filings, always consult a certified tax professional or your local tax authority.
     </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           How do I calculate VAT manually?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">To add VAT, multiply the price by (1 + VAT rate). For example, €100 × 1.19 = €119. To remove VAT, divide the total by (1 + VAT rate). For example, €119 / 1.19 = €100.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Is this tool free to use?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">Yes, the ToolCompass VAT Calculator is 100% free. There are no hidden costs, subscriptions, or login requirements.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Is my financial data secure?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq3">
           <p class="faq-a-inner">Absolutely. All calculations happen locally in your browser. No data is sent to our servers, ensuring complete privacy for your financial figures.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Does this calculator handle reduced VAT rates?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq4">
           <p class="faq-a-inner">Yes. Simply enter the applicable reduced rate (e.g., 7% for books in Germany) in the "VAT Rate" field. The calculator works with any percentage you enter.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          Can I use this for US sales tax?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">Yes. While VAT and US sales tax work differently legally, the math is identical: enter your local rate (0–10% depending on state) and use "Add Tax" to calculate the final price. Always verify rates with your state's tax authority.</p>
         </div>
       </div>
     </div>
@@ -736,11 +923,21 @@
     <a href="/datenschutz/index.html">Privacy</a>
   </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
-  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. No personalized tracking is used.</p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Copied to clipboard!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard!</div>
+
+<!-- Image Lazy Loading Template (für zukünftige Bilder) -->
+<!-- 
+  <img src="image.jpg" 
+       alt="Descriptive alt text" 
+       width="800" 
+       height="600" 
+       loading="lazy" 
+       decoding="async">
+-->
 
 <script>
 // ═══════════════════════════════════════════════
@@ -752,8 +949,13 @@ const resultBox = document.getElementById('resultBox');
 const resultValue = document.getElementById('resultValue');
 
 function calcVAT(add) {
-    const a = parseFloat(amountInput.value);
-    const r = parseFloat(rateInput.value) / 100;
+    const amountEl = document.getElementById('amount');
+    const rateEl = document.getElementById('taxRate');
+    
+    if (!amountEl || !rateEl) return;
+    
+    const a = parseFloat(amountEl.value);
+    const r = parseFloat(rateEl.value) / 100;
 
     if(isNaN(a) || isNaN(r)) {
         showToast('Please enter valid numbers');
@@ -763,40 +965,55 @@ function calcVAT(add) {
     const res = add ? a * (1 + r) : a / (1 + r);
     
     // Ergebnis anzeigen
-    resultValue.innerText = res.toFixed(2);
-    resultBox.classList.add('show');
+    if (resultValue) resultValue.innerText = res.toFixed(2);
+    if (resultBox) resultBox.classList.add('show');
 
     // "Süchtig machend": Speichern im LocalStorage
-    localStorage.setItem('tc_vat_amount', a);
-    localStorage.setItem('tc_vat_rate', rateInput.value);
+    try {
+      localStorage.setItem('tc_vat_amount', a);
+      localStorage.setItem('tc_vat_rate', rateEl.value);
+    } catch(e) {
+      // Silent fail if storage is disabled
+    }
 }
 
 // Beim Laden der Seite alte Werte wiederherstellen (UX Boost)
 window.addEventListener('load', () => {
-    if(localStorage.getItem('tc_vat_amount')) {
-        amountInput.value = localStorage.getItem('tc_vat_amount');
-        rateInput.value = localStorage.getItem('tc_vat_rate');
+    try {
+      if(localStorage?.getItem('tc_vat_amount')) {
+          if (amountInput) amountInput.value = localStorage.getItem('tc_vat_amount');
+          if (rateInput) rateInput.value = localStorage.getItem('tc_vat_rate');
+      }
+    } catch(e) {
+      // Silent fail if storage is disabled
     }
 });
 
 // Copy Funktion
 function copyResult() {
-    const text = resultValue.innerText;
-    navigator.clipboard.writeText(text).then(() => {
+    const text = resultValue?.innerText;
+    if (!text) return;
+    
+    navigator.clipboard?.writeText(text).then(() => {
         showToast('Copied to clipboard!');
+    }).catch(() => {
+        showToast('Copy failed');
     });
 }
 
 // Toast Notification
 function showToast(message) {
     const toast = document.getElementById('toast');
+    if (!toast) return;
+    
     toast.innerText = message;
     toast.classList.add('active');
-    setTimeout(() => toast.classList.remove('active'), 2000);
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => toast.classList.remove('active'), 2000);
 }
 
 // Enter-Taste Support
-document.querySelectorAll('.tool-input').forEach(input => {
+document.querySelectorAll('.tool-input')?.forEach(input => {
     input.addEventListener('keypress', (e) => {
         if(e.key === 'Enter') {
             calcVAT(true);
@@ -805,23 +1022,28 @@ document.querySelectorAll('.tool-input').forEach(input => {
 });
 
 // ═══════════════════════════════════════════════
-// FAQ ACCORDION (Vom Vorbild übernommen)
+// FAQ ACCORDION
 // ═══════════════════════════════════════════════
-document.querySelectorAll('.faq-q').forEach(btn => {
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item   = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    const isOpen = item?.classList.contains('open');
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
+      i?.classList.remove('open');
+      i?.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
     });
-    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    
+    if (item && !isOpen) { 
+      item.classList.add('open'); 
+      btn.setAttribute('aria-expanded', 'true'); 
+    }
   });
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
 
 </body>
