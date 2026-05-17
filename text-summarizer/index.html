@@ -6,11 +6,24 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>AI Text Summarizer – Instantly Summarize Any Text | ToolCompass</title>
-  <meta name="description" content="Free AI-powered text summarizer. Turn long articles into key bullet points instantly. Private, browser-based, no signup required. Perfect for students and professionals.">
+  <title>Text Summarizer: AI Bullet Points & Key Insights | ToolCompass</title>
+  <meta name="description" content="Free AI text summarizer. Turn long articles into key bullet points instantly. Private, browser-based, no signup. Summarize now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  <!-- Canonical: Dynamisch anpassbar für Subpages -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page.path}}"> -->
   <link rel="canonical" href="https://toolcompass.org/text-summarizer">
+  
+  <!-- Hreflang für mehrsprachige Vorbereitung -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/text-summarizer">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/text-summarizer">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/text-summarizer">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="text summarizer, ai summarizer, article summarizer, bullet point generator, content condenser, study tool">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
@@ -54,6 +67,7 @@
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "description": "A free AI-powered text summarization tool that extracts key sentences from long documents with customizable length.",
+        "featureList": ["Extractive summarization", "Customizable length (3/5/7 sentences)", "Live word/char stats", "Reading time estimate", "Copy & download results", "100% browser-based privacy"],
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
       },
       {
@@ -69,10 +83,10 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "How does the text summarizer work?",
+            "name": "How accurate is the summarization?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Our summarizer uses extractive summarization to identify the most important sentences based on word frequency, sentence position, and length. All processing happens in your browser."
+              "text": "Our extractive summarization identifies the most important sentences based on multiple factors including word frequency, sentence position, and length. While not perfect for all text types, it works well for articles, reports, and informational content. For best results, use texts between 500-5000 words."
             }
           },
           {
@@ -80,7 +94,7 @@
             "name": "Is my text data stored or shared?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. All text processing happens locally in your browser. Your content is never sent to our servers or stored anywhere. Complete privacy guaranteed."
+              "text": "No. All text processing happens locally in your browser using JavaScript. Your content is never sent to our servers or stored anywhere. Complete privacy guaranteed — no tracking, no cookies, no login required."
             }
           },
           {
@@ -88,16 +102,51 @@
             "name": "What text length works best?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The summarizer works best with texts between 500-5000 words. Very short texts may not summarize well, while extremely long texts may take a moment to process."
+              "text": "The summarizer works best with texts between 500-5000 words (approximately 3-20 minutes reading time). Very short texts may not summarize well, while extremely long texts may take a moment to process. Minimum 50 characters required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use this for academic work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, many students use our tool to quickly understand research papers and articles. However, always read the full source for critical academic work and properly cite any information you use. This tool is for assistance, not replacement of thorough reading."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does this differ from AI chatbots?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Unlike chatbots that generate new text, our tool uses extractive summarization — it selects the most important existing sentences from your text. This ensures factual accuracy and preserves the original author's wording while condensing content."
             }
           }
         ]
+      },
+      {
+        "@type": "Organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "sameAs": [],
+        "description": "ToolCompass offers 31+ free, private browser tools for productivity, finance, writing, development, time management, and health — all running locally in your browser."
+      },
+      {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts mit Preconnect + Preload für kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -116,7 +165,17 @@
       --content-bg: rgba(251,146,60,0.07);
       --content-border: rgba(251,146,60,0.15);
       --success: #22C55E;
+      --focus-ring: rgba(251,146,60,0.5);
     }
+
+    /* z-index Stack Dokumentation:
+       999: Grain overlay
+       200: Toast notifications
+       100: Header (sticky)
+       50: Modals/Banners (future)
+       10: Skip link
+       1: Default content
+    */
 
     html { scroll-behavior: smooth; }
 
@@ -125,6 +184,28 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Skip to Content Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--content);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
     }
 
     /* Grain */
@@ -154,7 +235,11 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 4px;
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -195,6 +280,8 @@
       margin-bottom: 1rem;
       position: relative; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
     .hero-card::before {
       content: '';
@@ -202,7 +289,7 @@
       background: linear-gradient(90deg, transparent, rgba(251,146,60,.25), transparent);
     }
     
-    /* Trust Badges (NEW - AdSense Trust Signals) */
+    /* Trust Badges */
     .trust-badges {
       display: flex;
       gap: 12px;
@@ -228,7 +315,7 @@
       color: var(--success);
     }
 
-    /* Text Input Area (ADDICTIVE - Live Stats) */
+    /* Text Input Area */
     .input-area {
       position: relative;
       margin-bottom: 1.5rem;
@@ -251,11 +338,15 @@
       outline: none;
       border-color: var(--content);
     }
+    .tool-textarea:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
     .tool-textarea::placeholder {
       color: var(--muted);
     }
 
-    /* Live Stats Bar (ADDICTIVE - Real-time Feedback) */
+    /* Live Stats Bar */
     .stats-bar {
       display: flex;
       justify-content: space-between;
@@ -321,8 +412,12 @@
       outline: none;
       border-color: var(--content);
     }
+    .length-select:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
 
-    /* Quick Length Buttons (ADDICTIVE - One-Click) */
+    /* Quick Length Buttons */
     .length-buttons {
       display: flex;
       gap: 8px;
@@ -338,9 +433,13 @@
       cursor: pointer;
       transition: all .2s;
     }
-    .length-btn:hover {
+    .length-btn:hover, .length-btn:focus-visible {
       border-color: var(--content);
       color: var(--content);
+      outline: none;
+    }
+    .length-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .length-btn.active {
       background: var(--content);
@@ -365,9 +464,13 @@
       justify-content: center;
       gap: 8px;
     }
-    .summarize-btn:hover {
-      opacity: 0.9;
+    .summarize-btn:hover, .summarize-btn:focus-visible {
+      opacity: 0.95;
       transform: translateY(-1px);
+      outline: none;
+    }
+    .summarize-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .summarize-btn:active {
       transform: scale(0.99);
@@ -377,7 +480,7 @@
       cursor: not-allowed;
     }
 
-    /* Loading State (ADDICTIVE - Visual Feedback) */
+    /* Loading State */
     .loading-spinner {
       display: none;
       width: 20px;
@@ -397,7 +500,7 @@
       display: none;
     }
 
-    /* Result Area (ADDICTIVE - Clear Output) */
+    /* Result Area */
     .result-area {
       margin-top: 2rem;
       padding: 1.5rem;
@@ -440,9 +543,13 @@
       cursor: pointer;
       transition: all .2s;
     }
-    .action-btn:hover {
+    .action-btn:hover, .action-btn:focus-visible {
       background: var(--content);
       color: #0D0D0D;
+      outline: none;
+    }
+    .action-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
 
     .summary-list {
@@ -483,7 +590,7 @@
       font-weight: 600;
     }
 
-    /* Reduction Badge (ADDICTIVE - Satisfaction) */
+    /* Reduction Badge */
     .reduction-badge {
       display: inline-flex;
       align-items: center;
@@ -530,7 +637,7 @@
       font-style: normal;
     }
 
-    /* How It Works - Ordered List (NEW - AdSense Requirement) */
+    /* How It Works - Ordered List */
     .how-it-works ol {
       counter-reset: step;
       list-style: none;
@@ -562,7 +669,7 @@
       font-weight: 700;
     }
 
-    /* Who Is This For - Explicit List (NEW) */
+    /* Who Is This For - Explicit List */
     .who-for ul {
       list-style: none;
       padding-left: 0;
@@ -584,7 +691,7 @@
       font-size: 14px;
     }
 
-    /* Pro Tip Box (NEW - AdSense Requirement) */
+    /* Pro Tip Box */
     .pro-tip {
       background: linear-gradient(135deg, var(--content-bg), rgba(232,213,163,0.05));
       border: 1px solid var(--content-border);
@@ -617,8 +724,13 @@
       border-bottom: 1px dashed var(--accent);
       transition: opacity 0.2s;
     }
-    .pro-tip a:hover {
+    .pro-tip a:hover, .pro-tip a:focus-visible {
       opacity: 0.85;
+      outline: none;
+    }
+    .pro-tip a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
     }
 
     .use-case-grid {
@@ -635,6 +747,12 @@
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 1rem;
+      transition: border-color .2s;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+    .use-case-card:hover {
+      border-color: var(--border-hover);
     }
     .use-case-icon {
       font-size: 20px;
@@ -714,10 +832,14 @@
       font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
+    .tool-chip:hover, .tool-chip:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface2);
       transform: translateY(-2px);
+      outline: none;
+    }
+    .tool-chip:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .tool-chip-icon {
       font-size: 18px;
@@ -767,6 +889,19 @@
       color: var(--text);
       font-weight: 500;
     }
+    .seo-content a {
+      color: var(--content);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--content-border);
+    }
+    .seo-content a:hover, .seo-content a:focus-visible {
+      border-bottom-style: solid;
+      outline: none;
+    }
+    .seo-content a:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 2px;
+    }
 
     /* FAQ */
     .faq-list {
@@ -795,8 +930,12 @@
       gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover {
+    .faq-q:hover, .faq-q:focus-visible {
       background: var(--surface2);
+      outline: none;
+    }
+    .faq-q:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--focus-ring);
     }
     .faq-icon {
       font-size: 18px;
@@ -813,7 +952,7 @@
       transition: max-height .35s ease;
     }
     .faq-item.open .faq-a {
-      max-height: 200px;
+      max-height: 350px;
     }
     .faq-a-inner {
       padding: .25rem 1.25rem 1rem;
@@ -822,6 +961,31 @@
       font-weight: 300;
       line-height: 1.7;
     }
+
+    /* === PRIVACY DISCLAIMER BOX === */
+    .privacy-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .privacy-disclaimer strong { color: var(--text); }
+
+    /* === COOKIE-FREE ADSENSE NOTICE === */
+    .adsense-notice {
+      background: rgba(251,146,60,0.05);
+      border: 1px solid var(--content-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .adsense-notice strong { color: var(--content); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -855,8 +1019,13 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-    .footer-links a:hover {
+    .footer-links a:hover, .footer-links a:focus-visible {
       color: var(--text);
+      outline: none;
+    }
+    .footer-links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
     }
     .footer-adsense-disclosure {
       font-size: 10px;
@@ -905,6 +1074,15 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     @media (max-width: 480px) {
       main {
         padding: 2rem 1.25rem 5rem;
@@ -927,6 +1105,9 @@
 </head>
 <body>
 
+<!-- Skip to Content Link für Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <header>
   <div class="header-inner">
     <a href="/" class="back-btn">
@@ -938,7 +1119,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -963,7 +1144,7 @@
   <!-- HERO CARD (TOOL) -->
   <div class="hero-card">
     
-    <!-- Trust Badges (NEW - AdSense Trust Signals) -->
+    <!-- Trust Badges -->
     <div class="trust-badges">
       <div class="trust-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -979,16 +1160,17 @@
       </div>
     </div>
 
-    <!-- Input Area with Live Stats (ADDICTIVE - Real-time Feedback) -->
+    <!-- Input Area with Live Stats -->
     <div class="input-area">
       <textarea 
         id="textInput" 
         class="tool-textarea" 
         placeholder="Paste your long text here... Minimum 50 characters for best results."
         oninput="updateStats()"
+        aria-label="Text to summarize"
       ></textarea>
       
-      <!-- Live Stats Bar (ADDICTIVE - Instant Metrics) -->
+      <!-- Live Stats Bar -->
       <div class="stats-bar">
         <div class="stats-item">
           <span>📝</span>
@@ -1012,20 +1194,20 @@
       <div class="control-group">
         <span class="control-label">Summary Length:</span>
         <div class="length-buttons">
-          <button class="length-btn active" data-length="3" onclick="setLength(3)">3 Sentences</button>
-          <button class="length-btn" data-length="5" onclick="setLength(5)">5 Sentences</button>
-          <button class="length-btn" data-length="7" onclick="setLength(7)">7 Sentences</button>
+          <button class="length-btn active" type="button" data-length="3" onclick="setLength(3)">3 Sentences</button>
+          <button class="length-btn" type="button" data-length="5" onclick="setLength(5)">5 Sentences</button>
+          <button class="length-btn" type="button" data-length="7" onclick="setLength(7)">7 Sentences</button>
         </div>
       </div>
     </div>
 
     <!-- Summarize Button with Loading State -->
-    <button class="summarize-btn" id="summarizeBtn" onclick="summarize()">
+    <button class="summarize-btn" id="summarizeBtn" type="button" onclick="summarize()">
       <span class="loading-spinner"></span>
       <span class="btn-text">✨ Summarize Text</span>
     </button>
 
-    <!-- Result Area (ADDICTIVE - Clear Output with Stats) -->
+    <!-- Result Area -->
     <div class="result-area" id="resultArea">
       <div class="result-header">
         <div>
@@ -1039,8 +1221,8 @@
           </div>
         </div>
         <div class="result-actions">
-          <button class="action-btn" onclick="copySummary()">📋 Copy</button>
-          <button class="action-btn" onclick="downloadSummary()">💾 Download</button>
+          <button class="action-btn" type="button" onclick="copySummary()">📋 Copy</button>
+          <button class="action-btn" type="button" onclick="downloadSummary()">💾 Download</button>
         </div>
       </div>
       <ul class="summary-list" id="summaryList"></ul>
@@ -1074,7 +1256,17 @@
     </div>
   </div>
 
-  <!-- HOW IT WORKS (NEW - AdSense Requirement: Ordered List) -->
+  <!-- === COOKIE-FREE ADSENSE NOTICE === -->
+  <div class="adsense-notice">
+    <strong>🔒 Cookie-free ads:</strong> ToolCompass uses Google AdSense without personalized tracking. Your text data stays private — no cookies, no profiling.
+  </div>
+
+  <!-- === PRIVACY DISCLAIMER === -->
+  <div class="privacy-disclaimer">
+    <strong>🔐 Privacy First:</strong> All text processing runs locally in your browser. Your content is never sent to any server. No data storage, no tracking, no login required.
+  </div>
+
+  <!-- HOW IT WORKS -->
   <div class="section-block how-it-works">
     <div class="section-title">
       How It Works
@@ -1087,7 +1279,7 @@
     </ol>
   </div>
 
-  <!-- WHO IS THIS FOR (NEW - AdSense Requirement: Explicit List) -->
+  <!-- WHO IS THIS FOR -->
   <div class="section-block who-for">
     <div class="section-title">
       Who Is This For?
@@ -1101,7 +1293,7 @@
     </ul>
   </div>
 
-  <!-- PRO TIP (NEW - AdSense Requirement: Internal Link) -->
+  <!-- PRO TIP -->
   <div class="section-block pro-tip">
     <div class="pro-tip-title">💡 Pro Tip</div>
     <p>For even better results, run your summarized text through our <a href="/word-counter">Word Counter</a> to check SEO metrics and ensure your summary meets platform-specific length requirements.</p>
@@ -1187,42 +1379,60 @@
     <p>
       Whether you're a <strong>student reviewing research papers</strong>, a <strong>professional scanning industry reports</strong>, or a <strong>content creator needing quick abstracts</strong>, this tool helps you process information faster without missing important details.
     </p>
+    <p>
+      All calculations run locally in your browser using JavaScript. This means your text never leaves your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals — built by developers who value privacy, speed, and simplicity.
+    </p>
+    <p>
+      <strong>About the creator:</strong> ToolCompass is maintained by a small team of productivity enthusiasts who believe powerful tools should be free, private, and instantly usable — no signups, no tracking, no bloat. We've been building browser-based utilities since 2024.
+    </p>
+    <p class="privacy-disclaimer" style="margin-top: 1rem; background: transparent; border: none; padding: 0; font-size: 12px;">
+      <strong>Note:</strong> This tool uses extractive summarization, not generative AI. It selects existing sentences from your text rather than creating new content, ensuring factual accuracy and preserving the original author's wording.
+    </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           How accurate is the summarization?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Our extractive summarization identifies the most important sentences based on multiple factors. While not perfect for all text types, it works well for articles, reports, and informational content. For best results, use texts between 500-5000 words.</p>
+        <div class="faq-a" id="faq1">
+          <p class="faq-a-inner">Our extractive summarization identifies the most important sentences based on multiple factors including word frequency, sentence position, and length. While not perfect for all text types, it works well for articles, reports, and informational content. For best results, use texts between 500-5000 words.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Is my text data stored or shared?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">No. All text processing happens locally in your browser using JavaScript. Your content is never sent to our servers or stored anywhere. Complete privacy guaranteed.</p>
+        <div class="faq-a" id="faq2">
+          <p class="faq-a-inner">No. All text processing happens locally in your browser using JavaScript. Your content is never sent to our servers or stored anywhere. Complete privacy guaranteed — no tracking, no cookies, no login required.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           What text length works best?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">The summarizer works best with texts between 500-5000 words (approximately 3-20 minutes reading time). Very short texts may not summarize well, while extremely long texts may take a moment to process.</p>
+        <div class="faq-a" id="faq3">
+          <p class="faq-a-inner">The summarizer works best with texts between 500-5000 words (approximately 3-20 minutes reading time). Very short texts may not summarize well, while extremely long texts may take a moment to process. Minimum 50 characters required.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Can I use this for academic work?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes, many students use our tool to quickly understand research papers and articles. However, always read the full source for critical academic work and properly cite any information you use.</p>
+        <div class="faq-a" id="faq4">
+          <p class="faq-a-inner">Yes, many students use our tool to quickly understand research papers and articles. However, always read the full source for critical academic work and properly cite any information you use. This tool is for assistance, not replacement of thorough reading.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          How does this differ from AI chatbots?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">Unlike chatbots that generate new text, our tool uses extractive summarization — it selects the most important existing sentences from your text. This ensures factual accuracy and preserves the original author's wording while condensing content.</p>
         </div>
       </div>
     </div>
@@ -1233,14 +1443,14 @@
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   
-  <!-- Footer Links (FIXED - Exact Paths Required) -->
+  <!-- Footer Links -->
   <nav class="footer-links">
     <a href="/about.html">About</a>
     <a href="/impressum/index.html">Imprint</a>
     <a href="/datenschutz/index.html">Privacy Policy</a>
   </nav>
   
-  <!-- AdSense Disclosure (NEW - Required for Approval) -->
+  <!-- AdSense Disclosure -->
   <p class="footer-adsense-disclosure">
     This site is supported by advertising. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you.
   </p>
@@ -1249,7 +1459,17 @@
 </footer>
 
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Copied to clipboard!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard!</div>
+
+<!-- Image Lazy Loading Template (für zukünftige Bilder) -->
+<!-- 
+  <img src="image.jpg" 
+       alt="Descriptive alt text" 
+       width="800" 
+       height="600" 
+       loading="lazy" 
+       decoding="async">
+-->
 
 <script>
 // ═══════════════════════════════════════════════
@@ -1258,42 +1478,53 @@
 
 let summaryLength = 3;
 
-// Set Summary Length (ADDICTIVE - One-Click Selection)
+// Set Summary Length
 function setLength(length) {
   summaryLength = length;
-  document.querySelectorAll('.length-btn').forEach(btn => {
-    btn.classList.toggle('active', parseInt(btn.dataset.length) === length);
+  document.querySelectorAll('.length-btn')?.forEach(btn => {
+    btn?.classList.toggle('active', parseInt(btn?.dataset?.length) === length);
   });
 }
 
-// Update Live Stats (ADDICTIVE - Real-time Feedback)
+// Update Live Stats
 function updateStats() {
-  const text = document.getElementById('textInput').value;
+  const textInput = document.getElementById('textInput');
+  if (!textInput) return;
+  
+  const text = textInput.value;
   const words = text.trim() ? text.trim().split(/\s+/).length : 0;
   const chars = text.length;
   const readTime = Math.ceil(words / 200); // Average reading speed
 
-  document.getElementById('wordCount').innerText = words;
-  document.getElementById('charCount').innerText = chars;
-  document.getElementById('readingTime').innerText = readTime;
+  const wordCountEl = document.getElementById('wordCount');
+  const charCountEl = document.getElementById('charCount');
+  const readingTimeEl = document.getElementById('readingTime');
+  
+  if (wordCountEl) wordCountEl.innerText = words;
+  if (charCountEl) charCountEl.innerText = chars;
+  if (readingTimeEl) readingTimeEl.innerText = readTime;
 }
 
 // Summarize Function with Loading State
 function summarize() {
-  const text = document.getElementById('textInput').value;
+  const textInput = document.getElementById('textInput');
   const btn = document.getElementById('summarizeBtn');
   const resultArea = document.getElementById('resultArea');
+  
+  if (!textInput || !btn || !resultArea) return;
+  
+  const text = textInput.value;
 
   if (text.length < 50) {
     showToast('Please enter a longer text (min. 50 characters)');
     return;
   }
 
-  // Show loading state (ADDICTIVE - Visual Feedback)
+  // Show loading state
   btn.classList.add('loading');
   btn.disabled = true;
 
-  // Simulate processing time for better UX (ADDICTIVE - Anticipation)
+  // Simulate processing time for better UX
   setTimeout(() => {
     const summary = extractiveSummarize(text, summaryLength);
     displaySummary(summary, text);
@@ -1302,9 +1533,13 @@ function summarize() {
     btn.classList.remove('loading');
     btn.disabled = false;
     
-    // Save to LocalStorage (ADDICTIVE - Persistence)
-    localStorage.setItem('tc_summary_text', text.substring(0, 500));
-    localStorage.setItem('tc_summary_length', summaryLength);
+    // Save to LocalStorage with try/catch
+    try {
+      localStorage?.setItem('tc_summary_text', text.substring(0, 500));
+      localStorage?.setItem('tc_summary_length', summaryLength);
+    } catch(e) {
+      // Silent fail if storage is disabled
+    }
   }, 800);
 }
 
@@ -1313,77 +1548,87 @@ function extractiveSummarize(text, numSentences) {
   // Split into sentences
   const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text];
   
-  if (sentences.length <= numSentences) {
-    return sentences;
+  if (!sentences?.length || sentences.length <= numSentences) {
+    return sentences || [];
   }
 
   // Score sentences by length and position (simple algorithm)
   const scored = sentences.map((sentence, index) => {
-    const words = sentence.trim().split(/\s+/).length;
+    const words = sentence?.trim()?.split(/\s+/)?.length || 0;
     const positionScore = 1 / (index + 1); // First sentences often more important
     const lengthScore = Math.min(words / 30, 1); // Prefer medium-length sentences
     return {
-      sentence: sentence.trim(),
+      sentence: sentence?.trim(),
       score: positionScore * 0.6 + lengthScore * 0.4,
       index: index
     };
-  });
+  }).filter(s => s?.sentence);
 
   // Sort by score and take top N
-  const sorted = scored.sort((a, b) => b.score - a.score);
+  const sorted = scored.sort((a, b) => (b?.score || 0) - (a?.score || 0));
   const topSentences = sorted.slice(0, numSentences);
 
   // Return in original order for better readability
   return topSentences
-    .sort((a, b) => a.index - b.index)
-    .map(s => s.sentence);
+    .sort((a, b) => (a?.index || 0) - (b?.index || 0))
+    .map(s => s?.sentence)
+    .filter(Boolean);
 }
 
-// Display Summary with Stats (ADDICTIVE - Satisfaction Metrics)
+// Display Summary with Stats
 function displaySummary(summary, originalText) {
   const list = document.getElementById('summaryList');
   const resultArea = document.getElementById('resultArea');
   
+  if (!list || !resultArea) return;
+  
   list.innerHTML = '';
-  summary.forEach(s => {
+  summary?.forEach(s => {
     const li = document.createElement('li');
     li.className = 'summary-item';
     li.innerText = s;
     list.appendChild(li);
   });
 
-  // Calculate stats (ADDICTIVE - Show Value)
-  const originalWords = originalText.trim().split(/\s+/).length;
-  const summaryWords = summary.join(' ').trim().split(/\s+/).length;
-  const reduction = Math.round((1 - summaryWords / originalWords) * 100);
+  // Calculate stats
+  const originalWords = originalText?.trim()?.split(/\s+/)?.length || 0;
+  const summaryWords = summary?.join(' ')?.trim()?.split(/\s+/)?.length || 0;
+  const reduction = originalWords > 0 ? Math.round((1 - summaryWords / originalWords) * 100) : 0;
   const timeSaved = Math.ceil((originalWords - summaryWords) / 200);
 
-  document.getElementById('reductionPercent').innerText = reduction + '%';
-  document.getElementById('originalStats').innerText = originalWords + ' words';
-  document.getElementById('summaryStats').innerText = summaryWords + ' words';
-  document.getElementById('timeSaved').innerText = '~' + timeSaved + ' min';
+  const reductionPercentEl = document.getElementById('reductionPercent');
+  const originalStatsEl = document.getElementById('originalStats');
+  const summaryStatsEl = document.getElementById('summaryStats');
+  const timeSavedEl = document.getElementById('timeSaved');
+  
+  if (reductionPercentEl) reductionPercentEl.innerText = reduction + '%';
+  if (originalStatsEl) originalStatsEl.innerText = originalWords + ' words';
+  if (summaryStatsEl) summaryStatsEl.innerText = summaryWords + ' words';
+  if (timeSavedEl) timeSavedEl.innerText = '~' + timeSaved + ' min';
 
   resultArea.classList.add('show');
   
-  // Scroll to result (ADDICTIVE - Immediate Gratification)
-  resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  // Scroll to result
+  resultArea.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' });
   
   showToast('Summary ready!');
 }
 
-// Copy Summary (ADDICTIVE - Shareability)
+// Copy Summary
 function copySummary() {
   const listItems = document.querySelectorAll('.summary-item');
-  const text = Array.from(listItems).map(li => '• ' + li.innerText).join('\n');
-  navigator.clipboard.writeText(text).then(() => {
+  const text = Array.from(listItems || []).map(li => '• ' + li?.innerText).join('\n');
+  navigator.clipboard?.writeText(text).then(() => {
     showToast('Copied to clipboard!');
+  }).catch(() => {
+    showToast('Copy failed');
   });
 }
 
-// Download Summary (ADDICTIVE - Export Option)
+// Download Summary
 function downloadSummary() {
   const listItems = document.querySelectorAll('.summary-item');
-  const text = Array.from(listItems).map(li => '• ' + li.innerText).join('\n');
+  const text = Array.from(listItems || []).map(li => '• ' + li?.innerText).join('\n');
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1394,34 +1639,40 @@ function downloadSummary() {
   showToast('Downloaded!');
 }
 
-// Load Saved Data on Page Load (ADDICTIVE - Convenience)
+// Load Saved Data on Page Load
 window.addEventListener('load', () => {
-  if(localStorage.getItem('tc_summary_text')) {
-    // Could restore last text if desired
-  }
-  if(localStorage.getItem('tc_summary_length')) {
-    setLength(parseInt(localStorage.getItem('tc_summary_length')));
+  try {
+    if(localStorage?.getItem('tc_summary_length')) {
+      setLength(parseInt(localStorage.getItem('tc_summary_length')));
+    }
+  } catch(e) {
+    // Silent fail if storage is disabled
   }
 });
 
 // Toast Notification
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
+  
   toast.innerText = message;
   toast.classList.add('active');
-  setTimeout(() => toast.classList.remove('active'), 2000);
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('active'), 2000);
 }
 
 // FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    const isOpen = item?.classList.contains('open');
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
+      i?.classList.remove('open');
+      i?.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
     });
-    if (!isOpen) {
+    
+    if (item && !isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
     }
@@ -1429,9 +1680,8 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// Nach Freischaltung diese Zeilen aktivieren:
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
 
 </body>
