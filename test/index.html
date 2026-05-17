@@ -139,29 +139,30 @@
     }
 
     async function handleChat() {
-        const prompt = userInput.value.trim();
-        if (!prompt) return;
+    const prompt = userInput.value.trim();
+    if (!prompt) return;
 
-        appendMessage('user', prompt);
-        userInput.value = '';
-        userInput.style.height = 'auto'; 
-        sendBtn.disabled = true;
+    appendMessage('user', prompt);
+    userInput.value = '';
+    userInput.style.height = 'auto'; 
+    sendBtn.disabled = true;
 
-        try {
-            // Modell geändert auf claude-4.6-sonnet
-            const response = await puter.ai.chat(prompt, { 
-                model: 'anthropic/claude-4.6-sonnet' 
-            });
-            
-            const aiText = response.message ? response.message.content : response;
-            appendMessage('ai', aiText);
-        } catch (error) {
-            appendMessage('ai', "System-Fehler: " + error.message);
-        } finally {
-            sendBtn.disabled = false;
-            userInput.focus();
-        }
+    try {
+        // GEÄNDERT: Wechsel auf ein verifiziertes, stabiles Modell im Puter-Index
+        const response = await puter.ai.chat(prompt, { 
+            model: 'claude-3-5-sonnet' 
+        });
+        
+        const aiText = response.message ? response.message.content : response;
+        appendMessage('ai', aiText);
+    } catch (error) {
+        // Fängt den Fehler ab und zeigt ihn sauber im Chat an
+        appendMessage('ai', "System-Fehler: " + error.message + "\nTipp: Überprüfe den Modellnamen.");
+    } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
     }
+}
 
     userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
