@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qwen 3.6 Pro - Auto-Expand Textarea</title>
+    <title>Claude 4.7 Sonnet - Puter UI</title>
     <script src="https://js.puter.com/v2/"></script>
     <style>
         :root { 
@@ -25,25 +25,34 @@
         header { 
             width: 100%; max-width: var(--max-width); padding: 20px; 
             display: flex; justify-content: space-between; align-items: center;
+            box-sizing: border-box;
         }
 
         .global-copy-btn {
             background: transparent; color: var(--text-muted); border: 1px solid #444;
             padding: 6px 12px; font-size: 12px; border-radius: 8px; cursor: pointer;
+            transition: all 0.2s;
         }
+        .global-copy-btn:hover { background: #333; color: #fff; }
 
         #chat-container { 
             flex: 1; width: 100%; max-width: var(--max-width); overflow-y: auto; 
             padding: 20px; display: flex; flex-direction: column; gap: 30px; 
+            box-sizing: border-box;
         }
 
         .message-wrapper { position: relative; display: flex; flex-direction: column; }
         .message { max-width: 85%; padding: 10px 0; font-size: 16px; line-height: 1.6; word-wrap: break-word; white-space: pre-wrap; }
         .user { align-self: flex-end; background-color: var(--user-msg); color: white; padding: 12px 20px; border-radius: 18px; border: 1px solid #444; }
         .ai { align-self: flex-start; color: var(--text-main); width: 100%; }
-        .copy-btn { align-self: flex-start; background: #333; color: #ccc; border: 1px solid #444; padding: 4px 10px; font-size: 11px; border-radius: 6px; cursor: pointer; margin-bottom: 8px; }
+        
+        .copy-btn { 
+            align-self: flex-start; background: #333; color: #ccc; border: 1px solid #444; 
+            padding: 4px 10px; font-size: 11px; border-radius: 6px; cursor: pointer; margin-bottom: 8px; 
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { background: #444; color: #fff; }
 
-        /* Eingabebereich mit automatischer Höhe */
         #input-wrapper { width: 100%; max-width: var(--max-width); padding: 10px 20px 40px 20px; box-sizing: border-box; }
         #input-area { 
             display: flex; background: var(--input-bg); border-radius: 16px; 
@@ -59,26 +68,31 @@
         button#send-btn { 
             background: #fff; color: #000; border: none; border-radius: 12px; 
             width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-            margin-bottom: 4px;
+            margin-bottom: 4px; transition: opacity 0.2s;
         }
+        button#send-btn:hover { opacity: 0.9; }
+        button#send-btn:disabled { background-color: #555; color: #888; cursor: not-allowed; }
+
+        #chat-container::-webkit-scrollbar { width: 5px; }
+        #chat-container::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body>
 
 <header>
-    <span>Qwen 3.6 Flash</span>
+    <span>Claude 4.7 Sonnet</span>
     <button class="global-copy-btn" id="copy-all-btn">Chat-Verlauf kopieren</button>
 </header>
 
 <div id="chat-container">
     <div class="message-wrapper">
-        <div class="message ai">Guten Tag. Das Textfeld passt sich nun deiner Nachricht an.</div>
+        <div class="message ai">Hallo! Ich bin Claude 4.7 Sonnet. Wie kann ich dir heute helfen?</div>
     </div>
 </div>
 
 <div id="input-wrapper">
     <div id="input-area">
-        <textarea id="user-input" rows="1" placeholder="Nachricht an Qwen..." autocomplete="off"></textarea>
+        <textarea id="user-input" rows="1" placeholder="Nachricht an Claude..." autocomplete="off"></textarea>
         <button id="send-btn">↑</button>
     </div>
 </div>
@@ -89,9 +103,9 @@
     const sendBtn = document.getElementById('send-btn');
     const copyAllBtn = document.getElementById('copy-all-btn');
 
-    let chatHistory = ["KI: Guten Tag. Das Textfeld passt sich nun deiner Nachricht an."];
+    let chatHistory = ["KI: Hallo! Ich bin Claude 4.7 Sonnet. Wie kann ich dir heute helfen?"];
 
-    // Automatisches Anpassen der Höhe des Textfeldes
+    // Automatisches Erweitern des Textfeldes bei viel Text
     userInput.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
@@ -126,35 +140,33 @@
     }
 
     async function handleChat() {
-    const prompt = userInput.value.trim();
-    if (!prompt) return;
+        const prompt = userInput.value.trim();
+        if (!prompt) return;
 
-    appendMessage('user', prompt);
-    userInput.value = '';
-    userInput.style.height = 'auto'; 
-    sendBtn.disabled = true;
+        appendMessage('user', prompt);
+        userInput.value = '';
+        userInput.style.height = 'auto'; 
+        sendBtn.disabled = true;
 
-    try {
-        // Hier wurde das Modell auf deepseek-v4-pro geändert
-        const response = await puter.ai.chat(prompt, { 
-            model: 'deepseek/deepseek-v4-flash' 
-        });
-
-        // WICHTIG: Je nach Puter-Version ist die Antwort entweder 
-        // direkt der Text oder ein Objekt (response.message.content).
-        // Wir prüfen beides ab:
-        const aiText = response.message ? response.message.content : response;
-        
-        appendMessage('ai', aiText);
-    } catch (error) {
-        appendMessage('ai', "Fehler: " + error.message);
-    } finally {
-        sendBtn.disabled = false;
-        userInput.focus();
+        try {
+            // Aufruf mit Claude 4.7 Sonnet
+            const response = await puter.ai.chat(prompt, { 
+                model: 'anthropic/claude-4.7-sonnet' 
+            });
+            
+            // Flexibles Auslesen der Antwort (Text oder verschachteltes Objekt)
+            const aiText = response.message ? response.message.content : response;
+            
+            appendMessage('ai', aiText);
+        } catch (error) {
+            appendMessage('ai', "System-Fehler: " + error.message);
+        } finally {
+            sendBtn.disabled = false;
+            userInput.focus();
+        }
     }
-}
 
-    // Senden bei Enter (aber Zeilenumbruch bei Shift+Enter)
+    // Senden bei Enter, Zeilenumbruch bei Shift + Enter
     userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -162,6 +174,7 @@
         }
     });
 
+    // Gesamten Chat-Verlauf in Zwischenablage sichern
     copyAllBtn.addEventListener('click', () => {
         const fullText = chatHistory.join('\n\n---\n\n');
         navigator.clipboard.writeText(fullText);
