@@ -7,9 +7,20 @@
 
   <!-- ═══ SEO ═══ -->
   <title>Pomodoro Focus Timer – Boost Productivity | ToolCompass</title>
-  <meta name="description" content="Free Pomodoro timer with customizable work/break sessions. Track focus time, complete pomodoros, and boost productivity. Private, no signup, browser-based.">
+  <meta name="description" content="Free Pomodoro timer with customizable sessions. Track focus time, boost productivity. Private, browser-based. Start your first session now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/pomodoro-timer">
+  <!-- 🔧 DYNAMIC CANONICAL TEMPLATE: Replace URL with current page path -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page_path}}"> -->
+  
+  <!-- 🌍 HREFLANG for multilingual support -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/pomodoro-timer">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/pomodoro-timer">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/pomodoro-timer">
+  
+  <!-- 🗺️ SITEMAP reference -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
 
   <!-- ═══ OPEN GRAPH ═══ -->
@@ -90,14 +101,47 @@
               "@type": "Answer",
               "text": "Your session statistics are saved locally in your browser. No data is sent to our servers. Complete privacy guaranteed."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Are there keyboard shortcuts?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Spacebar starts/pauses the timer, R resets, and S skips to the next session. Perfect for hands-free operation while working."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this medical or wellness advice?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This timer is a productivity tool only. For health-related concerns about work-life balance or stress management, please consult a qualified professional."
+            }
           }
         ]
       }
     ]
   }
   </script>
+  
+  <!-- 🔧 BREADCRUMB TEMPLATE FOR SUBPAGES (copy & adapt) -->
+  <!--
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+      { "@type": "ListItem", "position": 2, "name": "Category", "item": "https://toolcompass.org/#category" },
+      { "@type": "ListItem", "position": 3, "name": "Current Tool", "item": "https://toolcompass.org/current-tool" }
+    ]
+  }
+  </script>
+  -->
 
+  <!-- 🚀 Preload critical fonts with crossorigin for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -121,6 +165,7 @@
       --long-break: #3B82F6;
       --long-break-bg: rgba(59,130,246,0.07);
       --long-break-border: rgba(59,130,246,0.15);
+      /* z-index documentation: 999=grain, 200=toast, 150=consent, 100=header, 50=modals, 10=content */
     }
 
     html { scroll-behavior: smooth; }
@@ -137,6 +182,26 @@
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
+    }
+
+    /* ─── SKIP LINK (Accessibility) ─── */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      z-index: 1000;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 8px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
     }
 
     /* ─── HEADER ─── */
@@ -159,7 +224,7 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -208,725 +273,427 @@
       background: linear-gradient(90deg, transparent, rgba(239,68,68,.25), transparent);
     }
 
-    /* Trust Badges (NEW - AdSense Trust Signals) */
+    /* Trust Badges */
     .trust-badges {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: flex; gap: 12px; margin-bottom: 1.5rem; flex-wrap: wrap; justify-content: center;
     }
     .trust-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 20px;
+      font-size: 11px; color: var(--muted); font-weight: 500;
     }
-    .trust-badge svg {
-      width: 14px;
-      height: 14px;
-      color: var(--success);
-    }
+    .trust-badge svg { width: 14px; height: 14px; color: var(--short-break); }
 
-    /* Mode Tabs (ADDICTIVE - Quick Switch) */
+    /* Mode Tabs */
     .mode-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 8px; margin-bottom: 2rem; flex-wrap: wrap;
     }
     .mode-btn {
-      padding: 10px 20px;
-      border-radius: 25px;
-      border: 1px solid var(--border);
-      background: var(--surface2);
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
+      padding: 10px 20px; border-radius: 25px; border: 1px solid var(--border);
+      background: var(--surface2); color: var(--muted);
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s;
     }
-    .mode-btn:hover {
-      border-color: var(--work);
-      color: var(--work);
+    .mode-btn:hover, .mode-btn:focus-visible {
+      border-color: var(--work); color: var(--work); outline: none;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.2);
     }
     .mode-btn.active[data-mode="work"] {
-      background: var(--work);
-      border-color: var(--work);
-      color: #fff;
+      background: var(--work); border-color: var(--work); color: #fff;
     }
     .mode-btn.active[data-mode="short"] {
-      background: var(--short-break);
-      border-color: var(--short-break);
-      color: #0D0D0D;
+      background: var(--short-break); border-color: var(--short-break); color: var(--bg);
     }
     .mode-btn.active[data-mode="long"] {
-      background: var(--long-break);
-      border-color: var(--long-break);
-      color: #fff;
+      background: var(--long-break); border-color: var(--long-break); color: #fff;
     }
 
-    /* Progress Ring (ADDICTIVE - Visual Timer) */
+    /* Progress Ring */
     .timer-container {
-      position: relative;
-      width: 320px;
-      height: 320px;
-      margin: 0 auto 2rem;
+      position: relative; width: 320px; height: 320px; margin: 0 auto 2rem;
     }
     @media (max-width: 400px) {
-      .timer-container {
-        width: 260px;
-        height: 260px;
-      }
+      .timer-container { width: 260px; height: 260px; }
     }
     .progress-ring {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
+      width: 100%; height: 100%; transform: rotate(-90deg);
     }
-    .progress-ring circle {
-      fill: none;
-      stroke-width: 12;
-    }
-    .progress-ring .bg {
-      stroke: var(--surface2);
-    }
+    .progress-ring circle { fill: none; stroke-width: 12; }
+    .progress-ring .bg { stroke: var(--surface2); }
     .progress-ring .progress {
       stroke-linecap: round;
       transition: stroke-dashoffset 0.5s linear, stroke 0.3s ease;
+      will-change: stroke-dashoffset; /* GPU acceleration hint */
     }
     .timer-content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); text-align: center;
     }
     .timer-display {
-      font-family: 'Outfit', monospace;
-      font-size: clamp(3rem, 8vw, 5rem);
-      font-weight: 700;
-      line-height: 1;
-      transition: color .3s ease;
+      font-family: 'Outfit', monospace; font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700; line-height: 1; transition: color .3s ease;
     }
     .timer-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      margin-top: 0.75rem;
-      transition: color .3s ease;
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; margin-top: 0.75rem; transition: color .3s ease;
     }
-    .pomodoro-count {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 0.5rem;
-    }
+    .pomodoro-count { font-size: 11px; color: var(--muted); margin-top: 0.5rem; }
 
-    /* Control Buttons (ADDICTIVE - Satisfying Clicks) */
+    /* Control Buttons */
     .control-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 1rem;
+      margin-bottom: 2rem; flex-wrap: wrap;
     }
     .control-btn {
-      padding: 14px 32px;
-      border-radius: 30px;
-      border: none;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all .2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      padding: 14px 32px; border-radius: 30px; border: none;
+      font-weight: 700; font-size: 14px; cursor: pointer;
+      transition: all .2s; display: flex; align-items: center; gap: 8px;
     }
     .control-btn:active { transform: scale(0.96); }
-    .btn-start {
-      background: var(--work);
-      color: #fff;
+    .control-btn:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
     }
+    .btn-start { background: var(--work); color: #fff; }
     .btn-start:hover { opacity: 0.9; transform: translateY(-2px); }
     .btn-start.running {
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--surface2); border: 1px solid var(--border);
     }
     .btn-reset {
-      background: var(--surface2);
-      color: var(--text);
+      background: var(--surface2); color: var(--text);
       border: 1px solid var(--border);
     }
-    .btn-reset:hover {
-      border-color: var(--work);
-      color: var(--work);
-    }
+    .btn-reset:hover { border-color: var(--work); color: var(--work); }
     .btn-skip {
-      background: var(--surface2);
-      color: var(--text);
+      background: var(--surface2); color: var(--text);
       border: 1px solid var(--border);
     }
-    .btn-skip:hover {
-      border-color: var(--short-break);
-      color: var(--short-break);
-    }
+    .btn-skip:hover { border-color: var(--short-break); color: var(--short-break); }
 
-    /* Keyboard Shortcuts (ADDICTIVE - Power User) */
+    /* Keyboard Shortcuts */
     .keyboard-hint {
-      text-align: center;
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      padding: 12px;
-      background: var(--surface2);
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
+      text-align: center; font-size: 11px; color: var(--muted);
+      margin-bottom: 2rem; padding: 12px; background: var(--surface2);
+      border-radius: 8px; display: flex; justify-content: center;
+      gap: 2rem; flex-wrap: wrap;
     }
-    .key-shortcut {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .key-shortcut { display: flex; align-items: center; gap: 6px; }
     .key-badge {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 600;
-      font-family: monospace;
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 4px; font-size: 10px;
+      font-weight: 600; font-family: monospace;
     }
 
-    /* Settings (ADDICTIVE - Customization) */
+    /* Settings */
     .settings-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
+      margin-top: 2rem; padding-top: 2rem;
       border-top: 1px solid var(--border);
     }
     .settings-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-bottom: 1rem;
-      text-align: center;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 1rem; text-align: center;
     }
     .settings-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
     }
-    @media (max-width: 520px) {
-      .settings-grid { grid-template-columns: 1fr; }
-    }
-    .setting-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .setting-label {
-      font-size: 11px;
-      color: var(--muted);
-    }
+    @media (max-width: 520px) { .settings-grid { grid-template-columns: 1fr; } }
+    .setting-item { display: flex; flex-direction: column; gap: 6px; }
+    .setting-label { font-size: 11px; color: var(--muted); }
     .setting-input {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px;
-      border-radius: 8px;
-      font-family: 'Outfit';
-      font-size: 14px;
-      text-align: center;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 10px; border-radius: 8px;
+      font-family: 'Outfit'; font-size: 14px; text-align: center;
     }
     .setting-input:focus {
-      outline: none;
-      border-color: var(--work);
+      outline: none; border-color: var(--work);
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.2);
+    }
+    .setting-input:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
     }
 
-    /* Statistics (ADDICTIVE - Progress Tracking) */
+    /* Statistics */
     .stats-section {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      display: none;
+      margin-top: 2rem; padding: 1.5rem; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 16px; display: none;
     }
-    .stats-section.show {
-      display: block;
-      animation: slideUp .3s ease;
-    }
+    .stats-section.show { display: block; animation: slideUp .3s ease; }
     .stats-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-bottom: 1rem;
-      display: flex;
-      justify-content: space-between;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: 1rem; display: flex; justify-content: space-between;
       align-items: center;
     }
     .stats-clear {
-      font-size: 10px;
-      color: var(--muted);
-      cursor: pointer;
+      font-size: 10px; color: var(--muted); cursor: pointer;
       transition: color .2s;
     }
-    .stats-clear:hover { color: var(--work); }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
+    .stats-clear:hover, .stats-clear:focus-visible { color: var(--work); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .stat-card {
-      text-align: center;
-      padding: 1rem;
-      background: var(--bg);
+      text-align: center; padding: 1rem; background: var(--bg);
       border-radius: 10px;
     }
     .stat-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--work);
-      line-height: 1;
+      font-family: 'Playfair Display', serif; font-size: 2rem;
+      font-weight: 700; color: var(--work); line-height: 1;
     }
     .stat-label {
-      font-size: 10px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-top: 0.5rem;
+      font-size: 10px; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .05em; margin-top: 0.5rem;
     }
 
-    /* Settings Modal (ADDICTIVE - Advanced Options) */
+    /* Settings Toggle */
     .settings-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-top: 1rem;
     }
     .toggle-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all .2s;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--muted); padding: 8px 16px; border-radius: 20px;
+      font-size: 11px; font-weight: 600; cursor: pointer; transition: all .2s;
     }
-    .toggle-btn:hover {
-      border-color: var(--work);
-      color: var(--work);
+    .toggle-btn:hover, .toggle-btn:focus-visible {
+      border-color: var(--work); color: var(--work); outline: none;
     }
     .settings-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease;
+      max-height: 0; overflow: hidden; transition: max-height .3s ease;
     }
-    .settings-panel.open {
-      max-height: 500px;
-    }
+    .settings-panel.open { max-height: 500px; }
 
     /* ─── SECTION BLOCKS ─── */
     .section-block {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem;
       animation: fadeUp .7s .3s ease both;
     }
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: 'Playfair Display', serif; font-size: 1.1rem;
+      font-weight: 700; font-style: italic; color: var(--text);
+      margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px;
     }
     .section-title-badge {
-      font-size: 10px;
-      font-weight: 600;
-      background: var(--work-bg);
-      color: var(--work);
-      border: 1px solid var(--work-border);
-      padding: 2px 8px;
-      border-radius: 20px;
-      letter-spacing: .06em;
-      font-style: normal;
+      font-size: 10px; font-weight: 600; background: var(--work-bg);
+      color: var(--work); border: 1px solid var(--work-border);
+      padding: 2px 8px; border-radius: 20px; letter-spacing: .06em; font-style: normal;
     }
 
-    /* How It Works - Ordered List (NEW - AdSense Requirement) */
-    .how-it-works ol {
-      counter-reset: step;
-      list-style: none;
-      padding-left: 0;
-    }
+    /* How It Works */
+    .how-it-works ol { counter-reset: step; list-style: none; padding-left: 0; }
     .how-it-works li {
-      position: relative;
-      padding-left: 36px;
-      margin-bottom: 1rem;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
-      counter-increment: step;
+      position: relative; padding-left: 36px; margin-bottom: 1rem;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7; counter-increment: step;
     }
     .how-it-works li::before {
-      content: counter(step);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 24px;
-      background: var(--work);
-      color: #0D0D0D;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
+      content: counter(step); position: absolute; left: 0; top: 0;
+      width: 24px; height: 24px; background: var(--work); color: var(--bg);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 11px; font-weight: 700;
     }
 
-    /* Who Is This For - Explicit List (NEW) */
-    .who-for ul {
-      list-style: none;
-      padding-left: 0;
-    }
+    /* Who Is This For */
+    .who-for ul { list-style: none; padding-left: 0; }
     .who-for li {
-      position: relative;
-      padding-left: 24px;
-      margin-bottom: 0.75rem;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
+      position: relative; padding-left: 24px; margin-bottom: 0.75rem;
+      font-size: 13.5px; color: var(--muted); line-height: 1.7;
     }
     .who-for li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--success);
-      font-weight: 700;
-      font-size: 14px;
+      content: '✓'; position: absolute; left: 0;
+      color: var(--short-break); font-weight: 700; font-size: 14px;
     }
 
-    /* Pro Tip Box (NEW - AdSense Requirement) */
+    /* Pro Tip Box */
     .pro-tip {
       background: linear-gradient(135deg, var(--work-bg), rgba(232,213,163,0.05));
-      border: 1px solid var(--work-border);
-      border-left: 3px solid var(--accent);
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin-top: 1rem;
+      border: 1px solid var(--work-border); border-left: 3px solid var(--accent);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem;
     }
     .pro-tip-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--work);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 700; color: var(--work);
+      margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;
     }
-    .pro-tip p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-    }
+    .pro-tip p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0; }
     .pro-tip a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px dashed var(--accent);
-      transition: opacity 0.2s;
+      color: var(--accent); text-decoration: none; font-weight: 600;
+      border-bottom: 1px dashed var(--accent); transition: opacity 0.2s;
     }
-    .pro-tip a:hover {
-      opacity: 0.85;
-    }
+    .pro-tip a:hover, .pro-tip a:focus-visible { opacity: 0.85; outline: none; }
 
+    /* Benefits */
     .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 1rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 1rem;
     }
-    @media (max-width: 520px) {
-      .benefit-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px) { .benefit-grid { grid-template-columns: 1fr; } }
     .benefit-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
     }
-    .benefit-icon {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    .benefit-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .benefit-desc {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .benefit-icon { font-size: 20px; margin-bottom: 8px; }
+    .benefit-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .benefit-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
 
     /* ─── AD SLOT ─── */
-    .ad-slot {
-      margin-bottom: 1rem;
-      display: none;
-    }
-    .ad-slot.adsense-active {
-      display: block;
-    }
+    .ad-slot { margin-bottom: 1rem; display: none; }
+    .ad-slot.adsense-active { display: block; }
     .ad-inner {
-      background: rgba(255,255,255,.02);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 90px;
-      position: relative;
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; display: flex;
+      align-items: center; justify-content: center; min-height: 90px; position: relative;
     }
     .ad-label {
-      position: absolute;
-      top: 6px;
-      left: 10px;
-      font-size: 9px;
-      color: var(--muted);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .4;
+      position: absolute; top: 6px; left: 10px; font-size: 9px;
+      color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4;
     }
 
     /* ─── OTHER TOOLS ─── */
-    .other-tools {
-      margin-bottom: 1rem;
-      animation: fadeUp .7s .5s ease both;
-    }
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .5s ease both; }
     .other-tools-header {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: .75rem;
+      font-size: 11px; font-weight: 500; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
     }
     .other-tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 8px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px;
     }
     .tool-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: .85rem 1rem;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 500;
+      display: flex; align-items: center; gap: 10px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; padding: .85rem 1rem;
+      text-decoration: none; color: var(--text); font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
-      border-color: var(--border-hover);
-      background: var(--surface2);
-      transform: translateY(-2px);
+    .tool-chip:hover, .tool-chip:focus-visible {
+      border-color: var(--border-hover); background: var(--surface2);
+      transform: translateY(-2px); outline: none;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
     }
-    .tool-chip-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .tool-chip-info {
-      min-width: 0;
-    }
+    .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
+    .tool-chip-info { min-width: 0; }
     .tool-chip-name {
-      font-weight: 600;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 600; font-size: 12px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
     }
-    .tool-chip-desc {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
+    .tool-chip-desc { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
     /* ─── SEO CONTENT ─── */
     .seo-content {
-      padding: 2.5rem 0 0;
-      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 0; border-top: 1px solid var(--border);
       animation: fadeUp .7s .6s ease both;
     }
     .seo-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      margin-bottom: 1rem;
+      font-family: 'Playfair Display', serif; font-size: 1.5rem;
+      font-weight: 700; font-style: italic; color: var(--text); margin-bottom: 1rem;
     }
-    .seo-content h2 em {
-      color: var(--accent);
-    }
+    .seo-content h2 em { color: var(--accent); }
     .seo-content p {
-      font-size: 13.5px;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      font-size: 13.5px; color: var(--muted); font-weight: 300;
+      line-height: 1.8; margin-bottom: 1rem;
     }
-    .seo-content strong {
-      color: var(--text);
-      font-weight: 500;
+    .seo-content strong { color: var(--text); font-weight: 500; }
+    .seo-content ul { color: var(--muted); margin-left: 1.5rem; margin-bottom: 1rem; }
+    .seo-content li { margin-bottom: 0.5rem; }
+
+    /* Category Intro (NEW) */
+    .category-intro {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
     }
-    .seo-content ul {
-      color: var(--muted);
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .seo-content li {
-      margin-bottom: 0.5rem;
+    .category-intro p {
+      font-size: 13px; color: var(--muted); line-height: 1.7; margin: 0;
     }
 
-    /* FAQ */
-    .faq-list {
-      margin-top: 1.5rem;
+    /* Wellness Disclaimer (NEW - for health-adjacent tools) */
+    .wellness-disclaimer {
+      background: var(--long-break-bg); border: 1px solid var(--long-break-border);
+      border-left: 3px solid var(--long-break); border-radius: 12px;
+      padding: 1rem 1.25rem; margin: 1.5rem 0;
     }
+    .wellness-disclaimer p {
+      font-size: 12px; color: var(--muted); line-height: 1.6; margin: 0;
+    }
+    .wellness-disclaimer strong { color: var(--text); }
+
+    /* FAQ */
+    .faq-list { margin-top: 1.5rem; }
     .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 8px;
-      overflow: hidden;
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 8px; overflow: hidden;
     }
     .faq-q {
-      width: 100%;
-      background: var(--surface);
-      border: none;
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 1rem 1.25rem;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      width: 100%; background: var(--surface); border: none;
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 13px; font-weight: 500; padding: 1rem 1.25rem;
+      text-align: left; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover {
-      background: var(--surface2);
+    .faq-q:hover, .faq-q:focus-visible {
+      background: var(--surface2); outline: none;
+      box-shadow: inset 0 0 0 2px var(--work);
     }
     .faq-icon {
-      font-size: 18px;
-      color: var(--accent);
-      transition: transform .3s;
-      flex-shrink: 0;
+      font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0;
     }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease;
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
     }
-    .faq-item.open .faq-a {
-      max-height: 200px;
-    }
+    .faq-item.open .faq-a { max-height: 250px; }
     .faq-a-inner {
-      padding: .25rem 1.25rem 1rem;
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.7;
+      padding: .25rem 1.25rem 1rem; font-size: 13px;
+      color: var(--muted); font-weight: 300; line-height: 1.7;
     }
 
     /* ─── FOOTER ─── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto;
+      border-top: 1px solid var(--border); padding: 2.5rem 2rem;
+      text-align: center; max-width: 860px; margin: 0 auto;
     }
     .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+      font-family: 'Playfair Display', serif; font-size: 1.2rem;
+      font-weight: 700; margin-bottom: 0.75rem;
     }
-    .footer-logo em {
-      color: var(--accent);
-      font-style: italic;
-    }
+    .footer-logo em { color: var(--accent); font-style: italic; }
     .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1rem 0;
-      flex-wrap: wrap;
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin: 1rem 0; flex-wrap: wrap;
     }
     .footer-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 500;
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none; font-size: 11px;
+      font-weight: 500; transition: color 0.2s;
     }
-    .footer-links a:hover {
-      color: var(--text);
+    .footer-links a:hover, .footer-links a:focus-visible {
+      color: var(--text); outline: none; text-decoration: underline;
     }
     .footer-adsense-disclosure {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 1rem;
-      opacity: 0.7;
-      line-height: 1.5;
+      font-size: 10px; color: var(--muted); margin-top: 1rem;
+      opacity: 0.7; line-height: 1.5;
     }
+    .footer-about {
+      font-size: 11px; color: var(--muted); margin-top: 0.75rem;
+      line-height: 1.6;
+    }
+    .footer-about strong { color: var(--text); }
     .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      opacity: .4;
-      margin-top: 0.5rem;
+      font-size: 11px; color: var(--muted); letter-spacing: .1em;
+      text-transform: uppercase; opacity: .4; margin-top: 0.5rem;
     }
+
+    /* ─── CONSENT HINT (Cookie-free for AdSense) ─── */
+    .consent-hint {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 12px 2rem; font-size: 11px; color: var(--muted);
+      text-align: center; z-index: 150; display: none;
+    }
+    .consent-hint.show { display: block; animation: slideUp .3s ease; }
+    .consent-hint a { color: var(--accent); text-decoration: none; }
+    .consent-hint a:hover { text-decoration: underline; }
+    .consent-close {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; color: var(--muted);
+      font-size: 18px; cursor: pointer; padding: 4px;
+    }
+    .consent-close:hover, .consent-close:focus-visible { color: var(--text); outline: none; }
 
     /* ─── ANIMATIONS & TOAST ─── */
     @keyframes fadeUp {
@@ -939,53 +706,44 @@
     }
 
     .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
+      position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: var(--accent);
-      color: #0D0D0D;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s;
-      z-index: 200;
+      background: var(--accent); color: var(--bg);
+      padding: 10px 20px; border-radius: 30px;
+      font-size: 13px; font-weight: 600; opacity: 0;
+      pointer-events: none; transition: all 0.3s; z-index: 200;
+      will-change: transform, opacity;
     }
     .toast.active {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      opacity: 1; transform: translateX(-50%) translateY(0);
+    }
+
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     @media (max-width: 480px) {
-      main {
-        padding: 2rem 1.25rem 5rem;
-      }
-      .hero-card {
-        padding: 1.5rem;
-      }
-      .control-buttons {
-        flex-direction: column;
-      }
-      .control-btn {
-        width: 100%;
-        justify-content: center;
-      }
-      .keyboard-hint {
-        flex-direction: column;
-        gap: 8px;
-      }
-      .footer-links {
-        gap: 1rem;
-        flex-direction: column;
-        align-items: center;
-      }
+      main { padding: 2rem 1.25rem 5rem; }
+      .hero-card { padding: 1.5rem; }
+      .control-buttons { flex-direction: column; }
+      .control-btn { width: 100%; justify-content: center; }
+      .keyboard-hint { flex-direction: column; gap: 8px; }
+      .footer-links { gap: 1rem; flex-direction: column; align-items: center; }
+      .consent-hint { padding: 12px 1.25rem; font-size: 10px; }
+      .consent-close { right: 12px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ♿ SKIP LINK for keyboard users -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <header>
   <div class="header-inner">
@@ -998,7 +756,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -1007,7 +765,17 @@
     <p class="page-sub">25-minute focused work sessions. Boost your productivity.</p>
   </div>
 
-  <!-- AD SLOT TOP (nach Approval aktivieren) -->
+  <!-- Category Intro (NEW - 2+ sentences) -->
+  <div class="category-intro">
+    <p><strong>Time & Productivity Tools:</strong> Our Pomodoro timer helps students, freelancers, and remote workers maintain focus with structured work/break cycles. Part of ToolCompass's collection of 31+ free browser-based utilities—no signup, no data collection.</p>
+  </div>
+
+  <!-- Wellness Disclaimer (NEW - for health-adjacent context) -->
+  <div class="wellness-disclaimer">
+    <p><strong>Note:</strong> This timer is a productivity tool only. For concerns about work-life balance, stress management, or mental health, please consult a qualified professional.</p>
+  </div>
+
+  <!-- AD SLOT TOP -->
   <div class="ad-slot" id="adTop">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
@@ -1023,7 +791,7 @@
   <!-- HERO CARD (TIMER) -->
   <div class="hero-card">
     
-    <!-- Trust Badges (NEW - AdSense Trust Signals) -->
+    <!-- Trust Badges -->
     <div class="trust-badges">
       <div class="trust-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1039,28 +807,22 @@
       </div>
     </div>
 
-    <!-- Mode Tabs (ADDICTIVE - Quick Switch) -->
-    <div class="mode-tabs">
-      <button class="mode-btn active" data-mode="work" onclick="setMode('work')">
-        🎯 Work
-      </button>
-      <button class="mode-btn" data-mode="short" onclick="setMode('short')">
-        ☕ Short Break
-      </button>
-      <button class="mode-btn" data-mode="long" onclick="setMode('long')">
-        🌴 Long Break
-      </button>
+    <!-- Mode Tabs -->
+    <div class="mode-tabs" role="tablist" aria-label="Timer modes">
+      <button class="mode-btn active" data-mode="work" onclick="setMode('work')" role="tab" aria-selected="true" id="tab-work">🎯 Work</button>
+      <button class="mode-btn" data-mode="short" onclick="setMode('short')" role="tab" aria-selected="false" id="tab-short">☕ Short Break</button>
+      <button class="mode-btn" data-mode="long" onclick="setMode('long')" role="tab" aria-selected="false" id="tab-long">🌴 Long Break</button>
     </div>
 
-    <!-- Progress Ring (ADDICTIVE - Visual Timer) -->
+    <!-- Progress Ring -->
     <div class="timer-container">
-      <svg class="progress-ring" width="320" height="320">
+      <svg class="progress-ring" width="320" height="320" aria-hidden="true">
         <circle class="bg" cx="160" cy="160" r="140"></circle>
         <circle class="progress" id="progressCircle" cx="160" cy="160" r="140" 
                 stroke-dasharray="879" stroke-dashoffset="0"></circle>
       </svg>
       <div class="timer-content">
-        <div class="timer-display" id="timerDisplay">25:00</div>
+        <div class="timer-display" id="timerDisplay" aria-live="polite">25:00</div>
         <div class="timer-label" id="timerLabel">Work Session</div>
         <div class="pomodoro-count">Pomodoro <span id="pomoCount">1</span> of 4</div>
       </div>
@@ -1068,15 +830,15 @@
 
     <!-- Control Buttons -->
     <div class="control-buttons">
-      <button class="control-btn btn-start" id="startBtn" onclick="toggleTimer()">
+      <button class="control-btn btn-start" id="startBtn" onclick="toggleTimer()" aria-label="Start or pause timer">
         <span id="startIcon">▶️</span>
         <span id="startText">Start</span>
       </button>
-      <button class="control-btn btn-reset" onclick="resetTimer()">
+      <button class="control-btn btn-reset" onclick="resetTimer()" aria-label="Reset timer">
         <span>🔄</span>
         <span>Reset</span>
       </button>
-      <button class="control-btn btn-skip" onclick="skipSession()">
+      <button class="control-btn btn-skip" onclick="skipSession()" aria-label="Skip to next session">
         <span>⏭️</span>
         <span>Skip</span>
       </button>
@@ -1098,11 +860,11 @@
       </div>
     </div>
 
-    <!-- Statistics (ADDICTIVE - Progress Tracking) -->
+    <!-- Statistics -->
     <div class="stats-section" id="statsSection">
       <div class="stats-title">
         <span>📊 Today's Progress</span>
-        <span class="stats-clear" onclick="clearStats()">Clear</span>
+        <span class="stats-clear" onclick="clearStats()" role="button" tabindex="0">Clear</span>
       </div>
       <div class="stats-grid">
         <div class="stat-card">
@@ -1122,27 +884,27 @@
 
     <!-- Settings Toggle -->
     <div class="settings-toggle">
-      <button class="toggle-btn" onclick="toggleSettings()">
+      <button class="toggle-btn" onclick="toggleSettings()" aria-expanded="false" aria-controls="settingsPanel">
         ⚙️ Settings
       </button>
     </div>
 
-    <!-- Settings Panel (ADDICTIVE - Customization) -->
+    <!-- Settings Panel -->
     <div class="settings-panel" id="settingsPanel">
       <div class="settings-section">
         <div class="settings-title">Timer Duration (minutes)</div>
         <div class="settings-grid">
           <div class="setting-item">
-            <label class="setting-label">Work</label>
-            <input type="number" id="workDuration" class="setting-input" value="25" min="1" max="60" onchange="saveSettings()">
+            <label class="setting-label" for="workDuration">Work</label>
+            <input type="number" id="workDuration" class="setting-input" value="25" min="1" max="60" onchange="saveSettings()" aria-label="Work session duration in minutes">
           </div>
           <div class="setting-item">
-            <label class="setting-label">Short Break</label>
-            <input type="number" id="shortDuration" class="setting-input" value="5" min="1" max="30" onchange="saveSettings()">
+            <label class="setting-label" for="shortDuration">Short Break</label>
+            <input type="number" id="shortDuration" class="setting-input" value="5" min="1" max="30" onchange="saveSettings()" aria-label="Short break duration in minutes">
           </div>
           <div class="setting-item">
-            <label class="setting-label">Long Break</label>
-            <input type="number" id="longDuration" class="setting-input" value="15" min="1" max="60" onchange="saveSettings()">
+            <label class="setting-label" for="longDuration">Long Break</label>
+            <input type="number" id="longDuration" class="setting-input" value="15" min="1" max="60" onchange="saveSettings()" aria-label="Long break duration in minutes">
           </div>
         </div>
       </div>
@@ -1162,7 +924,7 @@
     </div>
   </div>
 
-  <!-- HOW IT WORKS (NEW - AdSense Requirement: Ordered List) -->
+  <!-- HOW IT WORKS -->
   <div class="section-block how-it-works">
     <div class="section-title">
       How It Works
@@ -1175,7 +937,7 @@
     </ol>
   </div>
 
-  <!-- WHO IS THIS FOR (NEW - AdSense Requirement: Explicit List) -->
+  <!-- WHO IS THIS FOR -->
   <div class="section-block who-for">
     <div class="section-title">
       Who Is This For?
@@ -1189,7 +951,7 @@
     </ul>
   </div>
 
-  <!-- PRO TIP (NEW - AdSense Requirement: Internal Link) -->
+  <!-- PRO TIP -->
   <div class="section-block pro-tip">
     <div class="pro-tip-title">💡 Pro Tip</div>
     <p>Combine this Pomodoro timer with our <a href="/stopwatch">Stopwatch</a> to track additional tasks during breaks, or use our <a href="/workday-counter">Workday Counter</a> to plan your weekly productivity goals.</p>
@@ -1282,42 +1044,54 @@
     <p>
       <strong>Pro tips:</strong> Eliminate distractions during work sessions, use breaks to physically move around, and customize timer durations to match your personal productivity rhythm.
     </p>
+    <p>
+      <strong>Privacy guarantee:</strong> All timer data stays in your browser. We don't collect, store, or transmit any usage data. Your productivity patterns remain private.
+    </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           What is the Pomodoro Technique?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq1">
           <p class="faq-a-inner">The Pomodoro Technique is a time management method using 25-minute focused work sessions followed by 5-minute breaks. After 4 sessions, take a longer 15-30 minute break. This helps maintain focus and prevent burnout.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Can I customize the timer lengths?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq2">
           <p class="faq-a-inner">Yes! Click Settings to customize work session length (1-60 min), short break (1-30 min), and long break (1-60 min) to match your productivity style.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           Are there keyboard shortcuts?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq3">
           <p class="faq-a-inner">Yes! Spacebar starts/pauses the timer, R resets, and S skips to the next session. Perfect for hands-free operation while working.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
           Is my data saved?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" id="faq4">
           <p class="faq-a-inner">Your session statistics are saved locally in your browser. No data is sent to our servers. Complete privacy guaranteed.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          Is this medical or wellness advice?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">No. This timer is a productivity tool only. For health-related concerns about work-life balance or stress management, please consult a qualified professional.</p>
         </div>
       </div>
     </div>
@@ -1328,23 +1102,35 @@
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
   
-  <!-- Footer Links (FIXED - Exact Paths Required) -->
+  <!-- Footer Links -->
   <nav class="footer-links">
     <a href="/about.html">About</a>
     <a href="/impressum/index.html">Imprint</a>
     <a href="/datenschutz/index.html">Privacy Policy</a>
   </nav>
   
-  <!-- AdSense Disclosure (NEW - Required for Approval) -->
+  <!-- About hint (E-E-A-T) -->
+  <p class="footer-about">
+    <strong>Who we are:</strong> ToolCompass is built by a small team of developers and writers. We create free, privacy-first browser tools since 2024. No tracking, no paywalls.
+  </p>
+  
+  <!-- AdSense Disclosure -->
   <p class="footer-adsense-disclosure">
-    This site is supported by advertising. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you.
+    This site is supported by advertising via Google AdSense. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you. Ads are served by Google and governed by their privacy policy.
   </p>
   
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
 </footer>
 
+<!-- Cookie-free Consent Hint for AdSense -->
+<div class="consent-hint" id="consentHint">
+  This site uses Google AdSense for advertising. By continuing, you consent to ads being shown. 
+  <a href="/datenschutz/index.html">Learn more</a>
+  <button class="consent-close" id="consentClose" aria-label="Dismiss notice">×</button>
+</div>
+
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">Session complete!</div>
+<div class="toast" id="toast" role="status" aria-live="assertive">Session complete!</div>
 
 <!-- AUDIO NOTIFICATION -->
 <audio id="alarmSound" preload="auto">
@@ -1365,12 +1151,8 @@ let pomodoroCount = 1;
 let completedPomodoros = 0;
 let totalMinutes = 0;
 
-// Mode Durations (can be customized)
-let durations = {
-  work: 25,
-  short: 5,
-  long: 15
-};
+// Mode Durations
+let durations = { work: 25, short: 5, long: 15 };
 
 // Mode Colors
 const modeColors = {
@@ -1379,65 +1161,57 @@ const modeColors = {
   long: { circle: '#3B82F6', text: '#3B82F6' }
 };
 
-// Set Mode (ADDICTIVE - Quick Switch)
+// Set Mode with accessibility support
 function setMode(mode) {
   currentMode = mode;
   
-  // Update buttons
-  document.querySelectorAll('.mode-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.mode === mode);
+  document.querySelectorAll('.mode-btn')?.forEach(btn => {
+    const isActive = btn.dataset.mode === mode;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
   });
   
-  // Update timer
   const minutes = durations[mode];
   totalTime = minutes * 60;
   timeLeft = totalTime;
   
-  // Update display
   updateDisplay();
   updateProgress();
   updateColors();
   
-  // Update label
-  const labels = {
-    work: 'Work Session',
-    short: 'Short Break',
-    long: 'Long Break'
-  };
-  document.getElementById('timerLabel').innerText = labels[mode];
+  const labels = { work: 'Work Session', short: 'Short Break', long: 'Long Break' };
+  document.getElementById('timerLabel')?.innerText = labels[mode];
   
-  // Reset running state
-  if (isRunning) {
-    toggleTimer();
-  }
+  if (isRunning) toggleTimer();
 }
 
-// Update Colors (ADDICTIVE - Visual Feedback)
+// Update Colors
 function updateColors() {
   const colors = modeColors[currentMode];
   const progressCircle = document.getElementById('progressCircle');
   const timerDisplay = document.getElementById('timerDisplay');
   const timerLabel = document.getElementById('timerLabel');
   
-  progressCircle.style.stroke = colors.circle;
-  timerDisplay.style.color = colors.text;
-  timerLabel.style.color = colors.text;
+  if (progressCircle) progressCircle.style.stroke = colors.circle;
+  if (timerDisplay) timerDisplay.style.color = colors.text;
+  if (timerLabel) timerLabel.style.color = colors.text;
 }
 
 // Update Display
 function updateDisplay() {
   const mins = Math.floor(timeLeft / 60);
   const secs = timeLeft % 60;
-  document.getElementById('timerDisplay').innerText = 
-    `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  const display = document.getElementById('timerDisplay');
+  if (display) display.innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   
-  // Update page title (ADDICTIVE - Always Visible)
+  // Update page title
   document.title = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} - Pomodoro Timer`;
 }
 
-// Update Progress Ring (ADDICTIVE - Visual Timer)
+// Update Progress Ring
 function updateProgress() {
   const circle = document.getElementById('progressCircle');
+  if (!circle) return;
   const circumference = 2 * Math.PI * 140;
   const offset = circumference - (timeLeft / totalTime) * circumference;
   circle.style.strokeDashoffset = offset;
@@ -1449,21 +1223,20 @@ function toggleTimer() {
   const startIcon = document.getElementById('startIcon');
   const startText = document.getElementById('startText');
   
+  if (!startBtn || !startIcon || !startText) return;
+  
   if (isRunning) {
-    // Pause
     clearInterval(timer);
     startIcon.innerText = '▶️';
     startText.innerText = 'Resume';
     startBtn.classList.add('running');
   } else {
-    // Start
     timer = setInterval(() => {
       if (timeLeft > 0) {
         timeLeft--;
         updateDisplay();
         updateProgress();
       } else {
-        // Session complete
         clearInterval(timer);
         playAlarm();
         handleSessionComplete();
@@ -1478,16 +1251,16 @@ function toggleTimer() {
   isRunning = !isRunning;
 }
 
-// Handle Session Complete (ADDICTIVE - Progress Tracking)
+// Handle Session Complete
 function handleSessionComplete() {
   isRunning = false;
-  document.getElementById('startBtn').innerHTML = '<span>▶️</span><span>Start</span>';
+  const startBtn = document.getElementById('startBtn');
+  if (startBtn) startBtn.innerHTML = '<span>▶️</span><span>Start</span>';
   
   if (currentMode === 'work') {
     completedPomodoros++;
     totalMinutes += durations.work;
     
-    // Check if long break needed
     if (completedPomodoros % 4 === 0) {
       setMode('long');
       showToast('🎉 4 Pomodoros complete! Long break time!');
@@ -1496,21 +1269,19 @@ function handleSessionComplete() {
       showToast('✅ Work session complete! Take a break.');
     }
     
-    // Update stats
     updateStats();
   } else {
-    // Break complete, back to work
     if (currentMode === 'long') {
       pomodoroCount = 1;
     } else {
       pomodoroCount++;
     }
-    document.getElementById('pomoCount').innerText = pomodoroCount;
+    const pomoCount = document.getElementById('pomoCount');
+    if (pomoCount) pomoCount.innerText = pomodoroCount;
     setMode('work');
     showToast('☕ Break over! Back to work.');
   }
   
-  // Save stats
   saveStats();
 }
 
@@ -1518,14 +1289,16 @@ function handleSessionComplete() {
 function skipSession() {
   clearInterval(timer);
   isRunning = false;
-  document.getElementById('startBtn').innerHTML = '<span>▶️</span><span>Start</span>';
+  const startBtn = document.getElementById('startBtn');
+  if (startBtn) startBtn.innerHTML = '<span>▶️</span><span>Start</span>';
   
   if (currentMode === 'work') {
     setMode('short');
   } else {
     pomodoroCount++;
     if (pomodoroCount > 4) pomodoroCount = 1;
-    document.getElementById('pomoCount').innerText = pomodoroCount;
+    const pomoCount = document.getElementById('pomoCount');
+    if (pomoCount) pomoCount.innerText = pomodoroCount;
     setMode('work');
   }
   
@@ -1541,8 +1314,11 @@ function resetTimer() {
   updateDisplay();
   updateProgress();
   
-  document.getElementById('startBtn').innerHTML = '<span>▶️</span><span>Start</span>';
-  document.getElementById('startBtn').classList.remove('running');
+  const startBtn = document.getElementById('startBtn');
+  if (startBtn) {
+    startBtn.innerHTML = '<span>▶️</span><span>Start</span>';
+    startBtn.classList.remove('running');
+  }
   
   showToast('Timer reset');
 }
@@ -1550,8 +1326,7 @@ function resetTimer() {
 // Play Alarm Sound
 function playAlarm() {
   const audio = document.getElementById('alarmSound');
-  audio.play().catch(() => {
-    // Fallback notification if audio fails
+  audio?.play().catch(() => {
     if ('Notification' in window && Notification.permission === 'granted') {
       new Notification('Pomodoro Timer', { body: 'Session complete!' });
     }
@@ -1565,12 +1340,11 @@ function requestNotificationPermission() {
   }
 }
 
-// Statistics (ADDICTIVE - Progress Tracking)
+// Statistics
 function updateStats() {
-  document.getElementById('statCompleted').innerText = completedPomodoros;
-  document.getElementById('statMinutes').innerText = totalMinutes;
+  document.getElementById('statCompleted')?.innerText = completedPomodoros;
+  document.getElementById('statMinutes')?.innerText = totalMinutes;
   
-  // Calculate streak (simplified)
   const lastDate = localStorage.getItem('tc_pomo_lastDate');
   const today = new Date().toDateString();
   let streak = parseInt(localStorage.getItem('tc_pomo_streak') || '0');
@@ -1587,66 +1361,78 @@ function updateStats() {
   }
   
   localStorage.setItem('tc_pomo_streak', streak);
-  document.getElementById('statStreak').innerText = streak;
+  document.getElementById('statStreak')?.innerText = streak;
   
-  document.getElementById('statsSection').classList.add('show');
+  document.getElementById('statsSection')?.classList.add('show');
 }
 
 function saveStats() {
-  localStorage.setItem('tc_pomo_completed', completedPomodoros);
-  localStorage.setItem('tc_pomo_minutes', totalMinutes);
+  try {
+    localStorage.setItem('tc_pomo_completed', completedPomodoros);
+    localStorage.setItem('tc_pomo_minutes', totalMinutes);
+  } catch(e) {}
 }
 
 function clearStats() {
   completedPomodoros = 0;
   totalMinutes = 0;
-  localStorage.removeItem('tc_pomo_completed');
-  localStorage.removeItem('tc_pomo_minutes');
-  localStorage.removeItem('tc_pomo_streak');
-  localStorage.removeItem('tc_pomo_lastDate');
+  try {
+    localStorage.removeItem('tc_pomo_completed');
+    localStorage.removeItem('tc_pomo_minutes');
+    localStorage.removeItem('tc_pomo_streak');
+    localStorage.removeItem('tc_pomo_lastDate');
+  } catch(e) {}
   updateStats();
   showToast('Stats cleared');
 }
 
 function loadStats() {
-  completedPomodoros = parseInt(localStorage.getItem('tc_pomo_completed') || '0');
-  totalMinutes = parseInt(localStorage.getItem('tc_pomo_minutes') || '0');
-  updateStats();
+  try {
+    completedPomodoros = parseInt(localStorage.getItem('tc_pomo_completed') || '0');
+    totalMinutes = parseInt(localStorage.getItem('tc_pomo_minutes') || '0');
+    updateStats();
+  } catch(e) {}
 }
 
-// Settings (ADDICTIVE - Customization)
+// Settings
 function toggleSettings() {
-  document.getElementById('settingsPanel').classList.toggle('open');
+  const panel = document.getElementById('settingsPanel');
+  const toggle = document.querySelector('.toggle-btn');
+  if (panel) panel.classList.toggle('open');
+  if (toggle) {
+    const isOpen = panel?.classList.contains('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
 }
 
 function saveSettings() {
-  durations.work = parseInt(document.getElementById('workDuration').value) || 25;
-  durations.short = parseInt(document.getElementById('shortDuration').value) || 5;
-  durations.long = parseInt(document.getElementById('longDuration').value) || 15;
+  durations.work = parseInt(document.getElementById('workDuration')?.value) || 25;
+  durations.short = parseInt(document.getElementById('shortDuration')?.value) || 5;
+  durations.long = parseInt(document.getElementById('longDuration')?.value) || 15;
   
-  localStorage.setItem('tc_pomo_durations', JSON.stringify(durations));
+  try {
+    localStorage.setItem('tc_pomo_durations', JSON.stringify(durations));
+  } catch(e) {}
   
-  // Update current timer if not running
-  if (!isRunning) {
-    setMode(currentMode);
-  }
-  
+  if (!isRunning) setMode(currentMode);
   showToast('Settings saved');
 }
 
 function loadSettings() {
-  const saved = localStorage.getItem('tc_pomo_durations');
-  if (saved) {
-    durations = JSON.parse(saved);
-    document.getElementById('workDuration').value = durations.work;
-    document.getElementById('shortDuration').value = durations.short;
-    document.getElementById('longDuration').value = durations.long;
-  }
+  try {
+    const saved = localStorage.getItem('tc_pomo_durations');
+    if (saved) {
+      durations = JSON.parse(saved);
+      document.getElementById('workDuration')!.value = durations.work;
+      document.getElementById('shortDuration')!.value = durations.short;
+      document.getElementById('longDuration')!.value = durations.long;
+    }
+  } catch(e) {}
 }
 
-// Keyboard Shortcuts (ADDICTIVE - Power User)
+// Keyboard Shortcuts
 document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT') return;
+  if (e.target?.tagName === 'INPUT') return;
   
   if (e.code === 'Space') {
     e.preventDefault();
@@ -1661,24 +1447,51 @@ document.addEventListener('keydown', (e) => {
 // Toast Notification
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
   toast.innerText = message;
   toast.classList.add('active');
   setTimeout(() => toast.classList.remove('active'), 3000);
 }
 
-// FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+// FAQ Accordion with keyboard support
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
+    if (!item) return;
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
       i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      const q = i.querySelector('.faq-q');
+      if (q) q.setAttribute('aria-expanded', 'false');
     });
+    
     if (!isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
     }
+  });
+  
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+});
+
+// Consent hint logic
+document.addEventListener('DOMContentLoaded', () => {
+  const consentHint = document.getElementById('consentHint');
+  const consentClose = document.getElementById('consentClose');
+  
+  if (consentHint && !sessionStorage.getItem('consentDismissed')) {
+    setTimeout(() => { consentHint?.classList.add('show'); }, 3000);
+  }
+  
+  consentClose?.addEventListener('click', () => {
+    consentHint?.classList.remove('show');
+    try { sessionStorage.setItem('consentDismissed', 'true'); } catch(e) {}
   });
 });
 
@@ -1691,10 +1504,14 @@ window.addEventListener('load', () => {
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// Nach Freischaltung diese Zeilen aktivieren:
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
+
+<!-- 🖼️ IMAGE TEMPLATE for future use -->
+<!-- 
+<img src="image.jpg" alt="Description" width="800" height="600" loading="lazy" decoding="async">
+-->
 
 </body>
 </html>
