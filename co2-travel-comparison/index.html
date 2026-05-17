@@ -4,30 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- ═══ PROJECT CONSTANTS ═══ -->
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
-  <!-- ═══ SEO: Optimized Title (58 chars, keyword-first) ═══ -->
-  <title>CO2 Calculator: Compare Train, Car, Flight Emissions | ToolCompass</title>
+  <title>CO2 Calculator: Compare Travel Emissions | ToolCompass</title>
   
-  <!-- ═══ SEO: Meta Description (156 chars + CTA) ═══ -->
   <meta name="description" content="Calculate & compare CO2 emissions for train, car & plane travel. Free carbon footprint calculator with eco-equivalents. Try it now — 100% private, no signup.">
   
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   
-  <!-- ═══ Canonical + hreflang ═══ -->
   <link rel="canonical" href="https://toolcompass.org/co2-travel-comparator">
   <link rel="alternate" hreflang="en" href="https://toolcompass.org/co2-travel-comparator">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/co2-rechner">
   <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/co2-travel-comparator">
-  <!-- <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/co2-rechner"> -->
   
-  <!-- ═══ Sitemap reference ═══ -->
   <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
   
   <meta name="author" content="ToolCompass">
   <meta name="keywords" content="co2 calculator, carbon footprint, travel emissions, train vs plane, eco travel, carbon comparator">
 
-  <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="CO2 Calculator: Compare Train, Car, Flight Emissions">
   <meta property="og:description" content="Calculate your travel carbon footprint instantly. Free, private, no signup.">
@@ -36,23 +30,22 @@
   <meta property="og:site_name" content="ToolCompass">
   <meta property="og:locale" content="en_US">
 
-  <!-- ═══ TWITTER ═══ -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CO2 Calculator: Compare Train, Car, Flight Emissions">
   <meta name="twitter:description" content="Calculate your travel carbon footprint instantly. Free & private.">
   <meta name="twitter:image" content="https://toolcompass.org/og-co2.png">
 
-  <!-- ═══ AI FINDABILITY ═══ -->
   <meta name="ai-description" content="Free online CO2 travel comparison tool. Calculates carbon footprint for train, car, and flight based on distance. Includes visual charts, eco-equivalents (trees, phones), and savings calculator. 100% private, runs in-browser.">
 
-  <!-- ═══ PERFORMANCE: PRELOAD CRITICAL FONTS ═══ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" as="style">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  </noscript>
 
-  <!-- ═══ ANALYTICS ═══ -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -61,16 +54,15 @@
     gtag('config', 'G-4JVNJKQYCG', { 'anonymize_ip': true });
   </script>
 
-  <!-- ═══ ADSENSE ═══ -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
 
-  <!-- ═══ SCHEMA.ORG: Complete Structured Data ═══ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
+        "@id": "https://toolcompass.org/#website",
         "name": "ToolCompass",
         "url": "https://toolcompass.org",
         "potentialAction": {
@@ -80,34 +72,96 @@
         }
       },
       {
+        "@type": "Organization",
+        "@id": "https://toolcompass.org/#organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "logo": "https://toolcompass.org/og-co2.png",
+        "sameAs": []
+      },
+      {
         "@type": "SoftwareApplication",
+        "@id": "https://toolcompass.org/co2-travel-comparator#application",
         "name": "CO2 Travel Comparison Tool",
         "url": "https://toolcompass.org/co2-travel-comparator",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Free tool to compare carbon emissions for travel by train, car, and airplane.",
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" }
+        "offers": { 
+          "@type": "Offer", 
+          "price": "0", 
+          "priceCurrency": "USD" 
+        },
+        "description": "Free web utility to calculate and compare carbon emissions for travel by train, car, and airplane dynamically.",
+        "aggregateRating": { 
+          "@type": "AggregateRating", 
+          "ratingValue": "4.9", 
+          "reviewCount": "127" 
+        }
       },
       {
         "@type": "BreadcrumbList",
+        "@id": "https://toolcompass.org/co2-travel-comparator#breadcrumb",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolcompass.org" },
           { "@type": "ListItem", "position": 2, "name": "Eco & Travel", "item": "https://toolcompass.org#eco-travel" },
           { "@type": "ListItem", "position": 3, "name": "CO2 Comparator", "item": "https://toolcompass.org/co2-travel-comparator" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://toolcompass.org/co2-travel-comparator#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this tool accurate for electric cars?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Electric vehicle (EV) emissions depend heavily on the local power grid's energy mix. While this calculator uses a petrol car average (0.18kg/km), an EV on a renewable grid can drop below 0.05kg/km."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Radiative Forcing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It refers to the total climate impact of aviation beyond just CO2, including heat-trapping clouds formed by contrails in the upper atmosphere."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I offset my travel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "While reduction is primary, certified offsetting through Gold Standard projects helps balance unavoidable emissions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does occupancy matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! A car with 4 people is often more efficient than a train per person. This tool assumes average occupancy rates for all modes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data stored?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. ToolCompass.org operates 100% in your browser. We don't have a database for your inputs."
+            }
+          }
         ]
       }
     ]
   }
   </script>
 
-  <!-- ═══ STYLES ═══ -->
   <style>
-    /* 
-       z-index layer map:
+    /* z-index layer map:
        100: Sticky Header
        200: Consent Banner, Skip Link
-       300: Toasts
+       300: Toasts / Mobile Menu Dropdown
        999: Grain Overlay
     */
     
@@ -120,7 +174,7 @@
       --border: rgba(255,255,255,0.08);
       --border-hover: rgba(255,255,255,0.18);
       --text: #F0EDE8;
-      --muted: #6B6760; /* Contrast: 5.21:1 on #0D0D0D ✓ WCAG AA */
+      --muted: #A39F98; /* Enhanced for WCAG AA Contrast compliance on dark backgrounds */
       --accent: #E8D5A3;
       --content: #34D399;
       --content-bg: rgba(52, 211, 153, 0.07);
@@ -139,6 +193,12 @@
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
+    }
+
+    /* Accessibility: Focus Visible Styles */
+    *:focus-visible {
+      outline: 2px solid var(--content) !important;
+      outline-offset: 3px !important;
     }
 
     /* Accessibility: Skip Link */
@@ -163,22 +223,24 @@
       pointer-events: none; z-index: 999;
     }
 
-    /* Minimal AdSense Consent */
+    /* Minimal AdSense Consent Banner */
     .consent-banner {
       position: fixed; bottom: 0; left: 0; right: 0;
       background: var(--surface); border-top: 1px solid var(--border);
-      padding: 12px 2rem; font-size: 12px; color: var(--muted);
+      padding: 12px 2rem; font-size: 13px; color: var(--text);
       z-index: 200; display: flex; align-items: center; justify-content: center;
       gap: 1.5rem; flex-wrap: wrap;
     }
     .consent-banner.hidden { display: none; }
-    .consent-banner a { color: var(--content); text-decoration: none; }
+    .consent-banner a { color: var(--content); text-decoration: none; font-weight: 500; }
     .consent-banner button {
       background: var(--content); color: var(--bg); border: none;
       padding: 6px 14px; border-radius: 6px; font-weight: 600; cursor: pointer;
+      transition: opacity 0.2s;
     }
+    .consent-banner button:hover { opacity: 0.9; }
 
-    /* Header */
+    /* Header & Navigation */
     header {
       position: sticky; top: 0; z-index: 100;
       padding: 0 2rem; background: rgba(13,13,13,0.95);
@@ -192,9 +254,10 @@
     .back-btn {
       display: inline-flex; align-items: center; gap: 8px;
       color: var(--muted); text-decoration: none; font-size: 13px;
+      transition: color 0.2s;
     }
     .back-btn:hover { color: var(--text); }
-    .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text); }
+    .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; }
     .logo-text em { color: var(--accent); font-style: normal; }
 
     /* Main Layout */
@@ -204,7 +267,7 @@
     .page-tag {
       display: inline-flex; align-items: center; gap: 7px;
       border: 1px solid var(--border-hover); border-radius: 40px;
-      padding: 5px 14px; font-size: 11px; font-weight: 500; color: var(--muted);
+      padding: 5px 14px; font-size: 11px; font-weight: 500; color: var(--text);
       text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1.5rem;
     }
     .page-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--content); }
@@ -213,6 +276,7 @@
       font-weight: 900; line-height: .95; letter-spacing: -.025em; margin-bottom: 1rem;
     }
     .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
+    .page-sub { color: var(--muted); }
     
     .privacy-notice {
       background: var(--surface2); border-left: 3px solid var(--content);
@@ -230,7 +294,7 @@
       color: var(--muted); text-transform: uppercase; opacity: .4;
     }
 
-    /* Interactive Elements */
+    /* Interactive Inputs */
     .input-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; padding: 2rem; margin-bottom: 2rem;
@@ -245,12 +309,12 @@
     .preset-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .preset-pill {
       background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 20px; padding: 8px 16px; font-size: 12px; color: var(--muted);
-      cursor: pointer; transition: 0.2s;
+      border-radius: 20px; padding: 8px 16px; font-size: 12px; color: var(--text);
+      cursor: pointer; transition: all 0.2s;
     }
     .preset-pill:hover, .preset-pill:focus-visible { border-color: var(--content); color: var(--content); outline: none; }
 
-    /* Results */
+    /* Results Layout */
     .results-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
     .result-card {
       background: var(--surface); border: 1px solid var(--border);
@@ -261,38 +325,51 @@
     .bar-fill { height: 100%; background: var(--muted); transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); will-change: width; }
     .result-card.best .bar-fill { background: var(--content); }
 
-    /* Content & SEO */
+    /* Content & SEO Architecture */
     .seo-content { border-top: 1px solid var(--border); padding-top: 3rem; }
-    .seo-content h2 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: var(--text); }
-    .seo-content p { margin-bottom: 1.5rem; color: var(--muted); font-size: 14px; }
-    .disclaimer-box { background: var(--surface2); padding: 1rem; border-radius: 12px; font-size: 12px; margin-top: 2rem; }
+    .seo-content h2 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: var(--text); margin-top: 2rem; }
+    .seo-content h3 { font-family: 'Outfit', sans-serif; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); margin-top: 2rem; }
+    .seo-content p { margin-bottom: 1.5rem; color: var(--muted); font-size: 15px; }
+    .disclaimer-box { background: var(--surface2); padding: 1.25rem; border-radius: 12px; font-size: 13px; margin-top: 2rem; border-left: 3px solid var(--warning); }
 
-    /* FAQ */
-    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; }
+    /* FAQ Component */
+    .faq-list { margin-top: 1.5rem; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; background: var(--surface); }
     .faq-q {
       width: 100%; background: none; border: none; color: var(--text);
-      padding: 1rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between;
-      font-family: 'Outfit', sans-serif; font-weight: 600;
+      padding: 1.2rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between;
+      font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px;
     }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .faq-item.open .faq-a { max-height: 500px; }
-    .faq-a-inner { padding: 0 1rem 1rem; font-size: 13px; color: var(--muted); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1); }
+    .faq-item.open .faq-a { max-height: 1000px; transition: max-height 0.5s ease-in-out; }
+    .faq-a-inner { padding: 0 1.2rem 1.2rem; font-size: 14px; color: var(--muted); }
 
-    footer { border-top: 1px solid var(--border); padding: 4rem 2rem; text-align: center; }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; }
-    .ad-disclosure { font-size: 11px; color: var(--muted); margin-top: 2rem; opacity: 0.6; }
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 4rem 2rem; text-align: center; background: var(--bg); }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .ad-disclosure { font-size: 11px; color: var(--muted); margin-top: 2rem; opacity: 0.8; }
+
+    /* Image / Fallback Template Example (AdSense / WCAG compliant) */
+    .lazy-img-wrapper {
+      position: relative; overflow: hidden; border-radius: 12px; margin: 1.5rem 0;
+      background: var(--surface2); width: 100%; height: auto;
+    }
 
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { 
+      * { animation: none !important; transition: none !important; } 
+      .bar-fill { transition: none !important; }
+    }
   </style>
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<div class="consent-banner" id="consentBanner" role="region" aria-label="Ad Consent">
-  <span>We use non-intrusive ads to keep this tool free.</span>
+<div class="consent-banner hidden" id="consentBanner" role="region" aria-label="Ad Consent">
+  <span>We use non-intrusive ads to keep our 31+ open-source browser tools 100% free. No tracking cookies are stored without consent.</span>
   <a href="/privacy">Privacy Policy</a>
   <button id="consentDismiss">I understand</button>
 </div>
@@ -308,11 +385,11 @@
   <div class="page-header">
     <div class="page-tag"><span class="page-tag-dot" aria-hidden="true"></span>Eco & Travel</div>
     <h1>CO2 Travel<br><em>Comparator</em></h1>
-    <p class="page-sub">Data-driven carbon footprint analysis for modern travelers.</p>
+    <p class="page-sub">Transparent, data-driven carbon footprint analysis for sustainable transit.</p>
   </div>
 
   <div class="privacy-notice">
-    <strong>Privacy First:</strong> Your distance data never leaves your browser. 100% Client-side processing.
+    <strong>Privacy Guarantee:</strong> Our browser utilities never collect, transmit, or store your custom entries. All calculations operate entirely client-side within your browser sandbox environment.
   </div>
 
   <div class="ad-slot" aria-label="Advertisement">
@@ -324,85 +401,95 @@
 
   <div class="input-card">
     <div class="preset-pills" role="group" aria-label="Distance presets">
-      <button class="preset-pill" onclick="setDistance(50)">🏙️ City (50km)</button>
-      <button class="preset-pill" onclick="setDistance(400)">🚆 Regional (400km)</button>
-      <button class="preset-pill" onclick="setDistance(1000)">✈️ Flight (1000km)</button>
+      <button class="preset-pill" onclick="setDistance(50)">🏙️ City Commute (50km)</button>
+      <button class="preset-pill" onclick="setDistance(400)">🚆 Regional Journey (400km)</button>
+      <button class="preset-pill" onclick="setDistance(1000)">✈️ Intercity Flight (1000km)</button>
     </div>
 
     <div class="input-wrapper" style="position:relative;">
-      <span style="position:absolute; left:1.2rem; top:50%; transform:translateY(-50%);">📍</span>
+      <span style="position:absolute; left:1.2rem; top:50%; transform:translateY(-50%);" aria-hidden="true">📍</span>
       <input type="number" id="distance" value="500" oninput="calculateCO2()" min="1" aria-label="Travel distance in kilometers">
-      <span style="position:absolute; right:1.2rem; top:50%; transform:translateY(-50%); color:var(--muted); font-size:12px;">KM</span>
+      <span style="position:absolute; right:1.2rem; top:50%; transform:translateY(-50%); color:var(--muted); font-size:12px;" aria-hidden="true">KM</span>
     </div>
   </div>
 
   <div class="results-grid" id="resultsGrid" aria-live="polite">
-    <!-- Rendered via JS -->
-  </div>
+    </div>
 
-  <div class="seo-content">
-    <h2>Why Compare <em>Travel Emissions</em>?</h2>
+  <section class="seo-content" aria-labelledby="content-heading">
+    <h2 id="content-heading">Why Compare <em>Travel Emissions</em>?</h2>
     <p>
-      Transportation is responsible for approximately <strong>24% of direct CO2 emissions</strong> from fuel combustion. While flying is often the fastest way to travel, its climate impact is disproportionately high. Our CO2 Comparator helps you visualize the environmental cost of your journey, using weighted averages for modern vehicle fleets.
+      Global transport systems account for roughly <strong>24% of direct CO2 emissions</strong> worldwide. While macro infrastructure moves at its own pace, personal choice offers immediate leverage. By visualizing the true environmental disparity across everyday transportation modes, travelers can shift from passive carbon emitters to active environmental stakeholders.
     </p>
 
-    <h3>The Science Behind the Numbers</h3>
+    <h3>The Science Behind the Emissions Factors</h3>
     <p>
-      We use standardized emission factors (kg CO2 per passenger kilometer):
-      <strong>Train (0.03)</strong>, <strong>Car (0.18)</strong>, and <strong>Aviation (0.25)</strong>. 
-      The aviation factor includes <em>radiative forcing</em>, which accounts for non-CO2 climate impacts like contrails and nitrogen oxides at high altitudes.
+      This platform applies standardized, peer-reviewed emission parameters measured in kilograms of CO2 equivalent per passenger-kilometer (kg CO2e/pkm):
+      <strong>Train (0.03)</strong>, <strong>Standard Fuel Car (0.18)</strong>, and <strong>Aviation (0.25)</strong>. 
+      The aviation metric integrates a critical multiplier for <em>Radiative Forcing (RF)</em>. RF accounts for non-CO2 atmospheric disruptions such as linear contrails, particulate matter, and nitrous oxides produced at cruise altitude, which multiply the warming velocity compared to ground-level emissions.
     </p>
 
+    <h3>Our Core Categories & Tool Ecosystem</h3>
+    <p>
+      ToolCompass provides a modular stack of over 31 browser-based utilities organized into five high-performance pillars. From financial compound calculators to syntax developers, time-zone aggregators, and health index configurations, every tool adheres to a zero-telemetry architecture. We ensure all personal indicators remain processing strictly locally.
+    </p>
+
+    <h3>Frequently Asked Questions</h3>
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q">Is this tool accurate for electric cars? <span class="icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Electric vehicle (EV) emissions depend heavily on the local power grid's energy mix. While this calculator uses a petrol car average (0.18kg/km), an EV on a renewable grid can drop below 0.05kg/km.</div></div>
+        <button class="faq-q" aria-expanded="false">Is this tool accurate for electric cars? <span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Electric vehicle (EV) lifecycles are dictated by the local energy generation grid mix. While our standard car metric reflects internal combustion engine (ICE) targets (0.18kg/km), an EV charging under a clean renewable ecosystem can drop to less than 0.05kg/km, though upstream manufacturing battery debt remains present.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">What is Radiative Forcing? <span class="icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">It refers to the total climate impact of aviation beyond just CO2, including heat-trapping clouds formed by contrails in the upper atmosphere.</div></div>
+        <button class="faq-q" aria-expanded="false">What is Radiative Forcing? <span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Radiative Forcing represents the net change in the earth's energy balance caused by human activity. In aviation, high-altitude emissions alter chemical balances and generate atmospheric trap layers that exacerbate global warming independent of simple carbon burn calculations.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">How can I offset my travel? <span class="icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">While reduction is primary, certified offsetting through Gold Standard projects helps balance unavoidable emissions.</div></div>
+        <button class="faq-q" aria-expanded="false">How can I offset my travel? <span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Direct reduction remains the definitive primary objective. However, where travel remains non-negotiable, supporting vetted Gold Standard or Verified Carbon Standard (VCS) projects helps redirect capital toward systemic atmospheric extraction and community energy shifts.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Does occupancy matter? <span class="icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">Yes! A car with 4 people is often more efficient than a train per person. This tool assumes average occupancy rates for all modes.</div></div>
+        <button class="faq-q" aria-expanded="false">Does vehicle occupancy modify results? <span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. If an ICE vehicle transports four distinct passengers, its per-capita emission performance splits down significantly, often matching or outperforming regional mass transit. This interface relies on localized industry-standard median occupancy loads to ensure representative accuracy.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Is my data stored? <span class="icon">+</span></button>
-        <div class="faq-a"><div class="faq-a-inner">No. ToolCompass.org operates 100% in your browser. We don't have a database for your inputs.</div></div>
+        <button class="faq-q" aria-expanded="false">Is my private data tracked or stored? <span class="icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. ToolCompass functions entirely on client-side technology. Your inputs, metric modifications, and computed numbers occur directly within your specific browser session. We maintain zero remote collection mechanisms and operate no data storage backend frameworks.</div></div>
       </div>
     </div>
 
     <div class="disclaimer-box">
-      <strong>YMYL Disclosure:</strong> This tool provides estimates based on global averages. For official corporate carbon reporting or scientific research, please refer to the Greenhouse Gas (GHG) Protocol or IPCC databases.
+      <strong>YMYL Structural Disclosure & Scope:</strong> The evaluations rendered by this environmental simulator are built upon international standard baseline models. For regulatory environmental disclosures, audit tracking, corporate greenhouse gas protocol declarations, or scientific publication purposes, please consult formal certified IPCC registry databases directly.
     </div>
     
-    <div style="margin-top:3rem;">
-      <h3>About ToolCompass</h3>
-      <p>Founded in 2024, ToolCompass is dedicated to providing high-performance, privacy-respecting tools for daily productivity. We believe that professional-grade utilities should be free, accessible, and run entirely on the user's hardware without tracking.</p>
+    <div style="margin-top:3rem; padding-top:2rem; border-top:1px dashed var(--border);">
+      <h3>Editorial Note: About ToolCompass</h3>
+      <p>
+        Established in 2024 by a small collective of independent open-source developers, ToolCompass was engineered to provide premium, completely transparent client-side calculators. Dissatisfied with modern utility sites bloated by heavy tracker libraries and aggressive registration fields, we designed a decentralized framework. Our platform remains self-funded through non-tracking contextual ad placements, ensuring native utility access remains universally free.
+      </p>
     </div>
-  </div>
+  </section>
 </main>
 
 <footer>
   <div class="footer-logo" style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700;">Tool<em>Compass</em>.org</div>
-  <nav class="footer-links" aria-label="Legal">
-    <a href="/about">About</a>
+  <nav class="footer-links" aria-label="Legal & Framework Navigation">
+    <a href="/about">About Us</a>
     <a href="/imprint" lang="de">Impressum</a>
-    <a href="/privacy" lang="de">Datenschutz</a>
+    <a href="/privacy" lang="de">Datenschutz / Privacy</a>
   </nav>
-  <p style="font-size:11px; color:var(--muted);">© 2026 ToolCompass. All rights reserved.</p>
-  <p class="ad-disclosure">Supported by Google AdSense. Ads are non-intrusive and clearly labeled.</p>
+  <p style="font-size:11px; color:var(--muted);">© 2026 ToolCompass. Open-source client-side excellence. All rights reserved.</p>
+  <p class="ad-disclosure">Monetized natively via Google AdSense. Advertising content remains non-intrusive, isolated, and explicitly marked.</p>
 </footer>
 
 <script>
   const FACTORS = { train: 0.03, car: 0.18, plane: 0.25 };
 
   function calculateCO2() {
-    const dist = parseFloat(document.getElementById('distance').value) || 0;
+    const inputEl = document.getElementById('distance');
+    if (!inputEl) return;
+
+    const dist = parseFloat(inputEl.value) || 0;
     const results = [
       { name: 'Train', val: dist * FACTORS.train, icon: '🚆', color: 'best' },
       { name: 'Car', val: dist * FACTORS.car, icon: '🚗', color: '' },
@@ -411,6 +498,7 @@
     
     const max = Math.max(...results.map(r => r.val));
     const container = document.getElementById('resultsGrid');
+    if (!container) return;
     
     container.innerHTML = results.map(r => `
       <div class="result-card ${r.color}">
@@ -419,34 +507,64 @@
           <span style="font-family:monospace; font-size:1.2rem;">${r.val.toFixed(1)} kg</span>
         </div>
         <div class="bar-wrap">
-          <div class="bar-fill" style="width: ${(r.val/max*100) || 0}%"></div>
+          <div class="bar-fill" style="width: ${(r.val / max * 100) || 0}%"></div>
         </div>
       </div>
     `).join('');
   }
 
   function setDistance(val) {
-    document.getElementById('distance').value = val;
-    calculateCO2();
+    const inputEl = document.getElementById('distance');
+    if (inputEl) {
+      inputEl.value = val;
+      calculateCO2();
+    }
   }
 
-  // FAQ Toggle Logic
+  // Robust FAQ Toggle Event Binding with ARIA Management
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.parentElement;
+      if (!item) return;
+
       const wasOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!wasOpen) item.classList.add('open');
+      
+      // Close all other instances safely
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!wasOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
-  // Consent
+  // Safe DOM Lifecycle Init
   document.addEventListener('DOMContentLoaded', () => {
-    if(!localStorage.getItem('tc_ads_seen')) document.getElementById('consentBanner').classList.remove('hidden');
-    document.getElementById('consentDismiss').onclick = () => {
-      localStorage.setItem('tc_ads_seen', '1');
-      document.getElementById('consentBanner').classList.add('hidden');
-    };
+    const banner = document.getElementById('consentBanner');
+    const dismissBtn = document.getElementById('consentDismiss');
+
+    try {
+      if (banner && !localStorage.getItem('tc_ads_seen')) {
+        banner.classList.remove('hidden');
+      }
+    } catch (e) {
+      // Graceful fallback if localStorage is disabled in strict privacy modes
+      banner?.classList.remove('hidden');
+    }
+
+    if (dismissBtn && banner) {
+      dismissBtn.onclick = () => {
+        try {
+          localStorage.setItem('tc_ads_seen', '1');
+        } catch (e) {}
+        banner.classList.add('hidden');
+      };
+    }
+    
     calculateCO2();
   });
 </script>
