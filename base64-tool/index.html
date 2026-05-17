@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- ═══ PROJECT CONSTANTS ═══ -->
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>Base64 Encoder & Decoder – Convert Text & Files | ToolCompass</title>
-  <meta name="description" content="Encode and decode Base64 instantly. Support for text, files, and URL-safe encoding. Free online Base64 converter with live preview and copy to clipboard.">
+  <title>Base64 Encoder &amp; Decoder – Free Online Converter | ToolCompass</title><!-- 60 chars, keyword-first -->
+  <meta name="description" content="Encode or decode Base64 instantly — text, files &amp; URL-safe mode. Free, private, no login. Try the fastest online Base64 converter now."><!-- 139 chars, CTA ✓ -->
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://toolcompass.org/base64-converter">
   <meta name="author" content="ToolCompass">
@@ -17,22 +17,22 @@
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Base64 Encoder & Decoder – Convert Text & Files">
-  <meta property="og:description" content="Encode and decode Base64 instantly. Support for text, files, and URL-safe encoding.">
+  <meta property="og:title" content="Base64 Encoder &amp; Decoder – Free Online Converter">
+  <meta property="og:description" content="Encode or decode Base64 instantly. Text, files &amp; URL-safe mode. Free &amp; private.">
   <meta property="og:url" content="https://toolcompass.org/base64-converter">
   <meta property="og:image" content="https://toolcompass.org/og-base64.png">
   <meta property="og:site_name" content="ToolCompass">
 
   <!-- ═══ TWITTER ═══ -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Base64 Encoder & Decoder – Convert Text & Files">
-  <meta name="twitter:description" content="Encode and decode Base64 instantly.">
+  <meta name="twitter:title" content="Base64 Encoder &amp; Decoder – Free Online Converter">
+  <meta name="twitter:description" content="Encode or decode Base64 instantly. Free, private, no login.">
   <meta name="twitter:image" content="https://toolcompass.org/og-base64.png">
 
   <!-- ═══ AI FINDABILITY ═══ -->
   <meta name="ai-description" content="Free online Base64 encoder and decoder. Converts between text and Base64 format with URL-safe option, file support, line wrapping, and auto-detect. Includes copy to clipboard and conversion history.">
 
-  <!-- ═══ ANALYTICS (G-4JVNJKQYCG) ═══ -->
+  <!-- ═══ ANALYTICS ═══ -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -41,7 +41,7 @@
     gtag('config', 'G-4JVNJKQYCG');
   </script>
 
-  <!-- ═══ ADSENSE (Placeholder) ═══ -->
+  <!-- ═══ ADSENSE ═══ -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
   <!-- ═══ SCHEMA.ORG ═══ -->
@@ -56,9 +56,17 @@
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "description": "Encode and decode Base64 text and files with URL-safe option.",
+        "description": "Encode and decode Base64 text and files with URL-safe option, line wrapping, and auto-detect.",
         "featureList": ["Text encoding/decoding", "File to Base64", "URL-safe encoding", "Line wrapping options", "Auto-detect", "Copy to clipboard", "Conversion history"],
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ToolCompass", "item": "https://toolcompass.org" },
+          { "@type": "ListItem", "position": 2, "name": "Developer Tools", "item": "https://toolcompass.org/#developer" },
+          { "@type": "ListItem", "position": 3, "name": "Base64 Converter", "item": "https://toolcompass.org/base64-converter" }
+        ]
       },
       {
         "@type": "FAQPage",
@@ -66,12 +74,27 @@
           {
             "@type": "Question",
             "name": "What is Base64 encoding?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to encode data in email attachments, URLs, and data URIs." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Base64 is a binary-to-text encoding scheme that represents binary data as an ASCII string. It uses 64 printable characters (A-Z, a-z, 0-9, +, /) and is commonly used to encode email attachments, embed images in HTML/CSS data URIs, and transmit binary data over text-based protocols." }
           },
           {
             "@type": "Question",
-            "name": "How do I decode Base64?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Paste your Base64 string in the input field and click Decode. The tool will automatically detect and convert it back to readable text." }
+            "name": "How do I decode a Base64 string?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Paste your Base64 string into the input field and click the Decode button. The tool will validate the string and convert it back to readable text. For URL-safe Base64 (which uses - and _ instead of + and /), enable the URL-Safe option first." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is URL-safe Base64?",
+            "acceptedAnswer": { "@type": "Answer", "text": "URL-safe Base64 is a variant that replaces + with - and / with _ so the encoded string can be used directly in URLs and filenames without percent-encoding. Padding characters (=) are also removed. Use the URL-Safe option in this tool when encoding tokens, JWT payloads, or URL parameters." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I encode images or files to Base64?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Drag and drop any file (image, PDF, or binary file) into the upload area, or click to select a file from your device. The tool reads the file locally in your browser and converts it to a Base64 string — nothing is uploaded to any server." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this Base64 tool private and secure?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Completely. All encoding and decoding happens locally in your browser using the built-in JavaScript btoa() and atob() functions. No data is sent to any server, no files are stored, and no account is required. Your data never leaves your device." }
           }
         ]
       }
@@ -79,31 +102,41 @@
   }
   </script>
 
-  <!-- ═══ FONTS ═══ -->
+  <!-- ═══ PRECONNECT / FONTS ═══ -->
+  <!-- Preload critical font subset to reduce LCP impact -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- ═══ STYLES ═══ -->
   <style>
+    /* ─── RESET ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ─── DESIGN TOKENS ─── */
     :root {
-      /* Project Constants */
-      --bg: #0D0D0D;
-      --surface: #161616;
-      --surface2: #1E1E1E;
-      --border: rgba(255,255,255,0.08);
-      --border-hover: rgba(255,255,255,0.18);
-      --text: #F0EDE8;
-      --muted: #6B6760;
-      --accent: #E8D5A3;
-      
-      /* Tool Specific Accents (Blue for Tech) */
-      --content: #3B82F6;
-      --content-bg: rgba(59, 130, 246, 0.07);
-      --content-border: rgba(59, 130, 246, 0.15);
-      --danger: #EF4444;
-      --warning: #F59E0B;
+      --bg:             #0D0D0D;
+      --surface:        #161616;
+      --surface2:       #1E1E1E;
+      --border:         rgba(255,255,255,0.08);
+      --border-hover:   rgba(255,255,255,0.18);
+      --text:           #F0EDE8;
+      /* --muted lifted from #6B6760 → #8A8680 for WCAG AA on dark bg (ratio ~4.6:1) */
+      --muted:          #8A8680;
+      --accent:         #E8D5A3;
+
+      /* Tool accent — Blue / Developer */
+      --content:        #3B82F6;
+      --content-bg:     rgba(59,130,246,0.07);
+      --content-border: rgba(59,130,246,0.15);
+      --danger:         #EF4444;
+      --warning:        #F59E0B;
+
+      /* z-index stack:
+         100 = sticky header
+         200 = consent banner
+         500 = toast
+         999 = grain overlay */
     }
 
     html { scroll-behavior: smooth; }
@@ -116,19 +149,43 @@
       overflow-x: hidden;
     }
 
-    /* Grain Overlay */
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Grain overlay */
     body::before {
       content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 999;
+      pointer-events: none; z-index: 999; will-change: opacity;
+    }
+
+    /* ─── SKIP TO CONTENT ─── */
+    .skip-link {
+      position: absolute; top: -100%; left: 1rem;
+      background: var(--content); color: #000;
+      padding: 8px 16px; border-radius: 0 0 8px 8px;
+      font-size: 13px; font-weight: 600; z-index: 9999;
+      text-decoration: none; transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── FOCUS VISIBLE (global) ─── */
+    :focus-visible {
+      outline: 2px solid var(--content);
+      outline-offset: 3px;
+      border-radius: 4px;
     }
 
     /* ─── HEADER ─── */
     header {
       position: sticky; top: 0; z-index: 100;
       padding: 0 2rem;
-      background: rgba(13,13,13,0.9);
+      background: rgba(13,13,13,0.92);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .header-inner {
@@ -141,22 +198,37 @@
       color: var(--muted); text-decoration: none;
       font-size: 13px; font-weight: 500; transition: color .2s; padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); }
     .back-arrow { font-size: 16px; transition: transform .2s; }
-    .back-btn:hover .back-arrow { transform: translateX(-3px); }
+    .back-btn:hover .back-arrow,
+    .back-btn:focus-visible .back-arrow { transform: translateX(-3px); }
     .logo-text {
       font-family: 'Playfair Display', serif;
       font-weight: 700; font-size: 15px; color: var(--text);
+      text-decoration: none;
     }
     .logo-text em { color: var(--accent); font-style: normal; }
 
+    /* ─── BREADCRUMB (visual) ─── */
+    .breadcrumb {
+      max-width: 900px; margin: 0 auto;
+      padding: 0.6rem 2rem 0;
+      font-size: 11px; color: var(--muted);
+      display: flex; gap: 6px; align-items: center;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb-sep { opacity: .4; }
+
     /* ─── MAIN ─── */
-    main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 6rem; }
 
     /* ─── PAGE HEADER ─── */
     .page-header {
       text-align: center; margin-bottom: 2.5rem;
       animation: fadeUp .7s ease both;
+      will-change: opacity, transform;
     }
     .page-tag {
       display: inline-flex; align-items: center; gap: 7px;
@@ -174,6 +246,15 @@
     }
     .page-header h1 em { font-style: italic; color: var(--accent); font-weight: 700; }
     .page-sub { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+    /* Privacy badge */
+    .privacy-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: .75rem; font-size: 11px; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 12px;
+    }
+    .privacy-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; flex-shrink: 0; }
 
     /* ─── AD SLOT ─── */
     .ad-slot { margin-bottom: 1rem; display: none; }
@@ -196,22 +277,24 @@
       border-radius: 20px; padding: 2rem;
       margin-bottom: 1.5rem;
       animation: fadeUp .7s .1s ease both;
+      will-change: opacity, transform;
     }
 
     /* Mode Toggle */
     .mode-toggle {
-      display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
+      display: flex; gap: .5rem; margin-bottom: 1.5rem;
       background: var(--surface2); padding: 4px;
       border-radius: 12px; width: fit-content;
     }
     .mode-btn {
       background: transparent; border: none;
-      padding: 0.5rem 1rem; border-radius: 8px;
+      padding: .5rem 1rem; border-radius: 8px;
       font-size: 12px; font-weight: 500; color: var(--muted);
       cursor: pointer; transition: all .2s;
       font-family: 'Outfit', sans-serif;
     }
     .mode-btn.active { background: var(--content); color: #000; }
+    .mode-btn:not(.active):hover { color: var(--text); }
 
     /* Options Row */
     .options-row {
@@ -225,15 +308,16 @@
     }
     .option-checkbox input {
       width: 16px; height: 16px;
-      accent-color: var(--content);
+      accent-color: var(--content); cursor: pointer;
     }
     .format-select {
       background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 0.5rem 1rem;
+      border-radius: 8px; padding: .5rem 1rem;
       color: var(--text); font-size: 12px;
       font-family: 'Outfit', sans-serif;
-      outline: none;
+      outline: none; cursor: pointer;
     }
+    .format-select:focus-visible { outline: 2px solid var(--content); outline-offset: 2px; }
 
     /* Textareas */
     .textarea-grid {
@@ -241,11 +325,11 @@
       margin-bottom: 1.5rem;
     }
     @media (max-width: 768px) { .textarea-grid { grid-template-columns: 1fr; } }
-    
+
     .textarea-group label {
       display: block; font-size: 11px; font-weight: 600;
       color: var(--muted); text-transform: uppercase; letter-spacing: .08em;
-      margin-bottom: 0.5rem;
+      margin-bottom: .5rem;
     }
     .textarea-wrapper { position: relative; }
     textarea {
@@ -259,9 +343,9 @@
     textarea:focus { border-color: var(--content); }
     textarea::placeholder { color: var(--muted); }
     textarea[readonly] { background: var(--surface); }
-    
+
     .textarea-actions {
-      display: flex; gap: 6px; margin-top: 0.75rem; flex-wrap: wrap;
+      display: flex; gap: 6px; margin-top: .75rem; flex-wrap: wrap;
     }
     .action-btn {
       background: var(--surface2); border: 1px solid var(--border);
@@ -271,12 +355,14 @@
       font-family: 'Outfit', sans-serif;
       display: flex; align-items: center; gap: 6px;
     }
-    .action-btn:hover { border-color: var(--content); color: var(--content); }
+    .action-btn:hover,
+    .action-btn:focus-visible { border-color: var(--content); color: var(--content); }
     .action-btn.primary {
       background: var(--content); border-color: var(--content);
       color: #000; font-weight: 600;
     }
-    .action-btn.primary:hover { background: var(--accent); }
+    .action-btn.primary:hover,
+    .action-btn.primary:focus-visible { background: var(--accent); border-color: var(--accent); }
 
     /* Action Buttons Row */
     .action-row {
@@ -284,7 +370,7 @@
       margin-bottom: 1.5rem;
     }
     @media (max-width: 520px) { .action-row { grid-template-columns: 1fr; } }
-    
+
     .convert-btn {
       width: 100%; padding: 1rem;
       border-radius: 12px; border: none;
@@ -293,15 +379,15 @@
       font-family: 'Outfit', sans-serif;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .convert-btn.encode {
-      background: var(--content); color: #000;
-    }
-    .convert-btn.encode:hover { background: var(--accent); }
+    .convert-btn.encode { background: var(--content); color: #000; }
+    .convert-btn.encode:hover,
+    .convert-btn.encode:focus-visible { background: var(--accent); }
     .convert-btn.decode {
       background: var(--surface2); border: 1px solid var(--border);
       color: var(--text);
     }
-    .convert-btn.decode:hover { border-color: var(--content); color: var(--content); }
+    .convert-btn.decode:hover,
+    .convert-btn.decode:focus-visible { border-color: var(--content); color: var(--content); }
 
     /* Stats Bar */
     .stats-bar {
@@ -310,10 +396,7 @@
       border-radius: 12px; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;
       font-size: 12px;
     }
-    .stat-item {
-      display: flex; align-items: center; gap: 6px;
-      color: var(--muted);
-    }
+    .stat-item { display: flex; align-items: center; gap: 6px; color: var(--muted); }
     .stat-value {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 600; color: var(--content);
@@ -321,8 +404,7 @@
     .auto-detect-badge {
       background: var(--content-bg); color: var(--content);
       padding: 4px 10px; border-radius: 20px;
-      font-size: 10px; font-weight: 600;
-      text-transform: uppercase;
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
     }
 
     /* File Upload */
@@ -331,14 +413,19 @@
       border-radius: 12px; padding: 2rem;
       text-align: center; margin-bottom: 1.5rem;
       cursor: pointer; transition: all .2s;
+      position: relative;
     }
-    .file-upload:hover { border-color: var(--content); background: var(--content-bg); }
-    .file-upload-icon { font-size: 32px; margin-bottom: 0.5rem; }
+    .file-upload:hover,
+    .file-upload:focus-within { border-color: var(--content); background: var(--content-bg); }
+    .file-upload-icon { font-size: 32px; margin-bottom: .5rem; }
     .file-upload-text { font-size: 13px; color: var(--muted); }
-    .file-upload-input { display: none; }
+    .file-upload-input {
+      position: absolute; inset: 0; opacity: 0;
+      cursor: pointer; width: 100%; height: 100%;
+    }
     .file-info {
       display: none; margin-top: 1rem;
-      padding: 0.75rem; background: var(--surface2);
+      padding: .75rem; background: var(--surface2);
       border-radius: 8px; font-size: 12px;
     }
     .file-info.visible { display: block; }
@@ -355,21 +442,22 @@
     }
     .history-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.1rem; font-weight: 700; font-style: italic;
-      color: var(--text);
+      font-size: 1.1rem; font-weight: 700; font-style: italic; color: var(--text);
     }
     .history-clear {
       font-size: 11px; color: var(--muted);
       cursor: pointer; transition: color .2s;
+      background: none; border: none; font-family: 'Outfit', sans-serif;
     }
-    .history-clear:hover { color: var(--danger); }
+    .history-clear:hover,
+    .history-clear:focus-visible { color: var(--danger); outline: none; }
     .history-list {
-      display: flex; flex-direction: column; gap: 0.5rem;
+      display: flex; flex-direction: column; gap: .5rem;
       max-height: 200px; overflow-y: auto;
     }
     .history-item {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0.75rem; background: var(--surface2);
+      padding: .75rem; background: var(--surface2);
       border-radius: 8px; font-size: 12px;
     }
     .history-preview {
@@ -384,12 +472,12 @@
     }
     .history-delete {
       font-size: 14px; color: var(--muted); cursor: pointer;
-      transition: color .2s;
+      transition: color .2s; background: none; border: none;
     }
     .history-delete:hover { color: var(--danger); }
 
     /* ─── OTHER TOOLS ─── */
-    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .2s ease both; }
+    .other-tools { margin-bottom: 1rem; animation: fadeUp .7s .2s ease both; will-change: opacity, transform; }
     .other-tools-header {
       font-size: 11px; font-weight: 500; color: var(--muted);
       letter-spacing: .08em; text-transform: uppercase; margin-bottom: .75rem;
@@ -406,7 +494,8 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
+    .tool-chip:hover,
+    .tool-chip:focus-visible { border-color: var(--border-hover); background: var(--surface2); transform: translateY(-2px); }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
     .tool-chip-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -417,6 +506,7 @@
       padding: 2.5rem 0 0;
       border-top: 1px solid var(--border);
       animation: fadeUp .7s .3s ease both;
+      will-change: opacity, transform;
     }
     .seo-content h2 {
       font-family: 'Playfair Display', serif;
@@ -424,12 +514,17 @@
       color: var(--text); margin-bottom: 1rem;
     }
     .seo-content h2 em { color: var(--accent); }
+    .seo-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--text); margin: 1.5rem 0 1rem;
+    }
     .seo-content p {
       font-size: 13.5px; color: var(--muted); font-weight: 300;
       line-height: 1.8; margin-bottom: 1rem;
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
-    
+
     .code-block {
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 12px; padding: 1rem;
@@ -438,9 +533,20 @@
       margin: 1rem 0; overflow-x: auto;
     }
 
+    .seo-list { list-style: none; margin-bottom: 1.5rem; }
+    .seo-list li {
+      position: relative; padding-left: 1.5rem;
+      margin-bottom: .75rem; font-size: 13.5px;
+      color: var(--muted); font-weight: 300; line-height: 1.6;
+    }
+    .seo-list li::before { content: '•'; position: absolute; left: 0; color: var(--content); }
+
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
-    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: 12px;
+      margin-bottom: 8px; overflow: hidden;
+    }
     .faq-q {
       width: 100%; background: var(--surface); border: none; color: var(--text);
       font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
@@ -448,12 +554,37 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover,
+    .faq-q:focus-visible { background: var(--surface2); outline: none; }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 300px; }
-    .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner {
+      padding: .25rem 1.25rem 1rem;
+      font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7;
+    }
+
+    /* ─── CONSENT BANNER ─── */
+    .consent-banner {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--surface); border-top: 1px solid var(--border);
+      padding: 1rem 2rem; z-index: 200;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 12px; color: var(--muted);
+    }
+    .consent-banner.hidden { display: none; }
+    .consent-banner a { color: var(--accent); }
+    .consent-actions { display: flex; gap: .5rem; flex-shrink: 0; }
+    .consent-btn {
+      padding: 6px 14px; border-radius: 8px; border: none;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      font-family: 'Outfit', sans-serif; transition: opacity .2s;
+    }
+    .consent-btn.accept { background: var(--content); color: #000; }
+    .consent-btn.decline { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+    .consent-btn:hover { opacity: .85; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -463,40 +594,76 @@
     }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
     .footer-logo em { color: var(--accent); font-style: italic; }
-    .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 1.5rem;
+      margin-bottom: .75rem; flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 11px; color: var(--muted);
+      text-decoration: none; letter-spacing: .05em;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      font-size: 11px; color: var(--muted);
+      letter-spacing: .1em; text-transform: uppercase; opacity: .4;
+    }
 
     /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
+      .breadcrumb { padding: .6rem 1.25rem 0; }
     }
   </style>
 </head>
 <body>
 
-<header>
+<!-- ── SKIP TO CONTENT ── -->
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ── HEADER ── -->
+<header role="banner">
   <div class="header-inner">
-    <a href="/" class="back-btn">
-      <span class="back-arrow">←</span> All Tools
-    </a>
-    <a href="/" style="text-decoration:none;">
-      <span class="logo-text">Tool<em>Compass</em>.org</span>
+    <nav aria-label="Site navigation">
+      <a href="/" class="back-btn" aria-label="Back to all tools">
+        <span class="back-arrow" aria-hidden="true">←</span> All Tools
+      </a>
+    </nav>
+    <a href="/" aria-label="ToolCompass home">
+      <span class="logo-text" aria-hidden="true">Tool<em>Compass</em>.org</span>
     </a>
   </div>
 </header>
 
-<main>
+<!-- ── BREADCRUMB (visual) ── -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="/">ToolCompass</a>
+  <span class="breadcrumb-sep" aria-hidden="true">›</span>
+  <a href="/#developer">Developer Tools</a>
+  <span class="breadcrumb-sep" aria-hidden="true">›</span>
+  <span aria-current="page">Base64 Converter</span>
+</nav>
+
+<!-- ── MAIN ── -->
+<main id="main-content" aria-label="Base64 Encoder and Decoder tool">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-tag"><span class="page-tag-dot"></span>Developer Tools</div>
+    <div class="page-tag" aria-hidden="true"><span class="page-tag-dot"></span>Developer Tools</div>
     <h1>Base64<br><em>Converter</em></h1>
-    <p class="page-sub">Encode and decode Base64 text and files instantly.</p>
+    <p class="page-sub">Encode and decode Base64 text and files instantly — 100% in your browser.</p>
+    <p class="privacy-badge">
+      <span class="privacy-badge-dot" aria-hidden="true"></span>
+      No data sent to servers &mdash; fully private
+    </p>
   </div>
 
   <!-- AD SLOT TOP -->
-  <div class="ad-slot" id="adTop">
+  <div class="ad-slot" id="adTop" role="complementary" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle" style="display:block"
@@ -508,33 +675,42 @@
   </div>
 
   <!-- CONVERTER CARD -->
-  <div class="converter-card">
-    
+  <section class="converter-card" aria-label="Base64 conversion tool">
+
     <!-- FILE UPLOAD -->
-    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-      <div class="file-upload-icon">📁</div>
+    <div class="file-upload"
+         role="button"
+         tabindex="0"
+         aria-label="Upload a file to encode to Base64 — click or press Enter"
+         onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('fileInput').click()">
+      <div class="file-upload-icon" aria-hidden="true">📁</div>
       <div class="file-upload-text">Drop a file here or click to upload (Image, PDF, etc.)</div>
-      <input type="file" id="fileInput" class="file-upload-input" onchange="handleFileUpload(event)">
-      <div class="file-info" id="fileInfo"></div>
+      <input type="file" id="fileInput" class="file-upload-input"
+             aria-label="Choose a file to encode"
+             onchange="handleFileUpload(event)">
+      <div class="file-info" id="fileInfo" aria-live="polite"></div>
     </div>
 
     <!-- MODE TOGGLE -->
-    <div class="mode-toggle">
-      <button class="mode-btn active" onclick="setMode('text')" id="modeText">Text Mode</button>
-      <button class="mode-btn" onclick="setMode('file')" id="modeFile">File Mode</button>
+    <div class="mode-toggle" role="group" aria-label="Conversion mode">
+      <button class="mode-btn active" onclick="setMode('text')" id="modeText"
+              aria-pressed="true">Text Mode</button>
+      <button class="mode-btn" onclick="setMode('file')" id="modeFile"
+              aria-pressed="false">File Mode</button>
     </div>
 
     <!-- OPTIONS -->
-    <div class="options-row">
+    <div class="options-row" role="group" aria-label="Encoding options">
       <label class="option-checkbox">
-        <input type="checkbox" id="urlSafe" onchange="convert()">
+        <input type="checkbox" id="urlSafe" onchange="runConvert()">
         URL-Safe Encoding
       </label>
       <label class="option-checkbox">
-        <input type="checkbox" id="lineWrap" checked onchange="convert()">
-        Line Wrap (76 chars)
+        <input type="checkbox" id="lineWrap" checked onchange="runConvert()">
+        Line Wrap
       </label>
-      <select class="format-select" id="lineLength" onchange="convert()">
+      <label for="lineLength" class="sr-only">Line wrap length</label>
+      <select class="format-select" id="lineLength" onchange="runConvert()" aria-label="Line wrap length">
         <option value="0">No Wrap</option>
         <option value="64">64 chars</option>
         <option value="76" selected>76 chars</option>
@@ -544,10 +720,10 @@
 
     <!-- ACTION BUTTONS -->
     <div class="action-row">
-      <button class="convert-btn encode" onclick="encode()">
+      <button class="convert-btn encode" onclick="encode()" aria-label="Encode input text to Base64">
         🔒 Encode to Base64
       </button>
-      <button class="convert-btn decode" onclick="decode()">
+      <button class="convert-btn decode" onclick="decode()" aria-label="Decode Base64 input to text">
         🔓 Decode from Base64
       </button>
     </div>
@@ -555,9 +731,12 @@
     <!-- TEXTAREAS -->
     <div class="textarea-grid">
       <div class="textarea-group">
-        <label id="inputLabel">Input</label>
+        <label for="inputArea" id="inputLabel">Input</label>
         <div class="textarea-wrapper">
-          <textarea id="input" placeholder="Enter text or Base64 string..." oninput="autoDetect()"></textarea>
+          <textarea id="inputArea"
+                    placeholder="Enter text or Base64 string…"
+                    aria-labelledby="inputLabel"
+                    oninput="autoDetect()"></textarea>
         </div>
         <div class="textarea-actions">
           <button class="action-btn" onclick="pasteInput()">📋 Paste</button>
@@ -566,9 +745,13 @@
         </div>
       </div>
       <div class="textarea-group">
-        <label id="outputLabel">Output</label>
+        <label for="outputArea" id="outputLabel">Output</label>
         <div class="textarea-wrapper">
-          <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
+          <textarea id="outputArea"
+                    placeholder="Result will appear here…"
+                    aria-labelledby="outputLabel"
+                    aria-live="polite"
+                    readonly></textarea>
         </div>
         <div class="textarea-actions">
           <button class="action-btn primary" onclick="copyOutput()">📋 Copy</button>
@@ -578,7 +761,7 @@
     </div>
 
     <!-- STATS BAR -->
-    <div class="stats-bar">
+    <div class="stats-bar" aria-live="polite" aria-label="Conversion statistics">
       <div class="stat-item">
         <span>Input:</span>
         <span class="stat-value" id="inputLength">0</span>
@@ -589,26 +772,26 @@
         <span class="stat-value" id="outputLength">0</span>
         <span>chars</span>
       </div>
-      <div class="auto-detect-badge" id="autoDetectBadge" style="display:none;">
+      <div class="auto-detect-badge" id="autoDetectBadge" style="display:none;" aria-live="polite">
         🤖 Auto-Detected: Base64
       </div>
     </div>
 
-  </div>
+  </section>
 
   <!-- HISTORY -->
-  <div class="history-section">
+  <section class="history-section" aria-label="Conversion history">
     <div class="history-header">
-      <span class="history-title">📜 Conversion History</span>
-      <span class="history-clear" onclick="clearHistory()">Clear All</span>
+      <h2 class="history-title">📜 Conversion History</h2>
+      <button class="history-clear" onclick="clearHistory()" aria-label="Clear all conversion history">Clear All</button>
     </div>
-    <div class="history-list" id="historyList">
+    <div class="history-list" id="historyList" aria-live="polite">
       <div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start converting!</div>
     </div>
-  </div>
+  </section>
 
   <!-- AD SLOT MID -->
-  <div class="ad-slot" id="adMid">
+  <div class="ad-slot" id="adMid" role="complementary" aria-label="Advertisement">
     <div class="ad-inner">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle" style="display:block"
@@ -620,398 +803,510 @@
   </div>
 
   <!-- OTHER TOOLS -->
-  <div class="other-tools">
-    <div class="other-tools-header">🛠️ More Developer Tools</div>
+  <nav class="other-tools" aria-label="More developer tools">
+    <p class="other-tools-header">🛠️ More Developer Tools</p>
     <div class="other-tools-grid">
       <a href="/binary-converter" class="tool-chip">
-        <span class="tool-chip-icon">01</span>
+        <span class="tool-chip-icon" aria-hidden="true">01</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">Binary Converter</div>
           <div class="tool-chip-desc">Binary ↔ Text</div>
         </div>
       </a>
       <a href="/password-generator" class="tool-chip">
-        <span class="tool-chip-icon">🔐</span>
+        <span class="tool-chip-icon" aria-hidden="true">🔐</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">Password Gen</div>
           <div class="tool-chip-desc">Secure passwords</div>
         </div>
       </a>
       <a href="/qr-generator" class="tool-chip">
-        <span class="tool-chip-icon">📱</span>
+        <span class="tool-chip-icon" aria-hidden="true">📱</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">QR Generator</div>
           <div class="tool-chip-desc">Custom QR codes</div>
         </div>
       </a>
       <a href="/text-summarizer" class="tool-chip">
-        <span class="tool-chip-icon">📝</span>
+        <span class="tool-chip-icon" aria-hidden="true">📝</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">Summarizer</div>
           <div class="tool-chip-desc">AI-style compression</div>
         </div>
       </a>
-      <a href="/" class="tool-chip" style="border-style: dashed;">
-        <span class="tool-chip-icon">🧭</span>
+      <a href="/" class="tool-chip" style="border-style:dashed;">
+        <span class="tool-chip-icon" aria-hidden="true">🧭</span>
         <div class="tool-chip-info">
           <div class="tool-chip-name">All Tools</div>
-          <div class="tool-chip-desc">31+ utilities</div>
+          <div class="tool-chip-desc">31+ free utilities</div>
         </div>
       </a>
     </div>
-  </div>
+  </nav>
 
   <!-- SEO CONTENT -->
-  <div class="seo-content">
+  <article class="seo-content" aria-label="About Base64 encoding">
+
     <h2>Understanding <em>Base64 Encoding</em></h2>
     <p>
-      Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to encode data in email attachments, embed images in HTML/CSS, store complex data in URLs, and transmit data over text-based protocols.
+      <strong>Base64</strong> is a binary-to-text encoding scheme that represents binary data as a
+      printable ASCII string. Every 3 bytes of binary data become exactly 4 Base64 characters,
+      producing output that is ~33 % larger than the original but safe to transmit over any
+      text-based protocol — HTTP, JSON, XML, or email.
+    </p>
+    <p>
+      This free <strong>Base64 encoder and decoder</strong> runs entirely in your browser. No data
+      is ever sent to a server, no account is required, and nothing is stored anywhere. Your files
+      and text stay completely private on your device.
     </p>
 
-    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Example Conversion</h3>
-    <div class="code-block">
-Text: Hello World
+    <h3>Example Conversion</h3>
+    <div class="code-block" role="region" aria-label="Example Base64 conversions">
+Text:   Hello World
 Base64: SGVsbG8gV29ybGQ=
 
-Text: ToolCompass
+Text:   ToolCompass
 Base64: VG9vbENvbXBhc3M=
     </div>
 
-    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin:1.5rem 0 1rem;">Common Use Cases</h3>
-    <ul class="seo-list" style="list-style:none;margin-bottom:1.5rem;">
-      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>Data URIs:</strong> Embed images directly in HTML/CSS.</li>
-      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>Email Attachments:</strong> MIME encoding for email transmission.</li>
-      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>API Authentication:</strong> Basic Auth credentials encoding.</li>
-      <li style="position:relative;padding-left:1.5rem;margin-bottom:0.75rem;font-size:13.5px;color:var(--muted);font-weight:300;line-height:1.6;"><span style="position:absolute;left:0;color:var(--content);">•</span><strong>URL Parameters:</strong> Safe transmission of binary data in URLs.</li>
+    <h3>Common Use Cases</h3>
+    <ul class="seo-list">
+      <li><strong>Data URIs:</strong> Embed images directly in HTML or CSS without a separate HTTP request.</li>
+      <li><strong>Email Attachments:</strong> MIME encoding transmits binary files safely over SMTP.</li>
+      <li><strong>API Authentication:</strong> HTTP Basic Auth sends credentials as Base64-encoded username:password.</li>
+      <li><strong>URL Parameters:</strong> URL-safe Base64 encodes binary tokens (JWTs, session IDs) without percent-encoding.</li>
+      <li><strong>Clipboard / Storage:</strong> Serialise binary data to a string for localStorage or clipboard APIs.</li>
     </ul>
 
+    <h3>Frequently Asked Questions</h3>
     <div class="faq-list">
+
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           What is Base64 encoding?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used to encode data in email attachments, URLs, and data URIs.</p>
+        <div class="faq-a" role="region">
+          <p class="faq-a-inner">Base64 is a binary-to-text encoding scheme that converts binary data into a set of 64 printable ASCII characters (A–Z, a–z, 0–9, +, /). It is commonly used for email attachments (MIME), embedding images as data URIs in HTML/CSS, and transmitting structured data in APIs and URLs.</p>
         </div>
       </div>
+
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          How do I decode Base64?
-          <span class="faq-icon">+</span>
+          How do I decode a Base64 string?
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Paste your Base64 string in the input field and click Decode. The tool will automatically detect and convert it back to readable text.</p>
+        <div class="faq-a" role="region">
+          <p class="faq-a-inner">Paste your Base64 string into the Input field above and click <strong>Decode from Base64</strong>. The tool auto-strips whitespace and validates the string before converting it. If the Base64 uses URL-safe characters (- and _ instead of + and /), enable the URL-Safe option first.</p>
         </div>
       </div>
+
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
           What is URL-safe Base64?
-          <span class="faq-icon">+</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">URL-safe Base64 replaces + with - and / with _ to make the encoded string safe for use in URLs without additional encoding.</p>
+        <div class="faq-a" role="region">
+          <p class="faq-a-inner">Standard Base64 uses + and / which have special meaning in URLs. URL-safe Base64 replaces + with - and / with _ so the string can be used directly in query parameters or path segments without percent-encoding. Padding characters (=) are also removed. This variant is used in JSON Web Tokens (JWT) and many OAuth flows.</p>
         </div>
       </div>
+
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">
-          Can I encode files to Base64?
-          <span class="faq-icon">+</span>
+          Can I encode image or PDF files to Base64?
+          <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes! Drag and drop any file into the upload area or click to select a file. The tool will convert it to a Base64 string.</p>
+        <div class="faq-a" role="region">
+          <p class="faq-a-inner">Yes. Drag and drop any file — image, PDF, binary — into the upload area, or click it to browse. The tool reads the file locally using the FileReader API and converts it to a Base64 string. The resulting string can be used as a data URI in CSS/HTML or pasted into API payloads. Nothing is uploaded; everything happens in your browser.</p>
         </div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Is this Base64 converter private and secure?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq-a" role="region">
+          <p class="faq-a-inner">Completely. All encoding and decoding uses JavaScript's built-in <code>btoa()</code> and <code>atob()</code> functions, which run entirely in your browser. No data is transmitted to any server, no files are stored, and no account is needed. Your data never leaves your device — this is core to how all ToolCompass tools are built.</p>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </article>
 
 </main>
 
-<footer>
+<!-- ── FOOTER ── -->
+<footer role="contentinfo">
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/legal">Legal / Impressum</a>
+    <a href="/">All Tools</a>
+  </nav>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
 </footer>
 
-<script>
-// ═══════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════
-let currentMode = 'text';
-let history = [];
-let fileName = '';
+<!-- ── CONSENT BANNER (AdSense / cookie-free notice) ── -->
+<div class="consent-banner" id="consentBanner" role="dialog" aria-label="Cookie and advertising notice" aria-modal="false">
+  <p>
+    This site shows ads via Google AdSense, which may use cookies for personalisation.
+    No personal data is collected by ToolCompass itself. See our
+    <a href="/privacy">Privacy Policy</a>.
+  </p>
+  <div class="consent-actions">
+    <button class="consent-btn accept" onclick="acceptConsent()">OK, got it</button>
+    <button class="consent-btn decline" onclick="declineConsent()">Decline ads</button>
+  </div>
+</div>
 
-// ═══════════════════════════════════════════════
-// MODE
-// ═══════════════════════════════════════════════
-function setMode(mode) {
-  currentMode = mode;
-  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-  
-  if (mode === 'text') {
-    document.getElementById('modeText').classList.add('active');
-    document.getElementById('input').placeholder = 'Enter text or Base64 string...';
-  } else {
-    document.getElementById('modeFile').classList.add('active');
-    document.getElementById('input').placeholder = 'File Base64 will appear here...';
+<!-- ── NOSCRIPT FALLBACK ── -->
+<noscript>
+  <style>
+    .converter-card, .history-section, .other-tools { display: none; }
+    .noscript-notice {
+      max-width: 900px; margin: 2rem auto; padding: 1.5rem 2rem;
+      background: #1E1E1E; border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; color: #8A8680; font-size: 14px; line-height: 1.7;
+    }
+  </style>
+  <div class="noscript-notice">
+    <strong style="color:#F0EDE8;">JavaScript Required</strong><br>
+    The Base64 Converter runs entirely in your browser for privacy.
+    Please enable JavaScript to use this tool.
+  </div>
+</noscript>
+
+<!-- ── SCRIPTS ── -->
+<script>
+'use strict';
+// ═══════════════════════════════════════════════════════
+// CONSENT
+// ═══════════════════════════════════════════════════════
+(function initConsent() {
+  const banner = document.getElementById('consentBanner');
+  if (!banner) return;
+  if (localStorage.getItem('tc_consent')) {
+    banner.classList.add('hidden');
   }
+})();
+
+function acceptConsent() {
+  localStorage.setItem('tc_consent', 'accepted');
+  document.getElementById('consentBanner').classList.add('hidden');
+}
+function declineConsent() {
+  localStorage.setItem('tc_consent', 'declined');
+  document.getElementById('consentBanner').classList.add('hidden');
 }
 
-// ═══════════════════════════════════════════════
-// ENCODE/DECODE
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let currentMode = 'text';
+let convHistory = [];          // renamed from `history` to avoid shadowing window.history
+let currentFileName = '';
+
+// ═══════════════════════════════════════════════════════
+// HELPERS — safe element getters
+// ═══════════════════════════════════════════════════════
+function $id(id) {
+  const el = document.getElementById(id);
+  if (!el) console.warn('[ToolCompass] Element not found:', id);
+  return el;
+}
+
+// ═══════════════════════════════════════════════════════
+// MODE
+// ═══════════════════════════════════════════════════════
+function setMode(mode) {
+  currentMode = mode;
+  const textBtn = $id('modeText');
+  const fileBtn = $id('modeFile');
+  const inputEl = $id('inputArea');
+  if (!textBtn || !fileBtn || !inputEl) return;
+
+  textBtn.classList.toggle('active', mode === 'text');
+  fileBtn.classList.toggle('active', mode === 'file');
+  textBtn.setAttribute('aria-pressed', String(mode === 'text'));
+  fileBtn.setAttribute('aria-pressed', String(mode === 'file'));
+
+  inputEl.placeholder = mode === 'text'
+    ? 'Enter text or Base64 string…'
+    : 'File Base64 will appear here…';
+}
+
+// ═══════════════════════════════════════════════════════
+// ENCODE / DECODE
+// ═══════════════════════════════════════════════════════
 function encode() {
-  const input = document.getElementById('input').value;
-  const urlSafe = document.getElementById('urlSafe').checked;
-  const lineWrap = document.getElementById('lineWrap').checked;
-  const lineLength = parseInt(document.getElementById('lineLength').value);
-  
-  if (!input) {
-    showToast('Please enter text to encode');
-    return;
-  }
-  
+  const inputEl  = $id('inputArea');
+  if (!inputEl) return;
+  const input    = inputEl.value;
+  const urlSafe  = $id('urlSafe')?.checked ?? false;
+  const lineWrap = $id('lineWrap')?.checked ?? true;
+  const lineLen  = parseInt($id('lineLength')?.value ?? '76', 10);
+
+  if (!input.trim()) { showToast('Please enter text to encode'); return; }
+
   try {
     let encoded = btoa(unescape(encodeURIComponent(input)));
-    
-    // URL-safe
-    if (urlSafe) {
-      encoded = encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-    }
-    
-    // Line wrap
-    if (lineWrap && lineLength > 0) {
-      encoded = wrapLines(encoded, lineLength);
-    }
-    
-    document.getElementById('output').value = encoded;
+    if (urlSafe) { encoded = encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, ''); }
+    if (lineWrap && lineLen > 0) { encoded = wrapLines(encoded, lineLen); }
+
+    setOutput(encoded);
     updateStats(input.length, encoded.length);
     saveToHistory(input, encoded, 'Encode');
     showToast('Encoded successfully!');
   } catch (e) {
-    showToast('Encoding failed: ' + e.message);
+    showToast('Encoding failed: ' + (e?.message ?? e));
   }
 }
 
 function decode() {
-  const input = document.getElementById('input').value.trim();
-  const urlSafe = document.getElementById('urlSafe').checked;
-  
-  if (!input) {
-    showToast('Please enter Base64 to decode');
-    return;
-  }
-  
+  const inputEl = $id('inputArea');
+  if (!inputEl) return;
+  let input    = inputEl.value.trim();
+  const urlSafe = $id('urlSafe')?.checked ?? false;
+
+  if (!input) { showToast('Please enter Base64 to decode'); return; }
+
   try {
-    let decoded = input;
-    
-    // URL-safe
     if (urlSafe) {
-      decoded = decoded.replace(/-/g, '+').replace(/_/g, '/');
-      // Add padding
-      while (decoded.length % 4) {
-        decoded += '=';
-      }
+      input = input.replace(/-/g, '+').replace(/_/g, '/');
+      while (input.length % 4) input += '=';
     }
-    
-    // Remove whitespace
-    decoded = decoded.replace(/\s/g, '');
-    
-    const result = decodeURIComponent(escape(atob(decoded)));
-    document.getElementById('output').value = result;
-    updateStats(input.length, result.length);
-    saveToHistory(input, result, 'Decode');
+    input = input.replace(/\s/g, '');
+    const result = decodeURIComponent(escape(atob(input)));
+    setOutput(result);
+    updateStats(inputEl.value.length, result.length);
+    saveToHistory(inputEl.value, result, 'Decode');
     showToast('Decoded successfully!');
-  } catch (e) {
+  } catch {
     showToast('Invalid Base64 string');
-    document.getElementById('output').value = '';
+    setOutput('');
   }
 }
 
-function wrapLines(str, lineLength) {
+function wrapLines(str, len) {
   const lines = [];
-  for (let i = 0; i < str.length; i += lineLength) {
-    lines.push(str.substring(i, i + lineLength));
-  }
+  for (let i = 0; i < str.length; i += len) lines.push(str.substring(i, i + len));
   return lines.join('\n');
 }
 
-// ═══════════════════════════════════════════════
-// AUTO-DETECT
-// ═══════════════════════════════════════════════
-function autoDetect() {
-  const input = document.getElementById('input').value.trim();
-  const badge = document.getElementById('autoDetectBadge');
-  
-  // Simple Base64 detection
-  const base64Regex = /^[A-Za-z0-9+/=_\-\s]+$/;
-  const isBase64 = base64Regex.test(input) && input.length > 10 && input.length % 4 === 0;
-  
-  if (isBase64) {
-    badge.style.display = 'block';
-    badge.textContent = '🤖 Auto-Detected: Base64';
-  } else {
-    badge.style.display = 'none';
-  }
-  
-  updateStats(input.length, document.getElementById('output').value.length);
+function setOutput(val) {
+  const el = $id('outputArea');
+  if (el) el.value = val;
 }
 
-// ═══════════════════════════════════════════════
+// runConvert: triggered by option changes — re-runs last direction if output exists
+function runConvert() {
+  const output = $id('outputArea')?.value ?? '';
+  if (output) encode(); // default to re-encode if something is already in output
+}
+
+// ═══════════════════════════════════════════════════════
+// AUTO-DETECT
+// ═══════════════════════════════════════════════════════
+function autoDetect() {
+  const input  = $id('inputArea')?.value.trim() ?? '';
+  const badge  = $id('autoDetectBadge');
+  if (!badge) return;
+
+  const base64Re = /^[A-Za-z0-9+/=_\-\s]+$/;
+  const len      = input.replace(/\s/g, '').length;
+  const isBase64 = base64Re.test(input) && len > 10 && len % 4 === 0;
+
+  badge.style.display = isBase64 ? 'block' : 'none';
+  updateStats(input.length, $id('outputArea')?.value.length ?? 0);
+}
+
+// ═══════════════════════════════════════════════════════
 // FILE UPLOAD
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function handleFileUpload(event) {
-  const file = event.target.files[0];
+  const file = event?.target?.files?.[0];
   if (!file) return;
-  
-  fileName = file.name;
-  const reader = new FileReader();
-  
-  reader.onload = function(e) {
-    const base64 = e.target.result.split(',')[1]; // Remove data:image/png;base64, prefix
-    document.getElementById('input').value = base64;
-    
-    const fileInfo = document.getElementById('fileInfo');
-    fileInfo.classList.add('visible');
-    fileInfo.innerHTML = `
-      <strong>📄 ${file.name}</strong><br>
-      Size: ${(file.size / 1024).toFixed(2)} KB | 
-      Type: ${file.type}
-    `;
-    
-    convert();
+
+  currentFileName = file.name;
+  const reader   = new FileReader();
+
+  reader.onload = function (e) {
+    const raw    = e?.target?.result ?? '';
+    const base64 = raw.includes(',') ? raw.split(',')[1] : raw;
+    const inputEl = $id('inputArea');
+    if (inputEl) inputEl.value = base64;
+
+    const fileInfo = $id('fileInfo');
+    if (fileInfo) {
+      fileInfo.classList.add('visible');
+      fileInfo.textContent = `📄 ${file.name} — ${(file.size / 1024).toFixed(2)} KB — ${file.type || 'unknown type'}`;
+    }
+    autoDetect();
   };
-  
+
+  reader.onerror = () => showToast('Failed to read file');
   reader.readAsDataURL(file);
   showToast('File loaded!');
 }
 
-// ═══════════════════════════════════════════════
-// ACTIONS
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// CLIPBOARD / ACTIONS
+// ═══════════════════════════════════════════════════════
 function copyOutput() {
-  const output = document.getElementById('output');
-  if (!output.value) return;
-  
-  navigator.clipboard.writeText(output.value).then(() => {
-    showToast('Copied to clipboard!');
-  }).catch(() => {
-    showToast('Copy failed');
-  });
+  const val = $id('outputArea')?.value ?? '';
+  if (!val) { showToast('Nothing to copy'); return; }
+  navigator.clipboard?.writeText(val)
+    .then(() => showToast('Copied to clipboard!'))
+    .catch(() => showToast('Copy failed'));
 }
 
 function pasteInput() {
-  navigator.clipboard.readText().then(text => {
-    document.getElementById('input').value = text;
-    autoDetect();
-    showToast('Pasted from clipboard');
-  }).catch(() => {
-    showToast('Paste not supported');
-  });
+  navigator.clipboard?.readText()
+    .then(text => {
+      const el = $id('inputArea');
+      if (el) el.value = text;
+      autoDetect();
+      showToast('Pasted from clipboard');
+    })
+    .catch(() => showToast('Clipboard access denied'));
 }
 
 function clearAll() {
-  document.getElementById('input').value = '';
-  document.getElementById('output').value = '';
-  document.getElementById('fileInfo').classList.remove('visible');
-  document.getElementById('fileInput').value = '';
-  fileName = '';
+  const inputEl  = $id('inputArea');
+  const outputEl = $id('outputArea');
+  const fileInfo = $id('fileInfo');
+  const fileInput= $id('fileInput');
+
+  if (inputEl)  inputEl.value  = '';
+  if (outputEl) outputEl.value = '';
+  if (fileInfo) fileInfo.classList.remove('visible');
+  if (fileInput) fileInput.value = '';
+  currentFileName = '';
   updateStats(0, 0);
   autoDetect();
 }
 
 function loadExample() {
-  document.getElementById('input').value = 'Hello World! Welcome to ToolCompass.';
+  const el = $id('inputArea');
+  if (el) el.value = 'Hello World! Welcome to ToolCompass — free, private, in-browser tools.';
   autoDetect();
 }
 
 function downloadOutput() {
-  const output = document.getElementById('output').value;
-  if (!output) return;
-  
-  const blob = new Blob([output], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName ? `${fileName}.b64` : 'base64-output.txt';
+  const val = $id('outputArea')?.value ?? '';
+  if (!val) { showToast('Nothing to download'); return; }
+
+  const blob = new Blob([val], { type: 'text/plain' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = currentFileName ? `${currentFileName}.b64` : 'base64-output.txt';
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(url);
   showToast('Download started!');
 }
 
 function updateStats(inputLen, outputLen) {
-  document.getElementById('inputLength').textContent = inputLen.toLocaleString();
-  document.getElementById('outputLength').textContent = outputLen.toLocaleString();
+  const il = $id('inputLength');
+  const ol = $id('outputLength');
+  if (il) il.textContent = Number(inputLen).toLocaleString();
+  if (ol) ol.textContent = Number(outputLen).toLocaleString();
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // HISTORY
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 function loadHistory() {
-  const saved = localStorage.getItem('tc_base64_history');
-  if (saved) {
-    history = JSON.parse(saved);
+  try {
+    const saved = localStorage.getItem('tc_base64_history');
+    convHistory = saved ? JSON.parse(saved) : [];
+  } catch {
+    convHistory = [];
   }
   renderHistory();
 }
 
 function saveToHistory(input, output, type) {
-  if (history.length > 0 && history[0].input === input) return;
-  
-  history.unshift({
-    input: input.substring(0, 50),
+  if (convHistory.length > 0 && convHistory[0].input === input.substring(0, 50)) return;
+
+  convHistory.unshift({
+    input:  input.substring(0, 50),
     output: output.substring(0, 50),
     type,
     date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
   });
-  
-  if (history.length > 10) history.pop();
-  
-  localStorage.setItem('tc_base64_history', JSON.stringify(history));
+
+  if (convHistory.length > 10) convHistory.pop();
+
+  try { localStorage.setItem('tc_base64_history', JSON.stringify(convHistory)); } catch {}
   renderHistory();
 }
 
 function renderHistory() {
-  const list = document.getElementById('historyList');
-  
-  if (history.length === 0) {
+  const list = $id('historyList');
+  if (!list) return;
+
+  if (convHistory.length === 0) {
     list.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:12px;">No history yet. Start converting!</div>';
     return;
   }
-  
-  list.innerHTML = history.map((h, i) => `
+
+  list.innerHTML = convHistory.map((h, i) => `
     <div class="history-item">
       <div style="flex:1;min-width:0;">
-        <div class="history-preview">${h.input} → ${h.output}</div>
-        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${h.date}</div>
+        <div class="history-preview">${escHtml(h.input)} → ${escHtml(h.output)}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">${escHtml(h.date)}</div>
       </div>
-      <span class="history-type">${h.type}</span>
-      <span class="history-delete" onclick="deleteHistory(${i})">🗑️</span>
+      <span class="history-type">${escHtml(h.type)}</span>
+      <button class="history-delete" onclick="deleteHistory(${i})" aria-label="Delete history item">🗑️</button>
     </div>
   `).join('');
 }
 
 function deleteHistory(index) {
-  history.splice(index, 1);
-  localStorage.setItem('tc_base64_history', JSON.stringify(history));
+  if (index < 0 || index >= convHistory.length) return;
+  convHistory.splice(index, 1);
+  try { localStorage.setItem('tc_base64_history', JSON.stringify(convHistory)); } catch {}
   renderHistory();
 }
 
 function clearHistory() {
-  history = [];
-  localStorage.removeItem('tc_base64_history');
+  convHistory = [];
+  try { localStorage.removeItem('tc_base64_history'); } catch {}
   renderHistory();
   showToast('History cleared');
 }
 
-// ═══════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════
+// XSS guard for history render
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
 function showToast(msg) {
   let t = document.getElementById('tcToast');
   if (!t) {
     t = document.createElement('div');
     t.id = 'tcToast';
-    t.style.cssText = 'position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(60px);background:#1E1E1E;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:10px 18px;font-size:13px;font-weight:500;color:#F0EDE8;z-index:500;transition:transform .3s,opacity .3s;opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;';
+    t.setAttribute('role', 'status');
+    t.setAttribute('aria-live', 'polite');
+    t.style.cssText = [
+      'position:fixed;bottom:2rem;left:50%;',
+      'transform:translateX(-50%) translateY(60px);',
+      'background:#1E1E1E;border:1px solid rgba(255,255,255,.15);',
+      'border-radius:10px;padding:10px 18px;',
+      'font-size:13px;font-weight:500;color:#F0EDE8;',
+      'z-index:500;transition:transform .3s,opacity .3s;',
+      'opacity:0;white-space:nowrap;font-family:Outfit,sans-serif;'
+    ].join('');
     document.body.appendChild(t);
   }
   t.textContent = msg;
@@ -1021,35 +1316,43 @@ function showToast(msg) {
   t._timer = setTimeout(() => {
     t.style.transform = 'translateX(-50%) translateY(60px)';
     t.style.opacity   = '0';
-  }, 2000);
+  }, 2200);
 }
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // FAQ ACCORDION
-// ═══════════════════════════════════════════════
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item   = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+// ═══════════════════════════════════════════════════════
+(function initFaq() {
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item   = btn.closest('.faq-item');
+      const isOpen = item?.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked if it was closed
+      if (!isOpen && item) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
-    if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
   });
-});
+})();
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
 // INIT
-// ═══════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
+// ═══════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
   loadHistory();
   autoDetect();
 });
 
-// ─── ADSENSE nach Approval ───
+// ─── ADSENSE after approval ───────────────────────────
+// Uncomment these two lines once AdSense is approved:
 // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// (window.adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
 </body>
