@@ -3,119 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - ToolCompass</title>
-  <meta name="description" content="Learn about ToolCompass: free, private, ad-supported productivity tools for developers, creators, and professionals.">
+  <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
+
+  <!-- SEO: Primary Meta Tags -->
+  <title>About ToolCompass – Free, Private, Ad-Supported Tools</title>
+  <meta name="description" content="Learn about ToolCompass: 31+ free browser-based productivity tools. No login, no data stored, privacy-first design. Supported by non-intrusive ads.">
+  <meta name="keywords" content="about toolcompass, free online tools, privacy, ad-supported, productivity">
+  <meta name="author" content="ToolCompass.org">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://toolcompass.org/about.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About ToolCompass – Free, Private, Ad-Supported Tools">
+  <meta property="og:description" content="Learn about ToolCompass: 31+ free browser-based productivity tools. No login, no data stored.">
+  <meta property="og:url" content="https://toolcompass.org/about.html">
+  <meta property="og:site_name" content="ToolCompass">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About ToolCompass">
+  <meta name="twitter:description" content="Free, private, ad-supported productivity tools for everyone.">
+
+  <!-- Analytics & Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JVNJKQYCG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4JVNJKQYCG');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934902732899980" crossorigin="anonymous"></script>
+
+  <!-- Structured Data: AboutPage + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About ToolCompass",
+    "url": "https://toolcompass.org/about.html",
+    "description": "Learn about ToolCompass: free, private, ad-supported productivity tools for developers, creators, and professionals.",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "ToolCompass",
+      "url": "https://toolcompass.org/",
+      "logo": "https://toolcompass.org/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "ronwesel688@gmail.com",
+        "url": "https://toolcompass.org/about.html"
+      }
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    /* === BASIC RESET & TYPOGRAPHY === */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #161616;
+      --surface2: #1E1E1E;
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+      --text: #F0EDE8;
+      --muted: #6B6760;
+      --accent: #E8D5A3;
+      --finance: #4ADE80;
+      --finance-bg: rgba(74,222,128,0.07);
+      --content: #FB923C;
+      --content-bg: rgba(251,146,60,0.07);
+      --tech: #818CF8;
+      --tech-bg: rgba(129,140,248,0.07);
+      --time: #22D3EE;
+      --time-bg: rgba(34,211,238,0.07);
+      --health: #F472B6;
+      --health-bg: rgba(244,114,182,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.65;
-      color: #1a1a1a;
-      background: #f8f9fa;
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
-    a { color: #0056b3; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
+    }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0; }
 
-    /* === LAYOUT === */
-    .container { max-width: 820px; margin: 0 auto; padding: 0 1.2rem; width: 100%; }
-    header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem 0; }
-    nav { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 0.95rem; }
-    main { 
-      background: #fff; 
-      padding: 2rem; 
-      border-radius: 8px; 
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04); 
-      margin: 2rem auto; 
+    /* HEADER */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(13,13,13,0.88);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-hover); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; color: var(--text); letter-spacing: 0.01em; }
+    .logo-text em { color: var(--accent); font-style: normal; }
+    .live-badge { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: var(--finance); letter-spacing: 0.05em; }
+    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--finance); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.75)} }
+
+    /* MAIN CONTENT */
+    main {
       flex: 1;
-      width: 100%;
+      padding: 7rem 2rem 4rem;
+      display: flex;
+      justify-content: center;
+    }
+    .content-wrapper {
       max-width: 820px;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
     }
 
-    /* === FOOTER STYLES (angepasst an Ihre Struktur) === */
-    footer { 
-      text-align: center; 
-      padding: 1.5rem 0 2rem; 
-      color: #666; 
-      font-size: 0.9rem; 
-      border-top: 1px solid #e5e5e5; 
-      margin-top: auto;
-      background: #fff;
+    /* TYPOGRAPHY */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--text);
     }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 2rem 0 0.8rem;
+      color: var(--text);
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    p {
+      margin-bottom: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.97rem;
+    }
+    a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.85; }
+    ul { margin: 0.8rem 0 1.2rem 1.4rem; color: var(--muted); }
+    li { margin-bottom: 0.5rem; line-height: 1.6; font-size: 0.95rem; }
+    strong { color: var(--text); font-weight: 600; }
+
+    /* SPECIAL BOXES */
+    .ad-notice {
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      padding: 1.3rem;
+      margin: 1.8rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .ad-notice h2 {
+      margin-top: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+      font-size: 1.2rem;
+    }
+    .contact-box {
+      background: var(--surface2);
+      padding: 1.3rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    /* FOOTER (exakt wie Homepage-Vorlage) */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      background: var(--bg);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+    .footer-logo em { color: var(--accent); font-style: italic; }
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
     .footer-links a {
-      color: #666;
-      font-size: 0.9rem;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .15s;
     }
-    .footer-links a:hover {
-      color: #0056b3;
-    }
+    .footer-links a:hover { color: var(--text); }
     .footer-copy {
-      margin-bottom: 0.4rem;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: .4;
+      margin-bottom: 0.8rem;
     }
     .ad-disclosure {
-      font-size: 0.8rem;
-      color: #888;
-      max-width: 600px;
+      font-size: 10px;
+      color: var(--muted);
+      opacity: 0.6;
+      max-width: 500px;
       margin: 0 auto;
+      line-height: 1.5;
     }
 
-    /* === CONTENT STYLES === */
-    h1 { font-size: 2.1rem; margin-bottom: 1rem; color: #000; letter-spacing: -0.5px; }
-    h2 { font-size: 1.35rem; margin: 1.8rem 0 0.7rem; color: #000; border-bottom: 1px solid #eee; padding-bottom: 0.4rem; }
-    p { margin-bottom: 1rem; }
-    ul { margin: 0.5rem 0 1rem 1.4rem; }
-    li { margin-bottom: 0.4rem; }
-    strong { font-weight: 600; }
+    /* ANIMATIONS & UTILS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* === SPECIAL BOXES === */
-    .ad-notice {
-      background: #f1f5f9;
-      border-left: 4px solid #0056b3;
-      padding: 1.2rem;
-      margin: 1.5rem 0;
-      border-radius: 0 6px 6px 0;
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      header { padding: 0 1.25rem; }
+      main { padding: 6rem 1.25rem 3rem; }
+      .content-wrapper { padding: 1.8rem; }
+      .footer-links { gap: 1.2rem; }
     }
-    .contact-box {
-      background: #eef6ff;
-      padding: 1.2rem;
-      border-radius: 6px;
-      margin-top: 1.5rem;
-    }
-
-    /* === RESPONSIVE === */
-    @media (max-width: 600px) {
-      .container { padding: 0 1rem; }
-      main { padding: 1.3rem; margin: 1rem; }
-      h1 { font-size: 1.7rem; }
-      h2 { font-size: 1.2rem; }
-      .footer-links { flex-direction: column; gap: 0.4rem; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
 
+  <!-- HEADER (wie Homepage) -->
   <header>
-    <div class="container">
-      <nav>
-        <a href="index.html">← Home</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="imprint.html">Imprint</a>
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="ToolCompass – Home">
+        <div class="logo-icon" aria-hidden="true">🧭</div>
+        <span class="logo-text">Tool<em>Compass</em>.org</span>
+      </a>
+      <nav aria-label="Main navigation" style="display:flex; gap:1rem; align-items:center;">
+        <a href="/" style="font-size:12px; color:var(--muted); text-decoration:none;">← Home</a>
+        <span class="live-badge" aria-label="31 tools currently live">
+          <span class="live-dot" aria-hidden="true"></span>31 tools live
+        </span>
       </nav>
     </div>
   </header>
 
+  <!-- MAIN CONTENT -->
   <main>
-    <div class="container">
+    <div class="content-wrapper reveal">
       <h1>About ToolCompass</h1>
       
       <p><strong>ToolCompass</strong> is a curated collection of free, browser-based productivity tools designed to help developers, creators, freelancers, and professionals work smarter — without signups, installations, or hidden costs.</p>
@@ -135,7 +300,7 @@
       <p>Every tool on ToolCompass is carefully designed to be accurate, intuitive, and distraction-free. We prioritize reliability over quantity. If a tool doesn't meet our standards for usability and correctness, we don't publish it. All tools are regularly tested and updated to ensure they work across modern browsers and devices.</p>
 
       <h2>🔒 Your Privacy Matters</h2>
-      <p>ToolCompass processes all data locally in your browser. This means your inputs never leave your device, and we don't collect, track, or sell any personal information. Our <a href="privacy.html">Privacy Policy</a> explains exactly how we handle the minimal data required to keep the site running.</p>
+      <p>ToolCompass processes all data locally in your browser. This means your inputs never leave your device, and we don't collect, track, or sell any personal information. Our <a href="/datenschutz/index.html">Privacy Policy</a> explains exactly how we handle the minimal data required to keep the site running.</p>
 
       <div class="ad-notice">
         <h2>🪧 A Note About Ads</h2>
@@ -159,21 +324,33 @@
     </div>
   </main>
 
-  <!-- === FOOTER (angepasst an Ihre Struktur) === -->
+  <!-- FOOTER (exakt wie Homepage-Vorlage) -->
   <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="/about.html">About</a>
-        <a href="/impressum/index.html" lang="de">Impressum</a>
-        <a href="/datenschutz/index.html" lang="de">Datenschutz</a>
-      </div>
-      <p class="footer-copy">&copy; <span id="year"></span> ToolCompass. All rights reserved.</p>
-      <p class="ad-disclosure">This site is supported by non-intrusive ads. We never sell your data.</p>
-    </div>
+    <div class="footer-logo">Tool<em>Compass</em>.org</div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/about.html">About</a>
+      <a href="/impressum/index.html" lang="de">Imprint</a>
+      <a href="/datenschutz/index.html" lang="de">Privacy</a>
+    </nav>
+    <p class="footer-copy">ToolCompass.org &copy; <span id="year"></span> — Professional Online Tools</p>
+    <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. You may use an ad-blocker — we respect your choice.</p>
   </footer>
 
   <script>
+    // Year update
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
+
 </body>
 </html>
