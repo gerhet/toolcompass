@@ -13,16 +13,61 @@
       line-height: 1.65;
       color: #1a1a1a;
       background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     a { color: #0056b3; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     /* === LAYOUT === */
-    .container { max-width: 820px; margin: 0 auto; padding: 0 1.2rem; }
-    header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem 0; margin-bottom: 2rem; }
+    .container { max-width: 820px; margin: 0 auto; padding: 0 1.2rem; width: 100%; }
+    header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 1rem 0; }
     nav { display: flex; gap: 1.2rem; flex-wrap: wrap; font-size: 0.95rem; }
-    main { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); margin-bottom: 2.5rem; }
-    footer { text-align: center; padding: 1.5rem 0; color: #666; font-size: 0.9rem; border-top: 1px solid #e5e5e5; margin-top: auto; }
+    main { 
+      background: #fff; 
+      padding: 2rem; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04); 
+      margin: 2rem auto; 
+      flex: 1;
+      width: 100%;
+      max-width: 820px;
+    }
+
+    /* === FOOTER STYLES (angepasst an Ihre Struktur) === */
+    footer { 
+      text-align: center; 
+      padding: 1.5rem 0 2rem; 
+      color: #666; 
+      font-size: 0.9rem; 
+      border-top: 1px solid #e5e5e5; 
+      margin-top: auto;
+      background: #fff;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover {
+      color: #0056b3;
+    }
+    .footer-copy {
+      margin-bottom: 0.4rem;
+    }
+    .ad-disclosure {
+      font-size: 0.8rem;
+      color: #888;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
     /* === CONTENT STYLES === */
     h1 { font-size: 2.1rem; margin-bottom: 1rem; color: #000; letter-spacing: -0.5px; }
@@ -50,9 +95,10 @@
     /* === RESPONSIVE === */
     @media (max-width: 600px) {
       .container { padding: 0 1rem; }
-      main { padding: 1.3rem; }
+      main { padding: 1.3rem; margin: 1rem; }
       h1 { font-size: 1.7rem; }
       h2 { font-size: 1.2rem; }
+      .footer-links { flex-direction: column; gap: 0.4rem; }
     }
   </style>
 </head>
@@ -68,52 +114,61 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1>About ToolCompass</h1>
-    
-    <p><strong>ToolCompass</strong> is a curated collection of free, browser-based productivity tools designed to help developers, creators, freelancers, and professionals work smarter — without signups, installations, or hidden costs.</p>
-    
-    <h2>🎯 Why ToolCompass Exists</h2>
-    <p>We noticed that many everyday tasks — from calculating VAT to formatting JSON, generating secure passwords, or estimating reading time — require switching between multiple websites, dealing with intrusive ads, or installing bloated software.</p>
-    <p>ToolCompass solves this by offering:</p>
-    <ul>
-      <li>✅ <strong>100% free tools</strong> — no paywalls, no premium tiers</li>
-      <li>✅ <strong>No registration required</strong> — just open and use instantly</li>
-      <li>✅ <strong>Privacy-first design</strong> — all calculations run locally in your browser; we never store your inputs</li>
-      <li>✅ <strong>Lightweight & fast</strong> — optimized for performance, even on slower connections</li>
-      <li>✅ <strong>Open & transparent</strong> — built with care, hosted reliably on GitHub Pages</li>
-    </ul>
-
-    <h2>🔧 How We Build Our Tools</h2>
-    <p>Every tool on ToolCompass is carefully designed to be accurate, intuitive, and distraction-free. We prioritize reliability over quantity. If a tool doesn’t meet our standards for usability and correctness, we don’t publish it. All tools are regularly tested and updated to ensure they work across modern browsers and devices.</p>
-
-    <h2>🔒 Your Privacy Matters</h2>
-    <p>ToolCompass processes all data locally in your browser. This means your inputs never leave your device, and we don’t collect, track, or sell any personal information. Our <a href="privacy.html">Privacy Policy</a> explains exactly how we handle the minimal data required to keep the site running.</p>
-
-    <div class="ad-notice">
-      <h2>🪧 A Note About Ads</h2>
-      <p>ToolCompass is and will always be free to use. To cover domain, hosting, and maintenance costs, we display non-intrusive ads via Google AdSense.</p>
-      <p>What this means for you:</p>
+  <main>
+    <div class="container">
+      <h1>About ToolCompass</h1>
+      
+      <p><strong>ToolCompass</strong> is a curated collection of free, browser-based productivity tools designed to help developers, creators, freelancers, and professionals work smarter — without signups, installations, or hidden costs.</p>
+      
+      <h2>🎯 Why ToolCompass Exists</h2>
+      <p>We noticed that many everyday tasks — from calculating VAT to formatting JSON, generating secure passwords, or estimating reading time — require switching between multiple websites, dealing with intrusive ads, or installing bloated software.</p>
+      <p>ToolCompass solves this by offering:</p>
       <ul>
-        <li>🚫 <strong>No pop-ups</strong>, auto-play videos, or misleading ad buttons</li>
-        <li>🚫 <strong>No cross-site tracking</strong> beyond standard ad network requirements</li>
-        <li>✅ Ads are clearly labeled and visually separated from tool content</li>
-        <li>✅ You can use ad-blockers — we respect your choice (though your support helps us keep the site free!)</li>
+        <li>✅ <strong>100% free tools</strong> — no paywalls, no premium tiers</li>
+        <li>✅ <strong>No registration required</strong> — just open and use instantly</li>
+        <li>✅ <strong>Privacy-first design</strong> — all calculations run locally in your browser; we never store your inputs</li>
+        <li>✅ <strong>Lightweight & fast</strong> — optimized for performance, even on slower connections</li>
+        <li>✅ <strong>Open & transparent</strong> — built with care, hosted reliably on GitHub Pages</li>
       </ul>
-      <p><em>Transparency note: If you click on an ad and make a purchase, we may earn a small commission at no extra cost to you. This directly funds tool improvements and server costs.</em></p>
-    </div>
 
-    <div class="contact-box">
-      <h2>📬 Questions, Feedback, or Tool Requests?</h2>
-      <p>We’d love to hear from you! Whether you’ve found a bug, want to suggest a new tool, or just have a question, reach out at:</p>
-      <p><strong>Email:</strong> <a href="mailto:ronwesel688@gmail.com">ronwesel688@gmail.com</a></p>
-      <p>We read every message and try to respond within 48 hours.</p>
+      <h2>🔧 How We Build Our Tools</h2>
+      <p>Every tool on ToolCompass is carefully designed to be accurate, intuitive, and distraction-free. We prioritize reliability over quantity. If a tool doesn't meet our standards for usability and correctness, we don't publish it. All tools are regularly tested and updated to ensure they work across modern browsers and devices.</p>
+
+      <h2>🔒 Your Privacy Matters</h2>
+      <p>ToolCompass processes all data locally in your browser. This means your inputs never leave your device, and we don't collect, track, or sell any personal information. Our <a href="privacy.html">Privacy Policy</a> explains exactly how we handle the minimal data required to keep the site running.</p>
+
+      <div class="ad-notice">
+        <h2>🪧 A Note About Ads</h2>
+        <p>ToolCompass is and will always be free to use. To cover domain, hosting, and maintenance costs, we display non-intrusive ads via Google AdSense.</p>
+        <p>What this means for you:</p>
+        <ul>
+          <li>🚫 <strong>No pop-ups</strong>, auto-play videos, or misleading ad buttons</li>
+          <li>🚫 <strong>No cross-site tracking</strong> beyond standard ad network requirements</li>
+          <li>✅ Ads are clearly labeled and visually separated from tool content</li>
+          <li>✅ You can use ad-blockers — we respect your choice (though your support helps us keep the site free!)</li>
+        </ul>
+        <p><em>Transparency note: If you click on an ad and make a purchase, we may earn a small commission at no extra cost to you. This directly funds tool improvements and server costs.</em></p>
+      </div>
+
+      <div class="contact-box">
+        <h2>📬 Questions, Feedback, or Tool Requests?</h2>
+        <p>We'd love to hear from you! Whether you've found a bug, want to suggest a new tool, or just have a question, reach out at:</p>
+        <p><strong>Email:</strong> <a href="mailto:ronwesel688@gmail.com">ronwesel688@gmail.com</a></p>
+        <p>We read every message and try to respond within 48 hours.</p>
+      </div>
     </div>
   </main>
 
+  <!-- === FOOTER (angepasst an Ihre Struktur) === -->
   <footer>
     <div class="container">
-      <p>&copy; <span id="year"></span> ToolCompass. All rights reserved. | <a href="privacy.html">Privacy</a> | <a href="imprint.html">Imprint</a></p>
+      <div class="footer-links">
+        <a href="/about.html">About</a>
+        <a href="/impressum/index.html" lang="de">Impressum</a>
+        <a href="/datenschutz/index.html" lang="de">Datenschutz</a>
+      </div>
+      <p class="footer-copy">&copy; <span id="year"></span> ToolCompass. All rights reserved.</p>
+      <p class="ad-disclosure">This site is supported by non-intrusive ads. We never sell your data.</p>
     </div>
   </footer>
 
