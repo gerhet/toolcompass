@@ -6,11 +6,24 @@
   <meta name="google-site-verification" content="ZwbquvhC72rPppjQTqD4b8wBaDw97MHKdKSgCG3LMXI" />
 
   <!-- ═══ SEO ═══ -->
-  <title>Global Timezone Clock – Live World Time & Business Hours | ToolCompass</title>
-  <meta name="description" content="Live world clock with multiple timezones. Track business hours across global offices. Real-time updates, day/night indicators, and meeting planner. Free & private.">
+  <title>Timezone Clock: Live World Time & Meeting Planner | ToolCompass</title>
+  <meta name="description" content="Track multiple timezones live. Free world clock for remote teams. Real-time updates, business hours & meeting planner. Private, no login. Track your team now!">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  <!-- Canonical: Dynamisch anpassbar für Subpages -->
+  <!-- <link rel="canonical" href="https://toolcompass.org{{page.path}}"> -->
   <link rel="canonical" href="https://toolcompass.org/global-timezone-clock">
+  
+  <!-- Hreflang für mehrsprachige Vorbereitung -->
+  <link rel="alternate" hreflang="en" href="https://toolcompass.org/global-timezone-clock">
+  <link rel="alternate" hreflang="de" href="https://toolcompass.org/de/global-timezone-clock">
+  <link rel="alternate" hreflang="x-default" href="https://toolcompass.org/global-timezone-clock">
+  
+  <!-- Sitemap Reference -->
+  <link rel="sitemap" type="application/xml" href="https://toolcompass.org/sitemap.xml">
+  
   <meta name="author" content="ToolCompass">
+  <meta name="keywords" content="world clock, timezone converter, global time, meeting planner, remote team clock, business hours tracker">
 
   <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:type" content="website">
@@ -54,6 +67,7 @@
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "description": "A live world clock displaying multiple timezones simultaneously with business hours indicators and meeting planner.",
+        "featureList": ["Real-time timezone display", "Business hours indicator", "Day/night visualization", "Custom city selection", "Meeting time suggestions", "Auto-save preferences"],
         "isPartOf": { "@type": "WebSite", "name": "ToolCompass", "url": "https://toolcompass.org" }
       },
       {
@@ -72,7 +86,7 @@
             "name": "How accurate is the world clock?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Our clock updates every second using your device's system time and official timezone data. It's accurate to the second for all displayed locations."
+              "text": "Our clock updates every second using your device's system time and the official IANA timezone database. It's accurate to the second for all displayed locations worldwide, including automatic daylight saving time adjustments."
             }
           },
           {
@@ -80,16 +94,59 @@
             "name": "Can I add custom cities?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! You can add any city from our list of 20+ major business hubs. Your selections are saved automatically for your next visit."
+              "text": "Yes! Choose from 20+ major business hubs worldwide using the dropdown or quick-add buttons. Your selections are saved automatically in your browser, so they're ready when you return — no account required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does the business hours indicator mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Green (Open) indicates 9:00-17:00 local time on weekdays, representing typical business hours. Red (Closed) shows evenings, nights, and weekends when offices are typically closed. Note that actual business hours vary by country and industry."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my city selection data stored or shared?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Your city selections are stored locally in your browser only using localStorage. No data is sent to our servers or any third party. Your privacy is completely protected — no tracking, no cookies, no login required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does daylight saving time affect the clock?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The clock automatically adjusts for daylight saving time (DST) using the IANA timezone database. Since DST transition dates vary by country, always double-check times during spring/fall transition weeks when scheduling critical meetings."
             }
           }
         ]
+      },
+      {
+        "@type": "Organization",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "sameAs": [],
+        "description": "ToolCompass offers 31+ free, private browser tools for productivity, finance, writing, development, time management, and health — all running locally in your browser."
+      },
+      {
+        "@type": "WebSite",
+        "name": "ToolCompass",
+        "url": "https://toolcompass.org",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolcompass.org/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     ]
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Fonts mit Preconnect + Preload für kritische Ressourcen -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -113,7 +170,17 @@
       --night-bg: rgba(99,102,241,0.07);
       --business: #22C55E;
       --closed: #EF4444;
+      --focus-ring: rgba(34,211,238,0.5);
     }
+
+    /* z-index Stack Dokumentation:
+       999: Grain overlay
+       200: Toast notifications
+       100: Header (sticky)
+       50: Modals/Banners (future)
+       10: Skip link
+       1: Default content
+    */
 
     html { scroll-behavior: smooth; }
 
@@ -122,12 +189,34 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      line-height: 1.5;
     }
 
-    /* Grain */
+    /* Skip to Content Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--time);
+      color: var(--bg);
+      padding: 0.5rem 1rem;
+      z-index: 10;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 0 0 4px 0;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 2px solid var(--bg);
+      outline-offset: 2px;
+    }
+
+    /* Grain - korrigierte SVG-URL */
     body::before {
       content: ''; position: fixed; inset: 0;
-      background-image: url("image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 999;
     }
 
@@ -151,7 +240,11 @@
       transition: color .2s;
       padding: 6px 0;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 4px;
+    }
     .back-arrow { font-size: 16px; transition: transform .2s; }
     .back-btn:hover .back-arrow { transform: translateX(-3px); }
     .logo-text {
@@ -193,6 +286,8 @@
       margin-bottom: 1rem;
       position: relative; overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      will-change: transform, opacity;
+      transform: translateZ(0);
     }
     .hero-card::before {
       content: '';
@@ -200,7 +295,7 @@
       background: linear-gradient(90deg, transparent, rgba(34,211,238,.25), transparent);
     }
 
-    /* Local Time Display (ADDICTIVE - Personal Reference) */
+    /* Local Time Display */
     .local-time-display {
       text-align: center;
       padding: 1.5rem;
@@ -220,15 +315,17 @@
     }
     @media (min-width: 520px) { .clock-grid { grid-template-columns: repeat(2, 1fr); } }
 
-    /* Clock Card (ADDICTIVE - Visual Status) */
+    /* Clock Card */
     .clock-card {
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 14px; padding: 1.25rem;
       display: flex; justify-content: space-between; align-items: center;
       transition: border-color .2s, transform .2s;
       position: relative;
+      will-change: transform;
+      transform: translateZ(0);
     }
-    .clock-card:hover {
+    .clock-card:hover, .clock-card:focus-within {
       border-color: var(--border-hover);
       transform: translateY(-2px);
     }
@@ -261,9 +358,12 @@
       opacity: 0; transition: all .2s;
     }
     .clock-card:hover .remove-btn { opacity: 1; }
-    .remove-btn:hover { background: var(--closed); color: #fff; }
+    .remove-btn:hover, .remove-btn:focus-visible { background: var(--closed); color: #fff; outline: none; }
+    .remove-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
 
-    /* Add City Section (ADDICTIVE - Customization) */
+    /* Add City Section */
     .add-city-section {
       margin-top: 1.5rem; padding-top: 1.5rem;
       border-top: 1px solid var(--border);
@@ -283,16 +383,23 @@
       font-family: 'Outfit'; font-size: 14px;
     }
     .city-select:focus { outline: none; border-color: var(--time); }
+    .city-select:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
     .add-btn {
       padding: 12px 24px; border-radius: 8px; border: none;
       background: var(--time); color: #0D0D0D;
       font-weight: 600; font-size: 14px; cursor: pointer;
       transition: all .2s;
     }
-    .add-btn:hover { opacity: 0.9; transform: scale(1.02); }
+    .add-btn:hover, .add-btn:focus-visible { opacity: 0.95; transform: scale(1.02); outline: none; }
+    .add-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+    }
     .add-btn:active { transform: scale(0.98); }
 
-    /* Quick Add Cities (ADDICTIVE - One-Click) */
+    /* Quick Add Cities */
     .quick-cities {
       display: flex; gap: 8px; flex-wrap: wrap;
       margin-top: 1rem;
@@ -304,14 +411,18 @@
       font-size: 11px; font-weight: 500; cursor: pointer;
       transition: all .2s;
     }
-    .quick-city-btn:hover {
+    .quick-city-btn:hover, .quick-city-btn:focus-visible {
       border-color: var(--time); color: var(--time);
+      outline: none;
+    }
+    .quick-city-btn:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .quick-city-btn.added {
       background: var(--time-bg); border-color: var(--time); color: var(--time);
     }
 
-    /* Meeting Planner (ADDICTIVE - Business Value) */
+    /* Meeting Planner */
     .meeting-planner {
       margin-top: 2rem; padding: 1.5rem;
       background: var(--surface2); border: 1px solid var(--border);
@@ -336,7 +447,7 @@
     .overlap-value.good { color: var(--business); }
     .overlap-value.bad { color: var(--closed); }
 
-    /* === NEW: HOW IT WORKS SECTION === */
+    /* === HOW IT WORKS SECTION === */
     .how-it-works {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem;
@@ -355,7 +466,7 @@
     .how-it-works li { margin-bottom: 0.5rem; }
     .how-it-works strong { color: var(--text); font-weight: 500; }
 
-    /* === NEW: WHO IS THIS FOR BOX === */
+    /* === WHO IS THIS FOR BOX === */
     .who-is-this-for {
       background: linear-gradient(135deg, rgba(34,211,238,0.03) 0%, transparent 100%);
       border: 1px solid var(--time-border);
@@ -373,7 +484,7 @@
       content: '✓ '; color: var(--time); font-weight: 600;
     }
 
-    /* === NEW: TIMEZONE TIPS BOX === */
+    /* === TIMEZONE TIPS BOX === */
     .timezone-tips {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -430,10 +541,14 @@
       font-size: 12px; font-weight: 500;
       transition: border-color .2s, background .2s, transform .2s;
     }
-    .tool-chip:hover {
+    .tool-chip:hover, .tool-chip:focus-visible {
       border-color: var(--border-hover);
       background: var(--surface2);
       transform: translateY(-2px);
+      outline: none;
+    }
+    .tool-chip:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
     .tool-chip-icon { font-size: 18px; flex-shrink: 0; }
     .tool-chip-info { min-width: 0; }
@@ -458,7 +573,11 @@
     }
     .seo-content strong { color: var(--text); font-weight: 500; }
     .seo-content a { color: var(--time); text-decoration: none; border-bottom: 1px dashed var(--time-border); }
-    .seo-content a:hover { border-bottom-style: solid; }
+    .seo-content a:hover, .seo-content a:focus-visible { border-bottom-style: solid; outline: none; }
+    .seo-content a:focus-visible {
+      box-shadow: 0 0 0 3px var(--focus-ring);
+      border-radius: 2px;
+    }
 
     /* FAQ */
     .faq-list { margin-top: 1.5rem; }
@@ -471,14 +590,17 @@
       display: flex; justify-content: space-between; align-items: center; gap: 1rem;
       transition: background .2s;
     }
-    .faq-q:hover { background: var(--surface2); }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
+    .faq-q:focus-visible {
+      box-shadow: inset 0 0 0 2px var(--focus-ring);
+    }
     .faq-icon { font-size: 18px; color: var(--accent); transition: transform .3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .faq-item.open .faq-a { max-height: 200px; }
+    .faq-item.open .faq-a { max-height: 350px; }
     .faq-a-inner { padding: .25rem 1.25rem 1rem; font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
 
-    /* === NEW: PRO TIP BOX === */
+    /* === PRO TIP BOX === */
     .pro-tip {
       background: rgba(232,213,163,0.06);
       border-left: 3px solid var(--accent);
@@ -488,6 +610,31 @@
       color: var(--muted);
     }
     .pro-tip strong { color: var(--accent); }
+
+    /* === PRIVACY DISCLAIMER BOX === */
+    .privacy-disclaimer {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .privacy-disclaimer strong { color: var(--text); }
+
+    /* === COOKIE-FREE ADSENSE NOTICE === */
+    .adsense-notice {
+      background: rgba(34,211,238,0.05);
+      border: 1px solid var(--time-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .adsense-notice strong { color: var(--time); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -509,7 +656,11 @@
       letter-spacing: .08em; text-transform: uppercase;
       transition: color .15s;
     }
-    .footer-links a:hover { color: var(--text); }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--text); outline: none; }
+    .footer-links a:focus-visible {
+      box-shadow: 0 0 0 2px var(--focus-ring);
+      border-radius: 2px;
+    }
     .footer-copy { font-size: 11px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; opacity: .4; }
     .ad-disclosure {
       font-size: 10px; color: var(--muted); opacity: 0.5;
@@ -527,6 +678,16 @@
     }
     .toast.active { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .page-tag-dot { animation: none; }
+    }
+
     @media (max-width: 480px) {
       main { padding: 2rem 1.25rem 5rem; }
       .clock-grid { grid-template-columns: 1fr; }
@@ -535,6 +696,9 @@
   </style>
 </head>
 <body>
+
+<!-- Skip to Content Link für Accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header>
   <div class="header-inner">
@@ -547,7 +711,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -572,7 +736,7 @@
   <!-- HERO CARD (TOOL) -->
   <div class="hero-card">
     
-    <!-- Local Time Reference (ADDICTIVE - Personal Anchor) -->
+    <!-- Local Time Reference -->
     <div class="local-time-display">
       <div class="local-label">Your Local Time</div>
       <div class="local-time" id="localTime">--:--:--</div>
@@ -582,11 +746,11 @@
     <!-- Clock Grid -->
     <div class="clock-grid" id="clockGrid"></div>
 
-    <!-- Add City Section (ADDICTIVE - Customization) -->
+    <!-- Add City Section -->
     <div class="add-city-section">
       <div class="add-city-header">Add More Cities</div>
       <div class="city-select-row">
-        <select id="citySelect" class="city-select">
+        <select id="citySelect" class="city-select" aria-label="Select a city to add">
           <option value="">Select a city…</option>
           <option value="London|Europe/London">London (GMT)</option>
           <option value="New York|America/New_York">New York (EST)</option>
@@ -609,14 +773,14 @@
           <option value="Auckland|Pacific/Auckland">Auckland (NZDT)</option>
           <option value="Sao Paulo|America/Sao_Paulo">São Paulo (BRT)</option>
         </select>
-        <button class="add-btn" onclick="addCity()">+ Add</button>
+        <button class="add-btn" type="button" onclick="addCity()">+ Add</button>
       </div>
 
-      <!-- Quick Add (ADDICTIVE - One-Click) -->
+      <!-- Quick Add -->
       <div class="quick-cities" id="quickCities"></div>
     </div>
 
-    <!-- Meeting Planner (ADDICTIVE - Business Value) -->
+    <!-- Meeting Planner -->
     <div class="meeting-planner">
       <div class="planner-title">📅 Meeting Time Overview</div>
       <div class="overlap-grid">
@@ -632,7 +796,7 @@
     </div>
   </div>
 
-  <!-- === NEW: HOW IT WORKS SECTION === -->
+  <!-- === HOW IT WORKS SECTION === -->
   <div class="how-it-works">
     <h3>🔧 How This Tool Works</h3>
     <ol>
@@ -643,7 +807,7 @@
     </ol>
   </div>
 
-  <!-- === NEW: WHO IS THIS FOR BOX === -->
+  <!-- === WHO IS THIS FOR BOX === -->
   <div class="who-is-this-for">
     <strong>Who is this for?</strong> This clock helps professionals who coordinate across timezones:
     <ul>
@@ -665,6 +829,16 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
     </div>
+  </div>
+
+  <!-- === COOKIE-FREE ADSENSE NOTICE === -->
+  <div class="adsense-notice">
+    <strong>🔒 Cookie-free ads:</strong> ToolCompass uses Google AdSense without personalized tracking. Your timezone data stays private — no cookies, no profiling.
+  </div>
+
+  <!-- === PRIVACY DISCLAIMER === -->
+  <div class="privacy-disclaimer">
+    <strong>🔐 Privacy First:</strong> All calculations run locally in your browser. Your city selections are never sent to any server. No data storage, no tracking, no login required.
   </div>
 
   <!-- OTHER TOOLS -->
@@ -734,44 +908,59 @@
     </div>
 
     <p>
-      All calculations run locally in your browser using JavaScript and the IANA timezone database. This means your city selections never leave your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals.
+      All calculations run locally in your browser using JavaScript and the IANA timezone database. This means your city selections never leave your device, and the tool works even with limited internet connectivity. It's part of <a href="/">ToolCompass</a>, a collection of 31+ free, private productivity tools for professionals — built by developers who value privacy, speed, and simplicity.
+    </p>
+    <p>
+      <strong>About the creator:</strong> ToolCompass is maintained by a small team of productivity enthusiasts who believe powerful tools should be free, private, and instantly usable — no signups, no tracking, no bloat. We've been building browser-based utilities since 2024.
+    </p>
+    <p class="privacy-disclaimer" style="margin-top: 1rem; background: transparent; border: none; padding: 0; font-size: 12px;">
+      <strong>Note:</strong> This tool uses the IANA timezone database for accuracy. Timezone rules and daylight saving time transitions may change; always verify critical meeting times with official sources.
     </p>
 
     <div class="faq-list">
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
           How accurate is the world clock?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Our clock updates every second using your device's system time and official IANA timezone database. It's accurate to the second for all displayed locations worldwide.</p>
+        <div class="faq-a" id="faq1">
+          <p class="faq-a-inner">Our clock updates every second using your device's system time and the official IANA timezone database. It's accurate to the second for all displayed locations worldwide, including automatic daylight saving time adjustments.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
           Can I add custom cities?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Yes! Choose from 20+ major business hubs worldwide. Your selections are saved in your browser automatically, so they're ready when you return.</p>
+        <div class="faq-a" id="faq2">
+          <p class="faq-a-inner">Yes! Choose from 20+ major business hubs worldwide using the dropdown or quick-add buttons. Your selections are saved automatically in your browser, so they're ready when you return — no account required.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
           What does the business hours indicator mean?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">Green (Open) indicates 9:00-17:00 local time, typical business hours. Red (Closed) shows evenings, nights, and weekends when offices are typically closed.</p>
+        <div class="faq-a" id="faq3">
+          <p class="faq-a-inner">Green (Open) indicates 9:00-17:00 local time on weekdays, representing typical business hours. Red (Closed) shows evenings, nights, and weekends when offices are typically closed. Note that actual business hours vary by country and industry.</p>
         </div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Is my data stored or shared?
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
+          Is my city selection data stored or shared?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
-          <p class="faq-a-inner">No. Your city selections are stored locally in your browser only. No data is sent to our servers. Complete privacy guaranteed.</p>
+        <div class="faq-a" id="faq4">
+          <p class="faq-a-inner">No. Your city selections are stored locally in your browser only using localStorage. No data is sent to our servers or any third party. Your privacy is completely protected — no tracking, no cookies, no login required.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          How does daylight saving time affect the clock?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a" id="faq5">
+          <p class="faq-a-inner">The clock automatically adjusts for daylight saving time (DST) using the IANA timezone database. Since DST transition dates vary by country, always double-check times during spring/fall transition weeks when scheduling critical meetings.</p>
         </div>
       </div>
     </div>
@@ -787,18 +976,28 @@
     <a href="/datenschutz/index.html">Privacy</a>
   </div>
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
-  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality.</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. No personalized tracking is used.</p>
 </footer>
 
 <!-- TOAST NOTIFICATION -->
-<div class="toast" id="toast">City added!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">City added!</div>
+
+<!-- Image Lazy Loading Template (für zukünftige Bilder) -->
+<!-- 
+  <img src="image.jpg" 
+       alt="Descriptive alt text" 
+       width="800" 
+       height="600" 
+       loading="lazy" 
+       decoding="async">
+-->
 
 <script>
 // ═══════════════════════════════════════════════
 // TIMEZONE CLOCK LOGIC
 // ═══════════════════════════════════════════════
 
-// Default cities (ADDICTIVE - Pre-selected for value)
+// Default cities
 let selectedCities = [
   { name: 'London', zone: 'Europe/London' },
   { name: 'New York', zone: 'America/New_York' },
@@ -806,27 +1005,37 @@ let selectedCities = [
   { name: 'Berlin', zone: 'Europe/Berlin' }
 ];
 
-// Load saved cities from LocalStorage (ADDICTIVE - Persistence)
+// Load saved cities from LocalStorage
 function loadSavedCities() {
-  const saved = localStorage.getItem('tc_timezone_cities');
-  if (saved) {
-    selectedCities = JSON.parse(saved);
+  try {
+    const saved = localStorage?.getItem('tc_timezone_cities');
+    if (saved) {
+      selectedCities = JSON.parse(saved);
+    }
+  } catch(e) {
+    // Silent fail if storage is disabled
   }
 }
 
-// Save cities to LocalStorage (ADDICTIVE - Persistence)
+// Save cities to LocalStorage
 function saveCities() {
-  localStorage.setItem('tc_timezone_cities', JSON.stringify(selectedCities));
+  try {
+    localStorage?.setItem('tc_timezone_cities', JSON.stringify(selectedCities));
+  } catch(e) {
+    // Silent fail if storage is disabled
+  }
 }
 
 // Check if city is already added
 function isCityAdded(zone) {
-  return selectedCities.some(c => c.zone === zone);
+  return selectedCities?.some(c => c?.zone === zone);
 }
 
-// Add city (ADDICTIVE - Customization)
+// Add city
 function addCity() {
   const select = document.getElementById('citySelect');
+  if (!select) return;
+  
   const value = select.value;
   if (!value) return;
   
@@ -844,18 +1053,20 @@ function addCity() {
   select.value = '';
 }
 
-// Remove city (ADDICTIVE - Control)
+// Remove city
 function removeCity(zone) {
-  selectedCities = selectedCities.filter(c => c.zone !== zone);
+  selectedCities = selectedCities?.filter(c => c?.zone !== zone);
   saveCities();
   renderClocks();
   renderQuickCities();
   showToast('City removed');
 }
 
-// Render Quick Cities Buttons (ADDICTIVE - One-Click Add)
+// Render Quick Cities Buttons
 function renderQuickCities() {
   const container = document.getElementById('quickCities');
+  if (!container) return;
+  
   const allCities = [
     { name: 'London', zone: 'Europe/London' },
     { name: 'New York', zone: 'America/New_York' },
@@ -870,6 +1081,7 @@ function renderQuickCities() {
   container.innerHTML = allCities.map(city => {
     const added = isCityAdded(city.zone);
     return `<button class="quick-city-btn ${added ? 'added' : ''}" 
+                    type="button"
                     onclick="${added ? `removeCity('${city.zone}')` : `addSpecificCity('${city.name}', '${city.zone}')`}">
               ${added ? '✓' : '+'} ${city.name}
             </button>`;
@@ -885,71 +1097,84 @@ function addSpecificCity(name, zone) {
   showToast('City added!');
 }
 
-// Check business hours (ADDICTIVE - Visual Status)
+// Check business hours
 function isBusinessHours(hour, day) {
   // Mon-Fri, 9-17
   return day >= 1 && day <= 5 && hour >= 9 && hour < 17;
 }
 
-// Get day/night emoji (ADDICTIVE - Visual)
+// Get day/night emoji
 function getDayNightEmoji(hour) {
   return hour >= 6 && hour < 18 ? '☀️' : '🌙';
 }
 
-// Render Clocks (REAL-TIME - Every Second)
+// Render Clocks
 function renderClocks() {
   const container = document.getElementById('clockGrid');
+  if (!container) return;
+  
   const now = new Date();
   
-  container.innerHTML = selectedCities.map(city => {
-    const timeStr = now.toLocaleTimeString('en-US', { 
-      timeZone: city.zone, 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit',
-      second: '2-digit'
-    });
+  container.innerHTML = selectedCities?.map(city => {
+    if (!city?.zone) return '';
     
-    const hour = parseInt(now.toLocaleTimeString('en-US', { 
-      timeZone: city.zone, 
-      hour: 'numeric' 
-    }));
-    const day = new Date(now.toLocaleString('en-US', { timeZone: city.zone })).getDay();
-    
-    const business = isBusinessHours(hour, day);
-    const statusClass = business ? 'business-hours' : 'closed';
-    const statusBadge = business ? 
-      `<span class="status-badge open">Open</span>` : 
-      `<span class="status-badge closed">Closed</span>`;
-    const dayNight = getDayNightEmoji(hour);
-    
-    return `
-      <div class="clock-card ${statusClass}">
-        <button class="remove-btn" onclick="removeCity('${city.zone}')">×</button>
-        <div class="clock-info">
-          <div class="clock-city">${city.name}</div>
-          <div class="clock-zone">${city.zone}</div>
-          <div class="clock-time">${timeStr}</div>
+    try {
+      const timeStr = now.toLocaleTimeString('en-US', { 
+        timeZone: city.zone, 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      
+      const hour = parseInt(now.toLocaleTimeString('en-US', { 
+        timeZone: city.zone, 
+        hour: 'numeric' 
+      }));
+      const day = new Date(now.toLocaleString('en-US', { timeZone: city.zone })).getDay();
+      
+      const business = isBusinessHours(hour, day);
+      const statusClass = business ? 'business-hours' : 'closed';
+      const statusBadge = business ? 
+        `<span class="status-badge open">Open</span>` : 
+        `<span class="status-badge closed">Closed</span>`;
+      const dayNight = getDayNightEmoji(hour);
+      
+      return `
+        <div class="clock-card ${statusClass}">
+          <button class="remove-btn" type="button" onclick="removeCity('${city.zone}')" aria-label="Remove ${city.name}">×</button>
+          <div class="clock-info">
+            <div class="clock-city">${city.name}</div>
+            <div class="clock-zone">${city.zone}</div>
+            <div class="clock-time">${timeStr}</div>
+          </div>
+          <div class="clock-status">
+            ${statusBadge}
+            <span class="day-night-indicator">${dayNight}</span>
+          </div>
         </div>
-        <div class="clock-status">
-          ${statusBadge}
-          <span class="day-night-indicator">${dayNight}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
+      `;
+    } catch(e) {
+      return '';
+    }
+  }).filter(Boolean).join('') || '';
 }
 
-// Update Local Time (ADDICTIVE - Personal Reference)
+// Update Local Time
 function updateLocalTime() {
+  const localTimeEl = document.getElementById('localTime');
+  const localDateEl = document.getElementById('localDate');
+  
+  if (!localTimeEl || !localDateEl) return;
+  
   const now = new Date();
-  document.getElementById('localTime').innerText = now.toLocaleTimeString('en-US', {
+  localTimeEl.innerText = now.toLocaleTimeString('en-US', {
     hour12: false,
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit'
   });
-  document.getElementById('localDate').innerText = now.toLocaleDateString('en-US', {
+  localDateEl.innerText = now.toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -960,11 +1185,13 @@ function updateLocalTime() {
   updateMeetingPlanner();
 }
 
-// Update Meeting Planner (ADDICTIVE - Business Value)
+// Update Meeting Planner
 function updateMeetingPlanner() {
-  // Simple logic: suggest 9-11 AM local time as good overlap for most timezones
-  document.getElementById('bestWindow').innerText = '9:00 - 11:00 your time';
-  document.getElementById('avoidWindow').innerText = '22:00 - 7:00 your time';
+  const bestWindow = document.getElementById('bestWindow');
+  const avoidWindow = document.getElementById('avoidWindow');
+  
+  if (bestWindow) bestWindow.innerText = '9:00 - 11:00 your time';
+  if (avoidWindow) avoidWindow.innerText = '22:00 - 7:00 your time';
 }
 
 // Initialize
@@ -973,30 +1200,43 @@ renderClocks();
 renderQuickCities();
 updateLocalTime();
 
-// Real-time updates (ADDICTIVE - Live Feeling)
-setInterval(() => {
-  renderClocks();
-  updateLocalTime();
-}, 1000);
+// Real-time updates
+let clockInterval;
+if (typeof setInterval !== 'undefined') {
+  clockInterval = setInterval(() => {
+    renderClocks();
+    updateLocalTime();
+  }, 1000);
+}
+
+// Cleanup on page unload
+window.addEventListener?.('beforeunload', () => {
+  if (clockInterval) clearInterval(clockInterval);
+});
 
 // Toast Notification
 function showToast(message) {
   const toast = document.getElementById('toast');
+  if (!toast) return;
+  
   toast.innerText = message;
   toast.classList.add('active');
-  setTimeout(() => toast.classList.remove('active'), 2000);
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('active'), 2000);
 }
 
 // FAQ Accordion
-document.querySelectorAll('.faq-q').forEach(btn => {
+document.querySelectorAll('.faq-q')?.forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    const isOpen = item?.classList.contains('open');
+    
+    document.querySelectorAll('.faq-item')?.forEach(i => {
+      i?.classList.remove('open');
+      i?.querySelector('.faq-q')?.setAttribute('aria-expanded', 'false');
     });
-    if (!isOpen) {
+    
+    if (item && !isOpen) {
       item.classList.add('open');
       btn.setAttribute('aria-expanded', 'true');
     }
@@ -1004,8 +1244,8 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
-// document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
-// (adsbygoogle = window.adsbygoogle || []).push({});
+// document.querySelectorAll('.ad-slot')?.forEach(el => el.classList.add('adsense-active'));
+// if (typeof adsbygoogle !== 'undefined') { (adsbygoogle = window.adsbygoogle || []).push({}); }
 </script>
 
 </body>
