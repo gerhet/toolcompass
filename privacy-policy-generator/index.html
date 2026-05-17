@@ -125,6 +125,9 @@
       --content-border: rgba(251,146,60,0.15);
       --success: #22C55E;
       --success-bg: rgba(34,197,94,0.07);
+      --warning: #EF4444;
+      --warning-bg: rgba(239,68,68,0.07);
+      --warning-border: rgba(239,68,68,0.15);
     }
 
     html { scroll-behavior: smooth; }
@@ -209,6 +212,68 @@
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(251,146,60,.25), transparent);
+    }
+
+    /* Trust Badges (NEW - AdSense Trust Signals) */
+    .trust-badges {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .trust-badge svg {
+      width: 14px;
+      height: 14px;
+      color: var(--success);
+    }
+
+    /* ⚠️ YMYL DISCLAIMER (REQUIRED FOR LEGAL TOOLS) */
+    .ymyl-disclaimer {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      border-left: 4px solid var(--warning);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .ymyl-disclaimer-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--warning);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .ymyl-disclaimer p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .ymyl-disclaimer a {
+      color: var(--content);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px dashed var(--content);
+    }
+    .ymyl-disclaimer a:hover {
+      opacity: 0.85;
     }
 
     /* Form Sections */
@@ -552,6 +617,97 @@
       font-style: normal;
     }
 
+    /* How It Works - Ordered List (NEW - AdSense Requirement) */
+    .how-it-works ol {
+      counter-reset: step;
+      list-style: none;
+      padding-left: 0;
+    }
+    .how-it-works li {
+      position: relative;
+      padding-left: 36px;
+      margin-bottom: 1rem;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      counter-increment: step;
+    }
+    .how-it-works li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--content);
+      color: #0D0D0D;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* Who Is This For - Explicit List (NEW) */
+    .who-for ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .who-for li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 0.75rem;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .who-for li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* Pro Tip Box (NEW - AdSense Requirement) */
+    .pro-tip {
+      background: linear-gradient(135deg, var(--content-bg), rgba(232,213,163,0.05));
+      border: 1px solid var(--content-border);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .pro-tip-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--content);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pro-tip p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .pro-tip a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px dashed var(--accent);
+      transition: opacity 0.2s;
+    }
+    .pro-tip a:hover {
+      opacity: 0.85;
+    }
+
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -774,11 +930,35 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: .75rem;
+      margin-bottom: 0.75rem;
     }
     .footer-logo em {
       color: var(--accent);
       font-style: italic;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: var(--text);
+    }
+    .footer-adsense-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1rem;
+      opacity: 0.7;
+      line-height: 1.5;
     }
     .footer-copy {
       font-size: 11px;
@@ -786,6 +966,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       opacity: .4;
+      margin-top: 0.5rem;
     }
 
     /* ─── ANIMATIONS & TOAST ─── */
@@ -833,6 +1014,11 @@
         width: 100%;
         justify-content: center;
       }
+      .footer-links {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -874,6 +1060,37 @@
   <!-- HERO CARD (TOOL) -->
   <div class="hero-card">
     
+    <!-- Trust Badges (NEW - AdSense Trust Signals) -->
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        100% Private
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Browser-Based
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        No Signup
+      </div>
+    </div>
+
+    <!-- ⚠️ YMYL DISCLAIMER (REQUIRED FOR LEGAL TOOLS) -->
+    <div class="ymyl-disclaimer">
+      <div class="ymyl-disclaimer-title">
+        <span>⚠️</span>
+        Legal Disclaimer
+      </div>
+      <p>
+        This tool generates privacy policy <strong>templates</strong> based on GDPR, CCPA, and CalOPPA guidelines. 
+        <strong>It is not legal advice.</strong> We recommend consulting a qualified attorney to review your specific situation, 
+        especially for complex businesses or sensitive data handling. 
+        <a href="https://gdpr-info.eu/" target="_blank" rel="noopener">Official GDPR Text</a> · 
+        <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener">CCPA Resources</a>
+      </p>
+    </div>
+
     <!-- Template Selector (ADDICTIVE - Style Options) -->
     <div class="form-section">
       <div class="section-title">
@@ -1023,6 +1240,39 @@
     </div>
   </div>
 
+  <!-- HOW IT WORKS (NEW - AdSense Requirement: Ordered List) -->
+  <div class="section-block how-it-works">
+    <div class="section-title">
+      How It Works
+      <span class="section-title-badge">3 Steps</span>
+    </div>
+    <ol>
+      <li><strong>Choose a template</strong>: Select Basic, E-Commerce, or Mobile App based on your business type.</li>
+      <li><strong>Fill in your details</strong>: Enter your website name, contact info, and select what data you collect.</li>
+      <li><strong>Generate & download</strong>: Click generate, review the preview, and export as TXT, HTML, or copy to clipboard.</li>
+    </ol>
+  </div>
+
+  <!-- WHO IS THIS FOR (NEW - AdSense Requirement: Explicit List) -->
+  <div class="section-block who-for">
+    <div class="section-title">
+      Who Is This For?
+      <span class="section-title-badge">Target Users</span>
+    </div>
+    <ul>
+      <li><strong>Website Owners:</strong> Quickly create compliant privacy policies for blogs, portfolios, and business sites.</li>
+      <li><strong>App Developers:</strong> Generate app-specific policies that meet App Store and Play Store requirements.</li>
+      <li><strong>E-Commerce Stores:</strong> Cover payment data, cookies, and third-party integrations in your policy.</li>
+      <li><strong>Startups:</strong> Get a professional, customizable policy template without legal consultation costs.</li>
+    </ul>
+  </div>
+
+  <!-- PRO TIP (NEW - AdSense Requirement: Internal Link) -->
+  <div class="section-block pro-tip">
+    <div class="pro-tip-title">💡 Pro Tip</div>
+    <p>After generating your privacy policy, consider creating matching <a href="/terms-generator">Terms of Service</a> and a <a href="/cookie-policy">Cookie Policy</a> for complete legal coverage on your website.</p>
+  </div>
+
   <!-- FEATURES -->
   <div class="section-block">
     <div class="section-title-block">
@@ -1164,6 +1414,19 @@
 
 <footer>
   <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  
+  <!-- Footer Links (FIXED - Exact Paths Required) -->
+  <nav class="footer-links">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html">Imprint</a>
+    <a href="/datenschutz/index.html">Privacy Policy</a>
+  </nav>
+  
+  <!-- AdSense Disclosure (NEW - Required for Approval) -->
+  <p class="footer-adsense-disclosure">
+    This site is supported by advertising. We may earn a commission from qualifying purchases via affiliate links at no extra cost to you.
+  </p>
+  
   <p class="footer-copy">Free · Private · No Login · ToolCompass.org © 2026</p>
 </footer>
 
@@ -1409,6 +1672,7 @@ document.querySelectorAll('.tool-input').forEach(input => {
 });
 
 // ─── ADSENSE aktivieren nach Approval ───
+// Nach Freischaltung diese Zeilen aktivieren:
 // document.querySelectorAll('.ad-slot').forEach(el => el.classList.add('adsense-active'));
 // (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
