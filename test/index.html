@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude 4.7 Sonnet - Puter UI</title>
+    <title>Claude 4.6 Sonnet - Puter UI</title>
     <script src="https://js.puter.com/v2/"></script>
     <style>
         :root { 
@@ -80,13 +80,13 @@
 <body>
 
 <header>
-    <span>Claude 4.7 Sonnet</span>
+    <span>Claude 4.6 Sonnet</span>
     <button class="global-copy-btn" id="copy-all-btn">Chat-Verlauf kopieren</button>
 </header>
 
 <div id="chat-container">
     <div class="message-wrapper">
-        <div class="message ai">Hallo! Ich bin Claude 4.7 Sonnet. Wie kann ich dir heute helfen?</div>
+        <div class="message ai">Hallo! Ich bin Claude 4.6 Sonnet. Wie kann ich dir heute helfen?</div>
     </div>
 </div>
 
@@ -103,9 +103,8 @@
     const sendBtn = document.getElementById('send-btn');
     const copyAllBtn = document.getElementById('copy-all-btn');
 
-    let chatHistory = ["KI: Hallo! Ich bin Claude 4.7 Sonnet. Wie kann ich dir heute helfen?"];
+    let chatHistory = ["KI: Hallo! Ich bin Claude 4.6 Sonnet. Wie kann ich dir heute helfen?"];
 
-    // Automatisches Erweitern des Textfeldes bei viel Text
     userInput.addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
@@ -149,14 +148,12 @@
         sendBtn.disabled = true;
 
         try {
-            // Aufruf mit Claude 4.7 Sonnet
+            // Modell geändert auf claude-4.6-sonnet
             const response = await puter.ai.chat(prompt, { 
-                model: 'anthropic/claude-4.7-sonnet' 
+                model: 'anthropic/claude-4.6-sonnet' 
             });
             
-            // Flexibles Auslesen der Antwort (Text oder verschachteltes Objekt)
             const aiText = response.message ? response.message.content : response;
-            
             appendMessage('ai', aiText);
         } catch (error) {
             appendMessage('ai', "System-Fehler: " + error.message);
@@ -166,7 +163,6 @@
         }
     }
 
-    // Senden bei Enter, Zeilenumbruch bei Shift + Enter
     userInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -174,7 +170,6 @@
         }
     });
 
-    // Gesamten Chat-Verlauf in Zwischenablage sichern
     copyAllBtn.addEventListener('click', () => {
         const fullText = chatHistory.join('\n\n---\n\n');
         navigator.clipboard.writeText(fullText);
