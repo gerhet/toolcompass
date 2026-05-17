@@ -256,14 +256,16 @@
       color: var(--muted); text-decoration: none; font-size: 13px;
       transition: color 0.2s;
     }
-    .back-btn:hover { color: var(--text); }
+    .back-btn:hover, .back-btn:focus-visible { color: var(--text); outline: none; }
+    .back-btn:focus-visible { box-shadow: var(--focus-ring); border-radius: 4px; }
     .logo-text { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 15px; color: var(--text); text-decoration: none; }
     .logo-text em { color: var(--accent); font-style: normal; }
+    .logo-text:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: 4px; }
 
     /* Main Layout */
     main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
 
-    .page-header { text-align: center; margin-bottom: 2.5rem; animation: fadeUp .7s ease both; }
+    .page-header { text-align: center; margin-bottom: 2.5rem; animation: fadeUp .7s ease both; will-change: transform, opacity; }
     .page-tag {
       display: inline-flex; align-items: center; gap: 7px;
       border: 1px solid var(--border-hover); border-radius: 40px;
@@ -298,6 +300,7 @@
     .input-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 20px; padding: 2rem; margin-bottom: 2rem;
+      animation: fadeUp .7s .1s ease both; will-change: transform, opacity;
     }
     .input-wrapper input {
       width: 100%; background: var(--surface2); border: 1px solid var(--border);
@@ -311,11 +314,18 @@
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 20px; padding: 8px 16px; font-size: 12px; color: var(--text);
       cursor: pointer; transition: all 0.2s;
+      /* Reset button defaults */
+      appearance: none; text-align: left; font-family: inherit;
     }
-    .preset-pill:hover, .preset-pill:focus-visible { border-color: var(--content); color: var(--content); outline: none; }
+    .preset-pill:hover, .preset-pill:focus-visible { 
+      border-color: var(--content); 
+      color: var(--content); 
+      outline: none; 
+    }
+    .preset-pill:focus-visible { box-shadow: var(--focus-ring); }
 
     /* Results Layout */
-    .results-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
+    .results-grid { display: grid; gap: 1rem; margin-bottom: 2rem; animation: fadeUp .7s .2s ease both; }
     .result-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 16px; padding: 1.5rem; transition: border-color 0.3s;
@@ -326,7 +336,7 @@
     .result-card.best .bar-fill { background: var(--content); }
 
     /* Content & SEO Architecture */
-    .seo-content { border-top: 1px solid var(--border); padding-top: 3rem; }
+    .seo-content { border-top: 1px solid var(--border); padding-top: 3rem; animation: fadeUp .7s .3s ease both; }
     .seo-content h2 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; color: var(--text); margin-top: 2rem; }
     .seo-content h3 { font-family: 'Outfit', sans-serif; font-weight: 600; margin-bottom: 0.75rem; color: var(--text); margin-top: 2rem; }
     .seo-content p { margin-bottom: 1.5rem; color: var(--muted); font-size: 15px; }
@@ -339,17 +349,91 @@
       width: 100%; background: none; border: none; color: var(--text);
       padding: 1.2rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between;
       font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 15px;
+      transition: background 0.2s;
     }
+    .faq-q:hover, .faq-q:focus-visible { background: var(--surface2); outline: none; }
+    .faq-q:focus-visible { box-shadow: var(--focus-ring); border-radius: 12px 12px 0 0; }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1); }
     .faq-item.open .faq-a { max-height: 1000px; transition: max-height 0.5s ease-in-out; }
     .faq-a-inner { padding: 0 1.2rem 1.2rem; font-size: 14px; color: var(--muted); }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); padding: 4rem 2rem; text-align: center; background: var(--bg); }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-    .ad-disclosure { font-size: 11px; color: var(--muted); margin-top: 2rem; opacity: 0.8; }
+    /* Footer - EXACT STRUCTURE AS SPECIFIED */
+    footer { 
+      border-top: 1px solid var(--border); 
+      padding: 3rem 2rem; 
+      text-align: center; 
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg);
+    }
+    .footer-logo { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 1.3rem; 
+      font-weight: 700; 
+      margin-bottom: 1rem; 
+      color: var(--text);
+    }
+    .footer-logo em { color: var(--accent); font-style: italic; }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .15s, opacity .15s;
+      opacity: 0.9;
+    }
+    .footer-links a:hover,
+    .footer-links a:focus-visible { 
+      color: var(--accent); 
+      opacity: 1;
+      outline: none;
+    }
+    .footer-links a:focus-visible { 
+      text-decoration: underline; 
+      border-radius: 3px;
+    }
+    
+    /* Separator between footer links */
+    .footer-links a:not(:last-child)::after {
+      content: "·";
+      margin-left: 1rem;
+      color: var(--border-hover);
+      opacity: 0.5;
+    }
+    
+    .footer-copy { 
+      font-size: 11px; 
+      color: var(--muted); 
+      letter-spacing: .1em; 
+      text-transform: uppercase; 
+      opacity: .7; 
+    }
+    
+    .ad-disclosure {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      opacity: 0.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.4;
+    }
+    .ad-disclosure a {
+      color: var(--content);
+      text-decoration: none;
+    }
+    .ad-disclosure a:hover { text-decoration: underline; }
 
     /* Image / Fallback Template Example (AdSense / WCAG compliant) */
     .lazy-img-wrapper {
@@ -362,6 +446,11 @@
       * { animation: none !important; transition: none !important; } 
       .bar-fill { transition: none !important; }
     }
+    @media (max-width: 640px) {
+      main { padding: 2rem 1.25rem 5rem; }
+      .footer-links { gap: 1.5rem; }
+      .footer-links a:not(:last-child)::after { margin-left: 0.75rem; }
+    }
   </style>
 </head>
 <body>
@@ -370,7 +459,7 @@
 
 <div class="consent-banner hidden" id="consentBanner" role="region" aria-label="Ad Consent">
   <span>We use non-intrusive ads to keep our 31+ open-source browser tools 100% free. No tracking cookies are stored without consent.</span>
-  <a href="/privacy">Privacy Policy</a>
+  <a href="/datenschutz/index.html" lang="de">Privacy Policy</a>
   <button id="consentDismiss">I understand</button>
 </div>
 
@@ -401,20 +490,20 @@
 
   <div class="input-card">
     <div class="preset-pills" role="group" aria-label="Distance presets">
-      <button class="preset-pill" onclick="setDistance(50)">🏙️ City Commute (50km)</button>
-      <button class="preset-pill" onclick="setDistance(400)">🚆 Regional Journey (400km)</button>
-      <button class="preset-pill" onclick="setDistance(1000)">✈️ Intercity Flight (1000km)</button>
+      <button class="preset-pill" type="button" onclick="setDistance(50)" aria-label="Set distance to 50 kilometers for city commute">🏙️ City Commute (50km)</button>
+      <button class="preset-pill" type="button" onclick="setDistance(400)" aria-label="Set distance to 400 kilometers for regional journey">🚆 Regional Journey (400km)</button>
+      <button class="preset-pill" type="button" onclick="setDistance(1000)" aria-label="Set distance to 1000 kilometers for intercity flight">✈️ Intercity Flight (1000km)</button>
     </div>
 
     <div class="input-wrapper" style="position:relative;">
+      <label for="distance" class="sr-only" style="position:absolute;left:-9999px;">Travel distance in kilometers</label>
       <span style="position:absolute; left:1.2rem; top:50%; transform:translateY(-50%);" aria-hidden="true">📍</span>
       <input type="number" id="distance" value="500" oninput="calculateCO2()" min="1" aria-label="Travel distance in kilometers">
       <span style="position:absolute; right:1.2rem; top:50%; transform:translateY(-50%); color:var(--muted); font-size:12px;" aria-hidden="true">KM</span>
     </div>
   </div>
 
-  <div class="results-grid" id="resultsGrid" aria-live="polite">
-    </div>
+  <div class="results-grid" id="resultsGrid" aria-live="polite"></div>
 
   <section class="seo-content" aria-labelledby="content-heading">
     <h2 id="content-heading">Why Compare <em>Travel Emissions</em>?</h2>
@@ -471,15 +560,16 @@
   </section>
 </main>
 
+<!-- ✅ EXACT FOOTER STRUCTURE AS SPECIFIED -->
 <footer>
-  <div class="footer-logo" style="font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700;">Tool<em>Compass</em>.org</div>
-  <nav class="footer-links" aria-label="Legal & Framework Navigation">
-    <a href="/about">About Us</a>
-    <a href="/imprint" lang="de">Impressum</a>
-    <a href="/privacy" lang="de">Datenschutz / Privacy</a>
+  <div class="footer-logo">Tool<em>Compass</em>.org</div>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="/about.html">About</a>
+    <a href="/impressum/index.html" lang="de">Imprint</a>
+    <a href="/datenschutz/index.html" lang="de">Privacy</a>
   </nav>
-  <p style="font-size:11px; color:var(--muted);">© 2026 ToolCompass. Open-source client-side excellence. All rights reserved.</p>
-  <p class="ad-disclosure">Monetized natively via Google AdSense. Advertising content remains non-intrusive, isolated, and explicitly marked.</p>
+  <p class="footer-copy">ToolCompass.org &copy; 2026 — Professional Online Tools</p>
+  <p class="ad-disclosure">This site is supported by Google AdSense. Ads are clearly labeled and do not affect tool functionality. You may use an ad-blocker — we respect your choice.</p>
 </footer>
 
 <script>
@@ -524,7 +614,7 @@
   // Robust FAQ Toggle Event Binding with ARIA Management
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
-      const item = btn.parentElement;
+      const item = btn?.parentElement;
       if (!item) return;
 
       const wasOpen = item.classList.contains('open');
@@ -538,6 +628,24 @@
       if (!wasOpen) {
         item.classList.add('open');
         btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+    
+    // Keyboard support for FAQ buttons
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+
+  // Keyboard support for preset pills
+  document.querySelectorAll('.preset-pill').forEach(pill => {
+    pill.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        pill.click();
       }
     });
   });
