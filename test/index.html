@@ -3,165 +3,386 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qwen 3.6 Pro - Auto-Expand Textarea</title>
-    <script src="https://js.puter.com/v2/"></script>
+    <title>KI-Chat mit Puter.js</title>
     <style>
-        :root { 
-            --bg-color: #171717;       
-            --user-msg: #2f2f2f;       
-            --text-main: #ececec;      
-            --text-muted: #b4b4b4;     
-            --input-bg: #2f2f2f;       
-            --max-width: 800px; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-main);
-            margin: 0; display: flex; flex-direction: column; height: 100vh; align-items: center; 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        header { 
-            width: 100%; max-width: var(--max-width); padding: 20px; 
-            display: flex; justify-content: space-between; align-items: center;
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            height: 90vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        .global-copy-btn {
-            background: transparent; color: var(--text-muted); border: 1px solid #444;
-            padding: 6px 12px; font-size: 12px; border-radius: 8px; cursor: pointer;
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        #chat-container { 
-            flex: 1; width: 100%; max-width: var(--max-width); overflow-y: auto; 
-            padding: 20px; display: flex; flex-direction: column; gap: 30px; 
+        .chat-header h1 {
+            font-size: 24px;
+            font-weight: 600;
         }
 
-        .message-wrapper { position: relative; display: flex; flex-direction: column; }
-        .message { max-width: 85%; padding: 10px 0; font-size: 16px; line-height: 1.6; word-wrap: break-word; white-space: pre-wrap; }
-        .user { align-self: flex-end; background-color: var(--user-msg); color: white; padding: 12px 20px; border-radius: 18px; border: 1px solid #444; }
-        .ai { align-self: flex-start; color: var(--text-main); width: 100%; }
-        .copy-btn { align-self: flex-start; background: #333; color: #ccc; border: 1px solid #444; padding: 4px 10px; font-size: 11px; border-radius: 6px; cursor: pointer; margin-bottom: 8px; }
-
-        /* Eingabebereich mit automatischer Höhe */
-        #input-wrapper { width: 100%; max-width: var(--max-width); padding: 10px 20px 40px 20px; box-sizing: border-box; }
-        #input-area { 
-            display: flex; background: var(--input-bg); border-radius: 16px; 
-            padding: 10px 15px; align-items: flex-end; gap: 10px; border: 1px solid #444;
+        .new-chat-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
         }
 
-        textarea { 
-            flex: 1; padding: 8px 0; border: none; background: transparent; outline: none; 
-            color: white; font-size: 16px; font-family: inherit; resize: none; 
-            max-height: 200px; line-height: 1.5;
+        .new-chat-btn:hover {
+            background: white;
+            color: #667eea;
         }
 
-        button#send-btn { 
-            background: #fff; color: #000; border: none; border-radius: 12px; 
-            width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-            margin-bottom: 4px;
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f7f7f8;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #chat-input:focus {
+            border-color: #667eea;
+        }
+
+        #send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        #send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: fit-content;
+        }
+
+        .typing-indicator.show {
+            display: block;
+        }
+
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+        }
+
+        .welcome-message h2 {
+            color: #667eea;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <span>Qwen 3.6 Flash</span>
-    <button class="global-copy-btn" id="copy-all-btn">Chat-Verlauf kopieren</button>
-</header>
-
-<div id="chat-container">
-    <div class="message-wrapper">
-        <div class="message ai">Guten Tag. Das Textfeld passt sich nun deiner Nachricht an.</div>
-    </div>
-</div>
-
-<div id="input-wrapper">
-    <div id="input-area">
-        <textarea id="user-input" rows="1" placeholder="Nachricht an Qwen..." autocomplete="off"></textarea>
-        <button id="send-btn">↑</button>
-    </div>
-</div>
-
-<script>
-    const chatContainer = document.getElementById('chat-container');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('send-btn');
-    const copyAllBtn = document.getElementById('copy-all-btn');
-
-    let chatHistory = ["KI: Guten Tag. Das Textfeld passt sich nun deiner Nachricht an."];
-
-    // Automatisches Anpassen der Höhe des Textfeldes
-    userInput.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    });
-
-    function appendMessage(role, text) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'message-wrapper';
-
-        if (role === 'ai') {
-            const btn = document.createElement('button');
-            btn.className = 'copy-btn';
-            btn.innerText = 'Antwort kopieren';
-            btn.onclick = () => {
-                navigator.clipboard.writeText(text);
-                btn.innerText = 'Kopiert!';
-                setTimeout(() => btn.innerText = 'Antwort kopieren', 2000);
-            };
-            wrapper.appendChild(btn);
-            chatHistory.push("KI: " + text);
-        } else {
-            chatHistory.push("DU: " + text);
-        }
-
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `message ${role}`;
-        msgDiv.innerText = text;
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>🤖 KI-Chat</h1>
+            <button class="new-chat-btn" onclick="startNewChat()">Neuer Chat</button>
+        </div>
         
-        wrapper.appendChild(msgDiv);
-        chatContainer.appendChild(wrapper);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
+        <div class="chat-messages" id="chat-messages">
+            <div class="welcome-message">
+                <h2>Willkommen!</h2>
+                <p>Stelle mir eine Frage und ich werde dir antworten.</p>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <input 
+                    type="text" 
+                    id="chat-input" 
+                    placeholder="Schreibe eine Nachricht..."
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button id="send-btn" onclick="sendMessage()">Senden</button>
+            </div>
+        </div>
+    </div>
 
-    async function handleChat() {
-        const prompt = userInput.value.trim();
-        if (!prompt) return;
+    <script src="https://js.puter.com/v2/"></script>
+    <script>
+        let chatHistory = [];
+        const STORAGE_KEY = 'puter_chat_history';
 
-        appendMessage('user', prompt);
-        userInput.value = '';
-        userInput.style.height = 'auto'; // Höhe zurücksetzen
-        sendBtn.disabled = true;
+        // Lade gespeicherten Chat beim Start
+        window.onload = function() {
+            loadChatHistory();
+            if (chatHistory.length > 0) {
+                displayChatHistory();
+            }
+        };
 
-        try {
-            const response = await puter.ai.chat(prompt, { model: 'qwen/qwen3.6-flash' });
-            appendMessage('ai', response);
-        } catch (error) {
-            appendMessage('ai', "Fehler: " + error.message);
-        } finally {
+        function loadChatHistory() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                chatHistory = JSON.parse(saved);
+            }
+        }
+
+        function saveChatHistory() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
+        }
+
+        function displayChatHistory() {
+            const messagesDiv = document.getElementById('chat-messages');
+            messagesDiv.innerHTML = '';
+            
+            chatHistory.forEach(msg => {
+                addMessageToUI(msg.role, msg.content);
+            });
+            
+            scrollToBottom();
+        }
+
+        function addMessageToUI(role, content) {
+            const messagesDiv = document.getElementById('chat-messages');
+            
+            // Entferne Willkommensnachricht
+            const welcome = messagesDiv.querySelector('.welcome-message');
+            if (welcome) welcome.remove();
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = content;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesDiv.appendChild(messageDiv);
+            
+            scrollToBottom();
+        }
+
+        function showTypingIndicator() {
+            const messagesDiv = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message assistant';
+            typingDiv.id = 'typing-indicator';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'typing-indicator show';
+            contentDiv.innerHTML = '<span></span><span></span><span></span>';
+            
+            typingDiv.appendChild(contentDiv);
+            messagesDiv.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+        }
+
+        function scrollToBottom() {
+            const messagesDiv = document.getElementById('chat-messages');
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Deaktiviere Input und Button
+            input.disabled = true;
+            sendBtn.disabled = true;
+            
+            // Füge Benutzernachricht hinzu
+            addMessageToUI('user', message);
+            chatHistory.push({ role: 'user', content: message });
+            
+            // Leere Input
+            input.value = '';
+            
+            // Zeige Ladeanimation
+            showTypingIndicator();
+            
+            try {
+                // Sende Anfrage an Puter.js KI mit Hermes-Modell
+                const response = await puter.ai.chat(
+                    chatHistory.map(msg => ({
+                        role: msg.role,
+                        content: msg.content
+                    })),
+                    { model: "nousresearch/hermes-4-405b" }
+                );
+                
+                // Verstecke Ladeanimation
+                hideTypingIndicator();
+                
+                // Füge KI-Antwort hinzu
+                const aiResponse = response.message.content;
+                addMessageToUI('assistant', aiResponse);
+                chatHistory.push({ role: 'assistant', content: aiResponse });
+                
+                // Speichere Chat
+                saveChatHistory();
+                
+            } catch (error) {
+                hideTypingIndicator();
+                addMessageToUI('assistant', 'Entschuldigung, es gab einen Fehler: ' + error.message);
+                console.error('Fehler:', error);
+            }
+            
+            // Aktiviere Input und Button wieder
+            input.disabled = false;
             sendBtn.disabled = false;
-            userInput.focus();
+            input.focus();
         }
-    }
 
-    // Senden bei Enter (aber Zeilenumbruch bei Shift+Enter)
-    userInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleChat();
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
         }
-    });
 
-    copyAllBtn.addEventListener('click', () => {
-        const fullText = chatHistory.join('\n\n---\n\n');
-        navigator.clipboard.writeText(fullText);
-        copyAllBtn.innerText = 'Verlauf kopiert!';
-        setTimeout(() => copyAllBtn.innerText = 'Chat-Verlauf kopieren', 2000);
-    });
-
-    sendBtn.addEventListener('click', handleChat);
-</script>
-
+        function startNewChat() {
+            if (chatHistory.length > 0) {
+                if (confirm('Möchtest du wirklich einen neuen Chat starten? Der aktuelle Chat wird gelöscht.')) {
+                    chatHistory = [];
+                    localStorage.removeItem(STORAGE_KEY);
+                    document.getElementById('chat-messages').innerHTML = `
+                        <div class="welcome-message">
+                            <h2>Willkommen!</h2>
+                            <p>Stelle mir eine Frage und ich werde dir antworten.</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+    </script>
 </body>
 </html>
