@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Caption Generator – ToolCompass</title>
+    <meta name="description" content="Generiere perfekte Social-Media-Texte für Instagram, LinkedIn, Twitter & mehr. Mit Hashtag-Strategie & Tonalitätsanpassung. 100% client-seitig.">
+    <link rel="canonical" href="https://toolcompass.org/caption-generator/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Caption Generator – ToolCompass">
+    <meta property="og:description" content="Social Media Captions, die konvertieren. Inklusive Hashtag-Strategie & Tonalitätsanpassung. 100% client-seitig.">
+    <meta property="og:url" content="https://toolcompass.org/caption-generator/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Caption Generator",
+      "url": "https://toolcompass.org/caption-generator/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web",
+      "description": "Generiere Social-Media-Texte mit intelligenter Hashtag-Strategie und Tonalitätsanpassung. Läuft komplett im Browser.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface { background: var(--card-bg); backdrop-filter: var(--glass); -webkit-backdrop-filter: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); margin-bottom: 3rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-main); }
+        .form-group textarea, .form-group select { width: 100%; padding: 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 12px; color: white; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-group textarea:focus, .form-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
+        .form-group select option { background: var(--bg-dark); color: white; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
+        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent-primary), #4f46e5); color: white; padding: 1rem 2rem; border-radius: 12px; font-weight: 700; cursor: pointer; border: none; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+        .btn-secondary { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-muted); padding: 1rem 2rem; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn-secondary:hover { border-color: var(--text-muted); color: white; background: rgba(255,255,255,0.06); }
+        .output-area { display: none; animation: fadeIn 0.4s ease-out; margin-top: 2rem; }
+        .output-area.visible { display: block; }
+        .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+        .output-header h3 { color: white; font-size: 1.1rem; font-weight: 700; }
+        .caption-card { background: rgba(3, 7, 18, 0.8); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 1.2rem; animation: fadeIn 0.4s ease-out; }
+        .caption-card .caption-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-secondary); margin-bottom: 0.6rem; }
+        .caption-card .caption-text { color: #e2e8f0; font-size: 0.95rem; line-height: 1.7; white-space: pre-wrap; }
+        .caption-card .caption-meta { display: flex; gap: 1rem; margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-muted); }
+        .copy-caption-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-muted); padding: 0.4rem 0.8rem; font-size: 0.8rem; border-radius: 8px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.3rem; transition: all 0.2s; }
+        .copy-caption-btn:hover { background: var(--accent-secondary); color: white; border-color: var(--accent-secondary); }
+        .copy-caption-btn.copied { background: #10b981; color: white; border-color: #10b981; }
+        .tip-box { background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.15); border-radius: 12px; padding: 1rem 1.2rem; margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück zur Startseite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#message-square-text"></use></svg> 100% Client-Side – Keine API, kein Tracking</div>
+            <h1>Caption <span>Generator</span></h1>
+            <p class="subtitle">Social-Media-Texte, die konvertieren. Inklusive intelligenter Hashtag-Strategie &amp; Tonalitätsanpassung.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <form id="captionForm" novalidate>
+                    <div class="form-group">
+                        <label for="topic">Worüber soll der Post gehen?</label>
+                        <textarea id="topic" placeholder="z. B.: Wir haben ein neues KI-Tool veröffentlicht, das Freelancern hilft..." required></textarea>
+                        <div style="font-size:0.8rem;color:var(--text-muted);text-align:right;margin-top:0.3rem;"><span id="charCount">0</span> Zeichen</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="platform">Plattform</label>
+                            <select id="platform">
+                                <option value="instagram">📸 Instagram</option>
+                                <option value="linkedin">💼 LinkedIn</option>
+                                <option value="twitter" selected>🐦 X / Twitter</option>
+                                <option value="tiktok">🎵 TikTok</option>
+                                <option value="facebook">👍 Facebook</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tone">Tonalität</label>
+                            <select id="tone">
+                                <option value="professional" selected>🧑‍💼 Professionell</option>
+                                <option value="inspirational">✨ Inspirierend</option>
+                                <option value="funny">😂 Lustig</option>
+                                <option value="educational">📚 Lehrreich</option>
+                                <option value="storytelling">🗣️ Storytelling</option>
+                                <option value="provocative">🔥 Provokativ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cta">Call-to-Action</label>
+                            <select id="cta">
+                                <option value="none">Kein spezifischer CTA</option>
+                                <option value="comment">💬 Kommentar</option>
+                                <option value="share">🔄 Teilen</option>
+                                <option value="visit" selected>🔗 Link besuchen</option>
+                                <option value="follow">➕ Folgen</option>
+                                <option value="download">⬇️ Download / Anmelden</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="variants">Anzahl Varianten</label>
+                            <select id="variants">
+                                <option value="2">2 Varianten</option>
+                                <option value="3" selected>3 Varianten</option>
+                                <option value="4">4 Varianten</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary" id="generateBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Captions generieren</button>
+                        <button type="reset" class="btn-secondary" id="resetBtn">Zurücksetzen</button>
+                    </div>
+                </form>
+                <div class="output-area" id="outputArea">
+                    <div class="output-header"><h3>✨ Generierte Captions + Hashtags</h3></div>
+                    <div id="captionsContainer"></div>
+                    <div class="tip-box"><span style="color:var(--accent-secondary);flex-shrink:0;">💡</span><span>Klicke auf "Kopieren" neben einer Caption. Die Hashtags sind bereits enthalten.</span></div>
+                </div>
+            </div>
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie funktioniert der Caption Generator?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Du beschreibst dein Thema, wählst Plattform und Tonalität – das Tool generiert Captions inklusive Hashtags. Template-basiert, kein API-Aufruf.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Welche Plattformen werden unterstützt?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Instagram, LinkedIn, X/Twitter, TikTok und Facebook – jeweils mit angepasster Länge und Stil.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Werden meine Daten gespeichert?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Nein. Alles läuft lokal in deinem Browser. Deine Ideen verlassen niemals dein Gerät.</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+    <script defer>
+        (function() {
+            'use strict';
+            var form = document.getElementById('captionForm');
+            var topic = document.getElementById('topic');
+            var charCount = document.getElementById('charCount');
+            var platform = document.getElementById('platform');
+            var tone = document.getElementById('tone');
+            var cta = document.getElementById('cta');
+            var variantsCount = document.getElementById('variants');
+            var outputArea = document.getElementById('outputArea');
+            var captionsContainer = document.getElementById('captionsContainer');
+            var resetBtn = document.getElementById('resetBtn');
+
+            topic.addEventListener('input', function() { charCount.textContent = this.value.length; });
+
+            var hooks = {
+                professional: ['Wusstest du, dass…', 'Fakt ist:', 'Hier sind die Fakten:', 'Ein Thema, das oft unterschätzt wird:'],
+                inspirational: ['Stell dir vor…', 'Der Moment, in dem dir klar wird:', 'Man sagt, der beste Zeitpunkt war gestern. Der zweitbeste ist heute.', 'Großes beginnt immer mit einem kleinen Schritt:'],
+                funny: ['Also, ich hab da mal was ausprobiert… Spoiler: Es ging schief.', 'Okay, hör zu:', 'Ich hab heute was gelernt:', 'Mal ehrlich:'],
+                educational: ['Hier kommt, was dir niemand sagt:', 'Lass uns mal auseinandernehmen, wie…', 'Kurze Lektion in Sachen:', '3 Dinge, die du über … wissen solltest:'],
+                storytelling: ['Letzte Woche ist etwas passiert, das mich komplett umgehauen hat.', 'Ich werde nie den Tag vergessen, an dem…', 'Eine kurze Geschichte:', 'Es war einmal… okay, erst letzten Monat:'],
+                provocative: ['Die meisten machen es falsch. Hier ist der richtige Weg:', 'Bereit für eine unbequeme Wahrheit?', 'Ich sag dir jetzt was, das nicht allen gefallen wird:', 'Stopp. Hör auf zu glauben, dass…']
+            };
+            var bodyTemplates = {
+                professional: ['In der heutigen Zeit ist es wichtiger denn je, [THEMA] richtig anzugehen.', 'Die Zahlen sprechen für sich: [THEMA] verändert die Art, wie wir arbeiten.', '[THEMA] ist kein Trend – es ist die neue Realität.'],
+                inspirational: ['Jeder erfolgreiche Mensch hat eines gemeinsam: Sie haben [THEMA] verstanden.', 'Die größten Durchbrüche entstehen, wenn wir bereit sind, [THEMA] neu zu denken.', 'Stell dir vor, du könntest [THEMA] meistern. Wie würde sich dein Leben verändern?'],
+                funny: ['Ich hab [THEMA] ausprobiert, damit du es nicht tun musst.', '[THEMA] klingt erstmal langweilig, oder? Dachte ich auch.', 'Wenn [THEMA] eine Person wäre, wäre es die Person auf der Party, die alle kennenlernen wollen.'],
+                educational: ['Lass uns kurz über [THEMA] sprechen. Die meisten denken falsch darüber.', 'Hier ist eine Schritt-für-Schritt-Anleitung zu [THEMA].', 'Die 80/20-Regel bei [THEMA]: Mit 20% Aufwand erreichst du 80% der Ergebnisse.'],
+                storytelling: ['Letztes Jahr stand ich vor einem Problem: [THEMA]. Also hab ich einfach gemacht.', 'Ich erinnere mich noch an den Moment, als ich [THEMA] zum ersten Mal begegnet bin.', 'Eigentlich wollte ich [THEMA] ignorieren. Aber das Universum hatte andere Pläne.'],
+                provocative: ['Die Wahrheit über [THEMA] ist unbequem. Aber sie zu ignorieren kostet dich Zeit.', 'Jeder redet von [THEMA], aber niemand spricht über den Elefanten im Raum.', 'Du denkst, du weißt alles über [THEMA]? Lass mich dich eines Besseren belehren.']
+            };
+            var closers = {
+                professional: ['Lohnt sich. Versprochen.', 'Probier es aus.', 'Die Zukunft gehört denen, die heute handeln.'],
+                inspirational: ['Der beste Zeitpunkt? Jetzt.', 'Trau dich. Es lohnt sich.', 'Dein zukünftiges Ich wird es dir danken.'],
+                funny: ['Trust me. Es ist besser als es klingt.', 'Du weißt, dass du es ausprobieren willst.', 'Kein Grund, nicht zu lächeln.'],
+                educational: ['Gespeichert und für später aufgehoben? Gut.', 'Schon gewusst? Jetzt ja.', 'Wissen ist Macht – teile es.'],
+                storytelling: ['Und das ist der Grund, warum ich heute anders denke.', 'Ende der Geschichte. Deine fängt gerade erst an.', 'So, das war meine Geschichte. Was ist deine?'],
+                provocative: ['Immer noch nicht überzeugt? Dann pass gut auf.', 'Die Beweise liegen auf dem Tisch.', 'Du entscheidest, ob du dazugehören willst.']
+            };
+            var ctaTexts = {
+                none: '', comment: '\n\n👇 Was denkst du? Schreib es in die Kommentare!', share: '\n\n🔄 Kennst du jemanden, der das auch wissen sollte?', visit: '\n\n🔗 Mehr dazu auf toolcompass.org', follow: '\n\n➕ Folge mir für mehr Insights.', download: '\n\n⬇️ Speichern für später!'
+            };
+            var hashtagPools = {
+                professional: ['#Produktivität','#Business','#Karriere','#Erfolg','#Marketing','#Innovation','#Digitalisierung','#Strategie','#Wachstum','#Leadership','#FutureOfWork','#Effizienz','#BusinessGrowth','#WorkSmart'],
+                inspirational: ['#Motivation','#Inspiration','#Mindset','#Erfolg','#Ziele','#Träume','#Weiterentwicklung','#Positiv','#Wachstum','#Mut','#Anfangen','#Dranbleiben','#Believe','#GoForIt'],
+                funny: ['#Lachen','#Humor','#Lustig','#Alltag','#RealTalk','#KoreaReal','#TrueStory','#Life','#FühltDichAn','#Erlebt','#SameEnergy','#SorryNotSorry'],
+                educational: ['#Bildung','#Wissen','#Lernen','#Tutorial','#Tipp','#Hack','#HowTo','#Ratgeber','#Fachwissen','#Weiterbildung','#Lerntag','#BesserVerstehen','#LearnOn','#SmartLearning'],
+                storytelling: ['#Storytime','#Geschichte','#Erzählt','#MeinWeg','#Learnings','#Erfahrung','#Rückblick','#LessonsLearned','#Journey','#Echt','#RealLife','#Chapter'],
+                provocative: ['#HotTake','#UnpopularOpinion','#RealTalk','#Wahrheit','#Fakten','#Klartext','#Kontrovers','#DenkMalDannach','#ProvokantGedacht','#AndersDenken','#BoldMove','#Unfiltered']
+            };
+
+            function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+            function pickN(arr, n) {
+                var s = arr.slice();
+                for (var i = s.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = s[i]; s[i] = s[j]; s[j] = t; }
+                return s.slice(0, n);
+            }
+            function escapeHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+            function escapeAttr(s) { return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var txt = topic.value.trim();
+                if (!txt) { topic.focus(); return; }
+                var pl = platform.value, tn = tone.value, ca = cta.value, nv = parseInt(variantsCount.value) || 3;
+                captionsContainer.innerHTML = '';
+                outputArea.classList.add('visible');
+
+                for (var i = 0; i < nv; i++) {
+                    var hk = pick(hooks[tn] || hooks.professional);
+                    var bd = pick(bodyTemplates[tn] || bodyTemplates.professional);
+                    var cl = pick(closers[tn] || closers.professional);
+                    bd = bd.replace('[THEMA]', txt.length > 40 ? txt.substring(0,37)+'...' : txt);
+                    var caption = hk + '\n\n' + bd + '\n\n' + cl;
+                    if (ca !== 'none') caption += ctaTexts[ca] || '';
+                    var limit = pl === 'twitter' ? 280 : (pl === 'instagram' ? 2200 : (pl === 'linkedin' ? 3000 : 9999));
+                    if (caption.length > limit) caption = caption.substring(0, limit-3) + '...';
+                    var tags = pickN(hashtagPools[tn] || hashtagPools.professional, 5);
+                    var full = caption + '\n\n' + tags.join(' ');
+                    var card = document.createElement('div');
+                    card.className = 'caption-card';
+                    card.innerHTML = '<div class="caption-label">Variante ' + (i+1) + '</div><div class="caption-text">' + escapeHtml(full) + '</div><div class="caption-meta"><span>📝 ' + full.length + ' Zeichen</span></div><div style="margin-top:0.8rem;"><button class="copy-caption-btn" data-text="' + escapeAttr(full) + '">📋 Kopieren</button></div>';
+                    captionsContainer.appendChild(card);
+                }
+
+                document.querySelectorAll('.copy-caption-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var t = this.getAttribute('data-text');
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(t).then(function() { copied(btn); });
+                        } else {
+                            var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+                            try { document.execCommand('copy'); copied(btn); } catch(e) {}
+                            document.body.removeChild(ta);
+                        }
+                    });
+                });
+                outputArea.scrollIntoView({behavior:'smooth', block:'start'});
+            });
+
+            function copied(btn) {
+                var o = btn.innerHTML; btn.innerHTML = '✅ Kopiert!'; btn.classList.add('copied');
+                setTimeout(function() { btn.innerHTML = '📋 Kopieren'; btn.classList.remove('copied'); }, 2000);
+            }
+
+            resetBtn.addEventListener('click', function() {
+                topic.value = ''; charCount.textContent = '0'; outputArea.classList.remove('visible'); captionsContainer.innerHTML = '';
+                platform.value = 'twitter'; tone.value = 'professional'; cta.value = 'visit'; variantsCount.value = '3'; topic.focus();
+            });
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+        })();
+    </script>
+</body>
+</html>
