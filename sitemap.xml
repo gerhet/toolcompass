@@ -16,12 +16,12 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://toolcompass.org/impressum/index.html</loc>
+    <loc>https://toolcompass.org/impressum/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://toolcompass.org/datenschutz/index.html</loc>
+    <loc>https://toolcompass.org/datenschutz/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
