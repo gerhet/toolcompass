@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Freelancer Rechner – ToolCompass</title>
+    <meta name="description" content="Stundensatz-Rechner, Projekt-Kalkulator & Steuer-Rücklage für Freelancer. Inklusive Mehrwertsteuer & Währungsumrechnung. 100% client-seitig.">
+    <link rel="canonical" href="https://toolcompass.org/freelancer-rechner/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Freelancer Rechner – ToolCompass">
+    <meta property="og:description" content="Stundensatz, Projektkosten & Steuer-Rücklage berechnen. Inklusive MwSt. & Währungsumrechnung.">
+    <meta property="og:url" content="https://toolcompass.org/freelancer-rechner/">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Freelancer Rechner",
+      "url": "https://toolcompass.org/freelancer-rechner/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne Stundensätze, Projektkosten und Steuer-Rücklagen. Läuft komplett im Browser.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface { background: var(--card-bg); backdrop-filter: var(--glass); -webkit-backdrop-filter: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); margin-bottom: 3rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-main); }
+        .form-group input, .form-group select { width: 100%; padding: 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 12px; color: white; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .form-group select option { background: var(--bg-dark); color: white; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
+        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent-primary), #4f46e5); color: white; padding: 1rem 2rem; border-radius: 12px; font-weight: 700; cursor: pointer; border: none; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+        .btn-secondary { background: rgba(255,255,255,0.03); border: 1px solid var(--border); color: var(--text-muted); padding: 1rem 2rem; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .btn-secondary:hover { border-color: var(--text-muted); color: white; background: rgba(255,255,255,0.06); }
+        .output-area { display: none; animation: fadeIn 0.4s ease-out; margin-top: 2rem; }
+        .output-area.visible { display: block; }
+        .result-card { background: rgba(3, 7, 18, 0.8); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        .result-card .result-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+        .result-card .result-value { font-size: 1.6rem; font-weight: 700; color: white; letter-spacing: -0.02em; }
+        .result-card .result-value.primary { color: var(--accent-secondary); }
+        .result-card .result-value.green { color: #10b981; }
+        .result-card .result-value.orange { color: #f59e0b; }
+        .result-card .result-detail { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem; }
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        @media (max-width: 600px) { .result-grid { grid-template-columns: 1fr; } }
+        .result-section-title { font-size: 1.1rem; font-weight: 700; color: white; margin: 1.5rem 0 1rem; letter-spacing: -0.02em; }
+        .tab-bar { display: flex; gap: 0; margin-bottom: 2rem; background: rgba(3, 7, 18, 0.6); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; }
+        .tab-btn { flex: 1; padding: 0.9rem 1rem; background: transparent; border: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .tab-btn:hover { color: white; background: rgba(255,255,255,0.03); }
+        .tab-btn.active { color: white; background: rgba(99, 102, 241, 0.15); border-bottom: 2px solid var(--accent-primary); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+        .input-with-suffix { position: relative; }
+        .input-with-suffix input { padding-right: 3rem; }
+        .input-with-suffix .suffix { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; pointer-events: none; }
+        .table-wrap { overflow-x: auto; margin-top: 1rem; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--border); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        table td { padding: 0.7rem 0.5rem; color: #e2e8f0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        table tr:last-child td { border-bottom: none; }
+        table td:last-child, table th:last-child { text-align: right; }
+        .tip-box { background: rgba(6, 182, 212, 0.08); border: 1px solid rgba(6, 182, 212, 0.15); border-radius: 12px; padding: 1rem 1.2rem; margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück zur Startseite"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#wallet"></use></svg> 100% Client-Side – Keine API, kein Tracking</div>
+            <h1>Freelancer <span>Rechner</span></h1>
+            <p class="subtitle">Stundensatz kalkulieren, Projekte bewerten, Steuern im Blick – ein Tool für dein Freelancer-Business.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <div class="tab-bar" role="tablist">
+                    <button class="tab-btn active" data-tab="rate" role="tab">💰 Stundensatz</button>
+                    <button class="tab-btn" data-tab="project" role="tab">📋 Projekt</button>
+                    <button class="tab-btn" data-tab="tax" role="tab">🧾 Steuer</button>
+                </div>
+
+                <!-- TAB 1: Stundensatz -->
+                <div class="tab-content active" id="tab-rate">
+                    <form id="rateForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="targetIncome">Gewünschtes Jahresnetto (€)</label>
+                                <div class="input-with-suffix"><input type="number" id="targetIncome" value="50000" min="0" step="1000"><span class="suffix">€</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="workingDays">Arbeitstage pro Jahr</label>
+                                <div class="input-with-suffix"><input type="number" id="workingDays" value="220" min="1" max="365"><span class="suffix">Tage</span></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hoursPerDay">Stunden pro Tag</label>
+                                <div class="input-with-suffix"><input type="number" id="hoursPerDay" value="6" min="1" max="16" step="0.5"><span class="suffix">h</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="taxRateRate">Steuerquote (Einkommensteuer + Sozialabgaben)</label>
+                                <div class="input-with-suffix"><input type="number" id="taxRateRate" value="42" min="0" max="60" step="1"><span class="suffix">%</span></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="currencyRate">Währung für Rechnungsstellung</label>
+                            <select id="currencyRate">
+                                <option value="eur">EUR (€)</option>
+                                <option value="usd">USD ($) – 1 EUR = 1,08 USD</option>
+                                <option value="gbp">GBP (£) – 1 EUR = 0,85 GBP</option>
+                                <option value="chf">CHF (CHF) – 1 EUR = 0,96 CHF</option>
+                            </select>
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn-primary">💶 Stundensatz berechnen</button>
+                            <button type="reset" class="btn-secondary" onclick="resetTab('rate')">Zurücksetzen</button>
+                        </div>
+                    </form>
+                    <div class="output-area" id="rateOutput">
+                        <div class="result-section-title">📍 Dein empfohlener Stundensatz</div>
+                        <div class="result-grid" id="rateResults"></div>
+                        <div class="tip-box"><span style="color:var(--accent-secondary);flex-shrink:0;">💡</span><span>Als Faustregel solltest du nur 60–70% deiner Zeit tatsächlich abrechnen können (Akquise, Verwaltung, Weiterbildung). Der Rechner berücksichtigt das.</span></div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Projekt -->
+                <div class="tab-content" id="tab-project">
+                    <form id="projectForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hourlyRate">Dein Stundensatz</label>
+                                <div class="input-with-suffix"><input type="number" id="hourlyRate" value="85" min="0" step="5"><span class="suffix">€</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="projectHours">Geschätzte Stunden</label>
+                                <div class="input-with-suffix"><input type="number" id="projectHours" value="40" min="0" step="1"><span class="suffix">h</span></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vatRate">Mehrwertsteuer</label>
+                                <select id="vatRate">
+                                    <option value="19">19% (Regelsteuersatz DE)</option>
+                                    <option value="7">7% (Ermäßigt DE)</option>
+                                    <option value="0">0% (Steuerbefreit / Drittland)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="extras">Zusätzliche Kosten (Material, Spesen, etc.)</label>
+                                <div class="input-with-suffix"><input type="number" id="extras" value="0" min="0" step="10"><span class="suffix">€</span></div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn-primary">📊 Projekt kalkulieren</button>
+                            <button type="reset" class="btn-secondary" onclick="resetTab('project')">Zurücksetzen</button>
+                        </div>
+                    </form>
+                    <div class="output-area" id="projectOutput">
+                        <div class="result-section-title">📋 Projekt-Kalkulation</div>
+                        <div class="result-grid" id="projectResults"></div>
+                        <div class="table-wrap"><table id="projectTable"><thead><tr><th>Position</th><th>Betrag</th></tr></thead><tbody></tbody></table></div>
+                        <div class="tip-box"><span style="color:var(--accent-secondary);flex-shrink:0;">💡</span><span>Denk dran: Als Freelancer zahlst du die MwSt. nur als Durchläufer – sie ist nicht dein Einkommen, sondern geht ans Finanzamt.</span></div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: Steuer -->
+                <div class="tab-content" id="tab-tax">
+                    <form id="taxForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="annualRevenue">Voraussichtlicher Jahresumsatz (brutto)</label>
+                                <div class="input-with-suffix"><input type="number" id="annualRevenue" value="80000" min="0" step="1000"><span class="suffix">€</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="taxRateTax">Steuerquote (Einkommensteuer + Soli + KiSt)</label>
+                                <div class="input-with-suffix"><input type="number" id="taxRateTax" value="35" min="0" max="50" step="1"><span class="suffix">%</span></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="socialContributions">Sozialabgaben (KV, RV, PV, Beiträge)</label>
+                                <div class="input-with-suffix"><input type="number" id="socialContributions" value="6000" min="0" step="500"><span class="suffix">€/Jahr</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessCosts">Betriebsausgaben (Material, Miete, Versicherungen, etc.)</label>
+                                <div class="input-with-suffix"><input type="number" id="businessCosts" value="5000" min="0" step="500"><span class="suffix">€/Jahr</span></div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button type="submit" class="btn-primary">🧮 Steuer-Rücklage berechnen</button>
+                            <button type="reset" class="btn-secondary" onclick="resetTab('tax')">Zurücksetzen</button>
+                        </div>
+                    </form>
+                    <div class="output-area" id="taxOutput">
+                        <div class="result-section-title">📊 Steuerliche Übersicht</div>
+                        <div class="result-grid" id="taxResults"></div>
+                        <div class="table-wrap"><table id="taxTable"><thead><tr><th>Position</th><th>Betrag</th></tr></thead><tbody></tbody></table></div>
+                        <div class="tip-box"><span style="color:var(--accent-secondary);flex-shrink:0;">⚠️</span><span>Die Steuer-Rücklage ist eine Schätzung. Lege mindestens 30% deiner Netto-Einnahmen zurück.</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie wird der Stundensatz berechnet?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Aus deinem Wunsch-Nettoeinkommen + Steuerquote + Sozialabgaben ergibt sich der Brutto-Jahresbedarf. Geteilt durch abrechenbare Stunden (Arbeitstage × Stunden × 65% Auslastung) erhältst du den notwendigen Stundensatz.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Welche Steuerquote soll ich annehmen?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Faustregel: Bei 30–50.000 € Gewinn ~25–30%, bei 50–80.000 € ~30–40%, über 80.000 € ~40–45% inkl. Soli und ggf. Kirchensteuer.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Werden meine Daten gespeichert?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Nein. Alle Berechnungen laufen lokal in deinem Browser. Deine Umsätze und Kosten verlassen niemals dein Gerät.</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+    <script defer>
+        (function() {
+            'use strict';
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            var tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    tabBtns.forEach(function(b) { b.classList.remove('active'); });
+                    document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+                    this.classList.add('active');
+                    document.getElementById('tab-' + this.getAttribute('data-tab')).classList.add('active');
+                });
+            });
+
+            function fmt(n) { return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
+
+            document.getElementById('rateForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var income = parseFloat(document.getElementById('targetIncome').value) || 50000;
+                var days = parseFloat(document.getElementById('workingDays').value) || 220;
+                var hours = parseFloat(document.getElementById('hoursPerDay').value) || 6;
+                var taxQ = parseFloat(document.getElementById('taxRateRate').value) || 42;
+                var cur = document.getElementById('currencyRate').value;
+                var billable = days * hours * 0.65;
+                var grossNeed = income / (1 - taxQ / 100);
+                var rate = grossNeed / billable;
+                var curSymbol = '€', curFactor = 1;
+                if (cur === 'usd') { curSymbol = '$'; curFactor = 1.08; }
+                else if (cur === 'gbp') { curSymbol = '£'; curFactor = 0.85; }
+                else if (cur === 'chf') { curSymbol = 'CHF'; curFactor = 0.96; }
+                document.getElementById('rateResults').innerHTML = ''
+                    + '<div class="result-card"><div class="result-label">Notwendiger Stundensatz (netto)</div><div class="result-value primary">' + (rate * curFactor).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ' + curSymbol + '</div><div class="result-detail">' + fmt(rate) + ' pro Stunde netto</div></div>'
+                    + '<div class="result-card"><div class="result-label">Abrechenbare Stunden pro Jahr</div><div class="result-value">' + Math.round(billable) + ' h</div><div class="result-detail">' + days + ' Tage × ' + hours + ' h × 65% Auslastung</div></div>'
+                    + '<div class="result-card"><div class="result-label">Brutto-Jahresbedarf (vor Steuern)</div><div class="result-value orange">' + fmt(grossNeed) + '</div><div class="result-detail">' + fmt(income) + ' netto + ' + taxQ + '% Steuerquote</div></div>'
+                    + '<div class="result-card"><div class="result-label">Monatlicher Netto-Bedarf</div><div class="result-value green">' + fmt(income / 12) + '</div><div class="result-detail">Pro Monat nach Steuern</div></div>';
+                document.getElementById('rateOutput').classList.add('visible');
+            });
+
+            window.resetTab = function(tab) { document.getElementById(tab + 'Output').classList.remove('visible'); };
+
+            document.getElementById('projectForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var rate = parseFloat(document.getElementById('hourlyRate').value) || 85;
+                var hours = parseFloat(document.getElementById('projectHours').value) || 40;
+                var vat = parseFloat(document.getElementById('vatRate').value) || 19;
+                var extras = parseFloat(document.getElementById('extras').value) || 0;
+                var netto = rate * hours + extras;
+                var vatAmount = netto * vat / 100;
+                var brutto = netto + vatAmount;
+                document.getElementById('projectResults').innerHTML = ''
+                    + '<div class="result-card"><div class="result-label">Rechnungsbetrag (brutto inkl. MwSt.)</div><div class="result-value primary">' + fmt(brutto) + '</div></div>'
+                    + '<div class="result-card"><div class="result-label">Davon Netto-Anteil</div><div class="result-value green">' + fmt(netto) + '</div></div>';
+                var tbody = document.querySelector('#projectTable tbody');
+                tbody.innerHTML = ''
+                    + '<tr><td>Stunden (' + hours + ' h × ' + rate.toLocaleString('de-DE', {minimumFractionDigits:2}) + ' €)</td><td>' + fmt(rate * hours) + '</td></tr>'
+                    + '<tr><td>Zusatzkosten</td><td>' + fmt(extras) + '</td></tr>'
+                    + '<tr><td>Nettosumme</td><td>' + fmt(netto) + '</td></tr>'
+                    + '<tr><td>Mehrwertsteuer (' + vat + '%)</td><td>' + fmt(vatAmount) + '</td></tr>'
+                    + '<tr style="border-top:2px solid var(--accent-primary)"><td><strong>Brutto-Rechnungsbetrag</strong></td><td><strong>' + fmt(brutto) + '</strong></td></tr>';
+                document.getElementById('projectOutput').classList.add('visible');
+            });
+
+            document.getElementById('taxForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var revenue = parseFloat(document.getElementById('annualRevenue').value) || 80000;
+                var taxRate = parseFloat(document.getElementById('taxRateTax').value) || 35;
+                var social = parseFloat(document.getElementById('socialContributions').value) || 6000;
+                var costs = parseFloat(document.getElementById('businessCosts').value) || 5000;
+                var vatShare = revenue / 119 * 19;
+                var nettoUmsatz = revenue - vatShare;
+                var gewinn = nettoUmsatz - costs;
+                var einkommenSteuer = gewinn * taxRate / 100;
+                var gesamtAbgaben = einkommenSteuer + social;
+                var nettoNachSteuern = gewinn - einkommenSteuer - social;
+                var ruecklageMonat = gesamtAbgaben / 12;
+                document.getElementById('taxResults').innerHTML = ''
+                    + '<div class="result-card"><div class="result-label">Verfügbar nach Steuern & Abgaben</div><div class="result-value green">' + fmt(nettoNachSteuern) + ' / Jahr</div><div class="result-detail">' + fmt(nettoNachSteuern / 12) + ' pro Monat</div></div>'
+                    + '<div class="result-card"><div class="result-label">Steuer-Rücklage pro Monat</div><div class="result-value primary">' + fmt(ruecklageMonat) + '</div><div class="result-detail">' + fmt(gesamtAbgaben) + ' pro Jahr</div></div>';
+                var tbody2 = document.querySelector('#taxTable tbody');
+                tbody2.innerHTML = ''
+                    + '<tr><td>Jahresumsatz brutto</td><td>' + fmt(revenue) + '</td></tr>'
+                    + '<tr><td>Enthaltene MwSt. (19%)</td><td>' + fmt(vatShare) + '</td></tr>'
+                    + '<tr><td>Umsatz netto</td><td>' + fmt(nettoUmsatz) + '</td></tr>'
+                    + '<tr><td>Betriebsausgaben</td><td>− ' + fmt(costs) + '</td></tr>'
+                    + '<tr><td><strong>Gewinn</strong></td><td><strong>' + fmt(gewinn) + '</strong></td></tr>'
+                    + '<tr><td>Einkommensteuer (' + taxRate + '%)</td><td>− ' + fmt(einkommenSteuer) + '</td></tr>'
+                    + '<tr><td>Sozialabgaben</td><td>− ' + fmt(social) + '</td></tr>'
+                    + '<tr style="border-top:2px solid var(--accent-primary)"><td><strong>Netto nach Steuern</strong></td><td><strong>' + fmt(nettoNachSteuern) + '</strong></td></tr>';
+                document.getElementById('taxOutput').classList.add('visible');
+            });
+        })();
+    </script>
+</body>
+</html>
