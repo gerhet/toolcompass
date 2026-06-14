@@ -3,94 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
     <title>ToolCompass - Premium Produktivitäts-Tools</title>
-    <meta name="description" content="Exklusive, kostenlose Online-Tools für KI-Prompts, Social Media und Freelancer. Modernes Design, maximale Privatsphäre, keine Anmeldung.">
+    <meta name="description" content="Kostenlose Online-Tools: KI-Prompt Optimierer, Caption Generator & Freelancer Rechner. 100% client-seitig, keine Anmeldung, maximale Privatsphäre.">
     <link rel="canonical" href="https://toolcompass.org/">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="ToolCompass - Next Level Productivity Tools">
-    <meta property="og:description" content="Weniger Tools. Bessere Ergebnisse. Erlebe Produktivität in einem neuen, modernen Design.">
+
+    <link rel="preload" href="/styles.css" as="style">
+    <link rel="preload" href="/assets/fonts/PlusJakartaSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/icons/lucide-sprite.svg" as="image" type="image/svg+xml">
+
+    <meta property="og:title" content="ToolCompass - Fokussierte Produktivitäts-Tools">
+    <meta property="og:description" content="Drei handverlesene Tools: KI-Prompt Optimierer, Caption Generator & Freelancer Rechner. 100% Client-Side.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://toolcompass.org/">
-    <meta property="og:image" content="https://toolcompass.org/assets/og-image.jpg"> <!-- Optional: Pfad zu einem Bild anpassen -->
-    
-    <!-- Zentrales Stylesheet & Lokale Fonts -->
+    <meta property="og:image" content="https://toolcompass.org/assets/og-image.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "ToolCompass",
+      "description": "Kostenlose, client-seitige Produktivitäts-Tools. 100% Privatsphäre.",
+      "url": "https://toolcompass.org/",
+      "mainEntity": [
+        {
+          "@type": "WebApplication",
+          "name": "KI-Prompt Optimierer",
+          "url": "https://toolcompass.org/ai-prompt-optimizer/",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Caption Generator",
+          "url": "https://toolcompass.org/caption-generator/",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+        },
+        {
+          "@type": "WebApplication",
+          "name": "Freelancer Rechner",
+          "url": "https://toolcompass.org/freelancer-rechner/",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Web",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+        }
+      ]
+    }
+    </script>
+
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-
-    <!-- Hintergrund-Effekte -->
     <div class="bg-glows">
         <div class="glow-1"></div>
         <div class="glow-2"></div>
     </div>
-
     <div class="container">
         <header>
             <div class="top-badge">
-                <!-- Icon: Sparkles -->
-                <svg class="icon" style="width: 14px; height: 14px;"><use href="/assets/icons/lucide-sprite.svg#sparkles"></use></svg>
-                100% Client-Side & Privatsphäre-Fokus
+                <svg class="icon" style="width: 14px; height: 14px;" aria-hidden="true">
+                    <use href="/assets/icons/lucide-sprite.svg#sparkles"></use>
+                </svg>
+                100% Client-Side &amp; Privatsphäre-Fokus
             </div>
             <h1>Tool<span>Compass</span></h1>
-            <p class="subtitle">Fokussierte Exzellenz statt mittelmäßiger Masse. Drei handverlesene Tools für moderne Arbeit.</p>
+            <p class="subtitle">Drei fokussierte Tools für deinen Arbeitsalltag – alle live &amp; kostenlos.</p>
         </header>
-
         <main>
             <div class="tools-grid">
-                <!-- Tool 1: KI Prompt Optimierer (Live) -->
-                <a href="/ai-prompt-optimizer/" class="tool-card">
+                <!-- Tool 1: KI Prompt Optimierer -->
+                <a href="/ai-prompt-optimizer/" class="tool-card" aria-label="KI-Prompt Optimierer – Live &amp; Kostenlos">
                     <span class="badge live">Live &amp; Kostenlos</span>
                     <div class="tool-icon-wrapper">
-                        <!-- Icon: Cpu -->
-                        <svg class="icon" style="width: 28px; height: 28px;"><use href="/assets/icons/lucide-sprite.svg#cpu"></use></svg>
+                        <svg class="icon" style="width: 28px; height: 28px;" aria-hidden="true">
+                            <use href="/assets/icons/lucide-sprite.svg#cpu"></use>
+                        </svg>
                     </div>
                     <div class="tool-title">KI-Prompt Optimierer</div>
-                    <p class="tool-desc">Verwandle vage Ideen in präzise, hochwirksame Prompts. Perfekt abgestimmt auf ChatGPT, Claude &amp; Gemini.</p>
+                    <p class="tool-desc">Verwandle vage Ideen in präzise, hochwirksame Prompts. Abgestimmt auf ChatGPT, Claude &amp; Gemini.</p>
                 </a>
-
-                <!-- Tool 2: Caption Generator (Coming Soon) -->
-                <div class="tool-card coming-soon">
-                    <span class="badge">In Entwicklung</span>
+                <!-- Tool 2: Caption Generator -->
+                <a href="/caption-generator/" class="tool-card" aria-label="Caption Generator – Live &amp; Kostenlos">
+                    <span class="badge live">Live &amp; Kostenlos</span>
                     <div class="tool-icon-wrapper">
-                        <!-- Icon: Message Square Text -->
-                        <svg class="icon" style="width: 28px; height: 28px;"><use href="/assets/icons/lucide-sprite.svg#message-square-text"></use></svg>
+                        <svg class="icon" style="width: 28px; height: 28px;" aria-hidden="true">
+                            <use href="/assets/icons/lucide-sprite.svg#message-square-text"></use>
+                        </svg>
                     </div>
                     <div class="tool-title">Caption Generator</div>
                     <p class="tool-desc">Social Media Texte, die konvertieren. Inklusive intelligenter Hashtag-Strategie &amp; Tonalitätsanpassung.</p>
-                </div>
-
-                <!-- Tool 3: Freelancer Rechner (Coming Soon) -->
-                <div class="tool-card coming-soon">
-                    <span class="badge">In Entwicklung</span>
+                </a>
+                <!-- Tool 3: Freelancer Rechner -->
+                <a href="/freelancer-rechner/" class="tool-card" aria-label="Freelancer Rechner – Live &amp; Kostenlos">
+                    <span class="badge live">Live &amp; Kostenlos</span>
                     <div class="tool-icon-wrapper">
-                        <!-- Icon: Wallet -->
-                        <svg class="icon" style="width: 28px; height: 28px;"><use href="/assets/icons/lucide-sprite.svg#wallet"></use></svg>
+                        <svg class="icon" style="width: 28px; height: 28px;" aria-hidden="true">
+                            <use href="/assets/icons/lucide-sprite.svg#wallet"></use>
+                        </svg>
                     </div>
                     <div class="tool-title">Freelancer Rechner</div>
-                    <p class="tool-desc">Internationale Rechnungsstellung, smarte Währungsumrechnung &amp; Steuerlogik in einem Interface.</p>
-                </div>
+                    <p class="tool-desc">Stundensatz kalkulieren, Projekte bewerten, Steuern im Blick. Inklusive MwSt. &amp; Währungen.</p>
+                </a>
             </div>
-
             <section class="info">
-                <h2>Warum nur drei Tools?</h2>
-                <p>Wir glauben an Tiefe statt Breite. Jedes Tool wird manuell kuratiert, auf maximale Performance optimiert und respektiert deine Daten durch reine Client-Side-Verarbeitung. Keine Tracker, keine lästigen Accounts, kein Bullshit.</p>
+                <h2>Qualität vor Quantität</h2>
+                <p>Drei Tools, alle live. Jedes handverlesen, auf maximale Performance optimiert und mit Respekt für deine Daten – reine Client-Side-Verarbeitung. Keine Tracker, keine Accounts, kein Bullshit.</p>
             </section>
         </main>
     </div>
-
     <footer>
         <div class="footer-links">
             <a href="/about.html">Über uns</a>
             <a href="/impressum/index.html" lang="de">Impressum</a>
-            <a href="/datenschutz/index.html" lang="de">Datenschutz</a>
+            <a href="/datenschutz/" lang="de">Datenschutz</a>
         </div>
         <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
-        <p class="ad-disclosure">Diese Seite ist kostenlos und werbefinanziert (Google AdSense). Affiliate-Links sind als solche gekennzeichnet.</p>
+        <p class="ad-disclosure">Diese Seite ist kostenlos und werbefinanziert (Google AdSense).</p>
     </footer>
-
-    <script>
-        // Setzt das aktuelle Jahr im Footer
+    <script defer>
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
