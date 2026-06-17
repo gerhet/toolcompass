@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Text Analyzer – ToolCompass</title>
+    <meta name="description" content="Analysiere Texte live: Zeichen, Wörter, Sätze, Lesedauer. Inklusive Worthäufigkeit und Statistiken. 100% client-seitig.">
+    <link rel="canonical" href="https://toolcompass.org/text-analyzer/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Text Analyzer – ToolCompass">
+    <meta property="og:description" content="Live-Textanalyse: Zeichen, Wörter, Sätze, Lesedauer. 100% client-seitig.">
+    <meta property="og:url" content="https://toolcompass.org/text-analyzer/">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text Analyzer","url":"https://toolcompass.org/text-analyzer/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group textarea{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;min-height:200px;resize:vertical;box-sizing:border-box}
+        .form-group textarea:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-bottom:2rem}
+        @media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+        .stat-card{background:rgba(3,7,18,0.6);padding:1rem;border-radius:12px;border:1px solid var(--border);text-align:center}
+        .stat-card .stat-num{font-size:1.8rem;font-weight:800;color:white;line-height:1.2;letter-spacing:-0.02em}
+        .stat-card .stat-num span{color:var(--accent-secondary)}
+        .stat-card .stat-name{font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.2rem}
+        .extra-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.extra-stats{grid-template-columns:1fr}}
+        .extra-card{background:rgba(3,7,18,0.6);padding:1.2rem;border-radius:12px;border:1px solid var(--border)}
+        .extra-card h4{font-size:0.85rem;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:0.8rem}
+        .word-list{display:flex;flex-wrap:wrap;gap:0.4rem}
+        .word-list .word-item{background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.12);padding:0.2rem 0.6rem;border-radius:6px;font-size:0.85rem;color:#e2e8f0}
+        .word-list .word-item .count{color:var(--accent-secondary);font-weight:700}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#file-text"></use></svg> Live-Analyse</div>
+            <h1>Text <span>Analyzer</span></h1>
+            <p class="subtitle">Analysiere Texte in Echtzeit – Zeichen, Wörter, Sätze, Lesedauer und mehr.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <div class="form-group">
+                    <label for="textInput">Dein Text</label>
+                    <textarea id="textInput" placeholder="Text hier eingeben oder einfügen – die Analyse startet sofort..." autofocus></textarea>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card"><div class="stat-num"><span id="charCount">0</span></div><div class="stat-name">Zeichen</div></div>
+                    <div class="stat-card"><div class="stat-num"><span id="wordCount">0</span></div><div class="stat-name">Wörter</div></div>
+                    <div class="stat-card"><div class="stat-num"><span id="sentenceCount">0</span></div><div class="stat-name">Sätze</div></div>
+                    <div class="stat-card"><div class="stat-num"><span id="readingTime">0</span> min</div><div class="stat-name">Lesezeit</div></div>
+                </div>
+                <div class="extra-stats">
+                    <div class="extra-card">
+                        <h4>📊 Detail-Statistiken</h4>
+                        <div style="font-size:0.9rem;color:var(--text-muted);line-height:1.8">
+                            <div>Zeichen (mit Leerzeichen): <strong id="charWithSpaces" style="color:white">0</strong></div>
+                            <div>Zeichen (ohne Leerzeichen): <strong id="charWithoutSpaces" style="color:white">0</strong></div>
+                            <div>Absätze: <strong id="paragraphCount" style="color:white">0</strong></div>
+                            <div>Durchschnittliche Wortlänge: <strong id="avgWordLength" style="color:white">0</strong> Zeichen</div>
+                            <div>Sprechzeit (langsam): <strong id="speakTimeSlow" style="color:white">0</strong> min</div>
+                        </div>
+                    </div>
+                    <div class="extra-card">
+                        <h4>📈 Häufigste Wörter</h4>
+                        <div class="word-list" id="wordFrequency"></div>
+                        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.8rem" id="wordCountInfo">Keine Wörter erkannt</div>
+                    </div>
+                </div>
+                <div class="btn-group" style="margin-top:1.5rem">
+                    <button class="btn-secondary" id="clearTextBtn">🗑️ Text löschen</button>
+                    <button class="btn-secondary" id="sampleTextBtn">📄 Beispieltext einfügen</button>
+                </div>
+            </div>
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie wird die Lesezeit berechnet?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Basierend auf einem Durchschnitt von 200 Wörtern pro Minute – dem empfohlenen Wert für deutsche Texte.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Werden meine Texte gespeichert?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Nein. Alles läuft lokal in deinem Browser. Deine Texte verlassen niemals dein Gerät.</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>
+        (function(){
+            'use strict';
+            document.getElementById('year').textContent=new Date().getFullYear();
+            var input=document.getElementById('textInput');
+            var els={ch:document.getElementById('charCount'),wo:document.getElementById('wordCount'),se:document.getElementById('sentenceCount'),rt:document.getElementById('readingTime'),cws:document.getElementById('charWithSpaces'),cwo:document.getElementById('charWithoutSpaces'),pc:document.getElementById('paragraphCount'),awl:document.getElementById('avgWordLength'),sts:document.getElementById('speakTimeSlow'),wf:document.getElementById('wordFrequency'),wci:document.getElementById('wordCountInfo')};
+
+            function analyze(){
+                var t=input.value;
+                var chars=t.length;
+                var words=t.trim()?t.trim().split(/\s+/).length:0;
+                var sentences=t.split(/[.!?]+/).filter(function(s){return s.trim().length>0}).length;
+                var paragraphs=t.split(/\n\s*\n/).filter(function(p){return p.trim().length>0}).length;
+                var charsNoSpace=t.replace(/\s/g,'').length;
+                var avgWL=words>0?Math.round((charsNoSpace/words)*10)/10:0;
+                var readTime=Math.max(1,Math.round(words/200));
+                var speakSlow=Math.max(1,Math.round(words/130));
+
+                els.ch.textContent=chars.toLocaleString();
+                els.wo.textContent=words.toLocaleString();
+                els.se.textContent=sentences;
+                els.rt.textContent=readTime;
+                els.cws.textContent=chars.toLocaleString();
+                els.cwo.textContent=charsNoSpace.toLocaleString();
+                els.pc.textContent=paragraphs;
+                els.awl.textContent=avgWL;
+                els.sts.textContent=speakSlow;
+
+                // Wortfrequenz (Top 10, Wörter > 2 Buchstaben)
+                if(words>0){
+                    var wordMap={};
+                    t.toLowerCase().replace(/[^a-zäöüßA-ZÄÖÜa-z0-9]/g,' ').split(/\s+/).forEach(function(w){
+                        if(w.length>2){wordMap[w]=(wordMap[w]||0)+1;}
+                    });
+                    var sorted=Object.keys(wordMap).sort(function(a,b){return wordMap[b]-wordMap[a]}).slice(0,15);
+                    els.wf.innerHTML=sorted.map(function(w){return '<span class="word-item">'+w+' <span class="count">('+wordMap[w]+')</span></span>';}).join('');
+                    els.wci.textContent='Top '+(sorted.length)+' von '+Object.keys(wordMap).length+' Wörtern';
+                }else{
+                    els.wf.innerHTML='';
+                    els.wci.textContent='Keine Wörter erkannt';
+                }
+            }
+
+            input.addEventListener('input',analyze);
+
+            document.getElementById('clearTextBtn').addEventListener('click',function(){input.value='';input.focus();analyze();});
+            document.getElementById('sampleTextBtn').addEventListener('click',function(){
+                input.value='ToolCompass ist eine Plattform für hochwertige, client-seitige Browser-Tools. Unser Fokus liegt auf Qualität vor Quantität: Jedes Tool wird von Hand kuratiert, auf maximale Performance optimiert und respektiert deine Daten zu 100%.\n\nAlle Berechnungen laufen lokal in deinem Browser – nichts verlässt dein Gerät. Keine Server, keine APIs, kein Tracking. Du kannst die Seite offline nutzen, sobald sie einmal geladen ist.\n\nAktuell bieten wir drei Tools an: Den KI-Prompt Optimierer für bessere Ergebnisse mit ChatGPT, Claude und Gemini. Den Caption Generator für Social-Media-Texte mit intelligenter Hashtag-Strategie. Und den Freelancer Rechner für Stundensätze, Projektkalkulation und Steuer-Rücklage.\n\nToolCompass ist und bleibt kostenlos. Finanziert wird die Seite durch nicht-störende Werbung und Affiliate-Links. Keine Premium-Tier, keine versteckten Kosten. Einfach öffnen und loslegen.';
+                input.focus();analyze();
+            });
+
+            // Initial analysis
+            analyze();
+        })();
+    </script>
+</body>
+</html>

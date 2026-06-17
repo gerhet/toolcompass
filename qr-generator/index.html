@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>QR Code Generator – ToolCompass</title>
+    <meta name="description" content="Erstelle QR-Codes aus Texten und URLs. In Echtzeit, als PNG-Download. 100% client-seitig, keine API.">
+    <link rel="canonical" href="https://toolcompass.org/qr-generator/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="QR Code Generator – ToolCompass">
+    <meta property="og:description" content="QR-Codes in Echtzeit generieren + Download. 100% client-seitig.">
+    <meta property="og:url" content="https://toolcompass.org/qr-generator/">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator","url":"https://toolcompass.org/qr-generator/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="qrcode-lib.js" defer></script>
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group input,.form-group textarea{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+        .form-group input:focus,.form-group textarea:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .form-group textarea{min-height:80px;resize:vertical;font-family:inherit}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4)}
+        .btn-secondary{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .btn-secondary:hover{border-color:var(--text-muted);color:white;background:rgba(255,255,255,0.06)}
+        .qr-output{display:flex;flex-direction:column;align-items:center;padding:2rem;background:rgba(3,7,18,0.6);border-radius:16px;border:1px solid var(--border);margin-top:1.5rem}
+        .qr-output canvas{background:white;padding:12px;border-radius:12px;max-width:100%}
+        .qr-url-display{font-size:0.85rem;color:var(--text-muted);margin-top:0.8rem;word-break:break-all;text-align:center;max-width:300px}
+        @media(max-width:600px){.tool-interface{padding:1.5rem}}
+    </style>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#qr-code"></use></svg> 100% Client-Side</div>
+            <h1>QR Code <span>Generator</span></h1>
+            <p class="subtitle">Erstelle QR-Codes aus Texten, URLs und mehr – in Echtzeit, Download als PNG.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <form id="qrForm" novalidate>
+                    <div class="form-group">
+                        <label for="qrInput">Text oder URL</label>
+                        <textarea id="qrInput" placeholder="https://toolcompass.org/ oder einen beliebigen Text eingeben..." required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qrSize">Größe</label>
+                            <select id="qrSize">
+                                <option value="150">Klein (150x150)</option>
+                                <option value="250" selected>Mittel (250x250)</option>
+                                <option value="400">Groß (400x400)</option>
+                                <option value="600">XL (600x600)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="qrECC">Fehlerkorrektur</label>
+                            <select id="qrECC">
+                                <option value="L">Niedrig (7%)</option>
+                                <option value="M" selected>Mittel (15%)</option>
+                                <option value="Q">Hoch (25%)</option>
+                                <option value="H">Sehr hoch (30%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary" id="generateQrBtn">📱 QR-Code generieren</button>
+                        <button type="button" class="btn-secondary" id="downloadQrBtn" style="display:none">⬇️ Als PNG herunterladen</button>
+                    </div>
+                </form>
+                <div class="qr-output" id="qrOutput" style="display:none">
+                    <canvas id="qrCanvas"></canvas>
+                    <div class="qr-url-display" id="qrUrlDisplay"></div>
+                </div>
+            </div>
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie funktioniert der QR Code Generator?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Du gibst einen Text oder eine URL ein, wählst Größe und Fehlerkorrektur – der QR-Code wird in Echtzeit generiert. Kein API-Aufruf, alles läuft lokal.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Werden meine Daten gespeichert?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Nein. Alles läuft lokal in deinem Browser. Deine Eingaben verlassen niemals dein Gerät.</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>
+        (function(){
+            'use strict';
+            document.getElementById('year').textContent=new Date().getFullYear();
+            var input=document.getElementById('qrInput'),sizeIn=document.getElementById('qrSize'),eccIn=document.getElementById('qrECC');
+            var canvas=document.getElementById('qrCanvas'),output=document.getElementById('qrOutput'),urlDisplay=document.getElementById('qrUrlDisplay'),dlBtn=document.getElementById('downloadQrBtn');
+
+            function generateQR(){
+                var text=input.value.trim();
+                if(!text){output.style.display='none';dlBtn.style.display='none';return;}
+
+                var size=parseInt(sizeIn.value)||250;
+                var eccMap={L:1,M:0,Q:3,H:2};
+                var ecc=eccMap[eccIn.value]||0;
+
+                try{
+                    var qr=QRCode.generate(text,{typeNumber:-1,errorCorrectLevel:ecc});
+                    var cellSize=size/qr.getModuleCount();
+                    canvas.width=size;canvas.height=size;
+                    var ctx=canvas.getContext('2d');
+                    ctx.fillStyle='#ffffff';ctx.fillRect(0,0,size,size);
+                    ctx.fillStyle='#000000';
+                    for(var r=0;r<qr.getModuleCount();r++){
+                        for(var c=0;c<qr.getModuleCount();c++){
+                            if(qr.isDark(r,c))ctx.fillRect(c*cellSize,r*cellSize,Math.ceil(cellSize),Math.ceil(cellSize));
+                        }
+                    }
+                    output.style.display='flex';
+                    urlDisplay.textContent=text.length>80?text.substring(0,77)+'...':text;
+                    dlBtn.style.display='inline-flex';
+                }catch(e){console.error(e);output.style.display='none';dlBtn.style.display='none';}
+            }
+
+            document.getElementById('qrForm').addEventListener('submit',function(e){e.preventDefault();generateQR();});
+            input.addEventListener('input',generateQR);
+            sizeIn.addEventListener('change',generateQR);
+            eccIn.addEventListener('change',generateQR);
+
+            dlBtn.addEventListener('click',function(){
+                var link=document.createElement('a');
+                link.download='toolcompass-qr.png';
+                link.href=canvas.toDataURL('image/png');
+                link.click();
+            });
+
+            // Initial
+            input.value='https://toolcompass.org/';
+            generateQR();
+        })();
+    </script>
+</body>
+</html>
