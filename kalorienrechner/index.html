@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Kalorienrechner – Täglichen Kalorienbedarf berechnen | ToolCompass</title>
+    <meta name="description" content="Kostenloser Kalorienrechner: Berechne deinen täglichen Kalorienbedarf mit Harris-Benedict-Formel. Mit Grund- und Gesamtbedarf für Abnehmen, Halten oder Zunehmen.">
+    <link rel="canonical" href="https://toolcompass.org/kalorienrechner/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Kalorienrechner – Täglichen Bedarf berechnen | ToolCompass">
+    <meta property="og:description" content="Berechne deinen täglichen Kalorienbedarf. Mit Harris-Benedict-Formel und Aktivitätslevel. Kostenlos und datenschutzkonform.">
+    <meta property="og:url" content="https://toolcompass.org/kalorienrechner/">
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Kalorienrechner",
+      "url": "https://toolcompass.org/kalorienrechner/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "Kostenloser Kalorienrechner mit Harris-Benedict-Formel. Berechne Grund- und Gesamtbedarf für Gewichtsabnahme, -erhalt oder -zunahme.",
+      "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"}
+    }</script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group input,.form-group select{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+        .form-group input:focus,.form-group select:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .form-group select option{background:var(--bg-dark);color:white}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4)}
+        .btn-secondary{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .btn-secondary:hover{border-color:var(--text-muted);color:white;background:rgba(255,255,255,0.06)}
+        .result-card{background:rgba(3,7,18,0.8);padding:2rem;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;display:none;animation:fadeIn 0.4s ease-out}
+        .result-card.visible{display:block}
+        .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem}
+        @media(max-width:600px){.result-grid{grid-template-columns:1fr;gap:0.7rem}}
+        .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+        .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
+        .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .kalorien-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.85rem}
+        .kalorien-table th{background:rgba(99,102,241,0.12);color:var(--text-main);padding:0.6rem;text-align:left;font-weight:600;border:1px solid var(--border)}
+        .kalorien-table td{padding:0.6rem;border:1px solid var(--border);color:var(--text-muted)}
+        .kalorien-table tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+    <script src="/assets/js/consent.js"></script>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#flame"></use></svg> Gesundheit & Lifestyle</div>
+            <h1>Kalorien-<span>Rechner</span></h1>
+            <p class="subtitle">Berechne deinen täglichen Kalorienbedarf mit der Harris-Benedict-Formel. Für Abnehmen, Halten oder Zunehmen.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <form id="kalorienForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="geschlecht">Geschlecht</label>
+                            <select id="geschlecht">
+                                <option value="maennlich">Männlich</option>
+                                <option value="weiblich">Weiblich</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="alter">Alter (Jahre)</label>
+                            <input type="number" id="alter" min="10" max="100" placeholder="z.B. 30" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gewicht">Gewicht (kg)</label>
+                            <input type="number" id="gewicht" step="0.1" min="30" max="300" placeholder="z.B. 70" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="groesse">Größe (cm)</label>
+                            <input type="number" id="groesse" min="100" max="250" placeholder="z.B. 175" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aktivitaet">Aktivitätslevel</label>
+                        <select id="aktivitaet">
+                            <option value="1.2">Sitzend (wenig/kein Sport)</option>
+                            <option value="1.375">Leicht aktiv (1-3x/Woche)</option>
+                            <option value="1.55">Moderat aktiv (3-5x/Woche)</option>
+                            <option value="1.725">Sehr aktiv (6-7x/Woche)</option>
+                            <option value="1.9">Extrem aktiv (2x/Tag)</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Berechnen</button>
+                        <button type="button" class="btn-secondary" onclick="document.getElementById('kalorienForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                    </div>
+                </form>
+            </div>
+            <div class="result-card" id="resultCard">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="ri-value" id="grundbedarf">0</div>
+                        <div class="ri-label">Grundbedarf (kcal)</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="ri-value" id="gesamtbedarf">0</div>
+                        <div class="ri-label">Gesamtbedarf (kcal)</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="ri-value" id="abnehmen">0</div>
+                        <div class="ri-label">Abnehmen (-500 kcal)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool-interface">
+                <h2 style="color:white;margin-bottom:1rem">Harris-Benedict-Formel</h2>
+                <p style="color:var(--text-muted);margin-bottom:1rem">Die Harris-Benedict-Formel berechnet deinen Grundumsatz (Kalorien bei völliger Ruhe). Mit Aktivitätslevel ergibt sich der Gesamtbedarf.</p>
+                <table class="kalorien-table">
+                    <tr><th>Geschlecht</th><th>Formel</th></tr>
+                    <tr><td><strong>Männlich</strong></td><td>Grundumsatz = 66,47 + (13,7 × Gewicht) + (5 × Größe) - (6,8 × Alter)</td></tr>
+                    <tr><td><strong>Weiblich</strong></td><td>Grundumsatz = 655,1 + (9,6 × Gewicht) + (1,8 × Größe) - (4,7 × Alter)</td></tr>
+                </table>
+            </div>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script>
+        document.getElementById('kalorienForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var geschlecht = document.getElementById('geschlecht').value;
+            var alter = parseInt(document.getElementById('alter').value);
+            var gewicht = parseFloat(document.getElementById('gewicht').value);
+            var groesse = parseInt(document.getElementById('groesse').value);
+            var aktivitaet = parseFloat(document.getElementById('aktivitaet').value);
+            if (isNaN(alter) || isNaN(gewicht) || isNaN(groesse) || alter < 10 || alter > 100 || gewicht < 30 || gewicht > 300 || groesse < 100 || groesse > 250) { alert('Bitte gib gültige Werte ein.'); return; }
+            var grundumsatz;
+            if (geschlecht === 'maennlich') {
+                grundumsatz = 66.47 + (13.7 * gewicht) + (5 * groesse) - (6.8 * alter);
+            } else {
+                grundumsatz = 655.1 + (9.6 * gewicht) + (1.8 * groesse) - (4.7 * alter);
+            }
+            var gesamtbedarf = grundumsatz * aktivitaet;
+            var abnehmen = gesamtbedarf - 500;
+            document.getElementById('grundbedarf').textContent = Math.round(grundumsatz) + ' kcal';
+            document.getElementById('gesamtbedarf').textContent = Math.round(gesamtbedarf) + ' kcal';
+            document.getElementById('abnehmen').textContent = Math.round(abnehmen) + ' kcal';
+            document.getElementById('resultCard').classList.add('visible');
+        });
+    </script>
+</body>
+</html>
