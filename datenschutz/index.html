@@ -29,9 +29,15 @@
         .legal-content a:hover { color: white; text-decoration: underline; }
         .legal-content .highlight { background: rgba(99, 102, 241, 0.08); border-left: 3px solid var(--accent-primary); padding: 1rem 1.2rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
         .legal-content strong { color: var(--text-main); }
+        .legal-content .cookie-table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.9rem; }
+        .legal-content .cookie-table th { background: rgba(99, 102, 241, 0.12); color: var(--text-main); padding: 0.75rem 1rem; text-align: left; font-weight: 600; border: 1px solid var(--border); }
+        .legal-content .cookie-table td { padding: 0.75rem 1rem; border: 1px solid var(--border); color: var(--text-muted); }
+        .legal-content .cookie-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
         .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s, transform 0.2s; margin-bottom: 1.5rem; }
         .back-link:hover { color: white; transform: translateX(-4px); }
-        @media (max-width: 600px) { .legal-content { padding: 0.5rem 0 3rem; } .legal-content h2 { font-size: 1.3rem; } }
+        .top-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(6, 182, 212, 0.1); color: var(--accent-secondary); font-size: 0.75rem; padding: 0.4rem 0.9rem; border-radius: 99px; margin-bottom: 1.2rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid rgba(6, 182, 212, 0.15); }
+        .lang-switch { display: inline-block; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 4px 12px; font-size: 11px; color: var(--text-muted); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        @media (max-width: 600px) { .legal-content { padding: 0.5rem 0 3rem; } .legal-content h2 { font-size: 1.3rem; } .legal-content .cookie-table { font-size: 0.75rem; } .legal-content .cookie-table th, .legal-content .cookie-table td { padding: 0.5rem; } }
     </style>
     <script src="/assets/js/consent.js"></script>
 </head>
@@ -44,7 +50,7 @@
         </a></nav>
         <header><div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#shield"></use></svg> DSGVO-Konform</div><h1>Datenschutz<span>erklärung</span></h1></header>
         <main class="legal-content">
-            <div class="highlight"><strong>Kurzfassung:</strong> ToolCompass erhebt, speichert oder verarbeitet keine personenbezogenen Daten deiner Tool-Eingaben. Alle Tools laufen 100% client-seitig in deinem Browser. Die Seite nutzt Google AdSense zur Finanzierung – Details unten.</div>
+            <div class="highlight"><strong>Kurzfassung:</strong> ToolCompass erhebt, speichert oder verarbeitet keine personenbezogenen Daten deiner Tool-Eingaben. Alle Tools laufen 100% client-seitig in deinem Browser. Die Seite nutzt Google AdSense und Google Analytics 4 – nur nach deiner ausdrücklichen Einwilligung.</div>
 
             <h2>1. Verantwortlicher</h2>
             <p>Verantwortlich für die Datenverarbeitung auf dieser Website:</p>
@@ -57,39 +63,151 @@
                 <li>❌ Keine Übermittlung an Dritte</li>
                 <li>❌ Kein Tracking deiner Eingaben</li>
                 <li>❌ Keine Cookies für die Tool-Funktion</li>
+                <li>❌ Keine externen API-Aufrufe bei der Tool-Nutzung</li>
             </ul>
-            <p>Du kannst die Seite nach dem Laden auch <strong>offline</strong> nutzen.</p>
+            <p>Du kannst die Seite nach dem Laden auch <strong>offline</strong> nutzen – alle notwendigen Ressourcen (Schriftarten, Icons, CSS, JavaScript) werden beim ersten Besuch geladen und liegen lokal im Browser-Cache.</p>
 
-            <h2>3. Google AdSense & Google Analytics 4</h2>
-            <p>Diese Website verwendet <strong>Google AdSense</strong> und <strong>Google Analytics 4</strong>, Dienste der Google LLC. Diese werden <strong>nur nach deiner Einwilligung</strong> aktiviert.</p>
-            
-            <h3>3.1 Google AdSense (Marketing)</h3>
-            <p>AdSense verwendet Cookies zur Ausspielung personalisierter oder nicht-personalisierter Werbung. Dabei können Besuchsdaten, Browser- und Geräteinformationen sowie eine gekürzte IP-Adresse erhoben werden.</p>
-            
-            <h3>3.2 Google Analytics 4 (Analyse)</h3>
-            <p>Analytics erfasst anonymisierte Nutzungsdaten zur Verbesserung der Website. IP-Adressen werden anonymisiert (letztes Oktett gekürzt). Keine personenbezogenen Daten werden gespeichert.</p>
-            
-            <p>Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a></p>
-            <p>Personaliserte Werbung kann in den <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google-Anzeigeneinstellungen</a> deaktiviert werden.</p>
+            <h2>3. Hosting & Server-Log-Dateien</h2>
+            <p>Diese Website wird auf <strong>GitHub Pages</strong> (GitHub Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Seite erhebt GitHub automatisch technische Zugriffsdaten (Server-Logs):</p>
+            <ul>
+                <li>IP-Adresse (anonymisiert)</li>
+                <li>Browsertyp und -version</li>
+                <li>Verwendetes Betriebssystem</li>
+                <li>Referrer URL (die zuvor besuchte Seite)</li>
+                <li>Uhrzeit der Serveranfrage</li>
+            </ul>
+            <p>Diese Daten dienen ausschließlich der technischen Sicherheit, Stabilität und Fehleranalyse. Eine Zusammenführung mit anderen Datenquellen findet nicht statt. Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</p>
 
-            <h2>4. Consent-Banner (Einwilligungsverwaltung)</h2>
+            <h2>4. Google AdSense & Google Analytics 4</h2>
+            <p>Diese Website verwendet <strong>Google AdSense</strong> (Werbung) und <strong>Google Analytics 4</strong> (Analyse), Dienste der Google LLC (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA). Beide Dienste werden <strong>nur nach deiner ausdrücklichen Einwilligung</strong> über das Consent-Banner aktiviert.</p>
+            
+            <h3>4.1 Google AdSense (Marketing)</h3>
+            <p>AdSense verwendet Cookies und ähnliche Technologien zur Ausspielung von Werbeanzeigen. Dabei können folgende Daten verarbeitet werden:</p>
+            <ul>
+                <li>Besuchte Seiten und Interaktionen</li>
+                <li>Browser- und Geräteinformationen</li>
+                <li>Gekürzte IP-Adresse (anonymisiert)</li>
+                <li>Cookie-IDs und Werbe-IDs</li>
+            </ul>
+            <p>Du kannst personalisierte Werbung jederzeit in den <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Anzeigeneinstellungen</a> deaktivieren.</p>
+
+            <h3>4.2 Google Analytics 4 (Analyse)</h3>
+            <p>Google Analytics 4 erfasst anonymisierte Nutzungsdaten zur Verbesserung der Website:</p>
+            <ul>
+                <li><strong>IP-Anonymisierung:</strong> IP-Adressen werden innerhalb der EU/EWR vor der Übermittlung in die USA gekürzt</li>
+                <li><strong>Speicherdauer:</strong> Daten werden maximal 14 Monate gespeichert und dann automatisch gelöscht</li>
+                <li><strong>Keine personenbezogenen Daten:</strong> Es werden keine Namen, Adressen oder ähnliche Daten erfasst</li>
+            </ul>
+
+            <h3>4.3 Rechtsgrundlage</h3>
+            <p>Die Rechtsgrundlage für die Verarbeitung ist Art. 6 Abs. 1 lit. a DSGVO (Einwilligung), die du jederzeit mit Wirkung für die Zukunft widerrufen kannst.</p>
+
+            <h2>5. Consent-Banner (Einwilligungsverwaltung)</h2>
             <p>Bei deinem ersten Besuch erscheint ein Cookie-Banner, in dem du wählen kannst:</p>
             <ul>
                 <li><strong>Nur essenziell:</strong> Keine Cookies für Marketing oder Analytics</li>
                 <li><strong>Analytics:</strong> Anonymisierte Nutzungsdaten für Website-Verbesserung</li>
                 <li><strong>Marketing:</strong> Personalisierte oder nicht-personalisierte Werbung</li>
             </ul>
-            <p>Deine Entscheidung wird lokal in deinem Browser gespeichert (localStorage) und kann jederzeit <a href="#" onclick="if(window.TCConsent){window.TCConsent.reset();}return false;">hier zurückgesetzt</a> werden.</p>
+            <p>Deine Entscheidung wird lokal in deinem Browser gespeichert (localStorage) und ist jederzeit widerrufbar. Du kannst deine Entscheidung <a href="#" onclick="if(window.TCConsent){window.TCConsent.reset();}return false;">hier zurücksetzen</a>.</p>
 
-            <h2>5. Hosting (GitHub Pages)</h2>
-            <p>Gehostet auf <strong>GitHub Pages</strong> (GitHub Inc., San Francisco). Beim Aufruf erhebt GitHub automatisch technische Zugriffsdaten. Details: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a></p>
+            <h2>6. Cookies im Überblick</h2>
+            <p>Auf unserer Website können folgende Dienste Cookies setzen – jedoch nur nach deiner Einwilligung:</p>
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Dienst</th>
+                        <th>Typ</th>
+                        <th>Zweck</th>
+                        <th>Speicherdauer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Google Analytics 4</td>
+                        <td>Analyse</td>
+                        <td>Nutzungsanalyse, Reichweitenmessung</td>
+                        <td>Bis zu 14 Monate</td>
+                    </tr>
+                    <tr>
+                        <td>Google AdSense</td>
+                        <td>Marketing</td>
+                        <td>Personalisierte/nicht-personalisierte Werbung</td>
+                        <td>Bis zu 2 Jahre</td>
+                    </tr>
+                    <tr>
+                        <td>tc-consent (localStorage)</td>
+                        <td>Essenziell</td>
+                        <td>Speicherung deiner Cookie-Einwilligung</td>
+                        <td>Bis zum Widerruf</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Die Tool-Funktionen selbst verwenden <strong>keine Cookies</strong>.</p>
 
-            <h2>6. Deine Rechte</h2>
-            <p>Du hast jederzeit Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit und Beschwerde bei einer Aufsichtsbehörde. Da ToolCompass keine personenbezogenen Daten aktiv speichert, entfallen die meisten dieser Rechte faktisch.</p>
+            <h2>7. Lokale Ressourcen (kein externes Tracking)</h2>
+            <p>Sämtliche Schriftarten (Plus Jakarta Sans), Icons (Lucide), CSS und JavaScript werden von unserem eigenen Server geladen. Es werden keine externen CDNs, Google Fonts, Google Icons oder ähnliche Dienste beim Seitenaufruf kontaktiert. Dies verhindert bereits auf technischer Ebene die Erhebung von Daten durch Dritte.</p>
 
-            <h2>7. Kontakt</h2>
+            <h2>8. Lokaler Speicher (Local Storage)</h2>
+            <p>Einige Tools nutzen den <strong>Local Storage</strong> deines Browsers, um Einstellungen oder Verläufe zu speichern (z. B. gespeicherte Farbpaletten, Berechnungsverlauf). Diese Daten verbleiben ausschließlich auf deinem Gerät und sind für uns nicht zugänglich. Eine Löschung ist jederzeit über die Browser-Einstellungen möglich.</p>
+
+            <h2>9. Ihre Rechte (DSGVO)</h2>
+            <p>Nach der Datenschutz-Grundverordnung hast du folgende Rechte:</p>
+            <ul>
+                <li><strong>Auskunft (Art. 15 DSGVO):</strong> Recht auf Auskunft über die verarbeiteten personenbezogenen Daten</li>
+                <li><strong>Berichtigung (Art. 16 DSGVO):</strong> Recht auf Berichtigung unrichtiger Daten</li>
+                <li><strong>Löschung (Art. 17 DSGVO):</strong> Recht auf Löschung ("Recht auf Vergessenwerden")</li>
+                <li><strong>Einschränkung (Art. 18 DSGVO):</strong> Recht auf Einschränkung der Verarbeitung</li>
+                <li><strong>Datenübertragbarkeit (Art. 20 DSGVO):</strong> Recht auf Erhalt der Daten in einem maschinenlesbaren Format</li>
+                <li><strong>Widerspruch (Art. 21 DSGVO):</strong> Recht auf Widerspruch gegen die Verarbeitung</li>
+                <li><strong>Beschwerderecht (Art. 77 DSGVO):</strong> Recht auf Beschwerde bei einer Aufsichtsbehörde</li>
+            </ul>
+            <p>Da ToolCompass keine personenbezogenen Daten aktiv speichert, entfallen die meisten dieser Rechte faktisch. Bei Fragen oder Beschwerden bezüglich unserer Hosting- oder Analyse-Anbieter wende dich bitte an uns.</p>
+
+            <h2>10. Kontakt</h2>
+            <p>Bei Fragen zur Datenschutzerklärung oder zur Verarbeitung deiner Daten kannst du uns jederzeit kontaktieren:</p>
+            <p>E-Mail: <a href="mailto:ronwesel688@gmail.com">ronwesel688@gmail.com</a></p>
+
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 3rem 0;">
+
+            <!-- English Version -->
+            <span class="lang-switch">English Version</span>
+            <h1>Privacy Policy</h1>
+            <p class="subtitle" style="font-size: 14px; color: var(--text-muted); margin-bottom: 2rem;">Last Updated: June 2026</p>
+
+            <div class="highlight"><strong>Summary:</strong> ToolCompass does not collect, store, or process any personal data from your tool inputs. All tools run 100% client-side in your browser. Google AdSense and Google Analytics 4 are used only after your explicit consent.</p></div>
+
+            <h2>1. Controller</h2>
+            <p>Responsible for data processing on this website:</p>
+            <p><strong>ToolCompass.org</strong><br>Email: <a href="mailto:ronwesel688@gmail.com">ronwesel688@gmail.com</a></p>
+
+            <h2>2. Data Collection by Tools</h2>
+            <p><strong>All tools on ToolCompass run purely client-side.</strong> Your inputs are processed exclusively in your browser. There is:</p>
+            <ul>
+                <li>❌ No storage on servers</li>
+                <li>❌ No transmission to third parties</li>
+                <li>❌ No tracking of your inputs</li>
+                <li>❌ No cookies for tool functionality</li>
+                <li>❌ No external API calls during tool usage</li>
+            </ul>
+
+            <h2>3. Hosting & Server Log Files</h2>
+            <p>Hosted on <strong>GitHub Pages</strong> (GitHub Inc., USA). Technical access data is automatically collected in server log files: anonymized IP address, browser type/version, operating system, referrer URL, and time of request. This data is used solely for security and stability purposes.</p>
+
+            <h2>4. Google AdSense & Google Analytics 4</h2>
+            <p>We use <strong>Google AdSense</strong> (advertising) and <strong>Google Analytics 4</strong> (analysis) – only after your explicit consent. IP anonymization is activated. Data is retained for a maximum of 14 months.</p>
+            <ul>
+                <li>Opt-out of Analytics: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="nofollow">Google Analytics Opt-out Browser Add-on</a></li>
+                <li>Ad personalization settings: <a href="https://adssettings.google.com" target="_blank" rel="nofollow">Google Ads Settings</a></li>
+                <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+            </ul>
+
+            <h2>5. Your Rights (GDPR)</h2>
+            <p>Under GDPR, you have the right to access, rectification, erasure, restriction, data portability, objection, and complaint to a supervisory authority. Since ToolCompass does not actively store personal data, most of these rights are effectively not applicable. Contact us for any concerns.</p>
+
+            <h2>6. Contact</h2>
             <p><a href="mailto:ronwesel688@gmail.com">ronwesel688@gmail.com</a></p>
-            <p><em>Stand: Januar 2025</em></p>
+            <p><em>Last Updated: June 2026</em></p>
         </main>
     </div>
     <footer>
