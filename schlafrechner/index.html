@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Schlafrechner – Optimale Schlafenszeit & Weckzeit | ToolCompass</title>
+    <meta name="description" content="Kostenloser Schlafrechner: Berechne die ideale Schlafenszeit oder Weckzeit basierend auf 90-Minuten-Schlafzyklen. Inklusive Schlafphasen-Erklärung & Tipps für erholsamen Schlaf.">
+    <link rel="canonical" href="https://toolcompass.org/schlafrechner/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Schlafrechner – Optimale Schlafenszeit & Weckzeit | ToolCompass">
+    <meta property="og:description" content="Finde die perfekte Schlafenszeit oder Weckzeit. Basierend auf 90-Minuten-Schlafzyklen. Für erholsamen Schlaf ohne Wecker-Gefühl.">
+    <meta property="og:url" content="https://toolcompass.org/schlafrechner/">
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Schlafrechner – Optimale Schlafenszeit & Weckzeit",
+      "url": "https://toolcompass.org/schlafrechner/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne die ideale Schlafenszeit oder Weckzeit basierend auf 90-Minuten-Schlafzyklen.",
+      "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"}
+    }</script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group input,.form-group select{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+        .form-group input:focus,.form-group select:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .form-group select option{background:var(--bg-dark);color:white}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4)}
+        .btn-secondary{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .btn-secondary:hover{border-color:var(--text-muted);color:white;background:rgba(255,255,255,0.06)}
+        .tab-bar{display:flex;gap:0;margin-bottom:2rem;background:rgba(3,7,18,0.4);border-radius:14px;padding:4px;border:1px solid var(--border)}
+        .tab-btn{flex:1;padding:0.8rem 1rem;border:none;background:transparent;color:var(--text-muted);font-weight:600;font-size:0.9rem;cursor:pointer;border-radius:10px;transition:all 0.3s ease;font-family:inherit}
+        .tab-btn.active{background:var(--accent-primary);color:white;box-shadow:0 2px 10px rgba(99,102,241,0.2)}
+        .tab-btn:hover:not(.active){color:var(--text-main)}
+        .tab-content{display:none}
+        .tab-content.active{display:block}
+        .result-card{background:rgba(3,7,18,0.8);padding:2rem;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;display:none;animation:fadeIn 0.4s ease-out}
+        .result-card.visible{display:block}
+        .result-card .result-title{font-size:1.1rem;font-weight:700;color:var(--text-main);margin-bottom:1.2rem;text-align:center}
+        .time-list{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1rem}
+        @media(max-width:600px){.time-list{grid-template-columns:1fr}}
+        .time-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1rem 1.2rem;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s}
+        .time-item:hover{border-color:rgba(99,102,241,0.3);background:rgba(99,102,241,0.05)}
+        .time-item .ti-label{font-size:0.8rem;color:var(--text-muted)}
+        .time-item .ti-value{font-size:1.3rem;font-weight:700;color:white;font-variant-numeric:tabular-nums}
+        .time-item .ti-cycles{font-size:0.75rem;color:var(--accent-secondary)}
+        .time-item.recommended{border-color:var(--accent-primary);background:rgba(99,102,241,0.08)}
+        .time-item.recommended .ti-value{color:var(--accent-primary)}
+        .sleep-cycle-diagram{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;margin:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .sleep-cycle-diagram .cycle-segment{flex:1;height:8px;border-radius:4px;margin:0 2px;opacity:0.6}
+        .sleep-cycle-diagram .cycle-segment.deep{background:#6366f1}
+        .sleep-cycle-diagram .cycle-segment.light{background:#818cf8}
+        .sleep-cycle-diagram .cycle-segment.rem{background:#a78bfa}
+        .sleep-cycle-diagram .cycle-segment.wake{background:#10b981;opacity:1}
+        .cycle-legend{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem}
+        .cycle-legend span{display:flex;align-items:center;gap:0.4rem}
+        .cycle-legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+        .cycle-legend .dot.deep{background:#6366f1}
+        .cycle-legend .dot.light{background:#818cf8}
+        .cycle-legend .dot.rem{background:#a78bfa}
+        .cycle-legend .dot.wake{background:#10b981}
+        .sleep-tips{margin-top:2rem;padding:1.5rem;background:rgba(6,182,212,0.05);border:1px solid rgba(6,182,212,0.15);border-radius:12px}
+        .sleep-tips h3{color:var(--accent-secondary);font-size:0.95rem;font-weight:700;margin-bottom:0.8rem}
+        .sleep-tips ul{margin:0;padding-left:1.2rem}
+        .sleep-tips li{color:var(--text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:0.3rem}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+    <script src="/assets/js/consent.js"></script>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#moon"></use></svg> 100% Client-Side</div>
+            <h1>Schlaf<span>rechner</span></h1>
+            <p class="subtitle">Finde die perfekte Schlafenszeit oder Weckzeit – basierend auf 90-Minuten-Schlafzyklen. Für erholsamen Schlaf und ein müheloses Aufwachen.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <div class="tab-bar" role="tablist">
+                    <button class="tab-btn active" data-tab="wake" role="tab">🛌 Weckzeit berechnen</button>
+                    <button class="tab-btn" data-tab="bed" role="tab">⏰ Schlafenszeit berechnen</button>
+                </div>
+                <form id="sleepForm" novalidate>
+                    <div class="tab-content active" id="tab-wake">
+                        <div class="form-group">
+                            <label for="wakeTime">Ich möchte aufwachen um ...</label>
+                            <input type="time" id="wakeTime" value="06:30">
+                        </div>
+                        <div class="form-group">
+                            <label for="fallAsleep">Einschlafdauer</label>
+                            <select id="fallAsleep">
+                                <option value="0">Sofort (0 Minuten)</option>
+                                <option value="5">Sehr schnell (5 Minuten)</option>
+                                <option value="15" selected>Normal (15 Minuten)</option>
+                                <option value="30">Langsam (30 Minuten)</option>
+                                <option value="45">Sehr langsam (45 Minuten)</option>
+                            </select>
+                        </div>
+                        <div style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">
+                            Ideale Schlafenszeiten für Aufwachen um <strong id="displayWakeTime" style="color:white">06:30</strong>
+                        </div>
+                        <div class="btn-group" style="justify-content:center">
+                            <button type="submit" class="btn-primary">🌙 Schlafenszeiten berechnen</button>
+                        </div>
+                    </div>
+                    <div class="tab-content" id="tab-bed">
+                        <div class="form-group">
+                            <label for="bedTime">Ich gehe schlafen um ...</label>
+                            <input type="time" id="bedTime" value="22:30">
+                        </div>
+                        <div class="form-group">
+                            <label for="fallAsleep2">Einschlafdauer</label>
+                            <select id="fallAsleep2">
+                                <option value="0">Sofort (0 Minuten)</option>
+                                <option value="5">Sehr schnell (5 Minuten)</option>
+                                <option value="15" selected>Normal (15 Minuten)</option>
+                                <option value="30">Langsam (30 Minuten)</option>
+                                <option value="45">Sehr langsam (45 Minuten)</option>
+                            </select>
+                        </div>
+                        <div style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">
+                            Ideale Weckzeiten für Schlafenszeit um <strong id="displayBedTime" style="color:white">22:30</strong>
+                        </div>
+                        <div class="btn-group" style="justify-content:center">
+                            <button type="submit" class="btn-primary">🕐 Weckzeiten berechnen</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="result-card" id="resultCard">
+                    <div class="result-title" id="resultTitle">Ideale Zeiten</div>
+                    <div class="cycle-legend">
+                        <span><span class="dot deep"></span> Tiefschlaf</span>
+                        <span><span class="dot light"></span> Leichtschlaf</span>
+                        <span><span class="dot rem"></span> REM-Schlaf</span>
+                        <span><span class="dot wake"></span> Aufwachen</span>
+                    </div>
+                    <div class="sleep-cycle-diagram" id="cycleDiagram"></div>
+                    <div class="time-list" id="timeList"></div>
+                    <div class="sleep-tips" id="sleepTips">
+                        <h3>💡 Tipps für erholsamen Schlaf</h3>
+                        <ul>
+                            <li>Halte einen regelmäßigen Schlafrhythmus – auch am Wochenende</li>
+                            <li>Vermeide Bildschirme (Handy, TV) 30-60 Minuten vor dem Schlafengehen</li>
+                            <li>Das Schlafzimmer sollte kühl (16-19°C), dunkel und leise sein</li>
+                            <li>Kein Koffein nach 14 Uhr und keine schweren Mahlzeiten vor dem Schlaf</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen zum Schlafrechner</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie funktionieren Schlafzyklen?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Der Schlaf verläuft in 90-Minuten-Zyklen. Jeder Zyklus besteht aus Leichtschlaf, Tiefschlaf und REM-Schlaf (Traumphase). Erwachsene durchlaufen pro Nacht 4-6 solcher Zyklen. Das Aufwachen zwischen zwei Zyklen fällt am leichtesten.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie viel Schlaf brauche ich?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Erwachsene (18-64 Jahre): 7-9 Stunden. Jugendliche (14-17): 8-10 Stunden. Schulkinder (6-13): 9-11 Stunden. Ältere (65+): 7-8 Stunden. Wichtiger als die Dauer ist die Qualität und das Aufwachen am Zyklus-Ende.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Was ist die ideale Schlafenszeit?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Wenn du um 6:30 aufwachen möchtest, sind 21:15, 22:45 oder 00:15 ideale Zeiten (5, 4 oder 3 Schlafzyklen + 15 Min. Einschlafzeit). Unser Rechner zeigt alle Optionen.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Kann ich Schlaf nachholen?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Eine einzelne verlorene Nacht kann teilweise ausgeglichen werden. Chronischen Schlafmangel kann man nicht vollständig nachholen. Ein regelmäßiger Rhythmus ist wichtiger als gelegentliches Ausschlafen.</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>
+        (function() {
+            'use strict';
+            document.getElementById('year').textContent = new Date().getFullYear();
+            var CYCLE_MINUTES = 90;
+            var minCycles = 4;
+            var maxCycles = 6;
+            var tabBtns = document.querySelectorAll('.tab-btn');
+            var tabContents = document.querySelectorAll('.tab-content');
+            tabBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var tab = this.dataset.tab;
+                    tabBtns.forEach(function(b) { b.classList.remove('active'); });
+                    tabContents.forEach(function(c) { c.classList.remove('active'); });
+                    this.classList.add('active');
+                    document.getElementById('tab-' + tab).classList.add('active');
+                    document.getElementById('resultCard').classList.remove('visible');
+                });
+            });
+            document.getElementById('wakeTime').addEventListener('change', function() {
+                document.getElementById('displayWakeTime').textContent = this.value;
+            });
+            document.getElementById('bedTime').addEventListener('change', function() {
+                document.getElementById('displayBedTime').textContent = this.value;
+            });
+            document.getElementById('sleepForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculate();
+            });
+            function timeToMinutes(timeStr) {
+                var parts = timeStr.split(':');
+                return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+            }
+            function minutesToTime(minutes) {
+                minutes = Math.round(minutes);
+                if (minutes < 0) minutes += 24 * 60;
+                if (minutes >= 24 * 60) minutes -= 24 * 60;
+                var h = Math.floor(minutes / 60);
+                var m = minutes % 60;
+                return h.toString().padStart(2, '0') + ':' + m.toString().padStart(2, '0');
+            }
+            function formatTimeNice(timeStr) {
+                var parts = timeStr.split(':');
+                var h = parseInt(parts[0]);
+                var m = parts[1];
+                if (h === 0 || h === 24) return '00:' + m + ' (Mitternacht)';
+                if (h < 6) return timeStr + ' Uhr (früher Morgen)';
+                if (h < 12) return timeStr + ' Uhr (Vormittag)';
+                if (h < 18) return timeStr + ' Uhr (Nachmittag)';
+                return timeStr + ' Uhr (Abend)';
+            }
+            function calculate() {
+                var mode = document.querySelector('.tab-btn.active').dataset.tab;
+                var wakeTime, bedTime, fallAsleepMinutes, fallAsleepStr;
+                if (mode === 'wake') {
+                    wakeTime = document.getElementById('wakeTime').value;
+                    fallAsleepStr = document.getElementById('fallAsleep').value;
+                } else {
+                    bedTime = document.getElementById('bedTime').value;
+                    fallAsleepStr = document.getElementById('fallAsleep2').value;
+                }
+                fallAsleepMinutes = parseInt(fallAsleepStr) || 15;
+                var timeList = document.getElementById('timeList');
+                var resultTitle = document.getElementById('resultTitle');
+                var cycleDiagram = document.getElementById('cycleDiagram');
+                var resultCard = document.getElementById('resultCard');
+                timeList.innerHTML = '';
+                if (mode === 'wake') {
+                    var wakeMinutes = timeToMinutes(wakeTime);
+                    resultTitle.textContent = '🛌 Ideale Schlafenszeiten für Aufwachen um ' + wakeTime + ' Uhr';
+                    for (var cycles = maxCycles; cycles >= minCycles; cycles--) {
+                        var totalSleep = cycles * CYCLE_MINUTES;
+                        var bedMinutes = wakeMinutes - totalSleep - fallAsleepMinutes;
+                        var bedTimeStr = minutesToTime(bedMinutes);
+                        var item = document.createElement('div');
+                        item.className = 'time-item' + (cycles === 5 ? ' recommended' : '');
+                        var hours = Math.floor(totalSleep / 60);
+                        var mins = totalSleep % 60;
+                        item.innerHTML = '<div><div class="ti-value">' + bedTimeStr + '</div><div class="ti-label">' + formatTimeNice(bedTimeStr) + '</div></div><div style="text-align:right"><div class="ti-cycles">' + cycles + ' Zyklen</div><div class="ti-label">' + hours + 'h ' + mins + 'min Schlaf</div></div>';
+                        timeList.appendChild(item);
+                    }
+                } else {
+                    var bedMinutes = timeToMinutes(bedTime);
+                    resultTitle.textContent = '⏰ Ideale Weckzeiten für Schlafenszeit um ' + bedTime + ' Uhr';
+                    for (var cycles = minCycles; cycles <= maxCycles; cycles++) {
+                        var totalSleep = cycles * CYCLE_MINUTES;
+                        var wakeMinutes = bedMinutes + fallAsleepMinutes + totalSleep;
+                        var wakeTimeStr = minutesToTime(wakeMinutes);
+                        var hours = Math.floor(totalSleep / 60);
+                        var mins = totalSleep % 60;
+                        var item = document.createElement('div');
+                        item.className = 'time-item' + (cycles === 5 ? ' recommended' : '');
+                        item.innerHTML = '<div><div class="ti-value">' + wakeTimeStr + '</div><div class="ti-label">' + formatTimeNice(wakeTimeStr) + '</div></div><div style="text-align:right"><div class="ti-cycles">' + cycles + ' Zyklen</div><div class="ti-label">' + hours + 'h ' + mins + 'min Schlaf</div></div>';
+                        timeList.appendChild(item);
+                    }
+                }
+                var segments = '';
+                var colors = ['light', 'deep', 'light', 'deep', 'light', 'rem'];
+                for (var i = 0; i < 6; i++) {
+                    segments += '<div class="cycle-segment ' + colors[i % colors.length] + '"></div>';
+                }
+                cycleDiagram.innerHTML = segments;
+                resultCard.classList.add('visible');
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            setTimeout(calculate, 100);
+        })();
+    </script>
+</body>
+</html>
