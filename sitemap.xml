@@ -13,4 +13,9 @@
   <url><loc>https://toolcompass.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://toolcompass.org/impressum/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://toolcompass.org/datenschutz/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://toolcompass.org/guides/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://toolcompass.org/guides/sichere-passwoerter/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/guides/qr-code-erstellen/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/guides/text-online-analysieren/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/guides/farbpaletten-webdesign/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
