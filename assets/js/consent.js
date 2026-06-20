@@ -7,7 +7,7 @@
 
     var STORAGE_KEY = 'tc-consent';
     var ADSENSE_ID = 'ca-pub-1934902732899980';
-    var GA4_ID = 'G-XXXXXXXXXX'; // ← WIRD BEI GA4-SETUP ERSETZT
+    var GA4_ID = 'G-4JVNJKQYCG';
 
     // Hilfsfunktionen
     function getConsent() {
