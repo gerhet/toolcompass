@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Promillerechner – Blutalkohol-Rechner kostenlos | ToolCompass</title>
+    <meta name="description" content="Kostenloser Promillerechner: Berechne deinen Blutalkoholgehalt (BAK) nach Widmark. Inkl. Abbauzeit, Restalkohol & Fahrtüchtigkeit. 100% client-seitig & privat.">
+    <link rel="canonical" href="https://toolcompass.org/promillerechner/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Promillerechner – Blutalkohol-Rechner | ToolCompass">
+    <meta property="og:description" content="Kostenloser Promillerechner nach Widmark. Berechne deinen Blutalkohol, Abbauzeit und ob du fahrtüchtig bist. 100% diskret & client-seitig.">
+    <meta property="og:url" content="https://toolcompass.org/promillerechner/">
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Promillerechner – Blutalkohol-Rechner",
+      "url": "https://toolcompass.org/promillerechner/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne deinen Blutalkoholgehalt nach der Widmark-Formel. Inklusive Abbauzeit und Fahrtüchtigkeits-Check.",
+      "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"}
+    }</script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group input,.form-group select{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+        .form-group input:focus,.form-group select:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .form-group select option{background:var(--bg-dark);color:white}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4)}
+        .btn-secondary{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .btn-secondary:hover{border-color:var(--text-muted);color:white;background:rgba(255,255,255,0.06)}
+        .result-card{background:rgba(3,7,18,0.8);padding:1.5rem;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;display:none;animation:fadeIn 0.4s ease-out}
+        .result-card.visible{display:block}
+        .result-card .result-value{font-size:2.5rem;font-weight:800;color:white;letter-spacing:-0.02em;line-height:1.2}
+        .result-card .result-value span{background:linear-gradient(135deg,var(--accent-primary),var(--accent-secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .result-card .result-label{font-size:0.85rem;color:var(--text-muted);margin-top:0.3rem}
+        .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem}
+        @media(max-width:600px){.result-grid{grid-template-columns:1fr}}
+        .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+        .result-item .ri-value{font-size:1.4rem;font-weight:700;color:white}
+        .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .warning-box{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:1rem 1.2rem;margin-top:1rem;display:none}
+        .warning-box.visible{display:block}
+        .warning-box .warn-title{color:#ef4444;font-weight:700;font-size:0.9rem;margin-bottom:0.3rem}
+        .warning-box .warn-text{color:var(--text-muted);font-size:0.85rem;line-height:1.5}
+        .success-box{background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:12px;padding:1rem 1.2rem;margin-top:1rem;display:none}
+        .success-box.visible{display:block}
+        .success-box .succ-title{color:#10b981;font-weight:700;font-size:0.9rem;margin-bottom:0.3rem}
+        .success-box .succ-text{color:var(--text-muted);font-size:0.85rem;line-height:1.5}
+        .disclaimer{font-size:0.75rem;color:var(--text-muted);margin-top:2rem;padding:1rem;border-top:1px solid var(--border);line-height:1.6}
+        .drink-entry{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:0.8rem;align-items:end;margin-bottom:0.8rem;padding:0.8rem;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid var(--border)}
+        .drink-entry .form-group{margin-bottom:0}
+        .drink-entry .remove-btn{background:none;border:none;color:#ef4444;cursor:pointer;padding:0.5rem;font-size:1.2rem;line-height:1;margin-bottom:0.3rem}
+        .drink-entry .remove-btn:hover{color:#dc2626}
+        .add-drink-btn{background:none;border:1px dashed var(--border);color:var(--accent-secondary);padding:0.8rem;border-radius:10px;cursor:pointer;font-size:0.9rem;width:100%;transition:all 0.2s;margin-bottom:1rem}
+        .add-drink-btn:hover{border-color:var(--accent-secondary);background:rgba(6,182,212,0.05)}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+    <script src="/assets/js/consent.js"></script>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#wine"></use></svg> 100% Diskret & Client-Side</div>
+            <h1>Promille<span>rechner</span></h1>
+            <p class="subtitle">Berechne deinen Blutalkoholgehalt nach der Widmark-Formel. Inklusive Abbauzeit, Restalkohol und Fahrtüchtigkeits-Check. Alle Berechnungen erfolgen lokal in deinem Browser.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <form id="bacForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Geschlecht</label>
+                            <select id="gender">
+                                <option value="male">Männlich</option>
+                                <option value="female">Weiblich</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Körpergewicht (kg)</label>
+                            <input type="number" id="weight" value="75" min="30" max="250" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Getränke</label>
+                        <div id="drinkList"></div>
+                        <button type="button" class="add-drink-btn" id="addDrinkBtn">+ Getränk hinzufügen</button>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startTime">Beginn des Trinkens (Uhrzeit)</label>
+                            <input type="time" id="startTime" value="20:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">Ende des Trinkens (Uhrzeit)</label>
+                            <input type="time" id="endTime" value="23:00">
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">🧮 Berechnen</button>
+                        <button type="reset" class="btn-secondary" id="resetBtn">Zurücksetzen</button>
+                    </div>
+                </form>
+
+                <div class="result-card" id="resultCard">
+                    <div class="result-value"><span id="bacValue">0,00</span> ‰</div>
+                    <div class="result-label">Blutalkoholkonzentration (BAK)</div>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="ri-value" id="bacPeak">0,00 ‰</div>
+                            <div class="ri-label">Maximaler Promillewert</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="ri-value" id="bacSoberTime">--:--</div>
+                            <div class="ri-label">Voraussichtlich nüchtern um</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="ri-value" id="bacPerHour">0,00 ‰</div>
+                            <div class="ri-label">Abbau pro Stunde</div>
+                        </div>
+                    </div>
+                    <div class="warning-box" id="warningBox">
+                        <div class="warn-title">⚠️ Nicht fahrtüchtig</div>
+                        <div class="warn-text" id="warningText">Dein Promillewert liegt über der gesetzlichen Grenze von 0,5 ‰. In der Probezeit (0,0 ‰) und bei Unfällen drohen empfindliche Strafen. Setze dich nicht ans Steuer!</div>
+                    </div>
+                    <div class="success-box" id="successBox">
+                        <div class="succ-title">✅ Fahrtüchtig (unter 0,3 ‰)</div>
+                        <div class="succ-text" id="successText">Dein Promillewert liegt unter 0,3 ‰. Dennoch: Bei Unfällen oder Ausfallerscheinungen drohen Konsequenzen. Im Zweifel: Finger weg vom Steuer!</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>⚠️ Wichtiger Hinweis:</strong> Dieser Rechner dient ausschließlich der Orientierung. Die Widmark-Formel liefert einen Näherungswert. Der tatsächliche Promillewert hängt von vielen individuellen Faktoren ab (Essen, Stoffwechsel, Medikamente, Gesundheitszustand). <strong>Setze dich niemals unter Alkoholeinfluss ans Steuer!</strong> Die gesetzliche Grenze in Deutschland beträgt 0,5 ‰ (0,0 ‰ in der Probezeit und unter 21 Jahren).
+            </div>
+
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen zum Promillerechner</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie funktioniert die Widmark-Formel?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Die Widmark-Formel berechnet den Blutalkoholgehalt: (Alkoholmenge in Gramm) / (Körpergewicht × Reduktionsfaktor). Der Reduktionsfaktor beträgt 0,68 für Männer und 0,55 für Frauen, da Frauen einen höheren Körperfettanteil haben. Vom berechneten Wert werden 10-20% Resorptionsverlust abgezogen. Der Abbau pro Stunde beträgt ca. 0,1-0,2 Promille.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wie viel Promille habe ich nach einem Bier?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Ein 0,5l Bier (5% Vol.) enthält ca. 20g reinen Alkohol. Bei einem 75kg schweren Mann ergibt das etwa 0,3-0,4 Promille. Bei einer 65kg schweren Frau etwa 0,4-0,5 Promille. Der tatsächliche Wert hängt von vielen Faktoren ab.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Wann bin ich wieder nüchtern?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Der Körper baut ca. 0,1-0,2 Promille pro Stunde ab. Bei 1,0 Promille dauert es also etwa 5-10 Stunden bis 0,0 Promille erreicht sind. Faktoren wie Schlaf, Essen und Flüssigkeitszufuhr beeinflussen den Abbau. Der Abbau lässt sich nicht beschleunigen – weder durch Kaffee noch durch kalte Duschen.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Welche Promillegrenzen gelten in Deutschland?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">0,0 ‰: Probezeit (2 Jahre) und unter 21 Jahren. 0,3 ‰: Relative Fahruntüchtigkeit (bei Ausfallerscheinungen strafbar). 0,5 ‰: Ordnungswidrigkeit (1. Verstoß: 500€ + 1 Monat Fahrverbot). 1,1 ‰: Absolute Fahruntüchtigkeit – Straftat (Führerscheinentzug, MPU).</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>
+        (function(){
+            'use strict';
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            var drinkList = document.getElementById('drinkList');
+            var addBtn = document.getElementById('addDrinkBtn');
+            var drinkCount = 0;
+
+            var DRINK_TYPES = [
+                { name: 'Bier (0,5l, 5%)', alcohol: 20 },
+                { name: 'Bier (0,33l, 5%)', alcohol: 13.2 },
+                { name: 'Wein (0,2l, 11%)', alcohol: 17.6 },
+                { name: 'Wein (0,75l, 11%)', alcohol: 66 },
+                { name: 'Sekt (0,1l, 11%)', alcohol: 8.8 },
+                { name: 'Schnaps (4cl, 40%)', alcohol: 12.8 },
+                { name: 'Longdrink/Cocktail', alcohol: 20 },
+                { name: 'Alcopops (0,33l, 5%)', alcohol: 13.2 },
+                { name: 'Eigene Angabe', alcohol: 0 }
+            ];
+
+            function addDrinkRow(type) {
+                drinkCount++;
+                var div = document.createElement('div');
+                div.className = 'drink-entry';
+                div.dataset.id = drinkCount;
+                var opts = DRINK_TYPES.map(function(d, i) {
+                    return '<option value="' + i + '"' + (i === type ? ' selected' : '') + '>' + d.name + '</option>';
+                }).join('');
+                div.innerHTML =
+                    '<div class="form-group"><select class="drink-type">' + opts + '</select></div>' +
+                    '<div class="form-group"><input type="number" class="drink-amount" value="1" min="0.5" max="50" step="0.5"></div>' +
+                    '<div class="form-group"><input type="number" class="drink-grams" value="' + (DRINK_TYPES[type] ? DRINK_TYPES[type].alcohol : 0) + '" min="0" max="500" step="0.1"></div>' +
+                    '<button type="button" class="remove-btn" title="Entfernen">✕</button>';
+                div.querySelector('.drink-type').addEventListener('change', function() {
+                    var idx = parseInt(this.value);
+                    var gramsInput = div.querySelector('.drink-grams');
+                    if (DRINK_TYPES[idx].alcohol > 0) {
+                        gramsInput.value = DRINK_TYPES[idx].alcohol;
+                    }
+                });
+                div.querySelector('.remove-btn').addEventListener('click', function() {
+                    div.remove();
+                });
+                drinkList.appendChild(div);
+            }
+
+            // Initial drinks
+            addDrinkRow(0); // Bier 0,5l
+            addDrinkRow(2); // Wein 0,2l
+
+            addBtn.addEventListener('click', function() {
+                addDrinkRow(0);
+            });
+
+            document.getElementById('bacForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculate();
+            });
+
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                document.getElementById('gender').value = 'male';
+                document.getElementById('weight').value = 75;
+                document.getElementById('startTime').value = '20:00';
+                document.getElementById('endTime').value = '23:00';
+                drinkList.innerHTML = '';
+                addDrinkRow(0);
+                addDrinkRow(2);
+                document.getElementById('resultCard').classList.remove('visible');
+                document.getElementById('warningBox').classList.remove('visible');
+                document.getElementById('successBox').classList.remove('visible');
+            });
+
+            function calculate() {
+                var gender = document.getElementById('gender').value;
+                var weight = parseFloat(document.getElementById('weight').value) || 75;
+                var startTime = document.getElementById('startTime').value;
+                var endTime = document.getElementById('endTime').value;
+
+                // Reduktionsfaktor
+                var r = gender === 'male' ? 0.68 : 0.55;
+
+                // Gesamtalkohol in Gramm
+                var totalAlcohol = 0;
+                var drinkEntries = drinkList.querySelectorAll('.drink-entry');
+                drinkEntries.forEach(function(entry) {
+                    var amount = parseFloat(entry.querySelector('.drink-amount').value) || 1;
+                    var grams = parseFloat(entry.querySelector('.drink-grams').value) || 0;
+                    totalAlcohol += amount * grams;
+                });
+
+                if (totalAlcohol <= 0) {
+                    alert('Bitte füge mindestens ein Getränk hinzu.');
+                    return;
+                }
+
+                // Widmark-Formel
+                var bac = (totalAlcohol / (weight * r)) * 0.85; // 15% Resorptionsverlust
+
+                // Zeitdifferenz
+                var startParts = startTime.split(':');
+                var endParts = endTime.split(':');
+                var startMin = parseInt(startParts[0]) * 60 + parseInt(startParts[1]);
+                var endMin = parseInt(endParts[0]) * 60 + parseInt(endParts[1]);
+                if (endMin < startMin) endMin += 24 * 60;
+                var durationHours = (endMin - startMin) / 60;
+
+                // Abbau während des Trinkens (0,15 ‰/h)
+                var abbauPerHour = 0.15;
+                var abgebaut = durationHours * abbauPerHour;
+                var peakBac = Math.max(0, bac);
+                var currentBac = Math.max(0, bac - abgebaut);
+
+                // Zeit bis nüchtern
+                var hoursToSober = currentBac / abbauPerHour;
+                var now = new Date();
+                var endDate = new Date();
+                var endH = parseInt(endParts[0]);
+                var endM = parseInt(endParts[1]);
+                endDate.setHours(endH, endM, 0, 0);
+                if (endDate < now) endDate.setDate(endDate.getDate() + 1);
+                var soberDate = new Date(endDate.getTime() + hoursToSober * 60 * 60 * 1000);
+                var soberStr = soberDate.getHours().toString().padStart(2, '0') + ':' + soberDate.getMinutes().toString().padStart(2, '0');
+
+                // Anzeige
+                document.getElementById('bacValue').textContent = currentBac.toFixed(2);
+                document.getElementById('bacPeak').textContent = peakBac.toFixed(2) + ' ‰';
+                document.getElementById('bacSoberTime').textContent = soberStr + ' Uhr';
+                document.getElementById('bacPerHour').textContent = abbauPerHour.toFixed(2) + ' ‰';
+
+                // Warnung / Erfolg
+                var warningBox = document.getElementById('warningBox');
+                var successBox = document.getElementById('successBox');
+                warningBox.classList.remove('visible');
+                successBox.classList.remove('visible');
+
+                if (currentBac >= 0.5) {
+                    warningBox.classList.add('visible');
+                    if (currentBac >= 1.1) {
+                        document.getElementById('warningText').textContent = 'Dein Promillewert liegt über 1,1 ‰ – absolute Fahruntüchtigkeit! Dir droht Führerscheinentzug, eine MPU und eine Strafanzeige. Setze dich auf keinen Fall ans Steuer!';
+                    } else {
+                        document.getElementById('warningText').textContent = 'Dein Promillewert liegt über der gesetzlichen Grenze von 0,5 ‰. Dir drohen 500€ Bußgeld, 1 Monat Fahrverbot und 2 Punkte in Flensburg. In der Probezeit (0,0 ‰) sind die Strafen noch härter.';
+                    }
+                } else if (currentBac >= 0.3) {
+                    warningBox.classList.add('visible');
+                    document.getElementById('warningText').textContent = 'Dein Promillewert liegt zwischen 0,3 und 0,5 ‰ – relative Fahruntüchtigkeit. Bei Ausfallerscheinungen oder einem Unfall drohen empfindliche Strafen. Sei vorsichtig!';
+                } else if (currentBac > 0) {
+                    successBox.classList.add('visible');
+                    document.getElementById('successText').textContent = 'Dein Promillewert liegt unter 0,3 ‰. Dennoch: Bei Unfällen oder Ausfallerscheinungen können Konsequenzen drohen. Im Zweifel: Finger weg vom Steuer!';
+                } else {
+                    successBox.classList.add('visible');
+                    document.getElementById('successText').textContent = 'Laut Berechnung bist du nüchtern. Dennoch: Bei Restalkohol oder Unsicherheit lieber auf das Auto verzichten.';
+                }
+
+                document.getElementById('resultCard').classList.add('visible');
+                document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        })();
+    </script>
+</body>
+</html>

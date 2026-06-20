@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>BMI-Rechner – Body Mass Index kostenlos berechnen | ToolCompass</title>
+    <meta name="description" content="Kostenloser BMI-Rechner: Berechne deinen Body Mass Index in Sekunden. Inklusive BMI-Tabelle für Erwachsene, Kinder & Jugendliche. 100% client-seitig & privat.">
+    <link rel="canonical" href="https://toolcompass.org/bmi-rechner/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="BMI-Rechner – Body Mass Index | ToolCompass">
+    <meta property="og:description" content="Berechne deinen BMI (Body Mass Index) kostenlos. Inklusive Gewichtsklassifikation nach WHO, BMI-Tabelle und Idealgewicht. Datenschutz-konform.">
+    <meta property="og:url" content="https://toolcompass.org/bmi-rechner/">
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "BMI-Rechner – Body Mass Index",
+      "url": "https://toolcompass.org/bmi-rechner/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne deinen Body Mass Index (BMI) kostenlos. Mit BMI-Tabelle, Gewichtsklassifikation nach WHO und Idealgewicht.",
+      "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"}
+    }</script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group input,.form-group select{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+        .form-group input:focus,.form-group select:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .form-group select option{background:var(--bg-dark);color:white}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4)}
+        .btn-secondary{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .btn-secondary:hover{border-color:var(--text-muted);color:white;background:rgba(255,255,255,0.06)}
+        .result-card{background:rgba(3,7,18,0.8);padding:2rem;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;display:none;animation:fadeIn 0.4s ease-out}
+        .result-card.visible{display:block}
+        .bmi-circle{width:160px;height:160px;border-radius:50%;margin:0 auto 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;border:4px solid;transition:all 0.5s ease}
+        .bmi-circle .bmi-value{font-size:2.8rem;font-weight:800;color:white;line-height:1}
+        .bmi-circle .bmi-label{font-size:0.7rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.2rem}
+        .bmi-circle.underweight{border-color:#f59e0b}
+        .bmi-circle.normal{border-color:#10b981}
+        .bmi-circle.overweight{border-color:#f59e0b}
+        .bmi-circle.obese{border-color:#ef4444}
+        .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem}
+        @media(max-width:600px){.result-grid{grid-template-columns:1fr;gap:0.7rem}}
+        .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+        .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
+        .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .bmi-scale{position:relative;height:10px;background:linear-gradient(to right,#f59e0b,#10b981,#f59e0b,#ef4444);border-radius:99px;margin:2rem 0 1rem;overflow:hidden}
+        .bmi-scale .indicator{position:absolute;top:-5px;width:20px;height:20px;background:white;border-radius:50%;border:3px solid var(--bg-dark);transform:translateX(-50%);transition:left 0.5s ease;box-shadow:0 0 10px rgba(255,255,255,0.3)}
+        .bmi-categories{display:flex;justify-content:space-between;font-size:0.7rem;color:var(--text-muted);margin-top:0.3rem}
+        .bmi-table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:0.85rem}
+        .bmi-table th{background:rgba(99,102,241,0.12);color:var(--text-main);padding:0.6rem 0.8rem;text-align:left;font-weight:600;border:1px solid var(--border)}
+        .bmi-table td{padding:0.6rem 0.8rem;border:1px solid var(--border);color:var(--text-muted)}
+        .bmi-table tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+        .bmi-table tr.active td{background:rgba(99,102,241,0.1);color:white;font-weight:600}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+    <script src="/assets/js/consent.js"></script>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#heart-pulse"></use></svg> 100% Client-Side</div>
+            <h1>BMI-<span>Rechner</span></h1>
+            <p class="subtitle">Berechne deinen Body Mass Index (BMI) und erfahre deine Gewichtsklassifikation nach WHO. Inklusive BMI-Tabelle für Erwachsene und Idealgewicht.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <form id="bmiForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="gender">Geschlecht</label>
+                            <select id="gender">
+                                <option value="male">Männlich</option>
+                                <option value="female">Weiblich</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Alter (Jahre)</label>
+                            <input type="number" id="age" value="30" min="2" max="120">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="height">Größe (cm)</label>
+                            <input type="number" id="height" value="175" min="50" max="250" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Gewicht (kg)</label>
+                            <input type="number" id="weight" value="75" min="10" max="400" step="0.1">
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">📊 BMI berechnen</button>
+                        <button type="reset" class="btn-secondary" id="resetBtn">Zurücksetzen</button>
+                    </div>
+                </form>
+
+                <div class="result-card" id="resultCard">
+                    <div class="bmi-circle" id="bmiCircle">
+                        <div class="bmi-value" id="bmiValue">--</div>
+                        <div class="bmi-label">BMI</div>
+                    </div>
+                    <div style="text-align:center;font-size:1.2rem;font-weight:600;color:white" id="bmiCategory">--</div>
+                    <div class="bmi-scale">
+                        <div class="indicator" id="bmiIndicator" style="left:50%"></div>
+                    </div>
+                    <div class="bmi-categories"><span>Untergewicht</span><span>Normal</span><span>Übergewicht</span><span>Adipositas</span></div>
+                    <div class="result-grid">
+                        <div class="result-item"><div class="ri-value" id="idealWeight">-- kg</div><div class="ri-label">Idealgewicht (Broca)</div></div>
+                        <div class="result-item"><div class="ri-value" id="bmiPrime">--</div><div class="ri-label">BMI-Prime</div></div>
+                        <div class="result-item"><div class="ri-value" id="ponderalIndex">--</div><div class="ri-label">Ponderal-Index</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>BMI-Tabelle für Erwachsene (WHO)</h2>
+            <table class="bmi-table">
+                <thead>
+                    <tr>
+                        <th>Kategorie</th>
+                        <th>BMI (kg/m²)</th>
+                        <th>Risiko für Begleiterkrankungen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="cat-severe-underweight"><td>Starkes Untergewicht</td><td>< 16,0</td><td>Sehr hoch</td></tr>
+                    <tr id="cat-moderate-underweight"><td>Mäßiges Untergewicht</td><td>16,0 – 17,0</td><td>Erhöht</td></tr>
+                    <tr id="cat-mild-underweight"><td>Leichtes Untergewicht</td><td>17,0 – 18,5</td><td>Erhöht</td></tr>
+                    <tr id="cat-normal"><td>Normalgewicht</td><td>18,5 – 25,0</td><td>Durchschnittlich</td></tr>
+                    <tr id="cat-pre-obese"><td>Präadipositas</td><td>25,0 – 30,0</td><td>Erhöht</td></tr>
+                    <tr id="cat-obese-1"><td>Adipositas Grad I</td><td>30,0 – 35,0</td><td>Hoch</td></tr>
+                    <tr id="cat-obese-2"><td>Adipositas Grad II</td><td>35,0 – 40,0</td><td>Sehr hoch</td></tr>
+                    <tr id="cat-obese-3"><td>Adipositas Grad III</td><td>> 40,0</td><td>Extrem hoch</td></tr>
+                </tbody>
+            </table>
+
+            <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Häufige Fragen zum BMI-Rechner</h2>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Was ist der BMI?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Der Body Mass Index (BMI) ist ein Maß zur Bewertung des Körpergewichts im Verhältnis zur Körpergröße. Die Formel lautet: BMI = Gewicht (kg) / (Größe in m)². Der BMI dient als grober Richtwert – er berücksichtigt weder Muskelmasse noch Körperfettverteilung.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Welcher BMI ist normal?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Laut WHO liegt der normale BMI-Bereich zwischen 18,5 und 24,9 kg/m². Bei einem BMI unter 18,5 spricht man von Untergewicht, ab 25 von Übergewicht und ab 30 von Adipositas. Für ältere Menschen gelten leicht abweichende Werte.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Ist der BMI aussagekräftig?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Der BMI ist ein grober Richtwert. Er unterscheidet nicht zwischen Muskel- und Fettmasse. Sportler mit hohem Muskelanteil haben oft einen erhöhten BMI, ohne übergewichtig zu sein. Für eine genaue Beurteilung sollten auch Taillenumfang, Körperfettanteil und Fitnesszustand berücksichtigt werden.</div></div>
+                </details>
+                <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <summary itemprop="name">Was ist mein Idealgewicht?</summary>
+                    <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Nach der Broca-Formel (einfach): Idealgewicht = Körpergröße (cm) − 100. Für Männer: (Größe − 100) × 0,9. Für Frauen: (Größe − 100) × 0,85. Diese Formel liefert nur einen groben Anhaltspunkt – das individuelle Wohlfühlgewicht kann abweichen.</div></div>
+                </details>
+            </section>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>
+        (function() {
+            'use strict';
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            var circle = document.getElementById('bmiCircle');
+            var bmiVal = document.getElementById('bmiValue');
+            var bmiCat = document.getElementById('bmiCategory');
+            var indicator = document.getElementById('bmiIndicator');
+            var idealWeight = document.getElementById('idealWeight');
+            var bmiPrime = document.getElementById('bmiPrime');
+            var ponderalIndex = document.getElementById('ponderalIndex');
+            var resultCard = document.getElementById('resultCard');
+
+            var catRows = [
+                'cat-severe-underweight', 'cat-moderate-underweight', 'cat-mild-underweight',
+                'cat-normal', 'cat-pre-obese', 'cat-obese-1', 'cat-obese-2', 'cat-obese-3'
+            ];
+
+            document.getElementById('bmiForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateBMI();
+            });
+
+            document.getElementById('resetBtn').addEventListener('click', function() {
+                document.getElementById('gender').value = 'male';
+                document.getElementById('age').value = 30;
+                document.getElementById('height').value = 175;
+                document.getElementById('weight').value = 75;
+                resultCard.classList.remove('visible');
+            });
+
+            function getBMIClass(bmi) {
+                if (bmi < 16) return ['underweight', 'Starkes Untergewicht', '#f59e0b'];
+                if (bmi < 17) return ['underweight', 'Mäßiges Untergewicht', '#f59e0b'];
+                if (bmi < 18.5) return ['underweight', 'Leichtes Untergewicht', '#f59e0b'];
+                if (bmi < 25) return ['normal', 'Normalgewicht', '#10b981'];
+                if (bmi < 30) return ['overweight', 'Übergewicht (Präadipositas)', '#f59e0b'];
+                if (bmi < 35) return ['obese', 'Adipositas Grad I', '#ef4444'];
+                if (bmi < 40) return ['obese', 'Adipositas Grad II', '#ef4444'];
+                return ['obese', 'Adipositas Grad III', '#ef4444'];
+            }
+
+            function getActiveCategory(bmi) {
+                if (bmi < 16) return 0;
+                if (bmi < 17) return 1;
+                if (bmi < 18.5) return 2;
+                if (bmi < 25) return 3;
+                if (bmi < 30) return 4;
+                if (bmi < 35) return 5;
+                if (bmi < 40) return 6;
+                return 7;
+            }
+
+            function calculateBMI() {
+                var gender = document.getElementById('gender').value;
+                var age = parseInt(document.getElementById('age').value) || 30;
+                var height = parseFloat(document.getElementById('height').value) || 175;
+                var weight = parseFloat(document.getElementById('weight').value) || 75;
+
+                var heightM = height / 100;
+                var bmi = weight / (heightM * heightM);
+                bmi = Math.round(bmi * 10) / 10;
+
+                var result = getBMIClass(bmi);
+                var className = result[0];
+                var catName = result[1];
+                var catColor = result[2];
+
+                // Circle
+                circle.className = 'bmi-circle ' + className;
+                bmiVal.textContent = bmi.toFixed(1);
+                bmiCat.textContent = catName;
+                bmiCat.style.color = catColor;
+
+                // Indicator position (0.5% padding each side)
+                var pct = Math.max(0.5, Math.min(99.5, ((bmi - 10) / 45) * 100));
+                indicator.style.left = pct + '%';
+
+                // Idealgewicht (Broca)
+                var ideal = 0;
+                if (gender === 'male') {
+                    ideal = (height - 100) * 0.9;
+                } else {
+                    ideal = (height - 100) * 0.85;
+                }
+                idealWeight.textContent = ideal.toFixed(1) + ' kg';
+
+                // BMI-Prime (BMI / 25)
+                bmiPrime.textContent = (bmi / 25).toFixed(2);
+
+                // Ponderal-Index
+                var pi = weight / Math.pow(heightM, 3);
+                ponderalIndex.textContent = pi.toFixed(1);
+
+                // Table highlight
+                var activeIdx = getActiveCategory(bmi);
+                catRows.forEach(function(id, idx) {
+                    var row = document.getElementById(id);
+                    if (row) {
+                        if (idx === activeIdx) {
+                            row.classList.add('active');
+                        } else {
+                            row.classList.remove('active');
+                        }
+                    }
+                });
+
+                resultCard.classList.add('visible');
+                resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        })();
+    </script>
+</body>
+</html>
