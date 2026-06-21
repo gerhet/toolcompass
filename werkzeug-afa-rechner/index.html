@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Werkzeug-AfA-Rechner – Abschreibung für Handwerker</title>
+    <meta name="description" content="Berechne die Abschreibung (AfA) für deine Werkzeuge, Maschinen & Fahrzeuge. Lineare & degressive Methode. Inkl. GWG-Grenze & Vergleich Neukauf vs. Leasing.">
+    <link rel="canonical" href="https://toolcompass.org/werkzeug-afa-rechner/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .result-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+        .result-label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .afa-table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; }
+        .afa-table th { text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+        .afa-table td { padding: 0.6rem 0.8rem; font-size: 0.9rem; color: white; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .afa-table tr:last-child td { border-bottom: none; }
+        .afa-table .highlight td { font-weight: 700; color: var(--accent-secondary); }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .range-value { color: var(--accent-secondary); font-weight: 700; }
+        .gwg-box { background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 12px; padding: 1.2rem; margin: 1rem 0; }
+        .gwg-box h4 { color: #34d399; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .gwg-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .tip-box { background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 12px; padding: 1.2rem; margin-top: 1.5rem; }
+        .tip-box h4 { color: white; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .tip-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } .result-value { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/tools-ausruestung/" style="margin-left:1rem;">→ Tools & Ausrüstung</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Werkzeug-AfA-<span>Rechner</span></h1>
+        <p class="subtitle">Berechne die Abschreibung (AfA) für deine Werkzeuge, Maschinen & Fahrzeuge – und finde heraus, ob sich Neukauf oder Leasing lohnt.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="input-row">
+            <div class="input-group">
+                <label for="gegenstand">Art des Gegenstands</label>
+                <select id="gegenstand">
+                    <option value="werkzeug">Werkzeug (z.B. Bohrmaschine, Akkuschrauber)</option>
+                    <option value="maschine">Großmaschine (z.B. Kreissäge, Kompressor)</option>
+                    <option value="fahrzeug">Fahrzeug (Transporter, Pritschenwagen)</option>
+                    <option value="computer">Computer / Tablet / Software</option>
+                    <option value="möbel">Büromöbel / Einrichtung</option>
+                    <option value="sonstiges">Sonstiges</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="anschaffungswert">Anschaffungswert (€)</label>
+                <input type="number" id="anschaffungswert" value="1200" min="50" max="100000" step="10">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="nutzungsdauer">Nutzungsdauer (Jahre)</label>
+                <select id="nutzungsdauer">
+                    <option value="1">1 Jahr (GWG < 800 €)</option>
+                    <option value="3">3 Jahre (z.B. Computer, Software)</option>
+                    <option value="5" selected>5 Jahre (z.B. Elektrowerkzeuge)</option>
+                    <option value="8">8 Jahre (z.B. Maschinen)</option>
+                    <option value="10">10 Jahre (z.B. große Maschinen)</option>
+                    <option value="13">13 Jahre (z.B. Fahrzeuge)</option>
+                    <option value="15">15 Jahre (z.B. Betriebsausstattung)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="methode">Abschreibungsmethode</label>
+                <select id="methode">
+                    <option value="linear" selected>Lineare AfA (gleichbleibend)</option>
+                    <option value="degressiv">Degressive AfA (fallend)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="gwg-box" id="gwgInfo">
+            <h4>⚡ GWG (Geringwertiges Wirtschaftsgut)</h4>
+            <p>Liegt der Anschaffungswert unter 800 € netto, kannst du das Werkzeug im Jahr des Kaufs komplett als Betriebsausgabe absetzen. Ab 800 € muss es über die Nutzungsdauer abgeschrieben werden.</p>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="berechnen()">AfA berechnen</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-label" id="ergebnisTitel">Jährlicher AfA-Betrag (lineare Methode)</div>
+            <div class="result-value" id="afaResult">0,00 €</div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.3rem;">pro Jahr</p>
+
+            <table class="afa-table" id="afaTable">
+                <thead>
+                    <tr><th>Jahr</th><th>Buchwert (Jahresanfang)</th><th>AfA-Betrag</th><th>Buchwert (Jahresende)</th></tr>
+                </thead>
+                <tbody id="afaTableBody"></tbody>
+            </table>
+
+            <div class="tip-box">
+                <h4>💡 Tipp: Neukauf vs. Leasing</h4>
+                <p id="leasingTipp">Lade Daten...</p>
+            </div>
+
+            <div class="tip-box" style="margin-top:1rem;border-color:rgba(251,191,36,0.15);background:rgba(251,191,36,0.04);">
+                <h4 style="color:#fbbf24;">💰 Steuerliche Ersparnis durch AfA</h4>
+                <p id="steuerErsparnis">Lade Daten...</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zur Werkzeug-AfA</h2>
+        <details>
+            <summary>Was bedeutet AfA?</summary>
+            <div class="faq-answer">
+                <p>AfA steht für "Absetzung für Abnutzung". Es ist die steuerliche Abschreibung von Wirtschaftsgütern über ihre Nutzungsdauer. Du kannst die Anschaffungskosten nicht sofort, sondern verteilt über die Jahre absetzen, in denen du das Werkzeug nutzt.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Welche Nutzungsdauer gilt für mein Werkzeug?</summary>
+            <div class="faq-answer">
+                <p>Das Finanzamt gibt offizielle AfA-Tabellen vor: Elektrowerkzeuge 5 Jahre, große Maschinen 8–10 Jahre, Fahrzeuge 6–13 Jahre, Computer 3 Jahre. Unser Rechner verwendet diese Standardwerte.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Was ist die GWG-Grenze 2026?</summary>
+            <div class="faq-answer">
+                <p>Geringwertige Wirtschaftsgüter (GWG) unter 800 € netto können sofort als Betriebsausgabe abgeschrieben werden. Zwischen 800 € und 1.000 € gilt der Sammelposten (5 Jahre). Seit 2026 gelten teilweise erweiterte Grenzen – frage im Zweifel deinen Steuerberater.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Lohnt sich Leasing statt Kauf?</summary>
+            <div class="faq-answer">
+                <p>Leasing kann steuerlich vorteilhaft sein, weil die Raten als Betriebsausgaben absetzbar sind. Für Werkzeuge unter 5.000 € ist Kauf meist günstiger. Unser Rechner hilft dir beim Vergleich.</p>
+            </div>
+        </details>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const nutzungsdauerMap = {
+    werkzeug: 5,
+    maschine: 8,
+    fahrzeug: 13,
+    computer: 3,
+    möbel: 15,
+    sonstiges: 5
+};
+
+// Update GWG-Info live
+document.getElementById('anschaffungswert').addEventListener('input', gwgCheck);
+document.getElementById('gegenstand').addEventListener('change', function() {
+    const nd = nutzungsdauerMap[this.value] || 5;
+    document.getElementById('nutzungsdauer').value = nd;
+    gwgCheck();
+});
+
+function gwgCheck() {
+    const wert = parseFloat(document.getElementById('anschaffungswert').value) || 0;
+    const gwgBox = document.getElementById('gwgInfo');
+    if (wert < 800) {
+        gwgBox.innerHTML = '<h4>⚡ GWG (Geringwertiges Wirtschaftsgut)</h4><p>Super! Mit <strong>' + wert.toFixed(0).replace('.',',') + ' €</strong> liegt der Wert unter 800 € netto. Du kannst diesen Betrag <strong>sofort komplett als Betriebsausgabe</strong> absetzen. Keine Abschreibung nötig!</p>';
+    } else {
+        gwgBox.innerHTML = '<h4>⚡ GWG (Geringwertiges Wirtschaftsgut)</h4><p>Mit <strong>' + wert.toFixed(0).replace('.',',') + ' €</strong> liegt der Wert über der GWG-Grenze von 800 €. Die Abschreibung erfolgt über die Nutzungsdauer. Optional: Sammelposten (800–1.000 €) über 5 Jahre abschreiben.</p>';
+    }
+}
+
+function berechnen() {
+    const wert = parseFloat(document.getElementById('anschaffungswert').value) || 0;
+    const jahre = parseInt(document.getElementById('nutzungsdauer').value) || 5;
+    const methode = document.getElementById('methode').value;
+    const gegenstand = document.getElementById('gegenstand').value;
+
+    if (wert < 800) {
+        document.getElementById('resultCard').classList.add('visible');
+        document.getElementById('ergebnisTitel').textContent = 'Sofort abschreibbar (GWG)';
+        document.getElementById('afaResult').textContent = wert.toFixed(2).replace('.', ',') + ' €';
+        document.querySelector('#resultCard p').textContent = 'komplett im ersten Jahr absetzbar';
+        document.getElementById('afaTableBody').innerHTML = '<tr><td>1</td><td>' + wert.toFixed(2).replace('.',',') + ' €</td><td style="color:#34d399;font-weight:700;">' + wert.toFixed(2).replace('.',',') + ' €</td><td>0,00 €</td></tr>';
+        document.getElementById('leasingTipp').innerHTML = 'Bei GWG unter 800 € ist der <strong>Kauf immer besser</strong> als Leasing. Du sparst dir Leasinggebühren und Zinsen und kannst die Kosten sofort absetzen.';
+        document.getElementById('steuerErsparnis').innerHTML = 'Bei einem angenommenen Steuersatz von 30% sparst du <strong>' + (wert * 0.3).toFixed(2).replace('.',',') + ' €</strong> Steuern durch den sofortigen Abzug.';
+        document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+
+    const afaJaehrlich = wert / jahre;
+    const restwertDegressiv = wert;
+
+    let tabellenHTML = '';
+    let buchwert = wert;
+    let gesamtAfA = 0;
+
+    for (let j = 1; j <= jahre; j++) {
+        let afa;
+        if (methode === 'linear') {
+            afa = afaJaehrlich;
+        } else {
+            // Degressiv: 30% vom Buchwert, aber nicht mehr als 2x linear
+            const degressivSatz = Math.min(0.3, 2 / jahre);
+            afa = Math.max(buchwert * degressivSatz, wert / (jahre - j + 1));
+            if (j === jahre) afa = buchwert; // Letztes Jahr: Rest abschreiben
+        }
+        const buchwertAnfang = buchwert;
+        buchwert -= afa;
+        if (buchwert < 0) buchwert = 0;
+        gesamtAfA += afa;
+
+        const highlight = j === 1 ? ' class="highlight"' : '';
+        tabellenHTML += '<tr' + highlight + '><td>' + j + '</td><td>' + buchwertAnfang.toFixed(2).replace('.',',') + ' €</td><td>' + afa.toFixed(2).replace('.',',') + ' €</td><td>' + buchwert.toFixed(2).replace('.',',') + ' €</td></tr>';
+    }
+
+    const ersterAfa = methode === 'linear' ? afaJaehrlich : (wert * Math.min(0.3, 2/jahre));
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('ergebnisTitel').textContent = 'Jährlicher AfA-Betrag (' + methode + 'e Methode)';
+    document.getElementById('afaResult').textContent = ersterAfa.toFixed(2).replace('.', ',') + ' €';
+    document.querySelector('#resultCard p').textContent = 'im ersten Jahr, über ' + jahre + ' Jahre verteilt';
+    document.getElementById('afaTableBody').innerHTML = tabellenHTML;
+
+    // Leasing-Tipp
+    const leasingVergleich = wert * 0.02 * 12 * jahre; // Geschätzte Leasingkosten
+    if (leasingVergleich > wert * 1.5) {
+        document.getElementById('leasingTipp').innerHTML = '<strong>Kauf empfohlen!</strong> Die geschätzten Leasingkosten (' + leasingVergleich.toFixed(0).replace('.',',') + ' €) sind deutlich höher als der Kaufpreis (' + wert.toFixed(0).replace('.',',') + ' €). Bei Werkzeugen dieser Preisklasse lohnt sich Leasing selten.';
+    } else {
+        document.getElementById('leasingTipp').innerHTML = 'Leasing könnte interessant sein. Geschätzte Leasingkosten: ' + leasingVergleich.toFixed(0).replace('.',',') + ' € vs. Kaufpreis: ' + wert.toFixed(0).replace('.',',') + ' €. Prüfe die Liquiditätsvorteile.';
+    }
+
+    // Steuerersparnis
+    const steuerSatz = 0.3;
+    const ersparnisJahr1 = ersterAfa * steuerSatz;
+    document.getElementById('steuerErsparnis').innerHTML = 'Durch die AfA sparst du im ersten Jahr ca. <strong>' + ersparnisJahr1.toFixed(2).replace('.',',') + ' €</strong> Steuern (bei 30% Steuersatz). Über ' + jahre + ' Jahre insgesamt <strong>' + (gesamtAfA * steuerSatz).toFixed(2).replace('.',',') + ' €</strong>.';
+
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('anschaffungswert').value = 1200;
+    document.getElementById('nutzungsdauer').value = 5;
+    document.getElementById('methode').value = 'linear';
+    document.getElementById('gegenstand').value = 'werkzeug';
+    gwgCheck();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initial check
+gwgCheck();
+</script>
+</body>
+</html>

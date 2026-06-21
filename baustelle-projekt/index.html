@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Baustelle & Projekt – ToolCompass</title>
+    <meta name="description" content="Materialrechner, Zeiterfassung, Projektplanung & Arbeitsvorbereitung für Handwerker. Kostenlos & 100% Client-Side.">
+    <link rel="canonical" href="https://toolcompass.org/baustelle-projekt/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .category-hero { text-align: center; margin-bottom: 4rem; padding-top: 2rem; }
+        .category-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        .category-hero .cat-icon { width: 64px; height: 64px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.12)); border-radius: 18px; display: flex; align-items: center; justify-content: center; }
+        .category-hero .cat-icon svg { width: 32px; height: 32px; color: var(--accent-secondary); }
+        .category-hero p.subtitle { max-width: 600px; margin: 0 auto; }
+        .placeholder-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(251, 191, 36, 0.1); color: #fbbf24; font-size: 0.7rem; padding: 0.25rem 0.7rem; border-radius: 99px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid rgba(251, 191, 36, 0.15); }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a></nav>
+
+    <div class="category-hero">
+        <div class="cat-icon"><svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+        <h1>Baustelle & <span>Projekt</span></h1>
+        <p class="subtitle">Materialkalkulation, Zeiterfassung & Projektplanung für deine Baustellen.</p>
+    </div>
+
+    <main>
+        <div class="section-label">🔧 Material & Kalkulation</div>
+        <div class="tools-grid" data-category="material">
+            <a href="/universal-converter/" class="tool-card">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#arrows-exchange"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Universal Converter</div>
+                    <div class="card-desc">Länge, Gewicht, Volumen, Temperatur, Geschwindigkeit umrechnen.</div>
+                </div>
+                <span class="card-badge utility">Utility</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <a href="/timer-stopwatch/" class="tool-card">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#clock"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Timer & Stoppuhr</div>
+                    <div class="card-desc">Minimalistisch, präzise, Vollbild + Benachrichtigung für Arbeitszeiten.</div>
+                </div>
+                <span class="card-badge utility">Utility</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <a href="/anfahrtskosten-rechner/" class="tool-card">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#route"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Anfahrtskosten-Rechner</div>
+                    <div class="card-desc">Anfahrtskosten zur Baustelle inkl. km-Geld, Zeit, Maut & Sperrzone.</div>
+                </div>
+                <span class="card-badge new">NEU</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <div class="tool-card coming-soon">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#ruler"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Materialrechner</div>
+                    <div class="card-desc">Flächen, Volumen & Materialbedarf für Boden, Farbe, Fliesen & mehr.</div>
+                </div>
+                <span class="placeholder-badge">In Planung</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+            <div class="tool-card coming-soon">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#weight"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Gewichtsrechner Baustoffe</div>
+                    <div class="card-desc">Gewicht von Beton, Kies, Sand & Holz berechnen – pro m³.</div>
+                </div>
+                <span class="placeholder-badge">In Planung</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+        </div>
+
+        <div class="section-label">⏱️ Zeiterfassung & Planung</div>
+        <div class="tools-grid" data-category="time">
+            <div class="tool-card coming-soon">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#calendar-clock"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Arbeitszeitrechner</div>
+                    <div class="card-desc">Arbeitszeit inkl. Pausen, Überstunden & Nachtzuschlag erfassen.</div>
+                </div>
+                <span class="placeholder-badge">In Planung</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+            <div class="tool-card coming-soon">
+                <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#git-branch"></use></svg></div>
+                <div class="card-body">
+                    <div class="card-title">Projektplaner</div>
+                    <div class="card-desc">Bauprojekte planen: Meilensteine, Aufgaben & Abhängigkeiten.</div>
+                </div>
+                <span class="placeholder-badge">In Planung</span>
+                <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+<script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

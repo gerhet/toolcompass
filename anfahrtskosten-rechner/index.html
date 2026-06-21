@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Anfahrtskosten-Rechner für Handwerker – Kostenlos</title>
+    <meta name="description" content="Berechne Anfahrtskosten zur Baustelle: km-Geld, Zeitaufwand, Maut & Parkgebühren. Inkl. Sperrbezirke für München, Köln & Berlin.">
+    <link rel="canonical" href="https://toolcompass.org/anfahrtskosten-rechner/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .result-value { font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+        .result-label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+        .breakdown-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+        .breakdown-item .label { font-size: 0.8rem; color: var(--text-muted); }
+        .breakdown-item .value { font-size: 1.1rem; font-weight: 700; color: white; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .range-value { color: var(--accent-secondary); font-weight: 700; }
+        .zone-box { background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.12); border-radius: 12px; padding: 1.2rem; margin: 1rem 0; display: none; }
+        .zone-box.visible { display: block; }
+        .zone-box h4 { color: #f87171; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .zone-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .tip-box { background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 12px; padding: 1.2rem; margin-top: 1.5rem; }
+        .tip-box h4 { color: white; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .tip-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } .breakdown-grid { grid-template-columns: 1fr; } .result-value { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/baustelle-projekt/" style="margin-left:1rem;">→ Baustelle & Projekt</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Anfahrtskosten-<span>Rechner</span></h1>
+        <p class="subtitle">Berechne die Kosten für die Anfahrt zur Baustelle – km-Geld, Zeitaufwand, Maut & Parkgebühren.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="input-row">
+            <div class="input-group">
+                <label for="entfernung">Einfache Entfernung (km)</label>
+                <input type="number" id="entfernung" value="25" min="1" max="500" step="1">
+            </div>
+            <div class="input-group">
+                <label for="anzahl_fahrten">Anzahl Fahrten (Hin+Rück = 1)</label>
+                <input type="number" id="anzahl_fahrten" value="1" min="1" max="30">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="fahrzeugtyp">Fahrzeugtyp</label>
+                <select id="fahrzeugtyp">
+                    <option value="transporter" selected>Transporter (Diesel, 8-10 L/100km)</option>
+                    <option value="kleintransporter">Kleintransporter (Diesel, 6-8 L/100km)</option>
+                    <option value="pkw">PKW (Benzin, 7-8 L/100km)</option>
+                    <option value="pkw_diesel">PKW (Diesel, 5-7 L/100km)</option>
+                    <option value="elektro">Elektro-Transporter</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="kraftstoffpreis">Kraftstoffpreis (€/Liter)</label>
+                <input type="number" id="kraftstoffpreis" value="1.85" min="1" max="2.5" step="0.01">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="km_satz">Km-Geld-Satz (€/km, steuerlich)</label>
+                <select id="km_satz">
+                    <option value="0.30">0,30 € (PKW, Standard)</option>
+                    <option value="0.35">0,35 € (PKW, erhöht)</option>
+                    <option value="0.38" selected>0,38 € (Transporter, Standard)</option>
+                    <option value="0.42">0,42 € (Transporter, erhöht)</option>
+                    <option value="0.50">0,50 € (Transporter, inkl. Beladung)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="stundensatz">Dein Stundensatz (€/h)</label>
+                <input type="number" id="stundensatz" value="65" min="0" max="200" step="5">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="durchschnittsgeschwindigkeit">Durchschnittsgeschwindigkeit (km/h)</label>
+                <select id="durchschnittsgeschwindigkeit">
+                    <option value="30">30 km/h (Stadtverkehr / Baustelle)</option>
+                    <option value="50" selected>50 km/h (Mischverkehr)</option>
+                    <option value="60">60 km/h (Überland)</option>
+                    <option value="80">80 km/h (Autobahn)</option>
+                    <option value="100">100 km/h (freie Autobahn)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="parkgebuehr">Parkgebühren pro Tag (€)</label>
+                <input type="number" id="parkgebuehr" value="0" min="0" max="50" step="1">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="sperrzone">
+                <input type="checkbox" id="sperrzone" onchange="toggleZone()"> Sperrzone / Umweltzone (z.B. München, Köln, Berlin)
+            </label>
+        </div>
+
+        <div class="zone-box" id="zoneInfo">
+            <h4>⚠️ Sperrzone / Umweltzone</h4>
+            <p>In vielen deutschen Städten gelten Umweltzonen. Für Transporter mit Diesel (Euro 4 oder älter) kann ein Fahrverbot oder eine zusätzliche Gebühr anfallen. Plane ggf. einen alternativen Transporter mit Grüner Plakette oder kalkuliere <strong>5–15 € pro Tag</strong> für Sondergenehmigungen ein.</p>
+        </div>
+
+        <div class="input-group">
+            <label for="maut">Mautkosten pro Tag (€, z.B. Tunnel, Brücken)</label>
+            <input type="number" id="maut" value="0" min="0" max="100" step="1">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="berechnen()">Anfahrtskosten berechnen</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-label">Gesamtkosten der Anfahrt</div>
+            <div class="result-value" id="gesamtKosten">0,00 €</div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.3rem;">für <span id="fahrtenText">1 Fahrt</span></p>
+
+            <div class="breakdown-grid">
+                <div class="breakdown-item">
+                    <div class="label">Kilometerkosten (km-Geld)</div>
+                    <div class="value" id="kmKosten">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Kraftstoffkosten</div>
+                    <div class="value" id="kraftstoffKosten">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Arbeitszeit (Fahrzeit)</div>
+                    <div class="value" id="zeitKosten">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Maut + Parken + Zonen</div>
+                    <div class="value" id="zusatzKosten">0 €</div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <h4>💡 Kunden-Weitergabe</h4>
+                <p id="weitergabeTipp">Du kannst die Anfahrtskosten dem Kunden in Rechnung stellen. Üblich sind <strong>km-Geld + Arbeitszeit (Fahrt)</strong> oder eine <strong>Anfahrts-Pauschale</strong>. Gib dies transparent im Angebot an.</p>
+            </div>
+
+            <div class="tip-box" style="margin-top:1rem;border-color:rgba(251,191,36,0.15);background:rgba(251,191,36,0.04);">
+                <h4 style="color:#fbbf24;">📊 Gesamtübersicht</h4>
+                <p id="gesamtUebersicht">Lade Daten...</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zu Anfahrtskosten</h2>
+        <details>
+            <summary>Kann ich Anfahrtskosten dem Kunden berechnen?</summary>
+            <div class="faq-answer">
+                <p>Ja, die Anfahrt ist eine reguläre Leistung, die du abrechnen kannst. Viele Handwerker berechnen entweder das km-Geld plus Fahrzeit oder eine Anfahrtspauschale (z.B. 25–50 € pro Einsatz). Wichtig: Transparent im Angebot ausweisen!</p>
+            </div>
+        </details>
+        <details>
+            <summary>Welcher km-Satz ist steuerlich anerkannt?</summary>
+            <div class="faq-answer">
+                <p>Das Finanzamt erkennt 0,30 € pro km für PKW und 0,38 € für Transporter an. Tatsächlich liegen die Kosten oft höher – unser Rechner hilft dir, den realen Satz zu ermitteln.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Was ist eine Sperrzone / Umweltzone?</summary>
+            <div class="faq-answer">
+                <p>Viele deutsche Städte haben Umweltzonen, die nur Fahrzeuge mit Grüner Plakette (Euro 4+) zulassen. Für ältere Transporter kann dies ein Fahrverbot bedeuten. München, Köln, Berlin, Stuttgart und Hamburg haben besonders strenge Regelungen.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Wie oft kann ich Anfahrt berechnen?</summary>
+            <div class="faq-answer">
+                <p>Bei jedem Kundenbesuch. Bei Großbaustellen mit mehreren Tagen Einsatz ist üblich: 1x Anfahrt zu Beginn + 1x Abfahrt am Ende des Projekts. Bei täglicher Anfahrt kann pro Tag abgerechnet werden.</p>
+            </div>
+        </details>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const verbrauchMap = {
+    transporter: 9,
+    kleintransporter: 7,
+    pkw: 7.5,
+    pkw_diesel: 6,
+    elektro: 0
+};
+
+function toggleZone() {
+    document.getElementById('zoneInfo').classList.toggle('visible', document.getElementById('sperrzone').checked);
+}
+
+function berechnen() {
+    const entfernung = parseFloat(document.getElementById('entfernung').value) || 0;
+    const anzahlFahrten = parseInt(document.getElementById('anzahl_fahrten').value) || 1;
+    const fahrzeug = document.getElementById('fahrzeugtyp').value;
+    const kraftstoffpreis = parseFloat(document.getElementById('kraftstoffpreis').value) || 1.85;
+    const kmSatz = parseFloat(document.getElementById('km_satz').value) || 0.38;
+    const stundensatz = parseFloat(document.getElementById('stundensatz').value) || 65;
+    const geschwindigkeit = parseFloat(document.getElementById('durchschnittsgeschwindigkeit').value) || 50;
+    const parkgebuehr = parseFloat(document.getElementById('parkgebuehr').value) || 0;
+    const maut = parseFloat(document.getElementById('maut').value) || 0;
+    const sperrzone = document.getElementById('sperrzone').checked;
+
+    const gesamtKm = entfernung * 2 * anzahlFahrten; // Hin + Rück
+    const verbrauch = verbrauchMap[fahrzeug] || 0;
+
+    // Kilometerkosten (km-Geld)
+    const kmKosten = gesamtKm * kmSatz;
+
+    // Kraftstoffkosten
+    const kraftstoffKosten = verbrauch > 0 ? (gesamtKm / 100) * verbrauch * kraftstoffpreis : 0;
+
+    // Zeitkosten (Fahrzeit)
+    const fahrzeitProFahrt = (entfernung * 2) / geschwindigkeit; // in Stunden
+    const gesamtFahrzeit = fahrzeitProFahrt * anzahlFahrten;
+    const zeitKosten = gesamtFahrzeit * stundensatz;
+
+    // Zusatzkosten
+    const zoneKosten = sperrzone ? 10 * anzahlFahrten : 0;
+    const zusatzKosten = (parkgebuehr + maut + zoneKosten) * anzahlFahrten;
+
+    // Gesamt
+    const gesamt = kmKosten + kraftstoffKosten + zeitKosten + zusatzKosten;
+
+    // Anzeige
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('gesamtKosten').textContent = gesamt.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('fahrtenText').textContent = anzahlFahrten + ' Fahrt(en) (je ' + entfernung + ' km einfach)';
+
+    document.getElementById('kmKosten').textContent = kmKosten.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('kraftstoffKosten').textContent = kraftstoffKosten.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('zeitKosten').textContent = zeitKosten.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('zusatzKosten').textContent = zusatzKosten.toFixed(2).replace('.', ',') + ' €';
+
+    // Weitergabe-Tipp
+    const empfehlungKunde = (kmKosten + zeitKosten).toFixed(2).replace('.', ',');
+    const pauschale = (entfernung <= 15 ? 25 : entfernung <= 30 ? 35 : 50);
+    document.getElementById('weitergabeTipp').innerHTML = 'Du kannst die Anfahrtskosten dem Kunden berechnen. <strong>Empfohlen für diesen Einsatz:</strong> ' + empfehlungKosten + ' € (km-Geld + Zeit) oder eine <strong>Pauschale von ' + pauschale + ' €</strong>.';
+
+    // Gesamtübersicht
+    document.getElementById('gesamtUebersicht').innerHTML = 
+        '📍 Gesamtstrecke: <strong>' + gesamtKm.toFixed(0).replace('.',',') + ' km</strong> (Hin+Rück) | ' +
+        '⏱️ Fahrzeit: <strong>' + gesamtFahrzeit.toFixed(1).replace('.',',') + ' h</strong> | ' +
+        '⛽ Kraftstoff: <strong>' + (verbrauch > 0 ? (gesamtKm/100*verbrauch).toFixed(1).replace('.',',') + ' L' : 'Strom') + '</strong> | ' +
+        '💰 Gesamtkosten pro km: <strong>' + (gesamt/gesamtKm).toFixed(2).replace('.',',') + ' €</strong>';
+
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('entfernung').value = 25;
+    document.getElementById('anzahl_fahrten').value = 1;
+    document.getElementById('fahrzeugtyp').value = 'transporter';
+    document.getElementById('kraftstoffpreis').value = 1.85;
+    document.getElementById('km_satz').value = '0.38';
+    document.getElementById('stundensatz').value = 65;
+    document.getElementById('durchschnittsgeschwindigkeit').value = 50;
+    document.getElementById('parkgebuehr').value = 0;
+    document.getElementById('maut').value = 0;
+    document.getElementById('sperrzone').checked = false;
+    document.getElementById('zoneInfo').classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

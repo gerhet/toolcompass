@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Stundensatz-Rechner für Handwerker – Kostenlos & Online</title>
+    <meta name="description" content="Berechne deinen optimalen Stundensatz als Handwerker oder Freelancer. Inkl. Material, Anfahrt, Versicherung, Steuern & Gewinn. Kostenlos, 100% Client-Side.">
+    <link rel="canonical" href="https://toolcompass.org/stundensatz-rechner/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .result-value { font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+        .result-label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+        .breakdown-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+        .breakdown-item .label { font-size: 0.8rem; color: var(--text-muted); }
+        .breakdown-item .value { font-size: 1.1rem; font-weight: 700; color: white; }
+        .breakdown-item .value.positive { color: #34d399; }
+        .breakdown-item .value.negative { color: #f87171; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .range-value { color: var(--accent-secondary); font-weight: 700; }
+        .comparison-box { margin-top: 1.5rem; padding: 1.2rem; background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 12px; }
+        .comparison-box h4 { color: white; font-size: 0.95rem; margin-bottom: 0.8rem; }
+        .comparison-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } .breakdown-grid { grid-template-columns: 1fr; } .result-value { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/buero-verwaltung/" style="margin-left:1rem;">→ Büro & Verwaltung</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Stundensatz-<span>Rechner</span></h1>
+        <p class="subtitle">Berechne deinen optimalen Stundensatz als Handwerker oder Freelancer – inkl. aller Kosten.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="input-row">
+            <div class="input-group">
+                <label for="gewerke">Dein Gewerk</label>
+                <select id="gewerke">
+                    <option value="elektriker">Elektriker</option>
+                    <option value="installateur">Installateur / SHK</option>
+                    <option value="maler">Maler / Lackierer</option>
+                    <option value="schreiner">Schreiner / Tischler</option>
+                    <option value="fliesenleger">Fliesenleger</option>
+                    <option value="zimmerer">Zimmerer / Dachdecker</option>
+                    <option value="metallbau">Metallbauer</option>
+                    <option value="freelancer" selected>Freelancer / Sonstige</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="jahresgehalt">Gewünschter Jahresgewinn (netto)</label>
+                <input type="number" id="jahresgehalt" value="45000" min="20000" max="150000" step="1000">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="arbeitstage">Arbeitstage pro Jahr</label>
+                <input type="number" id="arbeitstage" value="220" min="100" max="300">
+            </div>
+            <div class="input-group">
+                <label for="stunden_pro_tag">Stunden pro Tag</label>
+                <input type="number" id="stunden_pro_tag" value="8" min="4" max="12" step="0.5">
+            </div>
+        </div>
+
+        <div class="section-label" style="margin-top:2rem;">💰 Monatliche Fixkosten</div>
+        <div class="input-row">
+            <div class="input-group">
+                <label for="miete">Miete / Büro (€)</label>
+                <input type="number" id="miete" value="800" min="0" max="5000" step="50">
+            </div>
+            <div class="input-group">
+                <label for="versicherung">Versicherungen (€)</label>
+                <input type="number" id="versicherung" value="250" min="0" max="2000" step="10">
+            </div>
+        </div>
+        <div class="input-row">
+            <div class="input-group">
+                <label for="fahrzeug">Fahrzeug / Anfahrt (€)</label>
+                <input type="number" id="fahrzeug" value="400" min="0" max="3000" step="50">
+            </div>
+            <div class="input-group">
+                <label for="werkzeug">Werkzeug / Material (€)</label>
+                <input type="number" id="werkzeug" value="300" min="0" max="5000" step="50">
+            </div>
+        </div>
+        <div class="input-row">
+            <div class="input-group">
+                <label for="fortbildung">Fortbildung / Software (€)</label>
+                <input type="number" id="fortbildung" value="150" min="0" max="2000" step="10">
+            </div>
+            <div class="input-group">
+                <label for="sonstiges">Sonstige Kosten (€)</label>
+                <input type="number" id="sonstiges" value="200" min="0" max="3000" step="10">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="steuerlast">Steuerlast (durchschnittlicher Steuersatz %)</label>
+            <input type="range" id="steuerlast" min="15" max="45" value="30" step="1">
+            <span class="range-value" id="steuerlastValue">30%</span>
+        </div>
+
+        <div class="input-group">
+            <label for="gewinnmarge">Gewünschte Gewinnmarge (%)</label>
+            <input type="range" id="gewinnmarge" min="5" max="50" value="20" step="1">
+            <span class="range-value" id="gewinnmargeValue">20%</span>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="berechnen()">Stundensatz berechnen</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-label">Dein empfohlener Stundensatz (netto)</div>
+            <div class="result-value" id="stundensatzResult">0,00 €</div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.3rem;">zzgl. MwSt. <span id="stundensatzBrutto"></span></p>
+
+            <div class="breakdown-grid">
+                <div class="breakdown-item">
+                    <div class="label">Jahreskosten gesamt</div>
+                    <div class="value" id="jahreskosten">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Kosten pro Stunde</div>
+                    <div class="value" id="kostenProStunde">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Gewinnanteil pro Stunde</div>
+                    <div class="value positive" id="gewinnProStunde">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Steuerrücklage pro Stunde</div>
+                    <div class="value negative" id="steuerProStunde">0 €</div>
+                </div>
+            </div>
+
+            <div class="comparison-box">
+                <h4>📊 Vergleich: Übliche Stundensätze in deinem Gewerk</h4>
+                <p id="vergleichstext">Lade Vergleichsdaten...</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zum Stundensatz</h2>
+        <details>
+            <summary>Welcher Stundensatz ist für Handwerker üblich?</summary>
+            <div class="faq-answer">
+                <p>Die Spanne ist groß: Elektriker berechnen 50–90 €, Installateure 55–95 €, Maler 40–70 €, Schreiner 45–85 € pro Stunde (netto). Dein genauer Satz hängt von deiner Region, Spezialisierung und Kostenstruktur ab. Unser Rechner berücksichtigt all diese Faktoren.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Was ist der Unterschied zwischen netto und brutto?</summary>
+            <div class="faq-answer">
+                <p>Der Nettostundensatz ist dein reiner Verdienst ohne Umsatzsteuer. Der Bruttostundensatz enthält die gesetzliche MwSt. (19% oder 7%). Als Kleinunternehmer nach §19 UStG kannst du auf die MwSt. verzichten, darfst dann aber auch keine Vorsteuer abziehen.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Wie viele Stunden kann ich wirklich abrechnen?</summary>
+            <div class="faq-answer">
+                <p>Realistisch sind 150–200 abrechenbare Stunden pro Monat. Der Rest geht für Verwaltung, Anfahrt, Akquise und Weiterbildung drauf. Unser Rechner geht von 220 Arbeitstagen aus – ziehe mindestens 30 Tage für Urlaub, Krankheit und Fortbildung ab.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Soll ich meine Kosten offenlegen?</summary>
+            <div class="faq-answer">
+                <p>Nein, aber du solltest sie kennen. Nur wer seine tatsächlichen Kosten kennt, kann einen fairen und gleichzeitig wettbewerbsfähigen Stundensatz kalkulieren. Kunden akzeptieren höhere Sätze, wenn du Qualität und Zuverlässigkeit bietest.</p>
+            </div>
+        </details>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const steuerSlider = document.getElementById('steuerlast');
+const gewinnSlider = document.getElementById('gewinnmarge');
+steuerSlider.addEventListener('input', () => document.getElementById('steuerlastValue').textContent = steuerSlider.value + '%');
+gewinnSlider.addEventListener('input', () => document.getElementById('gewinnmargeValue').textContent = gewinnSlider.value + '%');
+
+const vergleichsdaten = {
+    elektriker: { min: 50, max: 90, text: 'Elektriker berechnen üblich 50–90 €/h. Mit Spezialisierung (Smart Home, PV-Anlagen) sind bis zu 110 €/h möglich.' },
+    installateur: { min: 55, max: 95, text: 'Installateure & SHK-Betriebe liegen bei 55–95 €/h. Notdienste erzielen oft 100–130 €/h.' },
+    maler: { min: 40, max: 70, text: 'Maler & Lackierer berechnen 40–70 €/h. Spezialtechniken (Airless, Spachteltechnik) erzielen 75–90 €/h.' },
+    schreiner: { min: 45, max: 85, text: 'Schreiner & Tischler liegen bei 45–85 €/h. Maßanfertigungen und Restaurationen erzielen 80–120 €/h.' },
+    fliesenleger: { min: 45, max: 80, text: 'Fliesenleger berechnen 45–80 €/h. Naturstein- und Mosaikarbeiten liegen höher bei 70–100 €/h.' },
+    zimmerer: { min: 50, max: 85, text: 'Zimmerer & Dachdecker liegen bei 50–85 €/h. Holzbau-Spezialisten erzielen 80–110 €/h.' },
+    metallbau: { min: 55, max: 90, text: 'Metallbauer berechnen 55–90 €/h. Edelstahl- und Sonderkonstruktionen erzielen 85–120 €/h.' },
+    freelancer: { min: 50, max: 120, text: 'Freelancer (IT, Beratung, Design) berechnen 50–120 €/h. Spezialisierte IT-Dienstleister bis 150 €/h.' }
+};
+
+function berechnen() {
+    const gewerke = document.getElementById('gewerke').value;
+    const jahresgewinn = parseFloat(document.getElementById('jahresgehalt').value) || 45000;
+    const arbeitstage = parseFloat(document.getElementById('arbeitstage').value) || 220;
+    const stundenProTag = parseFloat(document.getElementById('stunden_pro_tag').value) || 8;
+    const miete = parseFloat(document.getElementById('miete').value) || 0;
+    const versicherung = parseFloat(document.getElementById('versicherung').value) || 0;
+    const fahrzeug = parseFloat(document.getElementById('fahrzeug').value) || 0;
+    const werkzeug = parseFloat(document.getElementById('werkzeug').value) || 0;
+    const fortbildung = parseFloat(document.getElementById('fortbildung').value) || 0;
+    const sonstiges = parseFloat(document.getElementById('sonstiges').value) || 0;
+    const steuerSatz = parseFloat(steuerSlider.value) / 100;
+    const gewinnMarge = parseFloat(gewinnSlider.value) / 100;
+
+    const monatsKosten = miete + versicherung + fahrzeug + werkzeug + fortbildung + sonstiges;
+    const jahresKosten = monatsKosten * 12;
+    const gesamtKosten = jahresgewinn + jahresKosten;
+    const gesamtStunden = arbeitstage * stundenProTag;
+
+    // Kosten pro Stunde
+    const kostenProStunde = jahresKosten / gesamtStunden;
+
+    // Gewünschter Gewinn pro Stunde
+    const gewinnProStunde = jahresgewinn / gesamtStunden;
+
+    // Steuerrücklage pro Stunde
+    const steuerProStunde = (jahresgewinn * steuerSatz) / gesamtStunden;
+
+    // Stundensatz = Kosten + Gewinn + Steuern + Marge
+    const basisSatz = kostenProStunde + gewinnProStunde + steuerProStunde;
+    const stundensatzNetto = basisSatz / (1 - gewinnMarge);
+    const stundensatzBrutto = stundensatzNetto * 1.19;
+
+    // Anzeige
+    document.getElementById('stundensatzResult').textContent = stundensatzNetto.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('stundensatzBrutto').textContent = '= ' + stundensatzBrutto.toFixed(2).replace('.', ',') + ' € brutto (inkl. 19% MwSt.)';
+    document.getElementById('jahreskosten').textContent = jahresKosten.toFixed(0).replace('.', ',') + ' €';
+    document.getElementById('kostenProStunde').textContent = kostenProStunde.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('gewinnProStunde').textContent = gewinnProStunde.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('steuerProStunde').textContent = steuerProStunde.toFixed(2).replace('.', ',') + ' €';
+
+    // Vergleich
+    const vergleich = vergleichsdaten[gewerke] || vergleichsdaten.freelancer;
+    let vergleichsText = vergleich.text;
+    if (stundensatzNetto < vergleich.min) {
+        vergleichsText += ' Dein berechneter Satz liegt unter dem Durchschnitt. Prüfe, ob du alle Kosten erfasst hast oder ob du deine Preise anpassen kannst.';
+    } else if (stundensatzNetto > vergleich.max) {
+        vergleichsText += ' Dein Satz liegt über dem Durchschnitt – das ist okay, wenn du Spezialleistungen oder Premium-Qualität bietest.';
+    } else {
+        vergleichsText += ' Dein Satz liegt im üblichen Rahmen für dein Gewerk.';
+    }
+    document.getElementById('vergleichstext').textContent = vergleichsText;
+
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('jahresgehalt').value = 45000;
+    document.getElementById('arbeitstage').value = 220;
+    document.getElementById('stunden_pro_tag').value = 8;
+    document.getElementById('miete').value = 800;
+    document.getElementById('versicherung').value = 250;
+    document.getElementById('fahrzeug').value = 400;
+    document.getElementById('werkzeug').value = 300;
+    document.getElementById('fortbildung').value = 150;
+    document.getElementById('sonstiges').value = 200;
+    steuerSlider.value = 30;
+    document.getElementById('steuerlastValue').textContent = '30%';
+    gewinnSlider.value = 20;
+    document.getElementById('gewinnmargeValue').textContent = '20%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
