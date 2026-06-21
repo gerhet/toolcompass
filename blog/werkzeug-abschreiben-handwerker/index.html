@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Werkzeug abschreiben als Handwerker: GWG, AfA & Steuerersparnis einfach erklärt</title>
+    <meta name="description" content="Werkzeug richtig abschreiben: GWG-Grenze 2026, lineare vs. degressive AfA, komplette AfA-Tabelle + Beispielrechnung für 5.000 € Festool-Sortiment.">
+    <link rel="canonical" href="https://toolcompass.org/blog/werkzeug-abschreiben-handwerker/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Werkzeug abschreiben als Handwerker: GWG, AfA & Steuerersparnis einfach erklärt">
+    <meta property="og:description" content="Lerne, wie du Werkzeuge richtig abschreibst, die GWG-Grenze nutzt und bares Geld sparst. Mit AfA-Tabelle und Beispielrechnung.">
+    <meta property="og:url" content="https://toolcompass.org/blog/werkzeug-abschreiben-handwerker/">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .article-content { max-width: 750px; margin: 0 auto; }
+        .article-content h2 { font-size: 1.8rem; font-weight: 700; color: white; margin: 3rem 0 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
+        .article-content h3 { font-size: 1.3rem; font-weight: 700; color: white; margin: 2rem 0 0.8rem; letter-spacing: -0.01em; }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1.2rem; }
+        .article-content ul, .article-content ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-content li { font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .article-content strong { color: white; font-weight: 700; }
+        .article-content .highlight-box { background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .article-content .highlight-box h4 { color: white; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .article-content .highlight-box p { margin-bottom: 0; }
+        .article-content .success-box { background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .article-content .success-box h4 { color: #34d399; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .article-content .success-box p { margin-bottom: 0; }
+        .article-content .cta-box { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.08)); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 20px; padding: 2.5rem; text-align: center; margin: 3rem 0; }
+        .article-content .cta-box h3 { color: white; font-size: 1.5rem; margin-bottom: 1rem; }
+        .article-content .cta-box p { color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; }
+        .article-content .cta-box .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--accent-primary), #4f46e5); color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
+        .article-content .cta-box .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+        .article-content .afa-table-full { width: 100%; margin: 1.5rem 0; border-collapse: collapse; background: rgba(3, 7, 18, 0.4); border-radius: 12px; overflow: hidden; }
+        .article-content .afa-table-full th { background: rgba(99, 102, 241, 0.1); padding: 0.8rem 1.2rem; text-align: left; font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+        .article-content .afa-table-full td { padding: 0.8rem 1.2rem; font-size: 0.9rem; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .article-content .afa-table-full tr:last-child td { border-bottom: none; }
+        .article-content .afa-table-full .highlight td { font-weight: 700; color: white; background: rgba(99, 102, 241, 0.05); }
+        .article-hero { text-align: center; margin-bottom: 3rem; padding-top: 1rem; }
+        .article-hero .article-meta { display: flex; justify-content: center; gap: 1.5rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
+        .article-hero .article-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.25rem 0.7rem; border-radius: 99px; background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.15); margin-bottom: 1rem; }
+        .article-hero p.subtitle { max-width: 600px; margin: 0 auto; font-size: 1.15rem; line-height: 1.6; }
+        .article-content .example-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .article-content .example-box h4 { color: white; font-size: 1rem; margin-bottom: 0.8rem; }
+        .article-content .example-box p { font-size: 0.95rem; margin-bottom: 0.5rem; }
+        @media (max-width: 600px) { .article-content h2 { font-size: 1.4rem; } .article-content .cta-box { padding: 1.5rem; } .article-content .afa-table-full { font-size: 0.8rem; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/blog/">← Zurück zum Blog</a></nav>
+
+    <div class="article-hero">
+        <span class="article-tag">Steuern & Finanzen</span>
+        <h1>Werkzeug abschreiben als Handwerker – <span>GWG, AfA & Steuerersparnis einfach erklärt</span></h1>
+        <p class="subtitle">Warum du bares Geld verschenkst, wenn du deine Werkzeuge nicht richtig abschreibst – und wie du mit GWG und AfA jedes Jahr Tausende Euro sparst.</p>
+        <div class="article-meta">
+            <span>📅 Juni 2026</span>
+            <span>⏱️ 9 Min. Lesezeit</span>
+            <span>👨‍🔧 Für Handwerker & Selbstständige</span>
+        </div>
+    </div>
+
+    <div class="tool-interface article-content">
+        <p>Du kaufst einen neuen Akkuschrauber für 400 €. Nächstes Jahr eine Kreissäge für 1.200 €. Dann noch einen Kompressor, eine Tauchpumpe, ein neues Bosch-Set. Am Ende des Jahres hast du <strong>5.000–10.000 €</strong> in Werkzeug investiert – und fragst dich beim Steuerberater, wie du das angeben sollst.</p>
+
+        <p>Die Antwort ist einfacher, als du denkst: <strong>Du schreibst deine Werkzeuge ab.</strong> Klingt nach Buchhaltungs-Kauderwelsch? Ist es aber nicht. Mit der richtigen Abschreibung (AfA = Absetzung für Abnutzung) kannst du <strong>jedes Jahr mehrere Tausend Euro Steuern sparen</strong>. Das Geld bleibt in deiner Kasse, statt beim Finanzamt zu landen.</p>
+
+        <p>Dieser Artikel zeigt dir: Was die GWG-Grenze ist, wie lineare und degressive Abschreibung funktionieren, wie lange du was abschreiben kannst – und wie du mit einer klugen Strategie bares Geld sparst.</p>
+
+        <h2>GWG-Grenze 2026: Was ist das und wie nutzt du sie?</h2>
+
+        <p>GWG steht für <strong>Geringwertiges Wirtschaftsgut</strong>. Das sind Wirtschaftsgüter (also Werkzeuge, Maschinen, Geräte), die einen bestimmten Anschaffungswert nicht überschreiten. Und hier kommt die entscheidende Grenze:</p>
+
+        <div class="highlight-box">
+            <h4>💰 Die GWG-Grenze 2026: 800 € netto</h4>
+            <p>Liegt der Anschaffungswert eines Werkzeugs <strong>unter 800 € netto</strong> (also ca. 952 € brutto), kannst du es <strong>sofort im Jahr des Kaufs komplett als Betriebsausgabe absetzen</strong>. Das heißt: Du sparst dir die jahrelange Abschreibung und bekommst den Steuervorteil auf einmal.</p>
+        </div>
+
+        <p>Praktisches Beispiel: Du kaufst einen Akkuschrauber für 400 € netto. Da er unter 800 € liegt, setzt du ihn sofort komplett ab. Bei einem Steuersatz von 30 % sparst du <strong>120 € Steuern</strong> – sofort, im selben Jahr.</p>
+
+        <p><strong>Wichtig:</strong> Die GWG-Grenze gilt pro einzelnem Wirtschaftsgut, nicht für die Summe. Kaufst du 10 Schrauber für je 400 €, kannst du jeden einzeln sofort abschreiben, auch wenn die Summe 4.000 € beträgt.</p>
+
+        <div class="success-box">
+            <h4>💡 Praxistipp: Zahlt sich Splitten aus?</h4>
+            <p>Wenn du ein Set kaufst (z.B. ein Bohrmaschinen-Set für 900 €), prüfe, ob du die Einzelteile separat abrechnen kannst. Manche Steuerberater empfehlen, Sets in Einzelkomponenten zu zerlegen, wenn diese einzeln unter 800 € liegen. Aber Vorsicht: Das Finanzamt prüft genau, ob es sich um eigenständige Wirtschaftsgüter handelt. Im Zweifel mit dem Steuerberater klären.</p>
+        </div>
+
+        <p>Für alles <strong>über 800 € netto</strong> greift die normale Abschreibung (AfA) über die Nutzungsdauer. Und die hat zwei Gesichter.</p>
+
+        <h2>Lineare vs. degressive Abschreibung: Der große Unterschied</h2>
+
+        <p>Bei der AfA hast du die Wahl zwischen zwei Methoden. Die Entscheidung beeinflusst, wie viel du pro Jahr absetzen kannst.</p>
+
+        <h3>📏 Lineare AfA (die Standard-Methode)</h3>
+        <p>Du verteilst den Anschaffungswert gleichmäßig über die Nutzungsdauer. Einfach, planbar, vom Finanzamt anerkannt.</p>
+        <p><strong>Formel:</strong> Anschaffungswert ÷ Nutzungsdauer = jährlicher AfA-Betrag</p>
+        <p><strong>Beispiel:</strong> Kreissäge für 1.200 €, Nutzungsdauer 5 Jahre → 240 € pro Jahr, jedes Jahr gleich.</p>
+
+        <h3>📉 Degressive AfA (die Turbo-Methode)</h3>
+        <p>Du schreibst in den ersten Jahren mehr ab als in den späteren. Das Finanzamt erlaubt seit 2026 wieder eine degressive AfA mit bis zu <strong>30 % des Buchwerts</strong>, aber maximal das Doppelte der linearen AfA.</p>
+        <p><strong>Vorteil:</strong> Du hast die Steuerersparnis früher – das Geld arbeitet für dich.</p>
+        <p><strong>Nachteil:</strong> Die Beträge werden jedes Jahr kleiner. Bei langlebigen Gütern kann sich das lohnen, bei kurzer Nutzungsdauer ist der Unterschied minimal.</p>
+
+        <div class="highlight-box">
+            <h4>📊 Vergleich: Lineare vs. degressive AfA (1.200 €, 5 Jahre)</h4>
+            <p><strong>Linear:</strong> 240 €/Jahr, jedes Jahr gleich → Summe: 1.200 €</p>
+            <p><strong>Degressiv:</strong> Jahr 1: 360 € | Jahr 2: 252 € | Jahr 3: 176 € | Jahr 4: 124 € | Jahr 5: 288 € (Rest) → Summe: 1.200 €</p>
+            <p>Mit degressiver AfA sparst du im <strong>ersten Jahr 120 € mehr</strong> Steuern (bei 30 % Steuersatz: 36 € mehr).</p>
+        </div>
+
+        <h2>AfA-Tabelle: Wie lange kannst du was abschreiben?</h2>
+
+        <p>Das Finanzamt gibt offizielle Nutzungsdauern vor – die sogenannten <strong>AfA-Tabellen</strong>. Hier sind die wichtigsten Werte für Handwerker:</p>
+
+        <table class="afa-table-full">
+            <thead>
+                <tr><th>Wirtschaftsgut</th><th>Nutzungsdauer</th><th>Beispiel (1.000 €)</th></tr>
+            </thead>
+            <tbody>
+                <tr class="highlight"><td>GWG (unter 800 €)</td><td>1 Jahr (sofort)</td><td>1.000 € komplett im Jahr 1</td></tr>
+                <tr><td>Elektrowerkzeuge (Bohrmaschine, Schrauber)</td><td>5 Jahre</td><td>200 €/Jahr</td></tr>
+                <tr><td>Großmaschinen (Kreissäge, Kompressor)</td><td>8 Jahre</td><td>125 €/Jahr</td></tr>
+                <tr><td>Schwere Maschinen (Bagger, Rüttler)</td><td>10 Jahre</td><td>100 €/Jahr</td></tr>
+                <tr><td>Computer / Laptop / Tablet</td><td>3 Jahre</td><td>333 €/Jahr</td></tr>
+                <tr><td>Büromöbel</td><td>13–15 Jahre</td><td>67–77 €/Jahr</td></tr>
+                <tr><td>Transporter / Klein-LKW</td><td>6 Jahre</td><td>167 €/Jahr</td></tr>
+                <tr><td>PKW (gewerblich)</td><td>6 Jahre</td><td>167 €/Jahr</td></tr>
+                <tr><td>Fachliteratur / Software</td><td>3 Jahre</td><td>333 €/Jahr</td></tr>
+                <tr><td>Betriebsvorrichtung (Regal, Werkbank)</td><td>10 Jahre</td><td>100 €/Jahr</td></tr>
+            </tbody>
+        </table>
+
+        <p>Die Tabelle zeigt dir: <strong>Je kürzer die Nutzungsdauer, desto höher der jährliche AfA-Betrag.</strong> Bei einem Laptop (3 Jahre) schreibst du schneller ab als bei einem Transporter (6 Jahre). Das ist gut zu wissen, weil du so steuern optimieren kannst.</p>
+
+        <h2>Beispielrechnung: Festool-Sortiment für 5.000 € abschreiben</h2>
+
+        <p>Lass uns das Ganze konkret machen. Du investierst als Schreiner oder Elektriker in ein <strong>Festool-Sortiment im Wert von 5.000 € netto</strong>. Das Set besteht aus:</p>
+
+        <table class="afa-table-full">
+            <thead>
+                <tr><th>Werkzeug</th><th>Preis (netto)</th><th>GWG?</th><th>Nutzungsdauer</th><th>AfA pro Jahr (linear)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Tauchkreissäge TS 55</td><td>850 €</td><td>Nein</td><td>5 Jahre</td><td>170 €</td></tr>
+                <tr><td>Akkuschrauber 18V</td><td>350 €</td><td>✅ Ja</td><td>Sofort</td><td>350 €</td></tr>
+                <tr><td>Multifräse MFK 700</td><td>620 €</td><td>✅ Ja</td><td>Sofort</td><td>620 €</td></tr>
+                <tr><td>Exzenterschleifer ETS EC 150</td><td>580 €</td><td>✅ Ja</td><td>Sofort</td><td>580 €</td></tr>
+                <tr><td>Staubsauger CTM 26</td><td>950 €</td><td>Nein</td><td>5 Jahre</td><td>190 €</td></tr>
+                <tr><td>Kapp-Zugkreissäge KS 120</td><td>1.650 €</td><td>Nein</td><td>5 Jahre</td><td>330 €</td></tr>
+                <tr class="highlight"><td><strong>Gesamt</strong></td><td><strong>5.000 €</strong></td><td></td><td></td><td><strong>2.240 €</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="example-box">
+            <h4>📋 Ergebnis der Beispielrechnung</h4>
+            <p>✅ 3 Werkzeuge (1.550 €) sind GWG → sofort absetzbar</p>
+            <p>✅ 3 Werkzeuge (3.450 €) müssen über 5 Jahre abgeschrieben werden</p>
+            <p>✅ <strong>AfA im ersten Jahr: 1.550 € + 690 € = 2.240 €</strong></p>
+            <p>✅ Bei 30 % Steuersatz: <strong>672 € Steuerersparnis im ersten Jahr</strong></p>
+            <p>✅ Über 5 Jahre insgesamt: <strong>1.500 € Steuerersparnis</strong></p>
+        </div>
+
+        <p><strong>Das bedeutet:</strong> Von deinen 5.000 € Investition bekommst du über 5 Jahre <strong>1.500 € über die Steuer zurück</strong>. Deine tatsächliche Belastung sinkt auf 3.500 € – und das Werkzeug gehört trotzdem dir. Ziemlich gutes Geschäft, oder?</p>
+
+        <div class="cta-box">
+            <h3>🔢 Berechne deine eigene Werkzeug-AfA</h3>
+            <p>Unser kostenloser Werkzeug-AfA-Rechner macht die ganze Arbeit für dich. Einfach Anschaffungswert eingeben, Nutzungsdauer wählen – und sofort siehst du, wie viel du sparst.</p>
+            <a href="/werkzeug-afa-rechner/" class="cta-btn">Zum Werkzeug-AfA-Rechner →</a>
+        </div>
+
+        <h2>Neukauf vs. Leasing: Was lohnt sich für Handwerker?</h2>
+
+        <p>Diese Frage kommt immer wieder: Soll ich Werkzeuge kaufen oder leasen? Die Antwort hängt von der Summe ab.</p>
+
+        <p><strong>Für Werkzeuge unter 5.000 €:</strong> Kaufen. Immer. Die Leasinggebühren + Zinsen sind höher als der Steuervorteil, den du durch Leasing bekommst. Außerdem kannst du bei Kauf die GWG-Grenze nutzen und Werkzeuge sofort absetzen. Leasing lohnt sich hier nicht.</p>
+
+        <p><strong>Für Maschinen über 5.000 €:</strong> Kommt drauf an. Leasing kann Sinn machen, wenn:</p>
+        <ul>
+            <li>Du Liquidität schonen willst (keine hohe Einmalzahlung)</li>
+            <li>Die Maschine schnell veraltet (z.B. computergesteuerte Fräsen)</li>
+            <li>Du flexibel bleiben willst (nach Leasingende neue Technik)</li>
+        </ul>
+
+        <p><strong>Für Transporter und Fahrzeuge:</strong> Leasing ist hier oft die bessere Wahl, weil die Raten als Betriebsausgaben voll absetzbar sind und du kein Kapital bindest.</p>
+
+        <div class="highlight-box">
+            <h4>📌 Faustregel für Handwerker</h4>
+            <p><strong>Kauf bis 5.000 €</strong> (GWG + AfA nutzen)<br>
+            <strong>Leasing ab 20.000 €</strong> (Liquidität schonen)<br>
+            <strong>Dazwischen:</strong> Kommt auf deine individuelle Steuersituation an. Am besten mit Steuerberater klären.</p>
+        </div>
+
+        <h2>Fazit: Werkzeug abschreiben lohnt sich immer</h2>
+
+        <p>Egal ob du einmalig einen Akkuschrauber kaufst oder regelmäßig in hochwertiges Festool-Equipment investierst: <strong>Die Abschreibung deiner Werkzeuge ist kein Buchhaltungs-Trick, sondern dein gutes Recht.</strong> Der Gesetzgeber will, dass du deine berufliche Ausrüstung steuerlich geltend machst.</p>
+
+        <p>Die drei wichtigsten Punkte zum Mitnehmen:</p>
+
+        <ol>
+            <li><strong>GWG unter 800 €:</strong> Immer sofort komplett absetzen – kein Grund, auf Abschreibung zu verzichten</li>
+            <li><strong>Lineare AfA:</strong> Standard-Methode, einfach, sicher – für die meisten Fälle die richtige Wahl</li>
+            <li><strong>Degressive AfA:</strong> Turbo für die ersten Jahre – lohnt sich bei höheren Investitionen</li>
+        </ol>
+
+        <p>Nutze den <a href="/werkzeug-afa-rechner/" style="color: var(--accent-secondary);">Werkzeug-AfA-Rechner</a>, um deine individuelle Ersparnis zu berechnen. Und wenn du deinen <a href="/stundensatz-rechner/" style="color: var(--accent-secondary);">Stundensatz</a> noch nicht kalkuliert hast, solltest du auch das nachholen – denn die Werkzeugkosten sind ein Teil deines Stundensatzes.</p>
+
+        <div class="cta-box" style="margin-top:2rem;">
+            <h3>⚙️ Jetzt AfA berechnen & Steuern sparen</h3>
+            <p>Mit unserem kostenlosen Rechner siehst du in Sekunden, wie viel du durch die Abschreibung deiner Werkzeuge sparst.</p>
+            <a href="/werkzeug-afa-rechner/" class="cta-btn">AfA jetzt berechnen →</a>
+        </div>
+
+        <h2>Häufige Fragen zum Werkzeug abschreiben</h2>
+
+        <details>
+            <summary>Was passiert, wenn mein Werkzeug unter 800 € kostet?</summary>
+            <div class="faq-answer">
+                <p>Dann greift die GWG-Regelung (Geringwertiges Wirtschaftsgut). Du kannst den vollen Betrag <strong>sofort im Jahr des Kaufs als Betriebsausgabe absetzen</strong>. Keine Abschreibung über mehrere Jahre nötig. Das gilt für jedes einzelne Werkzeug unter 800 € netto.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Kann ich Werkzeuge auch privat nutzen und trotzdem absetzen?</summary>
+            <div class="faq-answer">
+                <p>Ja, aber nur anteilig. Wenn du deinen Akkuschrauber auch privat nutzt (z.B. für Heimwerker-Projekte), musst du den privaten Anteil schätzen und rausrechnen. Üblich sind 10–20 % Privatnutzung. <strong>Bei fast ausschließlich beruflicher Nutzung (über 90 %) kannst du den vollen Betrag absetzen.</strong></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Was ist der Sammelposten für GWG zwischen 800 und 1.000 €?</summary>
+            <div class="faq-answer">
+                <p>Güter zwischen 800 € und 1.000 € können in einen Sammelposten eingestellt werden. Dieser wird dann über <strong>5 Jahre gleichmäßig abgeschrieben</strong>. Vorteil: Du musst nicht jedes einzelne Werkzeug einzeln erfassen. Nachteil: Die Abschreibung dauert länger. <strong>Seit 2026 wird diese Regelung zunehmend durch die erweiterte GWG-Grenze verdrängt.</strong></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Kann ich Gebrauchtwerkzeuge abschreiben?</summary>
+            <div class="faq-answer">
+                <p>Ja, auch gebrauchte Werkzeuge sind Wirtschaftsgüter, die du abschreiben kannst. Der Anschaffungswert ist der Kaufpreis (nicht der Neupreis). Die Nutzungsdauer reduziert sich entsprechend: Ein 3 Jahre alter Schrauber mit Restlebensdauer von 2 Jahren wird über 2 Jahre abgeschrieben. <strong>Wichtig: Rechnung aufbewahren!</strong></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Welche Methode lohnt sich bei hohen Investitionen (über 10.000 €)?</summary>
+            <div class="faq-answer">
+                <p>Bei Investitionen über 10.000 € kann sich die <strong>degressive AfA richtig lohnen</strong>. Beispiel: Eine Fräsmaschine für 15.000 € mit 8 Jahren Nutzungsdauer: linear = 1.875 €/Jahr, degressiv = 4.500 € im ersten Jahr. Das sind bei 30 % Steuersatz <strong>1.350 € vs. 562 € Steuerersparnis im ersten Jahr</strong>. Ein Unterschied von fast 800 €! Besprich die degressive AfA aber vorher mit deinem Steuerberater.</p>
+            </div>
+        </details>
+
+        <div class="cta-box" style="margin-top:2rem;">
+            <h3>⚙️ Berechne jetzt deine Werkzeug-AfA</h3>
+            <p>Unser Rechner zeigt dir linear und degressiv – mit kompletter AfA-Tabelle und Steuerersparnis.</p>
+            <a href="/werkzeug-afa-rechner/" class="cta-btn">AfA-Rechner starten →</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">Startseite</a>
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+<script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
