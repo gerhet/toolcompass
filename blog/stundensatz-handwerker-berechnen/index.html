@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Stundensatz berechnen Handwerker: 5 Fehler die du vermeiden musst</title>
+    <meta name="description" content="Die meisten Handwerker rechnen falsch. Erfahre die 5 teuersten Fehler bei der Stundensatz-Kalkulation und wie du sie vermeidest. Mit kostenlosem Rechner.">
+    <link rel="canonical" href="https://toolcompass.org/blog/stundensatz-handwerker-berechnen/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Stundensatz berechnen Handwerker: 5 Fehler die du vermeiden musst">
+    <meta property="og:description" content="Die meisten Handwerker rechnen falsch. Erfahre die 5 teuersten Fehler bei der Stundensatz-Kalkulation und wie du sie vermeidest.">
+    <meta property="og:url" content="https://toolcompass.org/blog/stundensatz-handwerker-berechnen/">
+    <meta property="og:type" content="article">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .article-content { max-width: 750px; margin: 0 auto; }
+        .article-content h2 { font-size: 1.8rem; font-weight: 700; color: white; margin: 3rem 0 1.2rem; letter-spacing: -0.02em; line-height: 1.3; }
+        .article-content h3 { font-size: 1.3rem; font-weight: 700; color: white; margin: 2rem 0 0.8rem; letter-spacing: -0.01em; }
+        .article-content p { font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1.2rem; }
+        .article-content ul, .article-content ol { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-content li { font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .article-content strong { color: white; font-weight: 700; }
+        .article-content .highlight-box { background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .article-content .highlight-box h4 { color: white; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .article-content .highlight-box p { margin-bottom: 0; }
+        .article-content .error-box { background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.12); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .article-content .error-box h4 { color: #f87171; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .article-content .error-box p { margin-bottom: 0; }
+        .article-content .solution-box { background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.15); border-radius: 16px; padding: 1.5rem 2rem; margin: 2rem 0; }
+        .article-content .solution-box h4 { color: #34d399; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .article-content .solution-box p { margin-bottom: 0; }
+        .article-content .cta-box { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(6, 182, 212, 0.08)); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 20px; padding: 2.5rem; text-align: center; margin: 3rem 0; }
+        .article-content .cta-box h3 { color: white; font-size: 1.5rem; margin-bottom: 1rem; }
+        .article-content .cta-box p { color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; }
+        .article-content .cta-box .cta-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--accent-primary), #4f46e5); color: white; text-decoration: none; border-radius: 14px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
+        .article-content .cta-box .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4); }
+        .article-content .example-table { width: 100%; margin: 1.5rem 0; border-collapse: collapse; background: rgba(3, 7, 18, 0.4); border-radius: 12px; overflow: hidden; }
+        .article-content .example-table th { background: rgba(99, 102, 241, 0.1); padding: 0.8rem 1.2rem; text-align: left; font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+        .article-content .example-table td { padding: 0.8rem 1.2rem; font-size: 0.95rem; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .article-content .example-table tr:last-child td { border-bottom: none; }
+        .article-content .example-table .total td { font-weight: 700; color: white; border-top: 2px solid var(--accent-primary); }
+        .article-content .example-table .result td { font-weight: 700; color: var(--accent-secondary); font-size: 1.1rem; }
+        .article-hero { text-align: center; margin-bottom: 3rem; padding-top: 1rem; }
+        .article-hero .article-meta { display: flex; justify-content: center; gap: 1.5rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem; }
+        .article-hero .article-tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.25rem 0.7rem; border-radius: 99px; background: rgba(99, 102, 241, 0.12); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.15); margin-bottom: 1rem; }
+        .article-hero p.subtitle { max-width: 600px; margin: 0 auto; font-size: 1.15rem; line-height: 1.6; }
+        @media (max-width: 600px) { .article-content h2 { font-size: 1.4rem; } .article-content .cta-box { padding: 1.5rem; } .article-content .example-table { font-size: 0.85rem; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/blog/">← Zurück zum Blog</a></nav>
+
+    <div class="article-hero">
+        <span class="article-tag">Finanzen & Preise</span>
+        <h1>Stundensatz berechnen als Handwerker – <span>5 Fehler, die dich Geld kosten</span></h1>
+        <p class="subtitle">Warum 80% der Handwerker unter ihrem Wert arbeiten – und wie du die 5 teuersten Fehler bei der Stundensatz-Kalkulation vermeidest.</p>
+        <div class="article-meta">
+            <span>📅 Juni 2026</span>
+            <span>⏱️ 10 Min. Lesezeit</span>
+            <span>👨‍🔧 Für Handwerker & Freelancer</span>
+        </div>
+    </div>
+
+    <div class="tool-interface article-content">
+        <p>Du bist ein guter Handwerker. Deine Arbeit ist qualitativ hochwertig, deine Kunden zufrieden. Trotzdem fragst du dich am Ende des Monats, warum nicht mehr übrig bleibt? Die Antwort ist oft schmerzhaft einfach: <strong>Du berechnest deinen Stundensatz falsch.</strong></p>
+
+        <p>Keine Panik – das geht nicht nur dir so. <strong>Rund 80% der Handwerker in Deutschland arbeiten unter ihrem eigentlichen Wert.</strong> Sie nehmen bewusst oder unbewusst weniger Geld, als sie bräuchten, um langfristig wirtschaftlich gesund zu bleiben. Die Folge: Am Jahresende fehlt Geld für neue Werkzeuge, die Altersvorsorge liegt brach, und die private Kreditkarte wird zum Puffer.</p>
+
+        <p>Die gute Nachricht: <strong>Die Lösung ist einfach.</strong> Du musst nur 5 Fehler kennen und vermeiden. Und einen soliden Stundensatz-Rechner nutzen. Fangen wir an.</p>
+
+        <h2>Fehler #1: Nur Material + Arbeitszeit rechnen (und die Fixkosten vergessen)</h2>
+
+        <p>Der Klassiker. Du kalkulierst: Material kostet 200 €, du brauchst 4 Stunden, willst 50 € die Stunde – also machst du 400 € inklusive Material. Plus MwSt., fertig.</p>
+
+        <p>Klingt fair? <strong>Ist es nicht.</strong> Was fehlt? Deine gesamte Infrastruktur:</p>
+
+        <ul>
+            <li>Werkstatt- oder Büromiete</li>
+            <li>Versicherungen (Betriebshaftpflicht, Rechtsschutz, Berufsgenossenschaft)</li>
+            <li>Fahrzeugkosten (Leasing, Versicherung, Wartung)</li>
+            <li>Strom, Wasser, Heizung für die Werkstatt</li>
+            <li>Telefon, Internet, Software-Abos</li>
+            <li>Fortbildungen und Meisterkurse</li>
+            <li>Buchhaltung und Steuerberater</li>
+        </ul>
+
+        <div class="error-box">
+            <h4>💸 Die Realität</h4>
+            <p>Bei einem typischen Ein-Mann-Handwerksbetrieb liegen die monatlichen Fixkosten schnell bei <strong>1.500–2.500 €</strong>. Das sind 18.000–30.000 € im Jahr, die du erstmal reinholen musst, bevor du einen Cent Gewinn siehst. Rechnest du die nicht in deinen Stundensatz ein, arbeitest du quasi umsonst – jeden Tag die ersten 2-3 Stunden nur für die Kosten.</p>
+        </div>
+
+        <p><strong>Die Lösung:</strong> Erfasse ALLE deine monatlichen Fixkosten und teile sie durch deine abrechenbaren Stunden. Unser <a href="/stundensatz-rechner/" style="color: var(--accent-secondary);">Stundensatz-Rechner</a> macht das automatisch für dich.</p>
+
+        <h2>Fehler #2: Steuer nicht einkalkulieren</h2>
+
+        <p>"Das Finanzamt kriegt sein Teil schon irgendwann" – ein gefährlicher Satz. <strong>Viele Handwerker vergessen, dass sie von ihrem Bruttogewinn noch Steuern zahlen müssen.</strong></p>
+
+        <p>Du denkst: 65 € die Stunde sind doch super. Aber hast du bedacht, dass davon noch folgendes abgeht?</p>
+
+        <ul>
+            <li><strong>Einkommensteuer:</strong> Je nach Gewinn 14–42 %</li>
+            <li><strong>Gewerbesteuer:</strong> Je nach Gemeinde 7–15 %</li>
+            <li><strong>Solidaritätszuschlag</strong> (ja, den gibt's noch für viele)</li>
+            <li><strong>Kirchensteuer</strong> (falls du Mitglied bist)</li>
+        </ul>
+
+        <p>Realistisch landest du bei einer <strong>Gesamtsteuerlast von 25–40 %</strong>. Wenn du das nicht einkalkulierst, fehlt dir am Ende des Jahres bares Geld für die Steuervorauszahlung. Und dann kommt der Brief vom Finanzamt – purer Stress.</p>
+
+        <div class="highlight-box">
+            <h4>📌 Merk dir:</h4>
+            <p>Dein Stundensatz muss nicht nur deine Kosten und deinen Gewinn decken. Er muss auch die Steuer auf den Gewinn enthalten. Faustregel: Schlage <strong>mindestens 30 % auf deinen gewünschten Nettogewinn</strong> für Steuern drauf.</p>
+        </div>
+
+        <h2>Fehler #3: Werkzeugverschleiß ignorieren</h2>
+
+        <p>Deine Werkzeuge sind dein Kapital. Ein Akkuschrauber für 400 € hält vielleicht 3-5 Jahre. Eine Kreissäge für 1.200 € vielleicht 8 Jahre. Ein Transporter für 35.000 € sag ich 12-15 Jahre. <strong>Aber irgendwann muss alles ersetzt werden.</strong></p>
+
+        <p>Die meisten Handwerker kalkulieren den Werkzeugverschleiß nicht in ihren Stundensatz ein. Sie kaufen neues Werkzeug "irgendwann" von dem Geld, das gerade da ist. Das ist <strong>keine Strategie, sondern Glücksspiel.</strong></p>
+
+        <div class="highlight-box">
+            <h4>⚙️ Werkzeugkosten realistisch einschätzen</h4>
+            <p>Ein Elektriker hat leicht <strong>5.000–15.000 €</strong> in Werkzeug und Ausrüstung stecken. Bei 5 Jahren Nutzungsdauer sind das 1.000–3.000 € pro Jahr, die du über deinen Stundensatz wieder reinholen musst. Mit unserem <a href="/werkzeug-afa-rechner/" style="color: var(--accent-secondary);">Werkzeug-AfA-Rechner</a> siehst du genau, wie viel Abschreibung du pro Stunde einplanen musst.</p>
+        </div>
+
+        <p><strong>Die Lösung:</strong> Berechne den jährlichen Wertverlust deiner Werkzeuge und Maschinen (lineare Abschreibung) und teile ihn durch deine Jahresstunden. Ein Handwerker mit 10.000 € Werkzeugbestand sollte mindestens <strong>2–3 € pro Stunde</strong> für Werkzeugverschleiß einplanen.</p>
+
+        <h2>Fehler #4: Keine Altersvorsorge einplanen</h2>
+
+        <p>Als Angestellter zahlst du automatisch in die Rentenversicherung ein. Als selbstständiger Handwerker <strong>musst du dich selbst drum kümmern.</strong> Und das ist teurer, als du denkst.</p>
+
+        <p>Ein realistischer Altersvorsorgebeitrag für Selbstständige liegt bei <strong>500–1.000 € pro Monat</strong> (also 6.000–12.000 € im Jahr), wenn du im Alter halbwegs gut leben willst. Plus: Du brauchst eine private Krankenversicherung oder freiwillige gesetzliche KV, die schnell 400–800 € im Monat kostet.</p>
+
+        <div class="error-box">
+            <h4>⚠️ Der typische Denkfehler</h4>
+            <p>"Irgendwann verkauf ich den Betrieb und hab meine Altersvorsorge." Falsch! Die meisten Handwerksbetriebe lassen sich nicht gewinnbringend verkaufen. Der Kundenstamm ist an dich gebunden, nicht an die Firma. Setz lieber auf echte Altersvorsorge – und kalkulier sie in deinen Stundensatz ein.</p>
+        </div>
+
+        <p>Bei 220 Arbeitstagen und 8 Stunden pro Tag sind das 1.760 Stunden im Jahr. Teilen wir die 12.000 € Altersvorsorge durch 1.760 Stunden: Das sind <strong>6,80 € pro Stunde</strong>, die du zusätzlich verdienen musst, nur für die Rente.</p>
+
+        <h2>Fehler #5: "Kleine" Arbeiten und Fahrtzeiten nicht mitrechnen</h2>
+
+        <p>"Ach, das mach ich schnell nebenbei." Ein neuer Stecker, eine kurze Reparatur, eine Beratung vor Ort. "Dafür kann ich doch nichts berechnen!" – <strong>kannst du aber.</strong> Deine Zeit ist dein wertvollstes Gut. Jede Stunde, die du nicht berechnest, ist eine Stunde, die dir fehlt.</p>
+
+        <p>Besonders ärgerlich: <strong>Fahrtzeiten zur Baustelle.</strong> Viele Handwerker berechnen nur die reine Arbeitszeit vor Ort. Aber die Anfahrt, die Rückfahrt, das Material holen, der Smalltalk mit dem Kunden – alles das kostet Zeit, die du nicht anderweitig nutzen kannst.</p>
+
+        <div class="highlight-box">
+            <h4>📊 Rechenbeispiel Fahrtzeit</h4>
+            <p>Du fährst 25 km zur Baustelle. Hin + Rück = 50 km. Bei 50 km/h Durchschnitt = 1 Stunde Fahrzeit. Bei 65 € Stundensatz = <strong>65 € verschenktes Geld pro Fahrt</strong>. Bei 3 Fahrten pro Woche = 195 €/Woche = 9.360 €/Jahr. Unser <a href="/anfahrtskosten-rechner/" style="color: var(--accent-secondary);">Anfahrtskosten-Rechner</a> zeigt dir, was du wirklich verschenkst.</p>
+        </div>
+
+        <p><strong>Die Lösung:</strong> Berechne deine Anfahrt. Immer. Entweder als km-Geld (0,30–0,50 €/km) oder als Zeit (dein Stundensatz × Fahrzeit). Und sag nicht "beim nächsten Mal" – das nächste Mal ist heute.</p>
+
+        <h2>So berechnest du deinen echten Stundensatz</h2>
+
+        <p>Genug von den Fehlern. Hier kommt die Lösung – <strong>Schritt für Schritt.</strong></p>
+
+        <h3>Schritt 1: Deine Kosten erfassen</h3>
+        <p>Sammle alle monatlichen Fixkosten: Miete, Versicherungen, Fahrzeug, Werkzeug, Fortbildung, Software, Telefon, Buchhaltung. Realistisch sind 1.500–3.000 € pro Monat für einen Ein-Mann-Betrieb.</p>
+
+        <h3>Schritt 2: Deine Zeit berechnen</h3>
+        <p>220 Arbeitstage × 8 Stunden = 1.760 Stunden. Ziehe 30 Tage für Urlaub, Krankheit und Verwaltung ab = <strong>1.520 abrechenbare Stunden</strong>.</p>
+
+        <h3>Schritt 3: Kosten pro Stunde</h3>
+        <p>Monatskosten × 12 ÷ abrechenbare Stunden. Bei 2.000 €/Monat = 24.000 €/Jahr ÷ 1.520 h = <strong>15,79 €/h</strong> reine Kosten.</p>
+
+        <h3>Schritt 4: Gewünschten Gewinn + Steuern addieren</h3>
+        <p>Du willst 45.000 € Gewinn? Plus 30 % Steuern = 58.500 €. Plus Kosten 24.000 € = 82.500 €. Geteilt durch 1.520 h = <strong>54,28 €/h</strong>.</p>
+
+        <h3>Schritt 5: Gewinnmarge draufschlagen</h3>
+        <p>Eine gesunde Marge von 15–25 % sorgt für Luft nach oben. Bei 20 %: 54,28 € ÷ 0,8 = <strong>67,85 €/h netto</strong>.</p>
+
+        <h3>Beispielrechnung: Elektriker, 45 Jahre, 2 Mitarbeiter</h3>
+
+        <table class="example-table">
+            <thead>
+                <tr><th>Position</th><th>Betrag pro Monat</th><th>Betrag pro Jahr</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Werkstattmiete</td><td>1.200 €</td><td>14.400 €</td></tr>
+                <tr><td>Versicherungen (alle)</td><td>450 €</td><td>5.400 €</td></tr>
+                <tr><td>Fahrzeug (2 Transporter)</td><td>1.100 €</td><td>13.200 €</td></tr>
+                <tr><td>Werkzeug & Material</td><td>600 €</td><td>7.200 €</td></tr>
+                <tr><td>Mitarbeiter (2 × 3.500 brutto)</td><td>7.000 €</td><td>84.000 €</td></tr>
+                <tr><td>Fortbildung & Software</td><td>300 €</td><td>3.600 €</td></tr>
+                <tr><td>Buchhaltung & Steuerberater</td><td>350 €</td><td>4.200 €</td></tr>
+                <tr><td>Sonstiges (Telefon, Büro, etc.)</td><td>400 €</td><td>4.800 €</td></tr>
+                <tr class="total"><td><strong>Gesamtkosten</strong></td><td><strong>11.400 €</strong></td><td><strong>136.800 €</strong></td></tr>
+                <tr><td>Gewinn (Inhaber, 60.000 €)</td><td></td><td>60.000 €</td></tr>
+                <tr><td>Steuerrücklage (30 %)</td><td></td><td>18.000 €</td></tr>
+                <tr><td>Altersvorsorge Inhaber</td><td></td><td>12.000 €</td></tr>
+                <tr class="total"><td><strong>Umsatz-Ziel pro Jahr</strong></td><td></td><td><strong>226.800 €</strong></td></tr>
+                <tr><td>Abrechenbare Stunden (3 Personen)</td><td></td><td>4.560 h</td></tr>
+                <tr><td>Davon Verwaltung (15 %)</td><td></td><td>−684 h</td></tr>
+                <tr class="total"><td><strong>Effektiv abrechenbar</strong></td><td></td><td><strong>3.876 h</strong></td></tr>
+                <tr class="result"><td><strong>Stundensatz (netto)</strong></td><td></td><td><strong>58,50 €/h</strong></td></tr>
+            </tbody>
+        </table>
+
+        <p>Mit 20 % Gewinnmarge: <strong>70,20 €/h netto</strong> – das ist ein gesunder Stundensatz für einen Elektrobetrieb mit 2 Mitarbeitern.</p>
+
+        <div class="cta-box">
+            <h3>🔢 Berechne jetzt deinen echten Stundensatz</h3>
+            <p>Unser kostenloser Stundensatz-Rechner macht die ganze Arbeit für dich. Einfach deine Daten eingeben, fertig.</p>
+            <a href="/stundensatz-rechner/" class="cta-btn">Zum Stundensatz-Rechner →</a>
+        </div>
+
+        <h2>Fazit: Hör auf, dich zu unter Wert zu verkaufen</h2>
+
+        <p>Die 5 Fehler lassen sich zusammenfassen: <strong>Du vergisst einen Teil deiner Kosten, deiner Steuern, deines Verschleißes, deiner Zukunft und deiner Zeit.</strong> Jeder einzelne Fehler kostet dich Tausende Euro im Jahr. Alle zusammen können bedeuten, dass du 20–40 % unter deinem fairen Stundensatz liegst.</p>
+
+        <p>Die Korrektur ist einfach: Nutze den <a href="/stundensatz-rechner/" style="color: var(--accent-secondary);">Stundensatz-Rechner</a>, kalkuliere deine echten Kosten und verlang den Preis, der dir zusteht. Gute Kunden zahlen gerne für gute Arbeit – und sie wollen, dass du auch morgen noch für sie da bist. Ein fairer Preis ist keine Frechheit. <strong>Er ist Verantwortung.</strong></p>
+
+        <h2>Häufige Fragen zum Stundensatz</h2>
+
+        <details>
+            <summary>Welcher Stundensatz ist für einen Ein-Mann-Handwerksbetrieb realistisch?</summary>
+            <div class="faq-answer">
+                <p>Für einen Ein-Mann-Betrieb solltest du mindestens 55–75 €/h netto verlangen, bei Spezialisierung (Smart Home, PV, Denkmalschutz) auch 80–100 €/h. Darunter arbeitest du nach Kostenabzug faktisch für Mindestlohn.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Kann ich meinen Stundensatz einfach erhöhen?</summary>
+            <div class="faq-answer">
+                <p>Ja – aber kommuniziere es richtig. Sag nicht "ich habe meine Preise erhöht", sondern "mein neuer Stundensatz beträgt ab 1. Juli 75 €". Wer Qualität liefert, kann auch höhere Preise verlangen.<strong> Bei Preisdiskussionen: Erkläre deine Kosten, nicht deinen Gewinn.</strong></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Wie oft sollte ich meinen Stundensatz anpassen?</summary>
+            <div class="faq-answer">
+                <p>Einmal im Jahr. Prüfe deine Kosten, deine Inflation und deine gewünschte Gewinnentwicklung. Wenn Miete, Versicherungen und Werkzeug teurer werden, muss dein Stundensatz mitziehen. <strong>2–5 % pro Jahr</strong> sind normal.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Was mach ich bei Kunden, die meinen Stundensatz zu hoch finden?</summary>
+            <div class="faq-answer">
+                <p>Bleib professionell. Erkläre, dass in deinem Preis nicht nur die Arbeitszeit steckt, sondern auch deine Fachkompetenz, die Garantie, die Haftung und deine langjährige Erfahrung. Wer nur auf den Preis schaut, ist meist nicht der Kunde, den du langfristig haben willst.<strong> Gute Kunden erkennen gute Arbeit.</strong></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Muss ich als Kleinunternehmer MwSt. auf meinen Stundensatz schlagen?</summary>
+            <div class="faq-answer">
+                <p>Wenn du die Kleinunternehmerregelung (§ 19 UStG) nutzt, rechnest du ohne MwSt. ab, darfst dann aber auch keine Vorsteuer ziehen. Wenn du Regelbesteuerer bist, kommt auf deinen Nettostundensatz die gesetzliche MwSt. (19 % oder 7 %) drauf. Unser Rechner zeigt dir beide Varianten.</p>
+            </div>
+        </details>
+
+        <div class="cta-box" style="margin-top:2rem;">
+            <h3>💪 Berechne jetzt deinen fairen Stundensatz</h3>
+            <p>Keine Lust auf Tabellen und Formeln? Unser kostenloser Rechner erledigt alles für dich – inklusive Gewerke-Vergleich und Steuerrücklage.</p>
+            <a href="/stundensatz-rechner/" class="cta-btn">Jetzt Stundensatz berechnen →</a>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">Startseite</a>
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+<script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
