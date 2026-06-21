@@ -4,6 +4,12 @@
   <url><loc>https://toolcompass.org/ai-prompt-optimizer/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/caption-generator/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/freelancer-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/ust-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/zinsrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/trinkgeld-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/rabatt-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/netto-brutto-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/schrittrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/password-generator/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/text-analyzer/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/qr-generator/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
@@ -13,6 +19,8 @@
   <url><loc>https://toolcompass.org/bmi-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/promillerechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/schlafrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/kalorienrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/spritrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://toolcompass.org/blog/bmi-verstehen-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/ki-prompt-optimierer-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -27,6 +35,14 @@
   <url><loc>https://toolcompass.org/blog/promillerechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/schlafrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/bmi-rechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/ust-rechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/zinsrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/trinkgeld-rechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/rabatt-rechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/netto-brutto-rechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/spritrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/kalorienrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/schrittrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://toolcompass.org/impressum/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://toolcompass.org/datenschutz/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Schrittrechner – Schritte in km & Kalorien umrechnen | ToolCompass</title>
+    <meta name="description" content="Kostenloser Schrittrechner: Berechne aus deiner Schrittzahl die zurückgelegte Distanz in km und die verbrannten Kalorien. 100% client-seitig, privat.">
+    <link rel="canonical" href="https://toolcompass.org/schrittrechner/">
+    <link rel="preload" href="/styles.css" as="style">
+    <meta property="og:title" content="Schrittrechner – Schritte in km & Kalorien | ToolCompass">
+    <meta property="og:description" content="Berechne Distanz und Kalorienverbrauch aus deiner Schrittzahl. Kostenlos, schnell, datenschutzkonform.">
+    <meta property="og:url" content="https://toolcompass.org/schrittrechner/">
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Schrittrechner",
+      "url": "https://toolcompass.org/schrittrechner/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "Kostenloser Schrittrechner für Distanz und Kalorienverbrauch. Berechne km und kcal aus deiner Schrittzahl.",
+      "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"}
+    }</script>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .tool-interface{background:var(--card-bg);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);padding:2.5rem;border-radius:24px;border:1px solid var(--border);margin-bottom:3rem}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;font-weight:600;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text-main)}
+        .form-group input,.form-group select{width:100%;padding:1rem;background:rgba(3,7,18,0.6);border:1px solid var(--border);border-radius:12px;color:white;font-family:inherit;font-size:1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;box-sizing:border-box}
+        .form-group input:focus,.form-group select:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+        .form-group select option{background:var(--bg-dark);color:white}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
+        .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+        .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(99,102,241,0.4)}
+        .btn-secondary{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-muted);padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+        .btn-secondary:hover{border-color:var(--text-muted);color:white;background:rgba(255,255,255,0.06)}
+        .result-card{background:rgba(3,7,18,0.8);padding:2rem;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;display:none;animation:fadeIn 0.4s ease-out}
+        .result-card.visible{display:block}
+        .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+        @media(max-width:600px){.result-grid{grid-template-columns:1fr;gap:0.7rem}}
+        .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
+        .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
+        .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    </style>
+    <script src="/assets/js/consent.js"></script>
+</head>
+<body>
+    <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+    <div class="container">
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <header>
+            <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#footprints"></use></svg> Gesundheit & Fitness</div>
+            <h1>Schritt-<span>Rechner</span></h1>
+            <p class="subtitle">Berechne die zurückgelegte Strecke und den Kalorienverbrauch aus deiner Schrittzahl.</p>
+        </header>
+        <main>
+            <div class="tool-interface">
+                <form id="stepForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="steps">Schritte</label>
+                            <input type="number" id="steps" step="1" min="0" placeholder="z.B. 10000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Körpergewicht (kg)</label>
+                            <input type="number" id="weight" step="0.1" min="0" placeholder="z.B. 70" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="stride">Schrittlänge (cm)</label>
+                            <input type="number" id="stride" step="0.5" min="0" value="75" placeholder="z.B. 75">
+                        </div>
+                        <div class="form-group">
+                            <label for="pace">Tempo (km/h)</label>
+                            <select id="pace">
+                                <option value="3">Langsam (3 km/h)</option>
+                                <option value="5" selected>Normal (5 km/h)</option>
+                                <option value="6.5">Zügig (6,5 km/h)</option>
+                                <option value="8">Schnell (8 km/h)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-primary">Berechnen</button>
+                        <button type="button" class="btn-secondary" onclick="document.getElementById('stepForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                    </div>
+                </form>
+            </div>
+            <div class="result-card" id="resultCard">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="ri-value" id="distance">0,00 km</div>
+                        <div class="ri-label">Strecke</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="ri-value" id="calories">0 kcal</div>
+                        <div class="ri-label">Kalorienverbrauch</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool-interface">
+                <h2 style="color:white;margin-bottom:1rem">So funktioniert der Schrittrechner</h2>
+                <p style="color:var(--text-muted);margin-bottom:1rem">Der Rechner multipliziert die Schrittzahl mit deiner Schrittlänge, um die Strecke zu berechnen. Der Kalorienverbrauch wird anhand der MET-Formel (Metabolic Equivalent of Task) ermittelt, die Gewicht, Geschwindigkeit und Zeit berücksichtigt.</p>
+                <table class="ust-table" style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.9rem">
+                    <tr><th style="background:rgba(99,102,241,0.12);color:var(--text-main);padding:0.8rem;text-align:left;font-weight:600;border:1px solid var(--border)">Geschwindigkeit</th><th style="background:rgba(99,102,241,0.12);color:var(--text-main);padding:0.8rem;text-align:left;font-weight:600;border:1px solid var(--border)">MET-Wert</th></tr>
+                    <tr><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">Langsam (3 km/h)</td><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">3,0</td></tr>
+                    <tr><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">Normal (5 km/h)</td><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">3,5</td></tr>
+                    <tr><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">Zügig (6,5 km/h)</td><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">5,0</td></tr>
+                    <tr><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">Schnell (8 km/h)</td><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">7,0</td></tr>
+                </table>
+            </div>
+        </main>
+    </div>
+    <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+    <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script>
+        document.getElementById('stepForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var steps = parseFloat(document.getElementById('steps').value);
+            var weight = parseFloat(document.getElementById('weight').value);
+            var stride = parseFloat(document.getElementById('stride').value) / 100;
+            var pace = parseFloat(document.getElementById('pace').value);
+            if (isNaN(steps) || isNaN(weight) || steps <= 0 || weight <= 0) { alert('Bitte gib gültige Werte ein.'); return; }
+            var distanceKm = (steps * stride) / 1000;
+            var hours = distanceKm / pace;
+            var met = pace <= 4 ? 3.0 : pace <= 5.5 ? 3.5 : pace <= 6.5 ? 5.0 : 7.0;
+            var calories = Math.round(met * weight * hours);
+            document.getElementById('distance').textContent = distanceKm.toFixed(2).replace(/\./g, ',') + ' km';
+            document.getElementById('calories').textContent = calories + ' kcal';
+            document.getElementById('resultCard').classList.add('visible');
+        });
+    </script>
+</body>
+</html>

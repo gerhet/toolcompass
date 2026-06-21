@@ -27,12 +27,20 @@
         {"@type":"WebApplication","name":"KI-Prompt Optimierer","url":"https://toolcompass.org/ai-prompt-optimizer/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"Caption Generator","url":"https://toolcompass.org/caption-generator/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"Freelancer Rechner","url":"https://toolcompass.org/freelancer-rechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Umsatzsteuer-Rechner","url":"https://toolcompass.org/ust-rechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Zinsrechner","url":"https://toolcompass.org/zinsrechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Trinkgeld-Rechner","url":"https://toolcompass.org/trinkgeld-rechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Rabatt-Rechner","url":"https://toolcompass.org/rabatt-rechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Brutto-Netto-Rechner","url":"https://toolcompass.org/netto-brutto-rechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"Passwort Generator","url":"https://toolcompass.org/password-generator/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"Text Analyzer","url":"https://toolcompass.org/text-analyzer/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"QR Code Generator","url":"https://toolcompass.org/qr-generator/","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"BMI-Rechner","url":"https://toolcompass.org/bmi-rechner/","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
         {"@type":"WebApplication","name":"Promillerechner","url":"https://toolcompass.org/promillerechner/","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
-        {"@type":"WebApplication","name":"Schlafrechner","url":"https://toolcompass.org/schlafrechner/","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+        {"@type":"WebApplication","name":"Schlafrechner","url":"https://toolcompass.org/schlafrechner/","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Kalorienrechner","url":"https://toolcompass.org/kalorienrechner/","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Schrittrechner","url":"https://toolcompass.org/schrittrechner/","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+        {"@type":"WebApplication","name":"Spritrechner","url":"https://toolcompass.org/spritrechner/","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
       ]
     }
     </script>
@@ -321,7 +329,7 @@
         <!-- Live-Statistik -->
         <div class="stat-bar">
             <div class="stat-item">
-                <div class="stat-value"><span id="toolCount">12</span></div>
+                <div class="stat-value"><span id="toolCount">20</span></div>
                 <div class="stat-label">Tools Live</div>
             </div>
             <div class="stat-item">
@@ -370,6 +378,60 @@
                     <span class="card-badge finance">Finance</span>
                     <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
                 </a>
+                <a href="/ust-rechner/" class="tool-card" aria-label="Umsatzsteuer-Rechner">
+                    <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#percent"></use></svg></div>
+                    <div class="card-body">
+                        <div class="card-title">Umsatzsteuer-Rechner</div>
+                        <div class="card-desc">MwSt. berechnen mit 19%, 7% und 16% – Netto zu Brutto und zurück.</div>
+                    </div>
+                    <span class="card-badge finance">Finance</span>
+                    <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="/zinsrechner/" class="tool-card" aria-label="Zinsrechner">
+                    <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#trending-up"></use></svg></div>
+                    <div class="card-body">
+                        <div class="card-title">Zinsrechner</div>
+                        <div class="card-desc">Sparzinsen, Kreditzinsen & Zinseszins. Jährlich, monatlich, täglich.</div>
+                    </div>
+                    <span class="card-badge finance">Finance</span>
+                    <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="/trinkgeld-rechner/" class="tool-card" aria-label="Trinkgeld-Rechner">
+                    <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#hand-coins"></use></svg></div>
+                    <div class="card-body">
+                        <div class="card-title">Trinkgeld-Rechner</div>
+                        <div class="card-desc">Trinkgeld, Gesamtbetrag & Anteil pro Person für Restaurantbesuche.</div>
+                    </div>
+                    <span class="card-badge new">NEU</span>
+                    <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="/rabatt-rechner/" class="tool-card" aria-label="Rabatt-Rechner">
+                    <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#badge-percent"></use></svg></div>
+                    <div class="card-body">
+                        <div class="card-title">Rabatt-Rechner</div>
+                        <div class="card-desc">Ersparnis & Endpreis bei Rabatten berechnen. Ideal für Sales & Shopping.</div>
+                    </div>
+                    <span class="card-badge new">NEU</span>
+                    <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="/netto-brutto-rechner/" class="tool-card" aria-label="Brutto-Netto-Rechner">
+                    <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#percent"></use></svg></div>
+                    <div class="card-body">
+                        <div class="card-title">Brutto-Netto-Rechner</div>
+                        <div class="card-desc">Netto zu Brutto und Brutto zu Netto umrechnen mit 19% und 7%.</div>
+                    </div>
+                    <span class="card-badge new">NEU</span>
+                    <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+                <a href="/spritrechner/" class="tool-card" aria-label="Spritrechner">
+                    <div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#fuel"></use></svg></div>
+                    <div class="card-body">
+                        <div class="card-title">Spritrechner</div>
+                        <div class="card-desc">Benzinkosten & Verbrauch berechnen. Ideal für Reisen und Pendeln.</div>
+                    </div>
+                    <span class="card-badge new">NEU</span>
+                    <svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
             </div>
 
             <!-- Kategorie: Gesundheit & Lifestyle -->
@@ -378,6 +440,8 @@
                 <a href="/bmi-rechner/" class="tool-card"><div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#heart-pulse"></use></svg></div><div class="card-body"><div class="card-title">BMI-Rechner</div><div class="card-desc">Body Mass Index berechnen. Inkl. WHO-Tabelle, Idealgewicht & BMI-Prime.</div></div><span class="card-badge new">NEU</span><svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
                 <a href="/promillerechner/" class="tool-card"><div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#wine"></use></svg></div><div class="card-body"><div class="card-title">Promillerechner</div><div class="card-desc">Blutalkohol nach Widmark berechnen. Abbauzeit, Restalkohol & Fahrtüchtigkeit.</div></div><span class="card-badge new">NEU</span><svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
                 <a href="/schlafrechner/" class="tool-card"><div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#moon"></use></svg></div><div class="card-body"><div class="card-title">Schlafrechner</div><div class="card-desc">Optimale Schlafenszeit & Weckzeit basierend auf 90-Minuten-Schlafzyklen.</div></div><span class="card-badge new">NEU</span><svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+                <a href="/kalorienrechner/" class="tool-card"><div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#flame"></use></svg></div><div class="card-body"><div class="card-title">Kalorienrechner</div><div class="card-desc">Täglichen Kalorienbedarf mit Harris-Benedict-Formel berechnen.</div></div><span class="card-badge new">NEU</span><svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+                <a href="/schrittrechner/" class="tool-card"><div class="card-icon"><svg aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#footprints"></use></svg></div><div class="card-body"><div class="card-title">Schrittrechner</div><div class="card-desc">Schritte in km & Kalorien umrechnen. Mit MET-Formel & Schrittlänge.</div></div><span class="card-badge new">NEU</span><svg class="card-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
             </div>
 
             <!-- Kategorie: Alle Tools -->
