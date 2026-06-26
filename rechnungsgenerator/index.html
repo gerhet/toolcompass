@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Rechnungsgenerator für Handwerker – Kostenlos PDF</title>
+    <meta name="description" content="Erstelle professionelle Rechnungen für Handwerker und Freelancer. Inkl. MwSt., Rabatt, Zahlungsziel & PDF-Druck. Kostenlos, 100% Client-Side.">
+    <link rel="canonical" href="https://toolcompass.org/rechnungsgenerator/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-group textarea { min-height: 60px; resize: vertical; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+        .invoice-preview { background: white; color: #111; border-radius: 12px; padding: 2.5rem; margin-top: 1.5rem; font-family: 'Courier New', monospace; font-size: 0.85rem; }
+        .invoice-preview h2 { color: #111; font-size: 1.5rem; margin-bottom: 1rem; }
+        .invoice-preview table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .invoice-preview th { background: #f3f4f6; padding: 0.6rem; text-align: left; font-size: 0.8rem; }
+        .invoice-preview td { padding: 0.6rem; border-bottom: 1px solid #e5e7eb; font-size: 0.85rem; }
+        .invoice-preview .total td { font-weight: 700; border-top: 2px solid #111; }
+        .invoice-preview .address { margin-bottom: 1.5rem; line-height: 1.6; }
+        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+        @media (max-width: 600px) { .input-row, .input-row-3 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/buero-verwaltung/" style="margin-left:1rem;">→ Büro & Verwaltung</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Rechnungs-<span>Generator</span></h1>
+        <p class="subtitle">Erstelle professionelle Rechnungen für deine Handwerkerleistungen – inkl. MwSt., Rabatt und Zahlungsziel.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="section-label">👤 Deine Daten</div>
+        <div class="input-row">
+            <div class="input-group"><label for="absender_name">Dein Name / Firma</label><input type="text" id="absender_name" value="Max Mustermann"></div>
+            <div class="input-group"><label for="absender_strasse">Straße</label><input type="text" id="absender_strasse" value="Musterstraße 1"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-group"><label for="absender_plz">PLZ / Ort</label><input type="text" id="absender_plz" value="12345 Musterstadt"></div>
+            <div class="input-group"><label for="absender_email">E-Mail</label><input type="email" id="absender_email" value="max@example.com"></div>
+        </div>
+
+        <div class="section-label" style="margin-top:2rem;">👤 Kunde</div>
+        <div class="input-row">
+            <div class="input-group"><label for="kunde_name">Name / Firma</label><input type="text" id="kunde_name" value="Hans Meier GmbH"></div>
+            <div class="input-group"><label for="kunde_strasse">Straße</label><input type="text" id="kunde_strasse" value="Bahnhofstr. 10"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-group"><label for="kunde_plz">PLZ / Ort</label><input type="text" id="kunde_plz" value="54321 Kundendorf"></div>
+            <div class="input-group"><label for="kunde_email">E-Mail (optional)</label><input type="email" id="kunde_email" value=""></div>
+        </div>
+
+        <div class="section-label" style="margin-top:2rem;">📄 Rechnungsdetails</div>
+        <div class="input-row">
+            <div class="input-group"><label for="rechnungs_nr">Rechnungsnummer</label><input type="text" id="rechnungs_nr" value="RE-2026-001"></div>
+            <div class="input-group"><label for="rechnungs_datum">Rechnungsdatum</label><input type="date" id="rechnungs_datum"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-group"><label for="zahlungsziel">Zahlungsziel (Tage)</label><input type="number" id="zahlungsziel" value="14" min="0" max="90"></div>
+            <div class="input-group"><label for="mwst_satz">MwSt.-Satz</label><select id="mwst_satz"><option value="19" selected>19%</option><option value="7">7%</option><option value="0">0% (Kleinunternehmer)</option></select></div>
+        </div>
+
+        <div class="section-label" style="margin-top:2rem;">📋 Positionen</div>
+        <div id="positionenContainer">
+            <div class="input-row position-row">
+                <div class="input-group"><label>Bezeichnung</label><input type="text" class="pos-bezeichnung" value="Montagearbeiten Badezimmer"></div>
+                <div class="input-group"><label>Menge</label><input type="number" class="pos-menge" value="1" min="0" step="0.5"></div>
+                <div class="input-group"><label>Einzelpreis (€)</label><input type="number" class="pos-preis" value="850" min="0" step="0.5"></div>
+            </div>
+            <div class="input-row position-row">
+                <div class="input-group"><label>Bezeichnung</label><input type="text" class="pos-bezeichnung" value="Material Fliesen"></div>
+                <div class="input-group"><label>Menge</label><input type="number" class="pos-menge" value="25" min="0" step="0.5"></div>
+                <div class="input-group"><label>Einzelpreis (€)</label><input type="number" class="pos-preis" value="35" min="0" step="0.5"></div>
+            </div>
+        </div>
+        <button class="btn-secondary" onclick="positionHinzufuegen()" style="margin-bottom:1rem;">+ Position hinzufügen</button>
+
+        <div class="input-row">
+            <div class="input-group"><label for="rabatt">Rabatt (%)</label><input type="number" id="rabatt" value="0" min="0" max="100" step="1"></div>
+            <div class="input-group"><label for="anzahlung">Anzahlung (€)</label><input type="number" id="anzahlung" value="0" min="0" max="100000" step="10"></div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="rechnungErstellen()">Rechnung erstellen</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="section-label">📄 Rechnungsvorschau</div>
+            <div class="invoice-preview" id="invoicePreview"></div>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="drucken()">🖨️ Drucken / PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zum Rechnungsgenerator</h2>
+        <details><summary>Muss ich als Handwerker MwSt. ausweisen?</summary><div class="faq-answer"><p>Ja, als regulärer Handwerker musst du die Umsatzsteuer ausweisen. Als Kleinunternehmer (§19 UStG) kannst du auf die MwSt. verzichten. Wähle einfach den passenden Satz im Rechner.</p></div></details>
+        <details><summary>Was ist eine gültige Rechnungsnummer?</summary><div class="faq-answer"><p>Rechnungsnummern müssen einmalig und fortlaufend sein. Üblich sind Formate wie RE-2026-001 oder 2026-001. Das Finanzamt akzeptiert jedes System, solange es nachvollziehbar ist.</p></div></details>
+        <details><summary>Wie lange ist das Zahlungsziel?</summary><div class="faq-answer"><p>Üblich sind 14 Tage. Bei Geschäftskunden sind auch 30 Tage möglich. Ab dem 15. Tag nach Rechnungsdatum kannst du Verzugszinsen verlangen (9% über Basiszinssatz).</p></div></details>
+    </section>
+
+    <footer>
+        <div class="footer-links"><a href="/about.html">Über uns</a><a href="/impressum/index.html">Impressum</a><a href="/datenschutz/">Datenschutz</a></div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('rechnungs_datum').valueAsDate = new Date();
+
+function positionHinzufuegen() {
+    const container = document.getElementById('positionenContainer');
+    const div = document.createElement('div');
+    div.className = 'input-row position-row';
+    div.style.marginBottom = '0.5rem';
+    div.innerHTML = '<div class="input-group"><label>Bezeichnung</label><input type="text" class="pos-bezeichnung"></div><div class="input-group"><label>Menge</label><input type="number" class="pos-menge" value="1" min="0" step="0.5"></div><div class="input-group"><label>Einzelpreis (€)</label><input type="number" class="pos-preis" value="0" min="0" step="0.5"></div>';
+    container.appendChild(div);
+}
+
+function rechnungErstellen() {
+    const ab_name = document.getElementById('absender_name').value;
+    const ab_str = document.getElementById('absender_strasse').value;
+    const ab_plz = document.getElementById('absender_plz').value;
+    const ab_email = document.getElementById('absender_email').value;
+    const k_name = document.getElementById('kunde_name').value;
+    const k_str = document.getElementById('kunde_strasse').value;
+    const k_plz = document.getElementById('kunde_plz').value;
+    const r_nr = document.getElementById('rechnungs_nr').value;
+    const r_datum = document.getElementById('rechnungs_datum').value;
+    const ziel = document.getElementById('zahlungsziel').value;
+    const mwstSatz = parseFloat(document.getElementById('mwst_satz').value) / 100;
+    const rabattProzent = parseFloat(document.getElementById('rabatt').value) || 0;
+    const anzahlung = parseFloat(document.getElementById('anzahlung').value) || 0;
+
+    const rows = document.querySelectorAll('.position-row');
+    let positionen = [];
+    let nettoGesamt = 0;
+
+    rows.forEach(row => {
+        const bez = row.querySelector('.pos-bezeichnung').value;
+        const menge = parseFloat(row.querySelector('.pos-menge').value) || 0;
+        const preis = parseFloat(row.querySelector('.pos-preis').value) || 0;
+        if (bez && menge > 0) {
+            const gesamt = menge * preis;
+            positionen.push({ bez, menge, preis, gesamt });
+            nettoGesamt += gesamt;
+        }
+    });
+
+    const rabattBetrag = nettoGesamt * (rabattProzent / 100);
+    const nettoNachRabatt = nettoGesamt - rabattBetrag;
+    const mwstBetrag = nettoNachRabatt * mwstSatz;
+    const endbetrag = nettoNachRabatt + mwstBetrag - anzahlung;
+    const fälligDatum = new Date(r_datum);
+    fälligDatum.setDate(fälligDatum.getDate() + parseInt(ziel));
+    const mwstLabel = document.getElementById('mwst_satz').value + '%';
+
+    let html = '<div style="display:flex;justify-content:space-between;margin-bottom:2rem;">';
+    html += '<div class="address"><strong>' + ab_name + '</strong><br>' + ab_str + '<br>' + ab_plz + '<br>E-Mail: ' + ab_email + '</div>';
+    html += '<div style="text-align:right;"><h2>RECHNUNG</h2><p><strong>Nr.:</strong> ' + r_nr + '<br><strong>Datum:</strong> ' + r_datum + '<br><strong>Fällig:</strong> ' + fälligDatum.toLocaleDateString('de-DE') + '</p></div></div>';
+    html += '<div class="address"><strong>Rechnung an:</strong><br>' + k_name + '<br>' + k_str + '<br>' + k_plz + '</div>';
+    html += '<table><thead><tr><th>Position</th><th>Menge</th><th>Einzelpreis</th><th>Gesamt</th></tr></thead><tbody>';
+    positionen.forEach(p => {
+        html += '<tr><td>' + p.bez + '</td><td>' + p.menge + '</td><td>' + p.preis.toFixed(2).replace('.',',') + ' €</td><td>' + p.gesamt.toFixed(2).replace('.',',') + ' €</td></tr>';
+    });
+    html += '</tbody></table>';
+    html += '<table><tbody>';
+    html += '<tr><td><strong>Nettobetrag</strong></td><td style="text-align:right;">' + nettoGesamt.toFixed(2).replace('.',',') + ' €</td></tr>';
+    if (rabattProzent > 0) html += '<tr><td>Rabatt (' + rabattProzent + '%)</td><td style="text-align:right;">-' + rabattBetrag.toFixed(2).replace('.',',') + ' €</td></tr>';
+    html += '<tr><td>MwSt. (' + mwstLabel + ')</td><td style="text-align:right;">' + mwstBetrag.toFixed(2).replace('.',',') + ' €</td></tr>';
+    html += '<tr><td><strong>Bruttobetrag</strong></td><td style="text-align:right;">' + (nettoNachRabatt + mwstBetrag).toFixed(2).replace('.',',') + ' €</td></tr>';
+    if (anzahlung > 0) html += '<tr><td>Bereits gezahlt (Anzahlung)</td><td style="text-align:right;">-' + anzahlung.toFixed(2).replace('.',',') + ' €</td></tr>';
+    html += '<tr class="total"><td><strong>Offener Betrag</strong></td><td style="text-align:right;"><strong>' + endbetrag.toFixed(2).replace('.',',') + ' €</strong></td></tr>';
+    html += '</tbody></table>';
+    html += '<p style="margin-top:1rem;font-size:0.8rem;">Zahlungsziel: ' + ziel + ' Tage (fällig am ' + fälligDatum.toLocaleDateString('de-DE') + ')<br>Bitte überweise den Betrag auf folgendes Konto: [IBAN hier eintragen]</p>';
+
+    document.getElementById('invoicePreview').innerHTML = html;
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function drucken() { window.print(); }
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('absender_name').value = 'Max Mustermann';
+    document.getElementById('absender_strasse').value = 'Musterstraße 1';
+    document.getElementById('absender_plz').value = '12345 Musterstadt';
+    document.getElementById('absender_email').value = 'max@example.com';
+    document.getElementById('kunde_name').value = 'Hans Meier GmbH';
+    document.getElementById('kunde_strasse').value = 'Bahnhofstr. 10';
+    document.getElementById('kunde_plz').value = '54321 Kundendorf';
+    document.getElementById('kunde_email').value = '';
+    document.getElementById('rechnungs_nr').value = 'RE-2026-001';
+    document.getElementById('rechnungs_datum').valueAsDate = new Date();
+    document.getElementById('zahlungsziel').value = 14;
+    document.getElementById('mwst_satz').value = '19';
+    document.getElementById('rabatt').value = 0;
+    document.getElementById('anzahlung').value = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

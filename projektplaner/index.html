@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Projektplaner für Handwerker – Baustellen-Management</title>
+    <meta name="description" content="Plane deine Baustellenprojekte: Aufgaben, Meilensteine, Budget & Zeitplan. Inkl. Ampelsystem & PDF-Export. Kostenlos, 100% Client-Side.">
+    <link rel="canonical" href="https://toolcompass.org/projektplaner/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .task-item { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 1rem; }
+        .task-item .status { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .task-item .status.gruen { background: #10b981; }
+        .task-item .status.gelb { background: #f59e0b; }
+        .task-item .status.rot { background: #ef4444; }
+        .task-item .task-info { flex: 1; }
+        .task-item .task-info strong { color: white; font-size: 0.95rem; }
+        .task-item .task-info span { color: var(--text-muted); font-size: 0.8rem; }
+        .budget-bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 99px; margin: 1rem 0; overflow: hidden; }
+        .budget-bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+        @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/baustelle-projekt/" style="margin-left:1rem;">→ Baustelle & Projekt</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Projekt-<span>Planer</span></h1>
+        <p class="subtitle">Verwalte deine Baustellenprojekte mit Aufgaben, Meilensteinen und Budgetkontrolle.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="input-row">
+            <div class="input-group"><label for="projektname">Projektname</label><input type="text" id="projektname" value="Badezimmer-Sanierung Meier"></div>
+            <div class="input-group"><label for="kunde">Kunde</label><input type="text" id="kunde" value="Hans Meier"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-group"><label for="start">Startdatum</label><input type="date" id="start"></div>
+            <div class="input-group"><label for="ende">Geplantes Ende</label><input type="date" id="ende"></div>
+        </div>
+        <div class="input-row">
+            <div class="input-group"><label for="budget">Budget (€)</label><input type="number" id="budget" value="8500" min="0" step="100"></div>
+            <div class="input-group"><label for="ausgaben">Bisherige Ausgaben (€)</label><input type="number" id="ausgaben" value="3200" min="0" step="100"></div>
+        </div>
+
+        <div class="section-label" style="margin-top:1.5rem;">📋 Aufgaben & Meilensteine</div>
+        <div id="aufgabenContainer">
+            <div class="task-item"><div class="status gruen"></div><div class="task-info"><strong>Rohbau vorbereiten</strong><br><span>Abgeschlossen - 2 Tage</span></div></div>
+            <div class="task-item"><div class="status gruen"></div><div class="task-info"><strong>Leitungen verlegen</strong><br><span>Abgeschlossen - 3 Tage</span></div></div>
+            <div class="task-item"><div class="status gelb"></div><div class="task-info"><strong>Fliesen verlegen</strong><br><span>In Arbeit - 4 Tage</span></div></div>
+            <div class="task-item"><div class="status rot"></div><div class="task-info"><strong>Sanitär montieren</strong><br><span>Nicht gestartet - 2 Tage</span></div></div>
+            <div class="task-item"><div class="status rot"></div><div class="task-info"><strong>Abdichtung & Abschluss</strong><br><span>Nicht gestartet - 2 Tage</span></div></div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="projektAnalysieren()">Projekt analysieren</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="section-label">📊 Projektstatus</div>
+            <div id="projektStatus"></div>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zum Projektplaner</h2>
+        <details><summary>Wie viele Tage sollte ich pro Aufgabe einplanen?</summary><div class="faq-answer"><p>Kalkuliere realistisch und addiere 20% Puffer für Verzögerungen (Wetter, Lieferengpässe, Krankheit). Unser Ampelsystem hilft dir, den Überblick zu behalten.</p></div></details>
+        <details><summary>Was bedeutet das Ampelsystem?</summary><div class="faq-answer"><p>Grün = erledigt, Gelb = in Arbeit, Rot = ausstehend. So siehst du auf einen Blick, wo dein Projekt steht und wo Handlungsbedarf besteht.</p></div></details>
+    </section>
+
+    <footer>
+        <div class="footer-links"><a href="/about.html">Über uns</a><a href="/impressum/index.html">Impressum</a><a href="/datenschutz/">Datenschutz</a></div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+const heute = new Date();
+document.getElementById('start').valueAsDate = heute;
+const ende = new Date(heute); ende.setDate(ende.getDate() + 14);
+document.getElementById('ende').valueAsDate = ende;
+
+function projektAnalysieren() {
+    const name = document.getElementById('projektname').value;
+    const budget = parseFloat(document.getElementById('budget').value) || 0;
+    const ausgaben = parseFloat(document.getElementById('ausgaben').value) || 0;
+    const start = document.getElementById('start').value;
+    const ende = document.getElementById('ende').value;
+    const tasks = document.querySelectorAll('.task-item');
+    let done = 0, inProgress = 0, open = 0;
+    tasks.forEach(t => {
+        const status = t.querySelector('.status');
+        if (status.classList.contains('gruen')) done++;
+        else if (status.classList.contains('gelb')) inProgress++;
+        else open++;
+    });
+
+    const budgetProzent = budget > 0 ? (ausgaben / budget * 100) : 0;
+    const restBudget = budget - ausgaben;
+    const dauerTage = Math.ceil((new Date(ende) - new Date(start)) / (1000 * 60 * 60 * 24));
+    const gesamt = tasks.length;
+    const fertigProzent = gesamt > 0 ? (done / gesamt * 100) : 0;
+
+    let barColor = '#10b981';
+    if (budgetProzent > 80) barColor = '#ef4444';
+    else if (budgetProzent > 60) barColor = '#f59e0b';
+
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('projektStatus').innerHTML = `
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
+            <div><strong style="font-size:1.3rem;color:white;">${name}</strong><br><span style="color:var(--text-muted);">${start} bis ${ende} (${dauerTage} Tage)</span></div>
+            <div style="text-align:right;"><span style="font-size:1.5rem;font-weight:800;color:${budgetProzent > 100 ? '#ef4444' : 'white'};">${ausgaben.toFixed(0).replace('.',',')} €</span><br><span style="color:var(--text-muted);">von ${budget.toFixed(0).replace('.',',')} € Budget</span></div>
+        </div>
+        <div class="budget-bar"><div class="budget-bar-fill" style="width:${Math.min(budgetProzent, 100)}%;background:${barColor};"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;margin:1rem 0;">
+            <div style="text-align:center;padding:0.8rem;background:rgba(16,185,129,0.08);border-radius:10px;border:1px solid rgba(16,185,129,0.15);"><span style="font-size:1.5rem;font-weight:800;color:#34d399;">${done}</span><br><span style="color:var(--text-muted);font-size:0.8rem;">Erledigt</span></div>
+            <div style="text-align:center;padding:0.8rem;background:rgba(245,158,11,0.08);border-radius:10px;border:1px solid rgba(245,158,11,0.15);"><span style="font-size:1.5rem;font-weight:800;color:#fbbf24;">${inProgress}</span><br><span style="color:var(--text-muted);font-size:0.8rem;">In Arbeit</span></div>
+            <div style="text-align:center;padding:0.8rem;background:rgba(239,68,68,0.08);border-radius:10px;border:1px solid rgba(239,68,68,0.15);"><span style="font-size:1.5rem;font-weight:800;color:#f87171;">${open}</span><br><span style="color:var(--text-muted);font-size:0.8rem;">Offen</span></div>
+        </div>
+        <div style="padding:1rem;background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.15);border-radius:12px;">
+            <p style="color:white;font-weight:600;">💡 Zusammenfassung</p>
+            <p style="color:var(--text-muted);font-size:0.85rem;">
+                <strong>${fertigProzent.toFixed(0)}%</strong> der Aufgaben erledigt. 
+                ${budgetProzent > 100 ? '⚠️ Budget überschritten um ' + (ausgaben - budget).toFixed(0).replace('.',',') + ' €' : '💰 Noch ' + restBudget.toFixed(0).replace('.',',') + ' € Budget übrig.'}
+                ${ende ? '⏱️ Noch ' + dauerTage + ' Tage bis zum geplanten Ende.' : ''}
+            </p>
+        </div>
+    `;
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('projektname').value = 'Badezimmer-Sanierung Meier';
+    document.getElementById('kunde').value = 'Hans Meier';
+    document.getElementById('start').valueAsDate = new Date();
+    const ende = new Date(); ende.setDate(ende.getDate() + 14);
+    document.getElementById('ende').valueAsDate = ende;
+    document.getElementById('budget').value = 8500;
+    document.getElementById('ausgaben').value = 3200;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

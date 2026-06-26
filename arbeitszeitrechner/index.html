@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Arbeitszeitrechner für Handwerker – Stundenzettel</title>
+    <meta name="description" content="Erfasse Arbeitszeiten auf der Baustelle. Inkl. Pause, Überstunden, Nachtzuschlag & Wochenabrechnung. Kostenlos, 100% Client-Side.">
+    <link rel="canonical" href="https://toolcompass.org/arbeitszeitrechner/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+        .breakdown-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+        .breakdown-item .label { font-size: 0.8rem; color: var(--text-muted); }
+        .breakdown-item .value { font-size: 1.1rem; font-weight: 700; color: white; }
+        .breakdown-item .value.highlight { color: var(--accent-secondary); }
+        .day-entry { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; }
+        .day-entry h4 { color: white; margin-bottom: 0.8rem; font-size: 0.95rem; }
+        .day-entry .input-row { margin-bottom: 0; }
+        .day-entry .input-group { margin-bottom: 0.6rem; }
+        @media (max-width: 600px) { .input-row, .breakdown-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/baustelle-projekt/" style="margin-left:1rem;">→ Baustelle & Projekt</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Arbeitszeit-<span>Rechner</span></h1>
+        <p class="subtitle">Erfasse und berechne deine Arbeitszeiten – inkl. Pause, Überstunden, Zuschläge und Wochenabrechnung.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="input-row">
+            <div class="input-group"><label for="stundensatz">Stundensatz (€/h)</label><input type="number" id="stundensatz" value="45" min="0" max="200" step="5"></div>
+            <div class="input-group"><label for="woche">Kalenderwoche</label><input type="number" id="woche" value="26" min="1" max="53"></div>
+        </div>
+        <div class="input-group"><label for="zuschlag_nacht">Nachtzuschlag (%) ab 20 Uhr</label><input type="number" id="zuschlag_nacht" value="25" min="0" max="100" step="5"></div>
+
+        <div class="section-label" style="margin-top:2rem;">📅 Tägliche Arbeitszeiten</div>
+        <div id="tageContainer"></div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="berechnen()">Arbeitszeit abrechnen</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-label">Wochenabrechnung</div>
+            <div class="breakdown-grid">
+                <div class="breakdown-item"><div class="label">Gesamtarbeitszeit</div><div class="value highlight" id="gesamtZeit">0,00 h</div></div>
+                <div class="breakdown-item"><div class="label">Überstunden</div><div class="value" id="ueberstunden">0,00 h</div></div>
+                <div class="breakdown-item"><div class="label">Nettogehalt (ohne Zuschläge)</div><div class="value" id="nettoGehalt">0,00 €</div></div>
+                <div class="breakdown-item"><div class="label">Zuschläge gesamt</div><div class="value highlight" id="zuschlaege">0,00 €</div></div>
+                <div class="breakdown-item" style="grid-column:1/-1;"><div class="label">Gesamtverdienst (inkl. Zuschläge)</div><div class="value highlight" style="font-size:1.4rem;" id="gesamtVerdienst">0,00 €</div></div>
+            </div>
+            <table class="material-table" id="detailTable" style="margin-top:1.5rem;">
+                <thead><tr><th>Tag</th><th>Zeit</th><th>Pause</th><th>Netto-Zeit</th><th>Verdienst</th><th>Zuschlag</th></tr></thead>
+                <tbody id="detailTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zur Arbeitszeit</h2>
+        <details><summary>Wie viele Überstunden sind erlaubt?</summary><div class="faq-answer"><p>Maximal 10 Stunden pro Tag, 48 Stunden pro Woche (inkl. Überstunden). In Ausnahmefällen bis zu 60 Stunden, wenn der Ausgleich innerhalb von 6 Monaten erfolgt.</p></div></details>
+        <details><summary>Wann gibt es Nachtzuschlag?</summary><div class="faq-answer"><p>Nachtarbeit zwischen 20 Uhr und 6 Uhr. Der Zuschlag beträgt üblich 25–30% auf den Stundenlohn. In Tarifverträgen können höhere Sätze vereinbart sein.</p></div></details>
+        <details><summary>Muss ich Pause aufschreiben?</summary><div class="faq-answer"><p>Ja! Bei mehr als 6 Stunden Arbeit sind 30 Minuten Pause Pflicht, bei mehr als 9 Stunden 45 Minuten. Die Pause gilt nicht als Arbeitszeit.</p></div></details>
+    </section>
+
+    <footer>
+        <div class="footer-links"><a href="/about.html">Über uns</a><a href="/impressum/index.html">Impressum</a><a href="/datenschutz/">Datenschutz</a></div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+const tage = ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
+
+function createDayEntries() {
+    const container = document.getElementById('tageContainer');
+    container.innerHTML = '';
+    tage.forEach((tag, i) => {
+        const div = document.createElement('div');
+        div.className = 'day-entry';
+        div.innerHTML = '<h4>' + tag + '</h4><div class="input-row"><div class="input-group"><label>Start</label><input type="time" class="startzeit" value="' + (i < 5 ? '07:00' : '') + '"></div><div class="input-group"><label>Ende</label><input type="time" class="endzeit" value="' + (i < 5 ? '16:00' : '') + '"></div><div class="input-group"><label>Pause (Min.)</label><input type="number" class="pause" value="' + (i < 5 ? '30' : '0') + '" min="0" max="120"></div></div>';
+        container.appendChild(div);
+    });
+}
+createDayEntries();
+
+function zeitToStunden(zeitStr) {
+    if (!zeitStr) return 0;
+    const [h, m] = zeitStr.split(':').map(Number);
+    return h + m / 60;
+}
+
+function berechnen() {
+    const stundensatz = parseFloat(document.getElementById('stundensatz').value) || 0;
+    const nachtZuschlagProzent = parseFloat(document.getElementById('zuschlag_nacht').value) || 0;
+    const entries = document.querySelectorAll('.day-entry');
+
+    let gesamtMinuten = 0;
+    let gesamtUeberstundenMin = 0;
+    let gesamtVerdienst = 0;
+    let gesamtZuschlaege = 0;
+    let detailsHTML = '';
+
+    entries.forEach((entry, idx) => {
+        const start = entry.querySelector('.startzeit').value;
+        const end = entry.querySelector('.endzeit').value;
+        const pauseMin = parseInt(entry.querySelector('.pause').value) || 0;
+
+        if (!start || !end) {
+            detailsHTML += '<tr><td>' + tage[idx] + '</td><td>–</td><td>–</td><td>0,00 h</td><td>0,00 €</td><td>0,00 €</td></tr>';
+            return;
+        }
+
+        const startH = zeitToStunden(start);
+        const endH = zeitToStunden(end);
+        let bruttoMin = (endH - startH) * 60;
+        if (bruttoMin < 0) bruttoMin += 24 * 60;
+        const nettoMin = Math.max(0, bruttoMin - pauseMin);
+        const nettoH = nettoMin / 60;
+
+        // Überstunden ( > 8h pro Tag)
+        const ueberMin = Math.max(0, nettoMin - 480);
+        const normalMin = nettoMin - ueberMin;
+
+        // Nachtzuschlag (20-6 Uhr)
+        let nachtMin = 0;
+        let current = Math.max(startH, 20);
+        let endCalc = endH < startH ? endH + 24 : endH;
+        if (endCalc > 20) {
+            nachtMin = Math.min(Math.max(endCalc - current, 0), endCalc - current) * 60;
+            if (endCalc > 24 && endH < 6) nachtMin = (24 - Math.max(startH, 20)) * 60 + endH * 60;
+            nachtMin = Math.min(nachtMin, nettoMin);
+        }
+        if (endH < 6 && endH > 0) nachtMin = Math.min(endH * 60, nettoMin);
+        if (nachtMin < 0) nachtMin = 0;
+
+        const normalVerdienst = (normalMin / 60) * stundensatz;
+        const ueberVerdienst = (ueberMin / 60) * stundensatz * 1.25;
+        const nachtVerdienst = (nachtMin / 60) * stundensatz * (nachtZuschlagProzent / 100);
+        const zuschlag = ueberVerdienst + nachtVerdienst - (ueberMin / 60) * stundensatz;
+        const tagVerdienst = normalVerdienst + ueberVerdienst + nachtVerdienst;
+
+        gesamtMinuten += nettoMin;
+        gesamtUeberstundenMin += ueberMin;
+        gesamtVerdienst += tagVerdienst;
+        gesamtZuschlaege += zuschlag;
+
+        const startStr = start;
+        const endStr = end;
+        detailsHTML += '<tr><td><strong>' + tage[idx] + '</strong></td><td>' + startStr + '–' + endStr + '</td><td>' + pauseMin + ' Min</td><td>' + nettoH.toFixed(2).replace('.',',') + ' h</td><td>' + normalVerdienst.toFixed(2).replace('.',',') + ' €</td><td>' + zuschlag.toFixed(2).replace('.',',') + ' €</td></tr>';
+    });
+
+    const gesamtH = gesamtMinuten / 60;
+    const ueberH = gesamtUeberstundenMin / 60;
+
+    document.getElementById('resultCard').classList.add('visible');
+    document.getElementById('gesamtZeit').textContent = gesamtH.toFixed(2).replace('.',',') + ' h';
+    document.getElementById('ueberstunden').textContent = ueberH.toFixed(2).replace('.',',') + ' h';
+    document.getElementById('nettoGehalt').textContent = (gesamtVerdienst - gesamtZuschlaege).toFixed(2).replace('.',',') + ' €';
+    document.getElementById('zuschlaege').textContent = gesamtZuschlaege.toFixed(2).replace('.',',') + ' €';
+    document.getElementById('gesamtVerdienst').textContent = gesamtVerdienst.toFixed(2).replace('.',',') + ' €';
+    document.getElementById('detailTableBody').innerHTML = detailsHTML;
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('stundensatz').value = 45;
+    document.getElementById('woche').value = 26;
+    document.getElementById('zuschlag_nacht').value = 25;
+    createDayEntries();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
