@@ -332,6 +332,12 @@
                 });
             }
 
+            function showRateError(message) {
+                document.getElementById('rateResults').innerHTML = ''
+                    + '<div class="result-card"><div class="result-label">Fehler</div><div class="result-value" style="color:#f87171;">' + message + '</div></div>';
+                document.getElementById('rateOutput').classList.add('visible');
+            }
+
             document.getElementById('rateForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 var income = parseFloat(document.getElementById('targetIncome').value) || 50000;
@@ -340,8 +346,29 @@
                 var utilization = parseFloat(document.getElementById('utilizationRate').value) / 100 || 0.65;
                 var taxQ = parseFloat(document.getElementById('taxRateRate').value) || 42;
                 var cur = document.getElementById('currencyRate').value;
+                if (days <= 0 || hours <= 0) {
+                    showRateError('Arbeitstage und Stunden pro Tag müssen größer als 0 sein.');
+                    return;
+                }
+                if (utilization <= 0) {
+                    showRateError('Die Auslastung muss größer als 0% sein.');
+                    return;
+                }
+                if (taxQ >= 100) {
+                    showRateError('Die Steuerquote muss unter 100% liegen.');
+                    return;
+                }
                 var billable = days * hours * utilization;
+                if (billable <= 0) {
+                    showRateError('Bitte überprüfe deine Eingaben für Arbeitstage, Stunden und Auslastung.');
+                    return;
+                }
+                var billablePerMonth = billable / 12;
                 var grossNeed = income / (1 - taxQ / 100);
+                if (!isFinite(grossNeed) || grossNeed <= 0) {
+                    showRateError('Die Steuerquote führt zu einem ungültigen Brutto-Bedarf.');
+                    return;
+                }
                 var rate = grossNeed / billable;
                 var curSymbol = '€', curFactor = 1;
                 if (cur === 'usd') { curSymbol = '$'; curFactor = 1.08; }
@@ -350,10 +377,28 @@
                 document.getElementById('rateResults').innerHTML = ''
                     + '<div class="result-card"><div class="result-label">Notwendiger Stundensatz (netto)</div><div class="result-value primary">' + (rate * curFactor).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ' + curSymbol + '</div><div class="result-detail">' + fmt(rate) + ' pro Stunde netto</div></div>'
                     + '<div class="result-card"><div class="result-label">Abrechenbare Stunden pro Jahr</div><div class="result-value">' + Math.round(billable) + ' h</div><div class="result-detail">' + days + ' Tage × ' + hours + ' h × ' + (utilization * 100).toFixed(0) + '% Auslastung</div></div>'
+                    + '<div class="result-card"><div class="result-label">Abrechenbare Stunden pro Monat</div><div class="result-value">' + Math.round(billablePerMonth) + ' h</div><div class="result-detail">Durchschnittlich pro Monat</div></div>'
                     + '<div class="result-card"><div class="result-label">Brutto-Jahresbedarf (vor Steuern)</div><div class="result-value orange">' + fmt(grossNeed) + '</div><div class="result-detail">' + fmt(income) + ' netto + ' + taxQ + '% Steuerquote</div></div>'
                     + '<div class="result-card"><div class="result-label">Monatlicher Netto-Bedarf</div><div class="result-value green">' + fmt(income / 12) + '</div><div class="result-detail">Pro Monat nach Steuern</div></div>';
                 document.getElementById('rateOutput').classList.add('visible');
             });
+
+            document.getElementById('rateForm').addEventListener('reset', function() {
+                utilizationValue.textContent = utilizationSlider.value + '%';
+                document.getElementById('rateOutput').classList.remove('visible');
+            });
+
+            function showProjectError(message) {
+                document.getElementById('projectResults').innerHTML = ''
+                    + '<div class="result-card"><div class="result-label">Fehler</div><div class="result-value" style="color:#f87171;">' + message + '</div></div>';
+                document.getElementById('projectOutput').classList.add('visible');
+            }
+
+            function showTaxError(message) {
+                document.getElementById('taxResults').innerHTML = ''
+                    + '<div class="result-card"><div class="result-label">Fehler</div><div class="result-value" style="color:#f87171;">' + message + '</div></div>';
+                document.getElementById('taxOutput').classList.add('visible');
+            }
 
             window.resetTab = function(tab) { document.getElementById(tab + 'Output').classList.remove('visible'); };
 
@@ -363,6 +408,22 @@
                 var hours = parseFloat(document.getElementById('projectHours').value) || 40;
                 var vat = parseFloat(document.getElementById('vatRate').value) || 19;
                 var extras = parseFloat(document.getElementById('extras').value) || 0;
+                if (rate < 0) {
+                    showProjectError('Der Stundensatz darf nicht negativ sein.');
+                    return;
+                }
+                if (hours <= 0) {
+                    showProjectError('Die Projektstunden müssen größer als 0 sein.');
+                    return;
+                }
+                if (extras < 0) {
+                    showProjectError('Zusätzliche Kosten dürfen nicht negativ sein.');
+                    return;
+                }
+                if (vat < 0 || vat > 100) {
+                    showProjectError('Die Mehrwertsteuer muss zwischen 0% und 100% liegen.');
+                    return;
+                }
                 var netto = rate * hours + extras;
                 var vatAmount = netto * vat / 100;
                 var brutto = netto + vatAmount;
@@ -379,15 +440,35 @@
                 document.getElementById('projectOutput').classList.add('visible');
             });
 
+            document.getElementById('projectForm').addEventListener('reset', function() {
+                document.getElementById('projectOutput').classList.remove('visible');
+            });
+
             document.getElementById('taxForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 var revenue = parseFloat(document.getElementById('annualRevenue').value) || 80000;
                 var taxRate = parseFloat(document.getElementById('taxRateTax').value) || 35;
                 var social = parseFloat(document.getElementById('socialContributions').value) || 6000;
                 var costs = parseFloat(document.getElementById('businessCosts').value) || 5000;
+                if (revenue < 0) {
+                    showTaxError('Der Jahresumsatz darf nicht negativ sein.');
+                    return;
+                }
+                if (taxRate < 0 || taxRate >= 100) {
+                    showTaxError('Die Steuerquote muss zwischen 0% und 99% liegen.');
+                    return;
+                }
+                if (social < 0 || costs < 0) {
+                    showTaxError('Sozialabgaben und Betriebsausgaben dürfen nicht negativ sein.');
+                    return;
+                }
                 var vatShare = revenue / 119 * 19;
                 var nettoUmsatz = revenue - vatShare;
                 var gewinn = nettoUmsatz - costs;
+                if (gewinn <= 0) {
+                    showTaxError('Deine Ausgaben sind höher als der Nettoumsatz. Überprüfe bitte die Werte.');
+                    return;
+                }
                 var einkommenSteuer = gewinn * taxRate / 100;
                 var gesamtAbgaben = einkommenSteuer + social;
                 var nettoNachSteuern = gewinn - einkommenSteuer - social;

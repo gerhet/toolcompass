@@ -210,8 +210,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const steuerSlider = document.getElementById('steuerlast');
 const gewinnSlider = document.getElementById('gewinnmarge');
+const auslastungSlider = document.getElementById('auslastung');
+const auslastungValue = document.getElementById('auslastungValue');
 steuerSlider.addEventListener('input', () => document.getElementById('steuerlastValue').textContent = steuerSlider.value + '%');
 gewinnSlider.addEventListener('input', () => document.getElementById('gewinnmargeValue').textContent = gewinnSlider.value + '%');
+auslastungSlider.addEventListener('input', () => auslastungValue.textContent = auslastungSlider.value + '%');
 
 const vergleichsdaten = {
     elektriker: { min: 50, max: 90, text: 'Elektriker berechnen üblich 50–90 €/h. Mit Spezialisierung (Smart Home, PV-Anlagen) sind bis zu 110 €/h möglich.' },
