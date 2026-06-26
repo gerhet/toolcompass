@@ -30,6 +30,14 @@
   <url><loc>https://toolcompass.org/anfahrtskosten-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/materialrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/blog/materialrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/rechnungsgenerator/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/arbeitszeitrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/angebotsrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/projektplaner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/blog/rechnungsgenerator-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/arbeitszeitrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/angebotsrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://toolcompass.org/blog/projektplaner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://toolcompass.org/blog/bmi-verstehen-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/ki-prompt-optimierer-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
