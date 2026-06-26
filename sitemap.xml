@@ -28,6 +28,8 @@
   <url><loc>https://toolcompass.org/stundensatz-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/werkzeug-afa-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://toolcompass.org/anfahrtskosten-rechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/materialrechner/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://toolcompass.org/blog/materialrechner-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://toolcompass.org/blog/bmi-verstehen-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://toolcompass.org/blog/ki-prompt-optimierer-guide/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>

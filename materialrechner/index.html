@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Materialrechner für Handwerker – Flächen, Mengen & Kosten</title>
+    <meta name="description" content="Berechne Materialbedarf für Fliesen, Laminat, Farbe, Estrich & mehr. Inkl. Verschnitt, Kosten pro m² und Gesamtkosten. Kostenlos, 100% Client-Side.">
+    <link rel="canonical" href="https://toolcompass.org/materialrechner/">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/consent.js"></script>
+    <style>
+        .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
+        .result-card.visible { display: block; }
+        .result-value { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
+        .result-label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+        .breakdown-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+        .breakdown-item .label { font-size: 0.8rem; color: var(--text-muted); }
+        .breakdown-item .value { font-size: 1.1rem; font-weight: 700; color: white; }
+        .breakdown-item .value.highlight { color: var(--accent-secondary); }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+        .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
+        .input-group select option { background: var(--bg-dark); color: white; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+        .range-value { color: var(--accent-secondary); font-weight: 700; }
+        .tip-box { background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.15); border-radius: 12px; padding: 1.2rem; margin-top: 1.5rem; }
+        .tip-box h4 { color: white; font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .tip-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+        .material-table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; }
+        .material-table th { text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border); }
+        .material-table td { padding: 0.6rem 0.8rem; font-size: 0.9rem; color: white; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .material-table tr:last-child td { border-bottom: none; }
+        .material-table .total td { font-weight: 700; color: var(--accent-secondary); border-top: 2px solid var(--border); }
+        @media (max-width: 600px) { .input-row, .input-row-3 { grid-template-columns: 1fr; } .breakdown-grid { grid-template-columns: 1fr; } .result-value { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <nav><a href="/">← Zurück zur Übersicht</a> <a href="/baustelle-projekt/" style="margin-left:1rem;">→ Baustelle & Projekt</a></nav>
+    <header style="margin-bottom:3rem;">
+        <h1>Material-<span>Rechner</span></h1>
+        <p class="subtitle">Berechne Materialbedarf, Verschnitt & Kosten für Fliesen, Laminat, Farbe, Estrich und mehr.</p>
+    </header>
+
+    <div class="tool-interface">
+        <div class="input-row">
+            <div class="input-group">
+                <label for="materialtyp">Materialtyp</label>
+                <select id="materialtyp" onchange="updateMaterialPresets()">
+                    <option value="fliesen">Fliesen (Boden/Wand)</option>
+                    <option value="laminat">Laminat / Parkett</option>
+                    <option value="farbe">Farbe (Wanddecke)</option>
+                    <option value="estrich">Estrich / Beton</option>
+                    <option value="tapete">Tapete</option>
+                    <option value="sockelleiste">Sockelleisten</option>
+                    <option value="dämmung">Dämmung / Dämmplatten</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="raumform">Raumform</label>
+                <select id="raumform">
+                    <option value="rechteck" selected>Rechteckig</option>
+                    <option value="l-förmig">L-förmig</option>
+                    <option value="kreis">Kreis / Rund</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Rechteck -->
+        <div id="rechteckInputs" class="input-row">
+            <div class="input-group">
+                <label for="laenge">Länge (m)</label>
+                <input type="number" id="laenge" value="5" min="0.1" max="50" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="breite">Breite (m)</label>
+                <input type="number" id="breite" value="4" min="0.1" max="50" step="0.1">
+            </div>
+        </div>
+
+        <!-- L-förmig -->
+        <div id="lfoermigInputs" class="input-row" style="display:none;">
+            <div class="input-group">
+                <label for="l_laenge1">Länge 1 (m)</label>
+                <input type="number" id="l_laenge1" value="5" min="0.1" max="50" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="l_breite1">Breite 1 (m)</label>
+                <input type="number" id="l_breite1" value="4" min="0.1" max="50" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="l_laenge2">Länge 2 (m)</label>
+                <input type="number" id="l_laenge2" value="3" min="0.1" max="50" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="l_breite2">Breite 2 (m)</label>
+                <input type="number" id="l_breite2" value="2" min="0.1" max="50" step="0.1">
+            </div>
+        </div>
+
+        <!-- Kreis -->
+        <div id="kreisInputs" class="input-group" style="display:none;">
+            <label for="durchmesser">Durchmesser (m)</label>
+            <input type="number" id="durchmesser" value="3" min="0.1" max="50" step="0.1">
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="hoehe">Raumhöhe (m, nur bei Wänden)</label>
+                <input type="number" id="hoehe" value="2.5" min="0" max="10" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="verschnitt">Verschnitt (%)</label>
+                <input type="range" id="verschnitt" min="0" max="30" value="10" step="1">
+                <span class="range-value" id="verschnittValue">10%</span>
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label for="materialpreis">Materialpreis (€ pro Einheit)</label>
+                <input type="number" id="materialpreis" value="25" min="0" max="500" step="0.5">
+                <span style="font-size:0.8rem;color:var(--text-muted);" id="preisEinheit">pro m²</span>
+            </div>
+            <div class="input-group">
+                <label for="arbeitskosten">Arbeitskosten (€/m², optional)</label>
+                <input type="number" id="arbeitskosten" value="0" min="0" max="200" step="1">
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-primary" onclick="berechnen()">Materialbedarf berechnen</button>
+            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+        </div>
+
+        <div class="result-card" id="resultCard">
+            <div class="result-label">Gesamtmaterialbedarf</div>
+            <div class="result-value" id="materialResult">0,00</div>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.3rem;" id="materialEinheit">m²</p>
+
+            <div class="breakdown-grid">
+                <div class="breakdown-item">
+                    <div class="label">Nettfläche</div>
+                    <div class="value" id="nettoFlaeche">0,00 m²</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Verschnitt</div>
+                    <div class="value" id="verschnittMenge">0,00 m²</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Materialkosten</div>
+                    <div class="value highlight" id="materialKosten">0,00 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Arbeitskosten</div>
+                    <div class="value" id="arbeitsKosten">0,00 €</div>
+                </div>
+                <div class="breakdown-item" style="grid-column:1/-1;">
+                    <div class="label">Gesamtkosten (Material + Arbeit)</div>
+                    <div class="value highlight" id="gesamtKosten" style="font-size:1.4rem;">0,00 €</div>
+                </div>
+            </div>
+
+            <table class="material-table" id="detailTable">
+                <thead>
+                    <tr><th>Position</th><th>Menge</th><th>Einheit</th><th>Preis/€</th><th>Gesamt/€</th></tr>
+                </thead>
+                <tbody id="detailTableBody"></tbody>
+            </table>
+
+            <div class="tip-box">
+                <h4>💡 Tipp zur Materialbestellung</h4>
+                <p id="materialTipp">Lade Tipp...</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="faq">
+        <h2>Häufige Fragen zum Materialrechner</h2>
+        <details>
+            <summary>Wie viel Verschnitt sollte ich einplanen?</summary>
+            <div class="faq-answer">
+                <p>Fliesen: 10–15% (gerade Verlegung) bis 20% (diagonal). Laminat: 8–12%. Farbe: 5–10%. Tapete: 10–15%. Bei komplexen Räumen (L-Form, viele Ecken) immer den höheren Wert wählen.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Wie berechne ich die richtige Farbmenge?</summary>
+            <div class="faq-answer">
+                <p>Ein Liter Farbe reicht je nach Untergrund für 6–10 m² pro Anstrich. Bei dunklen Untergründen oder deckungsschwachen Farben sind 2 Anstriche nötig. Unser Rechner geht von 8 m²/Liter aus.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Was kostet ein Quadratmeter Fliesenlegen?</summary>
+            <div class="faq-answer">
+                <p>Die Kosten variieren stark: Fliesenlegen 25–60 €/m², Laminat verlegen 15–30 €/m², Tapezieren 10–20 €/m², Streichen 8–15 €/m². Hinzu kommen Materialkosten und ggf. Untergrundvorbereitung.</p>
+            </div>
+        </details>
+        <details>
+            <summary>Wie berechne ich eine L-förmige Fläche?</summary>
+            <div class="faq-answer">
+                <p>Teile den Raum in zwei Rechtecke auf. Berechne die Fläche jedes Rechtecks (Länge × Breite) und addiere sie. Unser Rechner macht das automatisch für dich.</p>
+            </div>
+        </details>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/about.html">Über uns</a>
+            <a href="/impressum/index.html">Impressum</a>
+            <a href="/datenschutz/">Datenschutz</a>
+        </div>
+        <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
+    </footer>
+</div>
+
+<script defer>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const verschnittSlider = document.getElementById('verschnitt');
+verschnittSlider.addEventListener('input', () => document.getElementById('verschnittValue').textContent = verschnittSlider.value + '%');
+
+// Material-Presets
+const materialPresets = {
+    fliesen: { preis: 25, einheit: 'm²', verschnitt: 12, beschreibung: 'Fliesen inkl. Fugenkreuze & Kleber' },
+    laminat: { preis: 18, einheit: 'm²', verschnitt: 10, beschreibung: 'Laminat inkl. Trittschalldämmung' },
+    farbe: { preis: 8, einheit: 'Liter', verschnitt: 8, beschreibung: 'Wandfarbe (8 m²/Liter, 2 Anstriche)' },
+    estrich: { preis: 12, einheit: 'm²', verschnitt: 5, beschreibung: 'Estrich (4 cm Schichtdicke)' },
+    tapete: { preis: 15, einheit: 'Rolle', verschnitt: 12, beschreibung: 'Tapete (5 m²/Rolle)' },
+    sockelleiste: { preis: 4, einheit: 'm', verschnitt: 5, beschreibung: 'Sockelleisten pro Meter' },
+    dämmung: { preis: 22, einheit: 'm²', verschnitt: 8, beschreibung: 'Dämmplatten (8 cm Stärke)' }
+};
+
+function updateMaterialPresets() {
+    const typ = document.getElementById('materialtyp').value;
+    const preset = materialPresets[typ] || materialPresets.fliesen;
+    document.getElementById('materialpreis').value = preset.preis;
+    document.getElementById('verschnitt').value = preset.verschnitt;
+    document.getElementById('verschnittValue').textContent = preset.verschnitt + '%';
+    document.getElementById('preisEinheit').textContent = 'pro ' + preset.einheit;
+}
+
+// Raumform umschalten
+document.getElementById('raumform').addEventListener('change', function() {
+    const form = this.value;
+    document.getElementById('rechteckInputs').style.display = form === 'rechteck' ? '' : 'none';
+    document.getElementById('lfoermigInputs').style.display = form === 'l-förmig' ? '' : 'none';
+    document.getElementById('kreisInputs').style.display = form === 'kreis' ? '' : 'none';
+});
+
+function berechnen() {
+    const typ = document.getElementById('materialtyp').value;
+    const form = document.getElementById('raumform').value;
+    const verschnittProzent = parseInt(document.getElementById('verschnitt').value) || 10;
+    const materialpreis = parseFloat(document.getElementById('materialpreis').value) || 0;
+    const arbeitskostenProM2 = parseFloat(document.getElementById('arbeitskosten').value) || 0;
+    const hoehe = parseFloat(document.getElementById('hoehe').value) || 2.5;
+    const preset = materialPresets[typ] || materialPresets.fliesen;
+
+    // Fläche berechnen
+    let nettoFlaeche = 0;
+    let umfang = 0;
+
+    if (form === 'rechteck') {
+        const laenge = parseFloat(document.getElementById('laenge').value) || 0;
+        const breite = parseFloat(document.getElementById('breite').value) || 0;
+        nettoFlaeche = laenge * breite;
+        umfang = 2 * (laenge + breite);
+    } else if (form === 'l-förmig') {
+        const l1 = parseFloat(document.getElementById('l_laenge1').value) || 0;
+        const b1 = parseFloat(document.getElementById('l_breite1').value) || 0;
+        const l2 = parseFloat(document.getElementById('l_laenge2').value) || 0;
+        const b2 = parseFloat(document.getElementById('l_breite2').value) || 0;
+        nettoFlaeche = (l1 * b1) + (l2 * b2);
+        umfang = 2 * (l1 + b1 + l2 + b2);
+    } else if (form === 'kreis') {
+        const d = parseFloat(document.getElementById('durchmesser').value) || 0;
+        nettoFlaeche = Math.PI * (d/2) * (d/2);
+        umfang = Math.PI * d;
+    }
+
+    // Bei Farbe: Wandfläche berechnen (Raumumfang × Höhe) + Decke
+    let wandFlaeche = 0;
+    let deckeFlaeche = 0;
+    if (typ === 'farbe') {
+        wandFlaeche = umfang * hoehe;
+        deckeFlaeche = nettoFlaeche;
+        nettoFlaeche = wandFlaeche + deckeFlaeche; // Gesamtfläche
+    }
+
+    // Bei Tapete: nur Wandfläche
+    if (typ === 'tapete') {
+        nettoFlaeche = umfang * hoehe;
+    }
+
+    // Bei Sockelleisten: Umfang
+    if (typ === 'sockelleiste') {
+        nettoFlaeche = umfang;
+    }
+
+    // Verschnitt
+    const verschnittMenge = nettoFlaeche * (verschnittProzent / 100);
+    const gesamtMenge = nettoFlaeche + verschnittMenge;
+
+    // Einheiten-Umrechnung
+    let mengeAnzeige = gesamtMenge;
+    let einheit = preset.einheit;
+    let preisProEinheit = materialpreis;
+
+    if (typ === 'farbe') {
+        // 1 Liter = 8 m², 2 Anstriche
+        const literProM2 = 1 / 8;
+        mengeAnzeige = gesamtMenge * literProM2 * 2; // 2 Anstriche
+        einheit = 'Liter';
+    } else if (typ === 'tapete') {
+        // 1 Rolle = 5 m²
+        mengeAnzeige = Math.ceil(gesamtMenge / 5);
+        einheit = 'Rollen';
+    }
+
+    // Kosten
+    let materialKosten = 0;
+    if (typ === 'farbe') {
+        materialKosten = mengeAnzeige * preisProEinheit;
+    } else if (typ === 'tapete') {
+        materialKosten = mengeAnzeige * preisProEinheit;
+    } else {
+        materialKosten = gesamtMenge * preisProEinheit;
+    }
+
+    const arbeitsKosten = nettoFlaeche * arbeitskostenProM2;
+    const gesamtKosten = materialKosten + arbeitsKosten;
+
+    // Anzeige
+    document.getElementById('resultCard').classList.add('visible');
+
+    let ergebnisText = mengeAnzeige.toFixed(typ === 'tapete' ? 0 : 2).replace('.', ',');
+    document.getElementById('materialResult').textContent = ergebnisText;
+    document.getElementById('materialEinheit').textContent = einheit;
+
+    document.getElementById('nettoFlaeche').textContent = nettoFlaeche.toFixed(2).replace('.', ',') + ' m²';
+    document.getElementById('verschnittMenge').textContent = verschnittMenge.toFixed(2).replace('.', ',') + ' m²';
+    document.getElementById('materialKosten').textContent = materialKosten.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('arbeitsKosten').textContent = arbeitsKosten.toFixed(2).replace('.', ',') + ' €';
+    document.getElementById('gesamtKosten').textContent = gesamtKosten.toFixed(2).replace('.', ',') + ' €';
+
+    // Detailtabelle
+    let detailsHTML = '';
+    detailsHTML += '<tr><td>Nettobedarf</td><td>' + nettoFlaeche.toFixed(2).replace('.',',') + '</td><td>m²</td><td>' + preisProEinheit.toFixed(2).replace('.',',') + '</td><td>' + (nettoFlaeche * preisProEinheit).toFixed(2).replace('.',',') + '</td></tr>';
+    detailsHTML += '<tr><td>Verschnitt (' + verschnittProzent + '%)</td><td>' + verschnittMenge.toFixed(2).replace('.',',') + '</td><td>m²</td><td>' + preisProEinheit.toFixed(2).replace('.',',') + '</td><td>' + (verschnittMenge * preisProEinheit).toFixed(2).replace('.',',') + '</td></tr>';
+    if (arbeitskostenProM2 > 0) {
+        detailsHTML += '<tr><td>Arbeitskosten</td><td>' + nettoFlaeche.toFixed(2).replace('.',',') + '</td><td>m²</td><td>' + arbeitskostenProM2.toFixed(2).replace('.',',') + '</td><td>' + arbeitsKosten.toFixed(2).replace('.',',') + '</td></tr>';
+    }
+    detailsHTML += '<tr class="total"><td>Gesamt</td><td>' + gesamtMenge.toFixed(2).replace('.',',') + '</td><td>m²</td><td></td><td>' + gesamtKosten.toFixed(2).replace('.',',') + '</td></tr>';
+    document.getElementById('detailTableBody').innerHTML = detailsHTML;
+
+    // Tipp
+    const tipps = {
+        fliesen: 'Bestelle immer 1–2 Kisten mehr als berechnet. Fliesen gleicher Charge können farblich abweichen. Hebe 2–3 Fliesen für spätere Reparaturen auf.',
+        laminat: 'Laminat vor dem Verlegen 48 Stunden im Raum akklimatisieren lassen. Dehnungsfuge von 10–15 mm an den Wänden einplanen.',
+        farbe: 'Rühre die Farbe vor dem Streichen gut um. Bei dunklen Untergründen ist eine Grundierung nötig. Rolle nicht zu nass machen – sonst läuft die Farbe.',
+        estrich: 'Estrich braucht 3–7 Tage Trockenzeit pro cm Schichtdicke. Bei Fußbodenheizung: Aufheizprotokoll beachten!',
+        tapete: 'Tapetenbahnen immer von der Fensterseite her anfangen. Musterrapport beachten – das erhöht den Verschnitt auf bis zu 20%.',
+        sockelleiste: 'Sockelleisten immer etwas länger bestellen. Gehrungsschnitte an den Ecken einplanen. Flexible Leisten sind einfacher zu verarbeiten.',
+        dämmung: 'Dämmplatten immer versetzt verlegen (wie Mauerwerk). Kältebrücken vermeiden. Dampfbremse nicht vergessen!'
+    };
+    document.getElementById('materialTipp').textContent = tipps[typ] || 'Bestelle immer etwas mehr Material als berechnet. Rückgabe von überschüssigem Material ist oft möglich – frage im Fachhandel nach.';
+
+    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('materialtyp').value = 'fliesen';
+    document.getElementById('raumform').value = 'rechteck';
+    document.getElementById('laenge').value = 5;
+    document.getElementById('breite').value = 4;
+    document.getElementById('hoehe').value = 2.5;
+    document.getElementById('verschnitt').value = 10;
+    document.getElementById('verschnittValue').textContent = '10%';
+    document.getElementById('materialpreis').value = 25;
+    document.getElementById('arbeitskosten').value = 0;
+    document.getElementById('rechteckInputs').style.display = '';
+    document.getElementById('lfoermigInputs').style.display = 'none';
+    document.getElementById('kreisInputs').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Initial
+updateMaterialPresets();
+</script>
+</body>
+</html>
