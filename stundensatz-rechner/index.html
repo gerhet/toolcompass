@@ -77,6 +77,11 @@
                 <input type="number" id="stunden_pro_tag" value="8" min="4" max="12" step="0.5">
             </div>
         </div>
+        <div class="input-group">
+            <label for="auslastung">Abrechenbare Zeit (%)</label>
+            <input type="range" id="auslastung" min="40" max="90" value="65" step="1">
+            <span class="range-value" id="auslastungValue">65%</span>
+        </div>
 
         <div class="section-label" style="margin-top:2rem;">💰 Monatliche Fixkosten</div>
         <div class="input-row">
@@ -136,6 +141,10 @@
                 <div class="breakdown-item">
                     <div class="label">Jahreskosten gesamt</div>
                     <div class="value" id="jahreskosten">0 €</div>
+                </div>
+                <div class="breakdown-item">
+                    <div class="label">Abrechenbare Stunden pro Jahr</div>
+                    <div class="value" id="abrechenbareStunden">0 h</div>
                 </div>
                 <div class="breakdown-item">
                     <div class="label">Kosten pro Stunde</div>
@@ -231,19 +240,13 @@ function berechnen() {
 
     const monatsKosten = miete + versicherung + fahrzeug + werkzeug + fortbildung + sonstiges;
     const jahresKosten = monatsKosten * 12;
-    const gesamtKosten = jahresgewinn + jahresKosten;
-    const gesamtStunden = arbeitstage * stundenProTag;
+    const auslastung = parseFloat(document.getElementById('auslastung').value) / 100;
+    const abrechenbareStunden = arbeitstage * stundenProTag * auslastung;
 
-    // Kosten pro Stunde
-    const kostenProStunde = jahresKosten / gesamtStunden;
+    const kostenProStunde = jahresKosten / abrechenbareStunden;
+    const gewinnProStunde = jahresgewinn / abrechenbareStunden;
+    const steuerProStunde = (jahresgewinn * steuerSatz) / abrechenbareStunden;
 
-    // Gewünschter Gewinn pro Stunde
-    const gewinnProStunde = jahresgewinn / gesamtStunden;
-
-    // Steuerrücklage pro Stunde
-    const steuerProStunde = (jahresgewinn * steuerSatz) / gesamtStunden;
-
-    // Stundensatz = Kosten + Gewinn + Steuern + Marge
     const basisSatz = kostenProStunde + gewinnProStunde + steuerProStunde;
     const stundensatzNetto = basisSatz / (1 - gewinnMarge);
     const stundensatzBrutto = stundensatzNetto * 1.19;
@@ -252,6 +255,7 @@ function berechnen() {
     document.getElementById('stundensatzResult').textContent = stundensatzNetto.toFixed(2).replace('.', ',') + ' €';
     document.getElementById('stundensatzBrutto').textContent = '= ' + stundensatzBrutto.toFixed(2).replace('.', ',') + ' € brutto (inkl. 19% MwSt.)';
     document.getElementById('jahreskosten').textContent = jahresKosten.toFixed(0).replace('.', ',') + ' €';
+    document.getElementById('abrechenbareStunden').textContent = Math.round(abrechenbareStunden) + ' h';
     document.getElementById('kostenProStunde').textContent = kostenProStunde.toFixed(2).replace('.', ',') + ' €';
     document.getElementById('gewinnProStunde').textContent = gewinnProStunde.toFixed(2).replace('.', ',') + ' €';
     document.getElementById('steuerProStunde').textContent = steuerProStunde.toFixed(2).replace('.', ',') + ' €';
@@ -283,6 +287,8 @@ function resetForm() {
     document.getElementById('werkzeug').value = 300;
     document.getElementById('fortbildung').value = 150;
     document.getElementById('sonstiges').value = 200;
+    document.getElementById('auslastung').value = 65;
+    document.getElementById('auslastungValue').textContent = '65%';
     steuerSlider.value = 30;
     document.getElementById('steuerlastValue').textContent = '30%';
     gewinnSlider.value = 20;
