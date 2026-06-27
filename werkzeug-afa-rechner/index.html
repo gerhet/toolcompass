@@ -7,8 +7,10 @@
     <title>Werkzeug-AfA-Rechner – Abschreibung für Handwerker</title>
     <meta name="description" content="Berechne die Abschreibung (AfA) für deine Werkzeuge, Maschinen & Fahrzeuge. Lineare & degressive Methode. Inkl. GWG-Grenze & Vergleich Neukauf vs. Leasing.">
     <link rel="canonical" href="https://toolcompass.org/werkzeug-afa-rechner/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -34,6 +36,18 @@
         .tip-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
         @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } .result-value { font-size: 1.8rem; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Werkzeug-AfA-Rechner",
+      "url": "https://toolcompass.org/werkzeug-afa-rechner/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne Abschreibung für Werkzeuge",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -45,6 +59,7 @@
     </header>
 
     <div class="tool-interface">
+<form id="afaForm" novalidate>
         <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
             <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Rechtlicher Hinweis</p>
             <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Diese Berechnung dient nur der Orientierung. Die AfA-Sätze und Regelungen können je nach Betriebsart und individuellem Fall abweichen. Konsultiere für steuerliche Fragen einen Steuerberater. Wir übernehmen keine Haftung für finanzielle Folgen.</p>
@@ -95,9 +110,10 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-primary" onclick="berechnen()">AfA berechnen</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">AfA berechnen</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
+</form>
 
         <div class="result-card" id="resultCard">
             <div class="result-label" id="ergebnisTitel">Jährlicher AfA-Betrag (lineare Methode)</div>
@@ -123,31 +139,47 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div style="background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(245,158,11,0.06));border:1px solid rgba(251,191,36,0.2);padding:2rem;border-radius:16px;text-align:center;margin:2rem 0;">
+        <span class="card-badge" style="margin-bottom:0.8rem;background:rgba(251,191,36,0.15);color:#fbbf24;border-color:rgba(251,191,36,0.2);">Empfehlung</span>
+        <h3 style="margin-top:0;color:white;">🔧 Werkzeugkoffer Komplettset – Für Handwerker und Heimwerker</h3>
+        <p style="font-size:0.95rem;color:var(--text-muted);">Ein hochwertiger Werkzeugkoffer ist die beste Investition für deinen Betrieb. Von Profi-Werkzeug bis zur Aufbewahrung – hier findest du alles, was du brauchst.</p>
+        <a href="https://www.amazon.de/dp/B0DK5VB7VM/?tag=viktorschwarz-21" class="btn-primary" style="display:inline-flex;margin-top:.5rem;" rel="sponsored" target="_blank">Werkzeugkoffer bei Amazon entdecken →</a>
+    </div>
+
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zur Werkzeug-AfA</h2>
-        <details>
-            <summary>Was bedeutet AfA?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Was bedeutet AfA?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>AfA steht für "Absetzung für Abnutzung". Es ist die steuerliche Abschreibung von Wirtschaftsgütern über ihre Nutzungsdauer. Du kannst die Anschaffungskosten nicht sofort, sondern verteilt über die Jahre absetzen, in denen du das Werkzeug nutzt.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Welche Nutzungsdauer gilt für mein Werkzeug?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Welche Nutzungsdauer gilt für mein Werkzeug?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Das Finanzamt gibt offizielle AfA-Tabellen vor: Elektrowerkzeuge 5 Jahre, große Maschinen 8–10 Jahre, Fahrzeuge 6–13 Jahre, Computer 3 Jahre. Unser Rechner verwendet diese Standardwerte.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Was ist die GWG-Grenze 2026?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Was ist die GWG-Grenze 2026?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Geringwertige Wirtschaftsgüter (GWG) unter 800 € netto können sofort als Betriebsausgabe abgeschrieben werden. Zwischen 800 € und 1.000 € gilt der Sammelposten (5 Jahre). Seit 2026 gelten teilweise erweiterte Grenzen – frage im Zweifel deinen Steuerberater.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Lohnt sich Leasing statt Kauf?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Lohnt sich Leasing statt Kauf?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Leasing kann steuerlich vorteilhaft sein, weil die Raten als Betriebsausgaben absetzbar sind. Für Werkzeuge unter 5.000 € ist Kauf meist günstiger. Unser Rechner hilft dir beim Vergleich.</p>
-            </div>
+            </div></div>
         </details>
     </section>
 
@@ -163,6 +195,17 @@
 
 <script defer>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+const afaForm = document.getElementById('afaForm');
+afaForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    berechnen();
+});
+afaForm.addEventListener('reset', function() {
+    document.getElementById('resultCard').classList.remove('visible');
+    gwgCheck();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 const nutzungsdauerMap = {
     werkzeug: 5,
@@ -256,16 +299,6 @@ function berechnen() {
     document.getElementById('steuerErsparnis').innerHTML = 'Durch die AfA sparst du im ersten Jahr ca. <strong>' + ersparnisJahr1.toFixed(2).replace('.',',') + ' €</strong> Steuern (bei 30% Steuersatz). Über ' + jahre + ' Jahre insgesamt <strong>' + (gesamtAfA * steuerSatz).toFixed(2).replace('.',',') + ' €</strong>.';
 
     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('anschaffungswert').value = 1200;
-    document.getElementById('nutzungsdauer').value = 5;
-    document.getElementById('methode').value = 'linear';
-    document.getElementById('gegenstand').value = 'werkzeug';
-    gwgCheck();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Initial check

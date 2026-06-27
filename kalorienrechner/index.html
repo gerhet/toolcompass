@@ -43,6 +43,7 @@
         .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
         .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
         .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .error-text{color:#f87171;font-size:0.95rem;margin-bottom:1rem}
         .kalorien-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.85rem}
         .kalorien-table th{background:rgba(99,102,241,0.12);color:var(--text-main);padding:0.6rem;text-align:left;font-weight:600;border:1px solid var(--border)}
         .kalorien-table td{padding:0.6rem;border:1px solid var(--border);color:var(--text-muted)}
@@ -50,6 +51,7 @@
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
 </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -68,6 +70,7 @@
 </div>
 
                 <form id="kalorienForm" novalidate>
+                    <div id="kalorienError" class="error-text" style="display:none;"></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="geschlecht">Geschlecht</label>
@@ -103,7 +106,7 @@
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn-primary">Berechnen</button>
-                        <button type="button" class="btn-secondary" onclick="document.getElementById('kalorienForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                        <button type="reset" class="btn-secondary">Zurücksetzen</button>
                     </div>
                 </form>
             </div>
@@ -134,29 +137,57 @@
             </div>
         </main>
     </div>
+    <div class="ad-container"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6224001325349919" data-ad-slot="5162949474" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div>
     <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
     <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
-        document.getElementById('kalorienForm').addEventListener('submit', function(e) {
+        const kalorienForm = document.getElementById('kalorienForm');
+        const kalorienError = document.getElementById('kalorienError');
+        const kalorienResultCard = document.getElementById('resultCard');
+
+        function showKalorienError(message) {
+            kalorienError.textContent = message;
+            kalorienError.style.display = 'block';
+            kalorienResultCard.classList.remove('visible');
+        }
+
+        function clearKalorienError() {
+            kalorienError.textContent = '';
+            kalorienError.style.display = 'none';
+        }
+
+        kalorienForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var geschlecht = document.getElementById('geschlecht').value;
-            var alter = parseInt(document.getElementById('alter').value);
-            var gewicht = parseFloat(document.getElementById('gewicht').value);
-            var groesse = parseInt(document.getElementById('groesse').value);
-            var aktivitaet = parseFloat(document.getElementById('aktivitaet').value);
-            if (isNaN(alter) || isNaN(gewicht) || isNaN(groesse) || alter < 10 || alter > 100 || gewicht < 30 || gewicht > 300 || groesse < 100 || groesse > 250) { alert('Bitte gib gültige Werte ein.'); return; }
-            var grundumsatz;
+            clearKalorienError();
+
+            const geschlecht = document.getElementById('geschlecht').value;
+            const alter = parseInt(document.getElementById('alter').value);
+            const gewicht = parseFloat(document.getElementById('gewicht').value);
+            const groesse = parseInt(document.getElementById('groesse').value);
+            const aktivitaet = parseFloat(document.getElementById('aktivitaet').value);
+
+            if (isNaN(alter) || isNaN(gewicht) || isNaN(groesse) || alter < 10 || alter > 100 || gewicht < 30 || gewicht > 300 || groesse < 100 || groesse > 250) {
+                showKalorienError('Bitte gib gültige Werte ein.');
+                return;
+            }
+
+            let grundumsatz;
             if (geschlecht === 'maennlich') {
                 grundumsatz = 66.47 + (13.7 * gewicht) + (5 * groesse) - (6.8 * alter);
             } else {
                 grundumsatz = 655.1 + (9.6 * gewicht) + (1.8 * groesse) - (4.7 * alter);
             }
-            var gesamtbedarf = grundumsatz * aktivitaet;
-            var abnehmen = gesamtbedarf - 500;
+            const gesamtbedarf = grundumsatz * aktivitaet;
+            const abnehmen = gesamtbedarf - 500;
             document.getElementById('grundbedarf').textContent = Math.round(grundumsatz) + ' kcal';
             document.getElementById('gesamtbedarf').textContent = Math.round(gesamtbedarf) + ' kcal';
             document.getElementById('abnehmen').textContent = Math.round(abnehmen) + ' kcal';
-            document.getElementById('resultCard').classList.add('visible');
+            kalorienResultCard.classList.add('visible');
+        });
+
+        kalorienForm.addEventListener('reset', function() {
+            clearKalorienError();
+            kalorienResultCard.classList.remove('visible');
         });
     </script>
 </body>

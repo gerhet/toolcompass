@@ -7,8 +7,10 @@
     <title>Arbeitszeitrechner für Handwerker – Stundenzettel</title>
     <meta name="description" content="Erfasse Arbeitszeiten auf der Baustelle. Inkl. Pause, Überstunden, Nachtzuschlag & Wochenabrechnung. Kostenlos, 100% Client-Side.">
     <link rel="canonical" href="https://toolcompass.org/arbeitszeitrechner/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -29,6 +31,18 @@
         .day-entry .input-group { margin-bottom: 0.6rem; }
         @media (max-width: 600px) { .input-row, .breakdown-grid { grid-template-columns: 1fr; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Arbeitszeitrechner",
+      "url": "https://toolcompass.org/arbeitszeitrechner/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne Arbeitszeiten & Überstunden",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -40,6 +54,7 @@
     </header>
 
     <div class="tool-interface">
+<form id="timeForm" novalidate>
 <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
     <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Hinweis</p>
     <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechner dient nur der Orientierung. Die berechneten Werte sind unverbindlich. Konsultiere im Zweifel einen Fachmann (Steuerberater, Arzt, etc.). Wir übernehmen keine Haftung für Folgen aus der Nutzung.</p>
@@ -55,9 +70,10 @@
         <div id="tageContainer"></div>
 
         <div class="btn-group">
-            <button class="btn-primary" onclick="berechnen()">Arbeitszeit abrechnen</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">Arbeitszeit abrechnen</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
+</form>
 
         <div class="result-card" id="resultCard">
             <div class="result-label">Wochenabrechnung</div>
@@ -75,11 +91,20 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zur Arbeitszeit</h2>
-        <details><summary>Wie viele Überstunden sind erlaubt?</summary><div class="faq-answer"><p>Maximal 10 Stunden pro Tag, 48 Stunden pro Woche (inkl. Überstunden). In Ausnahmefällen bis zu 60 Stunden, wenn der Ausgleich innerhalb von 6 Monaten erfolgt.</p></div></details>
-        <details><summary>Wann gibt es Nachtzuschlag?</summary><div class="faq-answer"><p>Nachtarbeit zwischen 20 Uhr und 6 Uhr. Der Zuschlag beträgt üblich 25–30% auf den Stundenlohn. In Tarifverträgen können höhere Sätze vereinbart sein.</p></div></details>
-        <details><summary>Muss ich Pause aufschreiben?</summary><div class="faq-answer"><p>Ja! Bei mehr als 6 Stunden Arbeit sind 30 Minuten Pause Pflicht, bei mehr als 9 Stunden 45 Minuten. Die Pause gilt nicht als Arbeitszeit.</p></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Wie viele Überstunden sind erlaubt?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Maximal 10 Stunden pro Tag, 48 Stunden pro Woche (inkl. Überstunden). In Ausnahmefällen bis zu 60 Stunden, wenn der Ausgleich innerhalb von 6 Monaten erfolgt.</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Wann gibt es Nachtzuschlag?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Nachtarbeit zwischen 20 Uhr und 6 Uhr. Der Zuschlag beträgt üblich 25–30% auf den Stundenlohn. In Tarifverträgen können höhere Sätze vereinbart sein.</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Muss ich Pause aufschreiben?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Ja! Bei mehr als 6 Stunden Arbeit sind 30 Minuten Pause Pflicht, bei mehr als 9 Stunden 45 Minuten. Die Pause gilt nicht als Arbeitszeit.</p></div></div></details>
     </section>
 
     <footer>
@@ -103,6 +128,17 @@ function createDayEntries() {
     });
 }
 createDayEntries();
+
+const timeForm = document.getElementById('timeForm');
+timeForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    berechnen();
+});
+timeForm.addEventListener('reset', function() {
+    document.getElementById('resultCard').classList.remove('visible');
+    createDayEntries();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 function zeitToStunden(zeitStr) {
     if (!zeitStr) return 0;
@@ -181,15 +217,6 @@ function berechnen() {
     document.getElementById('gesamtVerdienst').textContent = gesamtVerdienst.toFixed(2).replace('.',',') + ' €';
     document.getElementById('detailTableBody').innerHTML = detailsHTML;
     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('stundensatz').value = 45;
-    document.getElementById('woche').value = 26;
-    document.getElementById('zuschlag_nacht').value = 25;
-    createDayEntries();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 </body>

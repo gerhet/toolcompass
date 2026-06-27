@@ -24,6 +24,7 @@
     }
     </script>
     <link rel="stylesheet" href="/styles.css">
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .tool-interface { background: var(--card-bg); backdrop-filter: var(--glass); -webkit-backdrop-filter: var(--glass); padding: 2.5rem; border-radius: 24px; border: 1px solid var(--border); margin-bottom: 3rem; }
         .form-group { margin-bottom: 1.5rem; }
@@ -150,13 +151,13 @@
                     <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechner dient nur der Orientierung. Die berechneten Werte sind unverbindlich. Für steuerliche und rechtliche Fragen konsultiere einen Steuerberater oder Rechtsanwalt. Wir übernehmen keine Haftung für finanzielle Folgen.</p>
                 </div>
                 <div class="tab-bar" role="tablist">
-                    <button class="tab-btn active" data-tab="rate" role="tab">💰 Stundensatz</button>
-                    <button class="tab-btn" data-tab="project" role="tab">📋 Projekt</button>
-                    <button class="tab-btn" data-tab="tax" role="tab">🧾 Steuer</button>
+                    <button id="tab-rate-btn" class="tab-btn active" data-tab="rate" role="tab" aria-controls="tab-rate" aria-selected="true" tabindex="0">💰 Stundensatz</button>
+                    <button id="tab-project-btn" class="tab-btn" data-tab="project" role="tab" aria-controls="tab-project" aria-selected="false" tabindex="-1">📋 Projekt</button>
+                    <button id="tab-tax-btn" class="tab-btn" data-tab="tax" role="tab" aria-controls="tab-tax" aria-selected="false" tabindex="-1">🧾 Steuer</button>
                 </div>
 
                 <!-- TAB 1: Stundensatz -->
-                <div class="tab-content active" id="tab-rate">
+                <div class="tab-content active" id="tab-rate" role="tabpanel" aria-labelledby="tab-rate-btn">
                     <form id="rateForm" novalidate>
                         <div class="form-row">
                             <div class="form-group">
@@ -181,7 +182,7 @@
                         <div class="form-group">
                             <label for="utilizationRate">Abrechenbare Zeit (%)</label>
                             <div class="range-input">
-                                <input type="range" id="utilizationRate" min="40" max="90" value="65" step="1">
+                                <input type="range" id="utilizationRate" min="40" max="90" value="65" step="1" aria-label="Abrechenbare Zeit in Prozent">
                                 <div class="range-value" id="utilizationRateValue">65%</div>
                             </div>
                         </div>
@@ -196,8 +197,9 @@
                         </div>
                         <div class="btn-group">
                             <button type="submit" class="btn-primary">💶 Stundensatz berechnen</button>
-                            <button type="reset" class="btn-secondary" onclick="resetTab('rate')">Zurücksetzen</button>
+                            <button type="reset" class="btn-secondary">Zurücksetzen</button>
                         </div>
+                        <div id="rateError" class="error-text" style="display:none;" aria-live="polite"></div>
                     </form>
                     <div class="output-area" id="rateOutput">
                         <div class="result-section-title">📍 Dein empfohlener Stundensatz</div>
@@ -207,7 +209,7 @@
                 </div>
 
                 <!-- TAB 2: Projekt -->
-                <div class="tab-content" id="tab-project">
+                <div class="tab-content" id="tab-project" role="tabpanel" aria-labelledby="tab-project-btn">
                     <form id="projectForm" novalidate>
                         <div class="form-row">
                             <div class="form-group">
@@ -235,8 +237,9 @@
                         </div>
                         <div class="btn-group">
                             <button type="submit" class="btn-primary">📊 Projekt kalkulieren</button>
-                            <button type="reset" class="btn-secondary" onclick="resetTab('project')">Zurücksetzen</button>
+                            <button type="reset" class="btn-secondary">Zurücksetzen</button>
                         </div>
+                        <div id="projectError" class="error-text" style="display:none;" aria-live="polite"></div>
                     </form>
                     <div class="output-area" id="projectOutput">
                         <div class="result-section-title">📋 Projekt-Kalkulation</div>
@@ -247,13 +250,23 @@
                 </div>
 
                 <!-- TAB 3: Steuer -->
-                <div class="tab-content" id="tab-tax">
+                <div class="tab-content" id="tab-tax" role="tabpanel" aria-labelledby="tab-tax-btn">
                     <form id="taxForm" novalidate>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="annualRevenue">Voraussichtlicher Jahresumsatz (brutto)</label>
                                 <div class="input-with-suffix"><input type="number" id="annualRevenue" value="80000" min="0" step="1000"><span class="suffix">€</span></div>
                             </div>
+                            <div class="form-group">
+                                <label for="vatRateTax">MwSt.-Satz</label>
+                                <select id="vatRateTax">
+                                    <option value="19">19% (Regelsteuersatz DE)</option>
+                                    <option value="7">7% (ermäßigt DE)</option>
+                                    <option value="0">0% (steuerbefreit / Drittland)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="form-group">
                                 <label for="taxRateTax">Steuerquote (Einkommensteuer + Soli + KiSt)</label>
                                 <div class="input-with-suffix"><input type="number" id="taxRateTax" value="35" min="0" max="50" step="1"><span class="suffix">%</span></div>
@@ -271,8 +284,9 @@
                         </div>
                         <div class="btn-group">
                             <button type="submit" class="btn-primary">🧮 Steuer-Rücklage berechnen</button>
-                            <button type="reset" class="btn-secondary" onclick="resetTab('tax')">Zurücksetzen</button>
+                            <button type="reset" class="btn-secondary">Zurücksetzen</button>
                         </div>
+                        <div id="taxError" class="error-text" style="display:none;" aria-live="polite"></div>
                     </form>
                     <div class="output-area" id="taxOutput">
                         <div class="result-section-title">📊 Steuerliche Übersicht</div>
@@ -281,6 +295,13 @@
                         <div class="tip-box"><span style="color:var(--accent-secondary);flex-shrink:0;">⚠️</span><span>Die Steuer-Rücklage ist eine Schätzung. Lege mindestens 30% deiner Netto-Einnahmen zurück.</span></div>
                     </div>
                 </div>
+            </div>
+
+            <div class="ad-container" style="background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(245,158,11,0.06));border:1px solid rgba(251,191,36,0.2);padding:2rem;border-radius:16px;text-align:center;margin:2rem 0;">
+                <span class="card-badge" style="margin-bottom:0.8rem;background:rgba(251,191,36,0.15);color:#fbbf24;border-color:rgba(251,191,36,0.2);">Empfehlung</span>
+                <h3 style="margin-top:0;color:white;">📊 Lexoffice – Buchhaltungssoftware speziell für Freelancer & Handwerker</h3>
+                <p style="font-size:0.95rem;color:var(--text-muted);">Rechnungen schreiben, Belege scannen, Steuer-Voranmeldung – Lexoffice macht die Buchhaltung einfach. Inkl. Elster-Schnittstelle und passender App für unterwegs.</p>
+                <a href="https://www.lexoffice.de/?pid=DEIN_LEXOFFICE_PID" class="btn-primary" style="display:inline-flex;margin-top:.5rem;" rel="sponsored" target="_blank">Lexoffice kostenlos testen →</a>
             </div>
 
             <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
@@ -300,6 +321,14 @@
             </section>
         </main>
     </div>
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
     <footer>
         <div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div>
         <div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div>
@@ -312,14 +341,80 @@
             var tabBtns = document.querySelectorAll('.tab-btn');
             tabBtns.forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    tabBtns.forEach(function(b) { b.classList.remove('active'); });
+                    tabBtns.forEach(function(b) {
+                        b.classList.remove('active');
+                        b.setAttribute('aria-selected', 'false');
+                        b.setAttribute('tabindex', '-1');
+                    });
                     document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
                     this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+                    this.setAttribute('tabindex', '0');
                     document.getElementById('tab-' + this.getAttribute('data-tab')).classList.add('active');
+                    saveAllFormValues();
+                });
+
+                btn.addEventListener('keydown', function(e) {
+                    var currentIndex = Array.prototype.indexOf.call(tabBtns, this);
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        var nextIndex = e.key === 'ArrowRight' ? (currentIndex + 1) % tabBtns.length : (currentIndex + tabBtns.length - 1) % tabBtns.length;
+                        tabBtns[nextIndex].focus();
+                        tabBtns[nextIndex].click();
+                    }
                 });
             });
 
+            var STORAGE_PREFIX = 'freelancerCalc:';
+            var CURRENCY_RATES = { eur: 1, usd: 1.08, gbp: 0.85, chf: 0.96 };
+            var CURRENCY_SYMBOLS = { eur: '€', usd: '$', gbp: '£', chf: 'CHF' };
+
             function fmt(n) { return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
+
+            function storeFieldValue(id, value) {
+                try { localStorage.setItem(STORAGE_PREFIX + id, String(value)); } catch (e) { }
+            }
+
+            function getStoredValue(id) {
+                try { return localStorage.getItem(STORAGE_PREFIX + id); } catch (e) { return null; }
+            }
+
+            function saveAllFormValues() {
+                document.querySelectorAll('#rateForm input, #rateForm select, #projectForm input, #projectForm select, #taxForm input, #taxForm select').forEach(function(el) {
+                    if (el.id) { storeFieldValue(el.id, el.value); }
+                });
+                var activeTab = document.querySelector('.tab-btn.active');
+                if (activeTab) { storeFieldValue('activeTab', activeTab.getAttribute('data-tab')); }
+            }
+
+            function restoreStoredValues() {
+                document.querySelectorAll('#rateForm input, #rateForm select, #projectForm input, #projectForm select, #taxForm input, #taxForm select').forEach(function(el) {
+                    if (!el.id) { return; }
+                    var value = getStoredValue(el.id);
+                    if (value !== null) { el.value = value; }
+                });
+                if (utilizationSlider && utilizationValue) {
+                    utilizationValue.textContent = utilizationSlider.value + '%';
+                }
+                var storedTab = getStoredValue('activeTab');
+                if (storedTab) {
+                    var tabBtn = document.querySelector('.tab-btn[data-tab="' + storedTab + '"]');
+                    if (tabBtn) { tabBtn.click(); }
+                }
+            }
+
+            function attachStorageListeners() {
+                document.querySelectorAll('#rateForm input, #rateForm select, #projectForm input, #projectForm select, #taxForm input, #taxForm select').forEach(function(el) {
+                    if (el.type === 'range') {
+                        el.addEventListener('input', function() {
+                            if (this.id) { storeFieldValue(this.id, this.value); }
+                        });
+                    }
+                    el.addEventListener('change', function() {
+                        if (this.id) { storeFieldValue(this.id, this.value); }
+                    });
+                });
+            }
 
             var utilizationSlider = document.getElementById('utilizationRate');
             var utilizationValue = document.getElementById('utilizationRateValue');
@@ -329,17 +424,36 @@
                 });
                 document.getElementById('rateForm').addEventListener('reset', function() {
                     utilizationValue.textContent = utilizationSlider.value + '%';
+                    clearRateError();
+                    saveAllFormValues();
                 });
             }
 
+            restoreStoredValues();
+            attachStorageListeners();
+
+            function clearRateError() {
+                var rateError = document.getElementById('rateError');
+                if (rateError) {
+                    rateError.textContent = '';
+                    rateError.style.display = 'none';
+                }
+            }
+
             function showRateError(message) {
-                document.getElementById('rateResults').innerHTML = ''
-                    + '<div class="result-card"><div class="result-label">Fehler</div><div class="result-value" style="color:#f87171;">' + message + '</div></div>';
-                document.getElementById('rateOutput').classList.add('visible');
+                clearRateError();
+                document.getElementById('rateResults').innerHTML = '';
+                document.getElementById('rateOutput').classList.remove('visible');
+                var rateError = document.getElementById('rateError');
+                if (rateError) {
+                    rateError.textContent = message;
+                    rateError.style.display = 'block';
+                }
             }
 
             document.getElementById('rateForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                saveAllFormValues();
                 var income = parseFloat(document.getElementById('targetIncome').value) || 50000;
                 var days = parseFloat(document.getElementById('workingDays').value) || 220;
                 var hours = parseFloat(document.getElementById('hoursPerDay').value) || 6;
@@ -370,10 +484,9 @@
                     return;
                 }
                 var rate = grossNeed / billable;
-                var curSymbol = '€', curFactor = 1;
-                if (cur === 'usd') { curSymbol = '$'; curFactor = 1.08; }
-                else if (cur === 'gbp') { curSymbol = '£'; curFactor = 0.85; }
-                else if (cur === 'chf') { curSymbol = 'CHF'; curFactor = 0.96; }
+                var curFactor = CURRENCY_RATES[cur] || 1;
+                var curSymbol = CURRENCY_SYMBOLS[cur] || '€';
+                clearRateError();
                 document.getElementById('rateResults').innerHTML = ''
                     + '<div class="result-card"><div class="result-label">Notwendiger Stundensatz (netto)</div><div class="result-value primary">' + (rate * curFactor).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ' + curSymbol + '</div><div class="result-detail">' + fmt(rate) + ' pro Stunde netto</div></div>'
                     + '<div class="result-card"><div class="result-label">Abrechenbare Stunden pro Jahr</div><div class="result-value">' + Math.round(billable) + ' h</div><div class="result-detail">' + days + ' Tage × ' + hours + ' h × ' + (utilization * 100).toFixed(0) + '% Auslastung</div></div>'
@@ -388,22 +501,39 @@
                 document.getElementById('rateOutput').classList.remove('visible');
             });
 
+            function clearProjectError() {
+                var projectError = document.getElementById('projectError');
+                projectError.textContent = '';
+                projectError.style.display = 'none';
+            }
+
             function showProjectError(message) {
-                document.getElementById('projectResults').innerHTML = ''
-                    + '<div class="result-card"><div class="result-label">Fehler</div><div class="result-value" style="color:#f87171;">' + message + '</div></div>';
-                document.getElementById('projectOutput').classList.add('visible');
+                clearProjectError();
+                document.getElementById('projectResults').innerHTML = '';
+                document.getElementById('projectOutput').classList.remove('visible');
+                var projectError = document.getElementById('projectError');
+                projectError.textContent = message;
+                projectError.style.display = 'block';
+            }
+
+            function clearTaxError() {
+                var taxError = document.getElementById('taxError');
+                taxError.textContent = '';
+                taxError.style.display = 'none';
             }
 
             function showTaxError(message) {
-                document.getElementById('taxResults').innerHTML = ''
-                    + '<div class="result-card"><div class="result-label">Fehler</div><div class="result-value" style="color:#f87171;">' + message + '</div></div>';
-                document.getElementById('taxOutput').classList.add('visible');
+                clearTaxError();
+                document.getElementById('taxResults').innerHTML = '';
+                document.getElementById('taxOutput').classList.remove('visible');
+                var taxError = document.getElementById('taxError');
+                taxError.textContent = message;
+                taxError.style.display = 'block';
             }
-
-            window.resetTab = function(tab) { document.getElementById(tab + 'Output').classList.remove('visible'); };
 
             document.getElementById('projectForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                saveAllFormValues();
                 var rate = parseFloat(document.getElementById('hourlyRate').value) || 85;
                 var hours = parseFloat(document.getElementById('projectHours').value) || 40;
                 var vat = parseFloat(document.getElementById('vatRate').value) || 19;
@@ -442,16 +572,25 @@
 
             document.getElementById('projectForm').addEventListener('reset', function() {
                 document.getElementById('projectOutput').classList.remove('visible');
+                clearProjectError();
+                saveAllFormValues();
             });
 
             document.getElementById('taxForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                saveAllFormValues();
+                clearTaxError();
                 var revenue = parseFloat(document.getElementById('annualRevenue').value) || 80000;
+                var vatRateTax = parseFloat(document.getElementById('vatRateTax').value);
                 var taxRate = parseFloat(document.getElementById('taxRateTax').value) || 35;
                 var social = parseFloat(document.getElementById('socialContributions').value) || 6000;
                 var costs = parseFloat(document.getElementById('businessCosts').value) || 5000;
                 if (revenue < 0) {
                     showTaxError('Der Jahresumsatz darf nicht negativ sein.');
+                    return;
+                }
+                if (vatRateTax < 0 || vatRateTax > 100) {
+                    showTaxError('Der MwSt.-Satz muss zwischen 0% und 100% liegen.');
                     return;
                 }
                 if (taxRate < 0 || taxRate >= 100) {
@@ -462,7 +601,7 @@
                     showTaxError('Sozialabgaben und Betriebsausgaben dürfen nicht negativ sein.');
                     return;
                 }
-                var vatShare = revenue / 119 * 19;
+                var vatShare = vatRateTax > 0 ? revenue * vatRateTax / (100 + vatRateTax) : 0;
                 var nettoUmsatz = revenue - vatShare;
                 var gewinn = nettoUmsatz - costs;
                 if (gewinn <= 0) {
@@ -479,7 +618,7 @@
                 var tbody2 = document.querySelector('#taxTable tbody');
                 tbody2.innerHTML = ''
                     + '<tr><td>Jahresumsatz brutto</td><td>' + fmt(revenue) + '</td></tr>'
-                    + '<tr><td>Enthaltene MwSt. (19%)</td><td>' + fmt(vatShare) + '</td></tr>'
+                    + '<tr><td>Enthaltene MwSt. (' + vatRateTax + '%)</td><td>' + fmt(vatShare) + '</td></tr>'
                     + '<tr><td>Umsatz netto</td><td>' + fmt(nettoUmsatz) + '</td></tr>'
                     + '<tr><td>Betriebsausgaben</td><td>− ' + fmt(costs) + '</td></tr>'
                     + '<tr><td><strong>Gewinn</strong></td><td><strong>' + fmt(gewinn) + '</strong></td></tr>'
@@ -487,6 +626,12 @@
                     + '<tr><td>Sozialabgaben</td><td>− ' + fmt(social) + '</td></tr>'
                     + '<tr style="border-top:2px solid var(--accent-primary)"><td><strong>Netto nach Steuern</strong></td><td><strong>' + fmt(nettoNachSteuern) + '</strong></td></tr>';
                 document.getElementById('taxOutput').classList.add('visible');
+            });
+
+            document.getElementById('taxForm').addEventListener('reset', function() {
+                document.getElementById('taxOutput').classList.remove('visible');
+                clearTaxError();
+                saveAllFormValues();
             });
         })();
     </script>

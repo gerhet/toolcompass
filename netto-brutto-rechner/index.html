@@ -30,6 +30,7 @@
         .form-group input:focus,.form-group select:focus{border-color:var(--accent-primary);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
         .form-group select option{background:var(--bg-dark);color:white}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+        .error-text{color:#f87171;font-size:0.95rem;margin-bottom:1rem}
         @media(max-width:600px){.form-row{grid-template-columns:1fr;gap:0}}
         .btn-group{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem}
         .btn-primary{background:linear-gradient(135deg,var(--accent-primary),#4f46e5);color:white;padding:1rem 2rem;border-radius:12px;font-weight:700;cursor:pointer;border:none;font-size:1rem;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 15px rgba(99,102,241,0.3)}
@@ -46,6 +47,7 @@
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
 </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -64,6 +66,7 @@
 </div>
 
                 <form id="convForm" novalidate>
+                    <div id="convError" class="error-text" style="display:none;"></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="amount">Betrag (€)</label>
@@ -88,7 +91,7 @@
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn-primary">Berechnen</button>
-                        <button type="button" class="btn-secondary" onclick="document.getElementById('convForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                        <button type="button" class="btn-secondary" onclick="resetConvForm()">Zurücksetzen</button>
                     </div>
                 </form>
             </div>
@@ -119,16 +122,34 @@
             </div>
         </main>
     </div>
+    <div class="ad-container"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6224001325349919" data-ad-slot="5162949474" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div>
     <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
     <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
-        document.getElementById('convForm').addEventListener('submit', function(e) {
+        const convForm = document.getElementById('convForm');
+        const convError = document.getElementById('convError');
+        const convResultCard = document.getElementById('resultCard');
+
+        function showConvError(message) {
+            convError.textContent = message;
+            convError.style.display = 'block';
+            convResultCard.classList.remove('visible');
+        }
+
+        function clearConvError() {
+            convError.textContent = '';
+            convError.style.display = 'none';
+        }
+
+        convForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var amount = parseFloat(document.getElementById('amount').value);
-            var rate = parseFloat(document.getElementById('taxRate').value);
-            var modus = document.querySelector('input[name="modus"]:checked').value;
-            if (isNaN(amount) || amount < 0) { alert('Bitte gib einen gültigen Betrag ein.'); return; }
-            var fromVal, toVal, taxVal, fromLabel, toLabel;
+            clearConvError();
+            const amount = parseFloat(document.getElementById('amount').value);
+            const rate = parseFloat(document.getElementById('taxRate').value);
+            const modus = document.querySelector('input[name="modus"]:checked').value;
+            if (isNaN(amount) || amount < 0) { showConvError('Bitte gib einen gültigen Betrag ein.'); return; }
+            if (isNaN(rate) || rate < 0) { showConvError('Bitte wähle einen gültigen Steuersatz aus.'); return; }
+            let fromVal, toVal, taxVal, fromLabel, toLabel;
             if (modus === 'netto') {
                 fromVal = amount;
                 toVal = amount * (1 + rate / 100);
@@ -146,8 +167,15 @@
             document.getElementById('resultFrom').textContent = fromVal.toFixed(2).replace(/\./g, ',') + ' €';
             document.getElementById('resultTo').textContent = toVal.toFixed(2).replace(/\./g, ',') + ' €';
             document.getElementById('resultTax').textContent = taxVal.toFixed(2).replace(/\./g, ',') + ' €';
-            document.getElementById('resultCard').classList.add('visible');
+            convResultCard.classList.add('visible');
         });
+
+        function resetConvForm() {
+            convForm.reset();
+            clearConvError();
+            convResultCard.classList.remove('visible');
+            document.querySelector('input[name="modus"][value="netto"]').checked = true;
+        }
     </script>
 </body>
 </html>

@@ -7,8 +7,10 @@
     <title>Projektplaner für Handwerker – Baustellen-Management</title>
     <meta name="description" content="Plane deine Baustellenprojekte: Aufgaben, Meilensteine, Budget & Zeitplan. Inkl. Ampelsystem & PDF-Export. Kostenlos, 100% Client-Side.">
     <link rel="canonical" href="https://toolcompass.org/projektplaner/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -30,6 +32,18 @@
         .budget-bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
         @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Projektplaner",
+      "url": "https://toolcompass.org/projektplaner/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web",
+      "description": "Plane und analysiere deine Projekte",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -41,6 +55,7 @@
     </header>
 
     <div class="tool-interface">
+<form id="projectForm" novalidate>
 <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
     <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Hinweis</p>
     <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechner dient nur der Orientierung. Die berechneten Werte sind unverbindlich. Konsultiere im Zweifel einen Fachmann (Steuerberater, Arzt, etc.). Wir übernehmen keine Haftung für Folgen aus der Nutzung.</p>
@@ -69,9 +84,10 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-primary" onclick="projektAnalysieren()">Projekt analysieren</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">Projekt analysieren</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
+</form>
 
         <div class="result-card" id="resultCard">
             <div class="section-label">📊 Projektstatus</div>
@@ -79,10 +95,19 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zum Projektplaner</h2>
-        <details><summary>Wie viele Tage sollte ich pro Aufgabe einplanen?</summary><div class="faq-answer"><p>Kalkuliere realistisch und addiere 20% Puffer für Verzögerungen (Wetter, Lieferengpässe, Krankheit). Unser Ampelsystem hilft dir, den Überblick zu behalten.</p></div></details>
-        <details><summary>Was bedeutet das Ampelsystem?</summary><div class="faq-answer"><p>Grün = erledigt, Gelb = in Arbeit, Rot = ausstehend. So siehst du auf einen Blick, wo dein Projekt steht und wo Handlungsbedarf besteht.</p></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Wie viele Tage sollte ich pro Aufgabe einplanen?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Kalkuliere realistisch und addiere 20% Puffer für Verzögerungen (Wetter, Lieferengpässe, Krankheit). Unser Ampelsystem hilft dir, den Überblick zu behalten.</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Was bedeutet das Ampelsystem?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Grün = erledigt, Gelb = in Arbeit, Rot = ausstehend. So siehst du auf einen Blick, wo dein Projekt steht und wo Handlungsbedarf besteht.</p></div></div></details>
     </section>
 
     <footer>
@@ -97,6 +122,16 @@ const heute = new Date();
 document.getElementById('start').valueAsDate = heute;
 const ende = new Date(heute); ende.setDate(ende.getDate() + 14);
 document.getElementById('ende').valueAsDate = ende;
+
+const projectForm = document.getElementById('projectForm');
+projectForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    projektAnalysieren();
+});
+projectForm.addEventListener('reset', function() {
+    document.getElementById('resultCard').classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 function projektAnalysieren() {
     const name = document.getElementById('projektname').value;
@@ -145,18 +180,6 @@ function projektAnalysieren() {
         </div>
     `;
     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('projektname').value = 'Badezimmer-Sanierung Meier';
-    document.getElementById('kunde').value = 'Hans Meier';
-    document.getElementById('start').valueAsDate = new Date();
-    const ende = new Date(); ende.setDate(ende.getDate() + 14);
-    document.getElementById('ende').valueAsDate = ende;
-    document.getElementById('budget').value = 8500;
-    document.getElementById('ausgaben').value = 3200;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 </body>

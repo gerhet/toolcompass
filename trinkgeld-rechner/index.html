@@ -43,9 +43,11 @@
         .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
         .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
         .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .error-text{color:#f87171;font-size:0.95rem;margin-bottom:1rem}
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
 </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -64,6 +66,7 @@
 </div>
 
                 <form id="tipForm" novalidate>
+                    <div id="tipError" class="error-text" style="display:none;"></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="bill">Rechnungsbetrag (€)</label>
@@ -91,7 +94,7 @@
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn-primary">Berechnen</button>
-                        <button type="button" class="btn-secondary" onclick="document.getElementById('tipForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                        <button type="reset" class="btn-secondary">Zurücksetzen</button>
                     </div>
                 </form>
             </div>
@@ -123,22 +126,57 @@
             </div>
         </main>
     </div>
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
     <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
     <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
-        document.getElementById('tipForm').addEventListener('submit', function(e) {
+        const tipForm = document.getElementById('tipForm');
+        const tipError = document.getElementById('tipError');
+        const tipResultCard = document.getElementById('resultCard');
+
+        function showTipError(message) {
+            tipError.textContent = message;
+            tipError.style.display = 'block';
+            tipResultCard.classList.remove('visible');
+        }
+
+        function clearTipError() {
+            tipError.textContent = '';
+            tipError.style.display = 'none';
+        }
+
+        tipForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var bill = parseFloat(document.getElementById('bill').value);
-            var persons = parseInt(document.getElementById('persons').value);
-            var tipPct = parseFloat(document.getElementById('tipPercent').value);
-            if (isNaN(bill) || isNaN(persons) || isNaN(tipPct) || bill < 0 || persons < 1) { alert('Bitte gib gültige Werte ein.'); return; }
-            var tip = bill * tipPct / 100;
-            var total = bill + tip;
-            var perPerson = total / persons;
+            clearTipError();
+
+            const bill = parseFloat(document.getElementById('bill').value);
+            const persons = parseInt(document.getElementById('persons').value);
+            const tipPct = parseFloat(document.getElementById('tipPercent').value);
+
+            if (isNaN(bill) || isNaN(persons) || isNaN(tipPct) || bill < 0 || persons < 1) {
+                showTipError('Bitte gib gültige Werte ein.');
+                return;
+            }
+
+            const tip = bill * tipPct / 100;
+            const total = bill + tip;
+            const perPerson = total / persons;
             document.getElementById('tipAmount').textContent = tip.toFixed(2).replace(/\./g, ',') + ' €';
             document.getElementById('total').textContent = total.toFixed(2).replace(/\./g, ',') + ' €';
             document.getElementById('perPerson').textContent = perPerson.toFixed(2).replace(/\./g, ',') + ' €';
-            document.getElementById('resultCard').classList.add('visible');
+            tipResultCard.classList.add('visible');
+        });
+
+        tipForm.addEventListener('reset', function() {
+            clearTipError();
+            tipResultCard.classList.remove('visible');
         });
     </script>
 </body>

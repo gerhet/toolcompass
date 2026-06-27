@@ -7,8 +7,10 @@
     <title>Anfahrtskosten-Rechner für Handwerker – Kostenlos</title>
     <meta name="description" content="Berechne Anfahrtskosten zur Baustelle: km-Geld, Zeitaufwand, Maut & Parkgebühren. Inkl. Sperrbezirke für München, Köln & Berlin.">
     <link rel="canonical" href="https://toolcompass.org/anfahrtskosten-rechner/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -34,6 +36,18 @@
         .tip-box p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
         @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } .breakdown-grid { grid-template-columns: 1fr; } .result-value { font-size: 2.2rem; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Anfahrtskosten-Rechner",
+      "url": "https://toolcompass.org/anfahrtskosten-rechner/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne Anfahrtskosten für Handwerker",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -49,7 +63,7 @@
     <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Hinweis</p>
     <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechner dient nur der Orientierung. Die berechneten Werte sind unverbindlich. Konsultiere im Zweifel einen Fachmann (Steuerberater, Arzt, etc.). Wir übernehmen keine Haftung für Folgen aus der Nutzung.</p>
 </div>
-
+<form id="travelForm" novalidate>
         <div class="input-row">
             <div class="input-group">
                 <label for="entfernung">Einfache Entfernung (km)</label>
@@ -128,9 +142,11 @@
             <input type="number" id="maut" value="0" min="0" max="100" step="1">
         </div>
 
+        <div id="travelError" class="error-text" style="display:none;"></div>
+
         <div class="btn-group">
-            <button class="btn-primary" onclick="berechnen()">Anfahrtskosten berechnen</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">Anfahrtskosten berechnen</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
 
         <div class="result-card" id="resultCard">
@@ -169,31 +185,40 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zu Anfahrtskosten</h2>
-        <details>
-            <summary>Kann ich Anfahrtskosten dem Kunden berechnen?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Kann ich Anfahrtskosten dem Kunden berechnen?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Ja, die Anfahrt ist eine reguläre Leistung, die du abrechnen kannst. Viele Handwerker berechnen entweder das km-Geld plus Fahrzeit oder eine Anfahrtspauschale (z.B. 25–50 € pro Einsatz). Wichtig: Transparent im Angebot ausweisen!</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Welcher km-Satz ist steuerlich anerkannt?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Welcher km-Satz ist steuerlich anerkannt?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Das Finanzamt erkennt 0,30 € pro km für PKW und 0,38 € für Transporter an. Tatsächlich liegen die Kosten oft höher – unser Rechner hilft dir, den realen Satz zu ermitteln.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Was ist eine Sperrzone / Umweltzone?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Was ist eine Sperrzone / Umweltzone?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Viele deutsche Städte haben Umweltzonen, die nur Fahrzeuge mit Grüner Plakette (Euro 4+) zulassen. Für ältere Transporter kann dies ein Fahrverbot bedeuten. München, Köln, Berlin, Stuttgart und Hamburg haben besonders strenge Regelungen.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Wie oft kann ich Anfahrt berechnen?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Wie oft kann ich Anfahrt berechnen?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Bei jedem Kundenbesuch. Bei Großbaustellen mit mehreren Tagen Einsatz ist üblich: 1x Anfahrt zu Beginn + 1x Abfahrt am Ende des Projekts. Bei täglicher Anfahrt kann pro Tag abgerechnet werden.</p>
-            </div>
+            </div></div>
         </details>
     </section>
 
@@ -218,13 +243,40 @@ const verbrauchMap = {
     elektro: 0
 };
 
+const travelForm = document.getElementById('travelForm');
+const travelError = document.getElementById('travelError');
+const travelResultCard = document.getElementById('resultCard');
+
 function toggleZone() {
     document.getElementById('zoneInfo').classList.toggle('visible', document.getElementById('sperrzone').checked);
 }
 
+function showTravelError(message) {
+    travelError.textContent = message;
+    travelError.style.display = 'block';
+    travelResultCard.classList.remove('visible');
+}
+
+function clearTravelError() {
+    travelError.textContent = '';
+    travelError.style.display = 'none';
+}
+
+travelForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearTravelError();
+    berechnen();
+});
+
+travelForm.addEventListener('reset', function() {
+    clearTravelError();
+    travelResultCard.classList.remove('visible');
+    document.getElementById('zoneInfo').classList.remove('visible');
+});
+
 function berechnen() {
-    const entfernung = parseFloat(document.getElementById('entfernung').value) || 0;
-    const anzahlFahrten = parseInt(document.getElementById('anzahl_fahrten').value) || 1;
+    const entfernung = parseFloat(document.getElementById('entfernung').value);
+    const anzahlFahrten = parseInt(document.getElementById('anzahl_fahrten').value);
     const fahrzeug = document.getElementById('fahrzeugtyp').value;
     const kraftstoffpreis = parseFloat(document.getElementById('kraftstoffpreis').value) || 1.85;
     const kmSatz = parseFloat(document.getElementById('km_satz').value) || 0.38;
@@ -233,6 +285,19 @@ function berechnen() {
     const parkgebuehr = parseFloat(document.getElementById('parkgebuehr').value) || 0;
     const maut = parseFloat(document.getElementById('maut').value) || 0;
     const sperrzone = document.getElementById('sperrzone').checked;
+
+    if (isNaN(entfernung) || entfernung <= 0) {
+        showTravelError('Bitte gib eine gültige Entfernung größer als 0 km ein.');
+        return;
+    }
+    if (isNaN(anzahlFahrten) || anzahlFahrten <= 0) {
+        showTravelError('Bitte gib eine gültige Anzahl von Fahrten ein.');
+        return;
+    }
+    if (isNaN(geschwindigkeit) || geschwindigkeit <= 0) {
+        showTravelError('Bitte gib eine gültige Durchschnittsgeschwindigkeit ein.');
+        return;
+    }
 
     const gesamtKm = entfernung * 2 * anzahlFahrten; // Hin + Rück
     const verbrauch = verbrauchMap[fahrzeug] || 0;
@@ -268,7 +333,7 @@ function berechnen() {
     // Weitergabe-Tipp
     const empfehlungKunde = (kmKosten + zeitKosten).toFixed(2).replace('.', ',');
     const pauschale = (entfernung <= 15 ? 25 : entfernung <= 30 ? 35 : 50);
-    document.getElementById('weitergabeTipp').innerHTML = 'Du kannst die Anfahrtskosten dem Kunden berechnen. <strong>Empfohlen für diesen Einsatz:</strong> ' + empfehlungKosten + ' € (km-Geld + Zeit) oder eine <strong>Pauschale von ' + pauschale + ' €</strong>.';
+    document.getElementById('weitergabeTipp').innerHTML = 'Du kannst die Anfahrtskosten dem Kunden berechnen. <strong>Empfohlen für diesen Einsatz:</strong> ' + empfehlungKunde + ' € (km-Geld + Zeit) oder eine <strong>Pauschale von ' + pauschale + ' €</strong>.';
 
     // Gesamtübersicht
     document.getElementById('gesamtUebersicht').innerHTML = 
@@ -280,21 +345,6 @@ function berechnen() {
     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('entfernung').value = 25;
-    document.getElementById('anzahl_fahrten').value = 1;
-    document.getElementById('fahrzeugtyp').value = 'transporter';
-    document.getElementById('kraftstoffpreis').value = 1.85;
-    document.getElementById('km_satz').value = '0.38';
-    document.getElementById('stundensatz').value = 65;
-    document.getElementById('durchschnittsgeschwindigkeit').value = 50;
-    document.getElementById('parkgebuehr').value = 0;
-    document.getElementById('maut').value = 0;
-    document.getElementById('sperrzone').checked = false;
-    document.getElementById('zoneInfo').classList.remove('visible');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 </script>
 </body>
 </html>

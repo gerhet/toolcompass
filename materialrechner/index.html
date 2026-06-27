@@ -7,8 +7,10 @@
     <title>Materialrechner für Handwerker – Flächen, Mengen & Kosten</title>
     <meta name="description" content="Berechne Materialbedarf für Fliesen, Laminat, Farbe, Estrich & mehr. Inkl. Verschnitt, Kosten pro m² und Gesamtkosten. Kostenlos, 100% Client-Side.">
     <link rel="canonical" href="https://toolcompass.org/materialrechner/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -24,6 +26,7 @@
         .input-group input, .input-group select { width: 100%; padding: 0.8rem 1rem; background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 10px; color: white; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.2s; }
         .input-group input:focus, .input-group select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
         .input-group select option { background: var(--bg-dark); color: white; }
+        .error-text { color: #f87171; font-size: 0.95rem; margin-bottom: 1rem; }
         .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
         .range-value { color: var(--accent-secondary); font-weight: 700; }
@@ -37,6 +40,18 @@
         .material-table .total td { font-weight: 700; color: var(--accent-secondary); border-top: 2px solid var(--border); }
         @media (max-width: 600px) { .input-row, .input-row-3 { grid-template-columns: 1fr; } .breakdown-grid { grid-template-columns: 1fr; } .result-value { font-size: 1.8rem; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Materialrechner",
+      "url": "https://toolcompass.org/materialrechner/",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "Web",
+      "description": "Berechne Materialbedarf für Fliesen, Laminat & Farbe",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -52,7 +67,8 @@
     <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Hinweis</p>
     <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechner dient nur der Orientierung. Die berechneten Werte sind unverbindlich. Konsultiere im Zweifel einen Fachmann (Steuerberater, Arzt, etc.). Wir übernehmen keine Haftung für Folgen aus der Nutzung.</p>
 </div>
-
+<form id="materialForm" novalidate>
+    <div id="materialError" class="error-text" style="display:none;"></div>
         <div class="input-row">
             <div class="input-group">
                 <label for="materialtyp">Materialtyp</label>
@@ -139,9 +155,10 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-primary" onclick="berechnen()">Materialbedarf berechnen</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">Materialbedarf berechnen</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
+        </form>
 
         <div class="result-card" id="resultCard">
             <div class="result-label">Gesamtmaterialbedarf</div>
@@ -185,31 +202,40 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zum Materialrechner</h2>
-        <details>
-            <summary>Wie viel Verschnitt sollte ich einplanen?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Wie viel Verschnitt sollte ich einplanen?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Fliesen: 10–15% (gerade Verlegung) bis 20% (diagonal). Laminat: 8–12%. Farbe: 5–10%. Tapete: 10–15%. Bei komplexen Räumen (L-Form, viele Ecken) immer den höheren Wert wählen.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Wie berechne ich die richtige Farbmenge?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Wie berechne ich die richtige Farbmenge?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Ein Liter Farbe reicht je nach Untergrund für 6–10 m² pro Anstrich. Bei dunklen Untergründen oder deckungsschwachen Farben sind 2 Anstriche nötig. Unser Rechner geht von 8 m²/Liter aus.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Was kostet ein Quadratmeter Fliesenlegen?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Was kostet ein Quadratmeter Fliesenlegen?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Die Kosten variieren stark: Fliesenlegen 25–60 €/m², Laminat verlegen 15–30 €/m², Tapezieren 10–20 €/m², Streichen 8–15 €/m². Hinzu kommen Materialkosten und ggf. Untergrundvorbereitung.</p>
-            </div>
+            </div></div>
         </details>
-        <details>
-            <summary>Wie berechne ich eine L-förmige Fläche?</summary>
-            <div class="faq-answer">
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <summary itemprop="name">Wie berechne ich eine L-förmige Fläche?</summary>
+            <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">
                 <p>Teile den Raum in zwei Rechtecke auf. Berechne die Fläche jedes Rechtecks (Länge × Breite) und addiere sie. Unser Rechner macht das automatisch für dich.</p>
-            </div>
+            </div></div>
         </details>
     </section>
 
@@ -226,8 +252,64 @@
 <script defer>
 document.getElementById('year').textContent = new Date().getFullYear();
 
+const materialForm = document.getElementById('materialForm');
+const materialError = document.getElementById('materialError');
+const resultCard = document.getElementById('resultCard');
 const verschnittSlider = document.getElementById('verschnitt');
 verschnittSlider.addEventListener('input', () => document.getElementById('verschnittValue').textContent = verschnittSlider.value + '%');
+
+function showMaterialError(message) {
+    materialError.textContent = message;
+    materialError.style.display = 'block';
+    resultCard.classList.remove('visible');
+}
+
+function clearMaterialError() {
+    materialError.textContent = '';
+    materialError.style.display = 'none';
+}
+
+materialForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearMaterialError();
+    const typ = document.getElementById('materialtyp').value;
+    const form = document.getElementById('raumform').value;
+    const materialpreis = parseFloat(document.getElementById('materialpreis').value);
+    const hoehe = parseFloat(document.getElementById('hoehe').value);
+    const verschnittProzent = parseInt(document.getElementById('verschnitt').value, 10);
+
+    if (isNaN(materialpreis) || materialpreis < 0) { showMaterialError('Bitte gib einen gültigen Materialpreis ein.'); return; }
+    if (isNaN(hoehe) || hoehe < 0) { showMaterialError('Bitte gib eine gültige Raumhöhe ein.'); return; }
+    if (isNaN(verschnittProzent) || verschnittProzent < 0) { showMaterialError('Bitte gib einen gültigen Verschnittwert an.'); return; }
+
+    if (form === 'rechteck') {
+        const laenge = parseFloat(document.getElementById('laenge').value);
+        const breite = parseFloat(document.getElementById('breite').value);
+        if (isNaN(laenge) || laenge <= 0 || isNaN(breite) || breite <= 0) { showMaterialError('Bitte gib gültige Raummaße für Länge und Breite an.'); return; }
+    }
+    if (form === 'l-förmig') {
+        const l1 = parseFloat(document.getElementById('l_laenge1').value);
+        const b1 = parseFloat(document.getElementById('l_breite1').value);
+        const l2 = parseFloat(document.getElementById('l_laenge2').value);
+        const b2 = parseFloat(document.getElementById('l_breite2').value);
+        if ([l1, b1, l2, b2].some(v => isNaN(v) || v <= 0)) { showMaterialError('Bitte gib gültige Maße für alle L-Form Eingaben an.'); return; }
+    }
+    if (form === 'kreis') {
+        const d = parseFloat(document.getElementById('durchmesser').value);
+        if (isNaN(d) || d <= 0) { showMaterialError('Bitte gib einen gültigen Durchmesser an.'); return; }
+    }
+    berechnen();
+});
+
+materialForm.addEventListener('reset', function() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('raumform').value = 'rechteck';
+    document.getElementById('rechteckInputs').style.display = '';
+    document.getElementById('lfoermigInputs').style.display = 'none';
+    document.getElementById('kreisInputs').style.display = 'none';
+    updateMaterialPresets();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 // Material-Presets
 const materialPresets = {
@@ -376,23 +458,6 @@ function berechnen() {
     document.getElementById('materialTipp').textContent = tipps[typ] || 'Bestelle immer etwas mehr Material als berechnet. Rückgabe von überschüssigem Material ist oft möglich – frage im Fachhandel nach.';
 
     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('materialtyp').value = 'fliesen';
-    document.getElementById('raumform').value = 'rechteck';
-    document.getElementById('laenge').value = 5;
-    document.getElementById('breite').value = 4;
-    document.getElementById('hoehe').value = 2.5;
-    document.getElementById('verschnitt').value = 10;
-    document.getElementById('verschnittValue').textContent = '10%';
-    document.getElementById('materialpreis').value = 25;
-    document.getElementById('arbeitskosten').value = 0;
-    document.getElementById('rechteckInputs').style.display = '';
-    document.getElementById('lfoermigInputs').style.display = 'none';
-    document.getElementById('kreisInputs').style.display = 'none';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Initial

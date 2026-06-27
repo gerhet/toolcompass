@@ -7,8 +7,10 @@
     <title>Rechnungsgenerator für Handwerker – Kostenlos PDF</title>
     <meta name="description" content="Erstelle professionelle Rechnungen für Handwerker und Freelancer. Inkl. MwSt., Rabatt, Zahlungsziel & PDF-Druck. Kostenlos, 100% Client-Side.">
     <link rel="canonical" href="https://toolcompass.org/rechnungsgenerator/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -30,6 +32,18 @@
         .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
         @media (max-width: 600px) { .input-row, .input-row-3 { grid-template-columns: 1fr; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Rechnungsgenerator",
+      "url": "https://toolcompass.org/rechnungsgenerator/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Erstelle professionelle Rechnungen",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -41,6 +55,7 @@
     </header>
 
     <div class="tool-interface">
+<form id="invoiceForm" novalidate>
         <div style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;">
             <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Rechtlicher Hinweis</p>
             <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechnungsgenerator dient nur der Unterstützung. Die erstellten Rechnungen müssen auf ihre rechtliche Korrektheit überprüft werden. Wir übernehmen keine Haftung für fehlerhafte Angaben. Im Zweifel konsultiere einen Steuerberater oder Rechtsanwalt.</p>
@@ -96,9 +111,10 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-primary" onclick="rechnungErstellen()">Rechnung erstellen</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">Rechnung erstellen</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
+</form>
 
         <div class="result-card" id="resultCard">
             <div class="section-label">📄 Rechnungsvorschau</div>
@@ -109,11 +125,20 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zum Rechnungsgenerator</h2>
-        <details><summary>Muss ich als Handwerker MwSt. ausweisen?</summary><div class="faq-answer"><p>Ja, als regulärer Handwerker musst du die Umsatzsteuer ausweisen. Als Kleinunternehmer (§19 UStG) kannst du auf die MwSt. verzichten. Wähle einfach den passenden Satz im Rechner.</p></div></details>
-        <details><summary>Was ist eine gültige Rechnungsnummer?</summary><div class="faq-answer"><p>Rechnungsnummern müssen einmalig und fortlaufend sein. Üblich sind Formate wie RE-2026-001 oder 2026-001. Das Finanzamt akzeptiert jedes System, solange es nachvollziehbar ist.</p></div></details>
-        <details><summary>Wie lange ist das Zahlungsziel?</summary><div class="faq-answer"><p>Üblich sind 14 Tage. Bei Geschäftskunden sind auch 30 Tage möglich. Ab dem 15. Tag nach Rechnungsdatum kannst du Verzugszinsen verlangen (9% über Basiszinssatz).</p></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Muss ich als Handwerker MwSt. ausweisen?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Ja, als regulärer Handwerker musst du die Umsatzsteuer ausweisen. Als Kleinunternehmer (§19 UStG) kannst du auf die MwSt. verzichten. Wähle einfach den passenden Satz im Rechner.</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Was ist eine gültige Rechnungsnummer?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Rechnungsnummern müssen einmalig und fortlaufend sein. Üblich sind Formate wie RE-2026-001 oder 2026-001. Das Finanzamt akzeptiert jedes System, solange es nachvollziehbar ist.</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Wie lange ist das Zahlungsziel?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Üblich sind 14 Tage. Bei Geschäftskunden sind auch 30 Tage möglich. Ab dem 15. Tag nach Rechnungsdatum kannst du Verzugszinsen verlangen (9% über Basiszinssatz).</p></div></div></details>
     </section>
 
     <footer>
@@ -125,6 +150,17 @@
 <script defer>
 document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('rechnungs_datum').valueAsDate = new Date();
+
+const invoiceForm = document.getElementById('invoiceForm');
+invoiceForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    rechnungErstellen();
+});
+invoiceForm.addEventListener('reset', function() {
+    document.getElementById('resultCard').classList.remove('visible');
+    document.getElementById('positionenContainer').innerHTML = '<div class="input-row position-row"><div class="input-group"><label>Bezeichnung</label><input type="text" class="pos-bezeichnung" value="Montagearbeiten Badezimmer"></div><div class="input-group"><label>Menge</label><input type="number" class="pos-menge" value="1" min="0" step="0.5"></div><div class="input-group"><label>Einzelpreis (€)</label><input type="number" class="pos-preis" value="850" min="0" step="0.5"></div></div><div class="input-row position-row"><div class="input-group"><label>Bezeichnung</label><input type="text" class="pos-bezeichnung" value="Material Fliesen"></div><div class="input-group"><label>Menge</label><input type="number" class="pos-menge" value="25" min="0" step="0.5"></div><div class="input-group"><label>Einzelpreis (€)</label><input type="number" class="pos-preis" value="35" min="0" step="0.5"></div></div>';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 function positionHinzufuegen() {
     const container = document.getElementById('positionenContainer');
@@ -199,24 +235,7 @@ function rechnungErstellen() {
 
 function drucken() { window.print(); }
 
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('absender_name').value = 'Max Mustermann';
-    document.getElementById('absender_strasse').value = 'Musterstraße 1';
-    document.getElementById('absender_plz').value = '12345 Musterstadt';
-    document.getElementById('absender_email').value = 'max@example.com';
-    document.getElementById('kunde_name').value = 'Hans Meier GmbH';
-    document.getElementById('kunde_strasse').value = 'Bahnhofstr. 10';
-    document.getElementById('kunde_plz').value = '54321 Kundendorf';
-    document.getElementById('kunde_email').value = '';
-    document.getElementById('rechnungs_nr').value = 'RE-2026-001';
-    document.getElementById('rechnungs_datum').valueAsDate = new Date();
-    document.getElementById('zahlungsziel').value = 14;
-    document.getElementById('mwst_satz').value = '19';
-    document.getElementById('rabatt').value = 0;
-    document.getElementById('anzahlung').value = 0;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+// Form reset handled by invoiceForm 'reset' listener
 </script>
 </body>
 </html>

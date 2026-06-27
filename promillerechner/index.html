@@ -64,6 +64,7 @@
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
 </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -82,6 +83,7 @@
 </div>
 
                 <form id="bacForm" novalidate>
+                    <div id="bacError" class="error-text" style="display:none;"></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="gender">Geschlecht</label>
@@ -151,6 +153,7 @@
                 <strong>⚠️ Wichtiger Hinweis:</strong> Dieser Rechner dient ausschließlich der Orientierung. Die Widmark-Formel liefert einen Näherungswert. Der tatsächliche Promillewert hängt von vielen individuellen Faktoren ab (Essen, Stoffwechsel, Medikamente, Gesundheitszustand). <strong>Setze dich niemals unter Alkoholeinfluss ans Steuer!</strong> Die gesetzliche Grenze in Deutschland beträgt 0,5 ‰ (0,0 ‰ in der Probezeit und unter 21 Jahren).
             </div>
 
+            <div class="ad-container"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6224001325349919" data-ad-slot="5162949474" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div>
             <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
                 <h2>Häufige Fragen zum Promillerechner</h2>
                 <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -228,12 +231,31 @@
                 addDrinkRow(0);
             });
 
-            document.getElementById('bacForm').addEventListener('submit', function(e) {
+            const bacForm = document.getElementById('bacForm');
+            const bacError = document.getElementById('bacError');
+            const resultCard = document.getElementById('resultCard');
+
+            function showBacError(message) {
+                bacError.textContent = message;
+                bacError.style.display = 'block';
+                resultCard.classList.remove('visible');
+                document.getElementById('warningBox').classList.remove('visible');
+                document.getElementById('successBox').classList.remove('visible');
+            }
+
+            function clearBacError() {
+                bacError.textContent = '';
+                bacError.style.display = 'none';
+            }
+
+            bacForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                clearBacError();
                 calculate();
             });
 
-            document.getElementById('resetBtn').addEventListener('click', function() {
+            bacForm.addEventListener('reset', function() {
+                clearBacError();
                 document.getElementById('gender').value = 'male';
                 document.getElementById('weight').value = 75;
                 document.getElementById('startTime').value = '20:00';
@@ -265,7 +287,7 @@
                 });
 
                 if (totalAlcohol <= 0) {
-                    alert('Bitte füge mindestens ein Getränk hinzu.');
+                    showBacError('Bitte füge mindestens ein Getränk hinzu.');
                     return;
                 }
 

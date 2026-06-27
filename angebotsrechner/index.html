@@ -7,8 +7,10 @@
     <title>Angebotsrechner für Handwerker – Kosten & Gewinn</title>
     <meta name="description" content="Kalkuliere Angebote für Handwerkerleistungen. Inkl. Material, Arbeitszeit, Anfahrt, Rabatt & Gewinnmarge. Kostenlos, 100% Client-Side.">
     <link rel="canonical" href="https://toolcompass.org/angebotsrechner/">
+    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
     <style>
         .result-card { background: rgba(3, 7, 18, 0.6); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; margin-top: 2rem; display: none; animation: fadeIn 0.5s ease-out; }
         .result-card.visible { display: block; }
@@ -25,6 +27,18 @@
         .breakdown-item .value { font-size: 1.1rem; font-weight: 700; color: white; }
         @media (max-width: 600px) { .input-row, .breakdown-grid { grid-template-columns: 1fr; } .result-value { font-size: 1.8rem; } }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Angebotsrechner",
+      "url": "https://toolcompass.org/angebotsrechner/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "description": "Kalkuliere Angebote mit Arbeitszeit & Material",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+    }
+    </script>
 </head>
 <body>
 <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -40,8 +54,10 @@
             <p style="color:#fbbf24;font-weight:600;margin-bottom:0.5rem;">⚠️ Rechtlicher Hinweis</p>
             <p style="color:var(--text-muted);font-size:0.85rem;line-height:1.6;">Dieser Rechner dient nur der Orientierung. Die berechneten Preise sind unverbindlich. Für rechtsgültige Angebote konsultiere einen Fachanwalt oder Steuerberater. Wir übernehmen keine Haftung für wirtschaftliche Folgen.</p>
         </div>
-        <div class="section-label">⏱️ Arbeitszeit</div>
-        <div class="input-row">
+        <form id="offerForm" novalidate>
+            <div id="offerError" class="error-text" style="display:none;margin-bottom:1rem;color:#f87171;"></div>
+            <div class="section-label">⏱️ Arbeitszeit</div>
+            <div class="input-row">
             <div class="input-group"><label for="arbeitsstunden">Arbeitsstunden</label><input type="number" id="arbeitsstunden" value="16" min="0" max="500" step="0.5"></div>
             <div class="input-group"><label for="stundensatz">Stundensatz (€/h)</label><input type="number" id="stundensatz" value="65" min="0" max="200" step="5"></div>
         </div>
@@ -64,9 +80,10 @@
         <div class="input-group"><label for="mwst">MwSt.-Satz</label><select id="mwst"><option value="19" selected>19%</option><option value="7">7%</option><option value="0">0% (Kleinunternehmer)</option></select></div>
 
         <div class="btn-group">
-            <button class="btn-primary" onclick="berechnen()">Angebot kalkulieren</button>
-            <button class="btn-secondary" onclick="resetForm()">Zurücksetzen</button>
+            <button type="submit" class="btn-primary">Angebot kalkulieren</button>
+            <button type="reset" class="btn-secondary">Zurücksetzen</button>
         </div>
+        </form>
 
         <div class="result-card" id="resultCard">
             <div class="result-label">Angebotssumme (netto)</div>
@@ -81,11 +98,20 @@
         </div>
     </div>
 
-    <section class="faq">
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
         <h2>Häufige Fragen zum Angebotsrechner</h2>
-        <details><summary>Welche Gewinnmarge ist üblich?</summary><div class="faq-answer"><p>Für Handwerker sind 10–20% Gewinnmarge üblich. Bei Spezialarbeiten oder knappen Kapazitäten können es auch 25–30% sein. Wichtig: Die Marge bezieht sich auf die Gesamtkosten (Arbeit + Material).</p></div></details>
-        <details><summary>Soll ich Material mit Gewinnaufschlag berechnen?</summary><div class="faq-answer"><p>Ja, viele Handwerker schlagen 10–20% auf das Material auf. Das deckt Beschaffungsaufwand, Lagerhaltung und Risiko. In unserem Rechner ist der Gewinn bereits in der Gesamtmarge enthalten.</p></div></details>
-        <details><summary>Wie detailliert muss ein Angebot sein?</summary><div class="faq-answer"><p>Ein Angebot sollte enthalten: Ihre Daten, Kundendaten, Leistungsbeschreibung, Einzelpreise, Gesamtsumme, MwSt., Gültigkeitsdauer und Zahlungsbedingungen.</p></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Welche Gewinnmarge ist üblich?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Für Handwerker sind 10–20% Gewinnmarge üblich. Bei Spezialarbeiten oder knappen Kapazitäten können es auch 25–30% sein. Wichtig: Die Marge bezieht sich auf die Gesamtkosten (Arbeit + Material).</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Soll ich Material mit Gewinnaufschlag berechnen?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Ja, viele Handwerker schlagen 10–20% auf das Material auf. Das deckt Beschaffungsaufwand, Lagerhaltung und Risiko. In unserem Rechner ist der Gewinn bereits in der Gesamtmarge enthalten.</p></div></div></details>
+        <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Wie detailliert muss ein Angebot sein?</summary><div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text"><p>Ein Angebot sollte enthalten: Ihre Daten, Kundendaten, Leistungsbeschreibung, Einzelpreise, Gesamtsumme, MwSt., Gültigkeitsdauer und Zahlungsbedingungen.</p></div></div></details>
     </section>
 
     <footer>
@@ -97,16 +123,43 @@
 <script defer>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-function berechnen() {
-    const std = parseFloat(document.getElementById('arbeitsstunden').value) || 0;
-    const satz = parseFloat(document.getElementById('stundensatz').value) || 0;
-    const mat = parseFloat(document.getElementById('material').value) || 0;
-    const anf = parseFloat(document.getElementById('anfahrt').value) || 0;
-    const ent = parseFloat(document.getElementById('entsorgung').value) || 0;
-    const sonst = parseFloat(document.getElementById('sonstige_kosten').value) || 0;
-    const marge = parseFloat(document.getElementById('gewinnmarge').value) || 0;
-    const rab = parseFloat(document.getElementById('rabatt').value) || 0;
-    const mwstSatz = parseFloat(document.getElementById('mwst').value) || 0;
+const offerForm = document.getElementById('offerForm');
+const offerError = document.getElementById('offerError');
+const resultCard = document.getElementById('resultCard');
+
+function formatMoney(value) {
+    return value.toFixed(2).replace('.', ',') + ' €';
+}
+
+function showOfferError(message) {
+    offerError.textContent = message;
+    offerError.style.display = 'block';
+    resultCard.classList.remove('visible');
+}
+
+function clearOfferError() {
+    offerError.textContent = '';
+    offerError.style.display = 'none';
+}
+
+offerForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearOfferError();
+    const std = parseFloat(document.getElementById('arbeitsstunden').value);
+    const satz = parseFloat(document.getElementById('stundensatz').value);
+    const mat = parseFloat(document.getElementById('material').value);
+    const anf = parseFloat(document.getElementById('anfahrt').value);
+    const ent = parseFloat(document.getElementById('entsorgung').value);
+    const sonst = parseFloat(document.getElementById('sonstige_kosten').value);
+    const marge = parseFloat(document.getElementById('gewinnmarge').value);
+    const rab = parseFloat(document.getElementById('rabatt').value);
+    const mwstSatz = parseFloat(document.getElementById('mwst').value);
+
+    if (isNaN(std) || std <= 0) { showOfferError('Bitte gib eine gültige Anzahl Arbeitsstunden ein.'); return; }
+    if (isNaN(satz) || satz < 0) { showOfferError('Bitte gib einen gültigen Stundensatz ein.'); return; }
+    if (isNaN(mat) || mat < 0) { showOfferError('Bitte gib gültige Materialkosten ein.'); return; }
+    if (isNaN(marge) || marge < 0 || marge > 100) { showOfferError('Bitte gib eine Gewinnmarge zwischen 0 und 100 % ein.'); return; }
+    if (isNaN(rab) || rab < 0 || rab > 100) { showOfferError('Bitte gib einen Rabatt zwischen 0 und 100 % ein.'); return; }
 
     const arbeitsKosten = std * satz;
     const materialGesamt = mat + anf + ent + sonst;
@@ -117,29 +170,20 @@ function berechnen() {
     const netto = nettoVorRabatt - rabattBetrag;
     const brutto = netto * (1 + mwstSatz / 100);
 
-    document.getElementById('resultCard').classList.add('visible');
-    document.getElementById('angebotNetto').textContent = netto.toFixed(2).replace('.',',') + ' €';
-    document.getElementById('angebotBruttoText').textContent = brutto.toFixed(2).replace('.',',') + ' € brutto (inkl. ' + document.getElementById('mwst').value + '% MwSt.)';
-    document.getElementById('arbeitsKosten').textContent = arbeitsKosten.toFixed(2).replace('.',',') + ' €';
-    document.getElementById('materialKosten').textContent = materialGesamt.toFixed(2).replace('.',',') + ' €';
-    document.getElementById('gewinnAnteil').textContent = gewinn.toFixed(2).replace('.',',') + ' €';
-    document.getElementById('rabattAnzeige').textContent = '-' + rabattBetrag.toFixed(2).replace('.',',') + ' €';
-    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+    resultCard.classList.add('visible');
+    document.getElementById('angebotNetto').textContent = formatMoney(netto);
+    document.getElementById('angebotBruttoText').textContent = formatMoney(brutto) + ' brutto (inkl. ' + document.getElementById('mwst').value + '% MwSt.)';
+    document.getElementById('arbeitsKosten').textContent = formatMoney(arbeitsKosten);
+    document.getElementById('materialKosten').textContent = formatMoney(materialGesamt);
+    document.getElementById('gewinnAnteil').textContent = formatMoney(gewinn);
+    document.getElementById('rabattAnzeige').textContent = '-' + formatMoney(rabattBetrag).replace(' €', '');
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 
-function resetForm() {
-    document.getElementById('resultCard').classList.remove('visible');
-    document.getElementById('arbeitsstunden').value = 16;
-    document.getElementById('stundensatz').value = 65;
-    document.getElementById('material').value = 450;
-    document.getElementById('anfahrt').value = 35;
-    document.getElementById('entsorgung').value = 0;
-    document.getElementById('sonstige_kosten').value = 0;
-    document.getElementById('gewinnmarge').value = 15;
-    document.getElementById('rabatt').value = 0;
-    document.getElementById('mwst').value = '19';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+document.getElementById('offerForm').addEventListener('reset', function() {
+    resultCard.classList.remove('visible');
+    clearOfferError();
+});
 </script>
 </body>
 </html>

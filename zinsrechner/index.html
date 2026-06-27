@@ -43,6 +43,7 @@
         .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
         .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
         .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .error-text{color:#f87171;font-size:0.95rem;margin-bottom:1rem}
         .zins-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.85rem}
         .zins-table th{background:rgba(99,102,241,0.12);color:var(--text-main);padding:0.6rem;text-align:left;font-weight:600;border:1px solid var(--border)}
         .zins-table td{padding:0.6rem;border:1px solid var(--border);color:var(--text-muted)}
@@ -50,6 +51,7 @@
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
 </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -68,6 +70,7 @@
 </div>
 
                 <form id="zinsForm" novalidate>
+                    <div id="zinsError" class="error-text" style="display:none;"></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="kapital">Kapital (€)</label>
@@ -94,7 +97,7 @@
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn-primary">Berechnen</button>
-                        <button type="button" class="btn-secondary" onclick="document.getElementById('zinsForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                        <button type="reset" class="btn-secondary">Zurücksetzen</button>
                     </div>
                 </form>
             </div>
@@ -126,24 +129,59 @@
             </div>
         </main>
     </div>
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
     <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
     <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
-        document.getElementById('zinsForm').addEventListener('submit', function(e) {
+        const zinsForm = document.getElementById('zinsForm');
+        const zinsError = document.getElementById('zinsError');
+        const zinsResultCard = document.getElementById('resultCard');
+
+        function showZinsError(message) {
+            zinsError.textContent = message;
+            zinsError.style.display = 'block';
+            zinsResultCard.classList.remove('visible');
+        }
+
+        function clearZinsError() {
+            zinsError.textContent = '';
+            zinsError.style.display = 'none';
+        }
+
+        zinsForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var kapital = parseFloat(document.getElementById('kapital').value);
-            var zinsSatz = parseFloat(document.getElementById('zinsSatz').value);
-            var laufzeit = parseInt(document.getElementById('laufzeit').value);
-            var zinsArt = document.getElementById('zinsArt').value;
-            if (isNaN(kapital) || isNaN(zinsSatz) || isNaN(laufzeit) || kapital <= 0 || zinsSatz < 0 || laufzeit <= 0) { alert('Bitte gib gültige Werte ein.'); return; }
-            var n = zinsArt === 'jahr' ? 1 : zinsArt === 'monat' ? 12 : 365;
-            var endkapital = kapital * Math.pow(1 + zinsSatz / 100 / n, n * laufzeit);
-            var zinsen = endkapital - kapital;
-            var rendite = ((endkapital - kapital) / kapital) * 100;
+            clearZinsError();
+
+            const kapital = parseFloat(document.getElementById('kapital').value);
+            const zinsSatz = parseFloat(document.getElementById('zinsSatz').value);
+            const laufzeit = parseInt(document.getElementById('laufzeit').value);
+            const zinsArt = document.getElementById('zinsArt').value;
+
+            if (isNaN(kapital) || isNaN(zinsSatz) || isNaN(laufzeit) || kapital <= 0 || zinsSatz < 0 || laufzeit <= 0) {
+                showZinsError('Bitte gib gültige Werte ein.');
+                return;
+            }
+
+            const n = zinsArt === 'jahr' ? 1 : zinsArt === 'monat' ? 12 : 365;
+            const endkapital = kapital * Math.pow(1 + zinsSatz / 100 / n, n * laufzeit);
+            const zinsen = endkapital - kapital;
+            const rendite = ((endkapital - kapital) / kapital) * 100;
             document.getElementById('endkapital').textContent = endkapital.toFixed(2).replace(/\./g, ',') + ' €';
             document.getElementById('zinsen').textContent = zinsen.toFixed(2).replace(/\./g, ',') + ' €';
             document.getElementById('rendite').textContent = rendite.toFixed(2).replace(/\./g, ',') + ' %';
-            document.getElementById('resultCard').classList.add('visible');
+            zinsResultCard.classList.add('visible');
+        });
+
+        zinsForm.addEventListener('reset', function() {
+            clearZinsError();
+            zinsResultCard.classList.remove('visible');
         });
     </script>
 </body>

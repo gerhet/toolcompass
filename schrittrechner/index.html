@@ -43,9 +43,11 @@
         .result-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1.2rem;text-align:center}
         .result-item .ri-value{font-size:1.3rem;font-weight:700;color:white}
         .result-item .ri-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem}
+        .error-text{color:#f87171;font-size:0.95rem;margin-bottom:1rem}
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
     <script src="/assets/js/consent.js"></script>
+    <script src="/assets/js/affiliate.js"></script>
 </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
@@ -64,6 +66,7 @@
 </div>
 
                 <form id="stepForm" novalidate>
+                    <div id="stepError" class="error-text" style="display:none;"></div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="steps">Schritte</label>
@@ -91,7 +94,7 @@
                     </div>
                     <div class="btn-group">
                         <button type="submit" class="btn-primary">Berechnen</button>
-                        <button type="button" class="btn-secondary" onclick="document.getElementById('stepForm').reset();document.getElementById('resultCard').classList.remove('visible')">Zurücksetzen</button>
+                        <button type="reset" class="btn-secondary">Zurücksetzen</button>
                     </div>
                 </form>
             </div>
@@ -120,23 +123,58 @@
             </div>
         </main>
     </div>
+    <div class="ad-container" style="margin:2rem 0;text-align:center;min-height:90px;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1934902732899980"
+             data-ad-slot="1234567890"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
     <footer><div class="footer-links"><a href="/">Startseite</a><a href="/blog/">Blog</a><a href="/about.html">Über uns</a><a href="/impressum/index.html" lang="de">Impressum</a><a href="/datenschutz/" lang="de">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
     <script defer>document.getElementById('year').textContent = new Date().getFullYear();</script>
     <script>
-        document.getElementById('stepForm').addEventListener('submit', function(e) {
+        const stepForm = document.getElementById('stepForm');
+        const stepError = document.getElementById('stepError');
+        const stepResultCard = document.getElementById('resultCard');
+
+        function showStepError(message) {
+            stepError.textContent = message;
+            stepError.style.display = 'block';
+            stepResultCard.classList.remove('visible');
+        }
+
+        function clearStepError() {
+            stepError.textContent = '';
+            stepError.style.display = 'none';
+        }
+
+        stepForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            var steps = parseFloat(document.getElementById('steps').value);
-            var weight = parseFloat(document.getElementById('weight').value);
-            var stride = parseFloat(document.getElementById('stride').value) / 100;
-            var pace = parseFloat(document.getElementById('pace').value);
-            if (isNaN(steps) || isNaN(weight) || steps <= 0 || weight <= 0) { alert('Bitte gib gültige Werte ein.'); return; }
-            var distanceKm = (steps * stride) / 1000;
-            var hours = distanceKm / pace;
-            var met = pace <= 4 ? 3.0 : pace <= 5.5 ? 3.5 : pace <= 6.5 ? 5.0 : 7.0;
-            var calories = Math.round(met * weight * hours);
+            clearStepError();
+
+            const steps = parseFloat(document.getElementById('steps').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const stride = parseFloat(document.getElementById('stride').value) / 100;
+            const pace = parseFloat(document.getElementById('pace').value);
+
+            if (isNaN(steps) || isNaN(weight) || steps <= 0 || weight <= 0) {
+                showStepError('Bitte gib gültige Werte ein.');
+                return;
+            }
+
+            const distanceKm = (steps * stride) / 1000;
+            const hours = distanceKm / pace;
+            const met = pace <= 4 ? 3.0 : pace <= 5.5 ? 3.5 : pace <= 6.5 ? 5.0 : 7.0;
+            const calories = Math.round(met * weight * hours);
             document.getElementById('distance').textContent = distanceKm.toFixed(2).replace(/\./g, ',') + ' km';
             document.getElementById('calories').textContent = calories + ' kcal';
-            document.getElementById('resultCard').classList.add('visible');
+            stepResultCard.classList.add('visible');
+        });
+
+        stepForm.addEventListener('reset', function() {
+            clearStepError();
+            stepResultCard.classList.remove('visible');
         });
     </script>
 </body>
