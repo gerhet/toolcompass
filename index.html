@@ -812,14 +812,29 @@
                 e.preventDefault();
                 var email = document.getElementById('newsletterEmail').value.trim();
                 if (!email || !email.includes('@')) return;
-                var existing = JSON.parse(localStorage.getItem('tc_newsletter') || '[]');
-                if (existing.indexOf(email) === -1) {
-                    existing.push(email);
-                    localStorage.setItem('tc_newsletter', JSON.stringify(existing));
-                }
-                newsletterMsg.textContent = '✅ Danke für deine Anmeldung! Wir melden uns.';
-                newsletterMsg.style.display = 'block';
-                newsletterForm.reset();
+                var btn = newsletterForm.querySelector('button');
+                btn.disabled = true;
+                btn.textContent = 'Wird angemeldet...';
+                newsletterMsg.style.display = 'none';
+                fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    newsletterMsg.textContent = '✅ ' + data.message;
+                    newsletterMsg.style.display = 'block';
+                    if (data.success) newsletterForm.reset();
+                })
+                .catch(function() {
+                    newsletterMsg.textContent = '❌ Verbindungsfehler. Bitte später erneut versuchen.';
+                    newsletterMsg.style.display = 'block';
+                })
+                .finally(function() {
+                    btn.disabled = false;
+                    btn.textContent = 'Anmelden →';
+                });
             });
         })();
     </script>
