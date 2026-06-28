@@ -213,12 +213,12 @@ function rechnungErstellen() {
     html += '<div class="address"><strong>' + ab_name + '</strong><br>' + ab_str + '<br>' + ab_plz + '<br>E-Mail: ' + ab_email + '</div>';
     html += '<div style="text-align:right;"><h2>RECHNUNG</h2><p><strong>Nr.:</strong> ' + r_nr + '<br><strong>Datum:</strong> ' + r_datum + '<br><strong>Fällig:</strong> ' + fälligDatum.toLocaleDateString('de-DE') + '</p></div></div>';
     html += '<div class="address"><strong>Rechnung an:</strong><br>' + k_name + '<br>' + k_str + '<br>' + k_plz + '</div>';
-    html += '<table><thead><tr><th>Position</th><th>Menge</th><th>Einzelpreis</th><th>Gesamt</th></tr></thead><tbody>';
+    html += '<table aria-label="Rechnungspositionen"><thead><tr><th>Position</th><th>Menge</th><th>Einzelpreis</th><th>Gesamt</th></tr></thead><tbody>';
     positionen.forEach(p => {
         html += '<tr><td>' + p.bez + '</td><td>' + p.menge + '</td><td>' + p.preis.toFixed(2).replace('.',',') + ' €</td><td>' + p.gesamt.toFixed(2).replace('.',',') + ' €</td></tr>';
     });
     html += '</tbody></table>';
-    html += '<table><tbody>';
+    html += '<table aria-label="Rechnungssummen"><tbody>';
     html += '<tr><td><strong>Nettobetrag</strong></td><td style="text-align:right;">' + nettoGesamt.toFixed(2).replace('.',',') + ' €</td></tr>';
     if (rabattProzent > 0) html += '<tr><td>Rabatt (' + rabattProzent + '%)</td><td style="text-align:right;">-' + rabattBetrag.toFixed(2).replace('.',',') + ' €</td></tr>';
     html += '<tr><td>MwSt. (' + mwstLabel + ')</td><td style="text-align:right;">' + mwstBetrag.toFixed(2).replace('.',',') + ' €</td></tr>';
