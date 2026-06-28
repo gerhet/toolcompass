@@ -105,7 +105,7 @@
         </div>
 
         <div class="gwg-box" id="gwgInfo">
-            <h4>⚡ GWG (Geringwertiges Wirtschaftsgut)</h4>
+<h3>⚡ GWG (Geringwertiges Wirtschaftsgut)</h3>
             <p>Liegt der Anschaffungswert unter 800 € netto, kannst du das Werkzeug im Jahr des Kaufs komplett als Betriebsausgabe absetzen. Ab 800 € muss es über die Nutzungsdauer abgeschrieben werden.</p>
         </div>
 
@@ -128,12 +128,12 @@
             </table>
 
             <div class="tip-box">
-                <h4>💡 Tipp: Neukauf vs. Leasing</h4>
+                <h3>💡 Tipp: Neukauf vs. Leasing</h3>
                 <p id="leasingTipp">Lade Daten...</p>
             </div>
 
             <div class="tip-box" style="margin-top:1rem;border-color:rgba(251,191,36,0.15);background:rgba(251,191,36,0.04);">
-                <h4 style="color:#fbbf24;">💰 Steuerliche Ersparnis durch AfA</h4>
+                <h3 style="color:#fbbf24;">💰 Steuerliche Ersparnis durch AfA</h3>
                 <p id="steuerErsparnis">Lade Daten...</p>
             </div>
         </div>
@@ -141,7 +141,7 @@
 
     <div style="background:linear-gradient(135deg,rgba(251,191,36,0.1),rgba(245,158,11,0.06));border:1px solid rgba(251,191,36,0.2);padding:2rem;border-radius:16px;text-align:center;margin:2rem 0;">
         <span class="card-badge" style="margin-bottom:0.8rem;background:rgba(251,191,36,0.15);color:#fbbf24;border-color:rgba(251,191,36,0.2);">Empfehlung</span>
-        <h3 style="margin-top:0;color:white;">🔧 Werkzeugkoffer Komplettset – Für Handwerker und Heimwerker</h3>
+        <h2 style="margin-top:0;color:white;">🔧 Werkzeugkoffer Komplettset – Für Handwerker und Heimwerker</h2>
         <p style="font-size:0.95rem;color:var(--text-muted);">Ein hochwertiger Werkzeugkoffer ist die beste Investition für deinen Betrieb. Von Profi-Werkzeug bis zur Aufbewahrung – hier findest du alles, was du brauchst.</p>
         <a href="https://www.amazon.de/dp/B0DK5VB7VM/?tag=viktorschwarz-21" class="btn-primary" style="display:inline-flex;margin-top:.5rem;" rel="sponsored" target="_blank">Werkzeugkoffer bei Amazon entdecken →</a>
     </div>
@@ -228,9 +228,9 @@ function gwgCheck() {
     const wert = parseFloat(document.getElementById('anschaffungswert').value) || 0;
     const gwgBox = document.getElementById('gwgInfo');
     if (wert < 800) {
-        gwgBox.innerHTML = '<h4>⚡ GWG (Geringwertiges Wirtschaftsgut)</h4><p>Super! Mit <strong>' + wert.toFixed(0).replace('.',',') + ' €</strong> liegt der Wert unter 800 € netto. Du kannst diesen Betrag <strong>sofort komplett als Betriebsausgabe</strong> absetzen. Keine Abschreibung nötig!</p>';
+        gwgBox.innerHTML = '<h3>⚡ GWG (Geringwertiges Wirtschaftsgut)</h3><p>Super! Mit <strong>' + wert.toFixed(0).replace('.',',') + ' €</strong> liegt der Wert unter 800 € netto. Du kannst diesen Betrag <strong>sofort komplett als Betriebsausgabe</strong> absetzen. Keine Abschreibung nötig!</p>';
     } else {
-        gwgBox.innerHTML = '<h4>⚡ GWG (Geringwertiges Wirtschaftsgut)</h4><p>Mit <strong>' + wert.toFixed(0).replace('.',',') + ' €</strong> liegt der Wert über der GWG-Grenze von 800 €. Die Abschreibung erfolgt über die Nutzungsdauer. Optional: Sammelposten (800–1.000 €) über 5 Jahre abschreiben.</p>';
+        gwgBox.innerHTML = '<h3>⚡ GWG (Geringwertiges Wirtschaftsgut)</h3><p>Mit <strong>' + wert.toFixed(0).replace('.',',') + ' €</strong> liegt der Wert über der GWG-Grenze von 800 €. Die Abschreibung erfolgt über die Nutzungsdauer. Optional: Sammelposten (800–1.000 €) über 5 Jahre abschreiben.</p>';
     }
 }
 
