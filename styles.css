@@ -89,9 +89,18 @@ h1 {
     background: linear-gradient(to right, #ffffff, #9ca3af); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
 }
-h1 span {
+h1 span:not(.h1-sub) {
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.h1-sub {
+    display: block;
+    font-size: 0.35em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    -webkit-text-fill-color: var(--text-muted);
+    color: var(--text-muted);
+    background: none;
 }
 .subtitle { color: var(--text-muted); font-size: 1.25rem; max-width: 650px; margin: 0 auto; text-align: center; }
 
