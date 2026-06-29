@@ -46,13 +46,17 @@
         .error-text{color:#f87171;font-size:0.95rem;margin-bottom:1rem}
         @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
     </style>
+    <style>.related-content{margin:2rem 0;padding:1rem 1.2rem;background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.15);border-radius:12px;font-size:.9rem;color:var(--text-muted);line-height:1.6}.related-content a{color:var(--accent-secondary);text-decoration:none;font-weight:600}.related-content a:hover{text-decoration:underline}</style>
     <script src="/assets/js/consent.js"></script>
     <script src="/assets/js/affiliate.js"></script>
-</head>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://toolcompass.org/"},{"@type":"ListItem","position":2,"name":"Büro & Verwaltung","item":"https://toolcompass.org/buero-verwaltung/"},{"@type":"ListItem","position":3,"name":"Trinkgeld-Rechner","item":"https://toolcompass.org/trinkgeld-rechner/"}]}
+    </script>
+    </head>
 <body>
     <div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
     <div class="container">
-        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a></nav>
+        <nav><a href="/" aria-label="Zurück"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg> Zurück</a> <a href="/buero-verwaltung/" style="margin-left:1rem;">→ Büro & Verwaltung</a></nav>
         <header>
             <div class="top-badge"><svg class="icon" style="width:14px;height:14px;" aria-hidden="true"><use href="/assets/icons/lucide-sprite.svg#hand-coins"></use></svg> Finanzen & Business</div>
             <h1>Trinkgeld-<span>Rechner</span><span class="h1-sub"> – Trinkgeld & Gesamtbetrag berechnen</span></h1>
@@ -124,6 +128,7 @@
                     <tr><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">85,00 €</td><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">4,25 €</td><td style="padding:0.8rem;border:1px solid var(--border);color:var(--text-muted)">8,50 €</td></tr>
                 </table>
             </div>
+            <div class="related-content"><p>📖 Ausführliche Anleitung: <a href="/blog/trinkgeld-rechner-guide/">Trinkgeld-Rechner-Guide: Tipps &amp; Tricks für Handwerker</a></p></div>
             <section class="faq" itemscope itemtype="https://schema.org/FAQPage">
                 <h2>Häufige Fragen zum Trinkgeld-Rechner</h2>
                 <details itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">

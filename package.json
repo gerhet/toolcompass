@@ -1,0 +1,11 @@
+{
+  "name": "toolcompass",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npx cleancss -o styles.css styles.css"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3"
+  }
+}

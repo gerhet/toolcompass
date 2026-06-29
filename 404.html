@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#030712">
+    <title>Seite nicht gefunden – ToolCompass</title>
+    <meta name="description" content="Die von dir gesuchte Seite existiert leider nicht.">
+    <link rel="canonical" href="https://toolcompass.org/404.html">
+    <link rel="preload" href="/styles.css" as="style">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .error-page { text-align: center; padding: 6rem 1rem 4rem; }
+        .error-page .code { font-size: 6rem; font-weight: 800; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+        .error-page h1 { font-size: 1.8rem; margin: 1rem 0 .5rem; color: white; }
+        .error-page p { color: var(--text-muted); max-width: 400px; margin: 0 auto 2rem; }
+        .error-page .btn { display: inline-flex; padding: .8rem 1.8rem; background: linear-gradient(135deg, var(--accent-primary), #4f46e5); color: white; border-radius: 12px; font-weight: 700; text-decoration: none; align-items: center; gap: .5rem; transition: all .3s; }
+        .error-page .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,.4); }
+    </style>
+</head>
+<body>
+<div class="bg-glows"><div class="glow-1"></div><div class="glow-2"></div></div>
+<div class="container">
+    <div class="error-page">
+        <div class="code">404</div>
+        <h1>Seite nicht gefunden</h1>
+        <p>Die angeforderte Seite existiert leider nicht oder wurde verschoben.</p>
+        <a href="/" class="btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Zurück zur Startseite
+        </a>
+    </div>
+</div>
+<footer><div class="footer-links"><a href="/">Startseite</a><a href="/about.html">Über uns</a><a href="/impressum/index.html">Impressum</a><a href="/datenschutz/">Datenschutz</a></div><div class="footer-copy">&copy; <span id="year"></span> ToolCompass.org</div></footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
